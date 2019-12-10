@@ -1,15 +1,13 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en" dir="ltr">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ITAPS HOST</title>
+    <title>ITAPS HOST</title>
     <link rel="icon" href="~/images/itaps.png" type="image/x-icon" />
-
-    <!-- Prevent the demo from appearing in search engines -->
     <meta name="robots" content="noindex">
     <!-- Simplebar -->
-    <link href="~/vendor/simplebar.min.css" rel="stylesheet" />
+    <link type="text/css" href="~/vendor/simplebar.min.css" rel="stylesheet">
     <!-- App CSS -->
     <link type="text/css" href="~/css/app.css" rel="stylesheet">
     <link type="text/css" href="~/css/app.rtl.css" rel="stylesheet">
@@ -19,7 +17,6 @@
     <!-- Font Awesome FREE Icons -->
     <link type="text/css" href="~/css/vendor-fontawesome-free.css" rel="stylesheet">
     <link type="text/css" href="~/css/vendor-fontawesome-free.rtl.css" rel="stylesheet">
-
     <!-- Flatpickr -->
     <link type="text/css" href="~/css/vendor-flatpickr.css" rel="stylesheet">
     <link type="text/css" href="~/css/vendor-flatpickr.rtl.css" rel="stylesheet">
@@ -27,20 +24,7 @@
     <link type="text/css" href="~/css/vendor-flatpickr-airbnb.rtl.css" rel="stylesheet">
     <!-- Vector Maps -->
     <link type="text/css" href="~/vendor/jqvmap/jqvmap.min.css" rel="stylesheet">
-    <link href="~/css/jquery-datatable.css" rel="stylesheet" />
-    <link href="~/css/multiple-select.css" rel="stylesheet" />
-    <link href="~/css/multiple-select.min.css" rel="stylesheet" />
-    <link href="~/css/Itaps-custom.css" asp-append-version="true" rel="stylesheet" />
-    <!-- Kendo -->
-    <link href="~/kendo/css/kendo.default.min.css" rel="stylesheet" />
-    <link href="~/kendo/css/kendo.default.mobile.min.css" rel="stylesheet" />
-    <link href="~/kendo/css/kendo.bootstrap.min.css" rel="stylesheet" />
-    <link href="~/kendo/css/kendo.common.min.css" rel="stylesheet" />
-    <link href="~/css/showLoading.css" rel="stylesheet" />
-    <link href="~/css/toastr.min.css" rel="stylesheet" />
-    <link href="~/css/toastr.css" rel="stylesheet" />
-    <link href="~/lib/datatables/datatables.min.css" rel="stylesheet" />
-    <link href="~/css/gijgo.css" asp-append-version="true" rel="stylesheet" />
+    <link href="~/css/Itaps-custom.css" rel="stylesheet" />
 
     <style>
         select {
@@ -51,16 +35,22 @@
             color: black !important;
         }
     </style>
+
     @RenderSection("css", required: false)
-
-
 </head>
 <body class="layout-default">
+
+    @{
+
+    }
+
     <div class="preloader"></div>
     <div class="mdk-header-layout js-mdk-header-layout">
         <!-- Header -->
+
         <div id="header" class="mdk-header js-mdk-header m-0" data-fixed>
             <div class="mdk-header__content">
+
                 <div class="navbar navbar-expand-sm navbar-main navbar-dark bg-dark  pr-0" id="navbar" data-primary>
                     <div class="container-fluid p-0">
                         <!-- Navbar toggler -->
@@ -70,13 +60,12 @@
                         <!-- Navbar Brand -->
                         <a href="~/home" class="navbar-brand ">
                             <img class="navbar-brand-icon" src="~/images/itaps.png" width="50" alt="Stack" />
-                            <span>iTaPS</span>
+                            <span>iTaPS HOST</span>
                         </a>
-                        <ul class="nav navbar-nav d-none d-sm-flex navbar-height align-items-center">
+                        <ul class="nav navbar-nav d-none d-sm-flex border-left navbar-height align-items-center">
                             <li class="nav-item border-left dropdown">
-                                <a href="#notification_menu" id="Notification" class="nav-link dropdown-toggle" data-toggle="dropdown" data-caret="false">
-                                    <span id="NotificationCount">0</span>
-                                    <span id="NotificationBell" class="fa fa-bell icon-20pt"></span>
+                                <a href="#notifications_menu" class="nav-link dropdown-toggle" data-toggle="dropdown" data-caret="false">
+                                    <i class="material-icons nav-icon navbar-notifications-indicator">notifications</i>
                                 </a>
                                 <div id="notification_menu" class="dropdown-menu dropdown-menu-right">
                                     <div id="NotificationItems">
@@ -100,20 +89,16 @@
                                     <img src="~/images/icons/user.svg" class="rounded-circle" width="32" alt="">
                                     <span class="ml-1 d-flex-inline">
                                         <span class="text-light">
-                                            Hello, <span class="UserFirstName">@Model.UserSession.FirstName</span>
+                                            Hello, <span class="UserFirstName">@ViewData["UserName"]</span>
                                         </span>
                                     </span>
                                 </a>
                                 <div id="account_menu" class="dropdown-menu dropdown-menu-right">
                                     <div class="dropdown-item-text dropdown-item-text--lh">
-                                        <div><strong class="UserFullName" id="UserFullName">@Model.UserSession.DisplayName</strong></div>
-                                        <span class="UserTIN" id="UserTIN">@Model.UserSession.TIN</span>
-                                        <span id="UserTaxPayerId" hidden>@Model.UserSession.TaxPayerId</span>
+                                        <div><strong class="UserFullName" id="UserFullName">@ViewData["FullName"]</strong></div>
                                     </div>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item active" href="~/home">Dashboard</a>
-                                    <a class="dropdown-item" href="~/Account">My Profile</a>
-                                    <a class="dropdown-item" onclick="LoadTaxPayersAssociatedTo()">Associations</a>
                                     <div class="dropdown-divider"></div>
                                     <a asp-page="/Logout" class="dropdown-item" id="LogOut">Logout</a>
                                 </div>
@@ -121,14 +106,15 @@
                         </ul>
                     </div>
                 </div>
+
             </div>
         </div>
 
-        <!-- // END Header -->
-        <!-- Header Layout Content -->
         <div class="mdk-header-layout__content">
+
             <div class="mdk-drawer-layout js-mdk-drawer-layout" data-push data-responsive-width="992px">
                 <div class="mdk-drawer-layout__content page">
+
                     <div class="container-fluid page__heading-container">
                         <div class="page__heading d-flex align-items-center">
                             <div class="flex">
@@ -136,10 +122,10 @@
                                     <div class="col-md-9">
                                         <span class="m-0" style="font-size: 1.540625rem">
                                             <span id="pgHeader">@ViewBag.Title</span> -
-                                            <span style="font-size:18px" onclick="LoadTaxPayersAssociatedTo()" class="pt-2">
+                                            <span style="font-size:18px" class="pt-2">
                                                 <span class="badge badge-success" style="font-size: 0.8em; border-radius:1.7em">
                                                     <span class="fa fa-user-circle"></span>
-                                                    <span>&nbsp;<b class="TaxPayerName" id="TaxPayerName">@Model.UserSession.DisplayName</b></span>
+                                                    <span>&nbsp;<b class="TaxPayerName" id="TaxPayerName">@ViewData["FullName"]</b></span>
                                                 </span>
                                             </span>
                                         </span>
@@ -155,17 +141,16 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="container-fluid page__container">
                         @Html.AntiForgeryToken()
+
                         <!-- Contents go here -->
                         @RenderBody()
-
                     </div>
 
                 </div>
-                <input type="hidden" id="AppServerUrl" value="@ViewData["AppServerUrl"]" hidden>
-                <input type="hidden" id="NotificationUrl" value="@ViewData["NotificationUrl"]" hidden>
-                <!-- // END drawer-layout__content -->
+
                 <div class="mdk-drawer  js-mdk-drawer" id="default-drawer" data-align="start">
                     <div class="mdk-drawer__content">
                         <div class="sidebar sidebar-light sidebar-left simplebar" data-simplebar>
@@ -177,23 +162,6 @@
                                         <span class="sidebar-menu-text">Home</span>
                                     </a>
                                 </li>
-
-                                <!-- Company Registration -->
-                                <li class="sidebar-menu-item payment">
-                                    <a class="sidebar-menu-button" href="~/Registration/registration">
-                                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">account_balance_wallet</i>
-                                        <span class="sidebar-menu-text">Company Registration</span>
-                                    </a>
-                                </li>
-
-                                <!-- PAYMENT -->
-                                <li class="sidebar-menu-item payment">
-                                    <a class="sidebar-menu-button" href="~/payment">
-                                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">account_balance_wallet</i>
-                                        <span class="sidebar-menu-text">Payment</span>
-                                    </a>
-                                </li>
-
                                 <!-- PIT -->
                                 <li class="sidebar-menu-item pit">
                                     <a class="sidebar-menu-button" data-toggle="collapse" href="#PIT_menu">
@@ -224,8 +192,13 @@
                                         </li>
                                     </ul>
                                 </li>
-
-
+                                <!-- PAYMENT -->
+                                <li class="sidebar-menu-item payment">
+                                    <a class="sidebar-menu-button" href="~/payment">
+                                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">account_balance_wallet</i>
+                                        <span class="sidebar-menu-text">Payment</span>
+                                    </a>
+                                </li>
 
                                 <!-- WITHHOLDING -->
                                 <li class="sidebar-menu-item wht">
@@ -237,39 +210,29 @@
                                     <ul class="sidebar-submenu collapse" id="WHT_menu">
                                         <li class="sidebar-menu-item new">
                                             <a class="sidebar-menu-button" href="~/wht/new">
-                                                <span class="sidebar-menu-text">Record WHT Payment</span>
+                                                <span class="sidebar-menu-text">New Transaction</span>
                                             </a>
                                         </li>
-
-                                        <li class="sidebar-menu-item alltransactions">
-                                            <a class="sidebar-menu-button" href="~/wht/alltransactions">
-                                                <span class="sidebar-menu-text">View All WHT Payments</span>
-                                            </a>
-                                        </li>
-
                                         <li class="sidebar-menu-item update">
                                             <a class="sidebar-menu-button" href="~/wht/update">
-                                                <span class="sidebar-menu-text">Revoke WHT Payment</span>
+                                                <span class="sidebar-menu-text">Revoke Transaction</span>
                                             </a>
                                         </li>
-
-                                        <li class="sidebar-menu-item update">
-                                            <a class="sidebar-menu-button" href="~/wht/revise">
-                                                <span class="sidebar-menu-text">Revise Contract</span>
+                                        <li class="sidebar-menu-item alltransactions">
+                                            <a class="sidebar-menu-button" href="~/wht/alltransactions">
+                                                <span class="sidebar-menu-text">WHT Transactions</span>
                                             </a>
                                         </li>
-
                                         <li class="sidebar-menu-item returns">
                                             <a class="sidebar-menu-button" href="~/wht/returns">
-                                                <span class="sidebar-menu-text">Submit WHT Returns</span>
+                                                <span class="sidebar-menu-text">WHT Returns</span>
                                             </a>
                                         </li>
                                         <li class="sidebar-menu-item returns">
                                             <a class="sidebar-menu-button" href="~/wht/vatreturns">
-                                                <span class="sidebar-menu-text">Submit WH VAT Returns</span>
+                                                <span class="sidebar-menu-text">WH VAT Returns</span>
                                             </a>
                                         </li>
-
                                     </ul>
                                 </li>
 
@@ -291,99 +254,249 @@
                                                 <span class="sidebar-menu-text">Withholding Tax Exemption</span>
                                             </a>
                                         </li>
-
-                                        <li class="sidebar-menu-item ptr">
-                                            <a class="sidebar-menu-button" href="~/applications/ptr">
-                                                <span class="sidebar-menu-text">Personal Tax Relief</span>
-                                            </a>
-                                        </li>
-
                                     </ul>
                                 </li>
-
-                                <!-- PAYE -->
-                                <li class="sidebar-menu-item paye">
-                                    <a class="sidebar-menu-button" data-toggle="collapse" href="#paye_menu">
-                                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">account_balance_wallet</i>
-                                        <span class="sidebar-menu-text">Pay As You Earn</span>
-                                        <span class="ml-auto sidebar-menu-toggle-icon"></span>
-                                    </a>
-                                    <ul class="sidebar-submenu collapse" id="paye_menu">
-                                        <li class="sidebar-menu-item monthly">
-                                            <a class="sidebar-menu-button" href="~/paye/monthly">
-                                                <span class="sidebar-menu-text">Monthly PAYE Deductions Returns</span>
-                                            </a>
-                                        </li>
-                                        <li class="sidebar-menu-item annual">
-                                            <a class="sidebar-menu-button" href="~/paye/annual">
-                                                <span class="sidebar-menu-text">Annual PAYE Deductions Returns</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- // END drawer-layout -->
+
         </div>
-        <!-- // END header-layout__content -->
 
+        @RenderSection("modals", required: false)
+
+        <!-- jQuery -->
+        <script src="~/vendor/jquery.min.js"></script>
+        <!-- Bootstrap -->
+        <script src="~/vendor/popper.min.js"></script>
+        <script src="~/vendor/bootstrap.min.js"></script>
+        <!-- Simplebar -->
+        <script src="~/vendor/simplebar.min.js"></script>
+        <!-- DOM Factory -->
+        <script src="~/vendor/dom-factory.js"></script>
+        <!-- MDK -->
+        <script src="~/vendor/material-design-kit.js"></script>
+        <!-- App -->
+        <script src="~/js/toggle-check-all.js"></script>
+        <script src="~/js/check-selected-row.js"></script>
+        <script src="~/js/dropdown.js"></script>
+        <script src="~/js/sidebar-mini.js"></script>
+
+        <script>
+            (function () {
+                'use strict';
+                // Self Initialize DOM Factory Components
+                domFactory.handler.autoInit()
+
+                // Connect button(s) to drawer(s)
+                var sidebarToggle = document.querySelectorAll('[data-toggle="sidebar"]')
+                sidebarToggle = Array.prototype.slice.call(sidebarToggle)
+
+                sidebarToggle.forEach(function (toggle) {
+                    toggle.addEventListener('click', function (e) {
+                        var selector = e.currentTarget.getAttribute('data-target') || '#default-drawer'
+                        var drawer = document.querySelector(selector)
+                        if (drawer) {
+                            drawer.mdkDrawer.toggle()
+                        }
+                    })
+                })
+
+                let drawers = document.querySelectorAll('.mdk-drawer')
+                drawers = Array.prototype.slice.call(drawers)
+                drawers.forEach((drawer) => {
+                    drawer.addEventListener('mdk-drawer-change', (e) => {
+                        if (!e.target.mdkDrawer) {
+                            return
+                        }
+                        document.querySelector('body').classList[e.target.mdkDrawer.opened ? 'add' : 'remove']('has-drawer-opened')
+                        let button = document.querySelector('[data-target="#' + e.target.id + '"]')
+                        if (button) {
+                            button.classList[e.target.mdkDrawer.opened ? 'add' : 'remove']('active')
+                        }
+                    })
+                })
+
+                // SIDEBAR COLLAPSE MENUS
+                $('.sidebar .collapse').on('show.bs.collapse', function (e) {
+                    e.stopPropagation()
+                    var parent = $(this).parents('.sidebar-submenu').get(0) || $(this).parents('.sidebar-menu').get(0)
+                    $(parent).find('.open').find('.collapse').collapse('hide');
+                    $(this).closest('li').addClass('open');
+                });
+                $('.sidebar .collapse').on('hidden.bs.collapse', function (e) {
+                    e.stopPropagation()
+                    $(this).closest('li').removeClass('open');
+                });
+
+                // ENABLE TOOLTIPS
+                $('[data-toggle="tooltip"]').tooltip()
+
+                // PRELOADER
+                window.addEventListener('load', function () {
+                    $('.preloader').fadeOut()
+                    domFactory.handler.upgradeAll()
+                })
+
+            })()
+        </script>
+
+        <!-- App Settings (safe to remove) -->
+        <script src="~/js/app-settings.js"></script>
+
+        <script>
+            (function () {
+                'use strict';
+
+                $('[data-toggle="tab"]').on('hide.bs.tab', function (e) {
+                    $(e.target).removeClass('active')
+                })
+
+            })()
+        </script>
+
+        <!-- Flatpickr -->
+        <script src="~/vendor/flatpickr/flatpickr.min.js"></script>
+        <script src="~/js/flatpickr.js"></script>
+
+        <!-- Global Settings -->
+        <script src="~/js/settings.js"></script>
+
+        <!-- Chart.js -->
+        <script src="~/vendor/Chart.min.js"></script>
+
+        <!-- App Charts JS -->
+        <script src="~/js/charts.js"></script>
+
+        <!-- Chart Samples -->
+        <script>
+            (function () {
+                'use strict';
+
+                Charts.init()
+
+                var EarningsTraffic = function (id, type = 'line', options = {}) {
+                    options = Chart.helpers.merge({
+                        elements: {
+                            line: {
+                                fill: 'start',
+                                backgroundColor: settings.charts.colors.area
+                            }
+                        }
+                    }, options)
+
+                    var data = {
+                        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                        datasets: [{
+                            label: "Traffic",
+                            data: [10, 2, 5, 15, 10, 12, 15, 25, 22, 30, 25, 40]
+                        }]
+                    }
+
+                    Charts.create(id, type, options, data)
+                }
+
+                var Products = function (id, type = 'line', options = {}, data) {
+                    options = Chart.helpers.merge({
+                        elements: {
+                            line: {
+                                fill: 'start',
+                                backgroundColor: settings.charts.colors.area,
+                                tension: 0,
+                                borderWidth: 1
+                            },
+                            point: {
+                                pointStyle: 'circle',
+                                radius: 5,
+                                hoverRadius: 5,
+                                backgroundColor: settings.colors.white,
+                                borderColor: settings.colors.primary[700],
+                                borderWidth: 2
+                            }
+                        },
+                        scales: {
+                            yAxes: [{
+                                display: false
+                            }],
+                            xAxes: [{
+                                display: false
+                            }]
+                        }
+                    }, options)
+
+                    data = data || {
+                        labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+                        datasets: [{
+                            label: "Earnings",
+                            data: [400, 200, 450, 460, 220, 380, 800]
+                        }]
+                    }
+
+                    Charts.create(id, type, options, data)
+                }
+
+                var Courses = function (id, type = 'line', options = {}) {
+                    options = Chart.helpers.merge({
+                        elements: {
+                            line: {
+                                borderColor: settings.colors.success[700],
+                                backgroundColor: settings.hexToRGB(settings.colors.success[100], 0.5)
+                            },
+                            point: {
+                                borderColor: settings.colors.success[700]
+                            }
+                        }
+                    }, options)
+
+                    Products(id, type, options)
+                }
+
+                var LocationDoughnut = function (id, type = 'doughnut', options = {}) {
+                    options = Chart.helpers.merge({
+                        tooltips: {
+                            callbacks: {
+                                title: function (a, e) {
+                                    return e.labels[a[0].index]
+                                },
+                                label: function (a, e) {
+                                    var t = "";
+                                    return t += '<span class="popover-body-value">' + e.datasets[0].data[a.index] + "%</span>"
+                                }
+                            }
+                        }
+                    }, options)
+
+                    var data = {
+                        labels: ["United States", "United Kingdom", "Germany", "India"],
+                        datasets: [{
+                            data: [25, 25, 15, 35],
+                            backgroundColor: [settings.colors.success[400], settings.colors.danger[400], settings.colors.primary[500], settings.colors.gray[300]],
+                            hoverBorderColor: "dark" == settings.charts.colorScheme ? settings.colors.gray[800] : settings.colors.white
+                        }]
+                    }
+
+                    Charts.create(id, type, options, data)
+                }
+
+                ///////////////////
+                // Create Charts //
+                ///////////////////
+
+                EarningsTraffic('#earningsTrafficChart')
+                LocationDoughnut('#locationDoughnutChart')
+                Products('#productsChart')
+                Courses('#coursesChart')
+
+            })()
+        </script>
+
+        <!-- Vector Maps -->
+        <script src="~/vendor/jqvmap/jquery.vmap.min.js"></script>
+        <script src="~/vendor/jqvmap/maps/jquery.vmap.world.js"></script>
+        <script src="~/js/vector-maps.js"></script>
+
+        @RenderSection("scripts", required: false)
     </div>
-
-    @RenderSection("modals", required: false)
-
-    <!-- jQuery -->
-    <script src="~/vendor/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="~/vendor/popper.min.js"></script>
-    <script src="~/vendor/bootstrap.min.js"></script>
-    <!-- Simplebar -->
-    <script src="~/vendor/simplebar.min.js"></script>
-    <!-- DOM Factory -->
-    <script src="~/vendor/dom-factory.js"></script>
-    <!-- MDK -->
-    <script src="~/vendor/material-design-kit.js"></script>
-
-    <!-- App -->
-    <script src="~/js/toggle-check-all.js"></script>
-    <script src="~/js/check-selected-row.js"></script>
-    <script src="~/js/dropdown.js"></script>
-    <script src="~/js/sidebar-mini.js"></script>
-    <script src="~/js/multiple-select.js"></script>
-    <script src="~/js/multiple-select.min.js"></script>
-    <script src="~/js/jquery.showLoading.min.js"></script>
-    <script src="~/js/jquery-ui.js"></script>
-
-    <!--Itaps Helper-->
-    <script src="~/js/itaps/layout-operations.js" asp-append-version="true"></script>
-    <script src="~/js/itaps/itaps-helper.js" asp-append-version="true"></script>
-
-    <!-- Flatpickr -->
-    <script src="~/vendor/flatpickr/flatpickr.min.js"></script>
-    <script src="~/js/flatpickr.js"></script>
-    <!-- Global Settings -->
-    <script src="~/js/settings.js"></script>
-    <!-- Chart.js -->
-    <script src="~/vendor/Chart.min.js"></script>
-    <!-- App Charts JS -->
-    <script src="~/js/charts.js"></script>
-    <!-- Vector Maps -->
-    <script src="~/vendor/jqvmap/jquery.vmap.min.js"></script>
-    <script src="~/vendor/jqvmap/maps/jquery.vmap.world.js"></script>
-    <!-- Kendo JS -->
-    <script src="~/kendo/js/kendo.web.min.js"></script>
-    <script src="~/kendo/js/knockout-3.1.0.js"></script>
-    <script src="~/kendo/js/knockout-kendo.min.js"></script>
-    <script src="~/js/toastr.min.js"></script>
-
-    <script src="~/js/vector-maps.js"></script>
-    <script src="~/js/gijgo.js"></script>
-    <script src="~/lib/datatables/datatables.min.js"></script>
-    <!-- Chart Samples -->
-
-    @RenderSection("Scripts", required: false)
 </body>
 </html>

@@ -1,4 +1,4 @@
-﻿using itaps_host.Models;
+﻿using ITAPS_HOST.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -6,27 +6,19 @@ using Microsoft.Extensions.Options;
 
 namespace ITAPS_HOST.Helpers
 {
-    public static class ConfigurationServiceCollectionExtension
+    public static class ConfigurationServiceCollectionExtension 
     {
+        //This class makes appsettings values accessible in the Conrollers and Services
         public static IServiceCollection AddAppConfiguration(this IServiceCollection services, IConfiguration config)
         {
-            services.Configure<IDPSETTINGS>(config.GetSection("IDPSETTINGS"));
-            services.Configure<ITAPSHOSTCONFIGURATION>(config.GetSection("ITAPSHOSTCONFIG"));
-            services.Configure<SSRSConfiguration>(config.GetSection("SSRSConfiguration"));
-            services.Configure<AppTypeId>(config.GetSection("ApplicationTypeId"));
+            services.Configure<AppConstants>(config.GetSection("IDPSETTINGS"));
+            services.Configure<ReportConstants>(config.GetSection("REPORTS"));
 
-            services.TryAddSingleton<IHOSTConfiguration>(sp =>
-                sp.GetRequiredService<IOptions<ITAPSHOSTCONFIGURATION>>().Value); // forwarding via implementation factory
+            services.TryAddSingleton<IAppConstants>(sp =>
+                sp.GetRequiredService<IOptions<AppConstants>>().Value); // forwarding via implementation factory
 
-            services.TryAddSingleton<ISETTINGS>(sp =>
-                sp.GetRequiredService<IOptions<IDPSETTINGS>>().Value); // forwarding via implementation factory
-
-            services.TryAddSingleton<ISSRSConfiguration>(sp =>
-              sp.GetRequiredService<IOptions<SSRSConfiguration>>().Value); // forwarding via implementation factory
-
-            services.TryAddSingleton<IAppTypeId>(sp =>
-                sp.GetRequiredService<IOptions<AppTypeId>>().Value); // forwarding via implementation factory
-
+            services.TryAddSingleton<IReportConstants>(sp =>
+               sp.GetRequiredService<IOptions<ReportConstants>>().Value); // forwarding via implementation factory
 
             return services;
         }

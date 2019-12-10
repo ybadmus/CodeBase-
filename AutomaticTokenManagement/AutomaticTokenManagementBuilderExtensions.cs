@@ -1,9 +1,7 @@
-﻿using itaps_host;
-using itaps_host.AutomaticTokenManagement;
-using itaps_host.Models;
+﻿using ITAPS_HOST;
+using ITAPS_HOST.AutomaticTokenManagement;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System;
@@ -13,8 +11,6 @@ namespace IdentityModel.AspNetCore
 {
     public static class AutomaticTokenManagementBuilderExtensions
     {
-        private static readonly ISSRSConfiguration _ssrsConfig;
-
         public static AuthenticationBuilder AddAutomaticTokenManagement(this AuthenticationBuilder builder, Action<AutomaticTokenManagementOptions> options)
         {
             builder.Services.Configure(options);
@@ -23,7 +19,7 @@ namespace IdentityModel.AspNetCore
 
         public static AuthenticationBuilder AddAutomaticTokenManagement(this AuthenticationBuilder builder)
         {
-            var connString = Startup.StaticConfig.GetSection("IDPSETTINGS");
+            var connString = Startup.StaticConfig.GetSection("APPCONSTANTS");
 
             builder.Services.AddHttpClient("tokenAdmin", client =>
             {
@@ -48,7 +44,6 @@ namespace IdentityModel.AspNetCore
                     {
                         AutomaticDecompression = System.Net.DecompressionMethods.GZip
                     });
-
 
 
             builder.Services.AddTransient<TokenEndpointService>();

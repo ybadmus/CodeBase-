@@ -1,6 +1,5 @@
 ﻿using IdentityModel;
 using IdentityModel.AspNetCore;
-using itaps_host.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.Configuration;
@@ -14,17 +13,14 @@ namespace ITAPS_HOST.Helpers
     {
         public static IServiceCollection AddAuthenticationConfiguration(this IServiceCollection services, IConfiguration config)
         {
-            //var configitaps = new ITAPSHOSTCONFIGURATION();
-            var configidp = new IDPSETTINGS();
+            //This is how we pull things from appsettings on Startup 
+            var idpSettings = Startup.StaticConfig.GetSection("APPCONSTANTS");
 
-            config.Bind("ITAPSHOSTCONFIG", config);
-            config.Bind("IDPSETTINGS", configidp);
-
-            var apiUrl = configidp.ApiUrl;
-            var authority = configidp.Authority;
-            var clientSecret = configidp.ClientSecret;
-            var clientId = configidp.ClientId;
-            var requireHttpsMetadata = configidp.RequireHttpsMetadata;
+            var apiUrl = idpSettings["ApiUrl"];
+            var authority = idpSettings["Authority"];
+            var clientSecret = idpSettings["ClientSecret"];
+            var clientId = idpSettings["ClientId"];
+            bool requireHttpsMetadata = bool.Parse(idpSettings["RequireHttpsMetadata"]);
 
             services.AddAuthentication(options =>
             {
@@ -34,7 +30,7 @@ namespace ITAPS_HOST.Helpers
             .AddCookie(options =>
             {
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
-                options.Cookie.Name = "itapshostmvchybridautorefresh";
+                options.Cookie.Name = "mvcHybridITAPS";
             })
             .AddAutomaticTokenManagement()
             .AddOpenIdConnect("oidc", options =>
