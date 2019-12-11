@@ -11,8 +11,8 @@ namespace ITAPS_HOST.Helpers
         //This class makes appsettings values accessible in the Conrollers and Services
         public static IServiceCollection AddAppConfiguration(this IServiceCollection services, IConfiguration config)
         {
-            services.Configure<AppConstants>(config.GetSection("IDPSETTINGS"));
-            services.Configure<ReportConstants>(config.GetSection("REPORTS"));
+            services.Configure<AppConstants>(config.GetSection("APPCONSTANTS"));
+            services.Configure<ReportConstants>(config.GetSection("REPORTCONSTANTS"));
 
             services.TryAddSingleton<IAppConstants>(sp =>
                 sp.GetRequiredService<IOptions<AppConstants>>().Value); // forwarding via implementation factory

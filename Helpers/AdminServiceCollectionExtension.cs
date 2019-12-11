@@ -1,4 +1,5 @@
-﻿using ITAPS_HOST.Services;
+﻿using ITAPS_HOST.IServices;
+using ITAPS_HOST.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,7 +14,9 @@ namespace ITAPS_HOST.Helpers
             services.AddHttpClient<ITAPSMain, TAPSMain>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            //services.AddSingleton<ICurrencyService, CurrencyService>();
+            services.AddSingleton<ICodeService, CodeService>();
+            services.AddSingleton<IAdminRequestClient, AdminRequestClient>();
+
             //services.AddSingleton<ITaxOfficeService, TaxOfficeService>();
             //services.AddSingleton<ITaxHolidayService, TaxHolidayService>();
             //services.AddSingleton<ICodeSetupService, CodeSetupService>();

@@ -1,10 +1,11 @@
 ﻿var offices;
-var ServerUrl = $("#AppServerUrl").val();
+var ServerUrl = $("#serverUrl").val();
 var userid = $("#UserObj").val();
 var url = `${ServerUrl}api/Users/GetAllUserTaxOfficesByUserID?userId=` + userid;
 
 $(document).ready(function () {
-
+    //Always set page header here.
+    $("#pgHeader").text("Home");
     apiCaller(url, "GET", "", setTaxOffice);
 
 });

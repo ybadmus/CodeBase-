@@ -25,10 +25,7 @@ namespace ITAPS_HOST
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAppConfiguration(Configuration)
-              .AddHttpConfiguration(Configuration)
-              .AddAuthenticationConfiguration(Configuration);
-
+            
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -37,6 +34,11 @@ namespace ITAPS_HOST
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddAppConfiguration(Configuration)
+              .AddHttpConfiguration(Configuration)
+              .AddAuthenticationConfiguration(Configuration);
+
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

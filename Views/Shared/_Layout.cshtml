@@ -25,7 +25,15 @@
     <!-- Vector Maps -->
     <link type="text/css" href="~/vendor/jqvmap/jqvmap.min.css" rel="stylesheet">
     <link href="~/css/Itaps-custom.css" rel="stylesheet" />
-
+    <!-- Kendo -->
+    <link href="~/kendo/css/kendo.default.min.css" rel="stylesheet" />
+    <link href="~/kendo/css/kendo.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/kendo/css/kendo.default.mobile.min.css" rel="stylesheet" />
+    <link href="~/kendo/css/kendo.common.min.css" rel="stylesheet" />
+    <!--Toastr and Loader-->
+    <link href="~/css/showLoading.css" rel="stylesheet" />
+    <link href="~/css/toastr.min.css" rel="stylesheet" />
+    <link href="~/css/toastr.css" rel="stylesheet" />
     <style>
         select {
             width: 100% !important;
@@ -117,7 +125,7 @@
                                 <div class="row">
                                     <div class="col-md-9">
                                         <span class="m-0" style="font-size: 1.540625rem">
-                                            <span id="pgHeader">@ViewBag.Title</span> -
+                                            <span id="pgHeader"></span> -
                                             <span style="font-size:18px" class="pt-2">
                                                 <span class="badge badge-success" style="font-size: 0.8em; border-radius:1.7em">
                                                     <span class="fa fa-user-circle"></span>
@@ -157,6 +165,117 @@
                                         <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">home</i>
                                         <span class="sidebar-menu-text">Home</span>
                                     </a>
+                                </li>
+                                <!-- Code Setup-->
+                                <li class="sidebar-menu-item pit">
+                                    <a class="sidebar-menu-button" data-toggle="collapse" href="#Codes_menu">
+                                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">account_balance_wallet</i>
+                                        <span class="sidebar-menu-text">Codes</span>
+                                        <span class="ml-auto sidebar-menu-toggle-icon"></span>
+                                    </a>
+                                    <ul class="sidebar-submenu collapse" id="Codes_menu">
+                                        <li class="sidebar-menu-item estimates">
+                                            <a class="sidebar-menu-button" href="~/codes/index?type=taxofficetype">
+                                                <span class="sidebar-menu-text">Tax Office Type</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item estimatesRevised">
+                                            <a class="sidebar-menu-button" href="~/codes/taxoffice">
+                                                <span class="sidebar-menu-text">Tax Office</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item returns">
+                                            <a class="sidebar-menu-button" href="~/codes/taxholiday">
+                                                <span class="sidebar-menu-text">Tax Holiday</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item returnsRevised">
+                                            <a class="sidebar-menu-button" href="~/codes/index?type=region">
+                                                <span class="sidebar-menu-text">Regions</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item returnsRevised">
+                                            <a class="sidebar-menu-button" href="~/codes/index?type=nationality">
+                                                <span class="sidebar-menu-text">Nationality</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item returnsRevised">
+                                            <a class="sidebar-menu-button" href="~/codes/currency">
+                                                <span class="sidebar-menu-text">Currency</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item returnsRevised">
+                                            <a class="sidebar-menu-button" href="~/codes/index?type=taxpayertype">
+                                                <span class="sidebar-menu-text">Taxpayer Types</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item returnsRevised">
+                                            <a class="sidebar-menu-button" href="~/codes/index?type=identitytype">
+                                                <span class="sidebar-menu-text">Identity Types</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item returnsRevised">
+                                            <a class="sidebar-menu-button" href="~/codes/index?type=mediaUploadType">
+                                                <span class="sidebar-menu-text">Media Upload Types</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item returnsRevised">
+                                            <a class="sidebar-menu-button" href="~/codes/index?type=personalReliefs">
+                                                <span class="sidebar-menu-text">Personal Relief Types</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item returnsRevised">
+                                            <a class="sidebar-menu-button" href="~/codes/index?type=patnerdormantstate">
+                                                <span class="sidebar-menu-text">Partner Dormant State</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item returnsRevised">
+                                            <a class="sidebar-menu-button" href="~/codes/index?type=residentialstatus">
+                                                <span class="sidebar-menu-text">Residential Status</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item returnsRevised">
+                                            <a class="sidebar-menu-button" href="~/codes/index?type=tenancystatus">
+                                                <span class="sidebar-menu-text">Tenancy Status</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item returnsRevised">
+                                            <a class="sidebar-menu-button" href="~/codes/index?type=accountingmethod">
+                                                <span class="sidebar-menu-text">Accounting Method</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item">
+                                            <a class="sidebar-menu-button" data-toggle="collapse" href="#course_menu">
+                                                <span class="sidebar-menu-text">Withholding</span>
+                                                <span class="ml-auto d-flex align-items-center">
+                                                    <span class="badge badge-primary">WHT</span>
+                                                    <span class="sidebar-menu-toggle-icon"></span>
+                                                </span>
+                                            </a>
+                                            <ul class="sidebar-submenu collapse " id="course_menu">
+                                                <li class="sidebar-menu-item ">
+                                                    <a class="sidebar-menu-button" href="~/pit/returnsRevised">
+                                                        <span class="sidebar-menu-text">Account Type & Residency</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-menu-item ">
+                                                    <a class="sidebar-menu-button" href="~/pit/returnsRevised">
+                                                        <span class="sidebar-menu-text">Tax Rates & Codes</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-menu-item returnsRevised">
+                                                    <a class="sidebar-menu-button" href="~/pit/returnsRevised">
+                                                        <span class="sidebar-menu-text">WHT Exemption Reasons</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-menu-item returnsRevised">
+                                                    <a class="sidebar-menu-button" href="~/pit/returnsRevised">
+                                                        <span class="sidebar-menu-text">WithHolding Tax Status</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
                                 </li>
                                 <!-- PIT -->
                                 <li class="sidebar-menu-item pit">
@@ -260,44 +379,53 @@
 
         </div>
 
-        @RenderSection("modals", required: false)
-
-        <!-- jQuery -->
-        <script src="~/vendor/jquery.min.js"></script>
-        <!-- Bootstrap -->
-        <script src="~/vendor/popper.min.js"></script>
-        <script src="~/vendor/bootstrap.min.js"></script>
-        <!-- Simplebar -->
-        <script src="~/vendor/simplebar.min.js"></script>
-        <!-- DOM Factory -->
-        <script src="~/vendor/dom-factory.js"></script>
-        <!-- MDK -->
-        <script src="~/vendor/material-design-kit.js"></script>
-        <!-- App -->
-        <script src="~/js/toggle-check-all.js"></script>
-        <script src="~/js/check-selected-row.js"></script>
-        <script src="~/js/dropdown.js"></script>
-        <script src="~/js/sidebar-mini.js"></script>
-        <!--Template-->
-        <script src="~/js/template-bootstrapper.js"></script>
-
-        <!-- App Settings (safe to remove) -->
-        <script src="~/js/app-settings.js"></script>
-        <!-- Flatpickr -->
-        <script src="~/vendor/flatpickr/flatpickr.min.js"></script>
-        <script src="~/js/flatpickr.js"></script>
-        <!-- Global Settings -->
-        <script src="~/js/settings.js"></script>
-        <!-- Chart.js -->
-        <script src="~/vendor/Chart.min.js"></script>
-        <!-- App Charts JS -->
-        <script src="~/js/charts.js"></script>
-        <!-- Vector Maps -->
-        <script src="~/vendor/jqvmap/jquery.vmap.min.js"></script>
-        <script src="~/vendor/jqvmap/maps/jquery.vmap.world.js"></script>
-        <script src="~/js/vector-maps.js"></script>
-
-        @RenderSection("scripts", required: false)
     </div>
+
+    <!-- jQuery -->
+    <script src="~/vendor/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="~/vendor/popper.min.js"></script>
+    <script src="~/vendor/bootstrap.min.js"></script>
+    <!-- Simplebar -->
+    <script src="~/vendor/simplebar.min.js"></script>
+    <!-- DOM Factory -->
+    <script src="~/vendor/dom-factory.js"></script>
+    <!-- MDK -->
+    <script src="~/vendor/material-design-kit.js"></script>
+    <!-- App -->
+    <script src="~/js/toggle-check-all.js"></script>
+    <script src="~/js/check-selected-row.js"></script>
+    <script src="~/js/dropdown.js"></script>
+    <script src="~/js/sidebar-mini.js"></script>
+    <!--Template-->
+    <script src="~/js/template-bootstrapper.js"></script>
+
+    <!-- App Settings (safe to remove) -->
+    <script src="~/js/app-settings.js"></script>
+    <!-- Flatpickr -->
+    <script src="~/vendor/flatpickr/flatpickr.min.js"></script>
+    <script src="~/js/flatpickr.js"></script>
+    <!-- Global Settings -->
+    <script src="~/js/settings.js"></script>
+    <!-- Chart.js -->
+    <script src="~/vendor/Chart.min.js"></script>
+    <!-- App Charts JS -->
+    <script src="~/js/charts.js"></script>
+    <!-- Vector Maps -->
+    <script src="~/vendor/jqvmap/jquery.vmap.min.js"></script>
+    <script src="~/vendor/jqvmap/maps/jquery.vmap.world.js"></script>
+    <script src="~/js/vector-maps.js"></script>
+    <!-- Kendo JS -->
+    <script src="~/kendo/js/kendo.web.min.js"></script>
+    <script src="~/kendo/js/knockout-3.1.0.js"></script>
+    <script src="~/kendo/js/knockout-kendo.min.js"></script>
+    <!--Loader-->
+    <script src="~/js/jquery.showLoading.min.js"></script>
+    <!--Toastr-->
+    <script src="~/js/toastr.min.js"></script>
+
+    @RenderSection("modals", required: false)
+    @RenderSection("scripts", required: false)
+
 </body>
 </html>

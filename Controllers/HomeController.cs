@@ -1,20 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using ITAPS_HOST.Data;
 using ITAPS_HOST.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace ITAPS_HOST.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IAppConstants _config;
+
+        public HomeController(IAppConstants config)
+        {
+            _config = config;
+        }
+
         [Authorize]
         public IActionResult Index()
         {
             UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
             return View();
         }
 
@@ -35,21 +40,20 @@ namespace ITAPS_HOST.Controllers
             {
                 if (claim.Type == "given_name")
                 {
-                    ViewData["UserName"] = claim.Value;
+                    ViewBag.UserName = claim.Value;
                 }
                 if (claim.Type == "name")
                 {
-                    ViewData["FullName"] = claim.Value;
+                    ViewBag.FullName = claim.Value;
                 }
                 if (claim.Type == "email")
                 {
-                    ViewData["EmailAddress"] = claim.Value;
+                    ViewBag.EmailAddress = claim.Value;
                 }
                 if (claim.Type == "sub")
                 {
-                    ViewData["UserId"] = claim.Value;
+                    ViewBag.UserId = claim.Value;
                 }
-
             }
         }
     }
