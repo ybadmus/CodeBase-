@@ -1,0 +1,113 @@
+﻿<div id="modal-add-setup" class="modal fade" tabindex="-1"  role="dialog" aria-labelledby="modal-standard-title" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="modal-income-title">Add <span id="AddModalSetupName"></span></h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: white">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form>
+                                <div class="form-group row">
+                                    <div class="col-md-6 formDiv">
+                                        <label for="Code" class="col-form-label">
+                                            Code
+                                        </label>
+                                        <input type="text" class="form-control" id="Code" placeholder="">
+                                    </div>
+                                    <div class="col-md-6 formDiv">
+                                        <label for="Status" class=" col-form-label">Status</label>
+                                        <select type="text" id="Status" class="form-control" required>
+                                            <option value="A">Active</option>
+                                            <option value="I">Inactive</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-12 formDiv">
+                                        <label for="Description" class=" col-form-label">Description</label>
+                                        <input type="text" class="form-control" id="Description" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-12 formDiv">
+                                        <label for="Note" class="col-form-label">
+                                            Notes
+                                        </label>
+                                        <textarea class="form-control" rows="3" id="Note" style="resize: none;" value=""></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" id="SubmitSetup" class="btn btn-success">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-edit-setup" class="modal fade" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="modal-standard-title" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="modal-income-title">Update <span id="EditModalSetupName"></span></h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: white">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form>
+                                <div class="form-group row">
+                                    <div class="col-md-6 ">
+                                        <label for="UpdateCode" class="col-form-label">
+                                            Code
+                                        </label>
+                                        <input type="text" class="form-control" id="UpdateCode" placeholder="" disabled>
+                                    </div>
+                                    <div class="col-md-6 ">
+                                        <label for="UpdateStatus" class=" col-form-label">Status</label>
+                                        <select type="text" id="UpdateStatus" class="form-control" disabled>
+                                            <option value="A">Active</option>
+                                            <option value="I">Inactive</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-12 ">
+                                        <label for="UpdateDescription" class=" col-form-label">Description</label>
+                                        <input type="text" class="form-control" id="UpdateDescription" placeholder="" disabled>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-12 ">
+                                        <label for="UpdateNote" class="col-form-label">
+                                            Notes
+                                        </label>
+                                        <textarea class="form-control" rows="3" id="UpdateNote" style="resize: none; " value="" disabled></textarea>
+                                    </div>
+                                </div>
+                                <input type="text" id="EntryId" value="" hidden>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" id="BtnEdit" class="btn btn-light"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;&nbsp; Edit Entry</button>
+                <button type="button" id="BtnUpdate" class="btn btn-success" style="display:none">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

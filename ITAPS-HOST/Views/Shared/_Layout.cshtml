@@ -1,77 +1,431 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en" dir="ltr">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ITAPS_HOST</title>
+    <title>ITAPS HOST</title>
+    <link rel="icon" href="~/images/itaps.png" type="image/x-icon" />
+    <meta name="robots" content="noindex">
+    <!-- Simplebar -->
+    <link type="text/css" href="~/vendor/simplebar.min.css" rel="stylesheet">
+    <!-- App CSS -->
+    <link type="text/css" href="~/css/app.css" rel="stylesheet">
+    <link type="text/css" href="~/css/app.rtl.css" rel="stylesheet">
+    <!-- Material Design Icons -->
+    <link type="text/css" href="~/css/vendor-material-icons.css" rel="stylesheet">
+    <link type="text/css" href="~/css/vendor-material-icons.rtl.css" rel="stylesheet">
+    <!-- Font Awesome FREE Icons -->
+    <link type="text/css" href="~/css/vendor-fontawesome-free.css" rel="stylesheet">
+    <link type="text/css" href="~/css/vendor-fontawesome-free.rtl.css" rel="stylesheet">
+    <!-- Flatpickr -->
+    <link type="text/css" href="~/css/vendor-flatpickr.css" rel="stylesheet">
+    <link type="text/css" href="~/css/vendor-flatpickr.rtl.css" rel="stylesheet">
+    <link type="text/css" href="~/css/vendor-flatpickr-airbnb.css" rel="stylesheet">
+    <link type="text/css" href="~/css/vendor-flatpickr-airbnb.rtl.css" rel="stylesheet">
+    <!-- Vector Maps -->
+    <link type="text/css" href="~/vendor/jqvmap/jqvmap.min.css" rel="stylesheet">
+    <link href="~/css/Itaps-custom.css" rel="stylesheet" />
+    <!-- Kendo -->
+    <link href="~/kendo/css/kendo.default.min.css" rel="stylesheet" />
+    <link href="~/kendo/css/kendo.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/kendo/css/kendo.default.mobile.min.css" rel="stylesheet" />
+    <link href="~/kendo/css/kendo.common.min.css" rel="stylesheet" />
+    <!--Toastr and Loader-->
+    <link href="~/css/showLoading.css" rel="stylesheet" />
+    <link href="~/css/toastr.min.css" rel="stylesheet" />
+    <link href="~/css/toastr.css" rel="stylesheet" />
+    <style>
+        select {
+            width: 100% !important;
+        }
 
-    <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-    </environment>
-    <environment exclude="Development">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
-              crossorigin="anonymous"
-              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"/>
-    </environment>
-    <link rel="stylesheet" href="~/css/site.css" />
+        label > span {
+            color: black !important;
+        }
+    </style>
+
+    @RenderSection("css", required: false)
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ITAPS_HOST</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+<body class="layout-default">
+
+    <div class="preloader"></div>
+    <div class="mdk-header-layout js-mdk-header-layout">
+        <!-- Header -->
+
+        <div id="header" class="mdk-header js-mdk-header m-0" data-fixed>
+            <div class="mdk-header__content">
+
+                <div class="navbar navbar-expand-sm navbar-main navbar-dark bg-dark  pr-0" id="navbar" data-primary>
+                    <div class="container-fluid p-0">
+                        <!-- Navbar toggler -->
+                        <button class="navbar-toggler navbar-toggler-right d-block d-md-none" type="button" data-toggle="sidebar">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <!-- Navbar Brand -->
+                        <a href="~/home" class="navbar-brand ">
+                            <img class="navbar-brand-icon" src="~/images/itaps.png" width="50" alt="Stack" />
+                            <span>iTaPS HOST</span>
+                        </a>
+                        <ul class="nav navbar-nav d-none d-sm-flex navbar-height align-items-center">
+                            <li class="nav-item border-left dropdown">
+                                <a href="#notifications_menu" class="nav-link dropdown-toggle" data-toggle="dropdown" data-caret="false">
+                                    <i class="material-icons nav-icon navbar-notifications-indicator">notifications</i>
+                                </a>
+                                <div id="notification_menu" class="dropdown-menu dropdown-menu-right">
+                                    <div id="NotificationItems">
+                                        @for (var i = 0; i < 10; i++)
+                                        {
+                                            <div class="dropdown-item-text dropdown-item-text--lh">
+                                                <span class="text-secondary" id="NotificationTitle">PIT</span>
+                                                <span class="text-dark-gray" id="NotificationMessage">Message brief decription</span>
+                                            </div>
+                                            <div class="dropdown-divider"></div>
+                                        }
+                                    </div>
+                                    <div class="col-md-12 py-0 px-1 m-0">
+                                        <button class="btn btn-xs btn-default">Close</button>
+                                        <button class="btn btn-xs btn-default float-right" id="NotificationClearItems">Clear Items</button>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item border-left dropdown">
+                                <a href="#account_menu" class="nav-link dropdown-toggle" data-toggle="dropdown" data-caret="false">
+                                    <img src="~/images/icons/user.svg" class="rounded-circle" width="32" alt="">
+                                    <span class="ml-1 d-flex-inline">
+                                        <span class="text-light">
+                                            Hello, <span class="UserFirstName">@ViewBag.UserName</span>
+                                        </span>
+                                    </span>
+                                </a>
+                                <div id="account_menu" class="dropdown-menu dropdown-menu-right">
+                                    <div class="dropdown-item-text dropdown-item-text--lh">
+                                        <div><strong class="UserFullName" id="UserFullName">@ViewBag.FullName</strong></div>
+                                    </div>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item active" href="~/home">Dashboard</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a asp-page="/Logout" class="dropdown-item" id="LogOut">Logout</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="mdk-header-layout__content">
+
+            <div class="mdk-drawer-layout js-mdk-drawer-layout" data-push data-responsive-width="992px">
+                <div class="mdk-drawer-layout__content page">
+
+                    <div class="container-fluid page__heading-container">
+                        <div class="page__heading d-flex align-items-center">
+                            <div class="flex">
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <span class="m-0" style="font-size: 1.540625rem">
+                                            <span id="pgHeader"></span> -
+                                            <span style="font-size:18px" class="pt-2">
+                                                <span class="badge badge-success" style="font-size: 0.8em; border-radius:1.7em">
+                                                    <span class="fa fa-user-circle"></span>
+                                                    <span>&nbsp;<b class="TaxPayerName" id="TaxPayerName">@ViewBag.FullName</b></span>
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <nav aria-label="breadcrumb">
+                                            <ol class="breadcrumb mb-0 float-right">
+                                                <li title="TaxPayer's Tax Office">Tax Office: <span id="TaxPayerTaxOffice" style="font-weight: 600"></span></li>
+                                            </ol>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container-fluid page__container">
+                        @Html.AntiForgeryToken()
+
+                        <!-- Contents go here -->
+                        @RenderBody()
+                    </div>
+
+                </div>
+
+                <div class="mdk-drawer  js-mdk-drawer" id="default-drawer" data-align="start">
+                    <div class="mdk-drawer__content">
+                        <div class="sidebar sidebar-light sidebar-left simplebar" data-simplebar>
+                            <div class="sidebar-heading sidebar-m-t">Menu</div>
+                            <ul class="sidebar-menu">
+                                <li class="sidebar-menu-item home">
+                                    <a class="sidebar-menu-button" href="~/home">
+                                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">home</i>
+                                        <span class="sidebar-menu-text">Home</span>
+                                    </a>
+                                </li>
+                                <!-- Code Setup-->
+                                <li class="sidebar-menu-item pit">
+                                    <a class="sidebar-menu-button" data-toggle="collapse" href="#Codes_menu">
+                                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">account_balance_wallet</i>
+                                        <span class="sidebar-menu-text">Codes</span>
+                                        <span class="ml-auto sidebar-menu-toggle-icon"></span>
+                                    </a>
+                                    <ul class="sidebar-submenu collapse" id="Codes_menu">
+                                        <li class="sidebar-menu-item estimates">
+                                            <a class="sidebar-menu-button" href="~/codes/index?type=taxofficetype">
+                                                <span class="sidebar-menu-text">Tax Office Type</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item estimatesRevised">
+                                            <a class="sidebar-menu-button" href="~/codes/taxoffice">
+                                                <span class="sidebar-menu-text">Tax Office</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item returns">
+                                            <a class="sidebar-menu-button" href="~/codes/taxholiday">
+                                                <span class="sidebar-menu-text">Tax Holiday</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item returnsRevised">
+                                            <a class="sidebar-menu-button" href="~/codes/index?type=region">
+                                                <span class="sidebar-menu-text">Regions</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item returnsRevised">
+                                            <a class="sidebar-menu-button" href="~/codes/index?type=nationality">
+                                                <span class="sidebar-menu-text">Nationality</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item returnsRevised">
+                                            <a class="sidebar-menu-button" href="~/codes/currency">
+                                                <span class="sidebar-menu-text">Currency</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item returnsRevised">
+                                            <a class="sidebar-menu-button" href="~/codes/index?type=taxpayertype">
+                                                <span class="sidebar-menu-text">Taxpayer Types</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item returnsRevised">
+                                            <a class="sidebar-menu-button" href="~/codes/index?type=identitytype">
+                                                <span class="sidebar-menu-text">Identity Types</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item returnsRevised">
+                                            <a class="sidebar-menu-button" href="~/codes/index?type=mediaUploadType">
+                                                <span class="sidebar-menu-text">Media Upload Types</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item returnsRevised">
+                                            <a class="sidebar-menu-button" href="~/codes/index?type=personalReliefs">
+                                                <span class="sidebar-menu-text">Personal Relief Types</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item returnsRevised">
+                                            <a class="sidebar-menu-button" href="~/codes/index?type=patnerdormantstate">
+                                                <span class="sidebar-menu-text">Partner Dormant State</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item returnsRevised">
+                                            <a class="sidebar-menu-button" href="~/codes/index?type=residentialstatus">
+                                                <span class="sidebar-menu-text">Residential Status</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item returnsRevised">
+                                            <a class="sidebar-menu-button" href="~/codes/index?type=tenancystatus">
+                                                <span class="sidebar-menu-text">Tenancy Status</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item returnsRevised">
+                                            <a class="sidebar-menu-button" href="~/codes/index?type=accountingmethod">
+                                                <span class="sidebar-menu-text">Accounting Method</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item">
+                                            <a class="sidebar-menu-button" data-toggle="collapse" href="#course_menu">
+                                                <span class="sidebar-menu-text">Withholding</span>
+                                                <span class="ml-auto d-flex align-items-center">
+                                                    <span class="badge badge-primary">WHT</span>
+                                                    <span class="sidebar-menu-toggle-icon"></span>
+                                                </span>
+                                            </a>
+                                            <ul class="sidebar-submenu collapse " id="course_menu">
+                                                <li class="sidebar-menu-item ">
+                                                    <a class="sidebar-menu-button" href="~/pit/returnsRevised">
+                                                        <span class="sidebar-menu-text">Account Type & Residency</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-menu-item ">
+                                                    <a class="sidebar-menu-button" href="~/pit/returnsRevised">
+                                                        <span class="sidebar-menu-text">Tax Rates & Codes</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-menu-item returnsRevised">
+                                                    <a class="sidebar-menu-button" href="~/pit/returnsRevised">
+                                                        <span class="sidebar-menu-text">WHT Exemption Reasons</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-menu-item returnsRevised">
+                                                    <a class="sidebar-menu-button" href="~/pit/returnsRevised">
+                                                        <span class="sidebar-menu-text">WithHolding Tax Status</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- PIT -->
+                                <li class="sidebar-menu-item pit">
+                                    <a class="sidebar-menu-button" data-toggle="collapse" href="#PIT_menu">
+                                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">account_balance_wallet</i>
+                                        <span class="sidebar-menu-text">Personal Income Tax</span>
+                                        <span class="ml-auto sidebar-menu-toggle-icon"></span>
+                                    </a>
+                                    <ul class="sidebar-submenu collapse" id="PIT_menu">
+                                        <li class="sidebar-menu-item estimates">
+                                            <a class="sidebar-menu-button" href="~/pit/estimates">
+                                                <span class="sidebar-menu-text">Annual Estimates</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item estimatesRevised">
+                                            <a class="sidebar-menu-button" href="~/pit/estimatesRevised">
+                                                <span class="sidebar-menu-text">Revised Annual Estimates</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item returns">
+                                            <a class="sidebar-menu-button" href="~/pit/returns">
+                                                <span class="sidebar-menu-text">Annual Returns</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item returnsRevised">
+                                            <a class="sidebar-menu-button" href="~/pit/returnsRevised">
+                                                <span class="sidebar-menu-text">Revised Annual Returns</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- PAYMENT -->
+                                <li class="sidebar-menu-item payment">
+                                    <a class="sidebar-menu-button" href="~/payment">
+                                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">account_balance_wallet</i>
+                                        <span class="sidebar-menu-text">Payment</span>
+                                    </a>
+                                </li>
+
+                                <!-- WITHHOLDING -->
+                                <li class="sidebar-menu-item wht">
+                                    <a class="sidebar-menu-button" data-toggle="collapse" href="#WHT_menu">
+                                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">account_balance_wallet</i>
+                                        <span class="sidebar-menu-text">Withholding Tax</span>
+                                        <span class="ml-auto sidebar-menu-toggle-icon"></span>
+                                    </a>
+                                    <ul class="sidebar-submenu collapse" id="WHT_menu">
+                                        <li class="sidebar-menu-item new">
+                                            <a class="sidebar-menu-button" href="~/wht/new">
+                                                <span class="sidebar-menu-text">New Transaction</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item update">
+                                            <a class="sidebar-menu-button" href="~/wht/update">
+                                                <span class="sidebar-menu-text">Revoke Transaction</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item alltransactions">
+                                            <a class="sidebar-menu-button" href="~/wht/alltransactions">
+                                                <span class="sidebar-menu-text">WHT Transactions</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item returns">
+                                            <a class="sidebar-menu-button" href="~/wht/returns">
+                                                <span class="sidebar-menu-text">WHT Returns</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item returns">
+                                            <a class="sidebar-menu-button" href="~/wht/vatreturns">
+                                                <span class="sidebar-menu-text">WH VAT Returns</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <!-- APPLICATIONS -->
+                                <li class="sidebar-menu-item applications">
+                                    <a class="sidebar-menu-button" data-toggle="collapse" href="#APPLICATIONS_menu">
+                                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">account_balance_wallet</i>
+                                        <span class="sidebar-menu-text">Applications</span>
+                                        <span class="ml-auto sidebar-menu-toggle-icon"></span>
+                                    </a>
+                                    <ul class="sidebar-submenu collapse" id="APPLICATIONS_menu">
+                                        <li class="sidebar-menu-item tcc">
+                                            <a class="sidebar-menu-button" href="~/applications/tcc">
+                                                <span class="sidebar-menu-text">Tax Clearance Certificate</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item whte">
+                                            <a class="sidebar-menu-button" href="~/applications/whte">
+                                                <span class="sidebar-menu-text">Withholding Tax Exemption</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <partial name="_CookieConsentPartial" />
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+
+        </div>
+
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2019 - ITAPS_HOST - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+    <!-- jQuery -->
+    <script src="~/vendor/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="~/vendor/popper.min.js"></script>
+    <script src="~/vendor/bootstrap.min.js"></script>
+    <!-- Simplebar -->
+    <script src="~/vendor/simplebar.min.js"></script>
+    <!-- DOM Factory -->
+    <script src="~/vendor/dom-factory.js"></script>
+    <!-- MDK -->
+    <script src="~/vendor/material-design-kit.js"></script>
+    <!-- App -->
+    <script src="~/js/toggle-check-all.js"></script>
+    <script src="~/js/check-selected-row.js"></script>
+    <script src="~/js/dropdown.js"></script>
+    <script src="~/js/sidebar-mini.js"></script>
+    <!--Template-->
+    <script src="~/js/template-bootstrapper.js"></script>
 
-    <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
-        </script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous"
-                integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
-        </script>
-    </environment>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <!-- App Settings (safe to remove) -->
+    <script src="~/js/app-settings.js"></script>
+    <!-- Flatpickr -->
+    <script src="~/vendor/flatpickr/flatpickr.min.js"></script>
+    <script src="~/js/flatpickr.js"></script>
+    <!-- Global Settings -->
+    <script src="~/js/settings.js"></script>
+    <!-- Chart.js -->
+    <script src="~/vendor/Chart.min.js"></script>
+    <!-- App Charts JS -->
+    <script src="~/js/charts.js"></script>
+    <!-- Vector Maps -->
+    <script src="~/vendor/jqvmap/jquery.vmap.min.js"></script>
+    <script src="~/vendor/jqvmap/maps/jquery.vmap.world.js"></script>
+    <script src="~/js/vector-maps.js"></script>
+    <!-- Kendo JS -->
+    <script src="~/kendo/js/kendo.web.min.js"></script>
+    <script src="~/kendo/js/knockout-3.1.0.js"></script>
+    <script src="~/kendo/js/knockout-kendo.min.js"></script>
+    <!--Loader-->
+    <script src="~/js/jquery.showLoading.min.js"></script>
+    <!--Toastr-->
+    <script src="~/js/toastr.min.js"></script>
 
-    @RenderSection("Scripts", required: false)
+    @RenderSection("modals", required: false)
+    @RenderSection("scripts", required: false)
+
 </body>
 </html>

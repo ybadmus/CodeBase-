@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+@section css {
+    <link href="~/css/codes/code.css" rel="stylesheet" />
+}
+
+<input id="serverUrl" value="@ViewBag.ServerUrl" hidden />
+
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="input-group">
+                    <input type="text" class="form-control" autocomplete="off" id="searchItem" placeholder="search">
+                    <div class="input-group-append">
+                        <button type="button" id="btnSearch" class="btn btn-success btn-sm"><i class='fa fa-search'></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 offset-md-6">
+                <button id="btnOpenAddModal" class="btn btn-success float-right" type="button"><i class='fa fa-plus-circle'></i> Add Code</button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row align-items-end">
+            <div class="gridDiv">
+                <div id="grid"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section modals{
+    <partial name="_CodesModal" />
+}
+
+@section scripts {
+    <script src="~/js/codes/code.js"></script>
+}
