@@ -17,7 +17,46 @@ namespace ITAPS_HOST.Controllers
         public IActionResult Index(string type)
         {
             UserDetails();
-            ViewBag.Type = type;
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+
+        [Authorize]
+        public IActionResult TaxOffice()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+
+        [Authorize]
+        public IActionResult TaxHoliday()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+
+        [Authorize]
+        public IActionResult Currency()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+
+        [Authorize]
+        public IActionResult ACTR()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+
+        [Authorize]
+        public IActionResult RateAndCode()
+        {
+            UserDetails();
             ViewBag.ServerUrl = _config.AppServerUrl;
             return View();
         }

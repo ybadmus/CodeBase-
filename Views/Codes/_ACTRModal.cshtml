@@ -1,0 +1,133 @@
+﻿<div id="modal-add-setup" class="modal fade" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="modal-standard-title" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="modal-income-title">Add</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: white">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form>
+                                <div class="form-group row">
+                                    <div class="col-md-6 formDiv">
+                                        <label for="accountType" class="col-form-label">
+                                            Account Type
+                                        </label>
+                                        <select class="form-control" id="accountType" style="display: block"></select>
+                                    </div>
+                                    <div class="col-md-6 formDiv">
+                                        <label for="residencyStatus" class="col-form-label">
+                                            Residency Status
+                                        </label>
+                                        <select class="form-control" id="residencyStatus" style="display: block"></select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-12 formDiv">
+                                        <label for="descriptionAccType" class="col-form-label">
+                                            Description
+                                        </label>
+                                        <textarea class="form-control" rows="3" id="descriptionAccType" style="background-color: white; resize: none;" value="" readonly></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-6 formDiv">
+                                        <label for="dateCreated" class="col-form-label">
+                                            Date Created
+                                        </label>
+                                        <input id="dateCreated" type="text" class="form-control" placeholder="Select Date (Required)" data-toggle="flatpickr" data-flatpickr-mode="range" value="">
+                                    </div>
+                                    <div class="col-md-6 formDiv">
+                                        <label for="accountTypeStatus" class=" col-form-label">Status</label>
+                                        <select type="text" id="accountTypeStatus" class="form-control" style="font-weight: 600" required>
+                                            <option value="A">Active</option>
+                                            <option value="I">Inactive</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" id="SubmitSetup" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-edit-setup" class="modal fade" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="modal-standard-title" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="modal-income-title">Update <span id="EditModalSetupName"></span></h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: white">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form>
+                                <input id="accTypeId" hidden />
+                                <div class="form-group row">
+                                    <div class="col-md-6 formDiv">
+                                        <label for="accountTypeUpdate" class="col-form-label">
+                                            Account Type
+                                        </label>
+                                        <select class="form-control" id="accountTypeUpdate" style="display: block" disabled></select>
+                                    </div>
+                                    <div class="col-md-6 formDiv">
+                                        <label for="residencyStatusUpdate" class="col-form-label">
+                                            Residency Status
+                                        </label>
+                                        <select class="form-control" id="residencyStatusUpdate" style="display: block" disabled></select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-12 formDiv">
+                                        <label for="descriptionAccType" class="col-form-label">
+                                            Description
+                                        </label>
+                                        <textarea class="form-control" rows="3" id="descriptionAccTypeUpdate" style="resize: none;" value="" disabled></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-6 formDiv">
+                                        <label for="dateCreated" class="col-form-label">
+                                            Date Created
+                                        </label>
+                                        <input id="dateCreatedUpdate" type="text" class="form-control" placeholder="Select Date (Required)" data-toggle="flatpickr" data-flatpickr-mode="range" value="" disabled />
+                                    </div>
+                                    <div class="col-md-6 formDiv">
+                                        <label for="accountTypeStatus" class=" col-form-label">Status</label>
+                                        <select type="text" id="accountTypeStatusUpdate" class="form-control" disabled>
+                                            <option value="A">Active</option>
+                                            <option value="I">Inactive</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" id="BtnEdit" class="btn btn-light"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;&nbsp; Edit</button>
+                <button type="button" id="BtnUpdate" class="btn btn-primary" style="display:none">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

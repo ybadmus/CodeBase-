@@ -49,11 +49,10 @@ var apiCaller = function (url, type, data, callback) {
         error: function (error) {
             toastr.error('An error occured');
         }
-        //Reminder: set toastr for different situations of failure;
     });
 };
 
-var afterSave = function (res, objectSent, type) {
+var apiCallSuccess = function (res, objectSent, type) {
     if (type == "POST") {
         toastr.success("Successfully saved");
         UpdateKendoGridLocally(objectSent);
@@ -257,7 +256,7 @@ $("#SubmitSetup").click(function () {
         "cStatus": Status
     };
 
-    apiCaller(url, "POST", ObjectToSend, afterSave);
+    apiCaller(url, "POST", ObjectToSend, apiCallSuccess);
 });
 
 $("body").on('click', '#grid .k-grid-content .btn', function (e) {
@@ -297,7 +296,7 @@ $("#BtnUpdate").click(function () {
         "cStatus": rgionStatus
     };
 
-    apiCaller(url, "POST", ObjectToSend, afterSave);
+    apiCaller(url, "PUT", ObjectToSend, apiCallSuccess);
 });
 
 $('#modal-add-setup').on('hidden.bs.modal', function () {
@@ -325,14 +324,14 @@ $("#searchItem").on('keypress', function (e) {
 });
 
 var UpdateKendoGridLocally = function (obj) {
-    var displayedData = $("#grid").data().kendoGrid.dataSource.view()
+    var displayedData = $("#grid").data().kendoGrid.dataSource.data();
     var found = false;
 
     if (obj.id) {
         for (var i = 0; i < displayedData.length; i++) {
             if (obj.id == displayedData[i].id) {
                 found = true;
-                displayedData[i].cStatus = obj.status;
+                displayedData[i].cStatus = obj.cStatus;
                 displayedData[i].description = obj.description;
                 displayedData[i].code = obj.code;
                 displayedData[i].notes = obj.notes;
@@ -341,17 +340,17 @@ var UpdateKendoGridLocally = function (obj) {
             }
         }
     }
-   
 
     if (!found && !obj.id) {
-        var obj = {
-            "cStatus": obj.status,
+        var objNew = {
+            "cStatus": obj.cStatus,
             "description": obj.description,
             "code": obj.code,
             "notes": obj.notes,
         };
 
-        displayedData.shift(obj);
-        //To be continued here.
+        displayedData.unshift(objNew);
+        initializeKendoGrid(displayedData);
     }
 };
+

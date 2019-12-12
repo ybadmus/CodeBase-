@@ -30,5 +30,15 @@ C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcorea
 C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\ITAPS_HOST.Properties.Resources.resources
 C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\ITAPS-HOST.csproj.GenerateResource.cache
 C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\Codes\Index.g.cshtml.cs
-C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\ITAPS-HOST.csprojAssemblyReference.cache
 C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\Codes\_CodesModal.g.cshtml.cs
+C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\Codes\TaxOffice.g.cshtml.cs
+C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\Codes\_TaxOfficeModal.g.cshtml.cs
+C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\Codes\TaxHoliday.g.cshtml.cs
+C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\Codes\_TaxHolidayModal.g.cshtml.cs
+C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\Codes\Currency.g.cshtml.cs
+C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\Codes\_CurrencyModal.g.cshtml.cs
+C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\Codes\ACTR.g.cshtml.cs
+C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\Codes\_ACTRModal.g.cshtml.cs
+C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\ITAPS-HOST.csprojAssemblyReference.cache
+C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\Codes\RateAndCode.g.cshtml.cs
+C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\Codes\_RateAndCodeModal.g.cshtml.cs

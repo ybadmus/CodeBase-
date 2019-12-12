@@ -620,6 +620,10 @@ input[type="text"]:disabled {
     color: #308af3 !important;
 }
 
+select[type="text"]:disabled {
+    color: #308af3 !important;
+}
+
 .k-toolbar.k-grid-toolbar {
     background-color: #112b4a !important;
 }

@@ -40,7 +40,6 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\js\dashboard\" />
-    <Folder Include="wwwroot\js\codes\" />
   </ItemGroup>
 
 </Project>
