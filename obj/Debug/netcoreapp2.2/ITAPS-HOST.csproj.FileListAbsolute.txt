@@ -42,3 +42,7 @@ C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcorea
 C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\ITAPS-HOST.csprojAssemblyReference.cache
 C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\Codes\RateAndCode.g.cshtml.cs
 C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\Codes\_RateAndCodeModal.g.cshtml.cs
+C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\WTHT\AllTransaction.g.cshtml.cs
+C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\WTHT\Returns.g.cshtml.cs
+C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\WTHT\VATReturns.g.cshtml.cs
+C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\WTHT\VATTransaction.g.cshtml.cs
