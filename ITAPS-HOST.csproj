@@ -37,9 +37,4 @@
     </EmbeddedResource>
   </ItemGroup>
 
-
-  <ItemGroup>
-    <Folder Include="wwwroot\js\dashboard\" />
-  </ItemGroup>
-
 </Project>

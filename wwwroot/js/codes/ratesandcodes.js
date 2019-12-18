@@ -49,17 +49,8 @@ var SetAddModalFieldsToDefault = function () {
 };
 
 var InitializeKendoGrid = function (data) {
-    var dataFormatted = [];
-    if (data) {
-        for (var i = 0; i < data.length; i++) {
-            let formattedDate = DateFormatter(data[i].lastModifiedDate);
-            data[i].lastModifiedDate = formattedDate;
-            dataFormatted.push(data[i]);
-        }
-    }
-
     $("#Grid").kendoGrid({
-        dataSource: { data: dataFormatted ? dataFormatted : [], pageSize: 8 },
+        dataSource: { data: data, pageSize: 8 },
         sortable: true,
         selectable: true,
         pageable: { refresh: false, pageSizes: true, buttonCount: 5 },

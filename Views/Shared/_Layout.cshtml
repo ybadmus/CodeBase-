@@ -46,7 +46,9 @@
 
     @RenderSection("css", required: false)
 </head>
+
 <body class="layout-default">
+    <input id="userId" value="@ViewBag.UserId" hidden />
 
     <div class="preloader"></div>
     <div class="mdk-header-layout js-mdk-header-layout">
@@ -137,7 +139,7 @@
                                     <div class="col-md-3">
                                         <nav aria-label="breadcrumb">
                                             <ol class="breadcrumb mb-0 float-right">
-                                                <li title="TaxPayer's Tax Office">Tax Office: <span id="TaxPayerTaxOffice" style="font-weight: 600"></span></li>
+                                                <li title="TaxPayer's Tax Office">Tax Office: <span id="adminTaxOffice" style="font-weight: 600"></span></li>
                                             </ol>
                                         </nav>
                                     </div>
@@ -195,6 +197,11 @@
                                             </a>
                                         </li>
                                         <li class="sidebar-menu-item returnsRevised">
+                                            <a class="sidebar-menu-button" href="~/codes/index?type=countries">
+                                                <span class="sidebar-menu-text">Countries</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item returnsRevised">
                                             <a class="sidebar-menu-button" href="~/codes/index?type=nationality">
                                                 <span class="sidebar-menu-text">Nationality</span>
                                             </a>
@@ -222,6 +229,11 @@
                                         <li class="sidebar-menu-item returnsRevised">
                                             <a class="sidebar-menu-button" href="~/codes/index?type=personalReliefs">
                                                 <span class="sidebar-menu-text">Personal Relief Types</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item returnsRevised">
+                                            <a class="sidebar-menu-button" href="~/codes/index?type=tccpurposes">
+                                                <span class="sidebar-menu-text">TCC Purposes</span>
                                             </a>
                                         </li>
                                         <li class="sidebar-menu-item returnsRevised">
@@ -411,6 +423,7 @@
     <script src="~/js/jquery.showLoading.min.js"></script>
     <!--Toastr-->
     <script src="~/js/toastr.min.js"></script>
+    <script src="~/js/dashboard/layout.js"></script>
 
     @RenderSection("modals", required: false)
     @RenderSection("scripts", required: false)

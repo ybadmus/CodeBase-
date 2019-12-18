@@ -113,6 +113,13 @@ var configureUrls = function (setuptype) {
             HeaderName = "Tax Office Type";
             break;
 
+        case "countries":
+            MainGetUrl = `${MainGetUrl}CTR`;
+            MainPostUrl = `${MainPostUrl}CTR`;
+            MainSearchUrl = `${MainSearchUrl}CTR`;
+            HeaderName = "Countries";
+            break;
+
         case "nationality":
             MainGetUrl = `${MainGetUrl}NAT`;
             MainPostUrl = `${MainPostUrl}NAT`;
@@ -216,6 +223,13 @@ var configureUrls = function (setuptype) {
             MainPostUrl = `${MainPostUrl}EAR`;
             MainSearchUrl = `${MainSearchUrl}EAR`;
             HeaderName = "Reason For WHT Exemptions";
+            break;
+
+        case "tccpurposes":
+            MainGetUrl = `${MainGetUrl}TCCP`;
+            MainPostUrl = `${MainPostUrl}TCCP`;
+            MainSearchUrl = `${MainSearchUrl}TCCP`;
+            HeaderName = "TCC Purposes";
             break;
     }
 };
