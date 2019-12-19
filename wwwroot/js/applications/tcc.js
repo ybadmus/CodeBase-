@@ -56,7 +56,7 @@ var loadTaxOffices = function (listOfTaxOffices) {
 
     listOfTaxOffices.sort((a, b) => (a.taxOfficeName > b.taxOfficeName) - (a.taxOfficeName < b.taxOfficeName));
 
-    output += '<option selected>Choose</option>';
+    output += '<option selected>Choose office</option>';
     for (var i = 0; i < listOfTaxOffices.length; i++) {
         output = output + '<option value="' + listOfTaxOffices[i].taxOfficeId + '" >' + listOfTaxOffices[i].taxOfficeName + '</option>';
     }

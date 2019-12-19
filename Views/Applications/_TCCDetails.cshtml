@@ -11,62 +11,121 @@
                         <div class="col-md-5">
                             <div class="bordered-group" id="" style="height: 400px">
                                 <p class="card-title"><b>Application Details</b></p>
-                                <form style="margin-bottom: 10px;">
-                                    <div class="form-group row">
-                                        <div class="col-md-12">
-                                            <label for="Description" class=" col-form-label">Applicant Name</label>
-                                            <input type="text" class="form-control" id="applicantName" placeholder="">
+                                @*<form style="margin-bottom: 10px;">
+                                        <div class="form-group row">
+                                            <div class="col-md-12">
+                                                <label for="Description" class=" col-form-label">Applicant Name</label>
+                                                <input type="text" class="form-control" id="applicantName" placeholder="">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="col-md-6 formDiv">
-                                            <label for="Code" class="col-form-label">
-                                                TIN
-                                            </label>
-                                            <input type="text" class="form-control" id="applicantTIN" placeholder="">
+                                        <div class="form-group row">
+                                            <div class="col-md-6 formDiv">
+                                                <label for="Code" class="col-form-label">
+                                                    TIN
+                                                </label>
+                                                <input type="text" class="form-control" id="applicantTIN" placeholder="">
+                                            </div>
+                                            <div class="col-md-6 formDiv">
+                                                <label for="Code" class="col-form-label">
+                                                    Phone
+                                                </label>
+                                                <input type="text" class="form-control" id="applicantPhone" placeholder="">
+                                            </div>
                                         </div>
-                                        <div class="col-md-6 formDiv">
-                                            <label for="Code" class="col-form-label">
-                                                Phone
-                                            </label>
-                                            <input type="text" class="form-control" id="applicantPhone" placeholder="">
+                                        <div class="form-group row">
+                                            <div class="col-md-12">
+                                                <label for="Description" class=" col-form-label">Email</label>
+                                                <input type="text" class="form-control" id="applicantEmail" placeholder="">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="col-md-12">
-                                            <label for="Description" class=" col-form-label">Email</label>
-                                            <input type="text" class="form-control" id="applicantEmail" placeholder="">
+                                        <hr />
+                                        <div class="form-group row">
+                                            <div class="col-md-12">
+                                                <label for="Description" class=" col-form-label">Requesting Entity</label>
+                                                <input type="text" class="form-control" id="requestEntityName" placeholder="">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <hr />
-                                    <div class="form-group row">
-                                        <div class="col-md-12">
-                                            <label for="Description" class=" col-form-label">Requesting Entity</label>
-                                            <input type="text" class="form-control" id="requestEntityName" placeholder="">
+                                        <div class="form-group row">
+                                            <div class="col-md-6 formDiv">
+                                                <label for="Code" class="col-form-label">
+                                                    TIN
+                                                </label>
+                                                <input type="text" class="form-control" id="requestingEntityTin" placeholder="">
+                                            </div>
+                                            <div class="col-md-6 formDiv">
+                                                <label for="Code" class="col-form-label">
+                                                    Phone
+                                                </label>
+                                                <input type="text" class="form-control" id="requestingEntityPhone" placeholder="">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="col-md-6 formDiv">
-                                            <label for="Code" class="col-form-label">
-                                                TIN
-                                            </label>
-                                            <input type="text" class="form-control" id="requestingEntityTin" placeholder="">
+                                        <div class="form-group row">
+                                            <div class="col-md-12">
+                                                <label for="Description" class=" col-form-label">Email</label>
+                                                <input type="text" class="form-control" id="requestingEntityEmail" placeholder="">
+                                            </div>
                                         </div>
-                                        <div class="col-md-6 formDiv">
-                                            <label for="Code" class="col-form-label">
-                                                Phone
-                                            </label>
-                                            <input type="text" class="form-control" id="requestingEntityPhone" placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="col-md-12">
-                                            <label for="Description" class=" col-form-label">Email</label>
-                                            <input type="text" class="form-control" id="requestingEntityEmail" placeholder="">
-                                        </div>
-                                    </div>
-                                </form>
-
+                                    </form>*@
+                                <div class="table-responsive border-bottom">
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Applicant Name</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="applicantName"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">TIN</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="applicantTIN"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Phone</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="applicantPhone"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Email</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="applicantEmail"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Requesting Entity</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="requestEntityName"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">TIN</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="requestingEntityTin"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Phone</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="requestingEntityPhone"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Email</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="requestingEntityEmail"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Purpose</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="purposeOfApplication"></span></b>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
 

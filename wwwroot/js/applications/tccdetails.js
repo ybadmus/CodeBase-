@@ -39,15 +39,16 @@ var getTccDocumentsById = function () {
 };
 
 var loadDetails = function (resp) {
-    $("#applicantName").val(resp[0].applicantName);
+    $("#applicantName").text(resp[0].applicantName);
     $("#applicantFName").text(resp[0].applicantName); //span so using text
-    $("#applicantTIN").val(resp[0].applicantTIN);
-    $("#applicantPhone").val(resp[0].applicantPhoneNo);
-    $("#applicantEmail").val(resp[0].applicantEmailAddress);
-    $("#requestEntityName").val(resp[0].requestingEntity);
-    $("#requestingEntityTin").val(resp[0].requestingOfficeTIN);
-    $("#requestingEntityPhone").val(resp[0].requestingOfficePhone);
-    $("#requestingEntityEmail").val(resp[0].requestingOfficeEmail);
+    $("#applicantTIN").text(resp[0].applicantTIN);
+    $("#applicantPhone").text(resp[0].applicantPhoneNo);
+    $("#applicantEmail").text(resp[0].applicantEmailAddress);
+    $("#requestEntityName").text(resp[0].requestingEntity);
+    $("#requestingEntityTin").text(resp[0].requestingOfficeTIN);
+    $("#requestingEntityPhone").text(resp[0].requestingOfficePhone);
+    $("#requestingEntityEmail").text(resp[0].requestingOfficeEmail);
+    $("#purposeOfApplication").text(resp[0].purpose);
     $("#appIdHeader").text(resp[0].applicationNo); //span so using text
     $("#appStatusHeader").text(resp[0].status);
     $("#modalId").text(resp[0].applicationNo);
