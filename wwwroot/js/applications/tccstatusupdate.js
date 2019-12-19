@@ -1,6 +1,6 @@
 ﻿var selectedStatus;
 var statusCodeNames = [{ "StatusName": "ACKNOWLEDGE" }, { "StatusName": "PROCESSING APPLICATION" },
-    { "StatusName": "CERTIFICATE ISSUED" }, { "StatusName": "DECLINED" }, { "StatusName": "REQUEST FOR INFO" }, { "StatusName": "PENDING APPROVAL" }];
+{ "StatusName": "CERTIFICATE ISSUED" }, { "StatusName": "DECLINED" }, { "StatusName": "REQUEST FOR INFO" }, { "StatusName": "PENDING APPROVAL" }];
 
 $("#reviseApplication").click(function () {
     $("#tcc-status-update").modal("show");
@@ -56,9 +56,6 @@ $("#updateAppStatus").click(function (e) {
             }
 
             LoadTaxSummaryTable(data);
-
-            //$("#confirmationModal").modal("show");
-            //$("#tccStatusModal").modal("hide");
         }
 
         if (selectedStatus == 3) {
@@ -106,6 +103,29 @@ var updateTaxpayerMessages = function (message) {
     $("#chatUI").append('<div style=" padding: 5px; width: 80%; float: left;"><div class="chatview"><small style="font-size: 13px;"><b>GRA | </b>' + loggedInUserName + '</small><br><p style="color: black;">' + message + '</p><small style="font-size: 13px;" class="time-right">Today @' + time + '</small></div></div>');
 };
 
+var updateMessageDirectly = function () {
+    if ($("#commentToTaxpayer").val()) {
+        updateTaxpayerMessages($("#commentToTaxpayer").val());
+        toastr.success("Message succesfully sent!");
+        $("#commentToTaxpayer").val("");
+    };
+
+    if ($("#commentToStaff").val()) {
+        updateTaxpayerMessages($("#commentToStaff").val());
+        toastr.success("Message succesfully sent!");
+        $("#commentToStaff").val("");
+    };
+};
+
+var updateMessageDirectlyStaff = function () {
+
+    if ($("#commentToStaff").val()) {
+        updateInternalMessages($("#commentToStaff").val());
+        toastr.success("Message succesfully sent!");
+        $("#commentToStaff").val("");
+    };
+};
+
 var updateView = function () {
     if ($("#internalMessage").val())
         updateInternalMessages($("#internalMessage").val());
@@ -115,4 +135,52 @@ var updateView = function () {
 
     $("#appStatusHeader").text(statusCodeNames[selectedStatus].StatusName);
     $("#tcc-status-update").modal("hide");
-}
+};
+
+$("#tcc-status-update").on('hidden.bs.modal', function () {
+    $("#internalMessage").val("");
+    $("#taxpayerMessage").val("");
+});
+
+$("#sendMesageTaxpayer").click(function () {
+    let tccId = $("#appId").val();
+    let message = $("#commentToTaxpayer").val();
+    let updateUrl = tccUpdateUrl + tccId;
+
+    let ObjectToSend = {
+        "status": parseInt($("#currentStatus").text()),
+        "taxpayerComment": message,
+        "internalComment": "",
+        "applicationId": tccId
+    };
+
+    if (message.replace(/\s+/, '').length == 0)
+        toastr.warning('Fields empty');
+    else
+        apiCaller(updateUrl, "PUT", ObjectToSend, updateMessageDirectly);
+});
+
+$("#sendInternal").click(function () {
+    let tccId = $("#appId").val();
+    let message = $("#commentToStaff").val();
+    let updateUrl = tccUpdateUrl + tccId;
+
+    let ObjectToSend = {
+        "status": parseInt($("#currentStatus").text()),
+        "taxpayerComment": "",
+        "internalComment": message,
+        "applicationId": tccId
+    };
+
+    if (message.replace(/\s+/, '').length == 0)
+        toastr.warning('Fields empty');
+    else
+        apiCaller(updateUrl, "PUT", ObjectToSend, updateMessageDirectlyStaff);
+});
+
+$("#previewApplication").click(function () {
+    let tccId = $("#appId").val();
+    let url = `${ReportDownloadView}` + tccId;
+
+    window.open(url, "_blank");
+});

@@ -23,8 +23,13 @@ using ITAPS_HOST.Models;
 
 #line default
 #line hidden
+#line 4 "C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\Views\_ViewImports.cshtml"
+using BoldReports.TagHelpers;
+
+#line default
+#line hidden
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"2ba5ebd5642b06fb9b8a9cd96b3c98ffa7cac605", @"/Views/Applications/_TCCDetails.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"39b145f2b90cb6de2fa77b9df3031b426358dafe", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"24e702857a8f67f65d32f4756a8d9329551657cd", @"/Views/_ViewImports.cshtml")]
     public class Views_Applications__TCCDetails : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("name", "_TCCHeader", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -69,7 +74,7 @@ WriteAttributeValue("", 25, ViewBag.UserId, 25, 15, false);
             WriteLiteral(" hidden />\r\n\r\n\r\n<div id=\"tccDetailsView\">\r\n    ");
             EndContext();
             BeginContext(89, 29, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("partial", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "2ba5ebd5642b06fb9b8a9cd96b3c98ffa7cac6055073", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("partial", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "2ba5ebd5642b06fb9b8a9cd96b3c98ffa7cac6055234", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_TagHelpers_PartialTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.PartialTagHelper>();
@@ -97,7 +102,7 @@ WriteAttributeValue("", 25, ViewBag.UserId, 25, 15, false);
                                 ");
             EndContext();
             BeginContext(664, 3932, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2ba5ebd5642b06fb9b8a9cd96b3c98ffa7cac6056902", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2ba5ebd5642b06fb9b8a9cd96b3c98ffa7cac6057063", async() => {
                 BeginContext(699, 3890, true);
                 WriteLiteral(@"
                                     <div class=""form-group row"">
@@ -191,7 +196,7 @@ WriteAttributeValue("", 25, ViewBag.UserId, 25, 15, false);
                                     ");
             EndContext();
             BeginContext(5530, 31, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("partial", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "2ba5ebd5642b06fb9b8a9cd96b3c98ffa7cac60513515", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("partial", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "2ba5ebd5642b06fb9b8a9cd96b3c98ffa7cac60513676", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_TagHelpers_PartialTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.PartialTagHelper>();

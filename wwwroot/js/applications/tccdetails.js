@@ -52,6 +52,7 @@ var loadDetails = function (resp) {
     $("#appStatusHeader").text(resp[0].status);
     $("#modalId").text(resp[0].applicationNo);
     $("#statusNameModal").text(resp[0].status);
+    $("#currentStatus").text(resp[0].statusId);
     decideNextTccStage(resp[0].statusId);
 };
 
@@ -140,6 +141,7 @@ var decideNextTccStage = function (statusId) {
             $("#suspendStatus").hide();
             $("#declineStatus").hide();
             $("#previewApplication").hide();
+            $("#reviseApplication").show();
             $("#reviseApplication").attr("disabled", false);
             break;
         case 1:
@@ -149,6 +151,7 @@ var decideNextTccStage = function (statusId) {
             $("#acknowledgeStatus").hide();
             $("#declineStatus").show();
             $("#previewApplication").hide();
+            $("#reviseApplication").show();
             $("#reviseApplication").attr("disabled", false);
             break;
         case 2:
@@ -168,6 +171,7 @@ var decideNextTccStage = function (statusId) {
             $("#invLedgerStatus").hide();
             $("#acknowledgeStatus").hide();
             $("#previewApplication").hide();
+            $("#reviseApplication").show();
             $("#reviseApplication").attr("disabled", false);
             break;
         case 4:
@@ -177,6 +181,7 @@ var decideNextTccStage = function (statusId) {
             $("#invLedgerStatus").show();
             $("#acknowledgeStatus").show();
             $("#previewApplication").hide();
+            $("#reviseApplication").show();
             $("#reviseApplication").attr("disabled", false);
             break;
         case 5:
@@ -186,6 +191,7 @@ var decideNextTccStage = function (statusId) {
             $("#downloadTcc").hide();
             $("#acknowledgeStatus").hide();
             $("#previewApplication").hide();
+            $("#reviseApplication").show();
             $("#reviseApplication").attr("disabled", true);
             break;
         default:

@@ -61,3 +61,7 @@
     padding: 10px;
     margin: 10px 0;
 }
+
+#Grid .k-grid-content {
+    height: 46vh !important;
+}

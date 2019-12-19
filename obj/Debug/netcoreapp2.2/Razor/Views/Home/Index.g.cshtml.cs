@@ -23,8 +23,13 @@ using ITAPS_HOST.Models;
 
 #line default
 #line hidden
+#line 4 "C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\Views\_ViewImports.cshtml"
+using BoldReports.TagHelpers;
+
+#line default
+#line hidden
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"1bc2c0b1d5b0e0ea70057fdd643abbc076a07244", @"/Views/Home/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"39b145f2b90cb6de2fa77b9df3031b426358dafe", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"24e702857a8f67f65d32f4756a8d9329551657cd", @"/Views/_ViewImports.cshtml")]
     public class Views_Home_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("src", new global::Microsoft.AspNetCore.Html.HtmlString("~/images/icons/user.svg"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -95,12 +100,12 @@ WriteAttributeValue("", 128, ViewBag.UserId, 128, 15, false);
             WriteLiteral(" hidden />\r\n\r\n<div class=\"row card-group-row\">\r\n    <div class=\"col-md-6\">\r\n        ");
             EndContext();
             BeginContext(228, 499, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1bc2c0b1d5b0e0ea70057fdd643abbc076a072449995", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1bc2c0b1d5b0e0ea70057fdd643abbc076a0724410156", async() => {
                 BeginContext(268, 153, true);
                 WriteLiteral("\r\n            <div class=\"card card-group-row__card card-body card-body-x-lg flex-row align-items-center\" title=\"User Account Profile\">\r\n                ");
                 EndContext();
                 BeginContext(421, 71, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "1bc2c0b1d5b0e0ea70057fdd643abbc076a0724410532", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "1bc2c0b1d5b0e0ea70057fdd643abbc076a0724410694", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -147,12 +152,12 @@ WriteAttributeValue("", 128, ViewBag.UserId, 128, 15, false);
             WriteLiteral("\r\n    </div>\r\n\r\n    <div class=\"col-md-3 col-sm-6\">\r\n        ");
             EndContext();
             BeginContext(788, 825, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1bc2c0b1d5b0e0ea70057fdd643abbc076a0724413623", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1bc2c0b1d5b0e0ea70057fdd643abbc076a0724413785", async() => {
                 BeginContext(824, 254, true);
                 WriteLiteral("\r\n            <div class=\"card card-group-row__card card-body card-body-x-lg flex-row align-items-center pt-5\" title=\"Personal Income tax\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-12 text-center\">\r\n                        ");
                 EndContext();
                 BeginContext(1078, 69, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "1bc2c0b1d5b0e0ea70057fdd643abbc076a0724414271", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "1bc2c0b1d5b0e0ea70057fdd643abbc076a0724414433", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -199,7 +204,7 @@ WriteAttributeValue("", 128, ViewBag.UserId, 128, 15, false);
             WriteLiteral("\r\n    </div>\r\n\r\n    <div class=\"col-md-3 col-sm-6\">\r\n        ");
             EndContext();
             BeginContext(1674, 834, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1bc2c0b1d5b0e0ea70057fdd643abbc076a0724417219", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1bc2c0b1d5b0e0ea70057fdd643abbc076a0724417381", async() => {
                 BeginContext(1710, 256, true);
                 WriteLiteral(@"
             <div class=""card card-group-row__card card-body card-body-x-lg flex-row align-items-center pt-5"" title=""Withholding Tax & VAT"">
@@ -208,7 +213,7 @@ WriteAttributeValue("", 128, ViewBag.UserId, 128, 15, false);
                         ");
                 EndContext();
                 BeginContext(1966, 70, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "1bc2c0b1d5b0e0ea70057fdd643abbc076a0724417863", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "1bc2c0b1d5b0e0ea70057fdd643abbc076a0724418025", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -255,7 +260,7 @@ WriteAttributeValue("", 128, ViewBag.UserId, 128, 15, false);
             WriteLiteral("\r\n    </div>\r\n\r\n    <div class=\"col-md-3 col-sm-6\">\r\n        ");
             EndContext();
             BeginContext(2569, 888, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1bc2c0b1d5b0e0ea70057fdd643abbc076a0724420817", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1bc2c0b1d5b0e0ea70057fdd643abbc076a0724420979", async() => {
                 BeginContext(2614, 275, true);
                 WriteLiteral(@"
             <div class=""card card-group-row__card card-body card-body-x-lg flex-row align-items-center pt-5"" title=""TCC, Tax Relief & Exemption Applications"">
@@ -264,7 +269,7 @@ WriteAttributeValue("", 128, ViewBag.UserId, 128, 15, false);
                         ");
                 EndContext();
                 BeginContext(2889, 81, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "1bc2c0b1d5b0e0ea70057fdd643abbc076a0724421480", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "1bc2c0b1d5b0e0ea70057fdd643abbc076a0724421642", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -311,12 +316,12 @@ WriteAttributeValue("", 128, ViewBag.UserId, 128, 15, false);
             WriteLiteral("\r\n    </div>\r\n\r\n    <div class=\"col-md-3 col-sm-6\">\r\n        ");
             EndContext();
             BeginContext(3518, 832, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1bc2c0b1d5b0e0ea70057fdd643abbc076a0724424452", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1bc2c0b1d5b0e0ea70057fdd643abbc076a0724424614", async() => {
                 BeginContext(3555, 250, true);
                 WriteLiteral("\r\n            <div class=\"card card-group-row__card card-body card-body-x-lg flex-row align-items-center pt-5\" title=\"PAYE Deductions\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-12 text-center\">\r\n                        ");
                 EndContext();
                 BeginContext(3805, 82, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "1bc2c0b1d5b0e0ea70057fdd643abbc076a0724425097", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "1bc2c0b1d5b0e0ea70057fdd643abbc076a0724425259", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -367,7 +372,7 @@ WriteAttributeValue("", 128, ViewBag.UserId, 128, 15, false);
                 WriteLiteral("\r\n    ");
                 EndContext();
                 BeginContext(4398, 51, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1bc2c0b1d5b0e0ea70057fdd643abbc076a0724428184", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1bc2c0b1d5b0e0ea70057fdd643abbc076a0724428346", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();

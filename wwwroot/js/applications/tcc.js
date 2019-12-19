@@ -5,6 +5,7 @@ var GetTccCommentsByIdUrl = `${serverUrl}api/TCC/GetAllTccApplicationComments?tc
 var GetTccByIdUrl = `${serverUrl}api/TCC/GetTccApplicationById?tccId=`;
 var GetTCCDocuments = `${serverUrl}api/TCC/GetTCCApplicationDocumentByApplicationId`; 
 let tccUpdateUrl = `${serverUrl}api/TCC/UpdateTCCApplication?id=`;
+var ReportDownloadView = `${ServerUrl}applications/certificate?uniApplicationId=`;
 var activeTaxOffice = "";
 
 $("#tccListOfTaxOffices").on('change', function () {

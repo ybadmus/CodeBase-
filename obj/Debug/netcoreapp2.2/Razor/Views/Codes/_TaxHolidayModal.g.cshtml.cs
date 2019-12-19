@@ -23,8 +23,13 @@ using ITAPS_HOST.Models;
 
 #line default
 #line hidden
+#line 4 "C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\Views\_ViewImports.cshtml"
+using BoldReports.TagHelpers;
+
+#line default
+#line hidden
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"3553e1360e25171de68e092decdb3921b6e0013c", @"/Views/Codes/_TaxHolidayModal.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"39b145f2b90cb6de2fa77b9df3031b426358dafe", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"24e702857a8f67f65d32f4756a8d9329551657cd", @"/Views/_ViewImports.cshtml")]
     public class Views_Codes__TaxHolidayModal : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("value", "A", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -70,7 +75,7 @@ using ITAPS_HOST.Models;
                             ");
             EndContext();
             BeginContext(791, 2015, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3553e1360e25171de68e092decdb3921b6e0013c4976", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3553e1360e25171de68e092decdb3921b6e0013c5137", async() => {
                 BeginContext(797, 782, true);
                 WriteLiteral(@"
                                 <div class=""form-group row"">
@@ -86,7 +91,7 @@ using ITAPS_HOST.Models;
                                             ");
                 EndContext();
                 BeginContext(1579, 33, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3553e1360e25171de68e092decdb3921b6e0013c6167", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3553e1360e25171de68e092decdb3921b6e0013c6328", async() => {
                     BeginContext(1597, 6, true);
                     WriteLiteral("Active");
                     EndContext();
@@ -108,7 +113,7 @@ using ITAPS_HOST.Models;
                 WriteLiteral("\r\n                                            ");
                 EndContext();
                 BeginContext(1658, 35, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3553e1360e25171de68e092decdb3921b6e0013c7676", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3553e1360e25171de68e092decdb3921b6e0013c7837", async() => {
                     BeginContext(1676, 8, true);
                     WriteLiteral("Inactive");
                     EndContext();
@@ -187,7 +192,7 @@ using ITAPS_HOST.Models;
             WriteLiteral("\r\n                <div class=\"form-horizontal\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-12\">\r\n                            ");
             EndContext();
             BeginContext(3995, 2230, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3553e1360e25171de68e092decdb3921b6e0013c12672", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3553e1360e25171de68e092decdb3921b6e0013c12833", async() => {
                 BeginContext(4001, 924, true);
                 WriteLiteral(@"
                                 <input type=""text"" class=""form-control"" id=""EntryId"" placeholder="""" hidden>
@@ -204,7 +209,7 @@ using ITAPS_HOST.Models;
                                             ");
                 EndContext();
                 BeginContext(4925, 33, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3553e1360e25171de68e092decdb3921b6e0013c14015", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3553e1360e25171de68e092decdb3921b6e0013c14176", async() => {
                     BeginContext(4943, 6, true);
                     WriteLiteral("Active");
                     EndContext();
@@ -226,7 +231,7 @@ using ITAPS_HOST.Models;
                 WriteLiteral("\r\n                                            ");
                 EndContext();
                 BeginContext(5004, 35, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3553e1360e25171de68e092decdb3921b6e0013c15525", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3553e1360e25171de68e092decdb3921b6e0013c15686", async() => {
                     BeginContext(5022, 8, true);
                     WriteLiteral("Inactive");
                     EndContext();
