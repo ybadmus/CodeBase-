@@ -15,7 +15,6 @@ C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcorea
 C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\ITAPS-HOST.TagHelpers.input.cache
 C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\ITAPS-HOST.TagHelpers.output.cache
 C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\ITAPS-HOST.RazorCoreGenerate.cache
-C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\Applications\Certificate.g.cshtml.cs
 C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\Applications\TCC.g.cshtml.cs
 C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\Applications\_TCCDetails.g.cshtml.cs
 C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\Applications\_TCCHeader.g.cshtml.cs
@@ -53,3 +52,5 @@ C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcorea
 C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\ITAPS-HOST.pdb
 C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\ITAPS-HOST.csproj.CopyComplete
 C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\ITAPS-HOST.csprojAssemblyReference.cache
+C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\Applications\TCCCertificate.g.cshtml.cs
+C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\Applications\TEX.g.cshtml.cs

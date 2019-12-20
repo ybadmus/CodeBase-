@@ -43,7 +43,9 @@ namespace ITAPS_HOST
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MTQ0MjcwQDMxMzYyZTMzMmUzMEJHT2FCN3BNZmcrV01scC9rbjI2dy9yelVEQU4wQmtHMXRLUE80cW52eUk9");
+            //Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MTQ0MjcwQDMxMzYyZTMzMmUzMEJHT2FCN3BNZmcrV01scC9rbjI2dy9yelVEQU4wQmtHMXRLUE80cW52eUk9");
+
+            Bold.Licensing.BoldLicenseProvider.RegisterLicense("MDAyQDMxMmUzMjJlMzBIcXp5bTlZdGU4RHhCandURE80KzBHK1RXenV4bGNnelNrYXkxSkZvQzJzPWVYVnpkV1l1WW1Ga2JYVnpRSEJsY25OdmJDNXVaWFE3TVRFdk55OHlNREl3SURFeU9qQXdPakF3SUVGTk96TTJOVHRVY25WbA==");
 
             if (env.IsDevelopment())
             {
