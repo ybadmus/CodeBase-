@@ -57,8 +57,8 @@ var InitializeKendoGrid = function (data) {
         columns: [
             { field: "whtcode", title: "Code", width: "15%" },
             { field: "description", title: "Description", width: "45%" },
-            { field: "taxRate", title: "Rate", width: "15%", attributes: { style: "text-align:right;" } },
-            { field: "lastModifiedDate", title: "Date Created", width: "15%" },
+            { field: "rate", title: "Rate", width: "80px", attributes: { style: "text-align:right;" } },
+            { field: "lastModifiedDate", title: "Date Created", width: "10%", template: '#= formatDate(lastModifiedDate) #'  },
             { field: "status", template: "#if(status=='A'){# #: 'Active' # #}else{# #: 'Inactive' # #}#", title: "Status", width: "10%" },
             {
                 command: [{ name: "view", template: "<button title='View item' class='btn btn-success btn-sm'><i class='fa fa-edit'></i></button>" }],
@@ -169,6 +169,18 @@ var loadUpdateModal = function (item) {
     $("#noteUpdate").val(item.notes);
 
     $("#modal-edit-setup").modal("show");
+};
+
+var formatDate = function (date) {
+    var date = new Date(date);
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
+
+    day.toString().length > 1 ? day = day : day = '0' + day
+    month.toString().length > 1 ? month = month : month = '0' + month
+
+    var year = date.getFullYear();
+    return `${day}/${month}/${year}`;
 };
 
 $("#Grid").on("click", "[role='row']", function (e) {

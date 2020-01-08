@@ -15,13 +15,13 @@
                                 <div class="form-group row" style="margin-bottom: 1rem;">
                                     <div class="col-md-12 formDiv">
                                         <label for="appStatus" class="col-form-label">
-                                            <b>Action - select new status</b>
+                                            <b>Action - Select New Status</b>
                                         </label>
                                         <select type="text" id="appStatus" class="form-control" required>
-                                            <option style="display: none" id="" value="">Select Status</option>
+                                            <option style="display: block" id="" value="">Select Status</option>
                                             <option style="display: none" id="acknowledgeStatus" value="0">Acknowledge</option>
-                                            <option style="display: none" id="invLedgerStatus" value="1">Process Application</option>
-                                            <option style="display: none" id="issueCertStatus" value="2">Add Tax Position</option>
+                                            <option style="display: none" id="processApplication" value="1">Process Application</option>
+                                            <option style="display: none" id="addTaxPosition" value="2">Add Tax Position</option>
                                             <option style="display: none" id="declineStatus" value="3">Decline</option>
                                             <option style="display: none" id="suspendStatus" value="4">Request Info</option>
                                         </select>
@@ -51,6 +51,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 <button type="button" id="updateAppStatus" class="btn btn-primary" disabled>Save</button>
+                <button type="button" id="taxPosition"  class="btn btn-success" style="display: none" disabled>Tax Position</button>
             </div>
         </div>
     </div>

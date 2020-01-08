@@ -29,6 +29,16 @@ namespace ITAPS_HOST.Controllers
             return View();
         }
 
+        public IActionResult TaxPosition(string applicantName, Guid taxpayerId, Guid appId)
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            ViewBag.ApplicantName = applicantName;
+            ViewBag.TaxpayerId = taxpayerId;
+            ViewBag.AppId = appId;
+            return View();
+        }
+
         public IActionResult Certificate()
         {
             UserDetails();

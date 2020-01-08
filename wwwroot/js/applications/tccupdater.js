@@ -9,14 +9,29 @@ $("#reviseApplication").click(function () {
 $("#appStatus").on('change', function () {
     var elem = document.getElementById("appStatus");
     selectedStatus = elem.options[elem.selectedIndex].value;
+    $("#taxPosition").attr("disabled", true);
+    $("#updateAppStatus").attr("disabled", true);
 
-    if (!isNaN(parseInt(selectedStatus)) && ($("#internalMessage").val().match(/\S/)))
-        $("#updateAppStatus").attr("disabled", false);
+    if (!isNaN(parseInt(selectedStatus)))
+        if (parseInt(selectedStatus) == 2) {
+
+            $("#taxPosition").show();
+            $("#updateAppStatus").hide();
+        } else {
+
+            $("#taxPosition").hide();
+            $("#updateAppStatus").show();
+        };
 });
 
 $("#internalMessage").blur(function () {
     if (!isNaN(parseInt(selectedStatus)) && ($("#internalMessage").val().match(/\S/)))
-        $("#updateAppStatus").attr("disabled", false);
+        if (parseInt(selectedStatus) != 2)
+
+            $("#updateAppStatus").attr("disabled", false);
+        else
+
+            $("#taxPosition").attr("disabled", false);
 });
 
 $("#updateAppStatus").click(function (e) {
@@ -38,24 +53,6 @@ $("#updateAppStatus").click(function (e) {
             };
 
             apiCaller(updateUrl, "PUT", ObjectToSend, updateView);
-        }
-
-        if (selectedStatus == 2) {
-            $('html').hideLoading();
-
-            genCertTaxPayerComment = $("#commentToTaxpayer").val();
-            genCertStaffComment = $("#commentToStaff").val();
-
-            let d = new Date();
-            let data = [];
-
-            for (let i = d.getFullYear(); i >= d.getFullYear() - 2; i--) {
-                data.push({
-                    assessmentYear: i, status: "", chargeableIncome: "", taxCharged: "", taxPaid: "", taxOutstanding: ""
-                });
-            }
-
-            LoadTaxSummaryTable(data);
         }
 
         if (selectedStatus == 3) {
@@ -80,10 +77,12 @@ $("#updateAppStatus").click(function (e) {
                 "internalComment": $("#internalMessage").val(),
                 "applicationId": tccId
             };
+
             apiCaller(updateUrl, "PUT", ObjectToSend, updateView);
         }
     }
     else {
+
         toastr.warning('Invalid status');
     }
 });
@@ -183,4 +182,17 @@ $("#previewApplication").click(function () {
     let url = `${ReportDownloadView}` + tccId;
 
     window.open(url, "_blank");
+});
+
+$("#taxPosition").click(function () {
+    let ObjectToSend = {
+        "status": 5,
+        "taxpayerComment": $("#taxpayerMessage").val(),
+        "internalComment": $("#internalMessage").val(),
+        "applicationId": $("#appId").val()
+    };
+
+    localStorage.setItem('taxpositionObj', JSON.stringify(ObjectToSend));
+
+    window.location.href = "/applications/taxposition?applicantName=" + $("#applicantName").text() + "&taxpayerId=" + $("#taxpayerId").text() + "&appId=" + $("#appId").val();
 });

@@ -22,6 +22,8 @@ namespace ITAPS_HOST.Helpers
             services.AddSingleton<IWTHService, WHTService>();
             services.AddSingleton<IUserService, UserService>();
             services.AddSingleton<ITCCService, TCCService>();
+            services.AddSingleton<ITExService, TExService>();
+            services.AddSingleton<ITransactionService, TransactionService>();
 
             //services.AddSingleton<ITaxOfficeService, TaxOfficeService>();
             //services.AddSingleton<ITaxHolidayService, TaxHolidayService>();

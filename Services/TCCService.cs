@@ -16,10 +16,10 @@ namespace ITAPS_HOST.Services
     {
         private readonly IAdminRequestClient _adminRequestClient;
         private readonly IHostingEnvironment _env;
+
         public TCCService(IAdminRequestClient adminRequestClient, IHostingEnvironment env)
         {
             _adminRequestClient = adminRequestClient;
-            _env = env;
         }
         public async Task<ResponseItem<object>> GetAllTCCApplication()
         {

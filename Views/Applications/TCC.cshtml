@@ -8,6 +8,7 @@
 }
 
 <input id="serverUrl" value="@ViewBag.ServerUrl" hidden />
+<input id="taxpayerId" value="@ViewBag.TaxpayerId" hidden />
 
 <div class="card">
     <div id="tccGridView">
@@ -35,17 +36,17 @@
         </div>
     </div>
 
-    <partial name="_TCCDetails" />
+    <partial name="_AppDetails" />
 
 </div>
 
 
 @section modals{
-    <partial name="_TCCUpdate" />
+    <partial name="_AppUpdate" />
 }
 
 @section scripts {
     <script src="~/js/applications/tcc.js"></script>
     <script src="~/js/applications/tccdetails.js"></script>
-    <script src="~/js/applications/tccstatusupdate.js"></script>
+    <script src="~/js/applications/tccupdater.js"></script>
 }

@@ -54,6 +54,8 @@ var loadDetails = function (resp) {
     $("#modalId").text(resp[0].applicationNo);
     $("#statusNameModal").text(resp[0].status);
     $("#currentStatus").text(resp[0].statusId);
+    $("#taxpayerId").text(resp[0].taxpayerId);
+    
     decideNextTccStage(resp[0].statusId);
 };
 
@@ -136,7 +138,7 @@ var GetAssociatedBase64Stirng = function (id) {
 var decideNextTccStage = function (statusId) {
     switch (statusId) {
         case 0:
-            $("#invLedgerStatus").show();
+            $("#processApplication").show();
             $("#acknowledgeStatus").hide();
             $("#addPosition").hide();
             $("#suspendStatus").hide();
@@ -146,9 +148,9 @@ var decideNextTccStage = function (statusId) {
             $("#reviseApplication").attr("disabled", false);
             break;
         case 1:
-            $("#addPosition").show();
+            $("#addTaxPosition").show();
             $("#suspendStatus").show();
-            $("#invLedgerStatus").hide();
+            $("#processApplication").hide();
             $("#acknowledgeStatus").hide();
             $("#declineStatus").show();
             $("#previewApplication").hide();
@@ -157,7 +159,7 @@ var decideNextTccStage = function (statusId) {
             break;
         case 2:
             $("#addPosition").hide();
-            $("#invLedgerStatus").hide();
+            $("#processApplication").hide();
             $("#declineStatus").hide();
             $("#suspendStatus").hide();
             $("#acknowledgeStatus").hide();
@@ -169,7 +171,7 @@ var decideNextTccStage = function (statusId) {
             $("#addPosition").hide();
             $("#declineStatus").hide();
             $("#suspendStatus").hide();
-            $("#invLedgerStatus").hide();
+            $("#processApplication").hide();
             $("#acknowledgeStatus").hide();
             $("#previewApplication").hide();
             $("#reviseApplication").show();
@@ -179,14 +181,14 @@ var decideNextTccStage = function (statusId) {
             $("#acknowledgeStatus").hide();
             $("#addPosition").show();
             $("#declineStatus").show();
-            $("#invLedgerStatus").show();
+            $("#processApplication").show();
             $("#acknowledgeStatus").show();
             $("#previewApplication").hide();
             $("#reviseApplication").show();
             $("#reviseApplication").attr("disabled", false);
             break;
         case 5:
-            $("#invLedgerStatus").hide();
+            $("#processApplication").hide();
             $("#dismissModal").hide();
             $("#previewTcc").hide();
             $("#downloadTcc").hide();
@@ -200,3 +202,4 @@ var decideNextTccStage = function (statusId) {
             break;
     }
 };
+
