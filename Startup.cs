@@ -45,7 +45,7 @@ namespace ITAPS_HOST
         {
             //Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MTQ0MjcwQDMxMzYyZTMzMmUzMEJHT2FCN3BNZmcrV01scC9rbjI2dy9yelVEQU4wQmtHMXRLUE80cW52eUk9");
 
-            Bold.Licensing.BoldLicenseProvider.RegisterLicense("MDAyQDMxMmUzMjJlMzBIcXp5bTlZdGU4RHhCandURE80KzBHK1RXenV4bGNnelNrYXkxSkZvQzJzPWVYVnpkV1l1WW1Ga2JYVnpRSEJsY25OdmJDNXVaWFE3TVRFdk55OHlNREl3SURFeU9qQXdPakF3SUVGTk96TTJOVHRVY25WbA==");
+            Bold.Licensing.BoldLicenseProvider.RegisterLicense("MDAyQDMxMmUzMjJlMzBIcXp5bTlZdGU4RHhCandURE80KzBHK1RXenV4bGNnelNrYXkxSkZvQzJzPWFtVnljbmt1YjJ0aGJuUmxlVUJ3WlhKemIyd3VibVYwT3pJdk1qZ3ZNakF5TUNBeE1qb3dNRG93TUNCQlRUc3hNakU3Um1Gc2MyVT0=");
 
             if (env.IsDevelopment())
             {

@@ -3,7 +3,7 @@ var serverUrl = $("#serverUrl").val();
 var searchTccByTaxOffice = `${serverUrl}api/TCC/GetAllTccApplicationByTaxOfficeId`;
 var GetTccCommentsByIdUrl = `${serverUrl}api/TCC/GetAllTccApplicationComments?tccId=`;
 var GetTccByIdUrl = `${serverUrl}api/TCC/GetTccApplicationById?tccId=`;
-var GetTCCDocuments = `${serverUrl}api/TCC/GetTCCApplicationDocumentByApplicationId`; 
+var GetTCCDocuments = `${serverUrl}api/TCC/GetTCCApplicationDocumentByApplicationId`;
 let tccUpdateUrl = `${serverUrl}api/TCC/UpdateTCCApplication?id=`;
 var ReportDownloadView = `${ServerUrl}applications/certificate?uniApplicationId=`;
 var activeTaxOffice = "";
@@ -19,6 +19,7 @@ var initializeKendoGrid = function (data) {
         dataSource: { data: data, pageSize: 8 },
         sortable: true,
         selectable: true,
+        dataBound: onDataBound,
         pageable: { refresh: false, pageSizes: true, buttonCount: 5 },
         columns: [
             { field: "statusDate", title: "Date", width: '90px', format: "{0:MM-dd-yyyy}" },
@@ -29,13 +30,21 @@ var initializeKendoGrid = function (data) {
             {
                 command: [{
                     name: "view",
-                    template: "<button title='View item' class='btn btn-success btn-sm' style=''><span class='fa fa-file fa-lg'></span></button>"
+                    template: "<button title='View item' class='btn btn-light btn-sm' style='margin-right: 2px'><span class='fa fa-file fa-lg'></span></button>"
+                }, {
+                    name: "certificate",
+                    template: "<button id='certBtn' title='View certificate' class='btn btn-success btn-sm'><span class='fa fa-certificate fa-lg'></span></button>",
+                    visible: false
                 }],
                 title: "Actions",
                 width: "70px"
             }
         ]
     });
+};
+
+let onDataBound = function () {
+   
 };
 
 $(document).ready(function () {
@@ -105,7 +114,7 @@ var validateSearchEntry = function () {
     let searchItem = $("#searchItem").val().trim();
     if (!searchItem.match(/\S/) || activeTaxOffice === "")
         return false;
-    else 
+    else
         return true;
 };
 
@@ -118,9 +127,11 @@ var searchTcc = function () {
                     replaceAt(searchItem, i, '%2F');
             }
         }
+
         let url = `${searchTccByTaxOffice}?officeId=` + activeTaxOffice + "&queryString=" + searchItem;
         apiCaller(url, "GET", "", initializeKendoGrid);
     } else {
+
         toastr.error("Tax office or search item field is empty");
     }
 }
@@ -136,6 +147,7 @@ $("#searchItem").on('keypress', function (e) {
 });
 
 $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
+
     var grid = $("#Grid").getKendoGrid();
     var item = grid.dataItem($(e.target).closest("tr"));
 
@@ -144,6 +156,7 @@ $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
 });
 
 var prepareDetailsView = function () {
+
     hideAndShowThings();
     loadMessages();
     loadDetailsView();

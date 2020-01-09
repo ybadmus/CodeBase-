@@ -7,46 +7,28 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ITAPS_HOST.Controllers
 {
-    public class ApplicationsController : Controller
+    public class ApprovalController : Controller
     {
         private readonly IAppConstants _config;
         private readonly IReportConstants _reportConfig;
 
-        public ApplicationsController(IAppConstants config, IReportConstants reportConfig)
+        public ApprovalController(IAppConstants config, IReportConstants reportConfig)
         {
             _config = config;
             _reportConfig = reportConfig;
         }
 
-        public IActionResult TCC()
-        {
-            UserDetails();
-            ViewBag.ServerUrl = _config.AppServerUrl;
-            return View();
-        }
-        public IActionResult TEX()
+        public IActionResult TccApproval()
         {
             UserDetails();
             ViewBag.ServerUrl = _config.AppServerUrl;
             return View();
         }
 
-        public IActionResult TaxPosition(string applicantName, Guid taxpayerId, Guid appId)
+        public IActionResult TexApproval()
         {
             UserDetails();
             ViewBag.ServerUrl = _config.AppServerUrl;
-            ViewBag.ApplicantName = applicantName;
-            ViewBag.TaxpayerId = taxpayerId;
-            ViewBag.AppId = appId;
-            return View();
-        }
-
-        public IActionResult Certificate()
-        {
-            UserDetails();
-            ViewBag.ServerUrl = _config.AppServerUrl;
-            ViewBag.ReportServer = _reportConfig.ReportServer;
-            ViewBag.ReportPath = _reportConfig.ReportPath;
             return View();
         }
 

@@ -262,5 +262,8 @@ var updateApplication = function () {
 
 var notify = function () {
     toastr.success('Application is pending approval');
-    window.location.href = "/applications/tcc";
+
+    setTimeout(function () {
+        window.location.href = "/applications/tcc";
+    }, 3000);
 };

@@ -1,4 +1,5 @@
-﻿var selectedStatus;
+﻿var selectedStatus; 
+var detailsKendoUpdate;
 var statusCodeNames = [{ "StatusName": "ACKNOWLEDGE" }, { "StatusName": "PROCESSING APPLICATION" },
 { "StatusName": "CERTIFICATE ISSUED" }, { "StatusName": "DECLINED" }, { "StatusName": "REQUEST FOR INFO" }, { "StatusName": "PENDING APPROVAL" }];
 
@@ -52,6 +53,11 @@ $("#updateAppStatus").click(function (e) {
                 "applicationId": tccId
             };
 
+            detailsKendoUpdate = {
+                "statusId": selectedStatus,
+                "appId": tccId
+            };
+
             apiCaller(updateUrl, "PUT", ObjectToSend, updateView);
         }
 
@@ -65,6 +71,11 @@ $("#updateAppStatus").click(function (e) {
                 "applicationId": tccId
             };
 
+            detailsKendoUpdate = {
+                "statusId": 3,
+                "appId": tccId
+            };
+
             apiCaller(updateUrl, "PUT", ObjectToSend, updateView);
         }
 
@@ -76,6 +87,11 @@ $("#updateAppStatus").click(function (e) {
                 "taxpayerComment": $("#taxpayerMessage").val(),
                 "internalComment": $("#internalMessage").val(),
                 "applicationId": tccId
+            };
+
+            detailsKendoUpdate = {
+                "statusId": 4,
+                "appId": tccId
             };
 
             apiCaller(updateUrl, "PUT", ObjectToSend, updateView);
@@ -116,6 +132,28 @@ var updateMessageDirectly = function () {
     };
 };
 
+var updateKendoGridLocally = function (updateDetails) {
+    var displayedData = $("#Grid").data().kendoGrid.dataSource.data();
+
+    for (var i = 0; i < displayedData.length; i++) {
+        if (updateDetails.appId == displayedData[i].applicationId) {
+            displayedData[i].status = statusCodeNames[updateDetails.statusId].StatusName; 
+            displayedData[i].statusId = updateDetails.statusId;
+            displayedData[i].statusDate = getCurrentDateMMDDYYY();
+
+            initializeKendoGrid(displayedData);
+        }
+    };
+};
+
+var getCurrentDateMMDDYYY = function () {
+    var now = new Date();
+
+    return now.getDate() < 10 ? ("0" + now.getDate() + "/" + ((now.getMonth() + 1) < 10 ? "0" + (now.getMonth() + 1) : (now.getMonth() + 1)) + "/" + now.getFullYear())
+        : (now.getDate() + "/" + ((now.getMonth() + 1) < 10 ? "0" + (now.getMonth() + 1) : (now.getMonth() + 1)) + "/" + now.getFullYear());
+
+};
+
 var updateMessageDirectlyStaff = function () {
 
     if ($("#commentToStaff").val()) {
@@ -126,6 +164,8 @@ var updateMessageDirectlyStaff = function () {
 };
 
 var updateView = function () {
+    toastr.success("Successfully updated!");
+
     if ($("#internalMessage").val())
         updateInternalMessages($("#internalMessage").val());
 
@@ -134,6 +174,9 @@ var updateView = function () {
 
     $("#appStatusHeader").text(statusCodeNames[selectedStatus].StatusName);
     $("#tcc-status-update").modal("hide");
+
+    updateKendoGridLocally(detailsKendoUpdate);
+    backToView();
 };
 
 $("#tcc-status-update").on('hidden.bs.modal', function () {
@@ -196,3 +239,14 @@ $("#taxPosition").click(function () {
 
     window.location.href = "/applications/taxposition?applicantName=" + $("#applicantName").text() + "&taxpayerId=" + $("#taxpayerId").text() + "&appId=" + $("#appId").val();
 });
+
+
+
+//if (statusId == 5) {
+//    $('html').hideLoading();
+//    let appId = $("#tccRequestId").val();
+//    let url = `${ReportDownloadView}` + appId;
+
+//    $("#continueButton").removeAttr('disabled');
+//    window.open(url, "_blank");
+//}

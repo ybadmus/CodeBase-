@@ -111,9 +111,13 @@ var appendDocumentsToTable = function (listOfDocuments) {
 };
 
 $("#backToGrid").click(function () {
+    backToView();
+});
+
+var backToView = function () {
     $("#tccGridView").show();
     $("#tccDetailsView").hide();
-});
+};
 
 var GetAssociatedBase64Stirng = function (id) {
     let stringT = listOfDocumentsGlobal[id].document;

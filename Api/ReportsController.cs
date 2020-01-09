@@ -1,16 +1,15 @@
 ﻿using BoldReports.Web;
 using BoldReports.Web.ReportViewer;
 using ITAPS_HOST.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using System.Collections.Generic;
-using System.IO;
 
 namespace ITAPS_HOST.Api
 {
-    [Route("api/[controller]")]
-    [ApiController]
+    [Authorize]
     public class ReportsController : Controller, IReportController
     {
         private readonly IReportConstants _config;
