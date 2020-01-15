@@ -1,16 +1,16 @@
 ﻿<input id="appId" value="@ViewBag.UserId " hidden />
 
 
-<div id="tccDetailsView">
+<div id="detailsView">
     <partial name="_AppHeader" />
     <div class="card-body">
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="tccDetails" role="tabpanel" aria-labelledby="nav-profile-tab">
                 <div class="form-horizontal">
                     <div class="form-row">
-                        <div class="col-md-5">
+                        <div class="col-md-5" id="tccDetailsGrid">
                             <div class="bordered-group" id="" style="height: 400px">
-                                <p class="card-title"><b>Application Details</b></p>                               
+                                <p class="card-title"><b>Application Details</b></p>
                                 <div class="table-responsive border-bottom">
                                     <table class="table table-bordered">
                                         <tbody>
@@ -74,6 +74,73 @@
                             </div>
                         </div>
 
+                        <div class="col-md-5" id="texDetailsGrid">
+                            <div class="bordered-group" id="" style="height: 400px">
+                                <p class="card-title"><b>Application Details</b></p>
+                                <div class="table-responsive border-bottom">
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Date Submitted</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="dateSubmitted"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Applicant Name</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="applicantNameTex"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">TIN</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="applicantTINTex"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Phone</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="applicantPhoneTex"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Email</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="applicantEmailTex"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Residential Status</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="residentialStatus"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">WHT Type</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="whtType"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Reason</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="whtReason"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Remarks</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="whtRemarks"></span></b>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="col-md-7">
                             <div class="bordered-group" id="" style="height: 400px">
                                 <p class="card-title"><b>Messages & Atachment</b></p>
@@ -89,7 +156,7 @@
 
                         </div>
                     </div>
-                    <button id="backToGrid" class="btn btn-primary"> Back</button>
+                    <button id="backToGrid" class="btn btn-outline-primary"> Back</button>
                 </div>
             </div>
         </div>

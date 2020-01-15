@@ -25,7 +25,6 @@
     <!-- Vector Maps -->
     <link type="text/css" href="~/vendor/jqvmap/jqvmap.min.css" rel="stylesheet">
     <link href="~/css/Itaps-custom.css" rel="stylesheet" />
-
     <!-- Kendo -->
     <link href="~/kendo/css/kendo.default.min.css" rel="stylesheet" />
     <link href="~/kendo/css/kendo.bootstrap.min.css" rel="stylesheet" />
@@ -36,6 +35,7 @@
     <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2017.1.118/styles/kendo.rtl.min.css" />
     <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2017.1.118/styles/kendo.silver.min.css" />
     <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2017.1.118/styles/kendo.mobile.all.min.css" />-->
+
     <!--Toastr and Loader-->
     <link href="~/css/showLoading.css" rel="stylesheet" />
     <link href="~/css/toastr.min.css" rel="stylesheet" />
@@ -278,6 +278,27 @@
                                             </a>
                                         </li>
                                         <li class="sidebar-menu-item">
+                                            <a class="sidebar-menu-button" data-toggle="collapse" href="#taxRates_menu">
+                                                <span class="sidebar-menu-text">Tax Rates</span>
+                                                <span class="ml-auto d-flex align-items-center">
+                                                    <span class="badge badge-primary">Rates</span>
+                                                    <span class="sidebar-menu-toggle-icon"></span>
+                                                </span>
+                                            </a>
+                                            <ul class="sidebar-submenu collapse " id="taxRates_menu">
+                                                <li class="sidebar-menu-item ">
+                                                    <a class="sidebar-menu-button" href="~/codes/pitrates">
+                                                        <span class="sidebar-menu-text">PIT</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-menu-item ">
+                                                    <a class="sidebar-menu-button" href="~/codes/companyrates">
+                                                        <span class="sidebar-menu-text">Company Tax Rate</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="sidebar-menu-item">
                                             <a class="sidebar-menu-button" data-toggle="collapse" href="#course_menu">
                                                 <span class="sidebar-menu-text">Withholding</span>
                                                 <span class="ml-auto d-flex align-items-center">
@@ -286,7 +307,7 @@
                                                 </span>
                                             </a>
                                             <ul class="sidebar-submenu collapse " id="course_menu">
-                                                <li class="sidebar-menu-item ">
+                                                @*<li class="sidebar-menu-item ">
                                                     <a class="sidebar-menu-button" href="~/codes/actr">
                                                         <span class="sidebar-menu-text">Account Type & Residency</span>
                                                     </a>
@@ -295,7 +316,7 @@
                                                     <a class="sidebar-menu-button" href="~/codes/rateandcode">
                                                         <span class="sidebar-menu-text">Tax Rates & Codes</span>
                                                     </a>
-                                                </li>
+                                                </li>*@
                                                 <li class="sidebar-menu-item returnsRevised">
                                                     <a class="sidebar-menu-button" href="~/codes/index?type=exemptionreason">
                                                         <span class="sidebar-menu-text">Exemption Reasons</span>
@@ -311,7 +332,7 @@
                                     </ul>
                                 </li>
                                 <!-- PIT -->
-                                <li class="sidebar-menu-item pit">
+                                @*<li class="sidebar-menu-item pit">
                                     <a class="sidebar-menu-button" data-toggle="collapse" href="#PIT_menu">
                                         <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">account_balance_wallet</i>
                                         <span class="sidebar-menu-text">Personal Income Tax</span>
@@ -339,10 +360,10 @@
                                             </a>
                                         </li>
                                     </ul>
-                                </li>
+                                </li>*@
 
                                 <!-- WITHHOLDING -->
-                                <li class="sidebar-menu-item wht">
+                                @*<li class="sidebar-menu-item wht">
                                     <a class="sidebar-menu-button" data-toggle="collapse" href="#WHT_menu">
                                         <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">account_balance_wallet</i>
                                         <span class="sidebar-menu-text">Withholding Tax</span>
@@ -370,7 +391,7 @@
                                             </a>
                                         </li>
                                     </ul>
-                                </li>
+                                </li>*@
 
                                 <!-- APPLICATIONS -->
                                 <li class="sidebar-menu-item applications">
@@ -387,7 +408,7 @@
                                         </li>
                                         <li class="sidebar-menu-item whte">
                                             <a class="sidebar-menu-button" href="~/applications/tex">
-                                                <span class="sidebar-menu-text">Withholding Tax Exemption</span>
+                                                <span class="sidebar-menu-text">Tax Exemption</span>
                                             </a>
                                         </li>
                                     </ul>
@@ -407,7 +428,7 @@
                                         </li>
                                         <li class="sidebar-menu-item whteapproval">
                                             <a class="sidebar-menu-button" href="~/approval/texapproval">
-                                                <span class="sidebar-menu-text">Withholding Tax Exemptions</span>
+                                                <span class="sidebar-menu-text">Tax Exemptions</span>
                                             </a>
                                         </li>
                                     </ul>

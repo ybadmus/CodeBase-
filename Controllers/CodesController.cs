@@ -61,6 +61,22 @@ namespace ITAPS_HOST.Controllers
             return View();
         }
 
+        [Authorize]
+        public IActionResult CompanyRates()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+
+        [Authorize]
+        public IActionResult PitRates()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+
         private void UserDetails()
         {
             foreach (var claim in User.Claims)

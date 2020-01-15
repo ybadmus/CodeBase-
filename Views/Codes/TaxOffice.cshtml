@@ -3,7 +3,7 @@
 }
 
 @section css {
-    <link href="~/css/codes/code.css" rel="stylesheet" />
+    <link href="~/css/codes/others.css" rel="stylesheet" />
 }
 
 <input id="serverUrl" value="@ViewBag.ServerUrl" hidden />
@@ -23,13 +23,12 @@
                 <button id="BtnOpenAddModal" class="btn btn-primary float-right" type="button"><i class='fa fa-plus-circle'></i> Add</button>
             </div>
         </div>
+
     </div>
     <div class="card-body">
-        <div class="GridDiv">
-            <div class="row">
-                <div class="col-md-12">
-                    <div id="Grid"></div>
-                </div>
+        <div class="row align-items-end" style="margin: 1px;">
+            <div class="GridDiv">
+                <div id="Grid"></div>
             </div>
         </div>
     </div>

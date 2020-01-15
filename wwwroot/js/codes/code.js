@@ -42,11 +42,13 @@ var apiCaller = function (url, type, data, callback) {
         },
         dataType: 'json',
         success: function (response) {
+            $('html').hideLoading();
             if (callback) {
                 callback(response.body, data, type);
             };
         },
         error: function (error) {
+            $('html').hideLoading();
             toastr.error('An error occured');
         }
     });
@@ -222,7 +224,7 @@ var configureUrls = function (setuptype) {
             MainGetUrl = `${MainGetUrl}EAR`;
             MainPostUrl = `${MainPostUrl}EAR`;
             MainSearchUrl = `${MainSearchUrl}EAR`;
-            HeaderName = "Reason For WHT Exemptions";
+            HeaderName = "Reasons For WHT Exemptions";
             break;
 
         case "tccpurposes":

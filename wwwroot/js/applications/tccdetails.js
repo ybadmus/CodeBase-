@@ -31,6 +31,13 @@ var loadDetailsView = function () {
     apiCaller(url, "GET", "", loadDetails)
 };
 
+var loadDetailsViewTex = function () {
+    let tccId = $("#appId").val();
+    let url = `${GetTexByIdUrl}` + tccId;
+
+    apiCaller(url, "GET", "", loadDetailsTex)
+};
+
 var getTccDocumentsById = function () {
     let tccId = $("#appId").val();
     let url = `${GetTCCDocuments}?id=` + tccId;
@@ -49,6 +56,7 @@ var loadDetails = function (resp) {
     $("#requestingEntityPhone").text(resp[0].requestingOfficePhone);
     $("#requestingEntityEmail").text(resp[0].requestingOfficeEmail);
     $("#purposeOfApplication").text(resp[0].purpose);
+
     $("#appIdHeader").text(resp[0].applicationNo); //span so using text
     $("#appStatusHeader").text(resp[0].status);
     $("#modalId").text(resp[0].applicationNo);
@@ -56,6 +64,28 @@ var loadDetails = function (resp) {
     $("#currentStatus").text(resp[0].statusId);
     $("#taxpayerId").text(resp[0].taxpayerId);
     
+    decideNextTccStage(resp[0].statusId);
+};
+
+var loadDetailsTex = function (resp) {
+    $("#dateSubmitted").text(resp[0].submittedDate);
+    $("#applicantNameTex").text(resp[0].applicantName);
+    $("#applicantFName").text(resp[0].applicantName); //span so using text
+    $("#applicantTINTex").text(resp[0].applicantTIN);
+    $("#applicantPhoneTex").text();
+    $("#applicantEmailTex").text(resp[0].email);
+    $("#residentialStatus").text(resp[0].residentialStatus);
+    $("#whtType").text(resp[0].typeOfWithHolding);
+    $("#whtReason").text(resp[0].reasons);
+    $("#whtRemarks").text(resp[0].remarks);
+
+    $("#appIdHeader").text(resp[0].applicationNo); //span so using text
+    $("#appStatusHeader").text(resp[0].status);
+    $("#modalId").text(resp[0].applicationNo);
+    $("#statusNameModal").text(resp[0].status);
+    $("#currentStatus").text(resp[0].statusId);
+    $("#taxpayerId").text(resp[0].taxpayerId);
+
     decideNextTccStage(resp[0].statusId);
 };
 
@@ -110,15 +140,6 @@ var appendDocumentsToTable = function (listOfDocuments) {
     $("#DocumentTableId").html(output);
 };
 
-$("#backToGrid").click(function () {
-    backToView();
-});
-
-var backToView = function () {
-    $("#tccGridView").show();
-    $("#tccDetailsView").hide();
-};
-
 var GetAssociatedBase64Stirng = function (id) {
     let stringT = listOfDocumentsGlobal[id].document;
     let exd = stringT;
@@ -152,7 +173,14 @@ var decideNextTccStage = function (statusId) {
             $("#reviseApplication").attr("disabled", false);
             break;
         case 1:
-            $("#addTaxPosition").show();
+            if (appType === "TCC") {
+                $("#addTaxPosition").show();
+                $("#sendForApproval").hide();
+            } else if (appType === "TEX") {
+                $("#addTaxPosition").hide();
+                $("#sendForApproval").show();
+            };
+
             $("#suspendStatus").show();
             $("#processApplication").hide();
             $("#acknowledgeStatus").hide();
@@ -162,7 +190,7 @@ var decideNextTccStage = function (statusId) {
             $("#reviseApplication").attr("disabled", false);
             break;
         case 2:
-            $("#addPosition").hide();
+            $("#addTaxPosition").hide();
             $("#processApplication").hide();
             $("#declineStatus").hide();
             $("#suspendStatus").hide();
@@ -172,18 +200,18 @@ var decideNextTccStage = function (statusId) {
             $("#reviseApplication").attr("disabled", false);
             break;
         case 3:
-            $("#addPosition").hide();
+            $("#addTaxPosition").hide();
             $("#declineStatus").hide();
             $("#suspendStatus").hide();
             $("#processApplication").hide();
             $("#acknowledgeStatus").hide();
             $("#previewApplication").hide();
-            $("#reviseApplication").show();
+            $("#reviseApplication").hide();
             $("#reviseApplication").attr("disabled", false);
             break;
         case 4:
             $("#acknowledgeStatus").hide();
-            $("#addPosition").show();
+            $("#addTaxPosition").show();
             $("#declineStatus").show();
             $("#processApplication").show();
             $("#acknowledgeStatus").show();

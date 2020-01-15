@@ -57,3 +57,10 @@ C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcorea
 C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\Applications\Certificate.g.cshtml.cs
 C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\Approval\TccApproval.g.cshtml.cs
 C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\Approval\TexApproval.g.cshtml.cs
+C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\Approval\_TccDetails.g.cshtml.cs
+C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\Approval\_TccMessages.g.cshtml.cs
+C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\Approval\_TexDetails.g.cshtml.cs
+C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\Approval\_TexMessages.g.cshtml.cs
+C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\Codes\PitRates.g.cshtml.cs
+C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\Codes\CompanyRates.g.cshtml.cs
+C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\Codes\_TaxRatesModal.g.cshtml.cs

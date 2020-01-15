@@ -55,6 +55,7 @@ var ApiCaller = function (url, type, data, callback) {
             };
         },
         error: function (error) {
+            $('html').hideLoading();
             toastr.error('An error occured');
         }
     });

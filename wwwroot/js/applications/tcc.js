@@ -7,6 +7,7 @@ var GetTCCDocuments = `${serverUrl}api/TCC/GetTCCApplicationDocumentByApplicatio
 let tccUpdateUrl = `${serverUrl}api/TCC/UpdateTCCApplication?id=`;
 var ReportDownloadView = `${ServerUrl}applications/certificate?uniApplicationId=`;
 var activeTaxOffice = "";
+var appType = "TCC";
 
 $("#tccListOfTaxOffices").on('change', function () {
     var elem = document.getElementById("tccListOfTaxOffices");
@@ -33,11 +34,11 @@ var initializeKendoGrid = function (data) {
                     template: "<button title='View item' class='btn btn-light btn-sm' style='margin-right: 2px'><span class='fa fa-file fa-lg'></span></button>"
                 }, {
                     name: "certificate",
-                    template: "<button id='certBtn' title='View certificate' class='btn btn-success btn-sm'><span class='fa fa-certificate fa-lg'></span></button>",
+                        template: "<button id='certBtn' title='View certificate' class='btn btn-light btn-sm'><span class='fa fa-certificate fa-lg'></span></button>",
                     visible: false
                 }],
                 title: "Actions",
-                width: "70px"
+                width: "90px"
             }
         ]
     });
@@ -53,7 +54,10 @@ $(document).ready(function () {
     setTitles();
 
     $("#tccGridView").show();
-    $("#tccDetailsView").hide();
+    $("#detailsView").hide();
+
+    $("#tccDetailsGrid").show();
+    $("#texDetailsGrid").hide();
 });
 
 var setTitles = function () {
@@ -75,7 +79,7 @@ var loadTaxOffices = function (listOfTaxOffices) {
 };
 
 var bootstrapPage = function () {
-    var userid = $("#userId").val();
+    var userid = $("#userId").val(); //save in layout file
     var tccUrl = `${serverUrl}api/Users/GetAllUserTaxOfficesByUserID?userId=` + userid;
 
     apiCaller(tccUrl, "GET", "", loadTaxOffices);
@@ -165,5 +169,21 @@ var prepareDetailsView = function () {
 
 var hideAndShowThings = function () {
     $("#tccGridView").hide();
-    $("#tccDetailsView").show();
+    $("#detailsView").show();
 };
+
+$("#backToGrid").click(function () {
+    backToView();
+});
+
+var backToView = function () {
+    $("#tccGridView").show();
+    $("#detailsView").hide();
+};
+
+$("#previewApplication").click(function () {
+    let appId = $("#appId").val();
+    let url = `${ReportDownloadView}` + appId;
+
+    window.open(url, "_blank");
+});

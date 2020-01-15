@@ -96,6 +96,24 @@ $("#updateAppStatus").click(function (e) {
 
             apiCaller(updateUrl, "PUT", ObjectToSend, updateView);
         }
+
+        if (selectedStatus == 5) {
+            $('html').hideLoading();
+
+            let ObjectToSend = {
+                "status": 5,
+                "taxpayerComment": $("#taxpayerMessage").val(),
+                "internalComment": $("#internalMessage").val(),
+                "applicationId": tccId
+            };
+
+            detailsKendoUpdate = {
+                "statusId": 5,
+                "appId": tccId
+            };
+
+            apiCaller(updateUrl, "PUT", ObjectToSend, updateView);
+        }
     }
     else {
 
@@ -151,7 +169,6 @@ var getCurrentDateMMDDYYY = function () {
 
     return now.getDate() < 10 ? ("0" + now.getDate() + "/" + ((now.getMonth() + 1) < 10 ? "0" + (now.getMonth() + 1) : (now.getMonth() + 1)) + "/" + now.getFullYear())
         : (now.getDate() + "/" + ((now.getMonth() + 1) < 10 ? "0" + (now.getMonth() + 1) : (now.getMonth() + 1)) + "/" + now.getFullYear());
-
 };
 
 var updateMessageDirectlyStaff = function () {
@@ -220,13 +237,6 @@ $("#sendInternal").click(function () {
         apiCaller(updateUrl, "PUT", ObjectToSend, updateMessageDirectlyStaff);
 });
 
-$("#previewApplication").click(function () {
-    let tccId = $("#appId").val();
-    let url = `${ReportDownloadView}` + tccId;
-
-    window.open(url, "_blank");
-});
-
 $("#taxPosition").click(function () {
     let ObjectToSend = {
         "status": 5,
@@ -239,14 +249,3 @@ $("#taxPosition").click(function () {
 
     window.location.href = "/applications/taxposition?applicantName=" + $("#applicantName").text() + "&taxpayerId=" + $("#taxpayerId").text() + "&appId=" + $("#appId").val();
 });
-
-
-
-//if (statusId == 5) {
-//    $('html').hideLoading();
-//    let appId = $("#tccRequestId").val();
-//    let url = `${ReportDownloadView}` + appId;
-
-//    $("#continueButton").removeAttr('disabled');
-//    window.open(url, "_blank");
-//}

@@ -23,7 +23,7 @@ var InitializeKendoGrid = function (data) {
             {
                 command: [{
                     name: "view",
-                    template: "<button title='View item' class='btn btn-success btn-sm'><i class='fa fa-edit'></i></button>"
+                    template: "<button title='View item' class='btn btn-success btn-sm'><i class='fa fa-file fa-lg'></i></button>"
                 }],
                 title: "Actions",
                 width: "7%"
@@ -33,7 +33,6 @@ var InitializeKendoGrid = function (data) {
 };
 
 var ApiCaller = function (url, type, data, callback) {
-
     $.ajax({
         url: url,
         type: type,
@@ -44,13 +43,14 @@ var ApiCaller = function (url, type, data, callback) {
         },
         dataType: 'json',
         success: function (response) {
+            $('html').hideLoading();
             if (callback) {
-                callback(response.body);
+                callback(response.body, data, type);
             };
         },
         error: function (error) {
-            console.log(error);
-            //TODO: USE TOASTR TO DISPLAY ERROR;
+            $('html').hideLoading();
+            toastr.error('An error occured');
         }
     });
 };
@@ -156,6 +156,7 @@ var searchCurrency = function () {
 
 $(document).ready(function () {
     InitializeKendoGrid();
+    $("#pgHeader").text("Currency");
 });
 
 $("#BtnOpenAddModal").click(function () {

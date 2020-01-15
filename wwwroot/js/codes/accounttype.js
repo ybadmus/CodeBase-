@@ -2,6 +2,7 @@
 
 var ServerUrl = $("#serverUrl").val();
 var HeaderName = "Account Type & Residency";
+
 var GWTRObjectToSend = {
     "id": "",
     "resStatusId": "",
@@ -68,8 +69,8 @@ var ApiCaller = function (url, type, data, callback) {
             }
         },
         error: function (error) {
-
             $('html').hideLoading();
+            toastr.error('An error occured');
         }
     });
 };

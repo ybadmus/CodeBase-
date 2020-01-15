@@ -1,17 +1,19 @@
 ﻿var HeaderName = "Tax Exemptions";
 var serverUrl = $("#serverUrl").val();
-var searchTccByTaxOffice = `${serverUrl}api/TCC/GetAllTccApplicationByTaxOfficeId`;
+var searchTexByTaxOffice = `${serverUrl}api/TEX/GetAllTExApplicationByTaxOfficeId`; 
 var GetTccCommentsByIdUrl = `${serverUrl}api/TCC/GetAllTccApplicationComments?tccId=`;
-var GetTccByIdUrl = `${serverUrl}api/TCC/GetTccApplicationById?tccId=`;
 var GetTCCDocuments = `${serverUrl}api/TCC/GetTCCApplicationDocumentByApplicationId`;
-let tccUpdateUrl = `${serverUrl}api/TCC/UpdateTCCApplication?id=`;
-var ReportDownloadView = `${ServerUrl}applications/certificate?uniApplicationId=`;
+var GetTexByIdUrl = `${serverUrl}api/TEX/GetWHTExApplicationById?whtId=`;
+var tccUpdateUrl = `${serverUrl}api/TCC/UpdateTCCApplication?id=`;
+//var ReportDownloadView = `${ServerUrl}applications/certificate?uniApplicationId=`;
+var ReportDownloadView = "";
 var activeTaxOffice = "";
+var appType = "TEX";
 
 $("#texListOfTaxOffices").on('change', function () {
     var elem = document.getElementById("texListOfTaxOffices");
     activeTaxOffice = elem.options[elem.selectedIndex].value;
-})
+});
 
 var initializeKendoGrid = function (data) {
 
@@ -22,14 +24,14 @@ var initializeKendoGrid = function (data) {
         pageable: { refresh: false, pageSizes: true, buttonCount: 5 },
         columns: [
             { field: "statusDate", title: "Date", width: '90px', format: "{0:MM-dd-yyyy}" },
-            { field: "applicantName", title: "Applicant", width: '17%' },
-            { field: "requestingEntity", title: "Requesting Entity", width: '20%' },
-            { field: "purpose", title: "Purpose", width: '20%' },
+            { field: "applicantName", title: "Applicant", width: '20%' },
+            { field: "applicantTIN", title: "TIN", width: '100px' },
+            { field: "typeOfWithHolding", title: "WHT Type", width: '20%' },
             { field: "status", title: "Status", width: '15%' },
             {
                 command: [{
                     name: "view",
-                    template: "<button title='View item' class='btn btn-success btn-sm' style=''><span class='fa fa-file fa-lg'></span></button>"
+                    template: "<button title='View item' class='btn btn-light btn-sm' style=''><span class='fa fa-file fa-lg'></span></button>"
                 }],
                 title: "Actions",
                 width: "70px"
@@ -43,8 +45,11 @@ $(document).ready(function () {
     bootstrapPage();
     setTitles();
 
-    $("#tccGridView").show();
-    $("#tccDetailsView").hide();
+    $("#texGridView").show();
+    $("#detailsView").hide();
+
+    $("#tccDetailsGrid").hide();
+    $("#texDetailsGrid").show();
 });
 
 var setTitles = function () {
@@ -118,7 +123,7 @@ var searchTcc = function () {
                     replaceAt(searchItem, i, '%2F');
             }
         }
-        let url = `${searchTccByTaxOffice}?officeId=` + activeTaxOffice + "&queryString=" + searchItem;
+        let url = `${searchTexByTaxOffice}?officeId=` + activeTaxOffice + "&queryString=" + searchItem;
         apiCaller(url, "GET", "", initializeKendoGrid);
     } else {
         toastr.error("Tax office or search item field is empty");
@@ -146,11 +151,27 @@ $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
 var prepareDetailsView = function () {
     hideAndShowThings();
     loadMessages();
-    loadDetailsView();
+    loadDetailsViewTex();
     getTccDocumentsById();
 };
 
 var hideAndShowThings = function () {
-    $("#tccGridView").hide();
-    $("#tccDetailsView").show();
+    $("#texGridView").hide();
+    $("#detailsView").show();
 };
+
+$("#backToGrid").click(function () {
+    backToView();
+});
+
+var backToView = function () {
+    $("#texGridView").show();
+    $("#detailsView").hide();
+};
+
+$("#previewApplication").click(function () {
+    let appId = $("#appId").val();
+    //let url = `${ReportDownloadView}` + appId;
+
+    //window.open(url, "_blank");
+});
