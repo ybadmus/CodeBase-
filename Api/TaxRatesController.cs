@@ -31,10 +31,28 @@ namespace ITAPS_HOST.Api
             return await _taxRateServices.GetAllGcirAsync();
         }
 
+        [HttpGet("GetAllGtaxAsync", Name = "GetAllGtaxAsync")]
+        public async Task<ResponseItem<object>> GetAllGtaxAsync()
+        {
+            return await _taxRateServices.GetAllGtaxAsync();
+        }
+
+        [HttpGet("GetAllGtaxByYearAsync", Name = "GetAllGtaxByYearAsync")]
+        public async Task<ResponseItem<object>> GetAllGtaxByYearAsync(string year)
+        {
+            return await _taxRateServices.GetAllGtaxByYearAsync(year);
+        }
+
         [HttpGet("GetGcirById", Name = "GetGcirById")]
         public async Task<ResponseItem<object>> GetGcirById(Guid lngId)
         {
             return await _taxRateServices.GetGcirByIdAsync(lngId);
+        }
+
+        [HttpGet("GetAllGtaxByIdAsync", Name = "GetAllGtaxByIdAsync")]
+        public async Task<ResponseItem<object>> GetAllGtaxByIdAsync(Guid lngId)
+        {
+            return await _taxRateServices.GetAllGtaxByIdAsync(lngId);
         }
 
         [HttpPost("PostGcir", Name = "PostGcir")]

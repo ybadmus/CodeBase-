@@ -4,16 +4,16 @@ var ServerUrl = $("#serverUrl").val();
 var MainUrl = `${ServerUrl}api/TaxRates/`;
 
 var objSave = {
-    "CodeTR": "",
-    "SectorTR": "",
-    "BusinessLocTR": "",
-    "TaxRateTR": 0,
-    "DescriptionTR": "",
-    "GivenTaxHolidayTR": true,
-    "TaxHolidayRateTR": 0,
-    "HolidayYearsTR": 0,
-    "NotesTR": "",
-    "StatusTR": ""
+    "Code": "",
+    "Sector": "",
+    "BusinessLoc": "",
+    "TaxRate": 0,
+    "Description": "",
+    "GivenTaxHoliday": true,
+    "TaxHolidayRate": 0,
+    "HolidayYears": 0,
+    "Notes": "",
+    "Status": ""
 };
 
 var initializeKendoGrid = function (data) {
@@ -184,18 +184,18 @@ $("#submitSetup").click(function () {
     var url = `${MainUrl}PostGcir`;
 
     if ($("#codeId").val() !== "")
-        objSave.IdTR = $("#codeId").val();
+        objSave.Id = $("#codeId").val();
 
-    objSave.CodeTR = $("#code").val();
-    objSave.SectorTR = $("#sector").val();
-    objSave.BusinessLocTR = $("#bizLoc").val();
-    objSave.TaxRateTR = parseInt($("#taxRate").val());
-    objSave.DescriptionTR = $("#description").val();
-    objSave.GivenTaxHolidayTR = $("#givenTaxHoliday").val();
-    objSave.TaxHolidayRateTR = parseInt($("#holidayRate").val());
-    objSave.HolidayYearsTR = parseInt($("#holidayYears").val());
-    objSave.NotesTR = $("#notes").val();
-    objSave.StatusTR = $("#status").val();
+    objSave.Code = $("#code").val();
+    objSave.Sector = $("#sector").val();
+    objSave.BusinessLoc = $("#bizLoc").val();
+    objSave.TaxRate = parseInt($("#taxRate").val());
+    objSave.Description = $("#description").val();
+    objSave.GivenTaxHoliday = $("#givenTaxHoliday").val();
+    objSave.TaxHolidayRate = parseInt($("#holidayRate").val());
+    objSave.HolidayYears = parseInt($("#holidayYears").val());
+    objSave.Notes = $("#notes").val();
+    objSave.Status = $("#status").val();
 
     apiCaller(url, "POST", objSave, successfullySaved);
 });
@@ -203,5 +203,5 @@ $("#submitSetup").click(function () {
 var successfullySaved = function () {
     toastr.success("Successfully saved!");
     $('#modal-add-setup').modal("hide");
-    location.reload();
+    setAllFieldToDefault();
 };

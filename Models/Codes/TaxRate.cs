@@ -26,16 +26,16 @@ namespace ITAPS_HOST.Models.Codes
 
     public class CompanyTaxRateDto
     {
-        public Guid IdTR { get; set; }
-        public string CodeTR { get; set; }
-        public string SectorTR { get; set; }
-        public string BusinessLocTR { get; set; }
-        public double TaxRateTR { get; set; }
-        public string DescriptionTR { get; set; }
-        public bool GivenTaxHolidayTR { get; set; }
-        public double TaxHolidayRateTR { get; set; }
-        public int HolidayYearsTR { get; set; }
-        public string NotesTR { get; set; }
-        public string StatusTR { get; set; }
+        public Guid Id { get; set; }
+        public string Code { get; set; }
+        public string Sector { get; set; }
+        public string BusinessLoc { get; set; }
+        public double TaxRate { get; set; }
+        public string Description { get; set; }
+        public bool GivenTaxHoliday { get; set; }
+        public double TaxHolidayRate { get; set; }
+        public int HolidayYears { get; set; }
+        public string Notes { get; set; }
+        public string Status { get; set; }
     }
 }

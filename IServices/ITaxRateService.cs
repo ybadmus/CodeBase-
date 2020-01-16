@@ -9,7 +9,13 @@ namespace ITAPS_HOST.IServices
     {
         Task<ResponseItem<object>> GetAllGcirAsync();
 
+        Task<ResponseItem<object>> GetAllGtaxAsync();
+
         Task<ResponseItem<object>> GetGcirByIdAsync(Guid lngId);
+
+        Task<ResponseItem<object>> GetAllGtaxByYearAsync(string year);
+
+        Task<ResponseItem<object>> GetAllGtaxByIdAsync(Guid lngId);
 
         Task<ResponseItemForCreationDto<object>> PostGcir(CompanyTaxRateDto data);
 

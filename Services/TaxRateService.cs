@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ITAPS_HOST.Services
 {
-    public class TaxRateService: ITaxRateService
+    public class TaxRateService : ITaxRateService
     {
         private readonly IAdminRequestClient _adminRequestClient;
 
@@ -17,13 +17,31 @@ namespace ITAPS_HOST.Services
 
         public async Task<ResponseItem<object>> GetAllGcirAsync()
         {
-            var apiEndpoint = $"CompanyTaxRates/GetAllGcirAsync";  
+            var apiEndpoint = $"CompanyTaxRates/GetAllGcirAsync";
+            return await _adminRequestClient.GetRequestAsync(apiEndpoint);
+        }
+
+        public async Task<ResponseItem<object>> GetAllGtaxAsync()
+        {
+            var apiEndpoint = $"TaxRates/GetAllGtaxAsync";
+            return await _adminRequestClient.GetRequestAsync(apiEndpoint);
+        }
+
+        public async Task<ResponseItem<object>> GetAllGtaxByYearAsync(string year)
+        {
+            var apiEndpoint = $"TaxRates/GetAllGtaxByYearAsync/{year}";
             return await _adminRequestClient.GetRequestAsync(apiEndpoint);
         }
 
         public async Task<ResponseItem<object>> GetGcirByIdAsync(Guid lngId)
         {
-            var apiEndpoint = $"CompanyTaxRates/GetGcirByIdAsync?lngId={lngId}"; 
+            var apiEndpoint = $"CompanyTaxRates/GetGcirByIdAsync?lngId={lngId}";
+            return await _adminRequestClient.GetRequestAsync(apiEndpoint);
+        }
+
+        public async Task<ResponseItem<object>> GetAllGtaxByIdAsync(Guid lngId)
+        {
+            var apiEndpoint = $"TaxRates/GetAllGtaxByIdAsync/{lngId}";
             return await _adminRequestClient.GetRequestAsync(apiEndpoint);
         }
 
@@ -32,17 +50,17 @@ namespace ITAPS_HOST.Services
             const string apiEndpoint = "CompanyTaxRates/PostGcir";
             var companyTaxRateDto = new CompanyTaxRateDto
             {
-                IdTR = data.IdTR,
-                CodeTR = data.CodeTR,
-                SectorTR = data.SectorTR,
-                BusinessLocTR = data.BusinessLocTR,
-                TaxRateTR = data.TaxRateTR,
-                DescriptionTR = data.DescriptionTR,
-                GivenTaxHolidayTR = data.GivenTaxHolidayTR,
-                TaxHolidayRateTR = data.TaxHolidayRateTR,
-                HolidayYearsTR = data.HolidayYearsTR,
-                NotesTR = data.NotesTR,
-                StatusTR = data.StatusTR
+                Id = data.Id,
+                Code = data.Code,
+                Sector = data.Sector,
+                BusinessLoc = data.BusinessLoc,
+                TaxRate = data.TaxRate,
+                Description = data.Description,
+                GivenTaxHoliday = data.GivenTaxHoliday,
+                TaxHolidayRate = data.TaxHolidayRate,
+                HolidayYears = data.HolidayYears,
+                Notes = data.Notes,
+                Status = data.Status
             };
 
             return await _adminRequestClient.PostRequestAsync(companyTaxRateDto, apiEndpoint);
