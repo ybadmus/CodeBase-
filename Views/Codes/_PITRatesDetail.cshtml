@@ -12,52 +12,36 @@
                                     <table class="table table-bordered">
                                         <tbody>
                                             <tr>
-                                                <td style="padding-left:5px;width:120px;font-weight:100;">Start Date</td>
-                                                <td style="padding-left:5px;width:280px;">
-                                                    <b><span id="startDate"></span></b>
-                                                </td>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Start Date</td>
+                                                <td title="Date Format: YYYY/MM/DD" style="padding-left:5px;width:250px;font-weight:bold;" id="startDate"></td>
                                             </tr>
                                             <tr>
-                                                <td style="padding-left:5px;width:120px;font-weight:100;">End Date</td>
-                                                <td style="padding-left:5px;width:280px;">
-                                                    <b><span id="endDate"></span></b>
-                                                </td>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">End Date</td>
+                                                <td title="Date Format: YYYY/MM/DD" style="padding-left:5px;width:250px;font-weight:bold;" id="endDate"></td>
                                             </tr>
                                             <tr>
-                                                <td style="padding-left:5px;width:120px;font-weight:100;">Description</td>
-                                                <td style="padding-left:5px;width:280px;">
-                                                    <b><span id="description"></span></b>
-                                                </td>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Description</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="description"></td>
                                             </tr>
                                             <tr>
-                                                <td style="padding-left:5px;width:120px;font-weight:100;">Amount Based</td>
-                                                <td style="padding-left:5px;width:280px;">
-                                                    <b><span id="amtBased"></span></b>
-                                                </td>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Amount Based</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="amtBased"></td>
                                             </tr>
                                             <tr>
-                                                <td style="padding-left:5px;width:120px;font-weight:100;">Tax Free Amount</td>
-                                                <td style="padding-left:5px;width:280px;">
-                                                    <b><span id="taxFreeAmt"></span></b>
-                                                </td>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Tax Free Amount</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="taxFreeAmt"></td>
                                             </tr>
                                             <tr>
-                                                <td style="padding-left:5px;width:120px;font-weight:100;">Based on Table</td>
-                                                <td style="padding-left:5px;width:280px;">
-                                                    <b><span id="basedOnTable"></span></b>
-                                                </td>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Based on Table</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="basedOnTable"></td>
                                             </tr>
                                             <tr>
-                                                <td style="padding-left:5px;width:120px;font-weight:100;">Fixed Amount Table</td>
-                                                <td style="padding-left:5px;width:280px;">
-                                                    <b><span id="fixedAmtTable"></span></b>
-                                                </td>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Fixed Amount Table</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="fixedAmtTable"></td>
                                             </tr>
                                             <tr>
-                                                <td style="padding-left:5px;width:120px;font-weight:100;">Default</td>
-                                                <td style="padding-left:5px;width:280px;">
-                                                    <b><span id="default"></span></b>
-                                                </td>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Default</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="default"></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -67,9 +51,22 @@
 
                         <div class="col-sm-7">
                             <div class="bordered-group" id="" style="height: 350px">
-                                <p class="card-title"><b>Tax</b></p>
+                                <p class="card-title"><b>Tax Band</b></p>
                                 <div class="table-responsive border-bottom" style="height: 300px;">
-
+                                    <button id="newRow" style="float: right;" class="btn btn-success btn-sm"><i class='fa fa-plus-circle'></i>  Add Rows</button>
+                                    <button id="saveRow" style="float: right;" class="btn btn-primary btn-sm"><i class='fa fa-plus-circle'></i>  Save Row</button>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr class="table-info">
+                                                @*<th scope="col" style="color: black;">#</th>*@
+                                                <th scope="col" style="color: black;">Tax Band</th>
+                                                <th scope="col" style="color: black;">Taxable Amount</th>
+                                                <th scope="col" style="color: black;">Percentage (%)</th>
+                                                @*<th scope="col" style="color: black;"></th>*@
+                                            </tr>
+                                        </thead>
+                                        <tbody id="taxGrid"></tbody>
+                                    </table>
                                 </div>
                             </div>
 
@@ -77,8 +74,8 @@
                     </div>
                     <button id="backToGrid" class="btn btn-outline-primary"> Back</button>
                     <button id="reviseApp" style="float: right; margin-left: 2px;" class="btn btn-success">  Save</button>
-                    <button id="editDetails" style="float: right; margin-left: 2px;" class="btn btn-light">  Edit</button>
-                    <button id="lockDetails" style="float: right; margin-left: 2px;" class="btn btn-primary">  Lock</button>
+                    <button id="editDetails" style="float: right; margin-left: 2px;" class="btn btn-light">  Edit Fields</button>
+                    <button id="lockDetails" style="float: right; margin-left: 2px;" class="btn btn-primary">  Lock Fields</button>
                     @*<button id="texMessages" style="float: right" class="btn btn-primary"><i class="fa fa-comments" aria-hidden="true"></i>  Messages</button>*@
                 </div>
 

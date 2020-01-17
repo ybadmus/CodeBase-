@@ -2,6 +2,8 @@
 
 var ServerUrl = $("#serverUrl").val();
 var MainUrl = `${ServerUrl}api/TaxRates/`;
+var dataTableRows = [];
+var taxTableLength = 0;
 
 var objSave = {
     "Code": "",
@@ -92,6 +94,8 @@ $(document).ready(function () {
     $("#crDetails").hide();
     $("#lockDetails").hide();
     $("#pitGridView").show();
+    $("#editDetails").hide();
+    $("#saveRow").hide();
 });
 
 var disableAllFields = function () {
@@ -104,6 +108,12 @@ var disableAllFields = function () {
     document.getElementById("basedOnTable").setAttribute('contenteditable', 'false');
     document.getElementById("fixedAmtTable").setAttribute('contenteditable', 'false');
     document.getElementById("default").setAttribute('contenteditable', 'false');
+
+    for (var i = 0; i < taxTableLength; i++) {
+        document.getElementById("taxBand" + i).setAttribute('contenteditable', 'false');
+        document.getElementById("taxableAmount" + i).setAttribute('contenteditable', 'false');
+        document.getElementById("percentage" + i).setAttribute('contenteditable', 'false');
+    }
 };
 
 $("#editBtn").click(function () {
@@ -121,6 +131,12 @@ var enableAllFields = function () {
     document.getElementById("basedOnTable").setAttribute('contenteditable', 'true');
     document.getElementById("fixedAmtTable").setAttribute('contenteditable', 'true');
     document.getElementById("default").setAttribute('contenteditable', 'true');
+
+    for (var i = 0; i < taxTableLength; i++) {
+        document.getElementById("taxBand" + i).setAttribute('contenteditable', 'true');
+        document.getElementById("taxableAmount" + i).setAttribute('contenteditable', 'true');
+        document.getElementById("percentage" + i).setAttribute('contenteditable', 'true');
+    }
 };
 
 var loadItemDetails = function (resp) {
@@ -135,6 +151,33 @@ var loadItemDetails = function (resp) {
     $("#startDate").text(response.startdate.split("T")[0]);
     $("#endDate ").text(response.endDate.split("T")[0]);
     $("#default").text(response.default);
+
+    loadTaxTable(response.tax1);
+    disableAllFields();
+};
+
+var loadTaxTable = function (listOfItems) {
+    taxTableLength = listOfItems.length;
+    dataTableRows = [];
+
+    let output = "";
+    let sortedArray = listOfItems.sort(function (a, b) {
+        return (a.taxBanb - b.taxBanb);
+    });
+
+    dataTableRows = sortedArray;
+
+    for (var i = 0; i <= sortedArray.length - 1; i++) {
+        output = output + '<tr><td align="right" style="color: black" contenteditable="true" id="taxBand' + i
+            + '" class="valueCell"> ' + listOfItems[i].taxBanb + ' </td><td align="right" style="color: black" contenteditable="true"  id="taxableAmount' + i
+            + '" class="valueCell"> ' + parseInt(listOfItems[i].taxableAmt ? listOfItems[i].taxableAmt : 0).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + ' </td><td align="right" contenteditable="true" style="color: black" id="percentage' + i
+            + '" class="">' + listOfItems[i].percentage + '</td></tr>';
+    }
+
+    /*<td><button id="removeRow' + i + '" class="btn btn-danger btn-sm"><i class="fa fa-minus-circle" aria-hidden="true"></i></button> <button id="saveRow' + i + '" class="btn btn-primary btn-sm"><i class="fa fa-cloud" aria-hidden="true"></i></button></td>*/
+
+    output = output;
+    $("#taxGrid").html(output);
 };
 
 var setAllFieldToDefault = function () {
@@ -142,12 +185,14 @@ var setAllFieldToDefault = function () {
     $("#ratesCode").text("");
     $("#description").text("");
     $("#amtBased").text("");
-    $("#taxFreeAmt").text("A");
+    $("#taxFreeAmt").text("");
     $("#basedOnTable").text("");
     $("#fixedAmtTable").text("");
     $("#startDate").text("");
     $("#endDate").text("");
     $("#default").text("");
+
+    //No need to clear table because it handled in the click action of the add button
 };
 
 $("#BtnSearch").click(function () {
@@ -160,15 +205,51 @@ $("#SearchItem").on('keypress', function (e) {
     }
 });
 
+$("#newRow").click(function () {
+    dataTableRows.push({
+        taxBanb: 0, taxableAmt:  0.00, percentage: 0,
+    });
+
+    loadTaxTable(dataTableRows);
+    $("#lockDetails").show();
+    $("#editDetails").hide();
+    $("#newRow").hide();
+    $("#saveRow").show();
+});
+
+$("#saveRow").click(function () {
+    $("#newRow").show();
+    $("#saveRow").hide();
+
+    dataTableRows.shift();
+
+    dataTableRows.push({
+        taxBanb: parseInt($("#taxBand0").text()), taxableAmt: parseInt($("#taxableAmount0").text()), percentage: parseInt($("#percentage0").text()),
+    });
+
+    loadTaxTable(dataTableRows);
+});
+
 $("#BtnOpenAddModal").click(function () {
+    dataTableRows = [];
+
+    for (let i = 5; i >= 1; i--) {
+        dataTableRows.push({
+            taxBanb: 0, taxableAmt: 0.00, percentage: 0,
+        });
+    };
+
     $("#crDetails").show();
     $("#pitGridView").hide();
+    enableAllFields();
+    loadTaxTable(dataTableRows);
 });
 
 $("#backToGrid").click(function () {
     setAllFieldToDefault();
     $("#crDetails").hide();
     $("#pitGridView").show();
+    $("#codeId").val("");
 });
 
 $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
@@ -177,19 +258,11 @@ $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
     var url = `${MainUrl}GetAllGtaxByIdAsync?lngId=` + item.id;
 
     $("#codeId").val(item.id);
-    apiCaller(url, "GET", "", loadItemDetails);
-    disableAllFields();
     $("#crDetails").show();
     $("#pitGridView").hide();
-});
+    $("#editDetails").show();
 
-$('#modal-add-setup').on('hidden.bs.modal', function () {
-    enableAllFields();
-    setAllFieldToDefault();
-    $("#editBtn").hide();
-    $("#submitSetup").show();
-
-    $("#codeId").val("");
+    apiCaller(url, "GET", "", loadItemDetails);
 });
 
 $("#submitSetup").click(function () {
@@ -220,12 +293,14 @@ var successfullySaved = function () {
 
 $("#editDetails").click(function () {
     enableAllFields();
+
     $("#lockDetails").show();
     $("#editDetails").hide();
 });
 
 $("#lockDetails").click(function () {
     disableAllFields();
+
     $("#lockDetails").hide();
     $("#editDetails").show();
 });
