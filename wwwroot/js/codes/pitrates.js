@@ -5,18 +5,28 @@ var MainUrl = `${ServerUrl}api/TaxRates/`;
 var dataTableRows = [];
 var taxTableLength = 0;
 
-var objSave = {
-    "Code": "",
-    "Sector": "",
-    "BusinessLoc": "",
-    "TaxRate": 0,
-    "Description": "",
-    "GivenTaxHoliday": true,
-    "TaxHolidayRate": 0,
-    "HolidayYears": 0,
-    "Notes": "",
-    "Status": ""
-};
+var objToSend = {
+    "id": "",
+    "companyId": "",
+    "code": "",
+    "description": "",
+    "amtBased": true,
+    "taxFreeAmt": 0,
+    "perBasedOnTable": true,
+    "fixedAmtTable": true,
+    "startdate": "",
+    "endDate": "",
+    "default": 0,
+    "tax1": [
+        {
+            "id": "",
+            "taxMasterId": "",
+            "taxBanb": 0,
+            "taxableAmt": 0,
+            "percentage": 0
+        }
+    ]
+}
 
 var dateConverter = function (startdate) {
     return startdate.split("T")[0];
@@ -305,3 +315,6 @@ $("#lockDetails").click(function () {
     $("#editDetails").show();
 });
 
+$("#saveDetails").click(function () {
+    
+});
