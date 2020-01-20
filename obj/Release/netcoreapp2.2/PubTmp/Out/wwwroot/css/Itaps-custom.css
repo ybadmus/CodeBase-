@@ -1,0 +1,711 @@
+﻿/*.notCaps, label {
+    text-transform: capitalize !important;
+}*/
+
+/** {
+    outline: 1px dashed red !important;
+}
+[dir="ltr"] .modal-dialog {
+    max-width: 564px !important;
+}
+
+**/
+.page__heading {
+    margin-bottom: 1% !important;
+    padding-bottom: 1% !important;
+}
+.height-250 {
+    height: 250px !important;
+}
+.height-350 {
+    height: 350px !important;
+}
+.bordered-group {
+    border: 1px solid #ddd;
+    padding: 0px 10px;
+    margin: 5px;
+    border-radius: 3px;
+}
+
+.bordered-div {
+    border: 1px solid #ddd;
+}
+
+.bordered-group .group-heading {}
+
+label {
+    margin-bottom: 0px !important;
+    color: rgba(147, 159, 173, .84);
+    font-weight: 500;
+    color: #364c66;
+    padding-bottom: 0px !important;
+    /*font-weight: bold;*/
+}
+
+.btn-sm,
+input.form-control,
+select.form-control {
+    height: 25px !important;
+    margin-top: 0px !important;
+}
+
+.form-row {
+    margin-bottom: 12px !important;
+}
+
+select.form-control {
+    padding-top: 0.45% !important;
+}
+
+div.form-horizontal>.form-row,
+.collapse>.form-row,
+#landlordColumn {
+    margin-bottom: 15px !important;
+}
+
+.accordion .card-header {
+    padding: 0px !important;
+    margin-bottom: 0 !important;
+    color: white !important;
+    background-color: rgba(0, 0, 0, .03);
+    border-bottom: 0px !important;
+}
+
+[dir=ltr] a {
+    color: #6c757d;
+}
+[dir="ltr"] a:hover {
+    text-decoration: none;
+}
+
+[dir="ltr"] a:hover {
+    text-decoration: none;
+}
+
+[dir=ltr] .nav-tabs .nav-item.show .nav-link,
+[dir=ltr] .nav-tabs .nav-link.active {
+    color: #364c66 !important;
+    font-size: large;
+    border-bottom: 3px solid #364c66;
+}
+
+.nav {
+    font-size: large !important;
+}
+
+.accordion .card-header {
+    background-color: white !important;
+    text-decoration: none
+}
+
+.ch-l-s {
+    letter-spacing: 1px;
+    overflow: hidden;
+    color: #999;
+    margin-bottom: 2% !important;
+}
+
+.ch-l-s:after {
+    background-color: #ddd;
+    content: "";
+    display: inline-block;
+    height: 1px;
+    position: relative;
+    vertical-align: middle;
+    width: 100%;
+}
+
+.ch-l-s:after {
+    left: 0.5em;
+    margin-right: -50%;
+}
+
+.ch-l-s:hover {
+    cursor: pointer;
+}
+
+.dash-anchor>.card-group-row__card {
+    height: 10em !important;
+    padding-left: 1em !important;
+}
+
+.card-group-row__card:hover {
+    border: 2px solid #308af3;
+    cursor: pointer;
+}
+
+.too-long-body {
+    max-height: 24em !important;
+    overflow-y: scroll;
+}
+
+.dash-body {
+    padding-left: 1.5% !important
+}
+
+a,
+a:hover {
+    text-decoration: none;
+}
+
+.card .table,
+.dataTables_wrapper table.dataTable,
+.modal-body .jumbotron,
+.modal .card,
+.modal-body .card-heading,
+.modal .table {
+    border-radius: 0;
+    margin: 0 !important;
+}
+
+.card .table-bordered th,
+.modal .table-bordered th {
+    background-color: #112b4a;
+    color: white !important;
+}
+
+textarea {
+    resize: none !important
+}
+
+#modal-declare .modal-body {
+    height: 40vh !important;
+    overflow-y: scroll;
+}
+
+#modal-standard-title .acceptmid {
+    text-align: center;
+    color: tomato;
+    margin-left: 150px;
+}
+
+#modal-declare .modal-body {
+    height: 55vh !important;
+}
+
+
+/* All the code is from lazareric.com
+	 I am using style.css and home.js from my front end framework
+	 https://github.com/lazareric/StarterPack. // Be curious. */
+
+html,
+body {
+    height: 100%;
+    background-color: #fff;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.wrap {
+    position: absolute;
+    width: 100%;
+    padding: 30px;
+    max-width: 700px;
+    top: 25%;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.accordion {
+    display: block;
+    position: relative;
+    width: 100%;
+    padding: 0px;
+}
+
+.accordion__item {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.accordion__item:last-child {
+    margin-bottom: 0;
+}
+
+.accordion__title {
+    display: block;
+    position: relative;
+    height: 33px;
+    line-height: 28px;
+    padding: 0px 20px 0 20px;
+    font-weight: normal;
+    color: white !important;
+    font-size: large;
+    border-bottom: 1px solid #eee;
+    overflow: hidden;
+    transition: background-color .2s;
+    background-color: #364c66 !important;
+}
+
+.accordion__title:hover {
+    background-color: #fafafa;
+}
+
+.accordion__title.active {
+    background: #e3f7d4;
+}
+
+.accordion__title.active .x7 {
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}
+
+.accordion__title.active .x7 .btop {
+    width: 67%;
+    top: 2px;
+    -webkit-transform: translateY(-50%) rotate(-45deg);
+    transform: translateY(-50%) rotate(-45deg);
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+}
+
+.accordion__title.active .x7 .bmid {
+    opacity: 0;
+}
+
+.accordion__title.active .x7 .bbot {
+    width: 67%;
+    bottom: 2px;
+    -webkit-transform: translateY(50%) rotate(45deg);
+    transform: translateY(50%) rotate(45deg);
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+}
+
+.accordion__content {
+    display: none;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #eee;
+    border-top: none;
+    line-height: 1.65;
+    padding: 2px !important;
+    background-color: #fff;
+}
+
+.bmenu {
+    width: 26px;
+    height: 16px;
+    display: block;
+    position: absolute;
+    right: 15px;
+    top: 8px;
+}
+
+.btop,
+.bmid,
+.bbot {
+    right: 0;
+    width: 100%;
+    height: 2px;
+    position: absolute;
+    background-color: #333;
+    border-radius: 1px;
+    background-color: white !important;
+}
+
+.btop {
+    width: 40%;
+}
+
+.bmid {
+    width: 60%;
+}
+
+.bbot {
+    width: 80%;
+}
+
+.x7 {
+    transition: -webkit-transform .3s ease-out;
+    transition: transform .3s ease-out;
+    transition: transform .3s ease-out, -webkit-transform .3s ease-out;
+    -webkit-transform-origin: 60% 75%;
+    transform-origin: 60% 75%;
+}
+
+.x7 .btop {
+    top: 0;
+    transition: width .3s, top .0s, -webkit-transform .3s;
+    transition: width .3s, transform .3s, top .0s;
+    transition: width .3s, transform .3s, top .0s, -webkit-transform .3s;
+    transition-timing-function: ease-out;
+}
+
+.x7 .bmid {
+    top: calc(50% - 1px);
+    -webkit-transform-origin: 100% 50%;
+    transform-origin: 100% 50%;
+    transition: opacity .1s;
+    transition-timing-function: ease-out;
+}
+
+.x7 .bbot {
+    bottom: 0;
+    transition: width .3s, bottom .0s, -webkit-transform .3s;
+    transition: width .3s, transform .3s, bottom .0s;
+    transition: width .3s, transform .3s, bottom .0s, -webkit-transform .3s;
+    transition-timing-function: ease-out;
+}
+
+.accordion_forms_padding {
+    padding: 5px !important;
+}
+
+.form-group input[type="checkbox"] {
+    display: none;
+}
+
+.form-group input[type="checkbox"]+.btn-group>label span {
+    width: 20px;
+}
+
+.form-group input[type="checkbox"]+.btn-group>label span:first-child {
+    display: none;
+}
+
+.form-group input[type="checkbox"]+.btn-group>label span:last-child {
+    display: inline-block;
+}
+
+.form-group input[type="checkbox"]:checked+.btn-group>label span:first-child {
+    display: inline-block;
+}
+
+@-moz-document url-prefix() {
+    a, a:link, a:visited, a:focus, a:hover, a:active,
+    .dash-anchor {
+        text-decoration: none !important;
+    }
+}
+a, a:link, a:visited, a:focus, a:hover, a:active,
+a:-webkit-any-link,
+a.dash-anchor:hover {
+    text-decoration: none !important;
+}
+[dir="ltr"] a:hover {
+    text-decoration: none !important;
+}
+
+body {
+    font-family: Calibri, sans-serif !important;
+}
+
+.form-group input[type="checkbox"]:checked+.btn-group>label span:last-child {
+    display: none;
+}
+
+.ul_without_padding {
+    padding: 0;
+}
+
+.btn-success,
+.badge-success {
+    background: #00acac !important;
+    border-color: #00acac !important;
+}
+
+.bordered-group .card-title {
+    border-bottom: #ddd solid 1px !important;
+}
+
+.disabled-content {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+#LogOut{
+    cursor:pointer;
+}
+
+#box-Benefits-kind {
+    padding: 0px 10px 0px;
+}
+
+#box-Cash-Benefits{
+    padding-bottom: 2.4em !important
+}
+
+[dir=ltr] .custom-control-label:after{
+    border-color: black !important;
+}
+
+.modal-header {
+    border-color:#364c66 !important;
+    background-color: #364c66 !important;
+    cursor: move !important;
+    border-radius: 0px !important;
+}
+
+.modal-title {
+    color: white !important;
+}
+
+.modal-body, .modal-header, .modal-footer {
+    padding: 0.4rem 1rem !important;
+}
+
+.account-footer {
+    border-top: 3px solid #364c66 !important;
+}
+
+#divAssociates .k-grid-content, #divBusiness .k-grid-content {
+    height: 30vh !important;
+    overflow-y: scroll !important;
+}
+
+.float-center {
+    margin: 0 auto !important;
+}
+
+/* Special Styles for Checkbox and Radio*/
+/* The checkgroup */
+.checkgroup {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    margin-right: 35px;
+    cursor: pointer;
+    /*font-size: 22px;*/
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.checkgroup.disqualified {
+    color:#6c757d;
+}
+.checkgroup.disqualified input ~ .checkmark {
+    background-color: #6c757d;
+}
+/* Hide the browser's default checkbox */
+.checkgroup input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    border: #6c757d 1px solid;
+}
+
+/* On mouse-over, add a grey background color */
+.checkgroup:hover input ~ .checkmark {
+    background-color: #6c757d;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkgroup input:checked ~ .checkmark {
+    background-color: #364c66;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkgroup input:checked ~ .checkmark.applied {
+    background-color: #68788A;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.checkgroup input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkgroup .checkmark:after {
+    left: 7px;
+    top: 4px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+/* The radiogroup */
+.radiogroup {
+    display: block;
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 12px;
+    margin-right: 35px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+    /* Hide the browser's default radio button */
+    .radiogroup input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+/* Create a custom radio button */
+.radiomark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    border: #6c757d 1px solid;
+    border-radius: 50%;
+}
+
+th{
+    font-weight: bold !important; 
+}
+
+.hover-primary:hover {
+    color: #308af3 !important;
+}
+/* On mouse-over, add a grey background color */
+.radiogroup:hover input ~ .radiomark {
+    background-color: #6c757d;
+}
+
+/* When the radio button is checked, add a blue background */
+.radiogroup input:checked ~ .radiomark {
+    background-color: #364c66;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.radiomark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.radiogroup input:checked ~ .radiomark:after {
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.radiogroup .radiomark:after {
+    top: 5px;
+    left: 5px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
+
+textarea:disabled,
+input[type="text"]:disabled {
+    color: #308af3 !important;
+}
+
+select[type="text"]:disabled {
+    color: #308af3 !important;
+}
+
+.k-toolbar.k-grid-toolbar {
+    background-color: #112b4a !important;
+}
+
+td label{
+    float: right;
+}
+
+
+/* TCC Application*/
+.CommentToMe {
+    border: 1px solid #b0eae0;
+    background: #d5ede3;
+    border-radius: 3px;
+    padding: 7px;
+    margin-right: 37px;
+}
+.CommentFromMe {
+    border: 1px solid #e3f7d4;
+    background: #f3f1d9;
+    border-radius: 3px;
+    padding: 7px;
+    margin-left: 37px;
+}
+
+.text-small label{
+    font-size:smaller!important;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    padding: 0px !important;
+    border:none !important;
+}
+.dataTables_wrapper {
+    width: 99.9% !important;
+}
+
+#Notification, 
+#NotificationCount,
+#NotificationBell {
+    display:block;    
+}
+
+
+#NotificationCount {
+    background-color: #308af3;
+    border-radius: 50%;
+    margin-left: 13px !important;
+    margin-bottom: -5px !important;
+    color: #fff;
+    text-align: center;
+    width: 20px !important;
+    height: 20px !important;
+    font-size: 12px !important;
+}
+
+#Notification {
+    width:50px !important;
+    margin: 0px !important;
+}
+#NotificationMessage {
+    font-size:12px;
+    font-style:italic;
+    line-height:8px;
+}
+
+#notification_menu {
+    width:300px !important;
+    height: unset;
+    overflow-y:unset;
+    overflow-x:unset;
+}
+
+#NotificationItems {
+    height: 280px !important;
+    overflow-y: scroll;
+}
+
+#GridEmployeeDeductions table {
+    table-layout: fixed;
+}
+#GridEmployeeDeductions table th,
+#GridEmployeeDeductions table td {
+    width: 100px;
+    overflow: hidden;
+}

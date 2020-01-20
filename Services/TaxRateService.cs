@@ -2,6 +2,7 @@
 using ITAPS_HOST.Models;
 using ITAPS_HOST.Models.Codes;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ITAPS_HOST.Services
@@ -13,6 +14,12 @@ namespace ITAPS_HOST.Services
         public TaxRateService(IAdminRequestClient adminRequestClient)
         {
             _adminRequestClient = adminRequestClient;
+        }
+
+        public async Task<ResponseItem<object>> SearchTaxRateAsync(string searchTerm)
+        {
+            var apiEndpoint = $"CompanyTaxRates/SearchTaxRateAsync/{searchTerm}";
+            return await _adminRequestClient.GetRequestAsync(apiEndpoint);
         }
 
         public async Task<ResponseItem<object>> GetAllGcirAsync()
@@ -66,10 +73,41 @@ namespace ITAPS_HOST.Services
             return await _adminRequestClient.PostRequestAsync(companyTaxRateDto, apiEndpoint);
         }
 
-        public async Task<ResponseItem<object>> SearchTaxRateAsync(string searchTerm)
+        public async Task<ResponseItemForCreationDto<object>> PostGtax(PitTaxRateDto data)
         {
-            var apiEndpoint = $"CompanyTaxRates/SearchTaxRateAsync/{searchTerm}";
-            return await _adminRequestClient.GetRequestAsync(apiEndpoint);
+            const string apiEndpoint = "TaxRates/PostGtax";
+            var companyTaxRateDto = new PitTaxRateDto
+            {
+                Id = data.Id,
+                Code = data.Code,
+                CompanyId = data.CompanyId,
+                Description = data.Description,
+                AmtBased = data.AmtBased,
+                TaxFreeAmt = data.TaxFreeAmt,
+                PerBasedOnTable = data.PerBasedOnTable,
+                FixedAmtTable = data.FixedAmtTable,
+                StartDate = data.StartDate,
+                EndDate = data.EndDate,
+                Default = data.Default,
+                Tax1 = new List<Tax1>()
+            };
+
+
+            foreach(Tax1 taxBand in data.Tax1)
+            {
+                var taxBandDto = new Tax1
+                {
+                    Id = taxBand.Id,
+                    TaxMasterId = taxBand.TaxMasterId,
+                    TaxBand = taxBand.TaxBand,
+                    TaxableAmt = taxBand.TaxableAmt,
+                    Percentage = taxBand.Percentage
+                };
+
+                companyTaxRateDto.Tax1.Add(taxBandDto);
+            };
+
+            return await _adminRequestClient.PostRequestAsync(companyTaxRateDto, apiEndpoint);
         }
     }
 }

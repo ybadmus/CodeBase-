@@ -1,4 +1,7 @@
-﻿<div id="crDetails">
+﻿<input id="codeId" value="" hidden />
+<input id="code" value="" hidden />
+
+<div id="crDetails">
     <div class="card-body">
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="taxPosition" role="tabpanel" aria-labelledby="nav-profile-tab">
@@ -9,15 +12,17 @@
                             <div class="bordered-group" id="" style="height: 350px">
                                 <p class="card-title"><b>Application Detail - <span id="ratesCode"></span> </b></p>
                                 <div class="table-responsive border-bottom">
-                                    <table class="table table-bordered">
+                                    <table class="table table-bordered" id="detailsViewTR">
                                         <tbody>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Start Date</td>
                                                 <td title="Date Format: YYYY/MM/DD" style="padding-left:5px;width:250px;font-weight:bold;" id="startDate"></td>
+                                                @*<td style="width:250px;"><input id="startDate" type="text" class="form-control" placeholder="Start Date" data-toggle="flatpickr" value="" style="font-weight:bold;"></td>*@
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">End Date</td>
                                                 <td title="Date Format: YYYY/MM/DD" style="padding-left:5px;width:250px;font-weight:bold;" id="endDate"></td>
+                                                @*<td style="width:250px;"><input id="endDate" type="text" class="form-control" placeholder="End Date" data-toggle="flatpickr" value="" style="font-weight:bold;"></td>*@
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Description</td>
@@ -25,7 +30,13 @@
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Amount Based</td>
-                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="amtBased"></td>
+                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;" id="amtBased"></td>
+                                                @*<td style="width:250px;">
+                                                        <select type="text" id="amtBased" class="form-control" required>
+                                                            <option value="true">True</option>
+                                                            <option value="false">False</option>
+                                                        </select>
+                                                    </td>*@
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Tax Free Amount</td>
@@ -33,15 +44,75 @@
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Based on Table</td>
-                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="basedOnTable"></td>
+                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;" id="basedOnTable"></td>
+                                                @*<td style="width:250px;">
+                                                        <select type="text" id="basedOnTable" class="form-control" required>
+                                                            <option value="true">True</option>
+                                                            <option value="false">False</option>
+                                                        </select>
+                                                    </td>*@
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Fixed Amount Table</td>
-                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="fixedAmtTable"></td>
+                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;" id="fixedAmtTable"></td>
+                                                @*<td style="width:250px;">
+                                                        <select type="text" id="fixedAmtTable" class="form-control" required>
+                                                            <option value="true">True</option>
+                                                            <option value="false">False</option>
+                                                        </select>
+                                                    </td>*@
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Default</td>
                                                 <td style="padding-left:5px;width:250px;font-weight:bold;" id="default"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+
+                                    <table class="table table-bordered" id="AddViewTR" style="display: none;">
+                                        <tbody>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Description</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="descriptionTR"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Amount Based</td>
+                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;" id="amtBasedTR"></td>
+                                                @*<td style="width:250px;">
+                                                        <select type="text" id="amtBased" class="form-control" required>
+                                                            <option value="true">True</option>
+                                                            <option value="false">False</option>
+                                                        </select>
+                                                    </td>*@
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Tax Free Amount</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="taxFreeAmtTR"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Based on Table</td>
+                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;" id="basedOnTableTR"></td>
+                                                @*<td style="width:250px;">
+                                                        <select type="text" id="basedOnTable" class="form-control" required>
+                                                            <option value="true">True</option>
+                                                            <option value="false">False</option>
+                                                        </select>
+                                                    </td>*@
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Fixed Amount Table</td>
+                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;" id="fixedAmtTableTR"></td>
+                                                @*<td style="width:250px;">
+                                                        <select type="text" id="fixedAmtTable" class="form-control" required>
+                                                            <option value="true">True</option>
+                                                            <option value="false">False</option>
+                                                        </select>
+                                                    </td>*@
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Default</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="defaultTR"></td>
                                             </tr>
                                         </tbody>
                                     </table>

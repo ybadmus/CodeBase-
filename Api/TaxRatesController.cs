@@ -25,6 +25,12 @@ namespace ITAPS_HOST.Api
             _taxRateServices = taxRateServices;
         }
 
+        [HttpGet("SearchTaxRateAsync", Name = "SearchTaxRateAsync")]
+        public async Task<ResponseItem<object>> SearchTaxRateAsync(string searchItem)
+        {
+            return await _taxRateServices.SearchTaxRateAsync(searchItem);
+        }
+
         [HttpGet("GetAllGcir", Name = "GetAllGcir")]
         public async Task<ResponseItem<object>> GetAllGcir()
         {
@@ -61,11 +67,11 @@ namespace ITAPS_HOST.Api
             return await _taxRateServices.PostGcir(data);
         }
 
-        [HttpGet("SearchTaxRateAsync", Name = "SearchTaxRateAsync")]
-        public async Task<ResponseItem<object>> SearchTaxRateAsync(string searchItem)
+        [HttpPost("PostGtax", Name = "PostGtax")]
+        public async Task<ResponseItemForCreationDto<object>> PostGtax([FromBody]PitTaxRateDto data)
         {
-            return await _taxRateServices.SearchTaxRateAsync(searchItem);
+            return await _taxRateServices.PostGtax(data);
         }
-        
+
     }
 }

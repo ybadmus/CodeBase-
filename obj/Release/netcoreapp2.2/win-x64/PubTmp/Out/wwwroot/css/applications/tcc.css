@@ -1,0 +1,67 @@
+﻿body {
+}
+
+.card .card-header {
+    background: #364C7D;
+}
+
+[dir=ltr] .form-group {
+    margin-bottom: 0.1rem;
+}
+
+[dir=ltr] .col-form-label {
+    padding-top: 0px;
+}
+
+.tablinks {
+    font-weight: 500;
+    width: 33.333% !important
+}
+
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    border-right: 1px solid silver;
+    outline: none;
+    cursor: pointer;
+    padding: 5px 5px;
+    transition: 0.3s;
+    font-size: 15px;
+    text-decoration: none;
+}
+
+.tab button:hover {
+    background-color: #ddd;
+    text-decoration: none;
+}
+
+.tab button.active {
+    background-color: #ccc;
+    border: white;
+}
+
+.chatview {
+    background-color: #d5ede3;
+    border-radius: 5px;
+    padding: 5px !important;
+    margin: 5px 0;
+}
+
+.chatview2 {
+    border: 2px solid #dedede;
+    background-color: #ffffff;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+#Grid .k-grid-content {
+    height: 46vh !important;
+}

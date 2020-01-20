@@ -34,6 +34,11 @@ namespace ITAPS_HOST.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        public IActionResult Logout()
+        {
+            return new SignOutResult(new[] { "Cookies", "oidc" });
+        }
+
         private void UserDetails()
         {
             foreach (var claim in User.Claims)

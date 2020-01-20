@@ -1,0 +1,11 @@
+﻿body {
+}
+
+.card .card-header {
+    background: #364C7D;
+}
+
+
+#grid .k-grid-content {
+    height: 46vh !important;
+}

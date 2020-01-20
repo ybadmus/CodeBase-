@@ -19,6 +19,8 @@ namespace ITAPS_HOST.IServices
 
         Task<ResponseItemForCreationDto<object>> PostGcir(CompanyTaxRateDto data);
 
+        Task<ResponseItemForCreationDto<object>> PostGtax(PitTaxRateDto data);
+
         Task<ResponseItem<object>> SearchTaxRateAsync(string searchTerm);
 
     }

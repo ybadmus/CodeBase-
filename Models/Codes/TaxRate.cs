@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ITAPS_HOST.Models.Codes
 {
@@ -37,5 +38,30 @@ namespace ITAPS_HOST.Models.Codes
         public int HolidayYears { get; set; }
         public string Notes { get; set; }
         public string Status { get; set; }
+    }
+
+    public class PitTaxRateDto
+    {
+        public Guid Id { get; set; }
+        public string CompanyId { get; set; }
+        public string Code { get; set; }
+        public string Description { get; set; }
+        public bool AmtBased { get; set; }
+        public double TaxFreeAmt { get; set; }
+        public bool PerBasedOnTable { get; set; }
+        public bool FixedAmtTable { get; set; }
+        public string StartDate { get; set; }
+        public string EndDate { get; set; }
+        public int Default { get; set; }
+        public IList<Tax1> Tax1 { get; set; }
+    }
+
+    public class Tax1
+    {
+        public Guid Id { get; set; }
+        public string TaxMasterId { get; set; }
+        public double TaxBand { get; set; }
+        public double TaxableAmt { get; set; }
+        public double Percentage { get; set; }
     }
 }
