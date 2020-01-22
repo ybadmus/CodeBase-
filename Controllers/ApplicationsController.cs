@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ITAPS_HOST.Data;
+﻿using ITAPS_HOST.Data;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace ITAPS_HOST.Controllers
 {
@@ -24,6 +21,14 @@ namespace ITAPS_HOST.Controllers
             ViewBag.ServerUrl = _config.AppServerUrl;
             return View();
         }
+
+        public IActionResult PTR()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+
         public IActionResult TEX()
         {
             UserDetails();

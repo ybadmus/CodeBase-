@@ -31,7 +31,7 @@ var initializeKendoGrid = function (data) {
             {
                 command: [{
                     name: "view",
-                    template: "<button title='View item' class='btn btn-light btn-sm' style=''><span class='fa fa-file fa-lg'></span></button>"
+                    template: "<button title='View item' class='btn btn-success btn-sm' style=''><span class='fa fa-file fa-lg'></span></button>"
                 }],
                 title: "Actions",
                 width: "70px"

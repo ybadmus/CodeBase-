@@ -66,3 +66,15 @@ C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcorea
 C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\Codes\_TaxRatesModal.g.cshtml.cs
 C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\Codes\_PITRatesDetail.g.cshtml.cs
 C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\Codes\_PitRatesModal.g.cshtml.cs
+C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\PAYE\Monthly.g.cshtml.cs
+C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\PAYE\Annual.g.cshtml.cs
+C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\PAYE\_MonthlyDetails.g.cshtml.cs
+C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\PAYE\_AnnualDetails.g.cshtml.cs
+C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\PAYE\_AnnualModal.g.cshtml.cs
+C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\PAYE\_MonthlyModal.g.cshtml.cs
+C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\PIT\AnnualEstimates.g.cshtml.cs
+C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\PIT\AnnualReturns.g.cshtml.cs
+C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\PIT\_AnnualEstimatesDetails.g.cshtml.cs
+C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\PIT\_AnnualReturnsDetails.g.cshtml.cs
+C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\Notification\AllNotifications.g.cshtml.cs
+C:\Users\Ybadmus\source\microverse_repo\ITAPS-HOST\ITAPS-HOST\obj\Debug\netcoreapp2.2\Razor\Views\Applications\PTR.g.cshtml.cs

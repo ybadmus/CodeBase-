@@ -17,7 +17,7 @@ var initializeKendoGrid = function (data) {
 
     for (var i = 0; i < data.length; i++) {
         data[i].startdate = data[i].startdate.split("T")[0];
-        data[i].endDate = data[i].startdate.split("T")[0];
+        data[i].endDate = data[i].endDate.split("T")[0];
     };
 
     $("#Grid").kendoGrid({

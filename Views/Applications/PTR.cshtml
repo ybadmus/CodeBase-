@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewData["Title"] = "PTR";
+}
+
+@section css {
+    <link href="~/css/applications/tcc.css" rel="stylesheet" />
+}
+
+<!--Defined this on page level because of control-->
+<input id="serverUrl" value="@ViewBag.ServerUrl" hidden />
+<input id="statusId" value="" hidden />
+
+<div class="card">
+    <div id="ptrGridView">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-sm-3" id="">
+                    <select type="text" id="ptrListOfTaxOffices" class="form-control" required></select>
+                </div>
+                <div class="col-sm-3">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="searchItem" autocomplete="off" placeholder="Search">
+                        <div class="input-group-append">
+                            <button type="button" id="btnSearch" class="btn btn-success btn-sm"><i class='fa fa-search'></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row align-items-end" style="margin: 1px;">
+                <div class="GridDiv">
+                    <div id="Grid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <partial name="_AppDetails" />
+</div>
+
+@section modals{
+    <partial name="_AppUpdate" />
+}
+
+@section scripts {
+    <script src="~/js/applications/ptr.js"></script>
+    <script src="~/js/applications/tccdetails.js"></script>
+    <script src="~/js/applications/tccupdater.js"></script>
+}
+
+

@@ -17,7 +17,7 @@ var initializeKendoGrid = function (data) {
 
     for (var i = 0; i < data.length; i++) {
         data[i].startdate = data[i].startdate.split("T")[0];
-        data[i].endDate = data[i].startdate.split("T")[0];
+        data[i].endDate = data[i].endDate.split("T")[0];
     };
 
     $("#Grid").kendoGrid({
@@ -88,6 +88,15 @@ $(document).ready(function () {
     $("#lockDetails").hide();
     $("#editDetails").hide();
     $("#saveRow").hide();
+
+    $("#startDateTR").flatpickr({
+    });
+
+    $("#endDateTR").flatpickr({
+
+    });
+
+    $('[data-toggle="tooltip"]').tooltip()
 });
 
 var disableAllFields = function () {
@@ -100,6 +109,14 @@ var disableAllFields = function () {
     document.getElementById("basedOnTable").setAttribute('contenteditable', 'false');
     document.getElementById("fixedAmtTable").setAttribute('contenteditable', 'false');
     document.getElementById("default").setAttribute('contenteditable', 'false');
+
+    document.getElementById("descriptionTR").setAttribute('contenteditable', 'false');
+    document.getElementById("amtBasedTR").setAttribute('contenteditable', 'false');
+    document.getElementById("taxFreeAmtTR").setAttribute('contenteditable', 'false');
+    document.getElementById("basedOnTableTR").setAttribute('contenteditable', 'false');
+    document.getElementById("fixedAmtTableTR").setAttribute('contenteditable', 'false');
+    document.getElementById("defaultTR").setAttribute('contenteditable', 'false');
+
 
     disableAllTableFields();
 };
@@ -124,6 +141,13 @@ var enableAllFields = function () {
     document.getElementById("fixedAmtTable").setAttribute('contenteditable', 'true');
     document.getElementById("default").setAttribute('contenteditable', 'true');
 
+    document.getElementById("descriptionTR").setAttribute('contenteditable', 'true');
+    document.getElementById("amtBasedTR").setAttribute('contenteditable', 'true');
+    document.getElementById("taxFreeAmtTR").setAttribute('contenteditable', 'true');
+    document.getElementById("basedOnTableTR").setAttribute('contenteditable', 'true');
+    document.getElementById("fixedAmtTableTR").setAttribute('contenteditable', 'true');
+    document.getElementById("defaultTR").setAttribute('contenteditable', 'true');
+
     for (var i = 0; i < taxTableLength; i++) {
         document.getElementById("taxBand" + i).setAttribute('contenteditable', 'true');
         document.getElementById("taxableAmount" + i).setAttribute('contenteditable', 'true');
@@ -142,6 +166,11 @@ $("#lockDetails").click(function () {
 
     $("#lockDetails").hide();
     $("#editDetails").show();
+
+    $("#saveRow").hide();
+    $("#newRow").show();
+
+
 });
 
 var loadItemDetails = function (resp) {
@@ -213,6 +242,12 @@ $("#BtnOpenAddModal").click(function () {
         });
     };
 
+    $("#detailsViewTR").hide();
+    $("#AddViewTR").show();
+
+    $("#lockDetails").show();
+    $("#editDetails").hide();
+
     $("#crDetails").show();
     $("#pitGridView").hide();
 
@@ -266,6 +301,9 @@ $("#backToGrid").click(function () {
 
     $("#crDetails").hide();
     $("#pitGridView").show();
+
+    $("#detailsViewTR").hide();
+    $("#AddViewTR").hide();
 });
 
 $("#editDetails").click(function () {
@@ -285,6 +323,9 @@ $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
     $("#crDetails").show();
     $("#pitGridView").hide();
 
+    $("#detailsViewTR").show();
+    $("#AddViewTR").hide();
+
     $("#editDetails").show();
     $("#lockDetails").hide();
 
@@ -302,20 +343,35 @@ var saveDetailsFlow = function () {
     var url = `${MainUrl}PostGtax`;
     var taxBands = [];
 
-    if ($("#codeId").val() !== "")
+    if ($("#codeId").val() !== "") {
+
         objSave.Id = $("#codeId").val();
+        objSave.CompanyId = "d0335a7d-de3a-435f-adf0-e044a599ef84";
+        objSave.Code = $("#code").text();
 
-    objSave.CompanyId = "d0335a7d-de3a-435f-adf0-e044a599ef84";
-    objSave.Code = $("#code").text();
+        objSave.Description = $("#description").text();
+        objSave.AmtBased = $("#amtBased").text();
+        objSave.TaxFreeAmt = parseInt($("#taxFreeAmt").text());
+        objSave.PerBasedOnTable = $("#basedOnTable").text();
+        objSave.FixedAmtTable = $("#fixedAmtTable").text();
+        objSave.Startdate = $("#startDate").text();
+        objSave.EndDate = $("#endDate").text();
+        objSave.Default = parseInt($("#default").text());
+    } else {
 
-    objSave.Description = $("#description").text();
-    objSave.AmtBased = $("#amtBased").text();
-    objSave.TaxFreeAmt = parseInt($("#taxFreeAmt").text());
-    objSave.PerBasedOnTable = $("#basedOnTable").text();
-    objSave.FixedAmtTable = $("#fixedAmtTable").text();
-    objSave.Startdate = $("#startDate").text();
-    objSave.EndDate = $("#endDate").text();
-    objSave.Default = parseInt($("#default").text());
+        objSave.CompanyId = "d0335a7d-de3a-435f-adf0-e044a599ef84";
+        objSave.Code = $("#codeTR").val();
+
+        objSave.Description = $("#descriptionTR").text();
+        objSave.AmtBased = $("#amtBasedTR").text();
+        objSave.TaxFreeAmt = parseInt($("#taxFreeAmtTR").text());
+        objSave.PerBasedOnTable = $("#basedOnTableTR").text();
+        objSave.FixedAmtTable = $("#fixedAmtTableTR").text();
+        objSave.Startdate = $("#startDateTR").val();
+        objSave.EndDate = $("#endDateTR").val();
+        objSave.Default = parseInt($("#defaultTR").text());
+    }
+
 
     for (var i = 0; i < taxTableLength; i++) {
 
@@ -340,8 +396,6 @@ var saveDetailsFlow = function () {
 
 var successfullySaved = function () {
     toastr.success("Successfully saved!");
-    $('#modal-add-setup').modal("hide");
-    setAllFieldToDefault();
 };
 
 $("#continueSubmit").click(function () {

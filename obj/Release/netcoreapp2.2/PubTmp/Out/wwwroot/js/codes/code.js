@@ -233,6 +233,13 @@ var configureUrls = function (setuptype) {
             MainSearchUrl = `${MainSearchUrl}TCCP`;
             HeaderName = "TCC Purposes";
             break;
+
+        case "payeEmployeePositions":
+            MainGetUrl = `${MainGetUrl}PEEP`;
+            MainPostUrl = `${MainPostUrl}PEEP`;
+            MainSearchUrl = `${MainSearchUrl}PEEP`;
+            HeaderName = "Employee Positions";
+            break;
     }
 };
 

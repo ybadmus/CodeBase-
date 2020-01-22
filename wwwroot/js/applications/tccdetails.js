@@ -38,12 +38,60 @@ var loadDetailsViewTex = function () {
     apiCaller(url, "GET", "", loadDetailsTex)
 };
 
+var loadDetailsViewPtr = function (pCode) {
+    let appId = $("#appId").val();
+    let url = `${GetPtrByIdUrl}` + appId + "&applicationTypeCode=" + pCode;
+
+    apiCaller(url, "GET", "", loadDetailsPtr)
+};
+
 var getTccDocumentsById = function () {
     let tccId = $("#appId").val();
     let url = `${GetTCCDocuments}?id=` + tccId;
 
     apiCaller(url, "GET", "", appendDocumentsToTable)
 };
+
+var loadDetailsPtr = function (resp) {
+
+    $("#appIdHeader").text(resp.applicationNo);
+    $("#appStatusHeader").text(resp.status);
+
+    $("#dateSubmittedPTR").text(resp.submittedDate);
+    $("#assessmentYearPTR").text(resp.assessmentYear);
+    $("#dateOfBirthPTR").text(resp.dateOfBirth);
+    $("#employerAddressPTR").text(resp.employerAddress);
+    $("#employerEmailPTR").text(resp.employerEmail);
+    $("#employerNamePTR").text(resp.employerName);
+    $("#employerPhonePTR").text(resp.employerPhone);
+    $("#employerTINPTR").text(resp.employerTIN);
+    $("#endDatePTR").text(resp.endDate);
+    $("#genderPTR").text(resp.gender === "M" ? "Male" : resp.gender === "F" ? "Female" : resp.gender);
+    $("#maritalStatusPTR").text(resp.maritalStatus);
+    $("#mothersMaidenNamePTR").text(resp.mothersMaidenName);
+    $("#phoneNoPTR").text(resp.phoneNo);
+    $("#startDatePTR").text(resp.startDate);
+
+    //applicationNo: "AP1912022"
+    //assessmentYear: 1992
+    //dateOfBirth: "08/04/1988"
+    //employerAddress: "St. Moron Down Street"
+    //employerEmail: "spydanet@yahoo.com"
+    //employerName: "MR ENOCH ENCHILL TAWIAH"
+    //employerPhone: "0275623368"
+    //employerTIN: "P000009093X"
+    //endDate: "31/12/1992"
+    //gender: "M"
+    //maritalStatus: "Married"
+    //mothersMaidenName: "GLORIA QUARTEY "
+    //phoneNo: "+233205429916"
+    //startDate: "01/01/1992"
+    //status: "INVESTIGATING"
+    //statusDate: "03/12/2019"
+    //submittedDate: "02/12/2019"
+
+    decideNextTccStage(parseInt($("#currentStatus").text())); 
+}
 
 var loadDetails = function (resp) {
     $("#applicantName").text(resp[0].applicantName);

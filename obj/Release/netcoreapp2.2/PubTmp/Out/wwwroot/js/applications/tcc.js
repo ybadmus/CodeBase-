@@ -31,7 +31,7 @@ var initializeKendoGrid = function (data) {
             {
                 command: [{
                     name: "view",
-                    template: "<button title='View item' class='btn btn-light btn-sm' style='margin-right: 2px'><span class='fa fa-file fa-lg'></span></button>"
+                    template: "<button title='View item' class='btn btn-success btn-sm' style='margin-right: 2px'><span class='fa fa-file fa-lg'></span></button>"
                 }, {
                     name: "certificate",
                         template: "<button id='certBtn' title='View certificate' class='btn btn-light btn-sm'><span class='fa fa-certificate fa-lg'></span></button>",
@@ -58,6 +58,7 @@ $(document).ready(function () {
 
     $("#tccDetailsGrid").show();
     $("#texDetailsGrid").hide();
+    $("#ptrDetailsGrid").hide();
 });
 
 var setTitles = function () {

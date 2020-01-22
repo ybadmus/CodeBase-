@@ -30,7 +30,7 @@ namespace ITAPS_HOST.Helpers
             .AddCookie(options =>
             {
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
-                options.Cookie.Name = "mvcHybridITAPS";
+                options.Cookie.Name = "mvcHybridITAPSHOST";
             })
             .AddAutomaticTokenManagement()
             .AddOpenIdConnect("oidc", options =>
