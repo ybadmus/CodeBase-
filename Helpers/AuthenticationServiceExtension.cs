@@ -39,7 +39,9 @@ namespace ITAPS_HOST.Helpers
                 options.RequireHttpsMetadata = requireHttpsMetadata;
                 options.ClientSecret = clientSecret;
                 options.ClientId = clientId;
+
                 options.ResponseType = "code id_token";
+                options.UseTokenLifetime = true;
 
                 options.Scope.Clear();
                 options.Scope.Add("openid");
@@ -49,6 +51,7 @@ namespace ITAPS_HOST.Helpers
                 options.Scope.Add("offline_access");
 
                 options.ClaimActions.MapAllExcept("iss", "nbf", "exp", "aud", "nonce", "iat", "c_hash");
+
                 options.GetClaimsFromUserInfoEndpoint = true;
                 options.SaveTokens = true;
 

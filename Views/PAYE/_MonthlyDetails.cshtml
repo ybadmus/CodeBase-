@@ -1,1 +1,208 @@
-﻿
+﻿<input id="codeId" value="" hidden />
+<input id="code" value="" hidden />
+
+<div id="monDetails">
+    <div class="card-body">
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="taxPosition" role="tabpanel" aria-labelledby="nav-profile-tab">
+
+                <div class="form-horizontal">
+                    <div class="form-row">
+                        <div class="col-sm-5">
+                            <div class="bordered-group" id="" style="height: 350px">
+                                <p class="card-title"><b>PAYE Detail - <span id="ratesCode"></span> </b></p>
+                                <div class="table-responsive border-bottom" style="overflow-y: scroll;height: 280px;">
+                                    <table class="table table-bordered" id="detailsViewTR">
+                                        <tbody>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">TIN</td>
+                                                <td title="Date Format: YYYY/MM/DD" style="padding-left:5px;width:250px;font-weight:bold;" id="startDate"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Period</td> <!--Concat Month and Year-->
+                                                <td title="Date Format: YYYY/MM/DD" style="padding-left:5px;width:250px;font-weight:bold;" id="endDate"></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;">Number Of Staffs</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Management</td>
+                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;" id="amtBased"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Other</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="taxFreeAmt"></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;">Cash Emolument</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Management</td>
+                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;" id="basedOnTable"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Other</td>
+                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;" id="fixedAmtTable"></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;">Tax Deductions</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Management</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="default"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Other</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="default"></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;">Staff Movement</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Starting Staff</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="default"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Engaged Staff</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="default"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Disengaged Staff</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="default"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-7">
+                            <div class="bordered-group" id="" style="height: 350px">
+                                <p class="card-title"><b>Employee Details</b></p>
+                                <div class="table-responsive border-bottom" style="height: 300px;">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr class="table-info">
+                                                <th scope="col" style="color: black;">Employee Name</th>
+                                                <th scope="col" style="color: black;">TIN</th>
+                                                <th scope="col" style="color: black;">Position</th>
+                                                <th scope="col" style="color: black;">Tax Deducted</th>
+                                                <th scope="col" style="color: black;">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="employeeGrid"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <button id="backToGrid" class="btn btn-outline-primary"> Back</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="employeeDetails">
+    <div class="card-body">
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="taxPosition" role="tabpanel" aria-labelledby="nav-profile-tab">
+
+                <div class="form-horizontal">
+                    <div class="form-row">
+                        <div class="col-sm-6">
+                            <div class="bordered-group" id="" style="height: 350px">
+                                <p class="card-title"><b>EMPLOYEE DETAIL<span id="ratesCode"></span> </b></p>
+                                <div class="table-responsive border-bottom" style="height: 300px;">
+                                    <table class="table table-bordered" id="employeeViewTR">
+                                        <tbody>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">TIN</td>
+                                                <td title="Date Format: YYYY/MM/DD" style="padding-left:5px;width:250px;font-weight:bold;" id="startDate"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Name</td>
+                                                <td title="Date Format: YYYY/MM/DD" style="padding-left:5px;width:250px;font-weight:bold;" id="endDate"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Phone</td>
+                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;" id="amtBased"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Email</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="taxFreeAmt"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Position</td>
+                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;" id="basedOnTable"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Serial No.</td>
+                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;" id="fixedAmtTable"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Residential</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="default"></td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="bordered-group" id="" style="height: 350px">
+                                <p class="card-title"><b>EMPLOYEE DETAIL<span id="ratesCode"></span> </b></p>
+                                <div class="table-responsive border-bottom" style="height: 300px;">
+                                    <table class="table table-bordered" id="detailsViewTR">
+                                        <tbody>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Basic Salary</td>
+                                                <td title="Date Format: YYYY/MM/DD" style="padding-left:5px;width:250px;font-weight:bold;" id="startDate"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Cash Allowance</td> <!--Concat Month and Year-->
+                                                <td title="Date Format: YYYY/MM/DD" style="padding-left:5px;width:250px;font-weight:bold;" id="endDate"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Bonus Income</td>
+                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;" id="amtBased"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Overtime Income</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="taxFreeAmt"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Secondary Employment</td>
+                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;" id="basedOnTable"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Non-Cash Benefit</td>
+                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;" id="fixedAmtTable"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Provident Rate</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="default"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Severance Pay Paid</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="default"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <button id="backToGridEmployee" class="btn btn-outline-primary"> Back</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

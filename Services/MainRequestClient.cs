@@ -1,4 +1,5 @@
-﻿using ITAPS_HOST.Models;
+﻿using ITAPS_HOST.IServices;
+using ITAPS_HOST.Models;
 using Marvin.StreamExtensions;
 using Newtonsoft.Json;
 using System;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace ITAPS_HOST.Services
 {
-    public class MainRequestClient
+    public class MainRequestClient: IMainRequestClient
     {
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
         private readonly ITAPSMain _itapMonoClient;

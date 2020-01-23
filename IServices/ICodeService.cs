@@ -13,5 +13,6 @@ namespace ITAPS_HOST.IServices
 
         Task<ResponseItem<object>> SearchCodesTableAsync(string type, string term);
 
+        Task<ResponseItem<object>> GetAllActivePeriods();
     }
 }

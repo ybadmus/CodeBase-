@@ -48,5 +48,10 @@ namespace ITAPS_HOST.Services
             return await _adminRequestClient.GetRequestAsync(apiEndpoint);
         }
 
+        public async Task<ResponseItem<object>> GetAllActivePeriods()
+        {
+            string apiEndpoint = $"GenericCodes/GetAllActivePeriodsByYearAndType/{DateTime.Now.Year.ToString()}/WHPER";
+            return await _adminRequestClient.GetRequestAsync(apiEndpoint);
+        }
     }
 }

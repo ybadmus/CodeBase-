@@ -11,6 +11,8 @@ namespace ITAPS_HOST.Helpers
         public static IServiceCollection AddHttpConfiguration(this IServiceCollection services, IConfiguration config)
         {
             services.AddHttpClient<ITAPSAdmin, TAPSAdmin>();
+            services.AddHttpClient<IMainRequestClient, MainRequestClient>();
+
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddSingleton<ICodeService, CodeService>();
@@ -25,6 +27,7 @@ namespace ITAPS_HOST.Helpers
             services.AddSingleton<ITransactionService, TransactionService>();
             services.AddSingleton<ITaxRateService, TaxRateService>();
             services.AddSingleton<IPTrService, PTrService>();
+            services.AddSingleton<IMonoService, MonoService>();
 
             return services;
         }

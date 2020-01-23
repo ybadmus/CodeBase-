@@ -48,6 +48,10 @@ namespace ITAPS_HOST.Api
             return await _codeSetupService.SearchCodesTableAsync(type, term);
         }
 
-        
+        [HttpGet("GetAllPeriods", Name = "GetAllPeriods")]
+        public async Task<ResponseItem<object>> GetAllActivePeriods()
+        {
+            return await _codeSetupService.GetAllActivePeriods();
+        }
     }
 }
