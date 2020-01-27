@@ -350,6 +350,6 @@ var successfullyUpdated = function () {
 
 var backToGrid = function () {
     setTimeout(function () {
-        window.location.href = "/approval/texapproval";
+        window.location.href = "/approval/ptrapproval";
     }, 3000);
 };
