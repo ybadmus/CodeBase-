@@ -28,7 +28,7 @@ var initializeKendoGrid = function (data) {
             {
                 command: [{
                     name: "view",
-                    template: "<button title='View item' class='btn btn-light btn-sm' style=''><span class='fa fa-file fa-lg'></span></button>"
+                    template: "<button title='View item' class='btn btn-success btn-sm' style=''><span class='fa fa-file fa-lg'></span></button>"
                 }],
                 title: "Actions",
                 width: "70px"
@@ -229,7 +229,6 @@ $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
 
     var grid = $("#Grid").getKendoGrid();
     var item = grid.dataItem($(e.target).closest("tr"));
-    //console.log(item);
 
     $("#appId").val(item.applicationId);
     $("#applicantNameApproval").text(item.applicantName);

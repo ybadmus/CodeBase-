@@ -1,5 +1,4 @@
-﻿<input id="codeId" value="" hidden />
-<input id="code" value="" hidden />
+﻿<input id="applicationId" value="" hidden />
 
 <div id="monDetails">
     <div class="card-body">
@@ -16,59 +15,59 @@
                                         <tbody>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">TIN</td>
-                                                <td title="Date Format: YYYY/MM/DD" style="padding-left:5px;width:250px;font-weight:bold;" id="startDate"></td>
+                                                <td title="Date Format: YYYY/MM/DD" style="padding-left:5px;width:250px;font-weight:bold;" id="payerTIN"></td>
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Period</td> <!--Concat Month and Year-->
-                                                <td title="Date Format: YYYY/MM/DD" style="padding-left:5px;width:250px;font-weight:bold;" id="endDate"></td>
+                                                <td title="Date Format: YYYY/MM/DD" style="padding-left:5px;width:250px;font-weight:bold;" id="periodYear"></td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;">Number Of Staffs</td>
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Management</td>
-                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;" id="amtBased"></td>
+                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="managementNo"></td>
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Other</td>
-                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="taxFreeAmt"></td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="otherNo"></td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;">Cash Emolument</td>
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Management</td>
-                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;" id="basedOnTable"></td>
+                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="managementPay"></td>
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Other</td>
-                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;" id="fixedAmtTable"></td>
+                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="otherPay"></td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;">Tax Deductions</td>
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Management</td>
-                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="default"></td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="managementTax"></td>
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Other</td>
-                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="default"></td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="otherTax"></td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;">Staff Movement</td>
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Starting Staff</td>
-                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="default"></td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="startingStaff"></td>
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Engaged Staff</td>
-                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="default"></td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="engagedStaff"></td>
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Disengaged Staff</td>
-                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="default"></td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="disengagedStaff"></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -121,31 +120,31 @@
                                         <tbody>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">TIN</td>
-                                                <td title="Date Format: YYYY/MM/DD" style="padding-left:5px;width:250px;font-weight:bold;" id="startDate"></td>
+                                                <td title="Date Format: YYYY/MM/DD" style="padding-left:5px;width:250px;font-weight:bold;" id="empTin"></td>
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Name</td>
-                                                <td title="Date Format: YYYY/MM/DD" style="padding-left:5px;width:250px;font-weight:bold;" id="endDate"></td>
+                                                <td title="Date Format: YYYY/MM/DD" style="padding-left:5px;width:250px;font-weight:bold;" id="empName"></td>
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Phone</td>
-                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;" id="amtBased"></td>
+                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;" id="empPhone"></td>
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Email</td>
-                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="taxFreeAmt"></td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="empEmail"></td>
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Position</td>
-                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;" id="basedOnTable"></td>
+                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;" id="empPosition"></td>
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Serial No.</td>
-                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;" id="fixedAmtTable"></td>
+                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;" id="empSerialNumber"></td>
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Residential</td>
-                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="default"></td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="empResidential"></td>
                                             </tr>
 
                                         </tbody>
@@ -162,35 +161,35 @@
                                         <tbody>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Basic Salary</td>
-                                                <td title="Date Format: YYYY/MM/DD" style="padding-left:5px;width:250px;font-weight:bold;" id="startDate"></td>
+                                                <td title="Date Format: YYYY/MM/DD" style="padding-left:5px;width:250px;font-weight:bold;text-align:right;" id="basicSalary"></td>
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Cash Allowance</td> <!--Concat Month and Year-->
-                                                <td title="Date Format: YYYY/MM/DD" style="padding-left:5px;width:250px;font-weight:bold;" id="endDate"></td>
+                                                <td title="Date Format: YYYY/MM/DD" style="padding-left:5px;width:250px;font-weight:bold;" id="cashAllowances"></td>
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Bonus Income</td>
-                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;" id="amtBased"></td>
+                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;" id="bonusIncome"></td>
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Overtime Income</td>
-                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="taxFreeAmt"></td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="overtimeIncome"></td>
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Secondary Employment</td>
-                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;" id="basedOnTable"></td>
+                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;" id="secondaryEmployement"></td>
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Non-Cash Benefit</td>
-                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;" id="fixedAmtTable"></td>
+                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;" id="nonCashBenefit"></td>
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Provident Rate</td>
-                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="default"></td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="providentRate"></td>
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Severance Pay Paid</td>
-                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="default"></td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="severancePayPaid"></td>
                                             </tr>
                                         </tbody>
                                     </table>

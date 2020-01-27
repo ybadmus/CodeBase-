@@ -71,6 +71,7 @@ var bootstrapPage = function () {
 
     $("#ptrGridView").show();
     $("#detailsView").hide();
+
     $("#tccDetailsGrid").hide();
     $("#texDetailsGrid").hide();
     $("#ptrDetailsGrid").show();

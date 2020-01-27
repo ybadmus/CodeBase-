@@ -28,6 +28,7 @@ namespace ITAPS_HOST.Helpers
             services.AddSingleton<ITaxRateService, TaxRateService>();
             services.AddSingleton<IPTrService, PTrService>();
             services.AddSingleton<IMonoService, MonoService>();
+            services.AddSingleton<IPayeService, PayeService>();
 
             return services;
         }

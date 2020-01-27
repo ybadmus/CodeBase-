@@ -72,28 +72,11 @@ var loadDetailsPtr = function (resp) {
     $("#phoneNoPTR").text(resp.phoneNo);
     $("#startDatePTR").text(resp.startDate);
 
-    //applicationNo: "AP1912022"
-    //assessmentYear: 1992
-    //dateOfBirth: "08/04/1988"
-    //employerAddress: "St. Moron Down Street"
-    //employerEmail: "spydanet@yahoo.com"
-    //employerName: "MR ENOCH ENCHILL TAWIAH"
-    //employerPhone: "0275623368"
-    //employerTIN: "P000009093X"
-    //endDate: "31/12/1992"
-    //gender: "M"
-    //maritalStatus: "Married"
-    //mothersMaidenName: "GLORIA QUARTEY "
-    //phoneNo: "+233205429916"
-    //startDate: "01/01/1992"
-    //status: "INVESTIGATING"
-    //statusDate: "03/12/2019"
-    //submittedDate: "02/12/2019"
-
-    decideNextTccStage(parseInt($("#currentStatus").text())); 
+    decideNextTccStage(parseInt($("#currentStatus").text()));
 }
 
 var loadDetails = function (resp) {
+    $("#dateSubmitted").text(resp[0].submittedDate);
     $("#applicantName").text(resp[0].applicantName);
     $("#applicantFName").text(resp[0].applicantName); //span so using text
     $("#applicantTIN").text(resp[0].applicantTIN);
@@ -111,12 +94,12 @@ var loadDetails = function (resp) {
     $("#statusNameModal").text(resp[0].status);
     $("#currentStatus").text(resp[0].statusId);
     $("#taxpayerId").text(resp[0].taxpayerId);
-    
+
     decideNextTccStage(resp[0].statusId);
 };
 
 var loadDetailsTex = function (resp) {
-    $("#dateSubmitted").text(resp[0].submittedDate);
+    $("#dateSubmittedTex").text(resp[0].submittedDate);
     $("#applicantNameTex").text(resp[0].applicantName);
     $("#applicantFName").text(resp[0].applicantName); //span so using text
     $("#applicantTINTex").text(resp[0].applicantTIN);
@@ -211,41 +194,48 @@ var GetAssociatedBase64Stirng = function (id) {
 var decideNextTccStage = function (statusId) {
     switch (statusId) {
         case 0:
-            $("#processApplication").show();
             $("#acknowledgeStatus").hide();
-            $("#addPosition").hide();
-            $("#suspendStatus").hide();
+            $("#processApplication").show();
+            $("#addTaxPosition").hide();
             $("#declineStatus").hide();
+            $("#suspendStatus").hide();
+
             $("#previewApplication").hide();
             $("#reviseApplication").show();
             $("#reviseApplication").attr("disabled", false);
             break;
         case 1:
             if (appType === "TCC") {
-                $("#addTaxPosition").show();
+                $("#acknowledgeStatus").hide();
+                $("#processApplication").hide();
                 $("#sendForApproval").hide();
+                $("#addTaxPosition").show();
+                $("#suspendStatus").show();
+                $("#declineStatus").show();
+
             } else if (appType === "TEX") {
+                $("#acknowledgeStatus").hide();
+                $("#processApplication").hide();
                 $("#addTaxPosition").hide();
                 $("#sendForApproval").show();
+                $("#suspendStatus").show();
+                $("#declineStatus").show();
             };
 
-            $("#suspendStatus").show();
-            $("#processApplication").hide();
-            $("#acknowledgeStatus").hide();
-            $("#declineStatus").show();
             $("#previewApplication").hide();
             $("#reviseApplication").show();
             $("#reviseApplication").attr("disabled", false);
             break;
         case 2:
+            $("#acknowledgeStatus").hide();
             $("#addTaxPosition").hide();
             $("#processApplication").hide();
             $("#declineStatus").hide();
             $("#suspendStatus").hide();
-            $("#acknowledgeStatus").hide();
+
             $("#previewApplication").show();
             $("#reviseApplication").hide();
-            $("#reviseApplication").attr("disabled", false);
+            $("#reviseApplication").attr("disabled", true);
             break;
         case 3:
             $("#addTaxPosition").hide();
@@ -259,9 +249,9 @@ var decideNextTccStage = function (statusId) {
             break;
         case 4:
             $("#acknowledgeStatus").hide();
-            $("#addTaxPosition").show();
+            $("#addTaxPosition").hide();
             $("#declineStatus").show();
-            $("#processApplication").show();
+            $("#processApplication").hide();
             $("#acknowledgeStatus").show();
             $("#previewApplication").hide();
             $("#reviseApplication").show();

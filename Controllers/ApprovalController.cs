@@ -32,6 +32,13 @@ namespace ITAPS_HOST.Controllers
             return View();
         }
 
+        public IActionResult PtrApproval()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+
         private void UserDetails()
         {
             foreach (var claim in User.Claims)

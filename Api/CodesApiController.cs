@@ -17,7 +17,6 @@ namespace ITAPS_HOST.Api
     public class CodesApiController : Controller
     {
         private readonly ICodeService _codeSetupService;
-        private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
         public CodesApiController(ICodeService codeSetupService)
         {

@@ -1,14 +1,17 @@
-﻿var HeaderName = "TEX Approval";
+﻿var HeaderName = "PTR Approval";
 var serverUrl = $("#serverUrl").val();
-var searchTexByTaxOffice = `${serverUrl}api/TEX/GetAllTaxExemptionPendingApprovalByTaxOfficeId`;
+var searchTexByTaxOffice = `${serverUrl}api/PTR/GetAllPTRPendingApprovalByTaxOfficeId`;
 var GetTccCommentsByIdUrl = `${serverUrl}api/TCC/GetAllTccApplicationComments?tccId=`;
-var GetAppDetailsById = `${serverUrl}api/TEX/GetWHTExApplicationById?whtId=`;
+var GetAppDetailsById = `${serverUrl}api/PTR/GetReliefApplicationDetailsByIdAndType?uniApplicationId=`;
 var activeTaxOffice = "";
-var selectedStatus; 
+var selectedStatus;
 var tccUpdateUrl = `${serverUrl}api/TCC/UpdateTCCApplication?id=`;
+var loadPtrCodesUrl = `${serverUrl}api/CodesApi/`;
+var PtrCodes = [];
 
-$("#texListOfTaxOffices").on('change', function () {
-    var elem = document.getElementById("texListOfTaxOffices");
+
+$("#ptrListOfTaxOffices").on('change', function () {
+    var elem = document.getElementById("ptrListOfTaxOffices");
     activeTaxOffice = elem.options[elem.selectedIndex].value;
 });
 
@@ -23,7 +26,8 @@ var initializeKendoGrid = function (data) {
             { field: "statusDate", title: "Date", width: '90px' },
             { field: "applicationNo", title: "Application No.", width: '100px' },
             { field: "applicantName", title: "Applicant", width: '20%' },
-            { field: "applicantTIN", title: "Applicant TIN", width: '15%' },
+            { field: "applicantTIN", title: "TIN", width: '15%' },
+            { field: "applicationType", title: "Type", width: '15%' },
             {
                 command: [{
                     name: "view",
@@ -34,10 +38,6 @@ var initializeKendoGrid = function (data) {
             }
         ]
     });
-
-    //if (data)
-    //    if (data.length == 0)
-    //        toastr.info("No Exemptions to approve.");
 };
 
 $(document).ready(function () {
@@ -69,13 +69,13 @@ var loadTaxOffices = function (listOfTaxOffices) {
     }
 
     output = output;
-    $("#texListOfTaxOffices").html(output);
+    $("#ptrListOfTaxOffices").html(output);
 };
 
 var bootstrapPage = function () {
     $("#pgHeader").text(HeaderName);
-    $("#texDetails").hide();
-    $("#texGridView").show();
+    $("#ptrDetails").hide();
+    $("#ptrGridView").show();
 
     $("#expiryDateTcc").flatpickr({
         maxDate: calculateThreeMonths(),
@@ -83,6 +83,7 @@ var bootstrapPage = function () {
     });
 
     initializeKendoGrid();
+    loadReliefTypes();
 
     var userid = $("#userId").val();
     var tccUrl = `${serverUrl}api/Users/GetAllUserTaxOfficesByUserID?userId=` + userid;
@@ -161,35 +162,65 @@ $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
     var item = grid.dataItem($(e.target).closest("tr"));
 
     $("#appId").val(item.applicationId);
-    prepareDetailsView(item.applicationId);
+    $("#currentStatus").text(item.statusId);
+    $("#applicantNamePTR").text(item.applicantName);
+    $("#applicantTINPTR").text(item.applicantTIN);
+
+    var ptrCode = ""
+
+    for (var i = 0; i < PtrCodes.length; i++) {
+        if (PtrCodes[i].description.toUpperCase().trim() === item.applicationType.toUpperCase().trim()) {
+            ptrCode = PtrCodes[i].code.trim();
+            break;
+        }
+    };
+
+    prepareDetailsView(item.applicationId, ptrCode);
 });
 
-var prepareDetailsView = function (appId) {
-    let url = `${GetAppDetailsById}` + appId;
+var prepareDetailsView = function (appId, pCode) {
+    let url = `${GetAppDetailsById}` + appId + "&applicationTypeCode=" + pCode;
+
 
     hideAndShow();
     loadMessages(appId);
-    apiCaller(url, "GET", "", loadAppDetails);
+    apiCaller(url, "GET", "", loadPtrDetails);
 };
 
-var loadAppDetails = function (resp) {
-    var response = resp[0];
+var loadPtrDetails = function (resp) {
+    $("#appIdHeader").text(resp.applicationNo);
+    $("#appStatusHeader").text(resp.status);
 
-    $("#dateSubmitted").text(response.submittedDate);
-    $("#lastUpdated").text(response.statusDate);
-    $("#applicantName").text(response.applicantName);
-    $("#applicantTin").text(response.applicantTIN);
-    $("#typeOfWht").text(response.typeOfWithHolding);
-    $("#residentialStatus").text(response.residentialStatus);
-    $("#remarks").text(response.remarks);
-    $("#reason").text(response.reasons);
-    $("#appNoTex").text(response.applicationNo);
-    $("#appNoTex2").text(response.applicationNo);
+    $("#dateSubmittedPTR").text(resp.submittedDate);
+    $("#assessmentYearPTR").text(resp.assessmentYear);
+    $("#dateOfBirthPTR").text(resp.dateOfBirth);
+    $("#employerAddressPTR").text(resp.employerAddress);
+    $("#employerEmailPTR").text(resp.employerEmail);
+    $("#employerNamePTR").text(resp.employerName);
+    $("#employerPhonePTR").text(resp.employerPhone);
+    $("#employerTINPTR").text(resp.employerTIN);
+    $("#endDatePTR").text(resp.endDate);
+    $("#genderPTR").text(resp.gender === "M" ? "Male" : resp.gender === "F" ? "Female" : resp.gender);
+    $("#maritalStatusPTR").text(resp.maritalStatus);
+    $("#mothersMaidenNamePTR").text(resp.mothersMaidenName);
+    $("#phoneNoPTR").text(resp.phoneNo);
+    $("#startDatePTR").text(resp.startDate);
+
+};
+
+var loadReliefTypes = function () {
+    var url = `${loadPtrCodesUrl}APT`;
+
+    apiCaller(url, "GET", "", ptrCodesFlow);
+};
+
+var ptrCodesFlow = function (resp) {
+    PtrCodes = resp;
 };
 
 var hideAndShow = function () {
-    $("#texDetails").show();
-    $("#texGridView").hide();
+    $("#ptrDetails").show();
+    $("#ptrGridView").hide();
 };
 
 var loadMessages = function (tccId) {
@@ -233,8 +264,8 @@ $("#backToGrid").click(function () {
 
 var backToView = function () {
 
-    $("#texDetails").hide();
-    $("#texGridView").show();
+    $("#ptrDetails").hide();
+    $("#ptrGridView").show();
 };
 
 $("#appStatus").on('change', function () {
