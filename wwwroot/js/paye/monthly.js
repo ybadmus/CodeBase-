@@ -2,7 +2,7 @@
 var serverUrl = $("#serverUrl").val();
 var searchPayeByTaxOffice = `${serverUrl}api/PayeApi/GetAllCompanyPaye`;
 var payeDetailsUrl = `${serverUrl}api/PayeApi/GetPayeDetails`;
-var employeeDetails = `${serverUrl}api/PayeApi/GetEmployeeDetails/`;
+var employeeDetails = `${serverUrl}api/PayeApi/GetEmployeeDetails`;
 var activeTaxOffice = "";
 var activePeriod = "";
 
