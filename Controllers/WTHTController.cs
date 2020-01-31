@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ITAPS_HOST.Data;
+﻿using ITAPS_HOST.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ITAPS_HOST.Controllers
 {
+    [Authorize]
     public class WTHTController : Controller
     {
         private readonly IAppConstants _config;
@@ -16,7 +13,6 @@ namespace ITAPS_HOST.Controllers
             _config = config;
         }
 
-        [Authorize]
         public IActionResult AllTransaction()
         {
             UserDetails();
@@ -24,7 +20,6 @@ namespace ITAPS_HOST.Controllers
             return View();
         }
 
-        [Authorize]
         public IActionResult Returns()
         {
             UserDetails();
@@ -32,7 +27,6 @@ namespace ITAPS_HOST.Controllers
             return View();
         }
 
-        [Authorize]
         public IActionResult VATTransaction()
         {
             UserDetails();
@@ -40,7 +34,6 @@ namespace ITAPS_HOST.Controllers
             return View();
         }
 
-        [Authorize]
         public IActionResult VATReturns()
         {
             UserDetails();

@@ -66,6 +66,8 @@ var apiCallSuccess = function (res, objectSent, type) {
         setDefaultUpdateModal();
         $("#modal-edit-setup").modal("hide");
     } else if (type == "GET") {
+        if (res.length == 0)
+            return toastr.info("No Data");
         initializeKendoGrid(res);
     }
 };
@@ -95,7 +97,8 @@ var searchCodes = function () {
     let searchItemTrimmed = searchItem.trim();
     let url = `${MainSearchUrl}` + "&term=" + `${searchItemTrimmed}`;
 
-    apiCaller(url.trim(), "GET", "", initializeKendoGrid);
+    $("#grid").data("kendoGrid").dataSource.data([]);
+    apiCaller(url.trim(), "GET", "", apiCallSuccess);
 };
 
 var configureUrls = function (setuptype) {

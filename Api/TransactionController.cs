@@ -14,6 +14,7 @@ namespace ITAPS_HOST.Api
 {
     [Authorize]
     [Route("api/[controller]")]
+    [Authorize]
     public class TransactionController : ControllerBase
     {
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();

@@ -337,36 +337,37 @@
                                         </li>
                                     </ul>
                                 </li>
+
                                 <!-- PIT -->
-                                <li class="sidebar-menu-item pit">
-                                        <a class="sidebar-menu-button" data-toggle="collapse" href="#PIT_menu">
-                                            <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">account_balance_wallet</i>
-                                            <span class="sidebar-menu-text">Personal Income Tax</span>
-                                            <span class="ml-auto sidebar-menu-toggle-icon"></span>
-                                        </a>
-                                        <ul class="sidebar-submenu collapse" id="PIT_menu">
-                                            <li class="sidebar-menu-item estimates">
-                                                <a class="sidebar-menu-button" href="~/pit/annualestimates">
-                                                    <span class="sidebar-menu-text">Annual Estimates</span>
-                                                </a>
-                                            </li>
-                                            @*<li class="sidebar-menu-item estimatesRevised">
+                                @*<li class="sidebar-menu-item pit">
+                                    <a class="sidebar-menu-button" data-toggle="collapse" href="#PIT_menu">
+                                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">account_balance_wallet</i>
+                                        <span class="sidebar-menu-text">Personal Income Tax</span>
+                                        <span class="ml-auto sidebar-menu-toggle-icon"></span>
+                                    </a>
+                                    <ul class="sidebar-submenu collapse" id="PIT_menu">
+                                        <li class="sidebar-menu-item estimates">
+                                            <a class="sidebar-menu-button" href="~/pit/annualestimates">
+                                                <span class="sidebar-menu-text">Annual Estimates</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item estimatesRevised">
                                                 <a class="sidebar-menu-button" href="~/pit/estimatesRevised">
                                                     <span class="sidebar-menu-text">Revised Annual Estimates</span>
                                                 </a>
-                                            </li>*@
-                                            <li class="sidebar-menu-item returns">
-                                                <a class="sidebar-menu-button" href="~/pit/annualreturns">
-                                                    <span class="sidebar-menu-text">Annual Returns</span>
-                                                </a>
                                             </li>
-                                            @*<li class="sidebar-menu-item returnsRevised">
+                                        <li class="sidebar-menu-item returns">
+                                            <a class="sidebar-menu-button" href="~/pit/annualreturns">
+                                                <span class="sidebar-menu-text">Annual Returns</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item returnsRevised">
                                                 <a class="sidebar-menu-button" href="~/pit/returnsRevised">
                                                     <span class="sidebar-menu-text">Revised Annual Returns</span>
                                                 </a>
-                                            </li>*@
-                                        </ul>
-                                    </li>
+                                            </li>
+                                    </ul>
+                                </li>*@
 
                                 <!-- WITHHOLDING -->
                                 @*<li class="sidebar-menu-item wht">
@@ -462,11 +463,11 @@
                                                 <span class="sidebar-menu-text">Monthly PAYE</span>
                                             </a>
                                         </li>
-                                        <li class="sidebar-menu-item whteapproval">
-                                            <a class="sidebar-menu-button" href="~/paye/annual">
-                                                <span class="sidebar-menu-text">Annual PAYE</span>
-                                            </a>
-                                        </li>
+                                        @*<li class="sidebar-menu-item whteapproval">
+                                                <a class="sidebar-menu-button" href="~/paye/annual">
+                                                    <span class="sidebar-menu-text">Annual PAYE</span>
+                                                </a>
+                                            </li>*@
                                     </ul>
                                 </li>
                             </ul>
@@ -522,8 +523,27 @@
     <!--Toastr-->
     <script src="~/js/toastr.min.js"></script>
     <script src="~/js/dashboard/layout.js"></script>
+    <script src="~/js/shared/itaps-helper.js"></script>
 
-    @*<script src="~/js/shared/itaps-host-global.js"></script>*@
+    <div id="ScreenTimeOutModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ScreenTimeOutModal" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-standard-title">Are you still there?</h5>
+                </div>
+                <div class="modal-body">
+                    <h6>You have been inactive for a while now. Do you want to logout? If no, please click on stay.</h6>
+                    <h6 class="text-primary">You will be automatically logged out in <span id="ScreenTimeOutView"></span></h6>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-light" role="button" onclick="ContinueToStay()">Stay</a>
+                    <a id="logMeOut" asp-controller="Home" asp-action="Logout" class="btn btn-success text-white">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     @RenderSection("modals", required: false)
     @RenderSection("scripts", required: false)
 

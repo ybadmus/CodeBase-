@@ -1,6 +1,17 @@
 ﻿// Call To Local Server API Configuration
 var AppServerUrl = $("#AppServerUrl").val();
 var NotificationUrl = $("#NotificationUrl").val();
+var userTIN = $("#UserTIN").text();
+var pageUrl = window.location.pathname;
+var userURLS = JSON.parse(localStorage.getItem("userURLS"));
+var sessionData = JSON.parse(localStorage.getItem("sessionData"));
+// Get Current Date
+var CurrentDate = new Date().toLocaleDateString();
+// Define NIL Data
+var NILDisplay = "NIL";
+var NILValue = 0.00;
+var NullDisplay = "";
+var NullValue = null;
 
 $.ajaxSetup({
     headers: {
@@ -9,40 +20,25 @@ $.ajaxSetup({
         'RequestVerificationToken': $('input:hidden[name="__RequestVerificationToken"]').val()
     }
 });
-var userTIN = $("#UserTIN").text();
-
-var pageUrl = window.location.pathname;
-var userURLS = JSON.parse(localStorage.getItem("userURLS"));
-var sessionData = JSON.parse(localStorage.getItem("sessionData"));
-
-
-// Get Current Date
-var CurrentDate = new Date().toLocaleDateString();
-
-// Define NIL Data
-var NILDisplay = "NIL";
-var NILValue = 0.00;
-var NullDisplay = "";
-var NullValue = null;
 
 $(document).ready(() => {
     
     // Trigger DataPicker
-    $(".DatePicker").flatpickr({
-        dateFormat: "d-m-Y"
-    });
+    //$(".DatePicker").flatpickr({
+    //    dateFormat: "d-m-Y"
+    //});
 
     // Past Date Operations
-    $(".PastDatePicker").flatpickr({
-        maxDate: "today",
-        dateFormat: "d-m-Y"
-    });
+    //$(".PastDatePicker").flatpickr({
+    //    maxDate: "today",
+    //    dateFormat: "d-m-Y"
+    //});
 
     // Future Date Operations
-    $(".FutureDatePicker").flatpickr({
-        minDate: "today",
-        dateFormat: "d-m-Y"
-    });
+    //$(".FutureDatePicker").flatpickr({
+    //    minDate: "today",
+    //    dateFormat: "d-m-Y"
+    //});
 
 });
 
@@ -82,7 +78,7 @@ function revealCurrentMenu(URLpath) {
 }
 
 //menu indicator
-revealCurrentMenu(window.location.pathname);
+//revealCurrentMenu(window.location.pathname);
 
 //Example value = '500' standard='en' or 'fr' if you want decimal places dec must be > 0
 function moneyInTxt(value, standard, dec = 2) {
@@ -223,6 +219,32 @@ function newAjaxRequest(url, method, data = "") {
         });
 }
 
+
+function apiCaller (url, type, data, callback) {
+    $('html').showLoading();
+
+    $.ajax({
+        url: url,
+        type: type,
+        crossDomain: true,
+        data: JSON.stringify(data),
+        contentType: "application/json; charset=utf-8",
+        headers: {
+        },
+        dataType: 'json',
+        success: function (response) {
+            if (callback) {
+                callback(response.body);
+            };
+            $('html').hideLoading();
+        },
+        error: function (error) {
+            $('html').hideLoading();
+            toastr.error('An error occured');
+        }
+    });
+};
+
 //capitalize words
 function ucwords(str, force = true) {
     str = force ? str.toLowerCase() : str;
@@ -263,6 +285,8 @@ var startTimer  = function (duration, display) {
         minutes = minutes < 10 ? "0" + minutes : minutes;
         seconds = seconds < 10 ? "0" + seconds : seconds;
 
+        console.log({ duration, diff, minutes, seconds });
+
         display.textContent = minutes + ":" + seconds;
 
         if (diff <= 0) {
@@ -278,7 +302,8 @@ var startTimer  = function (duration, display) {
 
         // Logout
         if (diff === 1) {
-            window.location = `${AppServerUrl}/Logout`;
+            var serverUrl = $("#serverUrl").val();
+            window.location = `${serverUrl}/Home/Logout`;
         }
     };
     // we don't want to wait a full second before the timer starts
@@ -307,8 +332,8 @@ webEvents.forEach(function (eventName) {
 // Initialize the timer
 var InitializeTimer = function () {
     var fiveMinutes = 60 * 5, // 60 * 5 => 5mins
-        display = document.querySelector('#ScreenTimeOut');
-    // startTimer(fiveMinutes, display); // Comment|Uncomment this line to Disable|Enable timer.
+        display = document.querySelector('#ScreenTimeOutView');
+     startTimer(fiveMinutes, display); // Comment|Uncomment this line to Disable|Enable timer.
 }
 
 // I want to continue staying on page.
@@ -317,6 +342,11 @@ var ContinueToStay = function () {
     //window.location.reload();
     clearInterval(logoutTimer);
     InitializeTimer();
+
+    var serverUrl = $("#serverUrl").val();
+    var url = `${serverUrl}api/TCC/RenewToken`;
+    apiCaller(url, "GET");
+
     $('#ScreenTimeOutModal').modal('hide');
 }
 

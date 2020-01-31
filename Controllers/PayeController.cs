@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ITAPS_HOST.Data;
+﻿using ITAPS_HOST.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ITAPS_HOST.Controllers
 {
+    [Authorize]
     public class PayeController : Controller
     {
         private readonly IAppConstants _config;

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ITAPS_HOST.Controllers
 {
+    [Authorize]
     public class CodesController : Controller
     {
         private readonly IAppConstants _config;
@@ -13,7 +14,6 @@ namespace ITAPS_HOST.Controllers
             _config = config;
         }
 
-        [Authorize]
         public IActionResult Index(string type)
         {
             UserDetails();
@@ -21,7 +21,6 @@ namespace ITAPS_HOST.Controllers
             return View();
         }
 
-        [Authorize]
         public IActionResult TaxOffice()
         {
             UserDetails();
@@ -29,7 +28,6 @@ namespace ITAPS_HOST.Controllers
             return View();
         }
 
-        [Authorize]
         public IActionResult TaxHoliday()
         {
             UserDetails();
@@ -37,7 +35,6 @@ namespace ITAPS_HOST.Controllers
             return View();
         }
 
-        [Authorize]
         public IActionResult Currency()
         {
             UserDetails();
@@ -45,7 +42,6 @@ namespace ITAPS_HOST.Controllers
             return View();
         }
 
-        [Authorize]
         public IActionResult ACTR()
         {
             UserDetails();
@@ -53,7 +49,6 @@ namespace ITAPS_HOST.Controllers
             return View();
         }
 
-        [Authorize]
         public IActionResult RateAndCode()
         {
             UserDetails();
@@ -61,7 +56,6 @@ namespace ITAPS_HOST.Controllers
             return View();
         }
 
-        [Authorize]
         public IActionResult CompanyRates()
         {
             UserDetails();
@@ -69,7 +63,6 @@ namespace ITAPS_HOST.Controllers
             return View();
         }
 
-        [Authorize]
         public IActionResult PitRates()
         {
             UserDetails();

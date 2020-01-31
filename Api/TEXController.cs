@@ -1,5 +1,6 @@
 ﻿using ITAPS_HOST.IServices;
 using ITAPS_HOST.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ namespace ITAPS_HOST.Api
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class TEXController : ControllerBase
     {
         private readonly ITExService _iTExService;

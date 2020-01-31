@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ITAPS_HOST.IServices;
 using ITAPS_HOST.Models;
 using ITAPS_HOST.Models.Applications;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,6 +13,7 @@ namespace ITAPS_HOST.Api
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class TCCController : ControllerBase
     {
         private readonly ITCCService _tccApplicationService;
@@ -92,5 +94,12 @@ namespace ITAPS_HOST.Api
         {
             return await _tccApplicationService.GetTCCApplicationTaxPositionByApplicationId(applicationId);
         }
+
+        [HttpGet("RenewToken", Name = "RenewToken")]
+        public bool RenewToken()
+        {
+            return true;
+        }
+
     }
 }

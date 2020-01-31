@@ -1,9 +1,11 @@
 ﻿using ITAPS_HOST.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
 namespace ITAPS_HOST.Controllers
 {
+    [Authorize]
     public class ApplicationsController : Controller
     {
         private readonly IAppConstants _config;

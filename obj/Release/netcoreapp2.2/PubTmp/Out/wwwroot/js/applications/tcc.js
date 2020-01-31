@@ -5,7 +5,7 @@ var GetTccCommentsByIdUrl = `${serverUrl}api/TCC/GetAllTccApplicationComments?tc
 var GetTccByIdUrl = `${serverUrl}api/TCC/GetTccApplicationById?tccId=`;
 var GetTCCDocuments = `${serverUrl}api/TCC/GetTCCApplicationDocumentByApplicationId`;
 let tccUpdateUrl = `${serverUrl}api/TCC/UpdateTCCApplication?id=`;
-var ReportDownloadView = `${ServerUrl}applications/certificate?uniApplicationId=`;
+var ReportDownloadView = `${ServerUrl}applications/certificate`;
 var activeTaxOffice = "";
 var appType = "TCC";
 
@@ -14,7 +14,10 @@ $("#tccListOfTaxOffices").on('change', function () {
     activeTaxOffice = elem.options[elem.selectedIndex].value;
 })
 
-var initializeKendoGrid = function (data) {
+var initializeKendoGrid = function (data, stage) {
+    if (data.length == 0 && stage !== 1) {
+        return toastr.info("No Data");
+    };
 
     $("#Grid").kendoGrid({
         dataSource: { data: data, pageSize: 8 },
@@ -49,7 +52,7 @@ let onDataBound = function () {
 };
 
 $(document).ready(function () {
-    initializeKendoGrid();
+    initializeKendoGrid([], 1);
     bootstrapPage();
     setTitles();
 
@@ -184,7 +187,11 @@ var backToView = function () {
 
 $("#previewApplication").click(function () {
     let appId = $("#appId").val();
-    let url = `${ReportDownloadView}` + appId;
+
+    localStorage.setItem("tccReportId", appId);
+    localStorage.setItem("tccLabel", "uniApplicationId");
+
+    let url = `${ReportDownloadView}`;
 
     window.open(url, "_blank");
 });

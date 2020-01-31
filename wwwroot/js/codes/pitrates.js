@@ -13,12 +13,17 @@ var dateConverter = function (startdate) {
     return startdate.split("T")[0];
 };
 
-var initializeKendoGrid = function (data) {
+var initializeKendoGrid = function (data, stage) {
+    if (data.length == 0 && stage !== 1) {
+        return toastr.info("No Data");
+    }
 
-    for (var i = 0; i < data.length; i++) {
-        data[i].startdate = data[i].startdate.split("T")[0];
-        data[i].endDate = data[i].endDate.split("T")[0];
-    };
+    if (data.length !== 0) {
+        for (var i = 0; i < data.length; i++) {
+            data[i].startdate = data[i].startdate.split("T")[0];
+            data[i].endDate = data[i].endDate.split("T")[0];
+        };
+    }
 
     $("#Grid").kendoGrid({
         dataSource: { data: data, pageSize: 8 },
@@ -75,11 +80,12 @@ var searchTaxRates = function () {
     else
         url = `${MainUrl}GetAllGtaxByYearAsync?year=` + searchItem;
 
+    $("#Grid").data("kendoGrid").dataSource.data([]);
     apiCaller(url, "GET", "", initializeKendoGrid);
 };
 
 $(document).ready(function () {
-    initializeKendoGrid([]);
+    initializeKendoGrid([], 1);
     $("#pgHeader").text("PIT Tax Rates");
 
     $("#crDetails").hide();
@@ -88,13 +94,11 @@ $(document).ready(function () {
     $("#lockDetails").hide();
     $("#editDetails").hide();
     $("#saveRow").hide();
+    $("#newRow").hide();
 
-    $("#startDateTR").flatpickr({
-    });
+    $("#startDateTR").flatpickr({});
 
-    $("#endDateTR").flatpickr({
-
-    });
+    $("#endDateTR").flatpickr({});
 
     $('[data-toggle="tooltip"]').tooltip()
 });
@@ -158,7 +162,7 @@ var enableAllFields = function () {
 $("#editBtn").click(function () {
     enableAllFields();
 
-    $("#code").attr("disabled", true); //codes are not editable
+    $("#code").attr("disabled", true); //codes are not editable;
 });
 
 $("#lockDetails").click(function () {
@@ -168,9 +172,7 @@ $("#lockDetails").click(function () {
     $("#editDetails").show();
 
     $("#saveRow").hide();
-    $("#newRow").show();
-
-
+    $("#newRow").hide();
 });
 
 var loadItemDetails = function (resp) {
@@ -266,11 +268,29 @@ $("#SearchItem").on('keypress', function (e) {
 });
 
 $("#newRow").click(function () {
-    dataTableRows.push({
-        taxBanb: 0, taxableAmt: 0.00, percentage: 0,
+
+    var tableData = []
+
+    for (var i = 0; i < taxTableLength; i++) {
+
+        var taxBandObj = {
+            "taxMasterId": "79521503-9ea4-4aca-819b-0481e679ad7d",
+            "taxBanb": parseInt($("#taxBand" + i).text().replace(/,/g, '')),
+            "taxableAmt": parseFloat($("#taxableAmount" + i).text().replace(/,/g, '')),
+            "percentage": parseFloat($("#percentage" + i).text().replace(/,/g, ''))
+        };
+
+        if (taxBandObj.taxBand === 0 && taxBandObj.taxableAmt === 0 && taxBandObj.percentage === 0)
+            continue;
+        else
+            tableData.push(taxBandObj);
+    };
+
+    tableData.push({
+        taxMasterId: "79521503-9ea4-4aca-819b-0481e679ad7d", taxBanb: 0, taxableAmt: 0.00, percentage: 0,
     });
 
-    loadTaxTable(dataTableRows);
+    loadTaxTable(tableData);
 
     $("#lockDetails").show();
     $("#editDetails").hide();
@@ -282,18 +302,28 @@ $("#saveRow").click(function () {
     $("#newRow").show();
     $("#saveRow").hide();
 
-    //remove defaults created!
-    dataTableRows.shift();
+    var tableData = []
 
-    dataTableRows.push({
-        taxBanb: parseInt($("#taxBand0").text()), taxableAmt: parseInt($("#taxableAmount0").text()), percentage: parseInt($("#percentage0").text()),
-    });
+    for (var i = 0; i < taxTableLength; i++) {
 
-    loadTaxTable(dataTableRows);
-    disableAllFields();
+        var taxBandObj = {
+            "taxMasterId": "79521503-9ea4-4aca-819b-0481e679ad7d",
+            "taxBanb": parseInt($("#taxBand" + i).text().replace(/,/g, '')),
+            "taxableAmt": parseFloat($("#taxableAmount" + i).text().replace(/,/g, '')),
+            "percentage": parseFloat($("#percentage" + i).text().replace(/,/g, ''))
+        };
 
-    $("#lockDetails").hide();
-    $("#editDetails").show();
+        if (taxBandObj.taxBand === 0 && taxBandObj.taxableAmt === 0 && taxBandObj.percentage === 0)
+            continue;
+        else
+            tableData.push(taxBandObj);
+    };
+
+    loadTaxTable(tableData);
+
+    //disableAllFields();
+    //$("#lockDetails").hide();
+    //$("#editDetails").show();
 });
 
 $("#backToGrid").click(function () {
@@ -304,6 +334,7 @@ $("#backToGrid").click(function () {
 
     $("#detailsViewTR").hide();
     $("#AddViewTR").hide();
+    $("#newRow").hide();
 });
 
 $("#editDetails").click(function () {
@@ -311,6 +342,7 @@ $("#editDetails").click(function () {
 
     $("#lockDetails").show();
     $("#editDetails").hide();
+    $("#newRow").show(); //show on edit btn click;
 });
 
 $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
@@ -377,7 +409,7 @@ var saveDetailsFlow = function () {
 
         var taxBandObj = {
             "TaxMasterId": "79521503-9ea4-4aca-819b-0481e679ad7d",
-            "TaxBand": parseFloat($("#taxBand" + i).text().replace(/,/g, '')),
+            "TaxBand": parseInt($("#taxBand" + i).text().replace(/,/g, '')),
             "TaxableAmt": parseFloat($("#taxableAmount" + i).text().replace(/,/g, '')),
             "Percentage": parseFloat($("#percentage" + i).text().replace(/,/g, ''))
         };

@@ -50,6 +50,7 @@ $(document).ready(function () {
 
     $("#tccDetailsGrid").hide();
     $("#texDetailsGrid").show();
+    $("#ptrDetailsGrid").hide();
 });
 
 var setTitles = function () {
@@ -158,6 +159,7 @@ var prepareDetailsView = function () {
 var hideAndShowThings = function () {
     $("#texGridView").hide();
     $("#detailsView").show();
+    $("#ptrDetailsGrid").hide();
 };
 
 $("#backToGrid").click(function () {
@@ -167,6 +169,7 @@ $("#backToGrid").click(function () {
 var backToView = function () {
     $("#texGridView").show();
     $("#detailsView").hide();
+    $("#ptrDetailsGrid").hide();
 };
 
 $("#previewApplication").click(function () {

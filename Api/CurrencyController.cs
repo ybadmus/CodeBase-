@@ -36,5 +36,6 @@ namespace ITAPS_HOST.Api
         {
             return await _currencyService.SearchCurrencyAsync(term);
         }
+
     }
 }

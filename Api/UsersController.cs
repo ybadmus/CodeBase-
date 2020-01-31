@@ -3,11 +3,13 @@ using ITAPS_HOST.IServices;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ITAPS_HOST.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ITAPS_HOST.Api
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;

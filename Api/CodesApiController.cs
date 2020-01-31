@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using ITAPS_HOST.IServices;
-using ITAPS_HOST.Models.Codes;
+﻿using ITAPS_HOST.IServices;
 using ITAPS_HOST.Models;
+using ITAPS_HOST.Models.Codes;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace ITAPS_HOST.Api
 {

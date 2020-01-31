@@ -4,7 +4,10 @@ var MainPostUrl = `${AppServerUrl}api/TaxHoliday`;
 var MainSearchUrl = `${AppServerUrl}api/TaxHoliday`;
 var pageName = "Tax Holiday";
 
-var InitializeKendoGrid = function (data) {
+var InitializeKendoGrid = function (data, stage) {
+    if (data.length == 0 && stage !== 1) {
+        return toastr.info("No Data");
+    }
 
     $("#Grid").kendoGrid({
         dataSource: { data: data, pageSize: 8 },
@@ -74,6 +77,7 @@ var searchTaxHoliday = function () {
     let searchItemTrimmed = searchItem.trim();
     let url = `${MainSearchUrl}/SearchTaxHolidayAsync/` + searchItemTrimmed;
 
+    $("#Grid").data("kendoGrid").dataSource.data([]);
     ApiCaller(url.trim(), "GET", "", InitializeKendoGrid);
 };
 
@@ -95,7 +99,7 @@ var apiCallSuccess = function (res, objectSent, type) {
 
 $(document).ready(function () {
     $("#pgHeader").text(pageName);
-    InitializeKendoGrid([]);
+    InitializeKendoGrid([], 1);
     ApiCaller(`${AppServerUrl}api/TaxHoliday/1fa14f0e-e0b6-4845-9665-04e5d741da2f`, "GET", "", "");
 });
 

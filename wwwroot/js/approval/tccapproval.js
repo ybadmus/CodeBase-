@@ -345,6 +345,6 @@ var successfullyUpdated = function () {
 
 var backToGrid = function () {
     setTimeout(function () {
-        window.location.href = "/approval/tccapproval";
+        window.location.href = `${serverUrl}approval/tccapproval`;
     }, 3000);
 };

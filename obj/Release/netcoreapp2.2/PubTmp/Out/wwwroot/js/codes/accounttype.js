@@ -77,6 +77,7 @@ var ApiCaller = function (url, type, data, callback) {
 
 var searchTcc = function () {
     let url = `${ServerUrl}api/wht/GetAllGwtrAsync`
+    //$("#Grid").data("kendoGrid").dataSource.data([]);
 
     ApiCaller(url, "GET", "", InitializeKendoGrid);
 };

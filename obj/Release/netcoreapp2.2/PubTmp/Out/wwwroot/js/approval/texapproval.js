@@ -27,7 +27,7 @@ var initializeKendoGrid = function (data) {
             {
                 command: [{
                     name: "view",
-                    template: "<button title='View item' class='btn btn-light btn-sm' style=''><span class='fa fa-file fa-lg'></span></button>"
+                    template: "<button title='View item' class='btn btn-success btn-sm' style=''><span class='fa fa-file fa-lg'></span></button>"
                 }],
                 title: "Actions",
                 width: "70px"
@@ -41,17 +41,7 @@ var initializeKendoGrid = function (data) {
 };
 
 $(document).ready(function () {
-    $("#pgHeader").text(HeaderName);
-    initializeKendoGrid();
     bootstrapPage();
-
-    $("#texDetails").hide();
-    $("#texGridView").show();
-
-    $("#expiryDateTcc").flatpickr({
-        maxDate: calculateThreeMonths(),
-        minDate: 'today'
-    });
 });
 
 var calculateThreeMonths = function () {
@@ -83,6 +73,17 @@ var loadTaxOffices = function (listOfTaxOffices) {
 };
 
 var bootstrapPage = function () {
+    $("#pgHeader").text(HeaderName);
+    $("#texDetails").hide();
+    $("#texGridView").show();
+
+    $("#expiryDateTcc").flatpickr({
+        maxDate: calculateThreeMonths(),
+        minDate: 'today'
+    });
+
+    initializeKendoGrid();
+
     var userid = $("#userId").val();
     var tccUrl = `${serverUrl}api/Users/GetAllUserTaxOfficesByUserID?userId=` + userid;
 
@@ -151,19 +152,13 @@ $("#searchItem").on('keypress', function (e) {
     }
 });
 
-$("#texMessages").click(function (e) {
-    $("#texMessagesView").modal("show");
-});
-
 $("#reviseApp").click(function (e) {
     $("#approveDecline").modal("show");
 });
 
 $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
-
     var grid = $("#Grid").getKendoGrid();
     var item = grid.dataItem($(e.target).closest("tr"));
-    console.log(item);
 
     $("#appId").val(item.applicationId);
     prepareDetailsView(item.applicationId);
@@ -324,6 +319,6 @@ var successfullyUpdated = function () {
 
 var backToGrid = function () {
     setTimeout(function () {
-        window.location.href = "/approval/texapproval";
+        window.location.href = `${serverUrl}approval/texapproval`;
     }, 3000);
 };

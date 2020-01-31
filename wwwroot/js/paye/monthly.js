@@ -29,12 +29,24 @@ var initializeKendoGrid = function (data) {
         dataBound: onDataBound,
         pageable: { refresh: false, pageSizes: true, buttonCount: 5 },
         columns: [
-            { field: "updatedAt", title: "Date", width: '110px', template: '#= kendo.toString(kendo.parseDate(updatedAt), "dd/MM/yyyy")#'  },
+            { field: "updatedAt", title: "Date", width: '110px', template: '#= kendo.toString(kendo.parseDate(updatedAt), "dd/MM/yyyy")#' },
             { field: "companyName", title: "Name", width: '25%' },
             { field: "companyTIN", title: "TIN", width: '110px' },
-            { field: "totalNoOfStaff", title: "Total Staffs", width: '15%', attributes: { style: "text-align:right;" } },
-            { field: "totalCashEmolument", title: "Total Cash Emolument", width: '15%', attributes: { style: "text-align:right;" } },
-            { field: "taxDeducted", title: "Tax Deducted", width: '15%', attributes: { style: "text-align:right;" } },
+            {
+                field: "totalNoOfStaff", title: "Total Staffs", width: '15%', attributes: { style: "text-align:right;" }, template: function (data) {
+                    return parseFloat(data.totalNoOfStaff).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
+                }
+            },
+            {
+                field: "totalCashEmolument", title: "Total Cash Emolument", width: '15%', attributes: { style: "text-align:right;" }, template: function (data) {
+                    return parseFloat(data.totalCashEmolument).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
+                }
+            },
+            {
+                field: "taxDeducted", title: "Tax Deducted", width: '15%', attributes: { style: "text-align:right;" }, template: function (data) {
+                    return parseFloat(data.taxDeducted).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
+                }
+            },
             {
                 command: [{
                     name: "view",
@@ -168,18 +180,18 @@ var loadDetailsView = function (resp) {
     $("#payerTIN").text(resp[0].payerTIN);
     $("#periodYear").text(resp[0].periodYear);
 
-    $("#managementNo").text(resp[0].managementNo);
-    $("#otherNo").text(resp[0].otherNo);
+    $("#managementNo").text(parseInt(resp[0].managementNo).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#otherNo").text(parseInt(resp[0].otherNo).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 
-    $("#managementPay").text(resp[0].managementPay);
-    $("#otherPay").text(resp[0].otherPay);
+    $("#managementPay").text(parseInt(resp[0].managementPay).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#otherPay").text(parseInt(resp[0].otherPay).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 
-    $("#managementTax").text(resp[0].managementTax);
-    $("#otherTax").text(resp[0].otherTax);
+    $("#managementTax").text(parseInt(resp[0].managementTax).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#otherTax").text(parseInt(resp[0].otherTax).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 
-    $("#startingStaff").text(resp[0].startingStaff);
-    $("#engagedStaff").text(resp[0].engagedStaff);
-    $("#disengagedStaff").text(resp[0].disengagedStaff);
+    $("#startingStaff").text(parseInt(resp[0].startingStaff).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#engagedStaff").text(parseInt(resp[0].engagedStaff).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#disengagedStaff").text(parseInt(resp[0].disengagedStaff).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 
     loadEmployeeTable(resp[0].payeChild);
 
@@ -239,12 +251,12 @@ var employeeView = function (resp) {
     $("#empPosition").text(resp[0].empPosition);
     $("#empSerialNumber").text(resp[0].empSerialNumber);
     $("#empResidential").text(resp[0].empResidential);
-    $("#basicSalary").text(resp[0].basicSalary);
-    $("#cashAllowances").text(resp[0].cashAllowances);
-    $("#bonusIncome").text(resp[0].bonusIncome);
-    $("#overtimeIncome").text(resp[0].overtimeIncome);
-    $("#secondaryEmployement").text(resp[0].secondaryEmployement);
-    $("#nonCashBenefit").text(resp[0].nonCashBenefit);
+    $("#basicSalary").text(parseInt(resp[0].basicSalary).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#cashAllowances").text(parseInt(resp[0].cashAllowances).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#bonusIncome").text(parseInt(resp[0].bonusIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#overtimeIncome").text(parseInt(resp[0].overtimeIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#secondaryEmployement").text(parseInt(resp[0].secondaryEmployement).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#nonCashBenefit").text(parseInt(resp[0].nonCashBenefit).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
     $("#providentRate").text(resp[0].providentRate);
-    $("#severancePayPaid").text(resp[0].severancePayPaid);
+    $("#severancePayPaid").text(parseInt(resp[0].severancePayPaid).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 };

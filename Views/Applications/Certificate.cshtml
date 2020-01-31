@@ -30,6 +30,11 @@
 <script>
     $("#pgHeader").text("TCC Certificate");
 
+    $(window).load(function () {
+        localStorage.removeItem("tccReportId");
+        localStorage.removeItem("tccLabel");
+    });
+
     var ServerUrl = $("#serverUrl").val();
 
     $(".pb-3").contents().filter(function () {
@@ -53,11 +58,13 @@
         return listParams;
     };
 
-    var params = getParameters();
+    //var params = getParameters();
+    //for (var i = 0; i < params.length; i++) {
+    //    parameters.push({ name: localStorage.getItem("tccLabel"), labels: [localStorage.getItem("tccReportId")], values: [localStorage.getItem("tccReportId")], nullable: "true" });
+    //}
 
-    for (var i = 0; i < params.length; i++) {
-        parameters.push({ name: params[i].name, labels: [params[i].value], values: [params[i].value], nullable: "true" });
-    }
+    parameters.push({ name: localStorage.getItem("tccLabel"), labels: [localStorage.getItem("tccReportId")], values: [localStorage.getItem("tccReportId")], nullable: "true" });
+
 
     function ajaxBeforeLoad(event) {
         event.model.parameters = parameters;

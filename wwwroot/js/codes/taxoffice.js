@@ -8,7 +8,10 @@ var pageName = "Tax Office";
 var regionsList = [];
 var tottype = [];
 
-var InitializeKendoGrid = function (data) {
+var InitializeKendoGrid = function (data, stage) {
+    if (data.length == 0 && stage !== 1) {
+        return toastr.info("No Data");
+    }
 
     $("#Grid").kendoGrid({
         dataSource: { data: data, pageSize: 8 },
@@ -127,6 +130,7 @@ var searchTaxOffices = function () {
     let searchItem = $("#SearchItem").val().trim();
     let url = `${MainSearchUrl}/SearchTaxOfficeAsync/` + searchItem;
 
+    $("#Grid").data("kendoGrid").dataSource.data([]);
     ApiCaller(url.trim(), "GET", "", apiCallSuccess);
 };
 
@@ -148,7 +152,7 @@ var apiCallSuccess = function (res, objectSent, type) {
 
 $(document).ready(function () {
     $("#pgHeader").text(pageName);
-    InitializeKendoGrid([]);
+    InitializeKendoGrid([], 1);
     GetRegions();
     GetTaxOfficeType();
 });

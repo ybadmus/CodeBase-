@@ -319,6 +319,6 @@ var successfullyUpdated = function () {
 
 var backToGrid = function () {
     setTimeout(function () {
-        window.location.href = "/approval/texapproval";
+        window.location.href = `${serverUrl}approval/texapproval`;
     }, 3000);
 };

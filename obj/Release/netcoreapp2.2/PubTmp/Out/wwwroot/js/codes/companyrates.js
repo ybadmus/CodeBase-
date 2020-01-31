@@ -16,7 +16,10 @@ var objSave = {
     "Status": ""
 };
 
-var initializeKendoGrid = function (data) {
+var initializeKendoGrid = function (data, stage) {
+    if (data.length == 0 && stage !== 1) {
+        return toastr.info("No Data");
+    }
 
     $("#Grid").kendoGrid({
         dataSource: { data: data, pageSize: 8 },
@@ -73,11 +76,12 @@ var searchTaxRates = function () {
     var searchItem = $("#SearchItem").val().trim();
     var url = `${MainUrl}SearchTaxRateAsync?searchItem=` + searchItem;
 
+    $("#Grid").data("kendoGrid").dataSource.data([]);
     apiCaller(url, "GET", "", initializeKendoGrid);
 };
 
 $(document).ready(function () {
-    initializeKendoGrid([]);
+    initializeKendoGrid([], 1);
     $("#pgHeader").text("Company Tax Rates");
 });
 
