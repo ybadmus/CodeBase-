@@ -285,7 +285,7 @@ var startTimer  = function (duration, display) {
         minutes = minutes < 10 ? "0" + minutes : minutes;
         seconds = seconds < 10 ? "0" + seconds : seconds;
 
-        console.log({ duration, diff, minutes, seconds });
+        //console.log({ duration, diff, minutes, seconds });
 
         display.textContent = minutes + ":" + seconds;
 

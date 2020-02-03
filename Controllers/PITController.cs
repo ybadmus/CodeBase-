@@ -16,14 +16,7 @@ namespace ITAPS_HOST.Controllers
             _reportConfig = reportConfig;
         }
 
-        public IActionResult AnnualEstimates()
-        {
-            UserDetails();
-            ViewBag.ServerUrl = _config.AppServerUrl;
-            return View();
-        }
-
-        public IActionResult AnnualReturns()
+        public IActionResult FormView()
         {
             UserDetails();
             ViewBag.ServerUrl = _config.AppServerUrl;
