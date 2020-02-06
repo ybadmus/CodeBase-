@@ -59,7 +59,6 @@ $(".modal").draggable({
     })
 })()
 
-
 $(document).ready(function () {
 
     //LOGGING OUT ACTION
@@ -67,7 +66,6 @@ $(document).ready(function () {
         localStorage.clear();
         // console.log("Logout", "Clicked");
     });
-
 
     //do these before any modal pops up
     $("#modal-declare").on('show.bs.modal', function () {

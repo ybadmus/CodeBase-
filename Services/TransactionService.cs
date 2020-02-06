@@ -35,7 +35,7 @@ namespace ITAPS_HOST.Services
             if (objectForSearch.Tin == "" || objectForSearch.Tin == null)
             {
                 apiEndpoint = $"Transactions/SearchTransactionsByTypeAsync?" +
-                $"&taxtype={objectForSearch.TaxType}&transactiontype={objectForSearch.TransactionType}&taxofficeid={objectForSearch.TaxOfficeId}" +
+                $"taxtype={objectForSearch.TaxType}&transactiontype={objectForSearch.TransactionType}&taxofficeid={objectForSearch.TaxOfficeId}" +
                 $"&startdate={objectForSearch.StartDate}&enddate={objectForSearch.EndDate}&year={objectForSearch.AssessmentYear}";
             }
             else

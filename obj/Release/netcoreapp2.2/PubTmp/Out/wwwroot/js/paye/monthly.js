@@ -180,18 +180,18 @@ var loadDetailsView = function (resp) {
     $("#payerTIN").text(resp[0].payerTIN);
     $("#periodYear").text(resp[0].periodYear);
 
-    $("#managementNo").text(parseInt(resp[0].managementNo).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#otherNo").text(parseInt(resp[0].otherNo).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#managementNo").text(parseFloat(resp[0].managementNo).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#otherNo").text(parseFloat(resp[0].otherNo).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 
-    $("#managementPay").text(parseInt(resp[0].managementPay).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#otherPay").text(parseInt(resp[0].otherPay).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#managementPay").text(parseFloat(resp[0].managementPay).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#otherPay").text(parseFloat(resp[0].otherPay).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 
-    $("#managementTax").text(parseInt(resp[0].managementTax).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#otherTax").text(parseInt(resp[0].otherTax).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#managementTax").text(parseFloat(resp[0].managementTax).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#otherTax").text(parseFloat(resp[0].otherTax).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 
-    $("#startingStaff").text(parseInt(resp[0].startingStaff).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#engagedStaff").text(parseInt(resp[0].engagedStaff).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#disengagedStaff").text(parseInt(resp[0].disengagedStaff).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#startingStaff").text(parseFloat(resp[0].startingStaff).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#engagedStaff").text(parseFloat(resp[0].engagedStaff).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#disengagedStaff").text(parseFloat(resp[0].disengagedStaff).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 
     loadEmployeeTable(resp[0].payeChild);
 
@@ -206,7 +206,7 @@ var loadEmployeeTable = function (listOfItems) {
             + '" class="valueCell"> ' + sortedArray[i].empName + ' </td><td style="color: black" contenteditable="true" id="empName' + i
             + '" class="valueCell"> ' + sortedArray[i].empTin + ' </td><td style="color: black" contenteditable="true" id="empPosition' + i
             + '" class="valueCell"> ' + sortedArray[i].empPosition + ' </td><td align="right" style="color: black" contenteditable="true"  id="basicSalary' + i
-            + '" class="valueCell"> ' + parseInt(sortedArray[i].basicSalary ? sortedArray[i].basicSalary : 0).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
+            + '" class="valueCell"> ' + parseFloat(sortedArray[i].basicSalary ? sortedArray[i].basicSalary : 0).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
             + '</td><td style="color: black" id="' + sortedArray[i].id + '" class="btnRow"><button title="View item" class="btn btn-success btn-sm" style=""><span class="fa fa-file fa - lg"></span></button></td></tr>';
     }
 
@@ -251,12 +251,12 @@ var employeeView = function (resp) {
     $("#empPosition").text(resp[0].empPosition);
     $("#empSerialNumber").text(resp[0].empSerialNumber);
     $("#empResidential").text(resp[0].empResidential);
-    $("#basicSalary").text(parseInt(resp[0].basicSalary).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#cashAllowances").text(parseInt(resp[0].cashAllowances).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#bonusIncome").text(parseInt(resp[0].bonusIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#overtimeIncome").text(parseInt(resp[0].overtimeIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#secondaryEmployement").text(parseInt(resp[0].secondaryEmployement).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#nonCashBenefit").text(parseInt(resp[0].nonCashBenefit).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#basicSalary").text(parseFloat(resp[0].basicSalary).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#cashAllowances").text(parseFloat(resp[0].cashAllowances).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#bonusIncome").text(parseFloat(resp[0].bonusIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#overtimeIncome").text(parseFloat(resp[0].overtimeIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#secondaryEmployement").text(parseFloat(resp[0].secondaryEmployement).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#nonCashBenefit").text(parseFloat(resp[0].nonCashBenefit).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
     $("#providentRate").text(resp[0].providentRate);
-    $("#severancePayPaid").text(parseInt(resp[0].severancePayPaid).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#severancePayPaid").text(parseFloat(resp[0].severancePayPaid).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 };

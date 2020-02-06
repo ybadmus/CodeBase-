@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using ITAPS_HOST.IServices;
+﻿using ITAPS_HOST.IServices;
 using ITAPS_HOST.Models;
 using ITAPS_HOST.Models.Applications;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ITAPS_HOST.Api
 {
-    [Authorize]
     [Route("api/[controller]")]
     [Authorize]
+    [ApiController]
     public class TransactionController : ControllerBase
     {
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
@@ -25,7 +22,7 @@ namespace ITAPS_HOST.Api
             _transactionService = transactionService;
         }
 
-        [HttpPost()]
+        [HttpPost("SearchTransactionAsync", Name = "SearchTransactionAsync")]
         public async Task<ResponseItem<object>> SearchTransactionAsync([FromBody] SearchForTransactionDto searchObject)
         {
             return await _transactionService.SearchTransactionAsync(searchObject, _cancellationTokenSource.Token);
@@ -39,7 +36,7 @@ namespace ITAPS_HOST.Api
         }
 
         [HttpGet("TaxCalculatorAsync", Name = "TaxCalculatorAsync")]
-        public async Task<ResponseItem<object>>  TaxCalculatorAsync(Double amount, string startdate, string enddate)
+        public async Task<ResponseItem<object>> TaxCalculatorAsync(Double amount, string startdate, string enddate)
         {
             return await _transactionService.TaxCalculatorAsync(amount, startdate, enddate, _cancellationTokenSource.Token);
         }

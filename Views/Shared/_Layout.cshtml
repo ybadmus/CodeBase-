@@ -35,6 +35,7 @@
     <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2017.1.118/styles/kendo.rtl.min.css" />
     <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2017.1.118/styles/kendo.silver.min.css" />
     <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2017.1.118/styles/kendo.mobile.all.min.css" />-->
+
     <!--Toastr and Loader-->
     <link href="~/css/showLoading.css" rel="stylesheet" />
     <link href="~/css/toastr.min.css" rel="stylesheet" />
@@ -70,6 +71,7 @@
 
 <body class="layout-default">
     <input id="userId" value="@ViewBag.UserId" hidden />
+    <input id="appServerUrlDashBoard" value="@ViewBag.ServerUrl" hidden />
 
     <div class="preloader"></div>
 
@@ -96,16 +98,8 @@
                                     <i class="material-icons nav-icon navbar-notifications-indicator">notifications</i>
                                 </a>
                                 <div id="notification_menu" class="dropdown-menu dropdown-menu-right">
-                                    <div id="NotificationItems">
-                                        @*@for (var i = 0; i < 10; i++)
-                                        {
-                                            <div class="dropdown-item-text dropdown-item-text--lh">
-                                                <span><img src="/icons/iconx-pit.png" width="40" height="40"></span>
-                                                <span class="" id="NotificationTitle">PIT</span> - 
-                                                <span class="text-dark-gray" id="NotificationMessage">Message brief decription</span>
-                                            </div>
-                                            <div class="dropdown-divider"></div>
-                                        }*@
+                                    <div id="NotificationItems" style="max-height: 280px !important; border-bottom: 1px solid lightgray;">
+
                                     </div>
                                     <div class="col-md-12 py-0 px-1 m-0">
                                         <a class="btn btn-xs btn-default" asp-controller="Home" asp-action="Logout" style="color: orangered" id="viewAllNotifications">Close</a>
@@ -129,7 +123,7 @@
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item active" href="~/home">Dashboard</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" asp-controller="Home" asp-action="Logout" style="color: orangered">Logout</a>
+                                    <a class="dropdown-item" id="" asp-controller="Home" asp-action="logOut" style="color: orangered">Logout</a>
                                 </div>
                             </li>
                         </ul>
@@ -352,19 +346,9 @@
                                                 <span class="sidebar-menu-text">Annual Estimates</span>
                                             </a>
                                         </li>
-                                        <li class="sidebar-menu-item estimatesRevised">
-                                            <a class="sidebar-menu-button" href="~/pit/formView?type=revisedestimate">
-                                                <span class="sidebar-menu-text">Revised Estimates</span>
-                                            </a>
-                                        </li>
                                         <li class="sidebar-menu-item returns">
                                             <a class="sidebar-menu-button" href="~/pit/formView?type=annualreturn">
                                                 <span class="sidebar-menu-text">Annual Returns</span>
-                                            </a>
-                                        </li>
-                                        <li class="sidebar-menu-item returnsRevised">
-                                            <a class="sidebar-menu-button" href="~/pit/formView?type=revisedreturn">
-                                                <span class="sidebar-menu-text">Revised Returns</span>
                                             </a>
                                         </li>
                                     </ul>
@@ -523,9 +507,9 @@
     <script src="~/js/jquery.showLoading.min.js"></script>
     <!--Toastr-->
     <script src="~/js/toastr.min.js"></script>
-    <script src="~/js/dashboard/layout.js"></script>
     <script src="~/js/shared/itaps-helper.js"></script>
     <script src="~/js/notifications/signalr.js"></script>
+    <script src="~/js/notifications/connections.js"></script>
     <script src="~/js/notifications/notifications.js"></script>
 
     <div id="ScreenTimeOutModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ScreenTimeOutModal" aria-hidden="true" data-keyboard="false" data-backdrop="static">

@@ -42,6 +42,13 @@ $(document).ready(() => {
 
 });
 
+//LOGGING OUT ACTION
+$("#logOut, #mdlLogout, #logMeOut").click(function () {
+    
+    localStorage.clear();
+    // console.log("Logout", "Clicked");
+});
+
 /********** ACCORDION SECTION **********/
 $(function() {
     $('.accordion').find('.accordion__title').click(function() {
@@ -303,6 +310,7 @@ var startTimer  = function (duration, display) {
         // Logout
         if (diff === 1) {
             var serverUrl = $("#serverUrl").val();
+            localStorage.clear();
             window.location = `${serverUrl}/Home/Logout`;
         }
     };

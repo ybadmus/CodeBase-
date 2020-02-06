@@ -1,28 +1,40 @@
 ﻿var HeaderName = "";
-var pitType = "";
 var serverUrl = $("#serverUrl").val();
+var searchPITByTaxOffice = `${serverUrl}api/Transaction/SearchTransactionAsync`;
+var pitDetailsUrl = `${serverUrl}api/Transaction/TransactionDetails`;
+var objToSend = {
+    "assessmentYear": "",
+    "transactionType": "",
+    "taxType": "PIT",
+    "taxOfficeId": "",
+    "tin": "",
+    "startDate": "",
+    "endDate": "",
+};
 
 $(document).ready(function () {
     bootstrapPage();
-
 });
 
-var initializeKendoGrid = function (data) {
+var initializeKendoGrid = function (data, stage) {
+    if (data == null || data.length == 0 && stage !== 1) {
+        return toastr.info("No Data");
+    };
 
     $("#Grid").kendoGrid({
         dataSource: { data: data, pageSize: 8 },
-        sortable: true,
-        selectable: true,
+        sortable: false,
+        selectable: false,
         dataBound: onDataBound,
         pageable: { refresh: false, pageSizes: true, buttonCount: 5 },
         columns: [
-            { field: "submissionDate", title: "Date", width: '120px' },
-            { field: "tin", title: "TIN", width: '20%' },
+            { field: "submissionDate", title: "Date", width: '100px' },
+            { field: "tin", title: "TIN", width: '100px' },
             { field: "entityName", title: "Entity Name", width: '55%' },
             {
                 command: [{
                     name: "view",
-                    template: "<button title='View' class='btn btn-success'><i class='fa fa-file-text'></i></button>"
+                    template: "<button title='View item' class='btn btn-success btn-sm' style='margin-right: 2px'><span class='fa fa-file fa-lg'></span></button>"
                 }],
                 title: "Actions",
                 width: "72px"
@@ -58,17 +70,50 @@ var bootstrapPage = function () {
     let setupName = getParameterByName("type");
     configureUrls(setupName);
 
+    $("#gridView").show();
+    $("#estimatesDetailsView").hide();
+    $("#returnsDetailsView").hide();
+
+    $("#moreDetailsPrev").hide();
+
+    $("#estimateDetailsGrid3").hide();
+    $("#estimateDetailsGrid4").hide();
+    $("#estimateDetailsGrid5").hide();
+
     $("#endDate").flatpickr({
-        minDate: 'today'
     });
 
     $("#startDate").flatpickr({
-        minDate: 'today'
     });
 
     setTitles();
     loadOffices();
-    initializeKendoGrid();
+    initializeKendoGrid([], 1);
+};
+
+var apiCaller = function (url, type, data, callback) {
+    $('html').showLoading();
+
+    $.ajax({
+        url: url,
+        type: type,
+        crossDomain: true,
+        data: JSON.stringify(data),
+        contentType: "application/json; charset=utf-8",
+        headers: {
+        },
+        dataType: 'json',
+        success: function (response) {
+            if (callback) {
+                callback(response.body);
+            };
+            $('html').hideLoading();
+        },
+        error: function (error) {
+            $('html').hideLoading();
+            toastr.error('An error occured');
+        }
+    });
 };
 
 var loadOffices = function () {
@@ -94,25 +139,15 @@ var configureUrls = function (setuptype) {
         case "annualestimate":
 
             HeaderName = "Annual Estimates";
-            pitType = "Estimate";
-            break;
-
-        case "revisedestimate":
-
-            HeaderName = "Revised Estimates";
-            pitType = "RevisedEstimate";
+            objToSend.transactionType = "Estimate";
             break;
 
         case "annualreturn":
-            
+
             HeaderName = "Annual Returns";
-            pitType = "Return";
+            objToSend.transactionType = "Return";
             break;
 
-        case "revisedreturn":
-
-            HeaderName = "Revised Returns";
-            pitType = "RevisedReturn";
-            break;
     }
-}
+};
+
