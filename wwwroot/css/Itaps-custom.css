@@ -666,7 +666,6 @@ td label{
     display:block;    
 }
 
-
 #NotificationCount {
     background-color: #308af3;
     border-radius: 50%;
@@ -690,15 +689,30 @@ td label{
 }
 
 #notification_menu {
-    width:300px !important;
+    width: 430px !important;
     height: unset;
     overflow-y:unset;
     overflow-x:unset;
 }
 
+#loader_div {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: cadetblue;
+    text-align: center;
+}
+
 #NotificationItems {
-    height: 280px !important;
+    max-height: 250px !important;
     overflow-y: scroll;
+    overflow-x: hidden;
+    border-bottom: 1px solid #dddfe2;
+}
+
+#notificationItem {
+    display: inline-flex;
+    border-bottom: 1px solid #dddfe2;
+    width: 430px;
 }
 
 #GridEmployeeDeductions table {

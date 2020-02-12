@@ -2,6 +2,53 @@
 
 var domainUrl = window.location.origin === "http://localhost:6290" || "http://psl-app-vm3" ? "http://psl-app-vm3" : window.location.origin;
 var serverUrl = $("#serverUrl").val();
+var userid = $("#userId").val();
+var urlTaxOffice = `${serverUrl}api/Users/GetAllUserTaxOfficesByUserID?userId=` + userid;
+var oneOfficeAssigned = false;
+
+$(document).ready(function () {
+    apiCaller(urlTaxOffice, "GET", "", setTaxOffice);
+});
+
+var loadNotificationsAllOffices = function (offices) {
+    if (offices) {
+        for (var i = 0; i < offices.length; i++) {
+            var loadNotificationsUrl = `${serverUrl}api/Notification/GetAllNotifications?taxOfficeId=${offices[i].taxOfficeId}`
+            apiCaller(loadNotificationsUrl, 'GET', '', loadNotificationDropdown);
+        }
+    }
+};
+
+var loadNotificationDropdown = function (resp) {
+    let output = "";
+
+    if (resp) {
+        for (var i = 0; i < resp.length; i++) {
+            var imgUrl = "";
+            if (resp[i].message.includes("Pit"))
+                imgUrl = `${serverUrl}/icons/iconx-pit.png`;
+            else if (resp[i].message.includes("Paye"))
+                imgUrl = `${serverUrl}/icons/iconx-payee.png`;
+
+            if (resp[i].status === "U") {
+                output = output + '<div class="dropdown-item-text dropdown-item-text--lh" id="notificationItem" style="background-color: #edf2fa;"><div>' +
+                    '<img src = "' + `${imgUrl}` + '" width = "48" height = "48" ></div><div style="padding-left: 5px; padding-right: 5px; padding-top: 4px">' +
+                    '<div class="" style="font-size: 14px; line-height: 1.10rem;"><span style="font-weight: 600">' + resp[i].userName + "</span><span style='font-weight: 500;'> (" + resp[i].userTIN + ") </span><span> submitted a </span><span style='font-weight: 600'>" + resp[i].taxType + " " + resp[i].transactionType + '</span><span class="oneOffice"> to </span>' +
+                    '<span class="oneOffice">  ' + resp[i].taxOfficeName + "</span><span style='font-weight: 600'> on </span><span>" + resp[i].submittedDate + '.</span></div></div></div>';
+            } else if (resp[i].status === "R") {
+                output = output + '<div class="dropdown-item-text dropdown-item-text--lh" id="notificationItem"><div>' +
+                    '<img src = "' + `${imgUrl}` + '" width = "48" height = "48" ></div><div style="padding-left: 5px; padding-right: 5px; padding-top: 4px">' +
+                    '<div class="" style="font-size: 14px; line-height: 1.10rem;"><span style="font-weight: 600">' + resp[i].userName + "</span><span style='font-weight: 500;'> (" + resp[i].userTIN + ") </span><span> submitted a </span><span style='font-weight: 600'>" + resp[i].taxType + " " + resp[i].transactionType + '</span><span class="oneOffice"> to </span>' +
+                    '<span class="oneOffice">  ' + resp[i].taxOfficeName + "</span><span style='font-weight: 600'> on </span><span>" + resp[i].submittedDate + '.</span></div></div></div>';
+            };
+        };
+        $("#loader_div").hide();
+    }
+
+    $("#NotificationItems").prepend(output);
+    if (oneOfficeAssigned)
+        $(".oneOffice").css('display', 'none');
+};
 
 const connection = new signalR.HubConnectionBuilder()
     .withUrl(`${domainUrl}/taxpayermonoapi/Notifications`)
@@ -16,12 +63,55 @@ const connection = new signalR.HubConnectionBuilder()
         }
     }).build();
 
+var joinGroups = function (taxOffices) {
+    if (taxOffices) {
+        for (var i = 0; i < taxOffices.length; i++) {
+            connection.invoke("JoinNotificationGroup", taxOffices[i].taxOfficeId).catch(function (err) {
+                return console.error(err.toString());
+            });
+        }
+    }
+};
+
+var setTaxOffice = function (resp) {
+    setTaxOfficeNameDashBoard(resp);
+    joinGroups(resp);
+    loadNotificationsAllOffices(resp);
+};
+
+var setTaxOfficeNameDashBoard = function (resp) {
+    if (resp) {
+        if (resp.length > 1) {
+            $("#adminTaxOffice").text("Head Office");
+        }
+        else if (resp.length == 1) {
+            $("#adminTaxOffice").text(resp[0].taxOfficeName);
+            oneOfficeAssigned = true;
+           
+        }
+
+    } else {
+        toastr.info("No Tax Office assigned to this user!");
+    }
+
+};
+
 connection.start()
     .then(function () {
         console.log("connected");
     }).catch(function (err) {
         return console.error(err.toString());
     });
+
+connection.on("ReceiveApplicationStatusMessage", (message) => {
+
+    var imgUrl = `${serverUrl}/icons/iconx-pit.png`;
+    var title = "New Notification Received";
+    var body = message[0].message;
+
+    displayNotification(body, imgUrl, title);
+    updateNotificationList(imgUrl, message[0]);
+});
 
 connection.on("pitsavenotification", (message) => {
 
@@ -102,3 +192,10 @@ connection.onclose((error) => {
     console.assert("onclose", connection.state === signalR.HubConnectionState.Disconnected);
     console.log(`Connection closed due to error "${error}". Try refreshing this page to restart the connection.`);
 });
+
+
+//itaps-host/icons/iconx-payee.png  
+//itaps-portal-lite/icons/iconx-tcc.png
+//itaps-portal-lite/icons/iconx-ptr.png -tex
+//itaps-portal-lite/icons/iconx-hand.png -ptr
+

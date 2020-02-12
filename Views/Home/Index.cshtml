@@ -19,7 +19,7 @@
     </div>
 
     <div class="col-md-3 col-sm-6">
-        <a href="#" class="dash-anchor">
+        <a href="~/pit/index" class="dash-anchor">
             <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center pt-5" title="Personal Income tax">
                 <div class="row">
                     <div class="col-12 text-center">
@@ -36,26 +36,26 @@
         </a>
     </div>
 
-    <div class="col-md-3 col-sm-6">
-        <a href="#" class="dash-anchor">
-            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center pt-5" title="Withholding Tax & VAT">
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <img src="~/icons/iconx-hand.png" class="img-responsive" width="80" />
-                    </div>
-                    <div class="col-12">
-                        <div class="flex mb-4 mt-2 dash-body banner text-center">
-                            <b class="text-center mt-0 text-inverse text-center">WHT</b><br />
-                            <p class="text-center text-muted text-center">Withholding Tax &amp; VAT</p>
+    @*<div class="col-md-3 col-sm-6">
+            <a href="#" class="dash-anchor">
+                <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center pt-5" title="Withholding Tax & VAT">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <img src="~/icons/iconx-hand.png" class="img-responsive" width="80" />
+                        </div>
+                        <div class="col-12">
+                            <div class="flex mb-4 mt-2 dash-body banner text-center">
+                                <b class="text-center mt-0 text-inverse text-center">WHT</b><br />
+                                <p class="text-center text-muted text-center">Withholding Tax &amp; VAT</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </a>
-    </div>
+            </a>
+        </div>*@
 
     <div class="col-md-3 col-sm-6">
-        <a href="#" class="dash-anchor">
+        <a href="~/applications/index" class="dash-anchor">
             <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center pt-5" title="TCC, Tax Relief & Exemption Applications">
                 <div class="row">
                     <div class="col-12 text-center">
@@ -73,7 +73,25 @@
     </div>
 
     <div class="col-md-3 col-sm-6">
-        <a href="#" class="dash-anchor">
+        <a href="~/approval/index" class="dash-anchor">
+            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center pt-5" title="TCC, Tax Relief & Exemption Applications">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <img src="~/images/icons/verified2.gif" class="img-responsive img-circle" width="80" />
+                    </div>
+                    <div class="col-12">
+                        <div class="flex mb-4 mt-2 dash-body banner text-center">
+                            <b class="text-center mt-0 text-inverse text-center">Applications Approval</b><br />
+                            <p class="text-center text-muted text-center">TCC, Tax Relief &amp; Exemption</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+        <a href="~/paye/index" class="dash-anchor">
             <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center pt-5" title="PAYE Deductions">
                 <div class="row">
                     <div class="col-12 text-center">
@@ -92,5 +110,9 @@
 </div>
 
 @section scripts {
-    <script src="~/js/dashboard/dashboard.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#pgHeader").text("Home");
+        });
+    </script>
 }

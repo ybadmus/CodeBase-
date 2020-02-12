@@ -48,4 +48,3 @@ var displayNotification = function (body, icon, title, link, duration) {
             });
     }
 })();
-

@@ -1,4 +1,4 @@
-﻿var HeaderName = "Personal Tax Exemptions";
+﻿var HeaderName = "Personal Tax Reliefs";
 var serverUrl = $("#serverUrl").val();
 var searchPtrByTaxOffice = `${serverUrl}api/PTR/GetAllPtrApplicationsByTaxOfficeId`;
 var GetTccCommentsByIdUrl = `${serverUrl}api/TCC/GetAllTccApplicationComments?tccId=`;

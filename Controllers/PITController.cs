@@ -16,6 +16,13 @@ namespace ITAPS_HOST.Controllers
             _reportConfig = reportConfig;
         }
 
+        public IActionResult Index()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+
         public IActionResult FormView()
         {
             UserDetails();

@@ -35,7 +35,6 @@
     <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2017.1.118/styles/kendo.rtl.min.css" />
     <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2017.1.118/styles/kendo.silver.min.css" />
     <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2017.1.118/styles/kendo.mobile.all.min.css" />-->
-
     <!--Toastr and Loader-->
     <link href="~/css/showLoading.css" rel="stylesheet" />
     <link href="~/css/toastr.min.css" rel="stylesheet" />
@@ -97,13 +96,18 @@
                                 <a href="#notifications_menu" class="nav-link dropdown-toggle" data-toggle="dropdown" data-caret="false">
                                     <i class="material-icons nav-icon navbar-notifications-indicator">notifications</i>
                                 </a>
-                                <div id="notification_menu" class="dropdown-menu dropdown-menu-right">
-                                    <div id="NotificationItems" style="max-height: 280px !important; border-bottom: 1px solid lightgray;">
-
+                                <div id="notification_menu" style="padding: 0px;" class="dropdown-menu dropdown-menu-right">
+                                    <div style="border-bottom: 1px solid #dddfe2;">
+                                        <a class="btn btn-xs btn-default">Notifications</a>
+                                        <a class="btn btn-xs btn-default float-right" style="color: #3578E5;font-weight: 500;">Mark All as Read</a>
                                     </div>
-                                    <div class="col-md-12 py-0 px-1 m-0">
-                                        <a class="btn btn-xs btn-default" asp-controller="Home" asp-action="Logout" style="color: orangered" id="viewAllNotifications">Close</a>
-                                        <a class="btn btn-xs btn-default float-right" asp-controller="Home" asp-action="Logout" id="viewAllNotifications">View All</a>
+                                    <div id="NotificationItems">
+                                        <div class="box" id="loader_div">
+                                            <div class="loader-03"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 py-0 px-1 m-0" style="text-align: center;">
+                                        <a class="btn btn-xs btn-default" asp-controller="Home" asp-action="Logout" id="viewAllNotifications">View All</a>
                                     </div>
                                 </div>
                             </li>
@@ -355,35 +359,35 @@
                                 </li>
 
                                 <!-- WITHHOLDING -->
-                                @*<li class="sidebar-menu-item wht">
-                                        <a class="sidebar-menu-button" data-toggle="collapse" href="#WHT_menu">
-                                            <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">account_balance_wallet</i>
-                                            <span class="sidebar-menu-text">Withholding Tax</span>
-                                            <span class="ml-auto sidebar-menu-toggle-icon"></span>
-                                        </a>
-                                        <ul class="sidebar-submenu collapse" id="WHT_menu">
-                                            <li class="sidebar-menu-item new">
-                                                <a class="sidebar-menu-button" href="~/wtht/alltransaction">
-                                                    <span class="sidebar-menu-text">All Transactions</span>
-                                                </a>
-                                            </li>
-                                            <li class="sidebar-menu-item update">
-                                                <a class="sidebar-menu-button" href="~/wtht/returns">
-                                                    <span class="sidebar-menu-text">Monthly Returns</span>
-                                                </a>
-                                            </li>
-                                            <li class="sidebar-menu-item alltransactions">
-                                                <a class="sidebar-menu-button" href="~/wtht/vattransaction">
-                                                    <span class="sidebar-menu-text">VAT Transactions</span>
-                                                </a>
-                                            </li>
-                                            <li class="sidebar-menu-item returns">
-                                                <a class="sidebar-menu-button" href="~/wtht/vatreturns">
-                                                    <span class="sidebar-menu-text">VAT Returns</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>*@
+                                <li class="sidebar-menu-item wht">
+                                    <a class="sidebar-menu-button" data-toggle="collapse" href="#WHT_menu">
+                                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">account_balance_wallet</i>
+                                        <span class="sidebar-menu-text">Withholding Tax</span>
+                                        <span class="ml-auto sidebar-menu-toggle-icon"></span>
+                                    </a>
+                                    <ul class="sidebar-submenu collapse" id="WHT_menu">
+                                        <li class="sidebar-menu-item new">
+                                            <a class="sidebar-menu-button" href="~/wtht/alltransaction">
+                                                <span class="sidebar-menu-text">All Transactions</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item update">
+                                            <a class="sidebar-menu-button" href="~/wtht/returns">
+                                                <span class="sidebar-menu-text">Monthly Returns</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item alltransactions">
+                                            <a class="sidebar-menu-button" href="~/wtht/vattransaction">
+                                                <span class="sidebar-menu-text">VAT Transactions</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item returns">
+                                            <a class="sidebar-menu-button" href="~/wtht/vatreturns">
+                                                <span class="sidebar-menu-text">VAT Returns</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
 
                                 <!-- APPLICATIONS -->
                                 <li class="sidebar-menu-item applications">
@@ -462,7 +466,6 @@
             </div>
 
         </div>
-
     </div>
 
     <!-- jQuery -->

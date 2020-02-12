@@ -10,3 +10,119 @@
   opacity: 0.6;
   filter: alpha(opacity = 60);
 }
+
+.loader-01 {
+    /*border: .2em dotted currentcolor;
+    border-radius: 50%;
+    -webkit-animation: 1s loader-01 linear infinite;
+    animation: 1s loader-01 linear infinite;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    color: inherit;
+    vertical-align: middle;
+    pointer-events: none;*/
+    border: .2em dotted currentcolor;
+    border-radius: 0%;
+    -webkit-animation: 1s loader-01 linear infinite;
+    animation: 1.5s loader-01 linear infinite;
+    display: inline-block;
+    width: 2em;
+    height: 2em;
+    color: inherit;
+    vertical-align: middle;
+    pointer-events: none;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+@-webkit-keyframes loader-01 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+.loader-42 {
+    width: 2em;
+    height: .66em;
+    border: .05em currentcolor solid;
+    border-radius: .1em;
+    background: linear-gradient(-60deg, transparent 0%, transparent 50%, currentcolor 50%, currentcolor 75%, transparent 75%, transparent);
+    background-size: 1em 2em;
+    background-position: 0 0;
+    -webkit-animation: loader-42 0.8s infinite linear;
+    animation: loader-42 0.8s infinite linear;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    color: inherit;
+    vertical-align: middle;
+    pointer-events: none;
+}
+
+@-webkit-keyframes loader-42 {
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: -2em 0;
+    }
+}
+
+@keyframes loader-42 {
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: -2em 0;
+    }
+}
+
+
+
+.loader-03 {
+    border: .2em solid currentcolor;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    -webkit-animation: 1s loader-03 linear infinite;
+    animation: 1s loader-03 linear infinite;
+    position: relative;
+    display: inline-block;
+    width: 2em;
+    height: 2em;
+    color: inherit;
+    vertical-align: middle;
+    pointer-events: none;
+}
+
+@-webkit-keyframes loader-03 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes loader-03 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}

@@ -200,15 +200,20 @@ var loadDetailsView = function (resp) {
 var loadEmployeeTable = function (listOfItems) {
     var output = ""
     var sortedArray = listOfItems;
-
-    for (var i = 0; i <= sortedArray.length - 1; i++) {
-        output = output + '<tr id="' + sortedArray[i].id + '"><td style="color: black" contenteditable="true" id="empName' + i
-            + '" class="valueCell"> ' + sortedArray[i].empName + ' </td><td style="color: black" contenteditable="true" id="empName' + i
-            + '" class="valueCell"> ' + sortedArray[i].empTin + ' </td><td style="color: black" contenteditable="true" id="empPosition' + i
-            + '" class="valueCell"> ' + sortedArray[i].empPosition + ' </td><td align="right" style="color: black" contenteditable="true"  id="basicSalary' + i
-            + '" class="valueCell"> ' + parseFloat(sortedArray[i].basicSalary ? sortedArray[i].basicSalary : 0).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
-            + '</td><td style="color: black" id="' + sortedArray[i].id + '" class="btnRow"><button title="View item" class="btn btn-success btn-sm" style=""><span class="fa fa-file fa - lg"></span></button></td></tr>';
+    
+    if (sortedArray) {
+        for (var i = 0; i <= sortedArray.length - 1; i++) {
+            output = output + '<tr id="' + sortedArray[i].id + '"><td style="color: black" contenteditable="true" id="empName' + i
+                + '" class="valueCell"> ' + sortedArray[i].empName + ' </td><td style="color: black" contenteditable="true" id="empName' + i
+                + '" class="valueCell"> ' + sortedArray[i].empTin + ' </td><td style="color: black" contenteditable="true" id="empPosition' + i
+                + '" class="valueCell"> ' + sortedArray[i].empPosition + ' </td><td align="right" style="color: black" contenteditable="true"  id="basicSalary' + i
+                + '" class="valueCell"> ' + parseFloat(sortedArray[i].basicSalary ? sortedArray[i].basicSalary : 0).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
+                + '</td><td style="color: black" id="' + sortedArray[i].id + '" class="btnRow"><button title="View item" class="btn btn-success btn-sm" style=""><span class="fa fa-file fa - lg"></span></button></td></tr>';
+        }
+    } else {
+        toastr.info("No employee submitted!");
     }
+    
 
     output = output;
     $("#employeeGrid").html(output);

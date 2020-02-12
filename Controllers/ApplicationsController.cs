@@ -11,6 +11,13 @@ namespace ITAPS_HOST.Controllers
         private readonly IAppConstants _config;
         private readonly IReportConstants _reportConfig;
 
+        public IActionResult Index()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+
         public ApplicationsController(IAppConstants config, IReportConstants reportConfig)
         {
             _config = config;
