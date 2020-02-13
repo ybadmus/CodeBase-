@@ -4,6 +4,7 @@ var serverUrl = $("#serverUrl").val();
 $(document).ready(function () {
     initializeKendoGrid();
     setTitles();
+    loadOffices();
 });
 
 var initializeKendoGrid = function (data) {
@@ -15,11 +16,24 @@ var initializeKendoGrid = function (data) {
         dataBound: onDataBound,
         pageable: { refresh: false, pageSizes: true, buttonCount: 5 },
         columns: [
-            { field: "statusDate", title: "Date", width: '90px', format: "{0:MM-dd-yyyy}" },
-            { field: "applicantName", title: "Applicant", width: '17%' },
-            { field: "requestingEntity", title: "Requesting Entity", width: '20%' },
-            { field: "purpose", title: "Purpose", width: '20%' },
-            { field: "status", title: "Status", width: '15%' },
+            { field: "updatedAt", title: "Date", width: '90px', format: "{0:MM-dd-yyyy}" },
+            { field: "companyName", title: "Company Name", width: '17%' },
+            { field: "companyTIN", title: "TIN", width: '20%' },
+            {
+                field: "totalNoOfStaff", title: "Total Staffs", width: '15%', attributes: { style: "text-align:right;" }, template: function (data) {
+                    return parseFloat(data.totalNoOfStaff).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
+                }
+            },
+            {
+                field: "totalCashEmolument", title: "Total Cash Emolument", width: '15%', attributes: { style: "text-align:right;" }, template: function (data) {
+                    return parseFloat(data.totalCashEmolument).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
+                }
+            },
+            {
+                field: "taxDeducted", title: "Tax Deducted", width: '15%', attributes: { style: "text-align:right;" }, template: function (data) {
+                    return parseFloat(data.taxDeducted).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
+                }
+            },
             {
                 command: [{
                     name: "view",
@@ -56,7 +70,7 @@ var loadTaxOffices = function (listOfTaxOffices) {
     }
 
     output = output;
-    $("#tccListOfTaxOffices").html(output);
+    $("#listOfTaxOffices").html(output);
 };
 
 var bootstrapPage = function () {

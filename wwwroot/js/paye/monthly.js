@@ -30,7 +30,7 @@ var initializeKendoGrid = function (data) {
         pageable: { refresh: false, pageSizes: true, buttonCount: 5 },
         columns: [
             { field: "updatedAt", title: "Date", width: '110px', template: '#= kendo.toString(kendo.parseDate(updatedAt), "dd/MM/yyyy")#' },
-            { field: "companyName", title: "Name", width: '25%' },
+            { field: "companyName", title: "Company Name", width: '25%' },
             { field: "companyTIN", title: "TIN", width: '110px' },
             {
                 field: "totalNoOfStaff", title: "Total Staffs", width: '15%', attributes: { style: "text-align:right;" }, template: function (data) {

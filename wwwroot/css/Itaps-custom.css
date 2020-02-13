@@ -715,6 +715,11 @@ td label{
     width: 430px;
 }
 
+#notificationItemMain {
+    display: inline-flex;
+    border-bottom: 1px solid #dddfe2;
+}
+
 #GridEmployeeDeductions table {
     table-layout: fixed;
 }

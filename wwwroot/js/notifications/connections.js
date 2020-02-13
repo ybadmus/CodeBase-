@@ -21,6 +21,7 @@ var loadNotificationsAllOffices = function (offices) {
 
 var loadNotificationDropdown = function (resp) {
     let output = "";
+    let outputMainView = "";
 
     if (resp) {
         for (var i = 0; i < resp.length; i++) {
@@ -41,13 +42,33 @@ var loadNotificationDropdown = function (resp) {
                     '<div class="" style="font-size: 14px; line-height: 1.10rem;"><span style="font-weight: 600">' + resp[i].userName + "</span><span style='font-weight: 500;'> (" + resp[i].userTIN + ") </span><span> submitted a </span><span style='font-weight: 600'>" + resp[i].taxType + " " + resp[i].transactionType + '</span><span class="oneOffice"> to </span>' +
                     '<span class="oneOffice">  ' + resp[i].taxOfficeName + "</span><span style='font-weight: 600'> on </span><span>" + resp[i].submittedDate + '.</span></div></div></div>';
             };
+
+            if (mainNotificationView) {
+                if (resp[i].status === "U") {
+                    outputMainView = outputMainView + '<div class="col-sm-12" id="notificationItemMain" style="background-color: #edf2fa;"><div>' +
+                        '<img src = "' + `${imgUrl}` + '" width = "48" height = "48" ></div><div style="padding-left: 5px; padding-right: 5px; padding-top: 4px">' +
+                        '<div class="" style="font-size: 14px; line-height: 1.10rem;"><span style="font-weight: 600">' + resp[i].userName + "</span><span style='font-weight: 500;'> (" + resp[i].userTIN + ") </span><span> submitted a </span><span style='font-weight: 600'>" + resp[i].taxType + " " + resp[i].transactionType + '</span><span class="oneOffice"> to </span>' +
+                        '<span class="oneOffice">  ' + resp[i].taxOfficeName + "</span><span style='font-weight: 600'> on </span><span>" + resp[i].submittedDate + '.</span></div></div></div>';
+                } else if (resp[i].status === "R") {
+                    outputMainView = outputMainView + '<div class="col-sm-12" id="notificationItemMain"><div>' +
+                        '<img src = "' + `${imgUrl}` + '" width = "48" height = "48" ></div><div style="padding-left: 5px; padding-right: 5px; padding-top: 4px">' +
+                        '<div class="" style="font-size: 14px; line-height: 1.10rem;"><span style="font-weight: 600">' + resp[i].userName + "</span><span style='font-weight: 500;'> (" + resp[i].userTIN + ") </span><span> submitted a </span><span style='font-weight: 600'>" + resp[i].taxType + " " + resp[i].transactionType + '</span><span class="oneOffice"> to </span>' +
+                        '<span class="oneOffice">  ' + resp[i].taxOfficeName + "</span><span style='font-weight: 600'> on </span><span>" + resp[i].submittedDate + '.</span></div></div></div>';
+                };
+            }
         };
         $("#loader_div").hide();
     }
 
     $("#NotificationItems").prepend(output);
+    if (mainNotificationView)
+        $("#notificationView").prepend(outputMainView);
     if (oneOfficeAssigned)
         $(".oneOffice").css('display', 'none');
+};
+
+var loadNotificationsView = function () {
+
 };
 
 const connection = new signalR.HubConnectionBuilder()

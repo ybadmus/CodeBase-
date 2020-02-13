@@ -1,44 +1,15 @@
-﻿var HeaderName = "All Notifications";
+﻿var HeaderName = "Notifications";
 var serverUrl = $("#serverUrl").val();
+var mainNotificationView = false;
 
 $(document).ready(function () {
-    initializeKendoGrid();
     bootstrapPage();
+    mainNotificationView = true;
 });
-
-var initializeKendoGrid = function (data) {
-
-    $("#Grid").kendoGrid({
-        dataSource: { data: data, pageSize: 8 },
-        sortable: true,
-        selectable: true,
-        dataBound: onDataBound,
-        pageable: { refresh: false, pageSizes: true, buttonCount: 5 },
-        columns: [
-            { field: "date", title: "Date", width: '90px', format: "{0:MM-dd-yyyy}" },
-            { field: "sender", title: "Sender", width: '17%' },
-            { field: "applicationType", title: "Application Type", width: '20%' },
-            { field: "status", title: "Status", width: '20%' },
-            {
-                command: [{
-                    name: "view",
-                    template: "<button title='View item' class='btn btn-light btn-sm' style='margin-right: 2px'><span class='fa fa-file fa-lg'></span></button>"
-                }],
-                title: "Actions",
-                width: "90px"
-            }
-        ]
-    });
-};
-
-var onDataBound = function () {
-
-};
 
 var setTitles = function () {
     $("#pgHeader").text(HeaderName);
 };
-
 
 var loadTaxOffices = function (listOfTaxOffices) {
     var output = "";
