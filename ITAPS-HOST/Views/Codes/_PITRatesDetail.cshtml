@@ -1,0 +1,157 @@
+﻿<input id="codeId" value="" hidden />
+<input id="code" value="" hidden />
+
+<div id="crDetails">
+    <div class="card-body">
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="taxPosition" role="tabpanel" aria-labelledby="nav-profile-tab">
+
+                <div class="form-horizontal">
+                    <div class="form-row">
+                        <div class="col-sm-5">
+                            <div class="bordered-group" id="" style="height: 350px">
+                                <p class="card-title"><b>Application Detail - <span id="ratesCode"></span> </b></p>
+                                <div class="table-responsive border-bottom">
+                                    <table class="table table-bordered" id="detailsViewTR">
+                                        <tbody>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Start Date</td>
+                                                <td title="Date Format: YYYY/MM/DD" style="padding-left:5px;width:250px;font-weight:bold;" id="startDate"></td>
+                                                @*<td style="width:250px;"><input id="startDate" type="text" class="form-control" placeholder="Start Date" data-toggle="flatpickr" value="" style="font-weight:bold;"></td>*@
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">End Date</td>
+                                                <td title="Date Format: YYYY/MM/DD" style="padding-left:5px;width:250px;font-weight:bold;" id="endDate"></td>
+                                                @*<td style="width:250px;"><input id="endDate" type="text" class="form-control" placeholder="End Date" data-toggle="flatpickr" value="" style="font-weight:bold;"></td>*@
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Description</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="description"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Amount Based</td>
+                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;" id="amtBased"></td>
+                                                @*<td style="width:250px;">
+                                                        <select type="text" id="amtBased" class="form-control" required>
+                                                            <option value="true">True</option>
+                                                            <option value="false">False</option>
+                                                        </select>
+                                                    </td>*@
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Tax Free Amount</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="taxFreeAmt"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Based on Table</td>
+                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;" id="basedOnTable"></td>
+                                                @*<td style="width:250px;">
+                                                        <select type="text" id="basedOnTable" class="form-control" required>
+                                                            <option value="true">True</option>
+                                                            <option value="false">False</option>
+                                                        </select>
+                                                    </td>*@
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Fixed Amount Table</td>
+                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;" id="fixedAmtTable"></td>
+                                                @*<td style="width:250px;">
+                                                        <select type="text" id="fixedAmtTable" class="form-control" required>
+                                                            <option value="true">True</option>
+                                                            <option value="false">False</option>
+                                                        </select>
+                                                    </td>*@
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Default</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="default"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+
+                                    <table class="table table-bordered" id="AddViewTR" style="display: none;">
+                                        <tbody>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Description</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="descriptionTR"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Amount Based</td>
+                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;" id="amtBasedTR"></td>
+                                                @*<td style="width:250px;">
+                                                        <select type="text" id="amtBased" class="form-control" required>
+                                                            <option value="true">True</option>
+                                                            <option value="false">False</option>
+                                                        </select>
+                                                    </td>*@
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Tax Free Amount</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="taxFreeAmtTR"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Based on Table</td>
+                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;" id="basedOnTableTR"></td>
+                                                @*<td style="width:250px;">
+                                                        <select type="text" id="basedOnTable" class="form-control" required>
+                                                            <option value="true">True</option>
+                                                            <option value="false">False</option>
+                                                        </select>
+                                                    </td>*@
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Fixed Amount Table</td>
+                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;" id="fixedAmtTableTR"></td>
+                                                @*<td style="width:250px;">
+                                                        <select type="text" id="fixedAmtTable" class="form-control" required>
+                                                            <option value="true">True</option>
+                                                            <option value="false">False</option>
+                                                        </select>
+                                                    </td>*@
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Default</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="defaultTR"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-7">
+                            <div class="bordered-group" id="" style="height: 350px">
+                                <p class="card-title"><b>Tax Band</b></p>
+                                <div class="table-responsive border-bottom" style="height: 300px;">
+                                    <button id="newRow" style="float: right;" class="btn btn-success btn-sm"><i class='fa fa-plus-circle'></i>  Add Rows</button>
+                                    <button id="saveRow" style="float: right;" class="btn btn-primary btn-sm"><i class='fa fa-plus-circle'></i>  Save Row</button>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr class="table-info">
+                                                @*<th scope="col" style="color: black;">#</th>*@
+                                                <th scope="col" style="color: black;">Tax Band</th>
+                                                <th scope="col" style="color: black;">Taxable Amount</th>
+                                                <th scope="col" style="color: black;">Percentage (%)</th>
+                                                @*<th scope="col" style="color: black;"></th>*@
+                                            </tr>
+                                        </thead>
+                                        <tbody id="taxGrid"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <button id="backToGrid" class="btn btn-outline-primary"> Back</button>
+                    <button id="saveDetails" style="float: right; margin-left: 2px;" class="btn btn-success">  Save</button>
+                    <button id="editDetails" style="float: right; margin-left: 2px;" class="btn btn-light">  Edit Fields</button>
+                    <button id="lockDetails" style="float: right; margin-left: 2px;" class="btn btn-primary">  Lock Fields</button>
+                    @*<button id="texMessages" style="float: right" class="btn btn-primary"><i class="fa fa-comments" aria-hidden="true"></i>  Messages</button>*@
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -21,13 +21,13 @@ namespace ITAPS_HOST.Services
             _adminRequestClient = adminRequestClient;
         }
 
-        public async Task<ResponseItem<object>> GetCodesTableAsync(string code, CancellationToken cancellationToken)
+        public async Task<ResponseItem<object>> GetCodesTableAsync(string code)
         {
             string apiEndpoint = $"GenericCodes/GetAllGCOTByTypeAsync/{code}";
             return await _adminRequestClient.GetRequestAsync(apiEndpoint);
         }
 
-        public async Task<ResponseItemForCreationDto<object>> PostCodesTableAsync(string code, SetupForCreationDto data, CancellationToken cancellationToken)
+        public async Task<ResponseItemForCreationDto<object>> PostCodesTableAsync(string code, SetupForCreationDto data)
         {
             string apiEndpoint = $"GenericCodes/PostGCOT?type={code}";
             var codeSetupForCreation = new SetupForCreationDto
@@ -42,11 +42,16 @@ namespace ITAPS_HOST.Services
             return await _adminRequestClient.PostRequestAsync(codeSetupForCreation, apiEndpoint);
         }
 
-        public async Task<ResponseItem<object>> SearchCodesTableAsync(string type, string term, CancellationToken cancellationToken)
+        public async Task<ResponseItem<object>> SearchCodesTableAsync(string type, string term)
         {
             string apiEndpoint = $"GenericCodes/SearchCodesAsync?type={type}&term={term}";
             return await _adminRequestClient.GetRequestAsync(apiEndpoint);
         }
 
+        public async Task<ResponseItem<object>> GetAllActivePeriods()
+        {
+            string apiEndpoint = $"GenericCodes/GetAllActivePeriodsByYearAndType/{DateTime.Now.Year.ToString()}/WHPER";
+            return await _adminRequestClient.GetRequestAsync(apiEndpoint);
+        }
     }
 }

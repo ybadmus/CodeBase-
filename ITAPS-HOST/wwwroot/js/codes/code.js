@@ -42,18 +42,19 @@ var apiCaller = function (url, type, data, callback) {
         },
         dataType: 'json',
         success: function (response) {
+            $('html').hideLoading();
             if (callback) {
                 callback(response.body, data, type);
             };
         },
         error: function (error) {
+            $('html').hideLoading();
             toastr.error('An error occured');
         }
-        //Reminder: set toastr for different situations of failure;
     });
 };
 
-var afterSave = function (res, objectSent, type) {
+var apiCallSuccess = function (res, objectSent, type) {
     if (type == "POST") {
         toastr.success("Successfully saved");
         UpdateKendoGridLocally(objectSent);
@@ -65,6 +66,8 @@ var afterSave = function (res, objectSent, type) {
         setDefaultUpdateModal();
         $("#modal-edit-setup").modal("hide");
     } else if (type == "GET") {
+        if (res.length == 0)
+            return toastr.info("No Data");
         initializeKendoGrid(res);
     }
 };
@@ -94,7 +97,8 @@ var searchCodes = function () {
     let searchItemTrimmed = searchItem.trim();
     let url = `${MainSearchUrl}` + "&term=" + `${searchItemTrimmed}`;
 
-    apiCaller(url.trim(), "GET", "", initializeKendoGrid);
+    $("#grid").data("kendoGrid").dataSource.data([]);
+    apiCaller(url.trim(), "GET", "", apiCallSuccess);
 };
 
 var configureUrls = function (setuptype) {
@@ -112,6 +116,13 @@ var configureUrls = function (setuptype) {
             MainPostUrl = `${MainPostUrl}TOT`;
             MainSearchUrl = `${MainSearchUrl}TOT`;
             HeaderName = "Tax Office Type";
+            break;
+
+        case "countries":
+            MainGetUrl = `${MainGetUrl}CTR`;
+            MainPostUrl = `${MainPostUrl}CTR`;
+            MainSearchUrl = `${MainSearchUrl}CTR`;
+            HeaderName = "Countries";
             break;
 
         case "nationality":
@@ -216,7 +227,21 @@ var configureUrls = function (setuptype) {
             MainGetUrl = `${MainGetUrl}EAR`;
             MainPostUrl = `${MainPostUrl}EAR`;
             MainSearchUrl = `${MainSearchUrl}EAR`;
-            HeaderName = "Reason For WHT Exemptions";
+            HeaderName = "Reasons For WHT Exemptions";
+            break;
+
+        case "tccpurposes":
+            MainGetUrl = `${MainGetUrl}TCCP`;
+            MainPostUrl = `${MainPostUrl}TCCP`;
+            MainSearchUrl = `${MainSearchUrl}TCCP`;
+            HeaderName = "TCC Purposes";
+            break;
+
+        case "payeEmployeePositions":
+            MainGetUrl = `${MainGetUrl}PEEP`;
+            MainPostUrl = `${MainPostUrl}PEEP`;
+            MainSearchUrl = `${MainSearchUrl}PEEP`;
+            HeaderName = "Employee Positions";
             break;
     }
 };
@@ -257,7 +282,7 @@ $("#SubmitSetup").click(function () {
         "cStatus": Status
     };
 
-    apiCaller(url, "POST", ObjectToSend, afterSave);
+    apiCaller(url, "POST", ObjectToSend, apiCallSuccess);
 });
 
 $("body").on('click', '#grid .k-grid-content .btn', function (e) {
@@ -297,7 +322,7 @@ $("#BtnUpdate").click(function () {
         "cStatus": rgionStatus
     };
 
-    apiCaller(url, "POST", ObjectToSend, afterSave);
+    apiCaller(url, "PUT", ObjectToSend, apiCallSuccess);
 });
 
 $('#modal-add-setup').on('hidden.bs.modal', function () {
@@ -325,14 +350,14 @@ $("#searchItem").on('keypress', function (e) {
 });
 
 var UpdateKendoGridLocally = function (obj) {
-    var displayedData = $("#grid").data().kendoGrid.dataSource.view()
+    var displayedData = $("#grid").data().kendoGrid.dataSource.data();
     var found = false;
 
     if (obj.id) {
         for (var i = 0; i < displayedData.length; i++) {
             if (obj.id == displayedData[i].id) {
                 found = true;
-                displayedData[i].cStatus = obj.status;
+                displayedData[i].cStatus = obj.cStatus;
                 displayedData[i].description = obj.description;
                 displayedData[i].code = obj.code;
                 displayedData[i].notes = obj.notes;
@@ -341,17 +366,17 @@ var UpdateKendoGridLocally = function (obj) {
             }
         }
     }
-   
 
     if (!found && !obj.id) {
-        var obj = {
-            "cStatus": obj.status,
+        var objNew = {
+            "cStatus": obj.cStatus,
             "description": obj.description,
             "code": obj.code,
             "notes": obj.notes,
         };
 
-        displayedData.shift(obj);
-        //To be continued here.
+        displayedData.unshift(objNew);
+        initializeKendoGrid(displayedData);
     }
 };
+

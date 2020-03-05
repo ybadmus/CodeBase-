@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewData["Title"] = "AllNotifications";
+}
+
+@section css {
+    <link href="~/css/applications/tcc.css" rel="stylesheet" />
+}
+
+<!--Defined this on page level because of control-->
+<input id="serverUrl" value="@ViewBag.ServerUrl" hidden />
+<input id="taxpayerId" value="@ViewBag.TaxpayerId" hidden />
+
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-sm-4" id="">
+                    <select type="text" id="tccListOfTaxOffices" class="form-control" required></select>
+                </div>
+                <div class="col-sm-2">
+                    <button type="button" id="btnSearch" class="btn btn-success btn-sm"><i class='fa fa-search'></i> Search</button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body" style="overflow-y: scroll;height: 55vh;padding-top: 3px;padding-bottom: 3px;">
+            <div class="box" id="main_loader_div">
+                <div class="loader-03"></div>
+            </div>
+
+            <div id="notificationView" class="row">
+
+            </div>
+        </div>
+        <div class="card-footer">
+            <i class="fa fa-copyright" aria-hidden="true"></i> <i>Copyright 2020 - ITAPS Notifications</i>
+        </div>
+    </div>
+</div>
+
+
+@section modals{s
+
+}
+
+@section scripts {
+    <script src="~/js/notifications/allnotifications.js"></script>
+}
+

@@ -1,0 +1,24 @@
+﻿using ITAPS_HOST.Models;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using ITAPS_HOST.Models.Applications;
+
+namespace ITAPS_HOST.IServices
+{
+    public interface ITCCService
+    {
+        Task<ResponseItem<object>> GetAllTCCApplication();
+        Task<ResponseItem<object>> GetTccApplicationById(Guid tccId);
+        Task<ResponseItem<object>> GetAllTccApplicationComments(Guid tccId);
+        Task<ResponseItem<object>> UpdateTccApplication(Guid id, UpdateTccDto objectToSend);
+        Task<ResponseItem<object>> SearchAllTCCApplication(string searchTerm);
+        Task<ResponseItemForCreationDto<object>> PostTaxPositionSummary(Guid taxerpayerId, Guid appId, IEnumerable<TaxPositionSummary> data);
+        Task<ResponseItem<object>> GetTCCCertificateNo();
+        Task<ResponseItem<object>> GetTCCApplicationDocumentByApplicationId(Guid id);
+        Task<ResponseItem<object>> GetAllTccApplicationByTaxOfficeId(Guid id, string queryString);
+        Task<ResponseItem<object>> GetTCCApplicationTaxPositionByApplicationId(Guid applicationId);
+        Task<ResponseItem<object>> GetAllTccApplicationPendingApprovalByTaxOfficeId(Guid id, string queryString);
+        Task<ResponseItem<object>> UpdateTccApplicationWithCertificate(Guid id, UpdateTccWithCertificate data);
+    }
+}

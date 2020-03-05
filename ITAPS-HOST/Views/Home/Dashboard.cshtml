@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewData["Title"] = "View";
+}
+
+<input id="serverUrl" value="@ViewBag.ServerUrl" hidden />
+<input id="userId" value="@ViewBag.UserId" hidden />
+
+<div class="row card-group-row">
+    <div class="col-md-12">
+        @*<iframe src='http://collect.localrevenue-gh.com/bi/en-us/site/site1/dashboards/b7d35f1b-9aed-45b2-8234-e0478bf2e13f/Sales/Northwind%20Products%20and%20Suppliers%20Dashboard?isembed=true'
+                id='dashboard-frame' width='100%' height='700vh' allowfullscreen frameborder='0'></iframe>*@
+
+        <iframe src='http://collect.localrevenue-gh.com/bi/en-us/site/site1/dashboards/d1597c8b-0b1c-438d-b820-6ee0ae3d91a7/Predictive%20Analytics/Personal%20Expense%20Analysis?isembed=true' 
+                id='dashboard-frame' width='100%' height='700vh' allowfullscreen frameborder='0'></iframe>
+    </div>
+</div>

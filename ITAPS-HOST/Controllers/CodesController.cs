@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ITAPS_HOST.Controllers
 {
+    [Authorize]
     public class CodesController : Controller
     {
         private readonly IAppConstants _config;
@@ -13,11 +14,58 @@ namespace ITAPS_HOST.Controllers
             _config = config;
         }
 
-        [Authorize]
         public IActionResult Index(string type)
         {
             UserDetails();
-            ViewBag.Type = type;
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+
+        public IActionResult TaxOffice()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+
+        public IActionResult TaxHoliday()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+
+        public IActionResult Currency()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+
+        public IActionResult ACTR()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+
+        public IActionResult RateAndCode()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+
+        public IActionResult CompanyRates()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+
+        public IActionResult PitRates()
+        {
+            UserDetails();
             ViewBag.ServerUrl = _config.AppServerUrl;
             return View();
         }

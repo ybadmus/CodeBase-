@@ -1,0 +1,158 @@
+﻿<div id="modal-add-setup" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="modal-standard-title" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="modal-income-title">Add Currency</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: white">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form>
+                                <div class="form-group row">
+                                    <div class="col-md-6 formDiv">
+                                        <label for="Code" class="col-form-label">
+                                            Code
+                                        </label>
+                                        <input type="text" class="form-control" id="Code" placeholder="">
+                                    </div>
+                                    <div class="col-md-6 formDiv">
+                                        <label for="Symbol" class="col-form-label">
+                                            Symbol
+                                        </label>
+                                        <input type="text" class="form-control" id="Symbol" placeholder="">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-12 formDiv">
+                                        <label for="Description" class="col-form-label">
+                                            Description
+                                        </label>
+                                        <textarea class="form-control" rows="2" id="Description"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-6 formDiv">
+                                        <label for="HomeCurrency" class="col-form-label">
+                                            Home Currency
+                                        </label>
+                                        <select type="text" id="HomeCurrency" class="form-control" required>
+                                            <option value="false">False</option>
+                                            <option value="true">True</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 formDiv">
+                                        <label for="Status" class="col-form-label">
+                                            Status
+                                        </label>
+                                        <select type="text" id="Status" class="form-control" required>
+                                            <option value="A">Active</option>
+                                            <option value="I">Inactive</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-12 formDiv">
+                                        <label for="Note" class="col-form-label">
+                                            Note
+                                        </label>
+                                        <textarea class="form-control" rows="3" id="Note" style="resize: none;" value=""></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" id="SubmitSetup" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-edit-setup" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="modal-standard-title" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="modal-income-title">Edit Currency</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: white">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form>
+                                <input type="text" class="form-control" id="EntryId" placeholder="" hidden>
+                                <div class="form-group row">
+                                    <div class="col-md-6 formDiv">
+                                        <label for="UpdateCode" class="col-form-label">
+                                            Code
+                                        </label>
+                                        <input type="text" class="form-control" id="UpdateCode" placeholder="" disabled>
+                                    </div>
+                                    <div class="col-md-6 formDiv">
+                                        <label for="UpdateSymbol" class="col-form-label">
+                                            Symbol
+                                        </label>
+                                        <input type="text" class="form-control" id="UpdateSymbol" placeholder="" disabled>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-12 formDiv">
+                                        <label for="UpdateDescription" class="col-form-label">
+                                            Description
+                                        </label>
+                                        <textarea class="form-control" rows="2" id="UpdateDescription" style="resize: none;" value="" disabled></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-6 formDiv">
+                                        <label for="UpdateHomeCurrency" class="col-form-label">
+                                            Home Currency
+                                        </label>
+                                        <input type="text" class="form-control" id="UpdateHomeCurrency" placeholder="" disabled>
+                                    </div>
+                                    <div class="col-md-6 formDiv">
+                                        <label for="UpdateStatus" class="col-form-label">
+                                            Status
+                                        </label>
+                                        <select type="text" id="UpdateStatus" class="form-control" disabled>
+                                            <option value="A">Active</option>
+                                            <option value="I">Inactive</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-12 formDiv">
+                                        <label for="UpdateNote" class="col-form-label">
+                                            Note
+                                        </label>
+                                        <textarea class="form-control" rows="2" id="UpdateNote" style="resize: none" value="" disabled></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" id="BtnEdit" class="btn btn-light"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;&nbsp; Edit</button>
+                <button type="button" id="BtnUpdate" class="btn btn-primary" style="display:none">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

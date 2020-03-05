@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewData["Title"] = "VATReturns";
+}
+
+
+<input id="serverUrl" value="@ViewBag.ServerUrl" hidden />
+<input id="UserObj" value="@ViewBag.UserId " hidden />
+
+<div class="card mb-0" style="margin-bottom: 1px !important;">
+    <div class="card-body pt-4 pl-4 pb-0">
+        <div class="form-horizontal">
+            <div class="form-row">
+                <div class="col-md-6" style="display: flex;">
+                    <div class="col-md-5">
+                        <label style="font-weight: bold"> TIN</label>
+                        <input id="tinField" type="text" class="form-control text-primary" placeholder="" onchange="" />
+                    </div>
+                    <div class="col-md-7">
+                        <label style="font-weight: bold"> Tax Office</label>
+                        <select id="tccListOfTaxOffices" class="form-control" style="width: auto;" onchange=""></select>
+                    </div>
+                </div>
+                <div class="col-md-6" style="display: flex;">
+                    <div class="col-md-6">
+                        <label style="font-weight: bold">Start Date</label>
+                        <input id="startDate" type="text" class="futureDatePicker form-control text-primary" placeholder="dd-mm-yyyy" onchange="" />
+                    </div>
+                    <div class="col-md-6">
+                        <label style="font-weight: bold">End Date</label>
+                        <input id="endDate" type="text" class="pastDatePicker form-control text-primary" placeholder="dd-mm-yyyy" onchange="" />
+                    </div>
+                </div>
+                <div class="col-md-6" style="display: flex;">
+                    <div class="col-md-5">
+                        <label style="font-weight: bold"> Filter</label>
+                        <input id="tinField" type="text" class="form-control text-primary" placeholder="" onchange="" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="row align-items-end">
+            <div class="GridDiv">
+                <div id="grid"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section modals{
+
+}
+@section scripts {
+    <script src="~/js/wht/vattransaction.js"></script>
+}
+

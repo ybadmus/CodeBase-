@@ -23,6 +23,13 @@ namespace ITAPS_HOST.Controllers
             return View();
         }
 
+        public IActionResult Dashboard()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
@@ -32,6 +39,12 @@ namespace ITAPS_HOST.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [Authorize]
+        public IActionResult Logout()
+        {
+            return new SignOutResult(new[] { "Cookies", "oidc" });
         }
 
         private void UserDetails()

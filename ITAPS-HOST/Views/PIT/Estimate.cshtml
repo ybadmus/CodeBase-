@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Estimate";
+}
+
+@section css {
+    <link href="~/css/applications/tcc.css" rel="stylesheet" />
+}
+
+<input id="serverUrl" value="@ViewBag.ServerUrl" hidden />
+<input id="taxpayerId" value="@ViewBag.TaxpayerId" hidden />
+
+<div class="card">
+
+    <partial name="_PITGrid" />
+    <partial name="_AnnualEstimate" />
+
+</div>
+
+@section scripts {
+    <script src="~/js/pit/pit.js"></script>
+    <script src="~/js/pit/estimate.js"></script>
+}
+

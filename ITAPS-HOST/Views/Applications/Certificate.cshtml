@@ -1,0 +1,74 @@
+﻿@{
+    ViewData["Title"] = "TCC Certificate";
+    Layout = "_Layout";
+}
+
+<input id="serverUrl" value="@ViewBag.ServerUrl" hidden />
+
+<style>
+    #reportviewer1_viewerContainer {
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+
+    #reportviewer1_licensing_msgContainer {
+        display: none;
+    }
+
+    #reportviewer1_viewBlockContainer {
+        display: none !important;
+    }
+
+    #reportviewer1 {
+        height: 77vh !important;
+    }
+</style>
+
+<div class="card">
+    <div class="card-body">
+        <bold-report-viewer id="reportviewer1" report-service-url="../Reports" report-path="@ViewBag.ReportPath" report-server-url="@ViewBag.ReportServer" processing-mode="Remote" ajax-before-load="ajaxBeforeLoad" />
+    </div>
+</div>
+
+<script>
+    $("#pgHeader").text("TCC Certificate");
+
+    $(window).load(function () {
+        localStorage.removeItem("tccReportId");
+        localStorage.removeItem("tccLabel");
+    });
+
+    var ServerUrl = $("#serverUrl").val();
+
+    $(".pb-3").contents().filter(function () {
+        return this.nodeType != 1;
+    }).replaceWith("");
+
+    var parameters = [];
+
+    var getParameters = function () {
+        var parameters = window.location.search.substr(1);
+        var listParams = [];
+        if (parameters != "") {
+            var splitValues = parameters.split("&");
+            for (var i = 0; i < splitValues.length; i++) {
+                var tempValue = splitValues[i].split("=");
+                listParams.push({ name: tempValue[0], value: decodeURIComponent(tempValue[1]) });
+            }
+        }
+
+        return listParams;
+    };
+
+    parameters.push({ name: localStorage.getItem("tccLabel"), labels: [localStorage.getItem("tccReportId")], values: [localStorage.getItem("tccReportId")], nullable: "true" });
+
+
+    function ajaxBeforeLoad(event) {
+        event.model.parameters = parameters;
+    };
+
+</script>
+
+<bold-script-manager></bold-script-manager>
+
+

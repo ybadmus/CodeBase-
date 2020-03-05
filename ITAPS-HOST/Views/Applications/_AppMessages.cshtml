@@ -1,0 +1,53 @@
+﻿<input id="currentStatus" style="display: none" />
+
+<div id="applicantColumn" class="tabcontent">
+    <div class="taxpayerMessageScroll" id="taxpayerMessageScroll" style="height: 250px; overflow-y: scroll; border-bottom: 1px solid silver; border-left: 1px solid silver;">
+        <div id="chatUI">
+
+        </div>
+    </div>
+
+    <div style="position: relative">
+        <form class="col-sm-10" style="padding-left: 0px; float:left;">
+            <label for="commentToTaxpayer" class="control-label" style="font-weight: 600; padding: 2px;">Message To <span id="applicantFName" style="color: #364c66 !important;"></span></label>
+            <textarea type="text" style="resize:none;height: 50px;" autocomplete="off" class="form-control form-cascade-control input-sm" id="commentToTaxpayer" placeholder="Type message to applicant here"></textarea>
+        </form>
+        <button id="sendMesageTaxpayer" style=" float:left; position: absolute; top: 40px" class="col-sm-2 btn btn-success"> Send</button>
+    </div>
+</div>
+
+<div id="internalMessagesColumn" class="tabcontent" style="display: none;">
+    <div class="internalMessageScroll" id="internalMessageScroll" style="height: 250px; overflow-y: scroll; border-bottom: 1px solid silver; border-left: 1px solid silver;">
+        <div style="" id="internalMessageUI">
+
+        </div>
+    </div>
+
+    <div style="position: relative">
+        <form class="col-sm-10" style="padding-left: 0px; float:left;">
+            <label for="commentToStaff" class="control-label" style="font-weight: 600; padding: 2px;">Internal Message</label>
+            <textarea type="text" autocomplete="off" class="form-control form-cascade-control input-sm" id="commentToStaff" style="resize:none;height: 50px;" placeholder="Type Internal messages here"></textarea>
+        </form>
+        <button id="sendInternal" style="float:left; position: absolute; top: 40px" class="col-sm-2 btn btn-success"> Send</button>
+    </div>
+</div>
+
+<div id="attachmentColumn" class="tabcontent" style="display: none;">
+    <div style="margin-top: 5px;">
+        <div class="row" id="">
+            <div class="container">
+                <table class="table table-striped">
+                    <colgroup><col style="width: 5%;"><col style="width: 65%;"><col style="width: 30%;"></colgroup>
+                    <thead>
+                        <tr class="" style=" background-color: #364c66 !important;">
+                            <td scope="col" style="color: white;">#</td>
+                            <td scope="col" style="color: white;">File Name</td>
+                            <td scope="col" style="color: white;">Date</td>
+                        </tr>
+                    </thead>
+                    <tbody id="DocumentTableId"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

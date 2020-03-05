@@ -1,0 +1,42 @@
+﻿<div id="gridView">
+    <div class="card-header" style="background: #f5f5f5 !important; border: 1px solid #ecd9d9;">
+        <div class="row">
+            <div class="col-md-6" style="display: inline-flex;">
+                <div class="col-sm-6">
+                    <select type="text" id="listOfTaxOffices" class="form-control" required></select>
+                </div>
+                <div class="col-md-4">
+                    <select class="form-control yearsDropdown" id="assessmentYear"></select>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="col-md-5" style="float: right">
+                    <input id="endDate" type="text" class="form-control" placeholder="End Date" />
+                </div>
+                <div class="col-md-5" style="float: right">
+                    <input id="startDate" type="text" class="form-control" placeholder="Start Date" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top: 5px;">
+            <div class="col-md-6" style="display: inline-flex;">
+                <div class="col-md-6">
+                    <input type="text" class="form-control  text-primary" autocomplete="off" id="tinHolder" placeholder="Enter Tin (Optional)" />
+                </div>
+                <div class="col-md-4">
+                    <button type="button" id="btnSearch" style="outline: none !important;box-shadow:none" class="btn btn-success btn-sm"><i class='fa fa-search'></i> Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div class="row align-items-end" style="margin: 1px;">
+            <div class="GridDiv">
+                <div id="Grid"></div>
+            </div>
+        </div>
+    </div>
+</div>

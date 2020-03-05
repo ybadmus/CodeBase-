@@ -2050,7 +2050,7 @@ html {
 }
 
 [dir=ltr] .form-group {
-    margin-bottom: 1rem
+    margin-bottom: 0.3rem
 }
 
 [dir=ltr] .form-text {
@@ -8793,7 +8793,7 @@ html {
 
 [dir=ltr] .pt-4,
 [dir=ltr] .py-4 {
-    padding-top: 1.5rem!important
+    padding-top: 1rem!important
 }
 
 [dir=ltr] .pr-4,
@@ -8808,7 +8808,7 @@ html {
 
 [dir=ltr] .pl-4,
 [dir=ltr] .px-4 {
-    padding-left: 1.5rem!important
+    padding-left: 1rem!important
 }
 
 [dir=ltr] .p-5 {

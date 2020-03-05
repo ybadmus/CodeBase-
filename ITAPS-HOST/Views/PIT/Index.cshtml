@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<input id="serverUrl" value="@ViewBag.ServerUrl" hidden />
+<div class="row card-group-row">
+    <div class="col-md-3 col-sm-6">
+        <a href="~/pit/estimate" class="dash-anchor">
+            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center" title="Click to enter your annual estimates">
+                <img src="~/icons/iconx-edits.png" class="img-responsive" width="80" />
+                <div class="flex mb-4 mt-4 dash-body">
+                    <h5 class="text-stats text-muted">Annual Estimates</h5>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <a href="~/pit/return" class="dash-anchor" title="Click to enter your annual returns">
+            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center">
+                <img src="~/icons/iconx-edits.png" class="img-responsive" width="80" />
+                <div class="flex mb-4 mt-4 dash-body">
+                    <h5 class="text-stats text-muted">Annual Returns</h5>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $("#pgHeader").text("Personal Income Tax");
+        });
+    </script>
+}
+

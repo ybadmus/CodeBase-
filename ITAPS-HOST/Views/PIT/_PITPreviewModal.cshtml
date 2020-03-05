@@ -1,0 +1,781 @@
+﻿@section css{
+    <link rel="stylesheet" href="~/PrintPDF/css/kendo.common-material.min.css" />
+    <link rel="stylesheet" href="~/PrintPDF/css/kendo.material.min.css" />
+    <link rel="stylesheet" href="~/PrintPDF/css/kendo.material.mobile.min.css" />
+}
+<div id="PreviewModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-large-title" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" id="modalpitreturn">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-large-title">Personal Income Tax Return</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: white">&times;</span>
+                </button>
+            </div>
+            <div id="modal-large-pitreturn" class="modal-body" style="width: 100% !important; display: inline-block !important; overflow:scroll; height:500px; overflow-x: hidden;">
+                <div id="PrintContent" class="p-4">
+                    <div class="row" style="margin-bottom: 16px;">
+                        <div class="col-md-12" style="text-align: center; margin-bottom: 2px;">
+                            <span style="font-weight: bold; font-size: 17PX; color: #364c66;">Tax Office: &nbsp;&nbsp;</span>
+                            <span id="TaxOfficePV" style="font-weight: bold; font-size: 17PX; color: #364c66;"></span>
+                        </div>
+                        <div class="col-md-12" style="text-align: center; margin-bottom: 2px;">
+                            <span style="font-weight: bold; font-size: 17PX; color: #364c66;"> Year: &nbsp;&nbsp;</span>
+                            <span id="assessmentYearViewReturnPV" style="font-weight: bold; font-size: 17PX; color: #364c66;"></span>
+                        </div>
+                        <div class="col-md-12" style="text-align: center; margin-bottom: 2px;">
+                            <span style="font-weight: bold; font-size: 17PX; color: #364c66;"></span>
+                            <span id="startDateViewReturnPV" style="font-weight: bold; font-size: 17PX; color: #364c66;"></span>
+                        </div>
+                        <div class="col-md-12" style="text-align: center; margin-bottom: 2px;">
+                            <span style="font-weight: bold; font-size: 17PX; color: #364c66;"> Date Submitted: &nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            <span id="endDateViewReturnPV" style="font-weight: bold; font-size: 17PX; color: #364c66;"></span>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 12px;">
+                        <div class="col-md-12" style="background-color: white;"><h6 style="font-weight: bold; color: #364c66;">Personal Information</h6><hr /></div>
+                        <div class="col-md-12">
+                            <div id="AssetsAndPayableView">
+                                <table class="table" style="width:100%!important; font-size:18px !important;">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th colspan="4">Personal Information</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 25%">Surname</td>
+                                            <th colspan="3"><span id="LastNamePV" style="font-weight: bold;"></span></th>
+                                        </tr>
+                                        <tr>
+                                            <td>First Name</td>
+                                            <td><span id="FirstNamePV" style="font-weight: bold;"></span></td>
+                                            <td>Other Name</td>
+                                            <td><span id="OtherNamesPV" style="font-weight: bold;"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>TIN</td>
+                                            <td><span id="TINPV" style="font-weight: bold;"></span></td>
+                                            <td>Nationality</td>
+                                            <td><span id="nationalityReturnPV" style="font-weight: bold;"></span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 12px;">
+                        <div class="col-md-12" style="background-color: white;"><h6 style="font-weight: bold; color: #364c66;">Business Information</h6><hr /></div>
+
+                        <div class="col-md-12" style="margin-bottom: 5px;">
+                            <table class="table" style="width:100%!important; font-size:18px !important;">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Business Name(s)</th>
+                                        <th scope="col">Business Activity</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="BusinessPreviewBody">
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br />
+                            <br />
+                        </div>
+                        <div class="col-md-12" style="margin-bottom: 5px;">
+                            <table class="table borderless" style="width:100%!important; font-size:18px !important;">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th colspan="4" style="color: black; text-align: center; font-size: 18px;">Tenancy</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="width: 30%">Accouting Method</td>
+                                        <td colspan="3">
+                                            <span id="accMethodReturnPV" style="color: black;"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tenancy status of Business </td>
+                                        <td>
+                                            <span id="" style="color: black;"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Name</td>
+                                        <td colspan="3"><span id="" style="color: black;"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Telephone No</td>
+                                        <td colspan="3"><span id="" style="color: black;"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>TIN</td>
+                                        <td colspan="3"><span id="" style="color: black;"></span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br />
+                        </div>
+                        <div class="col-md-12">
+                            <table class="table borderless" style="width:100%!important; font-size:18px !important;">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th colspan="3" style="color: black; text-align: center; font-size: 18px;">Tax Holiday</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Effective Date</th>
+                                        <th>Production Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="TaxHolidaysPreviewBody">
+                                    <tr>
+                                        <th>1</th>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>2</th>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>3</th>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br />
+                            <br />
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 12px;">
+                        <div class="col-md-12">
+                            <div id="TaxConsultantView">
+                                <table class="table borderless" style="width:100%!important; font-size:18px !important;">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th colspan="4" style="color: black; text-align: center; font-size: 18px;">Tax Consultant</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 20%">Full Name</td>
+                                            <td colspan="3"><span id="TaxConsultantNamePV" style="color: black;"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>TIN</td>
+                                            <td colspan="3"><span id="TaxConsultantTINPV" style="color: black;"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Telephone</td>
+                                            <td colspan="3"><span id="TaxConsultantPhonePV" style="color: black;"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>E-Mail</td>
+                                            <td colspan="3"><span id="TaxConsultantEmailPV" style="color: black;"></span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 12px;">
+                        <div class="col-md-12" style="background-color: white;">
+                            <h6 style="font-weight: bold; color: #364c66;"> Balance Sheet as @@ <span style="color: black;" class="btn btn-muted-light" id="bsBalanceSheetDatePV"></span></h6><hr />
+                        </div>
+                        <div class="col-md-12">
+                            <div id="AssetsAndPayableView">
+                                <table class="table table-borderless" style="width:100%!important; font-size:18px !important;">
+                                    <thead>
+                                        <tr>
+                                            <th style="color: black; font-weight: bold">Assets</th>
+                                            <th style="color: black; font-weight: bold">GHS</th>
+                                            <th style="color: black; font-weight: bold">Payables & Capital</th>
+                                            <th style="color: black; font-weight: bold">GHS</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="background-color: #e9ecef; color: black; font-size: 18px; font-weight: 700;" colspan="2">Current Assets</td>
+                                            <td style="background-color: #e9ecef; color: black; font-size: 18px; font-weight: 700;" colspan="2">Current Payables</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 30%">Stocks</td>
+                                            <td style="width: 20%" class="text-right"><span id="bsStocksPV" style="font-weight: bold;"></span></td>
+                                            <td style="width: 30%">Bill Payable</td>
+                                            <td style="width: 20%" class="text-right"><span id="bsBillsPayablePV" style="font-weight: bold;"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Receivables </td>
+                                            <td class="text-right"><span id="bsReceivablesPV" style="font-weight: bold;"></span></td>
+                                            <td>Loans / Overdraft</td>
+                                            <td class="text-right"><span id="bsLoansPV" style="font-weight: bold;"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Cash & Bank</td>
+                                            <td class="text-right"><span id="bsCashBalancePV" style="font-weight: bold;"></span></td>
+                                            <td>Accruals</td>
+                                            <td class="text-right"><span id="bsAccrualsPV" style="font-weight: bold;"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Prepayment</td>
+                                            <td class="text-right"><span id="bsPrepaymentPV" style="font-weight: bold;"></span></td>
+                                            <td>Other Payables</td>
+                                            <td class="text-right"><span id="bsOtherPayablesPV" style="font-weight: bold;"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Other Current Assets</td>
+                                            <td class="text-right"><span id="bsOtherCurrentAssetsPV" style="font-weight: bold;"></span></td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>a. Total Current</b></td>
+                                            <td class="text-right"><span id="TotalCurrentAssetsPV" style="font-weight: bold;"></span></td>
+                                            <td><b>d. Total </b></td>
+                                            <td class="text-right"><span id="totalCurrentPayablesPV" style="font-weight: bold;"></span></td>
+                                        </tr>
+                                    </tbody>
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <td style="background-color: #e9ecef; color: black; font-size: 18px; font-weight: 700;" colspan="2">Non-Current Assets</td>
+                                            <td style="background-color: #e9ecef; color: black; font-size: 18px; font-weight: 700;" colspan="2">Capital</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 30%">Land</td>
+                                            <td class="text-right" style="width: 20%"><span id="bsLandPV" style="font-weight: bold;"></span></td>
+                                            <td style="width: 30%">&nbsp;</td>
+                                            <td style="width: 20%">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Building</td>
+                                            <td class="text-right"><span id="bsBuildingPV" style="font-weight: bold;"></span></td>
+                                            <td>Capital B/F</td>
+                                            <td class="text-right"><span id="bsCapitalBFPV" style="font-weight: bold;"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Furniture & Equipment</td>
+                                            <td class="text-right"><span id="bsEquipmentPV" style="font-weight: bold;"></span></td>
+                                            <td>i. Add : Net Profit</td>
+                                            <td class="text-right"><span id="bsNetProfitPV" style="font-weight: bold;"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Motor Vehicles</td>
+                                            <td class="text-right"><span id="bsMotorVehiclePV" style="font-weight: bold;"></span></td>
+                                            <td>ii. Less : Drawings</td>
+                                            <td class="text-right"><span id="bsDrawingsPV" style="font-weight: bold;"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Other Assets</td>
+                                            <td class="text-right"><span id="bsOtherAssetsPV" style="font-weight: bold;"></span></td>
+                                            <td>Capital Additions</td>
+                                            <td class="text-right"><span id="bsCapitalAdditionsPV" style="font-weight: bold;"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>b. Total Non Current</b></td>
+                                            <td class="text-right"><span id="bsTotalNonCurrentAssetsPV" style="font-weight: bold;"></span></td>
+                                            <td><b>Net Capital</b></td>
+                                            <td class="text-right"><span id="bsNetCapitalPV" style="font-weight: bold;"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>c. Total Assets <br /> (sum a and b)</b></td>
+                                            <td class="text-right"><span id="totalAssetsPV" style="font-weight: bold;"></span></td>
+                                            <td><b> Total Capital and Payables <br /> (Sum d and h )</b></td>
+                                            <td class="text-right"><span id="totalCapitalPayablesPV" style="font-weight: bold;"></span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <br />
+                            <br />
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 12px;">
+                        <div class="col-md-12" style="background-color: white;">
+                            <h6 style="font-weight: bold; color: #364c66">Income Statement</h6><hr />
+                        </div>
+                        <div class="col-md-12">
+                            <div id="BusinessIncomeView">
+                                <table class="table table-bordered" style="width:100%!important; font-size:18px !important;">
+                                    <tbody>
+                                        <tr>
+                                            <td style="width:55%!important; font-weight: bold; color: black;">A. Gross Business Income</td>
+                                            <td colspan="2" style="background-color: #e9ecef;"></td>
+                                            <td class="text-right"><span id="inGrossBusinessIncomePV"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight: bold; color: black;">Business Expenses</td>
+                                            <td style="background-color: #e9ecef;" colspan="3"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 55%; color: black;"> i. Operating cost/cost of sales/ direct costs </td>
+                                            <td class="text-right" style="width: 15%; color: black;"><span id="inOperatingCostPV"></span></td>
+                                            <td colspan="2" style="width: 30%; background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;"> ii. General and  Administrative  Expenses </td>
+                                            <td class="text-right"><span id="insGeneralAdminExpensesPV"></span></td>
+                                            <td colspan="2" style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;"> iii. Others (specify) </td>
+                                            <td class="text-right"><span id="inOtherExpensesPV"></span></td>
+                                            <td colspan="2" style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;"> iv. Depreciation  </td>
+                                            <td class="text-right"><span id="inDepreciationPV"></span></td>
+                                            <td colspan="2" style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">  v. Staff / labour costs  </td>
+                                            <td class="text-right"><span id="insLabourCostPV"></span></td>
+                                            <td colspan="2" style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;"> vi. Interest expenses </td>
+                                            <td class="text-right"><span id="insInterestExpensesPV"></span></td>
+                                            <td colspan="2" style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; font-weight: bold; color: black;">B.  Total business Expenses</td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td class="text-right"><span id="inTotalBusinessExpensesPV"></span></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; font-weight: bold; color: black;">C. NET  BUSINESS PROFIT / LOSS  (A minus B)</td>
+                                            <td colspan="2" style="background-color: #e9ecef;"></td>
+                                            <td class="text-right"><span id="inNetBusinessProfitLossPV"></span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <br />
+                            <div id="EmploymentIncomeView">
+                                <table class="table table-bordered" style="width:100%!important; font-size:18px !important;">
+                                    <tbody>
+                                        <tr>
+                                            <td style="width:55%!important; font-weight: bold; color: black;">Employment  Income</td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">i. Basic salary </td>
+                                            <td class="text-right" style="width: 15%;"><span id="insBasicSalaryPV"></span></td>
+                                            <td style="width: 15%; background-color: #e9ecef;"></td>
+                                            <td style="width: 15%; background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">ii. Cash Allowances </td>
+                                            <td class="text-right"><span id="insCashAllowancePV"></span></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">iii. Other Cash Benefit</td>
+                                            <td class="text-right"><span id="insOtherCashBenefitPV"></span></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">iv. Excess Bonus </td>
+                                            <td class="text-right"><span id="insExcessBonusPV"></span></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">Benefit in Kind</td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">&nbsp;&nbsp;&nbsp;  1. Rent Element </td>
+                                            <td class="text-right"><span id="insRentElementPV"></span></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">&nbsp;&nbsp;&nbsp; 2. Car Element </td>
+                                            <td class="text-right"><span id="insCarElementPV"></span></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">&nbsp;&nbsp;&nbsp; 3. Others </td>
+                                            <td class="text-right"><span id="insOtherElementsPV"></span></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">&nbsp;&nbsp;&nbsp; v. Total Benefits in kind (The sum of 1, 2 and 3) </td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td class="text-right"><span id="inTotalBenefitsInKindPV"></span></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;"><b>D. NET EMPLOYMENT INCOME ( Sum i to v) </b></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td class="text-right"><span id="inNetEmploymentIncomePV"></span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <br />
+                            <div id="InvestmentIncomeView">
+                                <table class="table table-bordered" style="width:100%!important; font-size:18px !important;">
+                                    <tbody>
+                                        <tr>
+                                            <td style="width:55%!important;  font-weight: bold; color: black;">Investment  Income</td>
+                                            <td style="width: 15%; background-color: #e9ecef;"></td>
+                                            <td style="width: 15%; background-color: #e9ecef;"></td>
+                                            <td style="width: 15%; background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">i. Director’s fees</td>
+                                            <td class="text-right"><span id="insDirectorsFeePV"></span></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">ii. Commission</td>
+                                            <td class="text-right"><span id="insCommissionPV"></span></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">iii. Royalty</td>
+                                            <td class="text-right"><span id="insRoyaltyPV"></span></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">iv. Charges</td>
+                                            <td class="text-right"><span id="insChargesPV"></span></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">v. Annuity</td>
+                                            <td class="text-right"><span id="insAnnuityPV"></span></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">vi. Taxable Rent Income (See Notes ) </td>
+                                            <td class="text-right"><span id="insTaxableRentIncomePV"></span></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important;  color: black;">vii. Discounts</td>
+                                            <td class="text-right"><span id="insDiscountsPV"></span></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">viii. Premium</td>
+                                            <td class="text-right"><span id="insPremiumPV"></span></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">ix. Interest</td>
+                                            <td class="text-right"><span id="insInterestPV"></span></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;"> x. Other(Specify)</td>
+                                            <td class="text-right"><span id="insOthersPV"></span></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">E. NET INVESTMENT INCOME & OTHER INCOMES (sum i to x )</td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td class="text-right"><span id="inNetInvestmentIncomePV"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;"><b>F. TOTAL INCOME ( Sum C, D and E )</b></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td class="text-right"><span id="TotalIncomePV"></span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <br />
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 12px;">
+                        <div class="col-md-12" style="background-color: white;"><h6 style="font-weight: bold; color: #364c66">Tax Computations</h6><hr /></div>
+                        <div class="col-md-12">
+                            <div id="BusinessIncomeView">
+                                <table class="table table-bordered" style="width:100%!important; font-size:18px !important;">
+                                    <tbody>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">A. NET BUSINESS PROFIT ( Same as 4C )</td>
+                                            <td style="width: 15%; background-color: #e9ecef;"></td>
+                                            <td style="width: 15%; background-color: #e9ecef;"></td>
+                                            <td class="text-right" style="width: 15%;"><span id="NetBusinessProfitPV"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">Add Backs</td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">&nbsp;&nbsp;&nbsp;i. Depreciation</td>
+                                            <td class="text-right"><span id="AddBackDepreciationPV"></span></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">&nbsp;&nbsp;&nbsp;ii. Non–allowable deductions</td>
+                                            <td class="text-right"><span id="NonAllowableDeductionsPV"></span></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important;  color: black;">B. Total Add Backs ( sum i and ii )</td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td class="text-right"><span id="TotalAddBacksPV"></span></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">C. ADJUSTED BUSINESS  PROFIT (Sum A and B)</td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td class="text-right"><span id="AdjustedBusinessProfitPV"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important;  color: black;">Deduct</td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">&nbsp;&nbsp;&nbsp;i. Non-Taxable income</td>
+                                            <td class="text-right"><span id="NonTaxableIncomePV"></span></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important;  color: black;">&nbsp;&nbsp;&nbsp;ii. Capital Allowance</td>
+                                            <td class="text-right"><span id="CapitalAllowancePV"></span></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">D. TOTAL DEDUCTIONS</td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td class="text-right"><span id="TotalDeductionsPV"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">E. NET ADJUSTED BUSINESS PROFIT</td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td class="text-right"><span id="NetAdjustedBusinessProfitPV"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important;  color: black;">F. ADD NET EMPLOYMENT INCOME (same as 4D)</td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td class="text-right"><span id="AddNetEmploymentIncomePV"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">G. ADD NET INVESTMENT INCOME (same as 4E)</td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td class="text-right"><span id="AddNetInvestmentIncomePV"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important;  color: black;">H. TOTAL ASSESSABLE INCOME (sum 5E, 5F, and 5G)</td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td class="text-right"><span id="TotalAssessableIncomePV"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">LESS:</td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">I. INCOME TAXED AT DIFFERENT RATE</td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td class="text-right"><span id="IncomeTaxedAtDifferentRatesPV"></span></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">J. NET ASSESSABLE  INCOME ( 5H Minus 5I)</td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td class="text-right"><span id="NetAssessableIncomePV"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;"> DEDUCT: RELIEFS</td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important;  color: black;">&nbsp;&nbsp;&nbsp;i. Life Assurance</td>
+                                            <td class="text-right"><span id="LifeAssurancePV"></span></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">&nbsp;&nbsp;&nbsp;ii. Social Security</td>
+                                            <td class="text-right"><span id="SocialSecurityPV"></span></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">&nbsp;&nbsp;&nbsp;iii. Marriage / Responsibility</td>
+                                            <td class="text-right"><span id="MarriageResponsibilityPV"></span></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important;  color: black;">&nbsp;&nbsp;&nbsp;iv. Children's education (up to 3 Children)</td>
+                                            <td class="text-right"><span id="ChildrenEducationPV"></span></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">&nbsp;&nbsp;&nbsp;v. Old Age (For employees greater than or equal to 60 years old)</td>
+                                            <td class="text-right"><span id="OldAgePV"></span></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">&nbsp;&nbsp;&nbsp;vi. Aged Dependants (up to 2 aged dependants.)</td>
+                                            <td class="text-right"><span id="AgedDependantsPV"></span></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">&nbsp;&nbsp;&nbsp;vii. Disability</td>
+                                            <td class="text-right"><span id="DisabilityPV"></span></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important;  color: black;">&nbsp;&nbsp;&nbsp;viii. Cost of Training</td>
+                                            <td class="text-right"><span id="CostofTrainingPV"></span></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">&nbsp;&nbsp;&nbsp;ix. Voluntary Pension contribution (3rd  tier provident fund)</td>
+                                            <td class="text-right"><span id="VoluntaryPensionContributionPV"></span></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important;  color: black;">&nbsp;&nbsp;&nbsp;x. Other allowable deductions</td>
+                                            <td class="text-right"><span id="OtherAllowableDeductionsPV"></span></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">K. Total allowable deductions/reliefs</td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td class="text-right"><span id="TotalAllowableDeductionsReliefsPV"></span></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; font-weight: bold; color: black;">L. CHARGEABLE INCOME</td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td class="text-right"><span id="AnnualChargeableIncomePV"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">M. Tax Charged</td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td class="text-right"><span id="TaxChargedPV"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">Less PAYMENTS</td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important;  color: black;">&nbsp;&nbsp;&nbsp;i. Tax Credits</td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td class="text-right"><span id="TaxCreditsPV"></span></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">&nbsp;&nbsp;&nbsp;ii. Payment on Account</td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td class="text-right"><span id="PaymentOnAccountPV"></span></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">&nbsp;&nbsp;&nbsp;iii. Prior period credits </td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                            <td class="text-right"><span id="PriorPeriodCreditsPV"></span></td>
+                                            <td style="background-color: #e9ecef;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; color: black;">N. TOTAL PAYMENTS</td>
+                                            <td><span id=""></span></td>
+                                            <td><span id=""></span></td>
+                                            <td class="text-right"><span id="TotalPaymentsPV"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:55%!important; font-weight: bold; color: black;">O. TAX PAYABLE / OVERPAID </td>
+                                            <td><span id=""></span></td>
+                                            <td><span id=""></span></td>
+                                            <td class="text-right"><span id="TaxPayableOverpaidPV"></span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-light-gray" onclick="PrintDownload()">Download</button>
+                <button type="button" class="btn btn-light-gray" onclick="PrintPreview()">Print</button>
+            </div>
+        </div>
+    </div>
+</div>

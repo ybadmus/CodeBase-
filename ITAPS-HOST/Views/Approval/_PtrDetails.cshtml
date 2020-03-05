@@ -1,0 +1,141 @@
+﻿<input id="appId" value="@ViewBag.UserId " hidden />
+
+<div id="ptrDetails">
+    <div class="card-body">
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="taxPosition" role="tabpanel" aria-labelledby="nav-profile-tab">
+
+                <div class="form-horizontal">
+                    <div class="form-row">
+                        <div class="col-sm-6">
+                            <div class="bordered-group" id="" style="height: 350px">
+                                <p class="card-title"><b>Application Detail - <span id="appNoTex"></span> </b></p>
+                                <div class="table-responsive border-bottom" style="overflow-y: scroll;height: 280px;">
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Date Submitted</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="dateSubmittedPTR"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:140px;font-weight:100;">Applicant Name</td>
+                                                <td style="padding-left:5px;width:260px;">
+                                                    <b><span id="applicantNamePTR"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:140px;font-weight:100;">Applicant tin</td>
+                                                <td style="padding-left:5px;width:260px;">
+                                                    <b><span id="applicantTINPTR"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:140px;font-weight:100;">DOB</td>
+                                                <td style="padding-left:5px;width:260px;">
+                                                    <b><span id="dateOfBirthPTR"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:140px;font-weight:100;">Gender</td>
+                                                <td style="padding-left:5px;width:260px;">
+                                                    <b><span id="genderPTR"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:140px;font-weight:100;">Marital Status</td>
+                                                <td style="padding-left:5px;width:260px;">
+                                                    <b><span id="maritalStatusPTR"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:140px;font-weight:100;">Assessment Year</td>
+                                                <td style="padding-left:5px;width:260px;">
+                                                    <b><span id="assessmentYearPTR"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:140px;font-weight:100;">Start Date</td>
+                                                <td style="padding-left:5px;width:260px;">
+                                                    <b><span id="startDatePTR"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:140px;font-weight:100;">End Date</td>
+                                                <td style="padding-left:5px;width:260px;">
+                                                    <b><span id="endDatePTR"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:140px;font-weight:100;">Mothers Maiden Name</td>
+                                                <td style="padding-left:5px;width:260px;">
+                                                    <b><span id="mothersMaidenNamePTR"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:140px;font-weight:100;">Phone No</td>
+                                                <td style="padding-left:5px;width:260px;">
+                                                    <b><span id="phoneNoPTR"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:140px;font-weight:100;">Employer Name</td>
+                                                <td style="padding-left:5px;width:260px;">
+                                                    <b><span id="employerNamePTR"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:140px;font-weight:100;">Employer Phone</td>
+                                                <td style="padding-left:5px;width:260px;">
+                                                    <b><span id="employerPhonePTR"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:140px;font-weight:100;">Employer TIN</td>
+                                                <td style="padding-left:5px;width:260px;">
+                                                    <b><span id="employerTINPTR"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:140px;font-weight:100;">Employer Address</td>
+                                                <td style="padding-left:5px;width:260px;">
+                                                    <b><span id="employerAddressPTR"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:140px;font-weight:100;">Employer Email</td>
+                                                <td style="padding-left:5px;width:260px;">
+                                                    <b><span id="employerEmailPTR"></span></b>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="bordered-group" id="" style="height: 350px">
+                                <p class="card-title"><b>Messages</b></p>
+                                <div class="table-responsive border-bottom" style="height: 300px;">
+                                    <div id="taxpayerMessageScroll">
+                                        <div class="taxpayerMessageScroll">
+                                            <div id="chatUI">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <button id="backToGrid" class="btn btn-outline-primary"> Back</button>
+                    <button id="reviseApp" style="float: right; margin-left: 2px;" class="btn btn-success">  Revise Application</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,560 @@
+﻿<div id="returnDetail">
+    <div class="card-body">
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="tccDetails" role="tabpanel" aria-labelledby="nav-profile-tab">
+                <div class="form-horizontal">
+                    <div class="form-row">
+
+                        <div class="col-md-6" id="returnDetailsGrid1">
+                            <div class="bordered-group" id="" style="height: 320px">
+                                <p class="card-title"><b>Entity Details</b></p>
+                                <div class="table-responsive border-bottom">
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Assessment Year</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="assessmentYearViewReturn"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Start Date</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="startDateViewReturn"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">End Date</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="endDateViewReturn"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Accounting Method</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="accMethodReturn"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Nationality</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="nationalityReturn"></span></b>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6" id="returnDetailsGrid2">
+                            <div class="bordered-group" id="" style="height: 320px">
+                                <p class="card-title"><b>Balance Sheet</b></p>
+                                <div class="table-responsive border-bottom" style="overflow-y: scroll;height: 250px;">
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Balance Sheet Date</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="bsBalanceSheetDate"></span></b>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td colspan="2" style="padding-left:5px;width:120px;font-weight:100;text-align: center; font-weight: bold; background: #f7f8f9;">Current Assets</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Stocks</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="bsStocks"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Cash Balance</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="bsCashBalance"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Prepayment</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="bsPrepayment"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Other Current Assets</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="bsOtherCurrentAssets"></span></b>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td colspan="2" style="padding-left:5px;width:120px;font-weight:100;text-align: center; font-weight: bold; background: #f7f8f9;">Non-Current Assets</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Land</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="bsLand"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Building</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="bsBuilding"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Equipment</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="bsEquipment"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Motor Vehicle</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="bsMotorVehicle"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Other Assets</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="bsOtherAssets"></span></b>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td colspan="2" style="padding-left:5px;width:120px;font-weight:100;text-align: center; font-weight: bold; background: #f7f8f9;">Current Payables</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Bill Payable</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="bsBillsPayable"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Loans</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="bsLoans"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Accruals</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="bsAccruals"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Other Payables</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="bsOtherPayables"></span></b>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td colspan="2" style="padding-left:5px;width:120px;font-weight:100;text-align: center; font-weight: bold; background: #f7f8f9;">Capital</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Capital</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="bsCapitalBF"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Net Profit</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="bsNetProfit"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Drawings</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="bsDrawings"></span></b>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6" id="returnDetailsGrid3"  style="display: none">
+                            <div class="bordered-group" id="" style="height: 320px">
+                                <p class="card-title"><b>Income Statement</b></p>
+                                <div class="table-responsive border-bottom" style="overflow-y: scroll;height: 250px;">
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="2" style="padding-left:5px;width:120px;font-weight:100;text-align: center; font-weight: bold; background: #f7f8f9;">Business Expenses</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Operating Cost</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="insOperatingCost"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">General Expenses</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="insGeneralAndAdminExpense"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Labour Cost</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="insLabourCost"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Interest</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="insInterestExpenses"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Depreciation</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="insDepreciation"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Others</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="insOtherPayables"></span></b>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td colspan="2" style="padding-left:5px;width:120px;font-weight:100;text-align: center; font-weight: bold; background: #f7f8f9;">Cash Benefits</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Basic Salary</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="insBasicSalary"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Cash Allowance</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="insCashAllowance"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Excess Bonus</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="insExcessBonus"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Others</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="insOtherCashBenefit"></span></b>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td colspan="2" style="padding-left:5px;width:120px;font-weight:100;text-align: center; font-weight: bold; background: #f7f8f9;">Benefits In Kind</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Rent Element</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="insRentElement"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Car Element</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="insCarElement"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Others</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="insOtherElements"></span></b>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td colspan="2" style="padding-left:5px;width:120px;font-weight:100;text-align: center; font-weight: bold; background: #f7f8f9;">Investment Income</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Director's Fees</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="insDirectorsFee"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Commission</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="insCommission"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Royalty</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="insRoyalty"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Charges</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="insCharges"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Annutiy</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="insAnnuity"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Rent</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="insTaxableRentIncome"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Discount</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="insDiscounts"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Premium</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="insPremium"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Interest</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="insInterest"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Others</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="insOthers"></span></b>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6" id="returnDetailsGrid4"  style="display: none">
+                            <div class="bordered-group" id="" style="height: 320px">
+                                <p class="card-title"><b>Tax Computation</b></p>
+                                <div class="table-responsive border-bottom" style="overflow-y: scroll;height: 250px;">
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="2" style="padding-left:5px;width:120px;font-weight:100;text-align: center; font-weight: bold; background: #f7f8f9;">Add Backs & Deductions</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Depreciation</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="tcDepreciation1"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Non-Allowable</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="tcNonAllowableDeductions"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Non-Taxable Income</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="tcNonTaxableincome"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Capital Allowance</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="tcCapitalAllowance1"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Total Deduction</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="tcTotalDeductions"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Adjusted Profit</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="tcNetAdjustedBusinessProfit"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Net Business Profit</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="tcNetBusinessProfit"></span></b>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td colspan="2" style="padding-left:5px;width:120px;font-weight:100;text-align: center; font-weight: bold; background: #f7f8f9;">Tax Charged</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Net Employment Income</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="tcNetEmploymentIncome"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Net Investment Income</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="tcNetInvestmentIncome"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Different Rate</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="tcIncomeTaxDiffRates"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Tax Payable</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="tcTaxPayable"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Tax Charged</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="tcTaxCharged"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Chargeable Income</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="tcChargeableIncome"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Capital Allowance</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="tcCapitalAllowance"></span></b>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td colspan="2" style="padding-left:5px;width:120px;font-weight:100;text-align: center; font-weight: bold; background: #f7f8f9;">Payment Made</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Tax Credits</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="tcTaxCredits"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Payment Made</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="tcPaymentOnAccount"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Prior Credits</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="tcPriorPeriodCredits"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Total Payment</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="tcTotalPayment"></span></b>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6" id="returnDetailsGrid5"  style="display: none">
+                            <div class="bordered-group" id="" style="height: 320px">
+                                <p class="card-title"><b>Tax Reliefs</b></p>
+                                <div class="table-responsive border-bottom" style="overflow-y: scroll;height: 250px;">
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Life Assurance</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="tcRelLifeAssurance"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Social Security</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="tcRelSocialSecurity"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Marriage</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="tcRelMarriageResponsibility"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Children</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="relChildrenEduc"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Old Age</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="tcRelOldAgeEmployees"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Aged Dependants</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="tcRelAgedDependants"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Disability</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="tcRelDisability"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Training</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="tcRelCostOfTraining"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Pension</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="tcRelVolPensionContribution"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Others</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="tcRelOtherAllowableDeductions"></span></b>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <button id="backToGrid" class="btn btn-outline-primary"> Back</button>
+                    <button id="previousDetail1" onclick="previousDetail(1)" class="btn btn-outline-success"  style="display: none"> Previous Details</button>
+                    <button id="previousDetail2" onclick="previousDetail(2)" class="btn btn-outline-success"  style="display: none"> Previous Details</button>
+                    <button id="moreDetail1" onclick="moreDetails(1)" class="btn btn-success"  style="display: none"> More Details</button>
+                    <button id="moreDetail2" onclick="moreDetails(2)" class="btn btn-success"  style="display: none"> More Details</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
