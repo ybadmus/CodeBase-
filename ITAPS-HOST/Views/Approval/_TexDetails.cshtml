@@ -9,16 +9,16 @@
                     <div class="form-row">
                         <div class="col-sm-6">
                             <div class="bordered-group" id="" style="height: 350px">
-                                <p class="card-title"><b>Application Detail - <span id="appNoTex"></span> </b></p>
+                                <p class="card-title"><b>Application Detail - <span id="appNo"></span> </b></p>
                                 <div class="table-responsive border-bottom">
                                     <table class="table table-bordered">
                                         <tbody>
-                                            @*<tr>
-                                                <td style="padding-left:5px;width:120px;font-weight:100;">Applicant No.</td>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Application #</td>
                                                 <td style="padding-left:5px;width:280px;">
-                                                    <b><span id="applicantName"></span></b>
+                                                    <b><span id="appNoDetails"></span></b>
                                                 </td>
-                                            </tr>*@
+                                            </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:120px;font-weight:100;">Date Submitted</td>
                                                 <td style="padding-left:5px;width:280px;">
@@ -44,17 +44,36 @@
                                                 </td>
                                             </tr>
                                             <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Status</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="applicationStatus"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <td style="padding-left:5px;width:120px;font-weight:100;">Type of WHT</td>
                                                 <td style="padding-left:5px;width:280px;">
                                                     <b><span id="typeOfWht"></span></b>
                                                 </td>
                                             </tr>
-                                            @*<tr>
-                                                <td style="padding-left:5px;width:120px;font-weight:100;">Email</td>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="bordered-group" id="" style="height: 350px">
+                                <p class="card-title"><b>More Details - <span id="appNoMore"></span></b></p>
+                                <div class="table-responsive border-bottom">
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Applicant Email</td>
                                                 <td style="padding-left:5px;width:280px;">
-                                                    <b><span id="requestingEntityPhone"></span></b>
+                                                    <b><span id="applicantEmail"></span></b>
                                                 </td>
-                                            </tr>*@
+                                            </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:120px;font-weight:100;">Residential Status</td>
                                                 <td style="padding-left:5px;width:280px;">
@@ -77,27 +96,12 @@
                                     </table>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="col-sm-6">
-                            <div class="bordered-group" id="" style="height: 350px">
-                                <p class="card-title"><b>Messages</b></p>
-                                <div class="table-responsive border-bottom" style="height: 300px;">
-                                    <div id="taxpayerMessageScroll">
-                                        <div class="taxpayerMessageScroll">
-                                            <div id="chatUI">
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
                         </div>
                     </div>
                     <button id="backToGrid" class="btn btn-outline-primary"> Back</button>
                     <button id="reviseApp" style="float: right; margin-left: 2px;" class="btn btn-success">  Revise Application</button>
-                    @*<button id="texMessages" style="float: right" class="btn btn-primary"><i class="fa fa-comments" aria-hidden="true"></i>  Messages</button>*@
+                    <button id="tccMessages" style="float: right" class="btn btn-primary"><i class="fa fa-comments" aria-hidden="true"></i>  Messages</button>
                 </div>
 
             </div>

@@ -10,6 +10,7 @@
         public string DatasourcePassword { get; set; }
         public string ReportPath { get; set; }
         public string ReportServer { get; set; }
+        public string BoldBiKey { get; set; }
     }
 
     public interface IReportConstants
@@ -22,7 +23,7 @@
         string DatasourcePassword { get; set; }
         string ReportPath { get; set; }
         string ReportServer { get; set; }
-
+        string BoldBiKey { get; set; }
     }
 
 }

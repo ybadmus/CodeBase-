@@ -1,8 +1,5 @@
 ﻿using ITAPS_HOST.IServices;
 using ITAPS_HOST.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ITAPS_HOST.Services
@@ -15,9 +12,15 @@ namespace ITAPS_HOST.Services
             _adminRequestClient = adminRequestClient;
         }
 
-        public async Task<ResponseItem<object>> GetAllUserTaxOfficesByUserID(Guid userId)
+        public async Task<ResponseItem<object>> GetAllUserTaxOfficesByUserID(string userId)
         {
             var apiEndpoint = $"Users/GetAllUserTaxOfficesByUserID/" + userId;
+            return await _adminRequestClient.GetRequestAsync(apiEndpoint);
+        }
+
+        public async Task<ResponseItem<object>> GetAllMenusByUserId(string userId)
+        {
+            var apiEndpoint = $"Users/GetAllMenusByUserId/" + userId;
             return await _adminRequestClient.GetRequestAsync(apiEndpoint);
         }
     }

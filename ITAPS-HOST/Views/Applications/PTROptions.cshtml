@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewData["Title"] = "PTR Tiles";
+}
+
+<input id="serverUrl" value="@ViewBag.ServerUrl" hidden />
+
+<div class="row card-group-row">
+    <div class="col-md-3 col-sm-6">
+        <a href="~/applications/ptrdashboard" class="dash-anchor">
+            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center" title="Click to apply for Tax Clearance Certificate (TCC)">
+                <img src="~/icons/iconx-vatwh.png" class="img-responsive" width="80" />
+                <div class="flex mb-4 mt-4 dash-body">
+                    <h5 class="text-stats text-muted">View All Applications</h5>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+        <a href="~/applications/ptrassign" class="dash-anchor">
+            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center" title="Click to apply for Tax Clearance Certificate (TCC)">
+                <img src="~/icons/iconx-add.png" class="img-responsive" width="80" />
+                <div class="flex mb-4 mt-4 dash-body">
+                    <h5 class="text-stats text-muted">Assign Personal Tax Relief Aplication</h5>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+        <a href="~/applications/ptrprocessing" class="dash-anchor">
+            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center" title="Click to apply for Personal Tax Relief (PTR)">
+                <img src="~/icons/icon-revise.png" class="img-responsive" width="80" />
+                <div class="flex mb-4 mt-4 dash-body">
+                    <h5 class="text-stats text-muted">Process Personal Tax Relief Aplication</h5>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+        <a href="~/approval/ptrapproval" class="dash-anchor">
+            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center" title="Click to apply for Personal Tax Relief (PTR)">
+                <img src="~/images/icons/verified2.gif" class="img-responsive" width="80" />
+                <div class="flex mb-4 mt-4 dash-body">
+                    <h5 class="text-stats text-muted">Approve Personal Tax Relief Aplication</h5>
+                </div>
+            </div>
+        </a>
+    </div>
+
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $("#pgHeader").text("Personal Tax Reliefs");
+        });
+    </script>
+}

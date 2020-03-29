@@ -18,12 +18,7 @@ namespace ITAPS_HOST.Controllers
             return View();
         }
 
-        public ApplicationsController(IAppConstants config, IReportConstants reportConfig)
-        {
-            _config = config;
-            _reportConfig = reportConfig;
-        }
-
+        //TCC
         public IActionResult TCC()
         {
             UserDetails();
@@ -31,6 +26,78 @@ namespace ITAPS_HOST.Controllers
             return View();
         }
 
+        public IActionResult TCCAssign()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+
+        public IActionResult TCCDashboard()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+
+        public IActionResult TCCProcessing()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+
+        public IActionResult TCCOptions()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+        //TCC END
+
+        //WHT Exemption
+        public IActionResult TEX()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+
+        public IActionResult TEXAssign()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+       
+        public IActionResult TEXDashboard()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+
+        public IActionResult TEXProcessing()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+        public IActionResult TEXOptions()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+        //WHT END
+
+        public ApplicationsController(IAppConstants config, IReportConstants reportConfig)
+        {
+            _config = config;
+            _reportConfig = reportConfig;
+        }
+
+       
         public IActionResult Blank()
         {
             UserDetails();
@@ -38,6 +105,7 @@ namespace ITAPS_HOST.Controllers
             return View();
         }
 
+        //PTR
         public IActionResult PTR()
         {
             UserDetails();
@@ -45,12 +113,34 @@ namespace ITAPS_HOST.Controllers
             return View();
         }
 
-        public IActionResult TEX()
+        public IActionResult PTRAssign()
         {
             UserDetails();
             ViewBag.ServerUrl = _config.AppServerUrl;
             return View();
         }
+
+        public IActionResult PTROptions()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+
+        public IActionResult PTRDashboard()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+
+        public IActionResult PTRProcessing()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+        //PTR END
 
         public IActionResult TaxPosition(string applicantName, Guid taxpayerId, Guid appId)
         {
@@ -75,7 +165,7 @@ namespace ITAPS_HOST.Controllers
         {
             foreach (var claim in User.Claims)
             {
-                if (claim.Type == "given_name")
+                if (claim.Type == "preferred_username")
                 {
                     ViewBag.UserName = claim.Value;
                 }

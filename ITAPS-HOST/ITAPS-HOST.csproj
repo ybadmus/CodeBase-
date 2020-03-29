@@ -13,8 +13,8 @@
 
 
   <ItemGroup>
-    <PackageReference Include="BoldReports.AspNet.Core" Version="2.1.14" />
-    <PackageReference Include="BoldReports.Net.Core" Version="2.1.14" />
+    <PackageReference Include="BoldReports.AspNet.Core" Version="2.2.23" />
+    <PackageReference Include="BoldReports.Net.Core" Version="2.2.23" />
     <PackageReference Include="IdentityModel" Version="4.1.1" />
     <PackageReference Include="Marvin.StreamExtensions" Version="1.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />

@@ -43,10 +43,9 @@ namespace ITAPS_HOST
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            //Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MTQ0MjcwQDMxMzYyZTMzMmUzMEJHT2FCN3BNZmcrV01scC9rbjI2dy9yelVEQU4wQmtHMXRLUE80cW52eUk9");
-
-            //Bold.Licensing.BoldLicenseProvider.RegisterLicense("MDAyQDMxMmUzMjJlMzBIcXp5bTlZdGU4RHhCandURE80KzBHK1RXenV4bGNnelNrYXkxSkZvQzJzPWFtVnljbmt1YjJ0aGJuUmxlVUJ3WlhKemIyd3VibVYwT3pJdk1qZ3ZNakF5TUNBeE1qb3dNRG93TUNCQlRUc3hNakU3Um1Gc2MyVT0=");
-            Bold.Licensing.BoldLicenseProvider.RegisterLicense("");
+            var boldBiKey = Startup.StaticConfig.GetSection("REPORTCONSTANTS");
+            string licenseKey = boldBiKey["BoldBiKey"];
+            Bold.Licensing.BoldLicenseProvider.RegisterLicense(licenseKey);
 
             if (env.IsDevelopment())
             {

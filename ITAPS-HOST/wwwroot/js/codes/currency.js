@@ -3,7 +3,7 @@ var MainPostUrl = `${ServerUrl}api/Currency`;
 var MainGetUrl = `${ServerUrl}api/Currency`;
 var MainSearchUrl = `${ServerUrl}api/Currency`;
 
-var InitializeKendoGrid = function (data, stage) {
+var initializeKendoGrid = function (data, stage) {
     if (data.length == 0 && stage !== 1) {
         return toastr.info("No Data");
     }
@@ -155,7 +155,7 @@ var searchCurrency = function () {
     let url = `${MainSearchUrl}/SearchCurrency/` + searchItem;
 
     $("#Grid").data("kendoGrid").dataSource.data([]);
-    ApiCaller(url, "GET", "", InitializeKendoGrid);
+    ApiCaller(url, "GET", "", initializeKendoGrid);
 };
 
 $(document).ready(function () {
@@ -248,7 +248,7 @@ var UpdateKendoGridLocally = function (code, symbol, description, notes, status,
             displayedData[i].symbol = symbol;
             displayedData[i].notes = notes;
 
-            InitializeKendoGrid(displayedData);
+            initializeKendoGrid(displayedData);
         }
     }
 }

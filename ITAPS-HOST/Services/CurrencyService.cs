@@ -32,7 +32,8 @@ namespace ITAPS_HOST.Services
                 HomeCurrency = data.HomeCurrency,
                 Symbol = data.Symbol,
                 Notes = data.Notes,
-                Status = data.Status
+                Status = data.Status,
+                Description = data.Description
             };
 
             return await _adminRequestClient.PostRequestAsync(currencyForCreation, apiEndpoint);

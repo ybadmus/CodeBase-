@@ -56,16 +56,24 @@
         label > span {
             color: black !important;
         }
+
+        .sidebar-submenu collapse show {
+            display: block !important;
+        }
+
+        [dir="ltr"] .sidebar-submenu {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
     </style>
     @RenderSection("css", required: false)
 </head>
 
 <body class="layout-default">
     <input id="userId" value="@ViewBag.UserId" hidden />
-    <input id="appServerUrlDashBoard" value="@ViewBag.ServerUrl" hidden />
 
     <div class="preloader"></div>
-
     <div class="mdk-header-layout js-mdk-header-layout">
         <!-- Header -->
 
@@ -74,11 +82,9 @@
 
                 <div class="navbar navbar-expand-sm navbar-main navbar-dark bg-dark  pr-0" id="navbar" data-primary>
                     <div class="container-fluid p-0">
-                        <!-- Navbar toggler -->
                         <button class="navbar-toggler navbar-toggler-right d-block d-md-none" type="button" data-toggle="sidebar">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-                        <!-- Navbar Brand -->
                         <a href="~/home" class="navbar-brand ">
                             <img class="navbar-brand-icon" src="~/images/itaps.png" width="50" alt="Stack" />
                             <span>iTaPS HOST</span>
@@ -100,7 +106,6 @@
                                             </div>
                                         </div>
                                         <div class="col-md-12 py-0 px-1 m-0" style="text-align: center;">
-                                            @*<a class="btn btn-xs btn-default" asp-controller="Notification" asp-action="AllNotifications" id="viewAllNotifications">View All</a>*@
                                             <a class="btn btn-xs btn-default" id="viewAllNotifications">View All</a>
                                         </div>
                                     </form>
@@ -133,7 +138,6 @@
         </div>
 
         <div class="mdk-header-layout__content">
-
             <div class="mdk-drawer-layout js-mdk-drawer-layout" data-push data-responsive-width="992px">
                 <div class="mdk-drawer-layout__content page">
 
@@ -177,278 +181,14 @@
                     <div class="mdk-drawer__content">
                         <div class="sidebar sidebar-light sidebar-left simplebar" data-simplebar>
                             <div class="sidebar-heading sidebar-m-t">Menu</div>
-                            <ul class="sidebar-menu">
-                                <li class="sidebar-menu-item home">
-                                    <a class="sidebar-menu-button" href="~/home">
-                                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">home</i>
-                                        <span class="sidebar-menu-text">Home</span>
-                                    </a>
-                                </li>
-                                <!-- Code Setup-->
-                                <li class="sidebar-menu-item pit">
-                                    <a class="sidebar-menu-button" data-toggle="collapse" href="#Codes_menu">
-                                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">account_balance_wallet</i>
-                                        <span class="sidebar-menu-text">Codes</span>
-                                        <span class="ml-auto sidebar-menu-toggle-icon"></span>
-                                    </a>
-                                    <ul class="sidebar-submenu collapse" id="Codes_menu">
-                                        <li class="sidebar-menu-item estimates">
-                                            <a class="sidebar-menu-button" href="~/codes/index?type=taxofficetype">
-                                                <span class="sidebar-menu-text">Tax Office Type</span>
-                                            </a>
-                                        </li>
-                                        <li class="sidebar-menu-item estimatesRevised">
-                                            <a class="sidebar-menu-button" href="~/codes/taxoffice">
-                                                <span class="sidebar-menu-text">Tax Office</span>
-                                            </a>
-                                        </li>
-                                        <li class="sidebar-menu-item returns">
-                                            <a class="sidebar-menu-button" href="~/codes/taxholiday">
-                                                <span class="sidebar-menu-text">Tax Holiday</span>
-                                            </a>
-                                        </li>
-                                        <li class="sidebar-menu-item returnsRevised">
-                                            <a class="sidebar-menu-button" href="~/codes/index?type=region">
-                                                <span class="sidebar-menu-text">Regions</span>
-                                            </a>
-                                        </li>
-                                        <li class="sidebar-menu-item returnsRevised">
-                                            <a class="sidebar-menu-button" href="~/codes/index?type=countries">
-                                                <span class="sidebar-menu-text">Countries</span>
-                                            </a>
-                                        </li>
-                                        <li class="sidebar-menu-item returnsRevised">
-                                            <a class="sidebar-menu-button" href="~/codes/index?type=nationality">
-                                                <span class="sidebar-menu-text">Nationality</span>
-                                            </a>
-                                        </li>
-                                        <li class="sidebar-menu-item returnsRevised">
-                                            <a class="sidebar-menu-button" href="~/codes/currency">
-                                                <span class="sidebar-menu-text">Currency</span>
-                                            </a>
-                                        </li>
-                                        <li class="sidebar-menu-item returnsRevised">
-                                            <a class="sidebar-menu-button" href="~/codes/index?type=taxpayertype">
-                                                <span class="sidebar-menu-text">Taxpayer Types</span>
-                                            </a>
-                                        </li>
-                                        <li class="sidebar-menu-item returnsRevised">
-                                            <a class="sidebar-menu-button" href="~/codes/index?type=identitytype">
-                                                <span class="sidebar-menu-text">Identity Types</span>
-                                            </a>
-                                        </li>
-                                        <li class="sidebar-menu-item returnsRevised">
-                                            <a class="sidebar-menu-button" href="~/codes/index?type=mediaUploadType">
-                                                <span class="sidebar-menu-text">Media Upload Types</span>
-                                            </a>
-                                        </li>
-                                        <li class="sidebar-menu-item returnsRevised">
-                                            <a class="sidebar-menu-button" href="~/codes/index?type=personalReliefs">
-                                                <span class="sidebar-menu-text">Personal Relief Types</span>
-                                            </a>
-                                        </li>
-                                        <li class="sidebar-menu-item returnsRevised">
-                                            <a class="sidebar-menu-button" href="~/codes/index?type=tccpurposes">
-                                                <span class="sidebar-menu-text">TCC Purposes</span>
-                                            </a>
-                                        </li>
-                                        <li class="sidebar-menu-item returnsRevised">
-                                            <a class="sidebar-menu-button" href="~/codes/index?type=patnerdormantstate">
-                                                <span class="sidebar-menu-text">Partner Dormant State</span>
-                                            </a>
-                                        </li>
-                                        <li class="sidebar-menu-item returnsRevised">
-                                            <a class="sidebar-menu-button" href="~/codes/index?type=residentialstatus">
-                                                <span class="sidebar-menu-text">Residential Status</span>
-                                            </a>
-                                        </li>
-                                        <li class="sidebar-menu-item returnsRevised">
-                                            <a class="sidebar-menu-button" href="~/codes/index?type=tenancystatus">
-                                                <span class="sidebar-menu-text">Tenancy Status</span>
-                                            </a>
-                                        </li>
-                                        <li class="sidebar-menu-item returnsRevised">
-                                            <a class="sidebar-menu-button" href="~/codes/index?type=accountingmethod">
-                                                <span class="sidebar-menu-text">Accounting Method</span>
-                                            </a>
-                                        </li>
-                                        <li class="sidebar-menu-item returnsRevised">
-                                            <a class="sidebar-menu-button" href="~/codes/index?type=payeEmployeePositions">
-                                                <span class="sidebar-menu-text">Employee Positions</span>
-                                            </a>
-                                        </li>
-                                        <li class="sidebar-menu-item">
-                                            <a class="sidebar-menu-button" data-toggle="collapse" href="#taxRates_menu">
-                                                <span class="sidebar-menu-text">Tax Rates</span>
-                                                <span class="ml-auto d-flex align-items-center">
-                                                    <span class="badge badge-primary">Rates</span>
-                                                    <span class="sidebar-menu-toggle-icon"></span>
-                                                </span>
-                                            </a>
-                                            <ul class="sidebar-submenu collapse " id="taxRates_menu">
-                                                <li class="sidebar-menu-item ">
-                                                    <a class="sidebar-menu-button" href="~/codes/pitrates">
-                                                        <span class="sidebar-menu-text">PIT Tax Rate</span>
-                                                    </a>
-                                                </li>
-                                                <li class="sidebar-menu-item ">
-                                                    <a class="sidebar-menu-button" href="~/codes/companyrates">
-                                                        <span class="sidebar-menu-text">Company Tax Rate</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="sidebar-menu-item">
-                                            <a class="sidebar-menu-button" data-toggle="collapse" href="#course_menu">
-                                                <span class="sidebar-menu-text">Withholding</span>
-                                                <span class="ml-auto d-flex align-items-center">
-                                                    <span class="badge badge-primary">WHT</span>
-                                                    <span class="sidebar-menu-toggle-icon"></span>
-                                                </span>
-                                            </a>
-                                            <ul class="sidebar-submenu collapse " id="course_menu">
-                                                <li class="sidebar-menu-item returnsRevised">
-                                                    <a class="sidebar-menu-button" href="~/codes/index?type=exemptionreason">
-                                                        <span class="sidebar-menu-text">Exemption Reasons</span>
-                                                    </a>
-                                                </li>
-                                                <li class="sidebar-menu-item returnsRevised">
-                                                    <a class="sidebar-menu-button" href="~/codes/index?type=withholdingtaxstatus">
-                                                        <span class="sidebar-menu-text">WHT Tax Status</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
+                            <div id="menusHolder">
 
-                                <!-- PIT -->
-                                <li class="sidebar-menu-item pit">
-                                    <a class="sidebar-menu-button" data-toggle="collapse" href="#PIT_menu">
-                                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">account_balance_wallet</i>
-                                        <span class="sidebar-menu-text">Personal Income Tax</span>
-                                        <span class="ml-auto sidebar-menu-toggle-icon"></span>
-                                    </a>
-                                    <ul class="sidebar-submenu collapse" id="PIT_menu">
-                                        <li class="sidebar-menu-item estimates">
-                                            <a class="sidebar-menu-button" href="~/pit/estimate">
-                                                <span class="sidebar-menu-text">Annual Estimates</span>
-                                            </a>
-                                        </li>
-                                        <li class="sidebar-menu-item returns">
-                                            <a class="sidebar-menu-button" href="~/pit/return">
-                                                <span class="sidebar-menu-text">Annual Returns</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-
-                                <!-- WITHHOLDING
-                                <li class="sidebar-menu-item wht">
-                                    <a class="sidebar-menu-button" data-toggle="collapse" href="#WHT_menu">
-                                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">account_balance_wallet</i>
-                                        <span class="sidebar-menu-text">Withholding Tax</span>
-                                        <span class="ml-auto sidebar-menu-toggle-icon"></span>
-                                    </a>
-                                    <ul class="sidebar-submenu collapse" id="WHT_menu">
-                                        <li class="sidebar-menu-item new">
-                                            <a class="sidebar-menu-button" href="~/wtht/alltransaction">
-                                                <span class="sidebar-menu-text">All Transactions</span>
-                                            </a>
-                                        </li>
-                                        <li class="sidebar-menu-item update">
-                                            <a class="sidebar-menu-button" href="~/wtht/returns">
-                                                <span class="sidebar-menu-text">Monthly Returns</span>
-                                            </a>
-                                        </li>
-                                        <li class="sidebar-menu-item alltransactions">
-                                            <a class="sidebar-menu-button" href="~/wtht/vattransaction">
-                                                <span class="sidebar-menu-text">VAT Transactions</span>
-                                            </a>
-                                        </li>
-                                        <li class="sidebar-menu-item returns">
-                                            <a class="sidebar-menu-button" href="~/wtht/vatreturns">
-                                                <span class="sidebar-menu-text">VAT Returns</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li> -->
-                                <!-- APPLICATIONS -->
-                                <li class="sidebar-menu-item applications">
-                                    <a class="sidebar-menu-button" data-toggle="collapse" href="#APPLICATIONS_menu">
-                                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">account_balance_wallet</i>
-                                        <span class="sidebar-menu-text">Applications</span>
-                                        <span class="ml-auto sidebar-menu-toggle-icon"></span>
-                                    </a>
-                                    <ul class="sidebar-submenu collapse" id="APPLICATIONS_menu">
-                                        <li class="sidebar-menu-item tcc">
-                                            <a class="sidebar-menu-button" href="~/applications/tcc">
-                                                <span class="sidebar-menu-text">Tax Clearance Certificate</span>
-                                            </a>
-                                        </li>
-                                        <li class="sidebar-menu-item whte">
-                                            <a class="sidebar-menu-button" href="~/applications/tex">
-                                                <span class="sidebar-menu-text">Tax Exemption</span>
-                                            </a>
-                                        </li>
-                                        <li class="sidebar-menu-item whteapproval">
-                                            <a class="sidebar-menu-button" href="~/applications/ptr">
-                                                <span class="sidebar-menu-text">Personal Tax Relief</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-
-                                <li class="sidebar-menu-item approvals">
-                                    <a class="sidebar-menu-button" data-toggle="collapse" href="#APPROVAL_menu">
-                                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">account_balance_wallet</i>
-                                        <span class="sidebar-menu-text">Approval</span>
-                                        <span class="ml-auto sidebar-menu-toggle-icon"></span>
-                                    </a>
-                                    <ul class="sidebar-submenu collapse" id="APPROVAL_menu">
-                                        <li class="sidebar-menu-item tccapproval">
-                                            <a class="sidebar-menu-button" href="~/approval/tccapproval">
-                                                <span class="sidebar-menu-text">Tax Clearance Certification</span>
-                                            </a>
-                                        </li>
-                                        <li class="sidebar-menu-item whteapproval">
-                                            <a class="sidebar-menu-button" href="~/approval/texapproval">
-                                                <span class="sidebar-menu-text">Tax Exemptions</span>
-                                            </a>
-                                        </li>
-                                        <li class="sidebar-menu-item whteapproval">
-                                            <a class="sidebar-menu-button" href="~/approval/ptrapproval">
-                                                <span class="sidebar-menu-text">Personal Tax Relief</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-
-                                <li class="sidebar-menu-item approvals">
-                                    <a class="sidebar-menu-button" data-toggle="collapse" href="#PAYE_menu">
-                                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">account_balance_wallet</i>
-                                        <span class="sidebar-menu-text">Pay As You Earn</span>
-                                        <span class="ml-auto sidebar-menu-toggle-icon"></span>
-                                    </a>
-                                    <ul class="sidebar-submenu collapse" id="PAYE_menu">
-                                        <li class="sidebar-menu-item tccapproval">
-                                            <a class="sidebar-menu-button" href="~/paye/monthly">
-                                                <span class="sidebar-menu-text">Monthly PAYE</span>
-                                            </a>
-                                        </li>
-                                        <li class="sidebar-menu-item whteapproval">
-                                            <a class="sidebar-menu-button" href="~/paye/annual">
-                                                <span class="sidebar-menu-text">Annual PAYE</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
     </div>
 
@@ -470,7 +210,6 @@
     <script src="~/js/sidebar-mini.js"></script>
     <!--Template-->
     <script src="~/js/template-bootstrapper.js"></script>
-
     <!-- App Settings (safe to remove) -->
     <script src="~/js/app-settings.js"></script>
     <!-- Flatpickr -->
@@ -494,7 +233,8 @@
     <script src="~/js/jquery.showLoading.min.js"></script>
     <!--Toastr-->
     <script src="~/js/toastr.min.js"></script>
-    <script src="~/js/shared/itaps-helper.js"></script>
+    <script src="~/js/shared/itaps-host-shared.js"></script>
+    @*<script src="~/js/shared/itaps-helper.js"></script>*@
     <script src="~/js/notifications/signalr.js"></script>
     <script src="~/js/notifications/connections.js"></script>
     <script src="~/js/notifications/notifications.js"></script>

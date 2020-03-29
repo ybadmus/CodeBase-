@@ -3,58 +3,26 @@
     ViewData["Title"] = "AllTransaction";
 }
 
+@section css {
+    <link href="~/css/applications/tcc.css" rel="stylesheet" />
+}
+
 <input id="serverUrl" value="@ViewBag.ServerUrl" hidden />
 <input id="UserObj" value="@ViewBag.UserId " hidden />
 
-<div class="card mb-0" style="margin-bottom: 1px !important;">
-    <div class="card-body pt-4 pl-4 pb-0">
-        <div class="form-horizontal">
-            <div class="form-row">
-                <div class="col-md-6" style="display: flex;">
-                    <div class="col-md-4">
-                        <label style="font-weight: bold"> Year</label>
-                        <select id="yearField" class="form-control" style="width: auto;" onchange=""></select>
-                    </div>
-                    <div class="col-md-8">
-                        <label style="font-weight: bold"> Period</label>
-                        <select id="listOfActivePeriods" class="form-control" style="width: auto;" onchange="">
-                            <option value="">Select Period</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-6" style="display: flex;">
-                    <div class="col-md-6">
-                        <label style="font-weight: bold">Start Date</label>
-                        <input id="startDate" type="text" class="futureDatePicker form-control text-primary" placeholder="dd-mm-yyyy" onchange="" />
-                    </div>
-                    <div class="col-md-6">
-                        <label style="font-weight: bold">End Date</label>
-                        <input id="endDate" type="text" class="pastDatePicker form-control text-primary" placeholder="dd-mm-yyyy" onchange="" />
-                    </div>
-                </div>
-                <div class="col-md-6" style="display: flex;">
-                    <div class="col-md-4">
-                        <label style="font-weight: bold"> TIN</label>
-                        <input id="tinField" type="text" class="form-control text-primary" placeholder="" onchange="" />
-                    </div>
-                    <div class="col-md-8">
-                        <label style="font-weight: bold"> Tax Office</label>
-                        <select id="tccListOfTaxOffices" class="form-control" style="width: auto;" onchange=""></select>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="card">
-    <div class="card-body">
-        <div class="row align-items-end">
-            <div class="GridDiv">
-                <div id="grid"></div>
+    <div id="gridHeader">
+        <partial name="_WHTHeader" />
+        <div class="card-body">
+            <div class="row align-items-end">
+                <div class="GridDiv">
+                    <div id="Grid"></div>
+                </div>
             </div>
         </div>
     </div>
+
+    <partial name="_AllTransactionsDetail" />
 </div>
 
 @section modals{
@@ -62,5 +30,5 @@
 }
 
 @section scripts {
-    <script src="~/js/wht/alltransaction.js"></script>
+    <script src="~/js/wht/all-transaction.js"></script>
 }

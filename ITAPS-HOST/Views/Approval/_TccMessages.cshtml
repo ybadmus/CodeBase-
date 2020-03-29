@@ -8,22 +8,54 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="form-horizontal">
+                <div id="tabsContainer" class="tab" style="width: 100% !important; display: block;">
+                    <button class="tablinks active" style="width: 50% !important" onclick="openDivForTab(event, 'taxpayer')"> APPLICANT</button>
+                    <button class="tablinks" style="width: 50% !important" onclick="openDivForTab(event, 'internal')"> INTERNAL</button>
+                </div>
+
+                <div id="taxpayer" class="form-horizontal tabcontent">
                     <div class="row">
-                        <div class="col-md-12" style="overflow-y: scroll;height: 400px;">
-                            <div id="taxpayerMessageScroll">
+                        <div class="col-md-12">
+                            <div id="taxpayerMessageScroll" style="overflow-y: scroll;height: 330px;border-bottom: 1px solid silver;border-left: 1px solid silver;">
                                 <div class="taxpayerMessageScroll">
                                     <div style="margin-top: 10px;" id="chatUI">
 
                                     </div>
                                 </div>
                             </div>
+
+                            <form>
+                                <label for="commentToTaxpayer" class="control-label" style="font-weight: 600; padding: 2px;">Message To Applicant</label>
+                                <textarea type="text" style="resize:none;height: 70px;" autocomplete="off" class="form-control form-cascade-control input-sm" id="commentToTaxpayer" placeholder="Type message to applicant here"></textarea>
+                            </form>
                         </div>
                     </div>
                 </div>
+
+                <div id="internal" class="form-horizontal tabcontent" style="display: none">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="internalMessageScroll" style="overflow-y: scroll;height: 330px;border-bottom: 1px solid silver;border-left: 1px solid silver;">
+                                <div class="internalMessageScroll">
+                                    <div style="margin-top: 10px;" id="internalChatUI">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <form>
+                                <label for="commentToStaff" class="control-label" style="font-weight: 600; padding: 2px;">Message To Staffs</label>
+                                <textarea type="text" style="resize:none;height: 70px;" autocomplete="off" class="form-control form-cascade-control input-sm" id="commentToStaff" placeholder="Type internal messages here"></textarea>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" id="sendInternal" class="btn btn-success" style="display: none">Send Message</button>
+                <button type="button" id="sendMesageTaxpayer" class="btn btn-success">Send Message</button>
             </div>
         </div>
     </div>
@@ -49,7 +81,7 @@
                                             <b>Action - Select New Status</b>
                                         </label>
                                         <select type="text" id="appStatus" class="form-control" required>
-                                            <option style="display: block" id="0" value="">Select Status</option>
+                                            <option style="display: block" selected="selected">Select Status</option>
                                             <option style="display: block" id="approveTcc" value="2">Approve</option>
                                             <option style="display: block" id="declineTcc" value="3">Decline</option>
                                             <option style="display: block" id="returnTcc" value="1">Return</option>
@@ -66,7 +98,7 @@
                                 </div>
                                 <div class="form-group row" style="margin-bottom: 1rem;">
                                     <div class="col-md-12 formDiv">
-                                        <label for="taxpayerMessage" class=" col-form-label">
+                                        <label for="taxpayerMessage" class="col-form-label">
                                             <b>Message to Taxpayer</b>
                                         </label>
                                         <textarea class="form-control" rows="2" id="taxpayerMessage" style="resize: none;" value=""></textarea>

@@ -13,7 +13,6 @@ namespace ITAPS_HOST.Services
 {
     public class MonoService: IMonoService
     {
-        private readonly IMainRequestClient _mainRequestClient;
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
@@ -21,10 +20,16 @@ namespace ITAPS_HOST.Services
         {
             _httpClientFactory = httpClientFactory;
         }
-        public async Task<ResponseItem<object>> GetAllActivePeriods()
+        public async Task<ResponseItem<object>> GetAllActivePeriods(string year)
         {
-            string currentYear = DateTime.Now.Year.ToString();
-            string endpoint = "http://psl-app-vm3/TaxPayerMonoAPI/api/GenericCodes/GetAllActivePeriodsByYearAndType/" + currentYear + "/WHPER";
+            if (year == null || year.Trim() == "")
+            {
+                var currentYear = DateTime.Now.Year.ToString();
+                year = currentYear;
+            }
+           
+            var connString = Startup.StaticConfig.GetSection("APPCONSTANTS");
+            string endpoint =   connString["TaxpayerMonoAPI"] + "GenericCodes/GetAllActivePeriodsByYearAndType/" + year + "/WHPER";
             var client = _httpClientFactory.CreateClient();
             var request = new HttpRequestMessage(HttpMethod.Get, endpoint);
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));

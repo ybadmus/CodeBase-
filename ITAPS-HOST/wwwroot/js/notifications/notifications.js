@@ -6,8 +6,33 @@ var mainNotificationView = false;
 
 $(document).ready(function () {
 
-    apiCaller1(urlTaxOffice, "GET", "", bootstrapApplication);
+    apiCaller(urlTaxOffice, "GET", "", bootstrapNotifications);
 });
+
+var apiCaller = function (url, type, data, callback) {
+    $('html').showLoading();
+
+    $.ajax({
+        url: url,
+        type: type,
+        crossDomain: true,
+        data: JSON.stringify(data),
+        contentType: "application/json; charset=utf-8",
+        headers: {
+        },
+        dataType: 'json',
+        success: function (response) {
+            if (callback) {
+                callback(response.body);
+            };
+            $('html').hideLoading();
+        },
+        error: function (error) {
+            $('html').hideLoading();
+            //toastr.error('An error occured');
+        }
+    });
+};
 
 var prependListNotifications = function (resp) {
 
@@ -23,27 +48,12 @@ var prependListNotifications = function (resp) {
     $("#NotificationItems").prepend(notification);
 };
 
-var setTaxOfficeNameDashBoard = function (resp) {
-
-    if (resp) {
-        if (resp.length > 1) {
-            $("#adminTaxOffice").text("Head Office");
-        }
-        else if (resp.length == 1) {
-            $("#adminTaxOffice").text(resp[0].taxOfficeName);
-            oneOfficeAssigned = true;
-        }
-    } else {
-        toastr.info("No Tax Office assigned to this user!");
-    }
-};
-
 var loadNotificatonsAssignedToUser = function (offices) {
     if (!sessionStorage.getItem("notifications")) {
         if (offices) {
             for (var i = 0; i < offices.length; i++) {
                 var loadNotificationsUrl = `${serverUrl}api/Notification/GetAllNotifications?taxOfficeId=${offices[i].taxOfficeId}`
-                apiCaller1(loadNotificationsUrl, 'GET', '', loadDropdown);
+                apiCaller(loadNotificationsUrl, 'GET', '', loadDropdown);
             }
         }
     } else {
@@ -145,9 +155,8 @@ var addToLocalStorageArray = function (name, value) {
 
 };
 
-var bootstrapApplication = function (resp) {
+var bootstrapNotifications = function (resp) {
 
-    setTaxOfficeNameDashBoard(resp);
     joinGroups(resp);
     loadNotificatonsAssignedToUser(resp);
 };

@@ -22,7 +22,7 @@ namespace ITAPS_HOST.Controllers
         {
             foreach (var claim in User.Claims)
             {
-                if (claim.Type == "given_name")
+                if (claim.Type == "preferred_username")
                 {
                     ViewBag.UserName = claim.Value;
                 }

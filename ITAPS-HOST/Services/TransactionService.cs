@@ -56,7 +56,7 @@ namespace ITAPS_HOST.Services
                 TaxType = searchObject.TaxType,
                 TransactionId = searchObject.TransactionId
             };
-            
+
             var apiEndpoint = $"Transactions/GetPTransactionDetailsByIdAndTypeAsync/{objectForSearch.TransactionId}" +
                 $"?taxType={objectForSearch.TaxType}&transactionType={objectForSearch.TransactionType}";
 

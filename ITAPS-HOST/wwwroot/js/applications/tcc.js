@@ -36,11 +36,7 @@ var initializeKendoGrid = function (data, stage) {
                     command: [{
                         name: "view",
                         template: "<button title='View item' class='btn btn-success btn-sm' style='margin-right: 2px'><span class='fa fa-file fa-lg'></span></button>"
-                    }
-                        // , {   name: "certificate",
-                        //        template: "<button id='certBtn' title='View certificate' class='btn btn-light btn-sm'><span class='fa fa-certificate fa-lg'></span></button>",
-                        //    visible: false  }
-                    ],
+                    }],
                     title: "Actions",
                     width: "90px"
                 }
@@ -163,6 +159,7 @@ $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
     var item = grid.dataItem($(e.target).closest("tr"));
 
     $("#appId").val(item.applicationId);
+    $("#taxpayerName").text(item.applicantName);
     prepareDetailsView();
 });
 
@@ -191,10 +188,8 @@ var backToView = function () {
 $("#previewApplication").click(function () {
     let appId = $("#appId").val();
 
-    localStorage.setItem("tccReportId", appId);
-    localStorage.setItem("tccLabel", "uniApplicationId");
+    sessionStorage.setItem("tccReportId", appId);
+    sessionStorage.setItem("tccLabel", "uniApplicationId");
 
-    let url = `${ReportDownloadView}`;
-
-    window.open(url, "_blank");
+    window.location.href = `${ReportDownloadView}`;
 });

@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<input id="serverUrl" value="@ViewBag.ServerUrl" hidden />
+
+<div class="row card-group-row">
+    <div class="col-md-3 col-sm-6">
+        <a href="~/wtht/alltransaction" class="dash-anchor">
+            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center" title="Click to apply for Tax Clearance Certificate (TCC)">
+                <img src="~/icons/iconx-listx.png" class="img-responsive" width="80" />
+                <div class="flex mb-4 mt-4 dash-body">
+                    <h5 class="text-stats text-muted">View WHT Transactions</h5>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+        <a href="~/wtht/returns" class="dash-anchor" title="Submit WH VAT Returns">
+            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center">
+                <img src="~/icons/iconx-vatwh.png" class="img-responsive" width="80">
+                <div class="flex mb-4 mt-4 dash-body">
+                    <h5 class="text-stats text-muted">WHT Returns</h5>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+        <a href="~/wtht/vattransaction" class="dash-anchor" title="Submit WH VAT Returns">
+            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center">
+                <img src="~/icons/iconx-list.png" class="img-responsive" width="80">
+                <div class="flex mb-4 mt-4 dash-body">
+                    <h5 class="text-stats text-muted">View WH VAT Transactions</h5>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+        <a href="~/wtht/vatreturns" class="dash-anchor" title="Submit WH VAT Returns">
+            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center">
+                <img src="~/icons/iconx-payee.png" class="img-responsive" width="80">
+                <div class="flex mb-4 mt-4 dash-body">
+                    <h5 class="text-stats text-muted">WH VAT Returns</h5>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $("#pgHeader").text("Withholding Tax & VAT");
+        });
+    </script>
+}
+
+
+
+

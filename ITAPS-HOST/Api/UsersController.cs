@@ -1,9 +1,8 @@
-﻿using System;
-using ITAPS_HOST.IServices;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using ITAPS_HOST.IServices;
 using ITAPS_HOST.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace ITAPS_HOST.Api
 {
@@ -20,9 +19,35 @@ namespace ITAPS_HOST.Api
         }
 
         [HttpGet("GetAllUserTaxOfficesByUserID", Name = "GetAllUserTaxOfficesByUserID")]
-        public async Task<ResponseItem<object>> GetAllUserTaxOfficesByUserID(Guid userId)
+        public async Task<ResponseItem<object>> GetAllUserTaxOfficesByUserID()
         {
+            string userId = "";
+
+            foreach (var claim in User.Claims)
+            {
+                if (claim.Type == "sub")
+                {
+                    userId = claim.Value;
+                }
+            }
+
             return await _userService.GetAllUserTaxOfficesByUserID(userId);
+        }
+
+        [HttpGet("GetAllMenusByUserId", Name = "GetAllMenusByUserId")]
+        public async Task<ResponseItem<object>> GetAllMenusByUserId()
+        {
+            string userId = "";
+
+            foreach (var claim in User.Claims)
+            {
+                if (claim.Type == "sub")
+                {
+                    userId = claim.Value;
+                }
+            }
+
+            return await _userService.GetAllMenusByUserId(userId);
         }
     }
 }

@@ -26,7 +26,7 @@ namespace ITAPS_HOST.Api
             return await _whtService.SearchWithholdingByOffice(taxOfficeId, periodId, startDate, endDate, tin == String.Empty ? "" : tin, szFilter == String.Empty ? "" : szFilter, "whttax");
         }
 
-        [HttpGet("SearchMonthlyWithholdingReturnsByOffice/")]
+        [HttpGet("SearchMonthlyWithholdingReturnsByOffice/")] //
         public async Task<ResponseItem<object>> SearchMonthlyWithholdingReturnsByOffice(string taxOfficeId, string periodId, string startDate, string endDate, string tin, string szFilter)
         {
 
@@ -68,7 +68,7 @@ namespace ITAPS_HOST.Api
             return await _whtService.PostWTR1(dataForCreation);
         }
 
-        [HttpGet("GetGWTTByGwrtAsync", Name = "GetGWTTByGwrtAsync")]
+        [HttpGet("GetGWTTByGwrtAsync", Name = "GetGWTTByGwrtAsync")] //
         public async Task<ResponseItem<object>> GetGWTTByGwrtAsync(Guid periodId, string tin)
         {
 
@@ -82,7 +82,7 @@ namespace ITAPS_HOST.Api
             return await _whtService.GetGWVTByGwvrAsync(periodId, tin);
         }
 
-        [HttpGet("GetGWTTByInvoiceNumber", Name = "GetGWTTByInvoiceNumber")]
+        [HttpGet("GetGWTTByInvoiceNumber", Name = "GetGWTTByInvoiceNumber")] //
         public async Task<ResponseItem<object>> GetGWTTByInvoiceNumber(string invoiceNumber)
         {
 

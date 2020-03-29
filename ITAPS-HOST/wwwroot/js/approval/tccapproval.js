@@ -4,7 +4,7 @@ var searchTccByTaxOffice = `${serverUrl}api/TCC/GetAllTccApplicationPendingAppro
 var loadTaxPositionsUrl = `${serverUrl}api/TCC/GetTCCApplicationTaxPositionByApplicationId?applicationId=`;
 var GetTccCommentsByIdUrl = `${serverUrl}api/TCC/GetAllTccApplicationComments?tccId=`;
 var activeTaxOffice = "";
-var selectedStatus; 
+var selectedStatus;
 var tccUpdateUrl = `${serverUrl}api/TCC/UpdateTCCApplication?id=`;
 
 $("#tccListOfTaxOffices").on('change', function () {
@@ -36,9 +36,6 @@ var initializeKendoGrid = function (data) {
         ]
     });
 
-    //if (data)
-    //    if (data.length == 0)
-    //        toastr.info("No TCC to approve.");
 };
 
 $(document).ready(function () {
@@ -144,45 +141,9 @@ var validateSearchEntry = function () {
         return true;
 };
 
-var loadMessages = function (tccId) {
-
-    let url = `${GetTccCommentsByIdUrl}` + tccId;
-
-    apiCaller(url, "GET", "", appendMessages)
-};
-
-var appendMessages = function (listOfComments) {
-
-    var FName = $("#applicantName").text().split(" ")[0];
-    var output = "";
-
-    for (var i = 0; i < listOfComments.length; i++) {
-        if (listOfComments[i].commentToTaxpayer) {
-
-            output = output + '<div style=" padding: 5px; width: 80%; float: left;"><div class="chatview"><small style="font-size: 13px;"><b>GRA | </b>' + listOfComments[i].personnelName + '</small><br><p style="color: black;">'
-                + listOfComments[i].commentToTaxpayer + '</p><small style="font-size: 13px;" class="time-right">' + listOfComments[i].dateAndTime + '</small></div></div>';
-        }
-
-        if (listOfComments[i].taxpayerReply) {
-            output = output + '<div style=" padding: 5px; width: 80%; float: right;"><div class="chatview" style="background-color: #f3f1d9;"><small style="font-size: 13px;"><b>Reply from ' + FName.toUpperCase() + '</b></small><br><p style="color: black;">'
-                + listOfComments[i].taxpayerReply + '</p ><small style="font-size: 13px;" class="time-right">' + listOfComments[i].taxpayerReplyTime + '</small></div></div>';
-        }
-
-        if (listOfComments[i].internalComment) {
-            output = output + '<div style=" padding: 5px; width: 80%; float: left;"><div class="chatview" style=";"><small style="font-size: 13px;"><b>GRA | </b>' + listOfComments[i].personnelName + '<b> - Internal Message</b></small><br><p style="color: black;">'
-                + listOfComments[i].internalComment + '</p><small style="font-size: 13px;" class="time-right">' + listOfComments[i].dateAndTime + '</small></div></div>';
-        }
-    }
-
-    output = output;
-    $("#chatUI").html(output);
-    $('#taxpayerMessageScroll').scrollTop(1000000);
-};
-
 var prepareDetailsView = function (appId) {
     let url = `${loadTaxPositionsUrl}` + appId;
 
-    hideAndShow();
     calculateYear();
     loadMessages(appId);
     apiCaller(url, "GET", "", loadTaxPositionDetails);
@@ -209,6 +170,8 @@ var loadTaxPositionDetails = function (listOfSummary) {
 
     output = output;
     $("#TaxPositionSummaryGrid").html(output);
+
+    hideAndShow();
 };
 
 var calculateThreeMonths = function () {
@@ -233,15 +196,12 @@ $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
     $("#appId").val(item.applicationId);
     $("#applicantNameApproval").text(item.applicantName);
     $("#modalId").text(item.applicationNo);
+    $("#appNo").text(item.applicationNo);
     prepareDetailsView(item.applicationId);
 });
 
 $("#btnSearch").click(function (e) {
     searchTcc();
-});
-
-$("#tccMessages").click(function (e) {
-    $("#tccMessagesView").modal("show");
 });
 
 $("#reviseApp").click(function (e) {
@@ -263,25 +223,11 @@ var backToView = function () {
     $("#tccGridView").show();;
 };
 
-$("#appStatus").on('change', function () {
-    var elem = document.getElementById("appStatus");
-    selectedStatus = elem.options[elem.selectedIndex].value;
-    $("#approveDeclineReturnBtn").attr("disabled", true);
-});
-
-$("#internalMessage").blur(function () {
-    if (!isNaN(parseInt(selectedStatus)) && ($("#internalMessage").val().match(/\S/)))
-        if (parseInt(selectedStatus) > 0)
-            $("#approveDeclineReturnBtn").attr("disabled", false);
-        else
-            $("#approveDeclineReturnBtn").attr("disabled", true);
-});
-
 $("#approveDeclineReturnBtn").click(function () {
 
     if (selectedStatus == 2) {
 
-        $("#approveModal").modal("show");
+        approveTCC();
 
     } else {
 
@@ -299,7 +245,7 @@ $("#approveDeclineReturnBtn").click(function () {
     };
 });
 
-$("#continueApproval").click(function () {
+var approveTCC = function () {
     let tccId = $("#appId").val();
     let updateUrl = tccUpdateUrl + tccId;
 
@@ -308,40 +254,15 @@ $("#continueApproval").click(function () {
         "taxpayerComment": $("#taxpayerMessage").val(),
         "internalComment": $("#internalMessage").val(),
         "applicationId": tccId,
-        "expiryDate": $("#expiryDateTcc").val()
+        "expiryDate": calculateThreeMonths()
     };
 
     apiCaller(updateUrl, "PUT", ObjectToSend, successfullyUpdated);
-});
-
-var successfullyUpdated = function () {
-    if (selectedStatus == 2) {
-        toastr.success("Application has successfully been approved");
-
-        $("#approveModal").modal("hide");
-        $("#approveDecline").modal("hide");
-
-        backToGrid();
-    };
-
-    if (selectedStatus == 3) {
-        toastr.info("Application has been declined");
-
-        $("#approveModal").modal("hide");
-        $("#approveDecline").modal("hide");
-
-        backToGrid();
-    };
-
-    if (selectedStatus == 1) {
-        toastr.success("Application successfully return to applicant");
-
-        $("#approveModal").modal("hide");
-        $("#approveDecline").modal("hide");
-
-        backToGrid();
-    }
 };
+
+$("#continueApproval").click(function () {
+    approveTCC();
+});
 
 var backToGrid = function () {
     setTimeout(function () {

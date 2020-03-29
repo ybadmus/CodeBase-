@@ -6,6 +6,9 @@ var isCheckBoxSelectedAll = false;
 var ServerUrl = $("#serverUrl").val();
 var postTaxPosition = `${ServerUrl}api/TCC/PostTaxPositionSummary?taxpayerId=`;
 let tccUpdateUrl = `${ServerUrl}api/TCC/UpdateTCCApplication?id=`;
+var statusColumn0 = "";
+var statusColumn1 = "";
+var statusColumn2 = "";
 
 var LoadTaxSummaryTable = function (listOfSummary) {
 
@@ -15,12 +18,14 @@ var LoadTaxSummaryTable = function (listOfSummary) {
     });
 
     for (var i = 0; i < sortedArray.length; i++) {
-        output = output + '<tr><td align="center" id="assessmentYear' + i + '">' + listOfSummary[i].assessmentYear + '</td><td align="center" style="color: black" contenteditable="true" id="statusColumn' + i
-            + '" class=""></td><td align="right" style="color: black" contenteditable="true"  id="chargeableIncomeColumn' + i
-            + '" class="valueCell"></td><td align="right" style="color: black" id="taxChargedColumn' + i
-            + '" class=""></td><td align="right" style="color: black" contenteditable="true" id="taxPaidColumn' + i
-            + '" class="valueCell"></td><td align="right" style="color: black" id="taxOutstandingColumn' + i
-            + '" class=""></td></tr>';
+        output = output + '<tr><td align="center" id="assessmentYear' + i + '">' + listOfSummary[i].assessmentYear + '</td>'
+            + '<td align="center" style="color: black"><select type="text" id="statusColumn' + i + '" class="form-control">'
+            + '<option value="" selected="selected">Choose Status</option><option value="NID">Not In Dispute</option><option value="PROV">Provisional</option>' 
+            + '<option value="S/A">Self-Assessment</option><option value="FINAL">Finalized</option></select></td>'
+            + '<td align="right" style="color: black" contenteditable="true"  id="chargeableIncomeColumn' + i + '" class="valueCell"></td>'
+            + '<td align="right" style="color: black" id="taxChargedColumn' + i + '" class=""></td>'
+            + '<td align="right" style="color: black" contenteditable="true" id="taxPaidColumn' + i + '" class="valueCell"></td>'
+            + '<td align="right" style="color: black" id="taxOutstandingColumn' + i + '" class=""></td></tr>';
     }
 
     output = output;
@@ -201,7 +206,7 @@ $("#saveTaxPositionSummary").click(function (e) {
 
     var row1 = {
         "id": "",
-        "status": $("#statusColumn0").text(),
+        "status": statusColumn0,
         "assessmentYear": $("#assessmentYear0").text(),
         "chargeableIncome": $("#chargeableIncomeColumn0").text(),
         "taxCharged": $("#taxChargedColumn0").text(),
@@ -213,7 +218,7 @@ $("#saveTaxPositionSummary").click(function (e) {
 
     var row2 = {
         "id": "",
-        "status": $("#statusColumn1").text(),
+        "status": statusColumn1,
         "assessmentYear": $("#assessmentYear1").text(),
         "chargeableIncome": $("#chargeableIncomeColumn1").text(),
         "taxCharged": $("#taxChargedColumn1").text(),
@@ -225,7 +230,7 @@ $("#saveTaxPositionSummary").click(function (e) {
 
     var row3 = {
         "id": "",
-        "status": $("#statusColumn2").text(),
+        "status": statusColumn2,
         "assessmentYear": $("#assessmentYear2").text(),
         "chargeableIncome": $("#chargeableIncomeColumn2").text(),
         "taxCharged": $("#taxChargedColumn2").text(),
@@ -242,6 +247,21 @@ $("#saveTaxPositionSummary").click(function (e) {
     var url = `${postTaxPosition}` + $("#taxpayerId").val() + "&appId=" + $("#appId").val();
 
     apiCaller(url, 'POST', arrayObject, updateApplication);
+});
+
+$("#TaxPositionSummaryGrid").on('change', '#statusColumn0', function () {
+    var elem = document.getElementById("statusColumn0");
+    statusColumn0 = elem.options[elem.selectedIndex].value;
+});
+
+$("#TaxPositionSummaryGrid").on('change', '#statusColumn1', function () {
+    var elem = document.getElementById("statusColumn1");
+    statusColumn1 = elem.options[elem.selectedIndex].value;
+});
+
+$("#TaxPositionSummaryGrid").on('change', '#statusColumn2', function () {
+    var elem = document.getElementById("statusColumn2");
+    statusColumn2 = elem.options[elem.selectedIndex].value;
 });
 
 var updateApplication = function () {

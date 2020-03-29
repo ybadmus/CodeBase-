@@ -1,6 +1,5 @@
 ﻿@{
     ViewData["Title"] = "TCC Certificate";
-    Layout = "_Layout";
 }
 
 <input id="serverUrl" value="@ViewBag.ServerUrl" hidden />
@@ -34,8 +33,8 @@
     $("#pgHeader").text("TCC Certificate");
 
     $(window).load(function () {
-        localStorage.removeItem("tccReportId");
-        localStorage.removeItem("tccLabel");
+        sessionStorage.removeItem("tccReportId");
+        sessionStorage.removeItem("tccLabel");
     });
 
     var ServerUrl = $("#serverUrl").val();
@@ -60,7 +59,7 @@
         return listParams;
     };
 
-    parameters.push({ name: localStorage.getItem("tccLabel"), labels: [localStorage.getItem("tccReportId")], values: [localStorage.getItem("tccReportId")], nullable: "true" });
+    parameters.push({ name: sessionStorage.getItem("tccLabel"), labels: [sessionStorage.getItem("tccReportId")], values: [sessionStorage.getItem("tccReportId")], nullable: "true" });
 
 
     function ajaxBeforeLoad(event) {

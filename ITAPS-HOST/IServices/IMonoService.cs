@@ -6,6 +6,6 @@ namespace ITAPS_HOST.IServices
 {
     public interface IMonoService
     {
-        Task<ResponseItem<object>> GetAllActivePeriods();
+        Task<ResponseItem<object>> GetAllActivePeriods(string year);
     }
 }

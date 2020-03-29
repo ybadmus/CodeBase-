@@ -21,9 +21,9 @@ namespace ITAPS_HOST.Api
         }
        
         [HttpGet("GetAllActivePeriods", Name = "GetAllActivePeriods")]
-        public async Task<ResponseItem<object>> GetAllActivePeriods()
+        public async Task<ResponseItem<object>> GetAllActivePeriods(string year)
         {
-            return await _monoService.GetAllActivePeriods();
+            return await _monoService.GetAllActivePeriods(year);
         }
     }
 }

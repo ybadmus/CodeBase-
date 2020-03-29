@@ -1,0 +1,141 @@
+﻿<input id="appId" value="@ViewBag.UserId " hidden />
+
+<div id="transactionDetails">
+    <div class="card-body">
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="taxPosition" role="tabpanel" aria-labelledby="nav-profile-tab">
+                <div class="form-horizontal">
+                    <div class="form-row">
+                        <div class="col-sm-6">
+                            <div class="bordered-group" id="" style="height: 350px">
+                                <p class="card-title"><b> Applicant & WHT Agent Details <span id="appNoTex"></span> </b></p>
+                                <div class="table-responsive border-bottom">
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="2" style="padding-left:5px;width:120px;font-weight:100; font-weight: bold; background: #f7f8f9;">Taxpayer Details</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Taxpayer Name</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="taxpayerName"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Taxpayer TIN</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="taxpayerTIN"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Phone Number</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="taxpayerTel"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Business Location</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="businessLocation"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="padding-left:5px;width:120px;font-weight:100; font-weight: bold; background: #f7f8f9;">Agent Details</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Agent Name</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="whtAgentName"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Agent TIN</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="whAgentTIN"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Associated Office</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="taxOffice"></span></b>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="bordered-group" id="" style="height: 350px">
+                                <p class="card-title"><b>Application Detail <span id="appNoTex"></span> </b></p>
+                                <div class="table-responsive border-bottom">
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Date Submitted</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="dateSubmitted"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">WHT Type</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="whtType"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">WHT Status</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="whtStatus"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Invoice #</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="invoiceNo"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Contract Amount</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="contractAmount"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Gross Amount</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="grossAmount"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Amount Withheld</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="taxWithHeld"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">WHT Rate</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="whtRate"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Vatable Amount</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="vatableAmt"></span></b>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="backToGrid" class="btn btn-outline-primary"> Back</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

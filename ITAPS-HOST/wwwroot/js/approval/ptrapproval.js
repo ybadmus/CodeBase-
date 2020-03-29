@@ -44,11 +44,11 @@ $(document).ready(function () {
     bootstrapPage();
 });
 
-var calculateThreeMonths = function () {
+var calculateTwelveMonths = function () {
     var d = new Date(),
-        month = '' + (d.getMonth() + 4),
+        month = '' + (d.getMonth() + 1),
         day = '' + d.getDate(),
-        year = d.getFullYear();
+        year = d.getFullYear() + 1;
 
     if (month.length < 2)
         month = '0' + month;
@@ -78,7 +78,7 @@ var bootstrapPage = function () {
     $("#ptrGridView").show();
 
     $("#expiryDateTcc").flatpickr({
-        maxDate: calculateThreeMonths(),
+        maxDate: calculateTwelveMonths(),
         minDate: 'today'
     });
 
@@ -162,6 +162,8 @@ $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
     var item = grid.dataItem($(e.target).closest("tr"));
 
     $("#appId").val(item.applicationId);
+    $("#modalId").text(item.applicationNo);
+    $("#appNo").text(item.applicationNo);
     $("#currentStatus").text(item.statusId);
     $("#applicantNamePTR").text(item.applicantName);
     $("#applicantTINPTR").text(item.applicantTIN);
@@ -176,13 +178,12 @@ $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
     };
 
     prepareDetailsView(item.applicationId, ptrCode);
+    hideAndShow();
 });
 
 var prepareDetailsView = function (appId, pCode) {
     let url = `${GetAppDetailsById}` + appId + "&applicationTypeCode=" + pCode;
 
-
-    hideAndShow();
     loadMessages(appId);
     apiCaller(url, "GET", "", loadPtrDetails);
 };
@@ -192,6 +193,7 @@ var loadPtrDetails = function (resp) {
     $("#appStatusHeader").text(resp.status);
 
     $("#dateSubmittedPTR").text(resp.submittedDate);
+    $("#lastUpdatedPTR").text(resp.statusDate);
     $("#assessmentYearPTR").text(resp.assessmentYear);
     $("#dateOfBirthPTR").text(resp.dateOfBirth);
     $("#employerAddressPTR").text(resp.employerAddress);
@@ -205,6 +207,7 @@ var loadPtrDetails = function (resp) {
     $("#mothersMaidenNamePTR").text(resp.mothersMaidenName);
     $("#phoneNoPTR").text(resp.phoneNo);
     $("#startDatePTR").text(resp.startDate);
+    $("#appNoTex2").text(resp.applicationNo);
 
 };
 
@@ -230,34 +233,6 @@ var loadMessages = function (tccId) {
     apiCaller(url, "GET", "", appendMessages)
 };
 
-var appendMessages = function (listOfComments) {
-
-    var FName = $("#applicantName").text().split(" ")[0];
-    var output = "";
-
-    for (var i = 0; i < listOfComments.length; i++) {
-        if (listOfComments[i].commentToTaxpayer) {
-
-            output = output + '<div style=" padding: 5px; width: 80%; float: left;"><div class="chatview"><small style="font-size: 13px;"><b>GRA | </b>' + listOfComments[i].personnelName + '</small><br><p style="color: black;">'
-                + listOfComments[i].commentToTaxpayer + '</p><small style="font-size: 13px;" class="time-right">' + listOfComments[i].dateAndTime + '</small></div></div>';
-        }
-
-        if (listOfComments[i].taxpayerReply) {
-            output = output + '<div style=" padding: 5px; width: 80%; float: right;"><div class="chatview" style="background-color: #f3f1d9;"><small style="font-size: 13px;"><b>Reply from ' + FName.toUpperCase() + '</b></small><br><p style="color: black;">'
-                + listOfComments[i].taxpayerReply + '</p ><small style="font-size: 13px;" class="time-right">' + listOfComments[i].taxpayerReplyTime + '</small></div></div>';
-        }
-
-        if (listOfComments[i].internalComment) {
-            output = output + '<div style=" padding: 5px; width: 80%; float: left;"><div class="chatview" style=";"><small style="font-size: 13px;"><b>GRA | </b>' + listOfComments[i].personnelName + '<b> - Internal Message</b></small><br><p style="color: black;">'
-                + listOfComments[i].internalComment + '</p><small style="font-size: 13px;" class="time-right">' + listOfComments[i].dateAndTime + '</small></div></div>';
-        }
-    }
-
-    output = output;
-    $("#chatUI").html(output);
-    $('#taxpayerMessageScroll').scrollTop(1000000);
-};
-
 $("#backToGrid").click(function () {
     backToView();
 });
@@ -268,25 +243,11 @@ var backToView = function () {
     $("#ptrGridView").show();
 };
 
-$("#appStatus").on('change', function () {
-    var elem = document.getElementById("appStatus");
-    selectedStatus = elem.options[elem.selectedIndex].value;
-    $("#approveDeclineReturnBtn").attr("disabled", true);
-});
-
-$("#internalMessage").blur(function () {
-    if (!isNaN(parseInt(selectedStatus)) && ($("#internalMessage").val().match(/\S/)))
-        if (parseInt(selectedStatus) > 0)
-            $("#approveDeclineReturnBtn").attr("disabled", false);
-        else
-            $("#approveDeclineReturnBtn").attr("disabled", true);
-});
-
 $("#approveDeclineReturnBtn").click(function () {
 
     if (selectedStatus == 2) {
 
-        $("#approveModal").modal("show");
+        approvePTR();
 
     } else {
 
@@ -304,7 +265,7 @@ $("#approveDeclineReturnBtn").click(function () {
     };
 });
 
-$("#continueApproval").click(function () {
+var approvePTR = function () {
     let tccId = $("#appId").val();
     let updateUrl = tccUpdateUrl + tccId;
 
@@ -313,40 +274,15 @@ $("#continueApproval").click(function () {
         "taxpayerComment": $("#taxpayerMessage").val(),
         "internalComment": $("#internalMessage").val(),
         "applicationId": tccId,
-        "expiryDate": $("#expiryDateTcc").val()
+        "expiryDate": calculateTwelveMonths()
     };
 
     apiCaller(updateUrl, "PUT", ObjectToSend, successfullyUpdated);
-});
-
-var successfullyUpdated = function () {
-    if (selectedStatus == 2) {
-        toastr.success("Application has successfully been approved");
-
-        $("#approveModal").modal("hide");
-        $("#approveDecline").modal("hide");
-
-        backToGrid();
-    };
-
-    if (selectedStatus == 3) {
-        toastr.info("Application has been declined");
-
-        $("#approveModal").modal("hide");
-        $("#approveDecline").modal("hide");
-
-        backToGrid();
-    };
-
-    if (selectedStatus == 1) {
-        toastr.success("Application successfully return to applicant");
-
-        $("#approveModal").modal("hide");
-        $("#approveDecline").modal("hide");
-
-        backToGrid();
-    }
 };
+
+$("#continueApproval").click(function () {
+    approvePTR();
+});
 
 var backToGrid = function () {
     setTimeout(function () {

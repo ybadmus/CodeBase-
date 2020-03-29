@@ -1,0 +1,41 @@
+﻿<input id="appId" value="@ViewBag.UserId " hidden />
+
+<div id="gridDetails">
+    <div class="card-body">
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="taxPosition" role="tabpanel" aria-labelledby="nav-profile-tab">
+                <div class="form-horizontal">
+                    <div class="form-row">
+                        <div class="col-sm-12">
+                            <div class="bordered-group" id="" style="height: 380px">
+                                <p class="card-title"><b> Application Details  </b></p>
+                                <div class="table-responsive border-bottom">
+                                    <div id="tableFixHead" style="overflow-y: scroll; overflow-x: hidden; height: 320px;">
+                                        <table class="table table-bordered" style="border-collapse: collapse; width: 100%;">
+
+                                            <thead style="">
+                                                <tr class="table-info">
+                                                    <th scope="col" style="color: black; position: sticky; top: 0; center; font-size: 14px;">#</th>
+                                                    <th scope="col" style="color: black; position: sticky; top: 0; font-size: 14px;">Enity Name</th>
+                                                    <th scope="col" style="color: black; position: sticky; top: 0; font-size: 14px;">Contract Amount</th>
+                                                    <th scope="col" style="color: black; position: sticky; top: 0; font-size: 14px;">Gross Amount</th>
+                                                    <th scope="col" style="color: black; position: sticky; top: 0; font-size: 14px;">Tax WithHeld</th>
+                                                    <th scope="col" style="color: black; position: sticky; top: 0; font-size: 14px;">Invoice Number</th>
+                                                    <th scope="col" style="color: black; position: sticky; top: 0; font-size: 14px;">Transaction Type</th>
+                                                    <th scope="col" style="color: black; position: sticky; top: 0; font-size: 14px;">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="whtDetailGrid"></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="backToList" class="btn btn-outline-primary"> Back</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

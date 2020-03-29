@@ -1,4 +1,4 @@
-﻿var selectedStatus; 
+﻿var selectedStatus;
 var detailsKendoUpdate;
 var statusCodeNames = [{ "StatusName": "ACKNOWLEDGE" }, { "StatusName": "PROCESSING APPLICATION" },
 { "StatusName": "CERTIFICATE ISSUED" }, { "StatusName": "DECLINED" }, { "StatusName": "REQUEST FOR INFO" }, { "StatusName": "PENDING APPROVAL" }];
@@ -10,8 +10,7 @@ $("#reviseApplication").click(function () {
 $("#appStatus").on('change', function () {
     var elem = document.getElementById("appStatus");
     selectedStatus = elem.options[elem.selectedIndex].value;
-    $("#taxPosition").attr("disabled", true);
-    $("#updateAppStatus").attr("disabled", true);
+    fieldValidator();
 
     if (!isNaN(parseInt(selectedStatus)))
         if (parseInt(selectedStatus) == 2) {
@@ -25,15 +24,24 @@ $("#appStatus").on('change', function () {
         };
 });
 
-$("#internalMessage").blur(function () {
-    if (!isNaN(parseInt(selectedStatus)) && ($("#internalMessage").val().match(/\S/)))
-        if (parseInt(selectedStatus) != 2)
-
-            $("#updateAppStatus").attr("disabled", false);
-        else
-
-            $("#taxPosition").attr("disabled", false);
+$("#internalMessage").keyup(function () {
+    fieldValidator();
 });
+
+var fieldValidator = function () {
+    if (!isNaN(parseInt(selectedStatus)) && ($("#internalMessage").val().match(/\S/)) && lengthInternalMessage()) {
+
+        if (parseInt(selectedStatus) != 2)
+            $("#updateAppStatus").attr("disabled", false);
+
+        else
+            $("#taxPosition").attr("disabled", false);
+
+    } else {
+        $("#updateAppStatus").attr("disabled", true);
+        $("#taxPosition").attr("disabled", true);
+    }
+};
 
 $("#updateAppStatus").click(function (e) {
     e.preventDefault();
@@ -121,8 +129,18 @@ $("#updateAppStatus").click(function (e) {
     }
 });
 
+var lengthInternalMessage = function () {
+    var content = $("#internalMessage").val().trim();
+
+    if (content.length > 5) {
+        return true;
+    } else {
+        return false;
+    }
+};
+
 var updateInternalMessages = function (message) {
-    var loggedInUserName = $(".UserFirstName").val().toUpperCase();
+    var loggedInUserName = $(".UserFullName").text().toUpperCase();
     var time = new Date().toLocaleTimeString();
 
     $("#internalMessageUI").append('<div style=" padding: 5px; width: 80%; float: left;"><div class="chatview"><small style="font-size: 13px;"><b>GRA | </b>' + loggedInUserName + '</small><br><p style="color: black;">' + message + '</p><small style="font-size: 13px;" class="time-right">Today @' + time + '</small></div></div>');
@@ -130,7 +148,7 @@ var updateInternalMessages = function (message) {
 };
 
 var updateTaxpayerMessages = function (message) {
-    var loggedInUserName = $(".UserFirstName").val().toUpperCase();
+    var loggedInUserName = $(".UserFullName").text().toUpperCase();
     var time = new Date().toLocaleTimeString();
 
     $("#chatUI").append('<div style=" padding: 5px; width: 80%; float: left;"><div class="chatview"><small style="font-size: 13px;"><b>GRA | </b>' + loggedInUserName + '</small><br><p style="color: black;">' + message + '</p><small style="font-size: 13px;" class="time-right">Today @' + time + '</small></div></div>');
@@ -155,7 +173,7 @@ var updateKendoGridLocally = function (updateDetails) {
 
     for (var i = 0; i < displayedData.length; i++) {
         if (updateDetails.appId == displayedData[i].applicationId) {
-            displayedData[i].status = statusCodeNames[updateDetails.statusId].StatusName; 
+            displayedData[i].status = statusCodeNames[updateDetails.statusId].StatusName;
             displayedData[i].statusId = updateDetails.statusId;
             displayedData[i].statusDate = getCurrentDateMMDDYYY();
 
@@ -197,8 +215,13 @@ var updateView = function () {
 };
 
 $("#tcc-status-update").on('hidden.bs.modal', function () {
+    $('#appStatus option').prop('selected', function () {
+        return this.defaultSelected;
+    });
     $("#internalMessage").val("");
     $("#taxpayerMessage").val("");
+    $("#updateAppStatus").attr("disabled", true);
+    $("#taxPosition").attr("disabled", true);
 });
 
 $("#sendMesageTaxpayer").click(function () {

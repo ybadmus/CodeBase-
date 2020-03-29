@@ -9,7 +9,7 @@
                     <div class="form-row">
                         <div class="col-sm-6">
                             <div class="bordered-group" id="" style="height: 350px">
-                                <p class="card-title"><b>Application Detail - <span id="appNoTex"></span> </b></p>
+                                <p class="card-title"><b>Application Detail - <span id="appNo"></span> </b></p>
                                 <div class="table-responsive border-bottom" style="overflow-y: scroll;height: 280px;">
                                     <table class="table table-bordered">
                                         <tbody>
@@ -20,13 +20,19 @@
                                                 </td>
                                             </tr>
                                             <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Last Updated</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="lastUpdatedPTR"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <td style="padding-left:5px;width:140px;font-weight:100;">Applicant Name</td>
                                                 <td style="padding-left:5px;width:260px;">
                                                     <b><span id="applicantNamePTR"></span></b>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="padding-left:5px;width:140px;font-weight:100;">Applicant tin</td>
+                                                <td style="padding-left:5px;width:140px;font-weight:100;">Applicant Tin</td>
                                                 <td style="padding-left:5px;width:260px;">
                                                     <b><span id="applicantTINPTR"></span></b>
                                                 </td>
@@ -41,12 +47,6 @@
                                                 <td style="padding-left:5px;width:140px;font-weight:100;">Gender</td>
                                                 <td style="padding-left:5px;width:260px;">
                                                     <b><span id="genderPTR"></span></b>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding-left:5px;width:140px;font-weight:100;">Marital Status</td>
-                                                <td style="padding-left:5px;width:260px;">
-                                                    <b><span id="maritalStatusPTR"></span></b>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -67,6 +67,13 @@
                                                     <b><span id="endDatePTR"></span></b>
                                                 </td>
                                             </tr>
+
+                                            <tr>
+                                                <td style="padding-left:5px;width:140px;font-weight:100;">Marital Status</td>
+                                                <td style="padding-left:5px;width:260px;">
+                                                    <b><span id="maritalStatusPTR"></span></b>
+                                                </td>
+                                            </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:140px;font-weight:100;">Mothers Maiden Name</td>
                                                 <td style="padding-left:5px;width:260px;">
@@ -74,11 +81,23 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="padding-left:5px;width:140px;font-weight:100;">Phone No</td>
+                                                <td style="padding-left:5px;width:140px;font-weight:100;">Phone #</td>
                                                 <td style="padding-left:5px;width:260px;">
                                                     <b><span id="phoneNoPTR"></span></b>
                                                 </td>
                                             </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="bordered-group" id="" style="height: 350px">
+                                <p class="card-title"><b>Employer Details</b></p>
+                                <div class="table-responsive border-bottom" style="height: 280px;">
+                                    <table class="table table-bordered">
+                                        <tbody>
                                             <tr>
                                                 <td style="padding-left:5px;width:140px;font-weight:100;">Employer Name</td>
                                                 <td style="padding-left:5px;width:260px;">
@@ -113,26 +132,12 @@
                                     </table>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="col-sm-6">
-                            <div class="bordered-group" id="" style="height: 350px">
-                                <p class="card-title"><b>Messages</b></p>
-                                <div class="table-responsive border-bottom" style="height: 300px;">
-                                    <div id="taxpayerMessageScroll">
-                                        <div class="taxpayerMessageScroll">
-                                            <div id="chatUI">
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
                         </div>
                     </div>
                     <button id="backToGrid" class="btn btn-outline-primary"> Back</button>
                     <button id="reviseApp" style="float: right; margin-left: 2px;" class="btn btn-success">  Revise Application</button>
+                    <button id="tccMessages" style="float: right" class="btn btn-primary"><i class="fa fa-comments" aria-hidden="true"></i>  Messages</button>
                 </div>
 
             </div>

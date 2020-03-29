@@ -53,75 +53,82 @@ var getTccDocumentsById = function () {
 };
 
 var loadDetailsPtr = function (resp) {
-
-    $("#appIdHeader").text(resp.applicationNo);
-    $("#appStatusHeader").text(resp.status);
-    $("#modalId").text(resp.applicationNo);
-    $("#statusNameModal").text(resp.status);
-    $("#dateSubmittedPTR").text(resp.submittedDate);
-    $("#assessmentYearPTR").text(resp.assessmentYear);
-    $("#dateOfBirthPTR").text(resp.dateOfBirth);
-    $("#employerAddressPTR").text(resp.employerAddress);
-    $("#employerEmailPTR").text(resp.employerEmail);
-    $("#employerNamePTR").text(resp.employerName);
-    $("#employerPhonePTR").text(resp.employerPhone);
-    $("#employerTINPTR").text(resp.employerTIN);
-    $("#endDatePTR").text(resp.endDate);
-    $("#genderPTR").text(resp.gender === "M" ? "Male" : resp.gender === "F" ? "Female" : resp.gender);
-    $("#maritalStatusPTR").text(resp.maritalStatus);
-    $("#mothersMaidenNamePTR").text(resp.mothersMaidenName);
-    $("#phoneNoPTR").text(resp.phoneNo);
-    $("#startDatePTR").text(resp.startDate);
-
     decideNextTccStage(parseInt($("#currentStatus").text()));
+
+    $("#appIdHeader").text(testNullOrEmpty(resp.applicationNo));
+    $("#appStatusHeader").text(testNullOrEmpty(resp.status));
+    $("#modalId").text(testNullOrEmpty(resp.applicationNo));
+    $("#statusNameModal").text(testNullOrEmpty(resp.status));
+    $("#dateSubmittedPTR").text(testNullOrEmpty(resp.submittedDate));
+    $("#assessmentYearPTR").text(testNullOrEmpty(resp.assessmentYear));
+    $("#dateOfBirthPTR").text(testNullOrEmpty(resp.dateOfBirth));
+    $("#employerAddressPTR").text(testNullOrEmpty(resp.employerAddress));
+    $("#employerEmailPTR").text(testNullOrEmpty(resp.employerEmail));
+    $("#employerNamePTR").text(testNullOrEmpty(resp.employerName));
+    $("#employerPhonePTR").text(testNullOrEmpty(resp.employerPhone));
+    $("#employerTINPTR").text(testNullOrEmpty(resp.employerTIN));
+    $("#endDatePTR").text(testNullOrEmpty(resp.endDate));
+    $("#genderPTR").text(resp.gender === "M" ? "Male" : resp.gender === "F" ? "Female" : resp.gender);
+    $("#maritalStatusPTR").text(testNullOrEmpty(resp.maritalStatus));
+    $("#mothersMaidenNamePTR").text(testNullOrEmpty(resp.mothersMaidenName));
+    $("#phoneNoPTR").text(testNullOrEmpty(resp.phoneNo));
+    $("#startDatePTR").text(testNullOrEmpty(resp.startDate));
 }
 
 var loadDetails = function (resp) {
-    $("#dateSubmitted").text(resp[0].submittedDate);
-    $("#applicantName").text(resp[0].applicantName);
-    $("#applicantFName").text(resp[0].applicantName); //span so using text
-    $("#applicantTIN").text(resp[0].applicantTIN);
-    $("#applicantPhone").text(resp[0].applicantPhoneNo);
-    $("#applicantEmail").text(resp[0].applicantEmailAddress);
-    $("#requestEntityName").text(resp[0].requestingEntity);
-    $("#requestingEntityTin").text(resp[0].requestingOfficeTIN);
-    $("#requestingEntityPhone").text(resp[0].requestingOfficePhone);
-    $("#requestingEntityEmail").text(resp[0].requestingOfficeEmail);
-    $("#purposeOfApplication").text(resp[0].purpose);
-
-    $("#appIdHeader").text(resp[0].applicationNo); //span so using text
-    $("#appStatusHeader").text(resp[0].status);
-    $("#modalId").text(resp[0].applicationNo);
-    $("#statusNameModal").text(resp[0].status);
-    $("#currentStatus").text(resp[0].statusId);
-    $("#taxpayerId").text(resp[0].taxpayerId);
-
     decideNextTccStage(resp[0].statusId);
+
+    $("#dateSubmitted").text(testNullOrEmpty(resp[0].submittedDate));
+    $("#applicantName").text(testNullOrEmpty(resp[0].applicantName));
+    $("#applicantFName").text(testNullOrEmpty(resp[0].applicantName)); //span so using text
+    $("#applicantTIN").text(testNullOrEmpty(resp[0].applicantTIN));
+    $("#applicantPhone").text(testNullOrEmpty(resp[0].applicantPhoneNo));
+    $("#applicantEmail").text(testNullOrEmpty(resp[0].applicantEmailAddress));
+    $("#requestEntityName").text(testNullOrEmpty(resp[0].requestingEntity));
+    $("#requestingEntityTin").text(testNullOrEmpty(resp[0].requestingOfficeTIN));
+    $("#requestingEntityPhone").text(testNullOrEmpty(resp[0].requestingOfficePhone));
+    $("#requestingEntityEmail").text(testNullOrEmpty(resp[0].requestingOfficeEmail));
+    $("#purposeOfApplication").text(testNullOrEmpty(resp[0].purpose));
+
+    $("#appIdHeader").text(testNullOrEmpty(resp[0].applicationNo)); //span so using text
+    $("#appStatusHeader").text(testNullOrEmpty(resp[0].status));
+    $("#modalId").text(testNullOrEmpty(resp[0].applicationNo));
+    $("#statusNameModal").text(testNullOrEmpty(resp[0].status));
+    $("#currentStatus").text(resp[0].statusId);
+    $("#taxpayerId").text(testNullOrEmpty(resp[0].taxpayerId));
 };
 
 var loadDetailsTex = function (resp) {
-    $("#dateSubmittedTex").text(resp[0].submittedDate);
-    $("#applicantNameTex").text(resp[0].applicantName);
-    $("#applicantFName").text(resp[0].applicantName); //span so using text
-    $("#applicantTINTex").text(resp[0].applicantTIN);
-    $("#applicantPhoneTex").text();
-    $("#applicantEmailTex").text(resp[0].email);
-    $("#residentialStatus").text(resp[0].residentialStatus);
-    $("#whtType").text(resp[0].typeOfWithHolding);
-    $("#whtReason").text(resp[0].reasons);
-    $("#whtRemarks").text(resp[0].remarks);
-
-    $("#appIdHeader").text(resp[0].applicationNo); //span so using text
-    $("#appStatusHeader").text(resp[0].status);
-    $("#modalId").text(resp[0].applicationNo);
-    $("#statusNameModal").text(resp[0].status);
-    $("#currentStatus").text(resp[0].statusId);
-    $("#taxpayerId").text(resp[0].taxpayerId);
-
     decideNextTccStage(resp[0].statusId);
+
+    $("#dateSubmittedTex").text(testNullOrEmpty(resp[0].submittedDate));
+    $("#applicantNameTex").text(testNullOrEmpty(resp[0].applicantName));
+    $("#applicantFName").text(testNullOrEmpty(resp[0].applicantName)); //span so using text
+    $("#applicantTINTex").text(testNullOrEmpty(resp[0].applicantTIN));
+    $("#applicantPhoneTex").text();
+    $("#applicantEmailTex").text(testNullOrEmpty(resp[0].email));
+    $("#residentialStatus").text(testNullOrEmpty(resp[0].residentialStatus));
+    $("#whtType").text(testNullOrEmpty(resp[0].typeOfWithHolding));
+    $("#whtReason").text(testNullOrEmpty(resp[0].reasons));
+    $("#whtRemarks").text(testNullOrEmpty(resp[0].remarks));
+
+    $("#appIdHeader").text(testNullOrEmpty(resp[0].applicationNo)); //span so using text
+    $("#appStatusHeader").text(testNullOrEmpty(resp[0].status));
+    $("#modalId").text(testNullOrEmpty(resp[0].applicationNo));
+    $("#statusNameModal").text(testNullOrEmpty(resp[0].status));
+    $("#currentStatus").text(resp[0].statusId);
+    $("#taxpayerId").text(testNullOrEmpty(resp[0].taxpayerId));
 };
 
+var testNullOrEmpty = function (value) {
+    if (!value || value === "null") {
+        return "N/A";
+    } else
+        return value;
+}
+
 var appendApplicantMessages = function (listOfComments) {
+    var FName = $("#taxpayerName").text();
     appendInternalMessages(listOfComments);
 
     var output = "";
@@ -132,7 +139,7 @@ var appendApplicantMessages = function (listOfComments) {
         }
 
         if (listOfComments[i].taxpayerReply) {
-            output = output + '<div style=" padding: 5px; width: 80%; float: right;"><div class="chatview" style="background-color: #f3f1d9;"><small style="font-size: 12px;"><b>Taxpayer | </b>' + listOfComments[i].personnelName.toUpperCase() + '</small><br><p style="color: black; font-size: 14px;">'
+            output = output + '<div style=" padding: 5px; width: 80%; float: right;"><div class="chatview" style="background-color: #f3f1d9;"><small style="font-size: 12px;"><b>Taxpayer | </b>' + FName.split(" ")[0] + '</small><br><p style="color: black; font-size: 14px;">'
                 + listOfComments[i].taxpayerReply + '</p ><small style="font-size: 12px;" class="time-right">' + listOfComments[i].taxpayerReplyTime + '</small></div></div>';
         }
     }
@@ -252,8 +259,8 @@ var decideNextTccStage = function (statusId) {
             $("#acknowledgeStatus").hide();
             $("#addTaxPosition").hide();
             $("#declineStatus").show();
-            $("#processApplication").hide();
-            $("#acknowledgeStatus").show();
+            $("#processApplication").show();
+            $("#acknowledgeStatus").hide();
             $("#previewApplication").hide();
             $("#reviseApplication").show();
             $("#reviseApplication").attr("disabled", false);
