@@ -1,12 +1,10 @@
 ﻿var ServerUrl = $("#serverUrl").val();
-var MainPostUrl = `${ServerUrl}api/Currency`;
-var MainGetUrl = `${ServerUrl}api/Currency`;
-var MainSearchUrl = `${ServerUrl}api/Currency`;
+var mainUrl = `${ServerUrl}api/Currency`;
 
 var initializeKendoGrid = function (data, stage) {
     if (data.length == 0 && stage !== 1) {
         return toastr.info("No Data");
-    }
+    };
 
     $("#Grid").kendoGrid({
         dataSource: { data: data, pageSize: 8 },
@@ -102,8 +100,7 @@ var SetUpdateModalToDefault = function () {
 };
 
 var SubmitSetup = function () {
-
-    let url = `${MainPostUrl}`;
+    let url = `${mainUrl}/PostCurrencyAsync`;
     let Code = $("#Code").val();
     let Symbol = $("#Symbol").val();
     let Description = $("#Description").val();
@@ -126,7 +123,7 @@ var SubmitSetup = function () {
 
 var UpdateSetup = function () {
 
-    let url = `${MainPostUrl}`;
+    let url = `${mainUrl}`;
     let Code = $("#UpdateCode").val();
     let Symbol = $("#UpdateSymbol").val();
     let Description = $("#UpdateDescription").val();
@@ -152,7 +149,7 @@ var UpdateSetup = function () {
 var searchCurrency = function () {
 
     const searchItem = $("#SearchItem").val().trim();
-    let url = `${MainSearchUrl}/SearchCurrency/` + searchItem;
+    let url = `${mainUrl}/SearchCurrency/` + searchItem;
 
     $("#Grid").data("kendoGrid").dataSource.data([]);
     ApiCaller(url, "GET", "", initializeKendoGrid);
@@ -173,7 +170,7 @@ $("#SubmitSetup").click(function () {
     SubmitSetup();
 
     SetAddModalToDefault();
-    location.reload(true);
+    //location.reload(true);
 });
 
 $("#BtnUpdate").click(function () {

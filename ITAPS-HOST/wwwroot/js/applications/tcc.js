@@ -1,4 +1,4 @@
-﻿var HeaderName = "Tax Clearance Certificate";
+﻿var HeaderName = "My Tasks";
 var serverUrl = $("#serverUrl").val();
 var searchTccByTaxOffice = `${serverUrl}api/TCC/GetAllTccApplicationByTaxOfficeId`;
 var GetTccCommentsByIdUrl = `${serverUrl}api/TCC/GetAllTccApplicationComments?tccId=`;
@@ -27,11 +27,11 @@ var initializeKendoGrid = function (data, stage) {
             dataBound: onDataBound,
             pageable: { refresh: false, pageSizes: true, buttonCount: 5 },
             columns: [
-                { field: "statusDate", title: "Date", width: '90px', format: "{0:MM-dd-yyyy}" },
+                { field: "assignedDate", title: "Date", width: '90px', format: "{0:MM-dd-yyyy}" },
                 { field: "applicantName", title: "Applicant", width: '17%' },
-                { field: "requestingEntity", title: "Requesting Entity", width: '20%' },
-                { field: "purpose", title: "Purpose", width: '20%' },
-                { field: "status", title: "Status", width: '15%' },
+                { field: "applicantTIN", title: "TIN", width: '15%' },
+                { field: "applicationType", title: "Application Type", width: '20%' },
+                { field: "status", title: "Status", width: '20%' },
                 {
                     command: [{
                         name: "view",
@@ -54,12 +54,7 @@ $(document).ready(function () {
     bootstrapPage();
     setTitles();
 
-    $("#tccGridView").show();
-    $("#detailsView").hide();
-
-    $("#tccDetailsGrid").show();
-    $("#texDetailsGrid").hide();
-    $("#ptrDetailsGrid").hide();
+    $("#gridView").show();
 });
 
 var setTitles = function () {
@@ -159,11 +154,15 @@ $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
     var item = grid.dataItem($(e.target).closest("tr"));
 
     $("#appId").val(item.applicationId);
+    $("#appTypeId").val(item.applicationTypeId);
     $("#taxpayerName").text(item.applicantName);
-    prepareDetailsView();
+    if(item.applicationType === "TCC")
+        prepareDetailsViewTCC();
+    if (item.applicationType === "WHT Exemption")
+        prepareDetailsViewTEX();
 });
 
-var prepareDetailsView = function () {
+var prepareDetailsViewTCC = function () {
 
     hideAndShowThings();
     loadMessages();
@@ -171,9 +170,27 @@ var prepareDetailsView = function () {
     getTccDocumentsById();
 };
 
-var hideAndShowThings = function () {
-    $("#tccGridView").hide();
+var prepareDetailsViewTEX = function () {
+    hideAndShowTEXThings();
+    loadMessages();
+    loadDetailsViewTex();
+    getTccDocumentsById();
+};
+
+var hideAndShowTEXThings = function () {
+    $("#gridView").hide();
     $("#detailsView").show();
+    $("#ptrDetailsGrid").hide();
+    $("#tccDetailsGrid").hide();
+    $("#texDetailsGrid").show();
+};
+
+var hideAndShowThings = function () {
+    $("#gridView").hide();
+    $("#detailsView").show();
+    $("#ptrDetailsGrid").hide();
+    $("#tccDetailsGrid").show();
+    $("#texDetailsGrid").hide();
 };
 
 $("#backToGrid").click(function () {
@@ -181,7 +198,7 @@ $("#backToGrid").click(function () {
 });
 
 var backToView = function () {
-    $("#tccGridView").show();
+    $("#gridView").show();
     $("#detailsView").hide();
 };
 

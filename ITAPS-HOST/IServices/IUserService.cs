@@ -1,4 +1,5 @@
 ﻿using ITAPS_HOST.Models;
+using System;
 using System.Threading.Tasks;
 
 namespace ITAPS_HOST.IServices
@@ -8,5 +9,7 @@ namespace ITAPS_HOST.IServices
         Task<ResponseItem<object>> GetAllUserTaxOfficesByUserID(string userId);
 
         Task<ResponseItem<object>> GetAllMenusByUserId(string userId);
+
+        Task<ResponseItem<object>> GetOffTaxOfficerId(Guid taxofficeid);
     }
 }

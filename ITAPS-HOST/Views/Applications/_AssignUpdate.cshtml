@@ -22,20 +22,12 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group row" style="margin-bottom: 1rem;">
+                                <div class="form-group row" style="margin-bottom: 2rem;">
                                     <div class="col-md-12 formDiv">
                                         <label for="internalMessage" class="col-form-label">
                                             <b>Internal Message</b> (Required)
                                         </label>
                                         <textarea class="form-control" rows="2" id="internalMessage"></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group row" style="margin-bottom: 1rem;">
-                                    <div class="col-md-12 formDiv">
-                                        <label for="taxpayerMessage" class=" col-form-label">
-                                            <b>Taxpayer Message</b>
-                                        </label>
-                                        <textarea class="form-control" rows="2" id="taxpayerMessage" style="resize: none;" value=""></textarea>
                                     </div>
                                 </div>
                             </form>
@@ -46,6 +38,28 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 <button type="button" id="assignApplication" class="btn btn-primary" disabled>Assign</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="yesOrNo" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="modal-standard-title" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="modal-income-title">Are you sure?</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: white">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div><i style="color: darkred">Caution: This action cannot be revoked</i></div><br />
+                <div><p>Are you sure you want to assign <i><span id="apType"></span> (<span id="apNo"></span></i>) to <i><span id="selectedOfficer"></span></i> for processing?</p></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                <button type="button" id="yesBtn" class="btn btn-primary">Yes</button>
             </div>
         </div>
     </div>

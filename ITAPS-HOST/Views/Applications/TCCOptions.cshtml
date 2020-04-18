@@ -6,7 +6,7 @@
 <input id="serverUrl" value="@ViewBag.ServerUrl" hidden />
 
 <div class="row card-group-row">
-    <div class="col-md-3 col-sm-6">
+    <div class="col-md-3 col-sm-6" id="allTCC">
         <a href="~/applications/tccdashboard" class="dash-anchor">
             <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center" title="Click to apply for Tax Clearance Certificate (TCC)">
                 <img src="~/icons/iconx-vatwh.png" class="img-responsive" width="80" />
@@ -17,7 +17,7 @@
         </a>
     </div>
 
-    <div class="col-md-3 col-sm-6">
+    <div class="col-md-3 col-sm-6" id="assignTCC">
         <a href="~/applications/tccassign" class="dash-anchor">
             <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center" title="Click to apply for Tax Clearance Certificate (TCC)">
                 <img src="~/icons/iconx-add.png" class="img-responsive" width="80" />
@@ -28,8 +28,8 @@
         </a>
     </div>
 
-    <div class="col-md-3 col-sm-6">
-        <a href="~/applications/tccprocessing" class="dash-anchor">
+    <div class="col-md-3 col-sm-6" id="processTCC">
+        <a href="~/applications/tcc" class="dash-anchor">
             <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center" title="Click to apply for Personal Tax Relief (PTR)">
                 <img src="~/icons/icon-revise.png" class="img-responsive" width="80" />
                 <div class="flex mb-4 mt-4 dash-body">
@@ -39,7 +39,7 @@
         </a>
     </div>
 
-    <div class="col-md-3 col-sm-6">
+    <div class="col-md-3 col-sm-6" id="approveTCC">
         <a href="~/approval/tccapproval" class="dash-anchor">
             <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center" title="Click to apply for Personal Tax Relief (PTR)">
                 <img src="~/images/icons/verified2.gif" class="img-responsive" width="80" />
@@ -55,7 +55,24 @@
 @section scripts {
     <script>
         $(document).ready(function () {
-            $("#pgHeader").text("Tax Clearance Certificate");
+            $("#pgHeader").text("Applications");
+
+            if ($("#UserFullName").text().toLowerCase() === "manager") {
+                $("#approveTCC").show();
+                $("#processTCC").hide();
+                $("#assignTCC").hide();
+                $("#allTCC").show();
+            } else if ($("#UserFullName").text().toLowerCase() === "officer") {
+                $("#approveTCC").hide();
+                $("#processTCC").show();
+                $("#assignTCC").hide();
+                $("#allTCC").show();
+            } else if ($("#UserFullName").text().toLowerCase() === "supervisor") {
+                $("#approveTCC").hide();
+                $("#processTCC").hide();
+                $("#assignTCC").show();
+                $("#allTCC").show();
+            }
         });
     </script>
 }

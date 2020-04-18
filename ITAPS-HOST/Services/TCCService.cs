@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace ITAPS_HOST.Services
 {
-    public class TCCService: ITCCService
+    public class TCCService : ITCCService
     {
         private readonly IAdminRequestClient _adminRequestClient;
         private readonly IHostingEnvironment _env;
@@ -29,10 +29,11 @@ namespace ITAPS_HOST.Services
             return await _adminRequestClient.GetRequestAsync(apiEndpoint);
         }
 
-        public async Task<ResponseItem<object>> GetTccApplicationById(Guid tccId)
+        public async Task<ResponseItem<object>> GetTccApplicationById(Guid tccId, Guid appTypeId)
         {
 
-            var apiEndpoint = $"Application/GetAllTCCApplicationById/{tccId}";
+            //var apiEndpoint = $"Application/GetAllTCCApplicationById/{appTypeId}/{tccId}";
+            var apiEndpoint = $"Application/GetApplicationDetailsByTypeAndId/{appTypeId}/{tccId}";
 
             return await _adminRequestClient.GetRequestAsync(apiEndpoint);
         }
@@ -111,7 +112,8 @@ namespace ITAPS_HOST.Services
 
         public async Task<ResponseItem<object>> GetAllTccApplicationByTaxOfficeId(Guid id, string queryString)
         {
-            var apiEndpoint = $"Application/GetAllTccApplicationByTaxOfficeId/{id}?QueryString={queryString}";
+            //var apiEndpoint = $"Application/GetAllTccApplicationByTaxOfficeId/{id}?QueryString={queryString}";
+            var apiEndpoint = $"Application/GetAllAssignedApplicationsByPersonnelId";
 
             return await _adminRequestClient.GetRequestAsync(apiEndpoint);
         }
@@ -123,6 +125,19 @@ namespace ITAPS_HOST.Services
             return await _adminRequestClient.GetRequestAsync(apiEndpoint);
         }
 
+        public async Task<ResponseItem<object>> GetAppByOfficeTypeAndStatus(Guid id, int status, string searchitem)
+        {
+            var apiEndpoint = $"Application/GetAllApplicationByOfficeTypeAndStatus/{id}/{status}?QueryString={searchitem}";
+
+            return await _adminRequestClient.GetRequestAsync(apiEndpoint);
+        }
+
+        public async Task<ResponseItemForCreationDto<object>> PostAssignApplication(IEnumerable<AssignApplication> objData)
+        {
+            var apiEndpoint = $"Application/ApplicationAssignment";
+
+            return await _adminRequestClient.PostRequestArrayAsync(objData, apiEndpoint);
+        }
 
         public async Task<ResponseItem<object>> GetTCCApplicationTaxPositionByApplicationId(Guid applicationId)
         {

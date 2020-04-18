@@ -26,14 +26,17 @@ var loadMessages = function () {
 
 var loadDetailsView = function () {
     let tccId = $("#appId").val();
-    let url = `${GetTccByIdUrl}` + tccId;
+    let appTypeId = $("#appTypeId").val();
+    let url = `${GetTccByIdUrl}` + tccId + `&appTypeId=${appTypeId}`;
 
     apiCaller(url, "GET", "", loadDetails)
 };
 
 var loadDetailsViewTex = function () {
     let tccId = $("#appId").val();
-    let url = `${GetTexByIdUrl}` + tccId;
+    let appTypeId = $("#appTypeId").val();
+    //let url = `${GetTexByIdUrl}` + tccId;
+    let url = `${GetTccByIdUrl}` + tccId + `&appTypeId=${appTypeId}`;
 
     apiCaller(url, "GET", "", loadDetailsTex)
 };

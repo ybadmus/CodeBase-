@@ -29,10 +29,11 @@ namespace ITAPS_HOST.Api
         }
 
         [HttpGet("GetTccApplicationById", Name = "GetTccApplicationById")]
-        public async Task<ResponseItem<object>> GetTccApplicationById(Guid tccId)
+        public async Task<ResponseItem<object>> GetTccApplicationById(Guid tccId, Guid appTypeId)
         {
-            return await _tccApplicationService.GetTccApplicationById(tccId);
+            return await _tccApplicationService.GetTccApplicationById(tccId, appTypeId);
         }
+
 
         [HttpGet("GetAllTccApplicationComments", Name = "GetAllTccApplicationComments")]
         public async Task<ResponseItem<object>> GetAllTccApplicationComments(Guid tccId)
@@ -87,6 +88,33 @@ namespace ITAPS_HOST.Api
         public async Task<ResponseItem<object>> GetAllTccApplicationPendingApprovalByTaxOfficeId(Guid officeId, string queryString)
         {
             return await _tccApplicationService.GetAllTccApplicationPendingApprovalByTaxOfficeId(officeId, queryString);
+        }
+
+        [HttpGet("GetAppByOfficeTypeAndStatus", Name = "GetAppByOfficeTypeAndStatus")]
+        public async Task<ResponseItem<object>> GetAppByOfficeTypeAndStatus(Guid officeId, int status, string searchitem)
+        {
+            return await _tccApplicationService.GetAppByOfficeTypeAndStatus(officeId, status, searchitem);
+        }
+
+        [HttpPost("PostAssignApplication", Name = "PostAssignApplication")]
+        public async Task<ResponseItemForCreationDto<object>> PostAssignApplication(IEnumerable<AssignApplication> objData)
+        {
+            string userId = "";
+
+            foreach (var claim in User.Claims)
+            {
+                if (claim.Type == "sub")
+                {
+                    userId = claim.Value;
+                }
+            };
+
+            foreach (var objdat in objData)
+            {
+                objdat.AssignerId = userId;
+            }
+
+            return await _tccApplicationService.PostAssignApplication(objData);
         }
 
         [HttpGet("GetTCCApplicationTaxPositionByApplicationId", Name = "GetTCCApplicationTaxPositionByApplicationId")]

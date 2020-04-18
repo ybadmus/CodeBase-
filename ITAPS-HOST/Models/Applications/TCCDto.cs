@@ -25,4 +25,12 @@ namespace ITAPS_HOST.Models.Applications
         public int Status { get; set; }
         public Guid ApplicationId { get; set; }
     }
+
+    public class AssignApplication
+    {
+        public Guid ApplicationId { get; set; }
+        public string Notes { get; set; }
+        public string AssignerId { get; set; }
+        public Guid PersonnelId { get; set; }
+    }
 }

@@ -2,6 +2,7 @@
 using ITAPS_HOST.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace ITAPS_HOST.Api
@@ -49,5 +50,12 @@ namespace ITAPS_HOST.Api
 
             return await _userService.GetAllMenusByUserId(userId);
         }
+
+        [HttpGet("GetOffTaxOfficerId", Name = "GetOffTaxOfficerId")]
+        public async Task<ResponseItem<object>> GetOffTaxOfficerId(Guid taxofficeId)
+        {
+            return await _userService.GetOffTaxOfficerId(taxofficeId);
+        }
+
     }
 }

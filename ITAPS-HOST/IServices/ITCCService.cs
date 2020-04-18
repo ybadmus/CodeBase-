@@ -9,7 +9,7 @@ namespace ITAPS_HOST.IServices
     public interface ITCCService
     {
         Task<ResponseItem<object>> GetAllTCCApplication();
-        Task<ResponseItem<object>> GetTccApplicationById(Guid tccId);
+        Task<ResponseItem<object>> GetTccApplicationById(Guid tccId, Guid appTypeId);
         Task<ResponseItem<object>> GetAllTccApplicationComments(Guid tccId);
         Task<ResponseItem<object>> UpdateTccApplication(Guid id, UpdateTccDto objectToSend);
         Task<ResponseItem<object>> SearchAllTCCApplication(string searchTerm);
@@ -19,6 +19,8 @@ namespace ITAPS_HOST.IServices
         Task<ResponseItem<object>> GetAllTccApplicationByTaxOfficeId(Guid id, string queryString);
         Task<ResponseItem<object>> GetTCCApplicationTaxPositionByApplicationId(Guid applicationId);
         Task<ResponseItem<object>> GetAllTccApplicationPendingApprovalByTaxOfficeId(Guid id, string queryString);
+        Task<ResponseItem<object>> GetAppByOfficeTypeAndStatus(Guid id, int status, string searchitem);
         Task<ResponseItem<object>> UpdateTccApplicationWithCertificate(Guid id, UpdateTccWithCertificate data);
+        Task<ResponseItemForCreationDto<object>> PostAssignApplication(IEnumerable<AssignApplication> objData);
     }
 }

@@ -9,13 +9,14 @@
 }
 
 <input id="serverUrl" value="@ViewBag.ServerUrl" hidden />
+<input id="appId" value="" hidden />
 
 <div class="card">
     <div id="texGridView">
         <div class="card-header">
             <div class="row">
                 <div class="col-sm-3" id="">
-                    <select type="text" id="texListOfTaxOffices" class="form-control" required></select>
+                    <select type="text" id="listOfOffices" class="form-control" required></select>
                 </div>
                 <div class="col-sm-3">
                     <div class="input-group">
@@ -35,14 +36,13 @@
             </div>
         </div>
     </div>
-    <partial name="_AssignUpdate" />
 </div>
 
 @section modals{
-    <partial name="_AppUpdate" />
+    <partial name="_AssignUpdate" />
 }
 
 @section scripts {
-
+    <script src="~/js/applications/tccassignjs.js"></script>
 }
 
