@@ -8,6 +8,14 @@ var activeOfficer = "";
 var grid = "";
 var item = "";
 
+var GetTccCommentsByIdUrl = `${serverUrl}api/TCC/GetAllTccApplicationComments?tccId=`;
+var GetTccByIdUrl = `${serverUrl}api/TCC/GetTccApplicationById?tccId=`;
+var GetTCCDocuments = `${serverUrl}api/TCC/GetTCCApplicationDocumentByApplicationId`;
+var ReportDownloadView = `${serverUrl}applications/certificate`;
+var activeTaxOffice = "";
+var appType = "TCC";
+
+
 $("#listOfOffices").on('change', function () {
     var elem = document.getElementById("listOfOffices");
     activeTaxOffice = elem.options[elem.selectedIndex].value;
@@ -43,7 +51,7 @@ var initializeKendoGrid = function (data, stage) {
                         name: "view",
                         template: "<button title='View item' class='btn btn-success btn-sm' style='margin-right: 2px'><span class='fa fa-file fa-lg'></span></button>"
                     }],
-                    title: "ACTION",
+                    title: "Action",
                     width: "90px"
                 }
             ]
@@ -127,16 +135,25 @@ $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
     grid = $("#Grid").getKendoGrid();
     item = grid.dataItem($(e.target).closest("tr"));
     prepareModal(item);
-    $("#assign-update").modal("show");
+});
+
+$("#assApplication").click(function (e) {
+    $("#assign-update").modal("show")
 });
 
 var prepareModal = function (item) {
 
     $("#apNo").text(item.applicationNo);
     $("#apType").text(item.applicationType);
-
+    $("#appTypeId").val(item.applicationTypeId);
     $("#appId").val(item.applicationId);
     $("#modalId").text(testNullOrEmpty(item.applicationNo));
+    
+
+    if (item.applicationType === "TCC")
+        prepareDetailsViewTCC();
+    if (item.applicationType === "WHT Exemption")
+        prepareDetailsViewTEX();
 
     var url = `${serverUrl}api/Users/GetOffTaxOfficerId?taxOfficeId=` + activeTaxOffice;
     apiCaller(url, "GET", "", loadOfficers)
@@ -209,10 +226,55 @@ $("#assignApplication").click(function () {
 });
 
 $("#internalMessage").keyup(function () {
-    fieldValidator();
+    fieldValidatorAssign();
 });
 
-var fieldValidator = function () {
+$("#assignOfficer").change(function () {
+    fieldValidatorAssign();
+});
+
+var hideAndShowTEXThings = function () {
+    $("#gridView").hide();
+    $("#detailsView").show();
+    $("#ptrDetailsGrid").hide();
+    $("#tccDetailsGrid").hide();
+    $("#texDetailsGrid").show();
+};
+
+var hideAndShowThings = function () {
+    $("#gridView").hide();
+    $("#detailsView").show();
+    $("#ptrDetailsGrid").hide();
+    $("#tccDetailsGrid").show();
+    $("#texDetailsGrid").hide();
+};
+
+$("#backToGrid").click(function () {
+    backToView();
+});
+
+var backToViewAssign = function () {
+    $("#gridView").show();
+    $("#detailsView").hide();
+    $("#assignApplication").hide();
+};
+
+var prepareDetailsViewTCC = function () {
+
+    hideAndShowThings();
+    loadMessages();
+    loadDetailsView();
+    getTccDocumentsById();
+};
+
+var prepareDetailsViewTEX = function () {
+    hideAndShowTEXThings();
+    loadMessages();
+    loadDetailsViewTex();
+    getTccDocumentsById();
+};
+
+var fieldValidatorAssign = function () {
     if (activeOfficer && ($("#internalMessage").val().match(/\S/)) && lengthInternalMessage()) {
 
         $("#assignApplication").attr("disabled", false);
@@ -254,7 +316,7 @@ var updateApplicationToProcessing = function () {
 
     var ObjectToSend = {
         "status": 1,
-        "taxpayerComment": `Your TCC application - ${ appNo } has been assigned to a GRA official for processing`,
+        "taxpayerComment": `Your application - ${ appNo } has been assigned to a GRA official for processing`,
         "internalComment": $("#internalMessage").val(),
         "applicationId": $("#appId").val()
     };
@@ -267,4 +329,5 @@ var removeItemFromGrid = function () {
     grid.dataSource.remove(item);
     $('#assign-update').modal('hide');
     $('#yesOrNo').modal('hide');
+    backToViewAssign();
 };

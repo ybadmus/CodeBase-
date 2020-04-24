@@ -31,9 +31,15 @@ namespace ITAPS_HOST.Services
 
         public async Task<ResponseItem<object>> GetTccApplicationById(Guid tccId, Guid appTypeId)
         {
+            var apiEndpoint = "";
 
-            //var apiEndpoint = $"Application/GetAllTCCApplicationById/{appTypeId}/{tccId}";
-            var apiEndpoint = $"Application/GetApplicationDetailsByTypeAndId/{appTypeId}/{tccId}";
+            Guid guid = Guid.Parse("870301ea-f62e-4788-9905-7c94a26813d3");
+            int res = guid.CompareTo(appTypeId);
+
+            if (res == 0)
+                apiEndpoint = $"Application/GetAllTCCApplicationById/{tccId}";
+            else
+                apiEndpoint = $"Application/GetApplicationDetailsByTypeAndId/{appTypeId}/{tccId}";
 
             return await _adminRequestClient.GetRequestAsync(apiEndpoint);
         }
@@ -71,7 +77,8 @@ namespace ITAPS_HOST.Services
 
         public async Task<ResponseItemForCreationDto<object>> PostTaxPositionSummary(Guid taxerpayerId, Guid appId, IEnumerable<TaxPositionSummary> data)
         {
-            var apiEndpoint = $"Application/AddUpdateTaxPosition/{appId}";
+            //var apiEndpoint = $"Application/AddUpdateTaxPosition/{appId}";
+            var apiEndpoint = $"Application/AddListTaxPositions/{appId}";
 
             List<TaxPositionSummaryDto> arrayForCreation = new List<TaxPositionSummaryDto> { };
 

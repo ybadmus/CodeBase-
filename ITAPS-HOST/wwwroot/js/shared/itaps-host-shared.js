@@ -48,7 +48,7 @@ var buildTree = function (menus) {
 
         for (var i = 0; i < listOfSubMenu.length; i++) {
             for (var j = 0; j < listOfNestedSubMenu.length; j++) {
-                if (listOfSubMenu[i].pkId === listOfNestedSubMenu[j].iParent) {
+                if (listOfSubMenu[i].pkID === listOfNestedSubMenu[j].iParent) {
                     listOfSubMenu[i].children.push(listOfNestedSubMenu[j]);
                 }
             }
@@ -56,7 +56,7 @@ var buildTree = function (menus) {
 
         for (var i = 0; i < listOfMenus.length; i++) {
             for (var j = 0; j < listOfSubMenu.length; j++) {
-                if (listOfMenus[i].pkId === listOfSubMenu[j].iParent) {
+                if (listOfMenus[i].pkID === listOfSubMenu[j].iParent) {
                     listOfMenus[i].children.push(listOfSubMenu[j]);
                 }
             }
@@ -68,14 +68,21 @@ var buildTree = function (menus) {
 };
 
 var loadUserMenus = function (menu) {
-    var domain = window.location.hostname;
-    var homeUrl = "";
-    if(domain === "localhost" || domain === "psl")
+    var homeLink = "";
+
+    if (window.location.hostname === "localhost")
+        homeLink = "/home";
+    else if (window.location.hostname === "psl-app-vm3")
+        homeLink = "/itaps-host/home";
+    else if (window.location.hostname === "tax.gra-itaps.com")
+        homeLink = "/itaps-host-test/home";
+    else 
+        homeLink = "/itaps-host/home";
 
     var output = [];
     output.push('<ul class="sidebar-menu">');
     output.push('<li class="sidebar-menu-item home">' +
-        '<a class= "sidebar-menu-button" href="/itaps-host/home" >' +
+        '<a class= "sidebar-menu-button" href="' + homeLink + '" >' +
         '<i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">home</i>' +
         '<span class="sidebar-menu-text">Home</span></a></li>');
 

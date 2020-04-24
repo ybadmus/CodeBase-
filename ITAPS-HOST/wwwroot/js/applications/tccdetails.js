@@ -27,6 +27,9 @@ var loadMessages = function () {
 var loadDetailsView = function () {
     let tccId = $("#appId").val();
     let appTypeId = $("#appTypeId").val();
+
+    if (appTypeId === "")
+        appTypeId = "870301ea-f62e-4788-9905-7c94a26813d3";
     let url = `${GetTccByIdUrl}` + tccId + `&appTypeId=${appTypeId}`;
 
     apiCaller(url, "GET", "", loadDetails)
@@ -35,7 +38,9 @@ var loadDetailsView = function () {
 var loadDetailsViewTex = function () {
     let tccId = $("#appId").val();
     let appTypeId = $("#appTypeId").val();
-    //let url = `${GetTexByIdUrl}` + tccId;
+
+    if (appTypeId === "")
+        appTypeId = "870301ea-f62e-4788-9905-7c94a26813d3";
     let url = `${GetTccByIdUrl}` + tccId + `&appTypeId=${appTypeId}`;
 
     apiCaller(url, "GET", "", loadDetailsTex)
@@ -211,9 +216,20 @@ var decideNextTccStage = function (statusId) {
             $("#declineStatus").hide();
             $("#suspendStatus").hide();
 
-            $("#previewApplication").hide();
-            $("#reviseApplication").show();
-            $("#reviseApplication").attr("disabled", false);
+            let loc = window.location.href;
+            if (loc.substring(loc.lastIndexOf('/') + 1) === "tccassign") {
+
+                $("#assApplication").show();
+                $("#reviseApplication").hide();
+                $("#previewApplication").hide();
+            } else {
+
+                $("#previewApplication").hide();
+                $("#assApplication").hide();
+                $("#reviseApplication").show();
+                $("#reviseApplication").attr("disabled", false);
+            }
+          
             break;
         case 1:
             if (appType === "TCC") {

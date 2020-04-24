@@ -12,7 +12,7 @@
 <input id="appId" value="" hidden />
 
 <div class="card">
-    <div id="texGridView">
+    <div id="gridView">
         <div class="card-header">
             <div class="row">
                 <div class="col-sm-3" id="">
@@ -36,6 +36,8 @@
             </div>
         </div>
     </div>
+
+    <partial name="_AppDetails" />
 </div>
 
 @section modals{
@@ -44,5 +46,7 @@
 
 @section scripts {
     <script src="~/js/applications/tccassignjs.js"></script>
+    <script src="~/js/applications/tccdetails.js"></script>
+    <script src="~/js/applications/tccupdater.js"></script>
 }
 
