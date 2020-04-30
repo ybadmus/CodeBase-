@@ -30,6 +30,7 @@ var loadDetailsView = function () {
 
     if (appTypeId === "")
         appTypeId = "870301ea-f62e-4788-9905-7c94a26813d3";
+        
     let url = `${GetTccByIdUrl}` + tccId + `&appTypeId=${appTypeId}`;
 
     apiCaller(url, "GET", "", loadDetails)

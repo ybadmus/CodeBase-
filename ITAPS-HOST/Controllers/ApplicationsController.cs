@@ -28,7 +28,7 @@ namespace ITAPS_HOST.Controllers
             return View();
         }
 
-        public IActionResult TCCAssign()
+        public IActionResult Assign()
         {
             UserDetails();
             ViewBag.ServerUrl = _config.AppServerUrl;
@@ -91,14 +91,6 @@ namespace ITAPS_HOST.Controllers
             ViewBag.ServerUrl = _config.AppServerUrl;
             return View();
         }
-        //WHT END
-
-        public ApplicationsController(IAppConstants config, IReportConstants reportConfig)
-        {
-            _config = config;
-            _reportConfig = reportConfig;
-        }
-
        
         public IActionResult Blank()
         {

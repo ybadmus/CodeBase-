@@ -1,32 +1,28 @@
 ﻿var HeaderName = "Assign Application";
 var serverUrl = $("#serverUrl").val();
-var searchNewTccApplications = `${serverUrl}api/TCC/GetAppByOfficeTypeAndStatus`;
+var searchNewApplications = `${serverUrl}api/TCC/GetAppByOfficeTypeAndStatus`;
 var assignTccApplication = `${serverUrl}api/TCC/PostAssignApplication`;
 var tccUpdateUrl = `${serverUrl}api/TCC/UpdateTCCApplication?id=`;
+var GetTccCommentsByIdUrl = `${serverUrl}api/TCC/GetAllTccApplicationComments?tccId=`;
+var GetTccByIdUrl = `${serverUrl}api/TCC/GetTccApplicationById?tccId=`;
+var GetTCCDocuments = `${serverUrl}api/TCC/GetTCCApplicationDocumentByApplicationId`;
+var appType = "TCC";
 var activeTaxOffice = "";
 var activeOfficer = "";
+var activeOfficerName = "";
 var grid = "";
 var item = "";
 var activeApplicationType = "";
 
-var GetTccCommentsByIdUrl = `${serverUrl}api/TCC/GetAllTccApplicationComments?tccId=`;
-var GetTccByIdUrl = `${serverUrl}api/TCC/GetTccApplicationById?tccId=`;
-var GetTCCDocuments = `${serverUrl}api/TCC/GetTCCApplicationDocumentByApplicationId`;
-var ReportDownloadView = `${serverUrl}applications/certificate`;
-var activeTaxOffice = "";
-var appType = "TCC";
-
-
-$("#listOfOffices").on('change', function () {
-    var elem = document.getElementById("listOfOffices");
+$("#listOfTaxOffices").on('change', function () {
+    var elem = document.getElementById("listOfTaxOffices");
     activeTaxOffice = elem.options[elem.selectedIndex].value;
 });
 
 $("#assignOfficer").on('change', function () {
     var elem = document.getElementById("assignOfficer");
     activeOfficer = elem.options[elem.selectedIndex].value;
-    var activeOfficerName = elem.options[elem.selectedIndex].text;
-    $("#selectedOfficer").text(activeOfficerName);
+    activeOfficerName = elem.options[elem.selectedIndex].text;
 });
 
 var initializeKendoGrid = function (data, stage) {
@@ -39,7 +35,6 @@ var initializeKendoGrid = function (data, stage) {
             dataSource: { data: data, pageSize: 8 },
             sortable: true,
             selectable: true,
-            dataBound: onDataBound,
             pageable: { refresh: false, pageSizes: true, buttonCount: 5 },
             columns: [
                 { field: "submittedDate", title: "Date", width: '90px', format: "{0:MM-dd-yyyy}" },
@@ -58,10 +53,6 @@ var initializeKendoGrid = function (data, stage) {
             ]
         });
     }
-};
-
-var onDataBound = function () {
-
 };
 
 var apiCaller = function (url, type, data, callback) {
@@ -89,38 +80,12 @@ var apiCaller = function (url, type, data, callback) {
     });
 };
 
-var validateSearchEntry = function () {
-    let searchItem = $("#searchItem").val().trim();
-    if (!searchItem.match(/\S/) || activeTaxOffice === "")
-        return false;
-    else
-        return true;
-};
-
 var bootstrapPage = function () {
     setTitles();
-    var userid = $("#userId").val(); //save in layout file
-    var taxOfficeUrl = `${serverUrl}api/Users/GetAllUserTaxOfficesByUserID?userId=` + userid;
-
-    apiCaller(taxOfficeUrl, "GET", "", loadTaxOffices);
 };
 
 var setTitles = function () {
     $("#pgHeader").text(HeaderName);
-};
-
-var loadTaxOffices = function (listOfTaxOffices) {
-    var output = "";
-
-    listOfTaxOffices.sort((a, b) => (a.taxOfficeName > b.taxOfficeName) - (a.taxOfficeName < b.taxOfficeName));
-
-    output += '<option selected>Choose office</option>';
-    for (var i = 0; i < listOfTaxOffices.length; i++) {
-        output = output + '<option value="' + listOfTaxOffices[i].taxOfficeId + '" >' + listOfTaxOffices[i].taxOfficeName + '</option>';
-    }
-
-    output = output;
-    $("#listOfOffices").html(output);
 };
 
 $(document).ready(function () {
@@ -144,28 +109,20 @@ $("#assApplication").click(function (e) {
 
 var prepareModal = function (item) {
 
-    $("#apNo").text(item.applicationNo);
-    $("#apType").text(item.applicationType);
-    $("#appTypeId").val(item.applicationTypeId);
     $("#appId").val(item.applicationId);
-    $("#modalId").text(testNullOrEmpty(item.applicationNo));
+    $("#appTypeId").val(item.applicationTypeId);
+    
+    $(".modalId").text(testNullOrEmpty(item.applicationNo));
 
     activeApplicationType = item.applicationType;
 
-    if (item.applicationType === "TCC")
+    if (activeApplicationType === "TCC")
         prepareDetailsViewTCC();
-    if (item.applicationType === "WHT Exemption")
+    if (activeApplicationType === "WHT Exemption")
         prepareDetailsViewTEX();
 
     var url = `${serverUrl}api/Users/GetOffTaxOfficerId?taxOfficeId=` + activeTaxOffice;
     apiCaller(url, "GET", "", loadOfficers)
-};
-
-var testNullOrEmpty = function (value) {
-    if (!value || value === "null") {
-        return "N/A";
-    } else
-        return value;
 };
 
 var loadOfficers = function (listOfOfficers) {
@@ -194,7 +151,7 @@ var searchTcc = function () {
         }
 
         $("#Grid").data("kendoGrid").dataSource.data([]);
-        var url = `${searchNewTccApplications}?officeId=` + activeTaxOffice + "&status=" + newAppsStatus + "&searchitem=" + searchItem;
+        var url = `${searchNewApplications}?officeId=` + activeTaxOffice + "&status=" + newAppsStatus + "&searchitem=" + searchItem;
         apiCaller(url, "GET", "", initializeKendoGrid);
     } else {
 
@@ -213,10 +170,12 @@ $("#searchItem").on('keypress', function (e) {
 });
 
 $("#assign-update").on('hidden.bs.modal', function () {
-    document.getElementById("#listOfOffices").selectedIndex = 0;
+    document.getElementById("#listOfTaxOffices").selectedIndex = 0;
     document.getElementById("#assignOfficer").selectedIndex = 0;
+
     activeOfficer = "";
     activeApplicationType = "";
+
     $("#internalMessage").val("");
 });
 
@@ -225,6 +184,8 @@ $("#yesBtn").click(function () {
 });
 
 $("#assignApplication").click(function () {
+    $("#apType").text(activeApplicationType);
+    $("#selectedOfficer").text(activeOfficerName);
     $("#yesOrNo").modal("show");
 });
 
@@ -247,9 +208,10 @@ var hideAndShowTEXThings = function () {
 var hideAndShowThings = function () {
     $("#gridView").hide();
     $("#detailsView").show();
-    $("#ptrDetailsGrid").hide();
+    
     $("#tccDetailsGrid").show();
     $("#texDetailsGrid").hide();
+    $("#ptrDetailsGrid").hide();
 };
 
 $("#backToGrid").click(function () {

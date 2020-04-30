@@ -221,3 +221,18 @@ $('.yearsDropdown').ready(function () {
         }));
     }
 });
+
+var validateSearchEntry = function () {
+    let searchItem = $("#searchItem").val().trim();
+    if (!searchItem.match(/\S/) || activeTaxOffice === "")
+        return false;
+    else
+        return true;
+};
+
+var testNullOrEmpty = function (value) {
+    if (!value || value === "null") {
+        return "N/A";
+    } else
+        return value;
+};
