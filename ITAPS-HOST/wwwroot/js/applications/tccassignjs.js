@@ -7,6 +7,7 @@ var activeTaxOffice = "";
 var activeOfficer = "";
 var grid = "";
 var item = "";
+var activeApplicationType = "";
 
 var GetTccCommentsByIdUrl = `${serverUrl}api/TCC/GetAllTccApplicationComments?tccId=`;
 var GetTccByIdUrl = `${serverUrl}api/TCC/GetTccApplicationById?tccId=`;
@@ -148,7 +149,8 @@ var prepareModal = function (item) {
     $("#appTypeId").val(item.applicationTypeId);
     $("#appId").val(item.applicationId);
     $("#modalId").text(testNullOrEmpty(item.applicationNo));
-    
+
+    activeApplicationType = item.applicationType;
 
     if (item.applicationType === "TCC")
         prepareDetailsViewTCC();
@@ -214,6 +216,7 @@ $("#assign-update").on('hidden.bs.modal', function () {
     document.getElementById("#listOfOffices").selectedIndex = 0;
     document.getElementById("#assignOfficer").selectedIndex = 0;
     activeOfficer = "";
+    activeApplicationType = "";
     $("#internalMessage").val("");
 });
 
@@ -250,7 +253,7 @@ var hideAndShowThings = function () {
 };
 
 $("#backToGrid").click(function () {
-    backToView();
+    backToViewAssign();
 });
 
 var backToViewAssign = function () {
@@ -315,8 +318,8 @@ var updateApplicationToProcessing = function () {
     var url = tccUpdateUrl + tccId;
 
     var ObjectToSend = {
-        "status": 1,
-        "taxpayerComment": `Your application - ${ appNo } has been assigned to a GRA official for processing`,
+        "status": 0,
+        "taxpayerComment": `Your ${activeApplicationType} application - ${appNo} has been assigned to a GRA official for processing.`,
         "internalComment": $("#internalMessage").val(),
         "applicationId": $("#appId").val()
     };

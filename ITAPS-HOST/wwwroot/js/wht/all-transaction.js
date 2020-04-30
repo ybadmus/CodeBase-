@@ -12,7 +12,8 @@ $(document).ready(function () {
     hideShowGrid();
     setHeaderNameToHTML();
     InitializeKendoGrid([], 1);
-    GetTaxOfficesByUser();
+    $("taxOfficesDiv").show();
+    $("#tccTaxOffices").show();
     $("#endDate").flatpickr({});
     $("#startDate").flatpickr({});
 });
@@ -140,8 +141,8 @@ $("#searchWHT").click(function () {
     ApiCaller(url, "GET", "", InitializeKendoGrid);
 });
 
-$("#tccListOfTaxOffices").on('change', function () {
-    var e = document.getElementById("tccListOfTaxOffices");
+$("#listOfTaxOffices").on('change', function () {
+    var e = document.getElementById("listOfTaxOffices");
     searchObject.taxOfficeId = e.options[e.selectedIndex].value;
 });
 
@@ -175,12 +176,6 @@ var enableDatePicker = function (periodId) {
             $("#startDate").prop("disabled", false);
         }
     }
-};
-
-var GetTaxOfficesByUser = function () {
-    var userid = $("#UserObj").val();
-    var url = `${ServerUrl}api/Users/GetAllUserTaxOfficesByUserID?userId=` + userid;
-    ApiCaller(url, "GET", "", LoadTaxOffices);
 };
 
 var GetActivePeriods = function (year) {
@@ -227,26 +222,6 @@ var disablePeriodFields = function () {
     $("#endDate").val("");
     $("#startDate").val("");
     $("#listOfActivePeriods").empty();
-};
-
-var LoadTaxOffices = function (listOfTaxOffices) {
-    var listOfTaxOffices = listOfTaxOffices
-    var output = "";
-
-    if (listOfTaxOffices.length > 0) {
-        listOfTaxOffices.sort((a, b) => (a.taxOfficeName > b.taxOfficeName) - (a.taxOfficeName < b.taxOfficeName));
-
-        $("taxOfficesDiv").show();
-        $("#tccTaxOffices").show();
-
-        output += '<option value="0" selected>Select Office</option>';
-        for (var i = 0; i < listOfTaxOffices.length; i++) {
-            output = output + '<option value="' + listOfTaxOffices[i].taxOfficeId + '" >' + listOfTaxOffices[i].taxOfficeName + '</option>';
-        };
-    };
-
-    output = output;
-    $("#tccListOfTaxOffices").html(output);
 };
 
 var getWHTDetails = function (invoiceNumber) {

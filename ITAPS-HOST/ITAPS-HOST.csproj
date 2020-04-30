@@ -13,13 +13,14 @@
 
 
   <ItemGroup>
-    <PackageReference Include="BoldReports.AspNet.Core" Version="2.2.23" />
-    <PackageReference Include="BoldReports.Net.Core" Version="2.2.23" />
+    <PackageReference Include="BoldReports.AspNet.Core" Version="2.2.28" />
+    <PackageReference Include="BoldReports.Net.Core" Version="2.2.28" />
     <PackageReference Include="IdentityModel" Version="4.1.1" />
     <PackageReference Include="Marvin.StreamExtensions" Version="1.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+    <PackageReference Include="Syncfusion.Pdf.Net.Core" Version="18.1.0.45" />
   </ItemGroup>
 
 

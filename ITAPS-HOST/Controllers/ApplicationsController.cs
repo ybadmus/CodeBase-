@@ -1,7 +1,9 @@
-﻿using ITAPS_HOST.Data;
+﻿using BoldReports.Models.ReportViewer;
+using ITAPS_HOST.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 
 namespace ITAPS_HOST.Controllers
 {
@@ -154,10 +156,27 @@ namespace ITAPS_HOST.Controllers
 
         public IActionResult Certificate()
         {
-            UserDetails();
+            ToolbarSettings toolbarSettings = new ToolbarSettings();
+            toolbarSettings.CustomItems = new List<CustomItem>();
+
+            var customItem = new CustomItem()
+            {
+                GroupIndex = 1,
+                Index = 1,
+                CssClass = "e-icon e-mail e-reportviewer-icon",
+                Type = BoldReports.ReportViewerEnums.ToolBarItemType.Default,
+                Id = "E-Mail",
+                Tooltip = new ToolTip() { Header = "E-Mail", Content = "Send rendered report as mail attachment" }
+            };
+
+            toolbarSettings.CustomItems.Add(customItem);
+
+            ViewBag.toolbarSettings = toolbarSettings;
             ViewBag.ServerUrl = _config.AppServerUrl;
             ViewBag.ReportServer = _reportConfig.ReportServer;
             ViewBag.ReportPath = _reportConfig.ReportPath;
+            UserDetails();
+
             return View();
         }
 

@@ -10,7 +10,6 @@ var searchObject = {
 $(document).ready(function () {
     SetHeaderNameToHTML();
     InitializeKendoGrid([]);
-    GetTaxOfficesByUser();
     hideShowGrid();
     $("#endDate").flatpickr({});
     $("#startDate").flatpickr({});
@@ -88,30 +87,6 @@ var ApiCaller = function (url, type, data, callback) {
 var SetHeaderNameToHTML = function () {
 
     $("#pgHeader").text(HeaderName);
-};
-
-var LoadTaxOffices = function (listOfTaxOffices) {
-    var listOfTaxOffices = listOfTaxOffices
-    var output = "";
-
-    if (listOfTaxOffices.length > 0) {
-        listOfTaxOffices.sort((a, b) => (a.taxOfficeName > b.taxOfficeName) - (a.taxOfficeName < b.taxOfficeName));
-
-        output += '<option value="0" selected>Select Office</option>';
-        for (var i = 0; i < listOfTaxOffices.length; i++) {
-            output = output + '<option value="' + listOfTaxOffices[i].taxOfficeId + '" >' + listOfTaxOffices[i].taxOfficeName + '</option>';
-        };
-    };
-
-    output = output;
-    $("#tccListOfTaxOffices").html(output);
-};
-
-var GetTaxOfficesByUser = function () {
-    var userid = $("#UserObj").val();
-    var url = `${ServerUrl}api/Users/GetAllUserTaxOfficesByUserID?userId=` + userid;
-
-    ApiCaller(url, "GET", "", LoadTaxOffices);
 };
 
 var searchWht = function () {
@@ -200,8 +175,8 @@ var LoadModalDetails = function (whtDetailsFromServer) {
     gridShowHide();
 };
 
-$("#tccListOfTaxOffices").on('change', function () {
-    var e = document.getElementById("tccListOfTaxOffices");
+$("#listOfTaxOffices").on('change', function () {
+    var e = document.getElementById("listOfTaxOffices");
     searchObject.taxOfficeId = e.options[e.selectedIndex].value;
 });
 

@@ -12,7 +12,6 @@ $(document).ready(function () {
     showHideTrDetails();
     SetHeaderNameToHTML();
     InitializeKendoGrid([], 1);
-    GetTaxOfficesByUser();
     $("#endDate").flatpickr({});
     $("#startDate").flatpickr({});
 });
@@ -129,22 +128,6 @@ var disablePeriodFields = function () {
     $("#listOfActivePeriods").empty();
 };
 
-var LoadTaxOffices = function (listOfTaxOffices) {
-    var listOfTaxOffices = listOfTaxOffices
-    var output = "";
-    if (listOfTaxOffices.length > 0) {
-        listOfTaxOffices.sort((a, b) => (a.taxOfficeName > b.taxOfficeName) - (a.taxOfficeName < b.taxOfficeName));
-
-        output += '<option value="0" selected>Select Office</option>';
-        for (var i = 0; i < listOfTaxOffices.length; i++) {
-            output = output + '<option value="' + listOfTaxOffices[i].taxOfficeId + '" >' + listOfTaxOffices[i].taxOfficeName + '</option>';
-        };
-    }
-
-    output = output;
-    $("#tccListOfTaxOffices").html(output);
-};
-
 var GetActivePeriods = function (year) {
     var url = `${ServerUrl}api/MonoApi/GetAllActivePeriods?year=${year}`;
     ApiCaller(url, "GET", "", LoadActivePeriods);
@@ -167,13 +150,6 @@ var enableDatePicker = function (periodId) {
             $("#startDate").prop("disabled", false);
         }
     }
-};
-
-var GetTaxOfficesByUser = function () {
-    var userid = $("#UserObj").val();
-    var url = `${ServerUrl}api/Users/GetAllUserTaxOfficesByUserID?userId=` + userid;
-
-    ApiCaller(url, "GET", "", LoadTaxOffices);
 };
 
 var searchWht = function () {
@@ -239,8 +215,8 @@ $("#searchWHT").click(function (e) {
     searchWht();
 });
 
-$("#tccListOfTaxOffices").on('change', function () {
-    var e = document.getElementById("tccListOfTaxOffices");
+$("#listOfTaxOffices").on('change', function () {
+    var e = document.getElementById("listOfTaxOffices");
     searchObject.taxOfficeId = e.options[e.selectedIndex].value;
 });
 

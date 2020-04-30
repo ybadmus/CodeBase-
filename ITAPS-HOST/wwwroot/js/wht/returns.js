@@ -10,7 +10,7 @@ var searchObject = {
 $(document).ready(function () {
     SetHeaderNameToHTML();
     InitializeKendoGrid([]);
-    GetTaxOfficesByUser();
+   
     hideShowGrid();
     $("#endDate").flatpickr({});
     $("#startDate").flatpickr({});
@@ -90,8 +90,8 @@ var ApiCaller = function (url, type, data, callback) {
     });
 };
 
-$("#tccListOfTaxOffices").on('change', function () {
-    var e = document.getElementById("tccListOfTaxOffices");
+$("#listOfTaxOffices").on('change', function () {
+    var e = document.getElementById("listOfTaxOffices");
     searchObject.taxOfficeId = e.options[e.selectedIndex].value;
 });
 
@@ -127,12 +127,6 @@ $("#searchWHTReturn").click(function () {
     ApiCaller(url, "GET", "", InitializeKendoGrid);
 });
 
-var GetTaxOfficesByUser = function () {
-    var userid = $("#UserObj").val();
-    var url = `${ServerUrl}api/Users/GetAllUserTaxOfficesByUserID?userId=` + userid;
-    ApiCaller(url, "GET", "", LoadTaxOffices);
-};
-
 var GetActivePeriods = function () {
     var url = `${ServerUrl}api/MonoApi/GetAllActivePeriods`;
     ApiCaller(url, "GET", "", LoadActivePeriods);
@@ -150,27 +144,6 @@ var LoadActivePeriods = function (listOfPeriods) {
 
     output = output;
     $("#listOfActivePeriods").html(output);
-};
-
-var LoadTaxOffices = function (listOfTaxOffices) {
-    var listOfTaxOffices = listOfTaxOffices
-    var output = "";
-
-    if (listOfTaxOffices.length > 0) {
-        listOfTaxOffices.sort((a, b) => (a.taxOfficeName > b.taxOfficeName) - (a.taxOfficeName < b.taxOfficeName));
-
-        $("taxOfficesDiv").show();
-        $("#taxOfficesDropdownDiv").show();
-        $("#tccTaxOffices").show();
-
-        output += '<option value="0" selected>Select Office</option>';
-        for (var i = 0; i < listOfTaxOffices.length; i++) {
-            output = output + '<option value="' + listOfTaxOffices[i].taxOfficeId + '" >' + listOfTaxOffices[i].taxOfficeName + '</option>';
-        };
-    };
-
-    output = output;
-    $("#tccListOfTaxOffices").html(output);
 };
 
 var LoadModalGrid = function (listOfWht) {
@@ -252,6 +225,9 @@ var hideShowGrid = function () {
     $("#transactionDetails").hide();
     $("#gridDetails").hide();
     $("#gridHeader").show();
+    $("taxOfficesDiv").show();
+    $("#taxOfficesDropdownDiv").show();
+    $("#tccTaxOffices").show();
 }
 
 var hideShowGridDetails = function () {

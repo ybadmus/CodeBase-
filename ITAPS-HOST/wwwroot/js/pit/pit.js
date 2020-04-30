@@ -55,20 +55,6 @@ var initializeKendoGrid = function (data, stage) {
     });
 };
 
-var loadTaxOffices = function (listOfTaxOffices) {
-    var output = "";
-
-    listOfTaxOffices.sort((a, b) => (a.taxOfficeName > b.taxOfficeName) - (a.taxOfficeName < b.taxOfficeName));
-
-    output += '<option selected>Choose office</option>';
-    for (var i = 0; i < listOfTaxOffices.length; i++) {
-        output = output + '<option value="' + listOfTaxOffices[i].taxOfficeId + '" >' + listOfTaxOffices[i].taxOfficeName + '</option>';
-    }
-
-    output = output;
-    $("#listOfTaxOffices").html(output);
-};
-
 var bootstrapPage = function () {
 
     $("#pgHeader").text(HeaderName);
@@ -78,7 +64,6 @@ var bootstrapPage = function () {
     $("#endDate").flatpickr({});
     $("#startDate").flatpickr({});
 
-    loadOffices();
     initializeKendoGrid([], 1);
 };
 
@@ -105,13 +90,6 @@ var apiCaller = function (url, type, data, callback) {
             toastr.error('An error occured');
         }
     });
-};
-
-var loadOffices = function () {
-    var userid = $("#userId").val();
-    var officesUrl = `${serverUrl}api/Users/GetAllUserTaxOfficesByUserID?userId=` + userid;
-
-    apiCaller(officesUrl, "GET", "", loadTaxOffices);
 };
 
 var getParameterByName = function (name, url) {
@@ -147,8 +125,6 @@ var searchPIT = function () {
 };
 
 var bootstrapNotification = function () {
-    loadOffices();
-
     $("#pgHeader").text(HeaderName);
     $("#gridView").hide();
     $("#estimateDetail").hide();
@@ -156,7 +132,6 @@ var bootstrapNotification = function () {
 };
 
 $("#btnSearch").click(function () {
-
     searchPIT();
 });
 
@@ -165,6 +140,8 @@ $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
     var grid = $("#Grid").getKendoGrid();
     var item = grid.dataItem($(e.target).closest("tr"));
 
+    $(".entityName").text(item.entityName);
+    $(".tin").text(item.tin);
     loadDetails(item.id);
 });
 
@@ -185,6 +162,8 @@ $("#backToGrid").click(function () {
     $("#gridView").show();
     $("#returnDetail").hide();
     $("#estimateDetail").hide();
+    $(".entityName").text("");
+    $(".tin").text("");
 
     if (getParameterByName("type") === "annualreturn" || getParameterByName("type") === "provisional")
         initializeKendoGrid([], 1);

@@ -3,6 +3,7 @@
 }
 
 <input id="serverUrl" value="@ViewBag.ServerUrl" hidden />
+<input id="reportPath" value="@ViewBag.ReportPath" hidden />
 
 <style>
     #reportviewer1_viewerContainer {
@@ -15,7 +16,7 @@
     }
 
     #reportviewer1_viewBlockContainer {
-        display: none !important;
+        display: block !important;
     }
 
     #reportviewer1 {
@@ -23,19 +24,41 @@
     }
 </style>
 
-<div class="card">
-    <div class="card-body">
-        <bold-report-viewer id="reportviewer1" report-service-url="../Reports" report-path="@ViewBag.ReportPath" report-server-url="@ViewBag.ReportServer" processing-mode="Remote" ajax-before-load="ajaxBeforeLoad" />
-    </div>
+<div class="reportContainer">
+        <bold-report-viewer id="reportviewer1" report-service-url="../Reports" report-path="@ViewBag.ReportPath" toolbar-settings="ViewBag.toolbarSettings" tool-bar-item-click="onToolBarItemClick" report-server-url="@ViewBag.ReportServer" processing-mode="Remote" ajax-before-load="ajaxBeforeLoad" />
 </div>
 
 <script>
     $("#pgHeader").text("TCC Certificate");
 
-    $(window).load(function () {
-        sessionStorage.removeItem("tccReportId");
-        sessionStorage.removeItem("tccLabel");
+    $(function () {
+        var reportPath = $("#reportPath").val();
+        $("#reportviewer1").data("boldReportViewer", {
+            reportServiceUrl: "../Reports",
+            reportPath: reportPath,
+            toolbarSettings: {
+                showToolbar: true,
+                items: ej.ReportViewer.ToolbarItems.All & ~ej.ReportViewer.ToolbarItems.Print,
+                customItems: [{
+                    groupIndex: 1,
+                    index: 1,
+                    type: 'Default',
+                    cssClass: "e-icon e-mail e-reportviewer-icon",
+                    id: 'E-Mail',
+                    tooltip: {
+                        header: 'E-Mail',
+                        content: 'Send rendered report as mail attachment'
+                    }
+                }]
+            },
+            toolBarItemClick: 'ontoolBarItemClick'
+        });
     });
+
+    //$(window).load(function () {
+    //    sessionStorage.removeItem("tccReportId");
+    //    sessionStorage.removeItem("tccLabel");
+    //});
 
     var ServerUrl = $("#serverUrl").val();
 
@@ -61,11 +84,31 @@
 
     parameters.push({ name: sessionStorage.getItem("tccLabel"), labels: [sessionStorage.getItem("tccReportId")], values: [sessionStorage.getItem("tccReportId")], nullable: "true" });
 
-
     function ajaxBeforeLoad(event) {
         event.model.parameters = parameters;
     };
 
+    function onToolBarItemClick(args) {
+        if (args.value == "E-Mail") {
+            var proxy = $('#reportviewer1').data('boldReportViewer');
+            var reportName = "TCC Certificate";
+            var requrl = "..Reports/SendEmail";
+            var _json = proxy.exportReport("PDF");
+
+            //var _json = {
+            //    exportType: "PDF", reportViewerToken: proxy._reportViewerToken, ReportName: reportName
+            //};
+
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: requrl,
+                data: JSON.stringify(_json),
+                dataType: "json",
+                crossDomain: true
+            })
+        }
+    }
 </script>
 
 <bold-script-manager></bold-script-manager>

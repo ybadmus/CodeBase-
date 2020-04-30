@@ -13,14 +13,21 @@ var menuMapper = function (url) {
 }
 
 var loadTaxOfficeName = function () {
-    apiCaller(urlTaxOffice, "GET", "", userTaxOffice);
+    if (!sessionStorage.getItem("assignedTaxOfficers"))
+        apiCaller(urlTaxOffice, "GET", "", userTaxOffice);
+    else
+        userTaxOffice(JSON.parse(sessionStorage.getItem("assignedTaxOfficers")));
 };
 
 var loadMenus = function () {
-    apiCaller(urlAssignedMenu, "GET", "", loadAssignedRoled);
+    if (!sessionStorage.getItem("assignedMenus"))
+        apiCaller(urlAssignedMenu, "GET", "", loadAssignedRoled);
+    else
+        buildTree(JSON.parse(sessionStorage.getItem("assignedMenus")));
 };
 
 var loadAssignedRoled = function (resp) {
+    sessionStorage.setItem("assignedMenus", JSON.stringify(resp));
     buildTree(resp);
 };
 
@@ -76,7 +83,7 @@ var loadUserMenus = function (menu) {
         homeLink = "/itaps-host/home";
     else if (window.location.hostname === "tax.gra-itaps.com")
         homeLink = "/itaps-host-test/home";
-    else 
+    else
         homeLink = "/itaps-host/home";
 
     var output = [];
@@ -127,7 +134,7 @@ var loadUserMenus = function (menu) {
                         '</a></li>');
 
                 }
-               
+
             }
 
             output.push("</ul>");
@@ -170,18 +177,39 @@ var apiCaller = function (url, type, data, callback) {
 };
 
 var userTaxOffice = function (resp) {
+    if (!sessionStorage.getItem("assignedTaxOffices"));
+        sessionStorage.setItem("assignedTaxOffices", JSON.stringify(resp));
+    setTaxOfficeName(resp);
+    loadTaxOffices(resp);
+};
 
+var setTaxOfficeName = function (resp) {
     if (resp) {
         if (resp.length > 1) {
             $("#adminTaxOffice").text("Head Office");
         }
         else if (resp.length == 1) {
             $("#adminTaxOffice").text(resp[0].taxOfficeName);
+            //For notification purposes;
             oneOfficeAssigned = true;
         }
     } else {
         toastr.info("No Tax Office assigned to this user!");
     }
+};
+
+var loadTaxOffices = function (listOfTaxOffices) {
+    var output = "";
+
+    listOfTaxOffices.sort((a, b) => (a.taxOfficeName > b.taxOfficeName) - (a.taxOfficeName < b.taxOfficeName));
+
+    output += '<option selected>Choose office</option>';
+    for (var i = 0; i < listOfTaxOffices.length; i++) {
+        output = output + '<option value="' + listOfTaxOffices[i].taxOfficeId + '" >' + listOfTaxOffices[i].taxOfficeName + '</option>';
+    }
+
+    output = output;
+    $("#listOfTaxOffices").html(output);
 };
 
 $('.yearsDropdown').ready(function () {

@@ -6,8 +6,6 @@ var hideAndShowThings = function () {
 };
 
 var bootstrapNotification = function () {
-    loadOffices();
-
     $("#pgHeader").text(HeaderName);
     $("#gridView").hide();
     $("#estimateDetail").hide();
