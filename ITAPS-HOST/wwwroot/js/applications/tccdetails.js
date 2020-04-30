@@ -218,7 +218,7 @@ var decideNextTccStage = function (statusId) {
             $("#suspendStatus").hide();
 
             let loc = window.location.href;
-            if (loc.substring(loc.lastIndexOf('/') + 1) === "tccassign") {
+            if (loc.substring(loc.lastIndexOf('/') + 1) === "assign") {
 
                 $("#assApplication").show();
                 $("#reviseApplication").hide();

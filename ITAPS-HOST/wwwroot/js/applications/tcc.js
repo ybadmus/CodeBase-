@@ -156,6 +156,9 @@ $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
     $("#appId").val(item.applicationId);
     $("#appTypeId").val(item.applicationTypeId);
     $("#taxpayerName").text(item.applicantName);
+
+    appType = item.applicationType;
+
     if(item.applicationType === "TCC")
         prepareDetailsViewTCC();
     if (item.applicationType === "WHT Exemption")
