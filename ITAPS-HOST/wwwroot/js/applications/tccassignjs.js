@@ -6,6 +6,7 @@ var tccUpdateUrl = `${serverUrl}api/TCC/UpdateTCCApplication?id=`;
 var GetTccCommentsByIdUrl = `${serverUrl}api/TCC/GetAllTccApplicationComments?tccId=`;
 var GetTccByIdUrl = `${serverUrl}api/TCC/GetTccApplicationById?tccId=`;
 var GetTCCDocuments = `${serverUrl}api/TCC/GetTCCApplicationDocumentByApplicationId`;
+var loadPtrCodesUrl = `${serverUrl}api/CodesApi/`;
 var appType = "TCC";
 var activeTaxOffice = "";
 var activeOfficer = "";
@@ -111,19 +112,38 @@ var prepareModal = function (item) {
 
     $("#appId").val(item.applicationId);
     $("#appTypeId").val(item.applicationTypeId);
-    
     $(".modalId").text(testNullOrEmpty(item.applicationNo));
+    prepareAssignmentModal();
+
 
     activeApplicationType = item.applicationType;
 
-    if (activeApplicationType === "TCC")
+    if (activeApplicationType.toUpperCase() === "TCC".toUpperCase())
         prepareDetailsViewTCC();
-    if (activeApplicationType === "WHT Exemption")
+    if (activeApplicationType.toUpperCase() === "WHT Exemption".toUpperCase())
         prepareDetailsViewTEX();
+    if (activeApplicationType.toUpperCase() === "Disability Relief".toUpperCase() || activeApplicationType.toUpperCase() === "Aged Dependants Relief".toUpperCase()) {
+        prepareDetailsViewPTR();
+        $("#applicantNamePTR").text(item.applicantName);
+        $("#applicantTINPTR").text(item.applicantTIN);
+    }
 
+};
+
+var prepareAssignmentModal = function () {
     var url = `${serverUrl}api/Users/GetOffTaxOfficerId?taxOfficeId=` + activeTaxOffice;
     apiCaller(url, "GET", "", loadOfficers)
 };
+
+var loadReliefTypes = function () {
+    var url = `${loadPtrCodesUrl}APT`;
+
+    return apiCaller(url, "GET", "", ptrCodes);
+};
+
+var ptrCodes = function (resp) {
+    sessionStorage.setItem("ptrCodes", JSON.stringify(resp));
+}
 
 var loadOfficers = function (listOfOfficers) {
     var output = "";
@@ -170,13 +190,9 @@ $("#searchItem").on('keypress', function (e) {
 });
 
 $("#assign-update").on('hidden.bs.modal', function () {
-    document.getElementById("#listOfTaxOffices").selectedIndex = 0;
-    document.getElementById("#assignOfficer").selectedIndex = 0;
-
+    document.getElementById("assignOfficer").selectedIndex = 0;
+    document.getElementById("assignNotes").value = "";
     activeOfficer = "";
-    activeApplicationType = "";
-
-    $("#internalMessage").val("");
 });
 
 $("#yesBtn").click(function () {
@@ -189,13 +205,22 @@ $("#assignApplication").click(function () {
     $("#yesOrNo").modal("show");
 });
 
-$("#internalMessage").keyup(function () {
+$("#assignNotes").keyup(function () {
     fieldValidatorAssign();
 });
 
 $("#assignOfficer").change(function () {
     fieldValidatorAssign();
 });
+
+var hideAndShowThingsPTR = function () {
+    $("#gridView").hide();
+    $("#detailsView").show();
+
+    $("#ptrDetailsGrid").show();
+    $("#tccDetailsGrid").hide();
+    $("#texDetailsGrid").hide();
+};
 
 var hideAndShowTEXThings = function () {
     $("#gridView").hide();
@@ -208,7 +233,7 @@ var hideAndShowTEXThings = function () {
 var hideAndShowThings = function () {
     $("#gridView").hide();
     $("#detailsView").show();
-    
+
     $("#tccDetailsGrid").show();
     $("#texDetailsGrid").hide();
     $("#ptrDetailsGrid").hide();
@@ -225,7 +250,6 @@ var backToViewAssign = function () {
 };
 
 var prepareDetailsViewTCC = function () {
-
     hideAndShowThings();
     loadMessages();
     loadDetailsView();
@@ -239,8 +263,15 @@ var prepareDetailsViewTEX = function () {
     getTccDocumentsById();
 };
 
+var prepareDetailsViewPTR = function () {
+    hideAndShowThingsPTR();
+    loadMessages();
+    loadDetailsViewPtr();
+    getTccDocumentsById();
+};
+
 var fieldValidatorAssign = function () {
-    if (activeOfficer && ($("#internalMessage").val().match(/\S/)) && lengthInternalMessage()) {
+    if (activeOfficer && ($("#assignNotes").val().match(/\S/)) && lengthOfNotes()) {
 
         $("#assignApplication").attr("disabled", false);
     } else {
@@ -248,8 +279,8 @@ var fieldValidatorAssign = function () {
     }
 };
 
-var lengthInternalMessage = function () {
-    var content = $("#internalMessage").val().trim();
+var lengthOfNotes = function () {
+    var content = $("#assignNotes").val().trim();
 
     if (content.length > 5) {
         return true;
@@ -261,7 +292,7 @@ var lengthInternalMessage = function () {
 var assignApplication = function () {
     var objData = [{
         "applicationId": $("#appId").val(),
-        "notes": $("#internalMessage").val(),
+        "notes": $("#assignNotes").val(),
         "assignerId": "",
         "personnelId": activeOfficer
     }];
@@ -270,11 +301,6 @@ var assignApplication = function () {
 };
 
 var callBackFunc = function () {
-    
-    updateApplicationToProcessing();
-};
-
-var updateApplicationToProcessing = function () {
     var appNo = $("#modalId").text();
     var tccId = $("#appId").val();
     var url = tccUpdateUrl + tccId;
@@ -282,7 +308,7 @@ var updateApplicationToProcessing = function () {
     var ObjectToSend = {
         "status": 0,
         "taxpayerComment": `Your ${activeApplicationType} application - ${appNo} has been assigned to a GRA official for processing.`,
-        "internalComment": $("#internalMessage").val(),
+        "internalComment": $("#assignNotes").val(),
         "applicationId": $("#appId").val()
     };
 

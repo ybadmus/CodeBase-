@@ -24,10 +24,10 @@
                                 </div>
                                 <div class="form-group row" style="margin-bottom: 2rem;">
                                     <div class="col-md-12 formDiv">
-                                        <label for="internalMessage" class="col-form-label">
+                                        <label for="assignNotes" class="col-form-label">
                                             <b>Notes</b> (Required)
                                         </label>
-                                        <textarea class="form-control" rows="2" id="internalMessage"></textarea>
+                                        <textarea class="form-control" rows="3" id="assignNotes"></textarea>
                                     </div>
                                 </div>
                             </form>
@@ -54,8 +54,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div><i style="color: darkred">Caution: This action cannot be revoked</i></div><br />
-                <div><p>Are you sure you want to assign <i><span id="apType"></span> (<span class="modalId"></span></i>) to <i><span id="selectedOfficer"></span></i> for processing?</p></div>
+                <div><span style="color: darkred"><b>Caution</b>: This action cannot be revoked</span></div><br />
+                <div><p>Are you sure you want to assign <b><span id="apType"></span> - <span class="modalId"></span></b> to <b><span id="selectedOfficer"></span></b> for processing?</p></div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>

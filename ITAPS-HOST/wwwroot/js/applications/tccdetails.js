@@ -25,31 +25,35 @@ var loadMessages = function () {
 };
 
 var loadDetailsView = function () {
-    let tccId = $("#appId").val();
+    let appId = $("#appId").val();
     let appTypeId = $("#appTypeId").val();
 
     if (appTypeId === "")
         appTypeId = "870301ea-f62e-4788-9905-7c94a26813d3";
         
-    let url = `${GetTccByIdUrl}` + tccId + `&appTypeId=${appTypeId}`;
+    let url = `${GetTccByIdUrl}` + appId + `&appTypeId=${appTypeId}`;
 
     apiCaller(url, "GET", "", loadDetails)
 };
 
 var loadDetailsViewTex = function () {
-    let tccId = $("#appId").val();
+    let appId = $("#appId").val();
     let appTypeId = $("#appTypeId").val();
 
     if (appTypeId === "")
         appTypeId = "870301ea-f62e-4788-9905-7c94a26813d3";
-    let url = `${GetTccByIdUrl}` + tccId + `&appTypeId=${appTypeId}`;
+    let url = `${GetTccByIdUrl}` + appId + `&appTypeId=${appTypeId}`;
 
     apiCaller(url, "GET", "", loadDetailsTex)
 };
 
-var loadDetailsViewPtr = function (pCode) {
+var loadDetailsViewPtr = function () {
     let appId = $("#appId").val();
-    let url = `${GetPtrByIdUrl}` + appId + "&applicationTypeCode=" + pCode;
+    let appTypeId = $("#appTypeId").val();
+
+    if (appTypeId === "")
+        appTypeId = "870301ea-f62e-4788-9905-7c94a26813d3";
+    let url = `${GetTccByIdUrl}` + appId + `&appTypeId=${appTypeId}`;
 
     apiCaller(url, "GET", "", loadDetailsPtr)
 };
@@ -62,26 +66,28 @@ var getTccDocumentsById = function () {
 };
 
 var loadDetailsPtr = function (resp) {
-    decideNextTccStage(parseInt($("#currentStatus").text()));
+    decideNextTccStage(resp[0].statusId);
 
-    $("#appIdHeader").text(testNullOrEmpty(resp.applicationNo));
-    $("#appStatusHeader").text(testNullOrEmpty(resp.status));
-    $("#modalId").text(testNullOrEmpty(resp.applicationNo));
-    $("#statusNameModal").text(testNullOrEmpty(resp.status));
-    $("#dateSubmittedPTR").text(testNullOrEmpty(resp.submittedDate));
-    $("#assessmentYearPTR").text(testNullOrEmpty(resp.assessmentYear));
-    $("#dateOfBirthPTR").text(testNullOrEmpty(resp.dateOfBirth));
-    $("#employerAddressPTR").text(testNullOrEmpty(resp.employerAddress));
-    $("#employerEmailPTR").text(testNullOrEmpty(resp.employerEmail));
-    $("#employerNamePTR").text(testNullOrEmpty(resp.employerName));
-    $("#employerPhonePTR").text(testNullOrEmpty(resp.employerPhone));
-    $("#employerTINPTR").text(testNullOrEmpty(resp.employerTIN));
-    $("#endDatePTR").text(testNullOrEmpty(resp.endDate));
-    $("#genderPTR").text(resp.gender === "M" ? "Male" : resp.gender === "F" ? "Female" : resp.gender);
-    $("#maritalStatusPTR").text(testNullOrEmpty(resp.maritalStatus));
-    $("#mothersMaidenNamePTR").text(testNullOrEmpty(resp.mothersMaidenName));
-    $("#phoneNoPTR").text(testNullOrEmpty(resp.phoneNo));
-    $("#startDatePTR").text(testNullOrEmpty(resp.startDate));
+    $("#appIdHeader").text(testNullOrEmpty(resp[0].applicationNo));
+    $("#appStatusHeader").text(testNullOrEmpty(resp[0].status));
+    $("#modalId").text(testNullOrEmpty(resp[0].applicationNo));
+    $("#statusNameModal").text(testNullOrEmpty(resp[0].status));
+    $("#dateSubmittedPTR").text(testNullOrEmpty(resp[0].submittedDate));
+    $("#assessmentYearPTR").text(testNullOrEmpty(resp[0].assessmentYear));
+    $("#dateOfBirthPTR").text(testNullOrEmpty(resp[0].dateOfBirth));
+    $("#applicantNamePTR").text(resp[0].applicantName);
+    $("#applicantTINPTR").text(resp[0].applicantTIN);
+    $("#employerAddressPTR").text(testNullOrEmpty(resp[0].employerAddress));
+    $("#employerEmailPTR").text(testNullOrEmpty(resp[0].employerEmail));
+    $("#employerNamePTR").text(testNullOrEmpty(resp[0].employerName));
+    $("#employerPhonePTR").text(testNullOrEmpty(resp[0].employerPhone));
+    $("#employerTINPTR").text(testNullOrEmpty(resp[0].employerTIN));
+    $("#endDatePTR").text(testNullOrEmpty(resp[0].endDate));
+    $("#genderPTR").text(resp[0].gender === "M" ? "Male" : resp[0].gender === "F" ? "Female" : resp[0].gender);
+    $("#maritalStatusPTR").text(testNullOrEmpty(resp[0].maritalStatus));
+    $("#mothersMaidenNamePTR").text(testNullOrEmpty(resp[0].mothersMaidenName));
+    $("#phoneNoPTR").text(testNullOrEmpty(resp[0].phoneNo));
+    $("#startDatePTR").text(testNullOrEmpty(resp[0].startDate));
 }
 
 var loadDetails = function (resp) {
@@ -239,7 +245,7 @@ var decideNextTccStage = function (statusId) {
                 $("#sendForApproval").hide();
                 $("#addTaxPosition").show();
                 $("#suspendStatus").show();
-                $("#declineStatus").show();
+                $("#declineStatus").hide();
 
             } else {
                 $("#acknowledgeStatus").hide();
@@ -247,7 +253,7 @@ var decideNextTccStage = function (statusId) {
                 $("#addTaxPosition").hide();
                 $("#sendForApproval").show();
                 $("#suspendStatus").show();
-                $("#declineStatus").show();
+                $("#declineStatus").hide();
             };
 
             $("#previewApplication").hide();

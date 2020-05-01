@@ -188,7 +188,7 @@ var prepareDetailsView = function (pCode) {
     getTccDocumentsById();
 };
 
-var hideAndShowThings = function () {
+var hideAndShowThingsPTR = function () {
     $("#ptrGridView").hide();
     $("#detailsView").show();
 };

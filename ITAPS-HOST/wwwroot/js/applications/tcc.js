@@ -6,6 +6,7 @@ var GetTccByIdUrl = `${serverUrl}api/TCC/GetTccApplicationById?tccId=`;
 var GetTCCDocuments = `${serverUrl}api/TCC/GetTCCApplicationDocumentByApplicationId`;
 let tccUpdateUrl = `${serverUrl}api/TCC/UpdateTCCApplication?id=`;
 var ReportDownloadView = `${serverUrl}applications/certificate`;
+var loadPtrCodesUrl = `${serverUrl}api/CodesApi/`;
 var activeTaxOffice = "";
 var appType = "TCC";
 
@@ -159,14 +160,28 @@ $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
 
     appType = item.applicationType;
 
-    if(item.applicationType === "TCC")
+    if (item.applicationType === "TCC")
         prepareDetailsViewTCC();
     if (item.applicationType === "WHT Exemption")
         prepareDetailsViewTEX();
+    if (item.applicationType === "Disability Relief" || item.applicationType === "Aged Dependants Relief") {
+        var PtrCodes = loadReliefTypes();
+        $("#applicantNamePTR").text(item.applicantName);
+        $("#applicantTINPTR").text(item.applicantTIN);
+    }
 });
 
-var prepareDetailsViewTCC = function () {
+var loadReliefTypes = function () {
+    var url = `${loadPtrCodesUrl}APT`;
 
+    return apiCaller(url, "GET", "", function (resp) { return resp; });
+};
+
+var ptrCodesFlow = function (resp) {
+    return resp;
+};
+
+var prepareDetailsViewTCC = function () {
     hideAndShowThings();
     loadMessages();
     loadDetailsView();
@@ -179,6 +194,22 @@ var prepareDetailsViewTEX = function () {
     loadDetailsViewTex();
     getTccDocumentsById();
 };
+
+var prepareDetailsViewPTR = function (pCode) {
+    hideAndShowThingsPTR();
+    loadMessages();
+    loadDetailsViewPtr(pCode);
+    getTccDocumentsById();
+};
+
+var hideAndShowThingsPTR = function () {
+    $("#gridView").hide();
+    $("#detailsView").show();
+    $("#ptrDetailsGrid").show();
+    $("#tccDetailsGrid").hide();
+    $("#texDetailsGrid").hide();
+};
+
 
 var hideAndShowTEXThings = function () {
     $("#gridView").hide();
