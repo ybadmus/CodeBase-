@@ -1,4 +1,4 @@
-﻿var HeaderName = "PIT Estimates";
+﻿var HeaderName = "CIT Estimates";
 var hideAndShowThings = function () {
     $("#gridView").hide();
     $("#estimateDetail").show();
@@ -17,7 +17,7 @@ var loadDetails = function (trId) {
 
     let objSend = {
         "transactionId": trId,
-        "taxType": "PIT",
+        "taxType": "CIT",
         "transactionType": "Estimate"
     };
 

@@ -105,28 +105,27 @@ $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
 });
 
 $("#assApplication").click(function (e) {
-    $("#assign-update").modal("show")
+    $("#assign-update").modal("show");
+    prepareAssignmentModal();
 });
 
 var prepareModal = function (item) {
     $("#appId").val(item.applicationId);
     $("#appTypeId").val(item.applicationTypeId);
     $(".modalId").text(testNullOrEmpty(item.applicationNo));
-    $(".applicationType").text(activeApplicationType);
-
-    prepareAssignmentModal();
+    $(".applicationType").text(item.applicationType);
     activeApplicationType = item.applicationType;
 
-    if (activeApplicationType.toUpperCase() === "TCC".toUpperCase())
+    if (item.applicationType.toUpperCase() === "TCC".toUpperCase())
         prepareDetailsViewTCC();
-    if (activeApplicationType.toUpperCase() === "WHT Exemption".toUpperCase())
+    if (item.applicationType.toUpperCase() === "WHT Exemption".toUpperCase())
         prepareDetailsViewTEX();
-    if (activeApplicationType.toUpperCase() === "Disability Relief".toUpperCase()
-        || activeApplicationType.toUpperCase() === "Aged Dependants Relief".toUpperCase()
-        || activeApplicationType.toUpperCase() === "Old Age Relief".toUpperCase()
-        || activeApplicationType.toUpperCase() === "Pension Relief".toUpperCase()
-        || activeApplicationType.toUpperCase() === "Marriage/Responsibility Relief".toUpperCase()
-        || activeApplicationType.toUpperCase() === "Child/Ward Education Relief".toUpperCase()) {
+    if (item.applicationType.toUpperCase() === "Disability Relief".toUpperCase()
+        || item.applicationType.toUpperCase() === "Aged Dependants Relief".toUpperCase()
+        || item.applicationType.toUpperCase() === "Old Age Relief".toUpperCase()
+        || item.applicationType.toUpperCase() === "Pension Relief".toUpperCase()
+        || item.applicationType.toUpperCase() === "Marriage/Responsibility Relief".toUpperCase()
+        || item.applicationType.toUpperCase() === "Child/Ward Education Relief".toUpperCase()) {
         prepareDetailsViewPTR();
         $("#applicantNamePTR").text(item.applicantName);
         $("#applicantTINPTR").text(item.applicantTIN);

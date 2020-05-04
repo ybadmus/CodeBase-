@@ -1,11 +1,11 @@
 ﻿@{
-    ViewData["Title"] = "PITReturn";
+    ViewData["Title"] = "Estimates";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @section css {
     <link href="~/css/applications/tcc.css" rel="stylesheet" />
 }
-
 
 <input id="serverUrl" value="@ViewBag.ServerUrl" hidden />
 <input id="taxpayerId" value="@ViewBag.TaxpayerId" hidden />
@@ -13,16 +13,14 @@
 <div class="card">
 
     <partial name="_PITGrid" />
-    <partial name="_AnnualReturn" />
+    <partial name="_AnnualEstimate" />
 
 </div>
 
-
-@section modals{
-    @*<partial name="_PITPreviewModal" />*@
-}
-
 @section scripts {
-    <script src="~/js/pit/pit.js"></script>
-    <script src="~/js/pit/return.js"></script>
+    <script src="~/js/cit/cit.js"></script>
+    <script src="~/js/cit/estimate.js"></script>
 }
+
+
+

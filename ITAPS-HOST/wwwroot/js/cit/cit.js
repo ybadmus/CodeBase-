@@ -7,7 +7,7 @@ var activeYear = "";
 var objToSend = {
     "assessmentYear": "",
     "transactionType": "",
-    "taxType": "PIT",
+    "taxType": "CIT",
     "taxOfficeId": "",
     "tin": "",
     "startDate": "",
@@ -113,7 +113,7 @@ var validateSearchEntry = function () {
 var searchPIT = function () {
     objToSend.assessmentYear = activeYear === "" ? new Date().getFullYear() : activeYear;
     objToSend.taxOfficeId = activeTaxOffice;
-    objToSend.transactionType = HeaderName === "PIT Returns" ? "Return" : "Estimate"
+    objToSend.transactionType = HeaderName === "CIT Returns" ? "Return" : "Estimate"
     objToSend.tin = $("#tinHolder").val();
     objToSend.startDate = $("#startDate").val();
     objToSend.endDate = $("#endDate").val();

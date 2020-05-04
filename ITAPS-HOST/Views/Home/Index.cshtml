@@ -36,22 +36,40 @@
     </div>
 
     <div class="col-md-3 col-sm-6">
-            <a href="~/wtht/index" class="dash-anchor">
-                <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center pt-5" title="Withholding Tax & VAT">
-                    <div class="row">
-                        <div class="col-12 text-center">
-                            <img src="~/icons/iconx-hand.png" class="img-responsive" width="80" />
-                        </div>
-                        <div class="col-12">
-                            <div class="flex mb-4 mt-2 dash-body banner text-center">
-                                <b class="text-center mt-0 text-inverse text-center">WHT</b><br />
-                                <p class="text-center text-muted text-center">Withholding Tax &amp; VAT</p>
-                            </div>
+        <a href="~/cit/index" class="dash-anchor">
+            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center pt-5" title="Personal Income tax">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <img src="~/images/icons/iconx-cit.png" class="img-responsive" width="80" />
+                    </div>
+                    <div class="col-12">
+                        <div class="flex mb-4 mt-2 dash-body banner text-center">
+                            <b class="text-center mt-0 text-inverse text-center">CIT</b><br />
+                            <p class="text-center text-muted text-center">Company Income Tax</p>
                         </div>
                     </div>
                 </div>
-            </a>
-        </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+        <a href="~/wtht/index" class="dash-anchor">
+            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center pt-5" title="Withholding Tax & VAT">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <img src="~/icons/iconx-hand.png" class="img-responsive" width="80" />
+                    </div>
+                    <div class="col-12">
+                        <div class="flex mb-4 mt-2 dash-body banner text-center">
+                            <b class="text-center mt-0 text-inverse text-center">WHT</b><br />
+                            <p class="text-center text-muted text-center">Withholding Tax &amp; VAT</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
 
     <div class="col-md-3 col-sm-6">
         <a href="~/applications/options" class="dash-anchor">
@@ -94,11 +112,6 @@
     <script>
         $(document).ready(function () {
             $("#pgHeader").text("Home");
-            if ($("#UserFullName").text().toLowerCase() === "manager") {
-                $("#approvalTile").show();
-            } else {
-                $("#approvalTile").hide();
-            }
         });
     </script>
 }

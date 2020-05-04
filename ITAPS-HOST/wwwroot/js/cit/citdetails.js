@@ -1,54 +1,133 @@
-﻿var HeaderName = "PIT Returns";
+﻿
+
+$("body").on('click', '#Grid .k-grid-content .btn', function (e) {
+
+    var grid = $("#Grid").getKendoGrid();
+    var item = grid.dataItem($(e.target).closest("tr"));
+
+    prepareDetailsView(item.id);
+});
+
+var prepareDetailsView = function (trId) {
+
+    hideAndShowThings();
+    if (objToSend.transactionType === "Estimate")
+        loadDetailsViewEstimates(trId);
+    else if (objToSend.transactionType === "Return")
+        loadDetailsViewReturns(trId);
+};
 
 var hideAndShowThings = function () {
-    $("#gridView").hide();
-    $("#estimatesDetailsView").hide();
-    $("#returnDetail").show();
-
-    $("#returnDetailsGrid1").show();
-    $("#returnDetailsGrid2").show();
-    $("#returnDetailsGrid3").hide();
-    $("#returnDetailsGrid4").hide();
-    $("#returnDetailsGrid5").hide();
-
-    $("#previousDetail1").hide();
-    $("#previousDetail2").hide();
-    $("#moreDetail1").show();
-    $("#moreDetail2").hide();
-
+    if (objToSend.transactionType === "Estimate") {
+        $("#gridView").hide();
+        $("#estimatesDetailsView").show();
+        $("#returnsDetailsView").hide();
+    } else if (objToSend.transactionType === "Return") {
+        $("#gridView").hide();
+        $("#estimatesDetailsView").hide();
+        $("#returnsDetailsView").show();
+    }
 };
 
-var bootstrapNotification = function () {
-    loadOffices();
+$("#backToGrid").click(function () {
+    if (getParameterByName("from") === "notification") {
+        window.location.href = `${serverUrl}pit/formView?type=annualestimate`;
+    } else {
+        $("#gridView").show();
+        $("#estimatesDetailsView").hide();
+        $("#returnsDetailsView").hide();
+    }
+});
 
-    $("#pgHeader").text(HeaderName);
-    $("#gridView").hide();
-    $("#estimateDetail").hide();
-    $("#returnDetail").show();
-};
+$("#backToGrid2").click(function () {
+    if (getParameterByName("from") === "notification") {
+        window.location.href = `${serverUrl}pit/formView?type=annualreturn`;
+    } else {
+        $("#gridView").show();
+        $("#estimatesDetailsView").hide();
+        $("#returnsDetailsView").hide();
+    }
+});
 
-var loadDetails = function (trId) {
+$("#moreDetails").click(function () {
+    $("#estimateDetailsGrid1").hide();
+    $("#estimateDetailsGrid2").hide();
+    $("#estimateDetailsGrid3").show();
+    $("#estimateDetailsGrid4").show();
+    $("#estimateDetailsGrid5").hide();
+
+    $("#moreDetailsPrev").show();
+    $("#moreDetails").hide();
+    $("#moreDetailsTR").show();
+});
+
+$("#moreDetailsPrev").click(function () {
+    $("#estimateDetailsGrid1").show();
+    $("#estimateDetailsGrid2").show();
+    $("#estimateDetailsGrid3").hide();
+    $("#estimateDetailsGrid4").hide();
+    $("#estimateDetailsGrid5").hide();
+
+    $("#moreDetailsPrev").hide();
+    $("#moreDetails").show();
+    $("#moreDetailsTR").hide();
+});
+
+$("#moreDetailsTR").click(function () {
+    $("#estimateDetailsGrid1").hide();
+    $("#estimateDetailsGrid2").hide();
+    $("#estimateDetailsGrid3").hide();
+    $("#estimateDetailsGrid4").hide();
+    $("#estimateDetailsGrid5").show();
+
+    $("#moreDetailsPrev").hide();
+    $("#moreDetails").hide();
+    $("#moreDetailsPrev").show();
+});
+
+var loadDetailsViewReturns = function (trId) {
     let url = `${pitDetailsUrl}`;
 
     let objSend = {
         "transactionId": trId,
-        "taxType": "PIT",
+        "taxType": "CIT",
         "transactionType": "Return"
     };
 
-    apiCaller(url, "POST", objSend, loadForm)
+    apiCaller(url, "POST", objSend, loadDetailsReturns)
 };
 
-var loadForm = function (response) {
+var loadDetailsEstimates = function (response) {
+    if (response) {
+        let resp = response[0];
 
-    if (response && response.length !== 0) {
+        $("#assessmentYearView").text(resp.assessmentYear);
+        $("#startDateView").text(resp.startDate);
+        $("#endDateView").text(resp.endDate);
+        $("#nationality").text(resp.nationality);
+        $("#businessIncome").text(parseFloat(resp.businessIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $("#employmentIncome").text(parseFloat(resp.employmentIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $("#investmentOtherIncome").text(parseFloat(resp.investmentOtherIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $("#totalIncome").text(parseFloat(resp.totalIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $("#annualChargeableIncome").text(parseFloat(resp.annualChargeableIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $("#annualTotalIncomeTaxPayable").text(parseFloat(resp.annualTotalIncomeTaxPayable).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $("#quarterlyIncomeTaxPayable").text(parseFloat(resp.quarterlyIncomeTaxPayable).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    }
+    else
+        toastr.error("An error occured");
+};
+
+var loadDetailsReturns = function (response) {
+    $('html').showLoading();
+
+    if (response) {
         let resp = response[0];
 
         $("#assessmentYearViewReturn").text(resp.assessmentYear);
         $("#assessmentYearViewReturnPV").text(resp.assessmentYear);
 
         $("#startDateViewReturn").text(resp.startDate);
-        var fromToPeriod = `From: ${resp.startDate} - To: ${resp.endDate}`;
+        var fromToPeriod = `From: ${resp.startDate} - To: ${resp.endDate}`; 
         $("#startDateViewReturnPV").text(fromToPeriod);
 
         $("#endDateViewReturn").text(resp.endDate);
@@ -64,11 +143,10 @@ var loadForm = function (response) {
         loadIn(resp);
         loadTc(resp);
         LoadTr(resp);
-
-        hideAndShowThings();
     } else
         toastr.error("An error occured");
 
+    $('html').hideLoading();
 };
 
 var loadBs = function (resp) {
@@ -241,6 +319,8 @@ var loadIn = function (resp) {
 
     $("#inTotalIncome").text(parseFloat(resp.inTotalIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
     $("#inTotalIncomePV").text(parseFloat(resp.inTotalIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+
+    
 };
 
 var loadTc = function (resp) {
@@ -279,56 +359,12 @@ var LoadTr = function (resp) {
     $("#tcRelOtherAllowableDeductions").text(parseFloat(resp.tcRelOtherAllowableDeductions).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 };
 
-var moreDetails = function (stage) {
-    if (stage === 1) {
-        $("#returnDetailsGrid1").hide();
-        $("#returnDetailsGrid2").hide();
-        $("#returnDetailsGrid3").show();
-        $("#returnDetailsGrid4").show();
-        $("#returnDetailsGrid5").hide();
+var markAsRead = function () {
 
-        $("#moreDetail1").hide();
-        $("#moreDetail2").show();
-        $("#previousDetail1").show();
-        $("#previousDetail2").hide();
-
-    } else if (stage === 2) {
-        $("#returnDetailsGrid1").hide();
-        $("#returnDetailsGrid2").hide();
-        $("#returnDetailsGrid3").hide();
-        $("#returnDetailsGrid4").hide();
-        $("#returnDetailsGrid5").show();
-
-        $("#moreDetail1").hide();
-        $("#moreDetail2").hide();
-        $("#previousDetail1").hide();
-        $("#previousDetail2").show();
-    }
 };
 
-var previousDetail = function (stage) {
-    if (stage === 1) {
-        $("#returnDetailsGrid1").show();
-        $("#returnDetailsGrid2").show();
-        $("#returnDetailsGrid3").hide();
-        $("#returnDetailsGrid4").hide();
-        $("#returnDetailsGrid5").hide();
+$("#previewReportBtn").click(function () {
+    $("#PreviewModal").modal("show");
+});
 
-        $("#moreDetail1").show();
-        $("#moreDetail2").hide();
-        $("#previousDetail1").hide();
-        $("#previousDetail2").hide();
 
-    } else if (stage === 2) {
-        $("#returnDetailsGrid1").hide();
-        $("#returnDetailsGrid2").hide();
-        $("#returnDetailsGrid3").show();
-        $("#returnDetailsGrid4").show();
-        $("#returnDetailsGrid5").hide();
-
-        $("#moreDetail1").hide();
-        $("#moreDetail2").show();
-        $("#previousDetail1").show();
-        $("#previousDetail2").hide();
-    }
-}
