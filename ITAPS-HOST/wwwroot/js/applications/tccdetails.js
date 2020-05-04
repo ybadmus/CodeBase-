@@ -88,7 +88,43 @@ var loadDetailsPtr = function (resp) {
     $("#mothersMaidenNamePTR").text(testNullOrEmpty(resp[0].mothersMaidenName));
     $("#phoneNoPTR").text(testNullOrEmpty(resp[0].phoneNo));
     $("#startDatePTR").text(testNullOrEmpty(resp[0].startDate));
-}
+
+    if (activeApplicationType === "Disability Relief") {
+        loadDisabilityReliefDetail(resp);
+        $("#messagesAndAttachments").hide();
+        $("#ptrMarriageReliefDetailsGrid").hide();
+        $("#ptrDisabilityReliefDetailsGrid").show();
+    } else if (activeApplicationType === "Marriage/Responsibility Relief") {
+        loadMarriageReliefDetail(resp);
+        $("#messagesAndAttachments").hide();
+        $("#ptrDisabilityReliefDetailsGrid").hide();
+        $("#ptrMarriageReliefDetailsGrid").show();
+    }
+
+};
+
+var loadMarriageReliefDetail = function (resp) {
+    $("#certIssuingDateMar").text(testNullOrEmpty(resp[0].certIssuingDate));
+    $("#spouseEmailMar").text(testNullOrEmpty(resp[0].spouseEmail));
+    $("#spouseTIN").text(testNullOrEmpty(resp[0].spouseTIN));
+    $("#spousePhone").text(testNullOrEmpty(resp[0].spousePhone));
+    $("#spouseDateOfBirth").text(testNullOrEmpty(resp[0].spouseDateOfBirth));
+    $("#spouseGender").text(testNullOrEmpty(resp[0].spouseGender === "F" ? "Female" : "Male"));
+    $("#registrationDate").text(testNullOrEmpty(resp[0].registrationDate));
+    $("#certIssuedBy").text(testNullOrEmpty(resp[0].certIssuedBy));
+    $("#certIssueNo").text(testNullOrEmpty(resp[0].certIssueNo));
+    $("#certSignedBy").text(testNullOrEmpty(resp[0].certSignedBy));
+    $("#nameOfGender").text(testNullOrEmpty(resp[0].spouseFirstName + " " + resp[0].spouseMiddleName + " " + resp[0].spouseLastName));
+};
+
+var loadDisabilityReliefDetail = function (resp) {
+    $("#typeOfDisability").text(testNullOrEmpty(resp[0].typeOfDisability));
+    $("#disabilityDisclosureDate").text(testNullOrEmpty(resp[0].disabilityDisclosureDate));
+    $("#disabilityDoc").text();
+    $("#disabilityDocIssueBy").text(testNullOrEmpty(resp[0].disabilityDocIssueBy));
+    $("#disabilityDocIssueNo").text(testNullOrEmpty(resp[0].disabilityDocIssueNo));
+    $("#disabilityDocSignedBy").text(testNullOrEmpty(resp[0].disabilityDocSignedBy));
+};
 
 var loadDetails = function (resp) {
     decideNextTccStage(resp[0].statusId);

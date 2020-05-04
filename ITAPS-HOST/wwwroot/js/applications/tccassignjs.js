@@ -130,7 +130,6 @@ var prepareModal = function (item) {
         $("#applicantNamePTR").text(item.applicantName);
         $("#applicantTINPTR").text(item.applicantTIN);
     }
-
 };
 
 var prepareAssignmentModal = function () {

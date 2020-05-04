@@ -285,8 +285,144 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-6" id="ptrDisabilityReliefDetailsGrid" style="display: none">
                             <div class="bordered-group" id="" style="height: 400px">
+                                <div class="table-responsive border-bottom" style="overflow-y: no-display;height: 380px; margin: 10px 0px">
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="2" style="padding-left:5px;width:140px;font-weight:100;background: #f7f8f9;"><b>Applicant's Disability Details</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Type Of Disability</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="typeOfDisability"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Disclosure Date</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="disabilityDisclosureDate"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:140px;font-weight:100;">Disability Document</td>
+                                                <td style="padding-left:5px;width:260px;">
+                                                    <a class="btn btn-xs btn-block btn-outline-light">
+                                                        <i class="fa fa-paperclip"></i>
+                                                        View Attachment
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:140px;font-weight:100;">Issued By</td>
+                                                <td style="padding-left:5px;width:260px;">
+                                                    <b><span id="disabilityDocIssueBy"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:140px;font-weight:100;">Issue No.</td>
+                                                <td style="padding-left:5px;width:260px;">
+                                                    <b><span id="disabilityDocIssueNo"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:140px;font-weight:100;">Signed By</td>
+                                                <td style="padding-left:5px;width:260px;">
+                                                    <b><span id="disabilityDocSignedBy"></span></b>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6" id="ptrMarriageReliefDetailsGrid" style="display: none">
+                            <div class="bordered-group" id="" style="height: 400px">
+                                <div class="table-responsive border-bottom" style="overflow-y: no-display;height: 380px; margin: 10px 0px">
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="2" style="padding-left:5px;width:140px;font-weight:100;background: #f7f8f9;"><b>Spouse Details</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">TIN</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="spouseTIN"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Name Of Spouse</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="nameOfGender"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Spouse Gender</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="spouseGender"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">DOB</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="spouseDateOfBirth"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Phone Number</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="spousePhone"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Email</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="certIssuingDate"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="padding-left:5px;width:140px;font-weight:100;background: #f7f8f9;"><b>Marriage Registration Details</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:140px;font-weight:100;">Registration Date</td>
+                                                <td style="padding-left:5px;width:260px;">
+                                                    <b><span id="registrationDate"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:140px;font-weight:100;">Issue No.</td>
+                                                <td style="padding-left:5px;width:260px;">
+                                                    <b><span id="certIssueNo"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:140px;font-weight:100;">Issuing Date</td>
+                                                <td style="padding-left:5px;width:260px;">
+                                                    <b><span id="certIssuingDateMar"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:140px;font-weight:100;">Issued By</td>
+                                                <td style="padding-left:5px;width:260px;">
+                                                    <b><span id="certIssuedBy"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:140px;font-weight:100;">Signed By</td>
+                                                <td style="padding-left:5px;width:260px;">
+                                                    <b><span id="certSignedBy"></span></b>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="bordered-group" id="messagesAndAttachments" style="height: 400px">
                                 <p class="card-title"><b>Messages & Atachment</b></p>
                                 <div id="tabsContainer" class="tab" style="width: 100% !important; display: block;">
                                     <button class="tablinks active" onclick="openDivForTab(event, 'applicantColumn')"> APPLICANT</button>
