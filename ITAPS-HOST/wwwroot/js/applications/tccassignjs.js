@@ -109,20 +109,24 @@ $("#assApplication").click(function (e) {
 });
 
 var prepareModal = function (item) {
-
     $("#appId").val(item.applicationId);
     $("#appTypeId").val(item.applicationTypeId);
     $(".modalId").text(testNullOrEmpty(item.applicationNo));
+    $(".applicationType").text(activeApplicationType);
+
     prepareAssignmentModal();
-
-
     activeApplicationType = item.applicationType;
 
     if (activeApplicationType.toUpperCase() === "TCC".toUpperCase())
         prepareDetailsViewTCC();
     if (activeApplicationType.toUpperCase() === "WHT Exemption".toUpperCase())
         prepareDetailsViewTEX();
-    if (activeApplicationType.toUpperCase() === "Disability Relief".toUpperCase() || activeApplicationType.toUpperCase() === "Aged Dependants Relief".toUpperCase()) {
+    if (activeApplicationType.toUpperCase() === "Disability Relief".toUpperCase()
+        || activeApplicationType.toUpperCase() === "Aged Dependants Relief".toUpperCase()
+        || activeApplicationType.toUpperCase() === "Old Age Relief".toUpperCase()
+        || activeApplicationType.toUpperCase() === "Pension Relief".toUpperCase()
+        || activeApplicationType.toUpperCase() === "Marriage/Responsibility Relief".toUpperCase()
+        || activeApplicationType.toUpperCase() === "Child/Ward Education Relief".toUpperCase()) {
         prepareDetailsViewPTR();
         $("#applicantNamePTR").text(item.applicantName);
         $("#applicantTINPTR").text(item.applicantTIN);

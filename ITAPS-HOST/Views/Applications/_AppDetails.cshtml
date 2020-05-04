@@ -90,15 +90,26 @@
 
                         <div class="col-md-6" id="texDetailsGrid">
                             <div class="bordered-group" id="" style="height: 400px">
-                                <p class="card-title"><b>Application Details</b></p>
-                                <div class="table-responsive border-bottom" style="height: 340px;">
+                                <div class="table-responsive border-bottom" style="height: 380px; margin: 10px 0px">
                                     <table class="table table-bordered">
                                         <tbody>
+                                            <tr>
+                                                <td colspan="2" style="padding-left:5px;width:140px;font-weight:100;background: #f7f8f9;"><b>Application Details</b></td>
+                                            </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:120px;font-weight:100;">Date Submitted</td>
                                                 <td style="padding-left:5px;width:280px;">
                                                     <b><span id="dateSubmittedTex"></span></b>
                                                 </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Type</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span class="applicationType"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="padding-left:5px;width:140px;font-weight:100;background: #f7f8f9;"><b>Applicant Details</b></td>
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:120px;font-weight:100;">Applicant Name</td>
@@ -125,15 +136,18 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="padding-left:5px;width:120px;font-weight:100;">Residential Status</td>
-                                                <td style="padding-left:5px;width:280px;">
-                                                    <b><span id="residentialStatus"></span></b>
-                                                </td>
+                                                <td colspan="2" style="padding-left:5px;width:140px;font-weight:100;background: #f7f8f9;"><b>WHT Details</b></td>
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:120px;font-weight:100;">WHT Type</td>
                                                 <td style="padding-left:5px;width:280px;">
                                                     <b><span id="whtType"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Residential Status</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="residentialStatus"></span></b>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -155,17 +169,45 @@
                         </div>
 
                         <div class="col-md-6" id="ptrDetailsGrid">
-                            @*dateSubmittedPTR*@
                             <div class="bordered-group" id="" style="height: 400px">
-                                <p class="card-title"><b>Application Details</b></p>
-                                <div class="table-responsive border-bottom" style="overflow-y: scroll;height: 280px;">
+                                <div class="table-responsive border-bottom" style="overflow-y: scroll;height: 380px; margin: 10px 0px">
                                     <table class="table table-bordered">
                                         <tbody>
+                                            <tr>
+                                                <td colspan="2" style="padding-left:5px;width:140px;font-weight:100;background: #f7f8f9;"><b>Application Details</b></td>
+                                            </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:120px;font-weight:100;">Date Submitted</td>
                                                 <td style="padding-left:5px;width:280px;">
                                                     <b><span id="dateSubmittedPTR"></span></b>
                                                 </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Type</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span class="applicationType"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:140px;font-weight:100;">Assessment Year</td>
+                                                <td style="padding-left:5px;width:260px;">
+                                                    <b><span id="assessmentYearPTR"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:140px;font-weight:100;">Start Date</td>
+                                                <td style="padding-left:5px;width:260px;">
+                                                    <b><span id="startDatePTR"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:140px;font-weight:100;">End Date</td>
+                                                <td style="padding-left:5px;width:260px;">
+                                                    <b><span id="endDatePTR"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="padding-left:5px;width:140px;font-weight:100;background: #f7f8f9;"><b>Applicant Details</b></td>
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:140px;font-weight:100;">Applicant Name</td>
@@ -191,30 +233,7 @@
                                                     <b><span id="genderPTR"></span></b>
                                                 </td>
                                             </tr>
-                                            @*<tr>
-                                                    <td style="padding-left:5px;width:140px;font-weight:100;">Marital Status</td>
-                                                    <td style="padding-left:5px;width:260px;">
-                                                        <b><span id="maritalStatusPTR"></span></b>
-                                                    </td>
-                                                </tr>*@
-                                            <tr>
-                                                <td style="padding-left:5px;width:140px;font-weight:100;">Assessment Year</td>
-                                                <td style="padding-left:5px;width:260px;">
-                                                    <b><span id="assessmentYearPTR"></span></b>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding-left:5px;width:140px;font-weight:100;">Start Date</td>
-                                                <td style="padding-left:5px;width:260px;">
-                                                    <b><span id="startDatePTR"></span></b>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding-left:5px;width:140px;font-weight:100;">End Date</td>
-                                                <td style="padding-left:5px;width:260px;">
-                                                    <b><span id="endDatePTR"></span></b>
-                                                </td>
-                                            </tr>
+
                                             <tr>
                                                 <td style="padding-left:5px;width:140px;font-weight:100;">Mothers Maiden Name</td>
                                                 <td style="padding-left:5px;width:260px;">
@@ -226,6 +245,9 @@
                                                 <td style="padding-left:5px;width:260px;">
                                                     <b><span id="phoneNoPTR"></span></b>
                                                 </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="padding-left:5px;width:140px;font-weight:100;background: #f7f8f9;"><b>Employer Details</b></td>
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:140px;font-weight:100;">Employer Name</td>
