@@ -140,15 +140,15 @@ var loadOldAgeReliefDetail = function(resp) {
 };
 
 var loadAgedDependantReliefModal = function(resp) {
-    $("#agedDependentFName").text(testNullOrEmpty(resp[0].firstName));
-    $("#agedDependentMName").text(testNullOrEmpty(resp[0].middleName));
-    $("#agedDependentLName").text(testNullOrEmpty(resp[0].lastName));
-    $("#agedDependentDOB").text(testNullOrEmpty(resp[0].agedDateOfBirth));
-    $("#agedDependentGender").text(testNullOrEmpty(resp[0].gender));
-    $("#agedDependentMStatus").text(testNullOrEmpty(resp[0].maritalStatus));
-    $("#agedDependentbirthCertIssueBy").text(testNullOrEmpty(resp[0].birthCertIssueBy));
-    $("#agedDependentbirthCertIssueDate").text(testNullOrEmpty(resp[0].certIssuingDate));
-    $("#agedDependentbirthCertSignedBy").text(testNullOrEmpty(resp[0].birthCertSignedBy));
+    $("#agedDependentFName").text(testNullOrEmpty(resp.firstName));
+    $("#agedDependentMName").text(testNullOrEmpty(resp.middleName));
+    $("#agedDependentLName").text(testNullOrEmpty(resp.lastName));
+    $("#agedDependentDOB").text(testNullOrEmpty(resp.agedDateOfBirth));
+    $("#agedDependentGender").text(testNullOrEmpty(resp.gender));
+    $("#agedDependentMStatus").text(testNullOrEmpty(resp.maritalStatus));
+    $("#agedDependentbirthCertIssueBy").text(testNullOrEmpty(resp.birthCertIssueBy));
+    $("#agedDependentbirthCertIssueDate").text(testNullOrEmpty(resp.certIssuingDate));
+    $("#agedDependentbirthCertSignedBy").text(testNullOrEmpty(resp.birthCertSignedBy));
 
     $("#dependentDetails").modal("show");
 };
