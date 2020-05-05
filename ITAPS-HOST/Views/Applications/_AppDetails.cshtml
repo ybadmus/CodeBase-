@@ -10,10 +10,11 @@
             <div class="tab-pane fade show active" id="tccDetails" role="tabpanel" aria-labelledby="nav-profile-tab">
                 <div class="form-horizontal">
                     <div class="form-row">
-                        <div class="col-md-6" id="tccDetailsGrid">
+
+                        <div class="col-md-6" id="tccDetailsGrid" style="display: none">
                             <div class="bordered-group" id="" style="height: 400px">
                                 <p class="card-title"><b>Application Details</b></p>
-                                <div class="table-responsive border-bottom" style="overflow-y: scroll;height: 340px;">
+                                <div class="table-responsive border-bottom" style="height: 380px; margin: 10px 0px">
                                     <table class="table table-bordered">
                                         <tbody>
                                             <tr>
@@ -49,6 +50,18 @@
                                                     <b><span id="applicantEmail"></span></b>
                                                 </td>
                                             </tr>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6" id="tccRequestEntityDetailsGrid" style="display: none">
+                            <div class="bordered-group" id="" style="height: 400px">
+                                <div class="table-responsive border-bottom" style="height: 380px; margin: 10px 0px">
+                                    <table class="table table-bordered">
+                                        <tbody>
                                             <tr>
                                                 <td colspan="2" style="padding-left:5px;width:120px;font-weight:100; font-weight: bold; background: #f7f8f9;">Requesting Entity Details</td>
                                             </tr>
@@ -88,7 +101,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6" id="texDetailsGrid">
+                        <div class="col-md-6" id="texDetailsGrid" style="display: none">
                             <div class="bordered-group" id="" style="height: 400px">
                                 <div class="table-responsive border-bottom" style="height: 380px; margin: 10px 0px">
                                     <table class="table table-bordered">
@@ -135,6 +148,17 @@
                                                     <b><span id="applicantEmailTex"></span></b>
                                                 </td>
                                             </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6" id="texWHTDetailsGrid" style="display: none">
+                            <div class="bordered-group" id="" style="height: 400px">
+                                <div class="table-responsive border-bottom" style="height: 380px; margin: 10px 0px">
+                                    <table class="table table-bordered">
+                                        <tbody>
                                             <tr>
                                                 <td colspan="2" style="padding-left:5px;width:140px;font-weight:100;background: #f7f8f9;"><b>WHT Details</b></td>
                                             </tr>
@@ -168,7 +192,8 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6" id="ptrDetailsGrid">
+
+                        <div class="col-md-6" id="ptrDetailsGrid" style="display: none">
                             <div class="bordered-group" id="" style="height: 400px">
                                 <div class="table-responsive border-bottom" style="overflow-y: scroll;height: 380px; margin: 10px 0px">
                                     <table class="table table-bordered">
@@ -518,7 +543,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-6" style="display: none">
                             <div class="bordered-group" id="messagesAndAttachments" style="height: 400px">
                                 <p class="card-title"><b>Messages & Atachment</b></p>
                                 <div id="tabsContainer" class="tab" style="width: 100% !important; display: block;">

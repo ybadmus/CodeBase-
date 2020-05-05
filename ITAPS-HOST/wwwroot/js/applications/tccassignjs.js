@@ -217,28 +217,45 @@ $("#assignOfficer").change(function () {
 
 var hideAndShowThingsPTR = function () {
     $("#gridView").hide();
-    $("#detailsView").show();
-
     $("#ptrDetailsGrid").show();
     $("#tccDetailsGrid").hide();
     $("#texDetailsGrid").hide();
+
+    $("#detailsView").show();
 };
 
 var hideAndShowTEXThings = function () {
     $("#gridView").hide();
-    $("#detailsView").show();
     $("#ptrDetailsGrid").hide();
     $("#tccDetailsGrid").hide();
+    $("#messagesAndAttachments").hide();
+    $("#ptrDisabilityReliefDetailsGrid").hide();
+    $("#ptrMarriageReliefDetailsGrid").hide();
+    $("#ptrAgedDepedentReliefDetailsGrid").hide();
+    $("#ptrOldAgeReliefDetailsGrid").hide();
+    $("#ptrChildWardDepedentReliefDetailsGrid").hide();
+    $("#tccRequestEntityDetailsGrid").hide();
+
+    $("#texWHTDetailsGrid").show();
+    $("#detailsView").show();
     $("#texDetailsGrid").show();
 };
 
 var hideAndShowThings = function () {
     $("#gridView").hide();
-    $("#detailsView").show();
-
-    $("#tccDetailsGrid").show();
     $("#texDetailsGrid").hide();
     $("#ptrDetailsGrid").hide();
+    $("#messagesAndAttachments").hide();
+    $("#ptrDisabilityReliefDetailsGrid").hide();
+    $("#ptrMarriageReliefDetailsGrid").hide();
+    $("#ptrAgedDepedentReliefDetailsGrid").hide();
+    $("#ptrOldAgeReliefDetailsGrid").hide();
+    $("#ptrChildWardDepedentReliefDetailsGrid").hide();
+    $("#texWHTDetailsGrid").hide();
+
+    $("#tccRequestEntityDetailsGrid").show();
+    $("#detailsView").show();
+    $("#tccDetailsGrid").show();
 };
 
 $("#backToGrid").click(function () {
