@@ -149,6 +149,22 @@ var loadAgedDependantReliefModal = function(resp) {
     $("#agedDependentbirthCertIssueBy").text(testNullOrEmpty(resp[0].birthCertIssueBy));
     $("#agedDependentbirthCertIssueDate").text(testNullOrEmpty(resp[0].certIssuingDate));
     $("#agedDependentbirthCertSignedBy").text(testNullOrEmpty(resp[0].birthCertSignedBy));
+
+    $("#dependentDetails").modal("show");
+};
+
+var loadChildWardDependantReliefModal = function(resp) {
+    $("#agedDependentFName").text(testNullOrEmpty(resp[0].firstName));
+    $("#agedDependentMName").text(testNullOrEmpty(resp[0].middleName));
+    $("#agedDependentLName").text(testNullOrEmpty(resp[0].lastName));
+    $("#agedDependentDOB").text(testNullOrEmpty(resp[0].agedDateOfBirth));
+    $("#agedDependentGender").text(testNullOrEmpty(resp[0].gender));
+    $("#agedDependentMStatus").text(testNullOrEmpty(resp[0].maritalStatus));
+    $("#agedDependentbirthCertIssueBy").text(testNullOrEmpty(resp[0].birthCertIssueBy));
+    $("#agedDependentbirthCertIssueDate").text(testNullOrEmpty(resp[0].certIssuingDate));
+    $("#agedDependentbirthCertSignedBy").text(testNullOrEmpty(resp[0].birthCertSignedBy));
+
+    $("#childDependentDetails").modal("show");
 };
 
 var loadChildWardDependentRelief = function (resp) {
@@ -161,7 +177,7 @@ var loadChildWardDependentRelief = function (resp) {
         output = output + '<tr><td align="">' + dependants[i].firstName + " " + dependants[i].middleName + " " + dependants[i].lastName + '</td>'
             + '<td align="" style="color: black">' + dependants[i].childDateOfBirth + '</td>'
             + '<td align="center" style="color: black">' + dependants[i].schoolName + '</td>'
-            + '<td><button style="padding: 4px 8px;" onclick="previewDependent(this)" id="' + dependants[i].dependentId +
+            + '<td><button style="padding: 4px 8px;" onclick="previewChildDependent(this)" id="' + dependants[i].dependentId +
             '" title="View item" class="btn btn-success btn-sm btnReturnDetail"><span class="fa fa-file fa-lg"></span></button></td>';
     }
 
@@ -190,11 +206,22 @@ var loadAgedDependentReliefDetail = function (resp) {
     sessionStorage.setItem("listOfAgedDependents", JSON.stringify(dependants));
 };
 
-var previewDependent = function (rowInfo) {
-    console.log(rowInfo);
+var previewChildDependent = function (rowInfo) {
+    var dependants = JSON.parse(sessionStorage.getItem("listOfChildWardDependents"));
+    for(var i = 0; i < dependants.length; i++) {
+        if (dependants[i].dependentId === rowInfo.id) {
+            return loadChildWardDependantReliefModal(dependants[i]);
+        }
+    }
+}
 
-    //loop through for id of current dependant and show the modal.
-    $("#dependentDetails").modal("show");
+var previewDependent = function (rowInfo) {
+    var dependants = JSON.parse(sessionStorage.getItem("listOfAgedDependents"));
+    for(var i = 0; i < dependants.length; i++) {
+        if (dependants[i].dependentId === rowInfo.id) {
+            return loadAgedDependantReliefModal(dependants[i]);
+        }
+    }
 };
 
 var loadMarriageReliefDetail = function (resp) {
