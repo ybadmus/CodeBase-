@@ -183,7 +183,7 @@ var loadChildWardDependentRelief = function (resp) {
 
     output = output;
     $("#listOfChildWardDependents").html(output);
-    sessionStorage.setItem("listOfChildWardDependents", JSON.stringify(dependants));
+    sessionStorage.setItem("listOfChildWardDependents", JSON.stringify(resp));
 };
 
 var loadAgedDependentReliefDetail = function (resp) {
@@ -203,7 +203,7 @@ var loadAgedDependentReliefDetail = function (resp) {
 
     output = output;
     $("#listOfAgedDependents").html(output);
-    sessionStorage.setItem("listOfAgedDependents", JSON.stringify(dependants));
+    sessionStorage.setItem("listOfAgedDependents", JSON.stringify(resp));
 };
 
 var previewChildDependent = function (rowInfo) {
