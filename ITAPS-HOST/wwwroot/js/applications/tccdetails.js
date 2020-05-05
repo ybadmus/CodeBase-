@@ -176,7 +176,7 @@ var loadChildWardDependentRelief = function (resp) {
         output = output + '<tr><td align="">' + dependants[i].firstName + " " + dependants[i].middleName + " " + dependants[i].lastName + '</td>'
             + '<td align="" style="color: black">' + dependants[i].childDateOfBirth + '</td>'
             + '<td align="center" style="color: black">' + dependants[i].schoolName + '</td>'
-            + '<td><button style="padding: 4px 8px;" onclick="previewChildDependent(this)" id="' + dependants[i].dependentId +
+            + '<td><button style="padding: 4px 8px;" onclick="previewChildDependent(this)" id="' + dependants[i].dependantId +
             '" title="View item" class="btn btn-success btn-sm btnReturnDetail"><span class="fa fa-file fa-lg"></span></button></td>';
     }
 
@@ -209,7 +209,7 @@ var previewChildDependent = function (rowInfo) {
     var appDetail = JSON.parse(sessionStorage.getItem("listOfChildWardDependents"));
     var dependants = appDetail[0].childDetails;
     for(var i = 0; i < dependants.length; i++) {
-        if (dependants[i].dependentId === rowInfo.id) {
+        if (dependants[i].dependantId === rowInfo.id) {
             return loadChildWardDependantReliefModal(dependants[i]);
         }
     }
