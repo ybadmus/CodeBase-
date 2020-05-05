@@ -140,9 +140,7 @@ var loadOldAgeReliefDetail = function(resp) {
 };
 
 var loadAgedDependantReliefModal = function(resp) {
-    $("#agedDependentFName").text(testNullOrEmpty(resp.firstName));
-    $("#agedDependentMName").text(testNullOrEmpty(resp.middleName));
-    $("#agedDependentLName").text(testNullOrEmpty(resp.lastName));
+    $("#agedDependentFullName").text(testNullOrEmpty(resp.firstName + " " + resp.middleName + " " + resp.lastName));
     $("#agedDependentDOB").text(testNullOrEmpty(resp.agedDateOfBirth));
     $("#agedDependentGender").text(testNullOrEmpty(resp.gender));
     $("#agedDependentMStatus").text(testNullOrEmpty(resp.maritalStatus));
@@ -154,15 +152,16 @@ var loadAgedDependantReliefModal = function(resp) {
 };
 
 var loadChildWardDependantReliefModal = function(resp) {
-    $("#agedDependentFName").text(testNullOrEmpty(resp.firstName));
-    $("#agedDependentMName").text(testNullOrEmpty(resp.middleName));
-    $("#agedDependentLName").text(testNullOrEmpty(resp.lastName));
-    $("#agedDependentDOB").text(testNullOrEmpty(resp.agedDateOfBirth));
-    $("#agedDependentGender").text(testNullOrEmpty(resp.gender));
-    $("#agedDependentMStatus").text(testNullOrEmpty(resp.maritalStatus));
-    $("#agedDependentbirthCertIssueBy").text(testNullOrEmpty(resp.birthCertIssueBy));
-    $("#agedDependentbirthCertIssueDate").text(testNullOrEmpty(resp.certIssuingDate));
-    $("#agedDependentbirthCertSignedBy").text(testNullOrEmpty(resp.birthCertSignedBy));
+    $("#childDependentFullName").text(testNullOrEmpty(resp.firstName + " " + resp.middleName + " " + resp.lastName));
+    $("#childDependentSchoolName").text(testNullOrEmpty(resp.schoolName));
+    $("#childDependentDateOfAdmission").text(testNullOrEmpty(resp.dateOfAdmission));
+    $("#childDependentDOB").text(testNullOrEmpty(resp.childDateOfBirth));
+    $("#childDependentadmissionReferenceNo").text(testNullOrEmpty(resp.admissionReferenceNo));
+    $("#childDependentBirthCertDocument").text(testNullOrEmpty(resp.birthCertDocument));
+    $("#childDependentBirthCertIssueNo").text(testNullOrEmpty(resp.birthCertIssueNo));
+    $("#childDependentBirthCertIssueDate").text(testNullOrEmpty(resp.birthCertIssueDate));
+    $("#childDependentBirthCertIssueBy").text(testNullOrEmpty(resp.birthCertIssueBy));
+    $("#achildDependentBirthCertSignedBy").text(testNullOrEmpty(resp.birthCertSignedBy));
 
     $("#childDependentDetails").modal("show");
 };
