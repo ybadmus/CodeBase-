@@ -94,18 +94,21 @@ var loadDetailsPtr = function (resp) {
         $("#messagesAndAttachments").hide();
         $("#ptrMarriageReliefDetailsGrid").hide();
         $("#ptrAgedDepedentReliefDetailsGrid").hide();
+        $("#ptrOldAgeReliefDetailsGrid").hide();
         $("#ptrDisabilityReliefDetailsGrid").show();
     } else if (activeApplicationType === "Marriage/Responsibility Relief") {
         loadMarriageReliefDetail(resp);
         $("#messagesAndAttachments").hide();
         $("#ptrDisabilityReliefDetailsGrid").hide();
         $("#ptrAgedDepedentReliefDetailsGrid").hide();
+        $("#ptrOldAgeReliefDetailsGrid").hide();
         $("#ptrMarriageReliefDetailsGrid").show();
     } else if (activeApplicationType === "Aged Dependants Relief") {
         loadAgedDependentReliefDetail(resp);
         $("#messagesAndAttachments").hide();
         $("#ptrDisabilityReliefDetailsGrid").hide();
         $("#ptrMarriageReliefDetailsGrid").hide();
+        $("#ptrOldAgeReliefDetailsGrid").hide();
         $("#ptrAgedDepedentReliefDetailsGrid").show();
     } else if (activeApplicationType === "Old Age Relief") {
         loadOldAgeReliefDetail(resp);
