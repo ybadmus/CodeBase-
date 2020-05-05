@@ -95,6 +95,7 @@ var loadDetailsPtr = function (resp) {
         $("#ptrMarriageReliefDetailsGrid").hide();
         $("#ptrAgedDepedentReliefDetailsGrid").hide();
         $("#ptrOldAgeReliefDetailsGrid").hide();
+        $("#ptrChildWardDepedentReliefDetailsGrid").hide();
         $("#ptrDisabilityReliefDetailsGrid").show();
     } else if (activeApplicationType.trim() === "Marriage/Responsibility Relief") {
         loadMarriageReliefDetail(resp);
@@ -102,6 +103,7 @@ var loadDetailsPtr = function (resp) {
         $("#ptrDisabilityReliefDetailsGrid").hide();
         $("#ptrAgedDepedentReliefDetailsGrid").hide();
         $("#ptrOldAgeReliefDetailsGrid").hide();
+        $("#ptrChildWardDepedentReliefDetailsGrid").hide();
         $("#ptrMarriageReliefDetailsGrid").show();
     } else if (activeApplicationType.trim() === "Aged Dependants Relief") {
         loadAgedDependentReliefDetail(resp);
@@ -109,6 +111,7 @@ var loadDetailsPtr = function (resp) {
         $("#ptrDisabilityReliefDetailsGrid").hide();
         $("#ptrMarriageReliefDetailsGrid").hide();
         $("#ptrOldAgeReliefDetailsGrid").hide();
+        $("#ptrChildWardDepedentReliefDetailsGrid").hide();
         $("#ptrAgedDepedentReliefDetailsGrid").show();
     } else if (activeApplicationType.trim() === "Old Age Relief") {
         loadOldAgeReliefDetail(resp);
@@ -116,8 +119,16 @@ var loadDetailsPtr = function (resp) {
         $("#ptrDisabilityReliefDetailsGrid").hide();
         $("#ptrMarriageReliefDetailsGrid").hide();
         $("#ptrAgedDepedentReliefDetailsGrid").hide();
+        $("#ptrChildWardDepedentReliefDetailsGrid").hide();
         $("#ptrOldAgeReliefDetailsGrid").show();
-
+    } else if (activeApplicationType.trim() === "Old Age Relief") {
+        loadChildWardDependentRelief(resp);
+        $("#messagesAndAttachments").hide();
+        $("#ptrDisabilityReliefDetailsGrid").hide();
+        $("#ptrMarriageReliefDetailsGrid").hide();
+        $("#ptrAgedDepedentReliefDetailsGrid").hide();
+        $("#ptrOldAgeReliefDetailsGrid").hide();
+        $("#ptrChildWardDepedentReliefDetailsGrid").show();
     }
 };
 
@@ -138,6 +149,25 @@ var loadAgedDependantReliefModal = function(resp) {
     $("#agedDependentbirthCertIssueBy").text(testNullOrEmpty(resp[0].birthCertIssueBy));
     $("#agedDependentbirthCertIssueDate").text(testNullOrEmpty(resp[0].certIssuingDate));
     $("#agedDependentbirthCertSignedBy").text(testNullOrEmpty(resp[0].birthCertSignedBy));
+};
+
+var loadChildWardDependentRelief = function (resp) {
+    let output = "";
+    var dependants = resp[0].childDetails.sort(function (a, b) {
+        return (a.firstName - b.firstName);
+    });
+
+    for (var i = 0; i < dependants.length; i++) {
+        output = output + '<tr><td align="">' + dependants[i].firstName + " " + dependants[i].middleName + " " + dependants[i].lastName + '</td>'
+            + '<td align="" style="color: black">' + dependants[i].childDateOfBirth + '</td>'
+            + '<td align="center" style="color: black">' + dependants[i].schoolName + '</td>'
+            + '<td><button style="padding: 4px 8px;" onclick="previewDependent(this)" id="' + dependants[i].dependentId +
+            '" title="View item" class="btn btn-success btn-sm btnReturnDetail"><span class="fa fa-file fa-lg"></span></button></td>';
+    }
+
+    output = output;
+    $("#listOfChildWardDependents").html(output);
+    sessionStorage.setItem("listOfChildWardDependents", JSON.stringify(dependants));
 };
 
 var loadAgedDependentReliefDetail = function (resp) {
