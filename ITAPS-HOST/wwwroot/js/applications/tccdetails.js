@@ -121,7 +121,7 @@ var loadDetailsPtr = function (resp) {
         $("#ptrAgedDepedentReliefDetailsGrid").hide();
         $("#ptrChildWardDepedentReliefDetailsGrid").hide();
         $("#ptrOldAgeReliefDetailsGrid").show();
-    } else if (activeApplicationType.trim() === "Old Age Relief") {
+    } else if (activeApplicationType.trim() === "Child/Ward Education Relief") {
         loadChildWardDependentRelief(resp);
         $("#messagesAndAttachments").hide();
         $("#ptrDisabilityReliefDetailsGrid").hide();
