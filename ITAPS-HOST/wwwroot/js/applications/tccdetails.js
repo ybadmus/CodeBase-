@@ -96,6 +96,8 @@ var loadDetailsPtr = function (resp) {
         $("#ptrAgedDepedentReliefDetailsGrid").hide();
         $("#ptrOldAgeReliefDetailsGrid").hide();
         $("#ptrChildWardDepedentReliefDetailsGrid").hide();
+        $("#texWHTDetailsGrid").hide();
+        $("#tccRequestEntityDetailsGrid").hide();
         $("#ptrDisabilityReliefDetailsGrid").show();
     } else if (activeApplicationType.trim() === "Marriage/Responsibility Relief") {
         loadMarriageReliefDetail(resp);
@@ -104,6 +106,8 @@ var loadDetailsPtr = function (resp) {
         $("#ptrAgedDepedentReliefDetailsGrid").hide();
         $("#ptrOldAgeReliefDetailsGrid").hide();
         $("#ptrChildWardDepedentReliefDetailsGrid").hide();
+        $("#texWHTDetailsGrid").hide();
+        $("#tccRequestEntityDetailsGrid").hide();
         $("#ptrMarriageReliefDetailsGrid").show();
     } else if (activeApplicationType.trim() === "Aged Dependants Relief") {
         loadAgedDependentReliefDetail(resp);
@@ -112,6 +116,8 @@ var loadDetailsPtr = function (resp) {
         $("#ptrMarriageReliefDetailsGrid").hide();
         $("#ptrOldAgeReliefDetailsGrid").hide();
         $("#ptrChildWardDepedentReliefDetailsGrid").hide();
+        $("#texWHTDetailsGrid").hide();
+        $("#tccRequestEntityDetailsGrid").hide();
         $("#ptrAgedDepedentReliefDetailsGrid").show();
     } else if (activeApplicationType.trim() === "Old Age Relief") {
         loadOldAgeReliefDetail(resp);
@@ -120,6 +126,8 @@ var loadDetailsPtr = function (resp) {
         $("#ptrMarriageReliefDetailsGrid").hide();
         $("#ptrAgedDepedentReliefDetailsGrid").hide();
         $("#ptrChildWardDepedentReliefDetailsGrid").hide();
+        $("#texWHTDetailsGrid").hide();
+        $("#tccRequestEntityDetailsGrid").hide();
         $("#ptrOldAgeReliefDetailsGrid").show();
     } else if (activeApplicationType.trim() === "Child/Ward Education Relief") {
         loadChildWardDependentRelief(resp);
@@ -128,6 +136,8 @@ var loadDetailsPtr = function (resp) {
         $("#ptrMarriageReliefDetailsGrid").hide();
         $("#ptrAgedDepedentReliefDetailsGrid").hide();
         $("#ptrOldAgeReliefDetailsGrid").hide();
+        $("#texWHTDetailsGrid").hide();
+        $("#tccRequestEntityDetailsGrid").hide();
         $("#ptrChildWardDepedentReliefDetailsGrid").show();
     }
 };
@@ -253,7 +263,7 @@ var loadDetails = function (resp) {
 
     $("#dateSubmitted").text(testNullOrEmpty(resp[0].submittedDate));
     $("#applicantName").text(testNullOrEmpty(resp[0].applicantName));
-    $("#applicantFName").text(testNullOrEmpty(resp[0].applicantName)); //span so using text
+    $("#applicantFName").text(testNullOrEmpty(resp[0].applicantName));
     $("#applicantTIN").text(testNullOrEmpty(resp[0].applicantTIN));
     $("#applicantPhone").text(testNullOrEmpty(resp[0].applicantPhoneNo));
     $("#applicantEmail").text(testNullOrEmpty(resp[0].applicantEmailAddress));
@@ -263,7 +273,7 @@ var loadDetails = function (resp) {
     $("#requestingEntityEmail").text(testNullOrEmpty(resp[0].requestingOfficeEmail));
     $("#purposeOfApplication").text(testNullOrEmpty(resp[0].purpose));
 
-    $("#appIdHeader").text(testNullOrEmpty(resp[0].applicationNo)); //span so using text
+    $("#appIdHeader").text(testNullOrEmpty(resp[0].applicationNo));
     $("#appStatusHeader").text(testNullOrEmpty(resp[0].status));
     $("#modalId").text(testNullOrEmpty(resp[0].applicationNo));
     $("#statusNameModal").text(testNullOrEmpty(resp[0].status));
@@ -276,7 +286,7 @@ var loadDetailsTex = function (resp) {
 
     $("#dateSubmittedTex").text(testNullOrEmpty(resp[0].submittedDate));
     $("#applicantNameTex").text(testNullOrEmpty(resp[0].applicantName));
-    $("#applicantFName").text(testNullOrEmpty(resp[0].applicantName)); //span so using text
+    $("#applicantFName").text(testNullOrEmpty(resp[0].applicantName));
     $("#applicantTINTex").text(testNullOrEmpty(resp[0].applicantTIN));
     $("#applicantPhoneTex").text();
     $("#applicantEmailTex").text(testNullOrEmpty(resp[0].email));
@@ -285,13 +295,13 @@ var loadDetailsTex = function (resp) {
     $("#whtReason").text(testNullOrEmpty(resp[0].reasons));
     $("#whtRemarks").text(testNullOrEmpty(resp[0].remarks));
 
-    $("#appIdHeader").text(testNullOrEmpty(resp[0].applicationNo)); //span so using text
+    $("#appIdHeader").text(testNullOrEmpty(resp[0].applicationNo)); 
     $("#appStatusHeader").text(testNullOrEmpty(resp[0].status));
     $("#modalId").text(testNullOrEmpty(resp[0].applicationNo));
     $("#statusNameModal").text(testNullOrEmpty(resp[0].status));
     $("#currentStatus").text(resp[0].statusId);
     $("#taxpayerId").text(testNullOrEmpty(resp[0].taxpayerId));
-};
+ };
 
 var testNullOrEmpty = function (value) {
     if (!value || value === "null") {
