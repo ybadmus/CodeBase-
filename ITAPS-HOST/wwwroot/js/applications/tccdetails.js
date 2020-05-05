@@ -142,7 +142,7 @@ var loadOldAgeReliefDetail = function(resp) {
 var loadAgedDependantReliefModal = function(resp) {
     $("#agedDependentFullName").text(testNullOrEmpty(resp.firstName + " " + resp.middleName + " " + resp.lastName));
     $("#agedDependentDOB").text(testNullOrEmpty(resp.agedDateOfBirth));
-    $("#agedDependentGender").text(testNullOrEmpty(resp.gender));
+    $("#agedDependentGender").text(testNullOrEmpty(resp.gender === "M" ? "Male" : "Female"));
     $("#agedDependentMStatus").text(testNullOrEmpty(resp.maritalStatus));
     $("#agedDependentbirthCertIssueBy").text(testNullOrEmpty(resp.birthCertIssueBy));
     $("#agedDependentbirthCertIssueDate").text(testNullOrEmpty(resp.certIssuingDate));
