@@ -107,7 +107,22 @@ var loadDetailsPtr = function (resp) {
         $("#ptrDisabilityReliefDetailsGrid").hide();
         $("#ptrMarriageReliefDetailsGrid").hide();
         $("#ptrAgedDepedentReliefDetailsGrid").show();
+    } else if (activeApplicationType === "Old Age Relief") {
+        loadOldAgeReliefDetail(resp);
+        $("#messagesAndAttachments").hide();
+        $("#ptrDisabilityReliefDetailsGrid").hide();
+        $("#ptrMarriageReliefDetailsGrid").hide();
+        $("#ptrAgedDepedentReliefDetailsGrid").hide();
+        $("#ptrOldAgeReliefDetailsGrid").show();
+
     }
+};
+
+var loadOldAgeReliefDetail = function(resp) {
+    $("#oldAgeDocIssueBy").text(testNullOrEmpty(resp[0].birthCertIssueBy));
+    $("#oldAgeDocIssueNo").text(testNullOrEmpty(resp[0].birthCertIssueNo));
+    $("#oldAgeDocSignedBy").text(testNullOrEmpty(resp[0].birthCertSignedBy));
+    $("#oldAgeDocIssueDate").text(testNullOrEmpty(resp[0].birthCertIssuingDate));
 };
 
 var loadAgedDependantReliefModal = function(resp) {
