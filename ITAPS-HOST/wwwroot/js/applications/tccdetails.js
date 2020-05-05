@@ -110,6 +110,18 @@ var loadDetailsPtr = function (resp) {
     }
 };
 
+var loadAgedDependantReliefModal = function(resp) {
+    $("#agedDependentFName").text(testNullOrEmpty(resp[0].firstName));
+    $("#agedDependentMName").text(testNullOrEmpty(resp[0].middleName));
+    $("#agedDependentLName").text(testNullOrEmpty(resp[0].lastName));
+    $("#agedDependentDOB").text(testNullOrEmpty(resp[0].agedDateOfBirth));
+    $("#agedDependentGender").text(testNullOrEmpty(resp[0].gender));
+    $("#agedDependentMStatus").text(testNullOrEmpty(resp[0].maritalStatus));
+    $("#agedDependentbirthCertIssueBy").text(testNullOrEmpty(resp[0].birthCertIssueBy));
+    $("#agedDependentbirthCertIssueDate").text(testNullOrEmpty(resp[0].certIssuingDate));
+    $("#agedDependentbirthCertSignedBy").text(testNullOrEmpty(resp[0].birthCertSignedBy));
+};
+
 var loadAgedDependentReliefDetail = function (resp) {
     let output = "";
     var dependants = resp[0].agedDepandantsDetails.sort(function (a, b) {
@@ -121,15 +133,20 @@ var loadAgedDependentReliefDetail = function (resp) {
             + '<td align="" style="color: black">' + dependants[i].agedDateOfBirth + '</td>'
             + '<td align="center" style="color: black">' + dependants[i].gender + '</td>'
             + '<td align="center" style="color: black">' + dependants[i].maritalStatus + '</td>'
-            + '<td><button style="padding: 4px 8px;" onclick="previewDependent(this)" title="View item" class="btn btn-success btn-sm btnReturnDetail"><span class="fa fa-file fa-lg"></span></button></td>';
+            + '<td><button style="padding: 4px 8px;" onclick="previewDependent(this)" id="' + dependants[i].dependentId +
+            '" title="View item" class="btn btn-success btn-sm btnReturnDetail"><span class="fa fa-file fa-lg"></span></button></td>';
     }
 
     output = output;
     $("#listOfAgedDependents").html(output);
+    sessionStorage.setItem("listOfAgedDependents", JSON.stringify(dependants));
 };
 
 var previewDependent = function (rowInfo) {
-    console.log(rowInfo)
+    console.log(rowInfo);
+
+    //loop through for id of current dependant and show the modal.
+    $("#dependentDetails").modal("show");
 };
 
 var loadMarriageReliefDetail = function (resp) {
