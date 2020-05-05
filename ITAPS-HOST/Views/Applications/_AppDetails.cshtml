@@ -386,6 +386,15 @@
                                                 <td colspan="2" style="padding-left:5px;width:140px;font-weight:100;background: #f7f8f9;"><b>Marriage Registration Details</b></td>
                                             </tr>
                                             <tr>
+                                                <td style="padding-left:5px;width:140px;font-weight:100;">Marriage Certificate</td>
+                                                <td style="padding-left:5px;width:260px;">
+                                                    <a class="btn btn-xs btn-block btn-outline-light">
+                                                        <i class="fa fa-paperclip"></i>
+                                                        View Attachment
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <td style="padding-left:5px;width:140px;font-weight:100;">Registration Date</td>
                                                 <td style="padding-left:5px;width:260px;">
                                                     <b><span id="registrationDate"></span></b>
@@ -417,6 +426,26 @@
                                             </tr>
                                         </tbody>
                                     </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6" id="ptrAgedDepedentReliefDetailsGrid" style="display: none">
+                            <div class="bordered-group" id="" style="height: 400px">
+                                <p class="card-title"><b>List Of Aged Dependents</b></p>
+                                <div class="table-responsive border-bottom" style="overflow-y: no-display;height: 380px; margin: 10px 0px">
+                                    <table class="table table-bordered">
+                                            <thead>
+                                                <tr class="table-info">
+                                                    <th scope="col" style="color: black;">Name</th>
+                                                    <th scope="col" style="color: black;">DOB </th>
+                                                    <th scope="col" style="color: black;">Gender</th>
+                                                    <th scope="col" style="color: black;">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="listOfAgedDependents"></tbody>
+                                        </table>
+                                    
                                 </div>
                             </div>
                         </div>

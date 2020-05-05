@@ -93,14 +93,43 @@ var loadDetailsPtr = function (resp) {
         loadDisabilityReliefDetail(resp);
         $("#messagesAndAttachments").hide();
         $("#ptrMarriageReliefDetailsGrid").hide();
+        $("#ptrAgedDepedentReliefDetailsGrid").hide();
         $("#ptrDisabilityReliefDetailsGrid").show();
     } else if (activeApplicationType === "Marriage/Responsibility Relief") {
         loadMarriageReliefDetail(resp);
         $("#messagesAndAttachments").hide();
         $("#ptrDisabilityReliefDetailsGrid").hide();
+        $("#ptrAgedDepedentReliefDetailsGrid").hide();
         $("#ptrMarriageReliefDetailsGrid").show();
+    } else if (activeApplicationType === "Aged Dependants Relief") {
+        loadAgedDependentReliefDetail(resp);
+        $("#messagesAndAttachments").hide();
+        $("#ptrDisabilityReliefDetailsGrid").hide();
+        $("#ptrMarriageReliefDetailsGrid").hide();
+        $("#ptrAgedDepedentReliefDetailsGrid").show();
+    }
+};
+
+var loadAgedDependentReliefDetail = function (resp) {
+    let output = "";
+    var dependants = resp[0].agedDepandantsDetails.sort(function (a, b) {
+        return (a.firstName - b.firstName);
+    });
+
+    for (var i = 0; i < dependants.length; i++) {
+        output = output + '<tr><td align="">' + dependants[i].firstName + " " + dependants[i].middleName + " " + dependants[i].lastName + '</td>'
+            + '<td align="" style="color: black">' + dependants[i].agedDateOfBirth + '</td>'
+            + '<td align="center" style="color: black">' + dependants[i].gender + '</td>'
+            + '<td align="center" style="color: black">' + dependants[i].maritalStatus + '</td>'
+            + '<td><button style="padding: 4px 8px;" onclick="previewDependent(this)" title="View item" class="btn btn-success btn-sm btnReturnDetail"><span class="fa fa-file fa-lg"></span></button></td>';
     }
 
+    output = output;
+    $("#listOfAgedDependents").html(output);
+};
+
+var previewDependent = function (rowInfo) {
+    console.log(rowInfo)
 };
 
 var loadMarriageReliefDetail = function (resp) {
