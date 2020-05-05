@@ -116,16 +116,16 @@ var prepareModal = function (item) {
     $(".applicationType").text(item.applicationType);
     activeApplicationType = item.applicationType;
 
-    if (item.applicationType.toUpperCase() === "TCC".toUpperCase())
+    if (item.applicationType.toUpperCase().trim() === "TCC".toUpperCase())
         prepareDetailsViewTCC();
-    if (item.applicationType.toUpperCase() === "WHT Exemption".toUpperCase())
+    if (item.applicationType.toUpperCase().trim() === "WHT Exemption".toUpperCase())
         prepareDetailsViewTEX();
-    if (item.applicationType.toUpperCase() === "Disability Relief".toUpperCase()
-        || item.applicationType.toUpperCase() === "Aged Dependants Relief".toUpperCase()
-        || item.applicationType.toUpperCase() === "Old Age Relief".toUpperCase()
-        || item.applicationType.toUpperCase() === "Pension Relief".toUpperCase()
-        || item.applicationType.toUpperCase() === "Marriage/Responsibility Relief".toUpperCase()
-        || item.applicationType.toUpperCase() === "Child/Ward Education Relief".toUpperCase()) {
+    if (item.applicationType.toUpperCase().trim() === "Disability Relief".toUpperCase()
+        || item.applicationType.toUpperCase().trim() === "Aged Dependants Relief".toUpperCase()
+        || item.applicationType.toUpperCase().trim() === "Old Age Relief".toUpperCase()
+        || item.applicationType.toUpperCase().trim() === "Pension Relief".toUpperCase()
+        || item.applicationType.toUpperCase().trim() === "Marriage/Responsibility Relief".toUpperCase()
+        || item.applicationType.toUpperCase().trim() === "Child/Ward Education Relief".toUpperCase()) {
         prepareDetailsViewPTR();
         $("#applicantNamePTR").text(item.applicantName);
         $("#applicantTINPTR").text(item.applicantTIN);

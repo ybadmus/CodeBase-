@@ -89,28 +89,28 @@ var loadDetailsPtr = function (resp) {
     $("#phoneNoPTR").text(testNullOrEmpty(resp[0].phoneNo));
     $("#startDatePTR").text(testNullOrEmpty(resp[0].startDate));
 
-    if (activeApplicationType === "Disability Relief") {
+    if (activeApplicationType.trim() === "Disability Relief") {
         loadDisabilityReliefDetail(resp);
         $("#messagesAndAttachments").hide();
         $("#ptrMarriageReliefDetailsGrid").hide();
         $("#ptrAgedDepedentReliefDetailsGrid").hide();
         $("#ptrOldAgeReliefDetailsGrid").hide();
         $("#ptrDisabilityReliefDetailsGrid").show();
-    } else if (activeApplicationType === "Marriage/Responsibility Relief") {
+    } else if (activeApplicationType.trim() === "Marriage/Responsibility Relief") {
         loadMarriageReliefDetail(resp);
         $("#messagesAndAttachments").hide();
         $("#ptrDisabilityReliefDetailsGrid").hide();
         $("#ptrAgedDepedentReliefDetailsGrid").hide();
         $("#ptrOldAgeReliefDetailsGrid").hide();
         $("#ptrMarriageReliefDetailsGrid").show();
-    } else if (activeApplicationType === "Aged Dependants Relief") {
+    } else if (activeApplicationType.trim() === "Aged Dependants Relief") {
         loadAgedDependentReliefDetail(resp);
         $("#messagesAndAttachments").hide();
         $("#ptrDisabilityReliefDetailsGrid").hide();
         $("#ptrMarriageReliefDetailsGrid").hide();
         $("#ptrOldAgeReliefDetailsGrid").hide();
         $("#ptrAgedDepedentReliefDetailsGrid").show();
-    } else if (activeApplicationType === "Old Age Relief") {
+    } else if (activeApplicationType.trim() === "Old Age Relief") {
         loadOldAgeReliefDetail(resp);
         $("#messagesAndAttachments").hide();
         $("#ptrDisabilityReliefDetailsGrid").hide();
