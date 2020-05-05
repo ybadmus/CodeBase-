@@ -78,26 +78,13 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="bordered-group">
-                                 <p class="card-title"><b>Aged Dependant Details</b></p>
-                                <div class="table-responsive border-bottom" style="overflow-y: scroll;height: 380px;">
+                                 <p class="card-title"><b>Aged Dependant</b></p>
                                     <table class="table table-bordered">
                                         <tbody>
                                             <tr>
-                                                <td style="padding-left:5px;width:120px;font-weight:100;">First Name</td>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Full Name</td>
                                                 <td style="padding-left:5px;width:280px;">
-                                                    <b><span id="agedDependentFName"></span></b>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding-left:5px;width:120px;font-weight:100;">Middle Name</td>
-                                                <td style="padding-left:5px;width:280px;">
-                                                    <b><span id="agedDependentMName"></span></b>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding-left:5px;width:120px;font-weight:100;">Last Name</td>
-                                                <td style="padding-left:5px;width:280px;">
-                                                    <b><span id="agedDependentLName"></span></b>
+                                                    <b><span id="agedDependentFullName"></span></b>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -150,7 +137,6 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -167,7 +153,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="modal-title" id="modal-income-title">Aged Dependant Details</h6>
+                <h6 class="modal-title" id="modal-income-title">Child Dependant Details</h6>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true" style="color: white">&times;</span>
                 </button>
@@ -177,34 +163,39 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="bordered-group">
-                                 <p class="card-title"><b>Aged Dependant Details</b></p>
-                                <div class="table-responsive border-bottom" style="overflow-y: scroll;height: 380px;">
+                                 <p class="card-title"><b>Child Dependant</b></p>
                                     <table class="table table-bordered">
                                         <tbody>
                                             <tr>
-                                                <td style="padding-left:5px;width:120px;font-weight:100;">First Name</td>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Full Name</td>
                                                 <td style="padding-left:5px;width:280px;">
-                                                    <b><span id="agedDependentFName"></span></b>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding-left:5px;width:120px;font-weight:100;">Middle Name</td>
-                                                <td style="padding-left:5px;width:280px;">
-                                                    <b><span id="agedDependentMName"></span></b>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding-left:5px;width:120px;font-weight:100;">Last Name</td>
-                                                <td style="padding-left:5px;width:280px;">
-                                                    <b><span id="agedDependentLName"></span></b>
+                                                    <b><span id="childDependentFullName"></span></b>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:120px;font-weight:100;">DOB</td>
                                                 <td style="padding-left:5px;width:280px;">
-                                                    <b><span id="agedDependentDOB"></span></b>
+                                                    <b><span id="childDependentDOB"></span></b>
                                                 </td>
                                             </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">School Name</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="childDependentSchoolName"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Admission Date</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="childDependentDateOfAdmission"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Admission Ref No.</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="childDependentadmissionReferenceNo"></span></b>
+                                                </td>
+                                            </tr>c
                                             <tr>
                                                 <td style="padding-left:5px;width:120px;font-weight:100;">Gender</td>
                                                 <td style="padding-left:5px;width:280px;">
@@ -221,6 +212,12 @@
                                                 <td colspan="2" style="padding-left:5px;width:140px;font-weight:100;background: #f7f8f9;"><b>Dependent's Birth Details</b></td>
                                             </tr>
                                             <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Issued No.</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="childDependentBirthCertIssueNo"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <td style="padding-left:5px;width:140px;font-weight:100;">Birth Certificate</td>
                                                 <td style="padding-left:5px;width:260px;">
                                                     <a class="btn btn-xs btn-block btn-outline-light">
@@ -232,24 +229,23 @@
                                             <tr>
                                                 <td style="padding-left:5px;width:120px;font-weight:100;">Issued By</td>
                                                 <td style="padding-left:5px;width:280px;">
-                                                    <b><span id="agedDependentbirthCertIssueBy"></span></b>
+                                                    <b><span id="childDependentBirthCertIssueBy"></span></b>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:120px;font-weight:100;">Issue Date</td>
                                                 <td style="padding-left:5px;width:280px;">
-                                                    <b><span id="agedDependentbirthCertIssueDate"></span></b>
+                                                    <b><span id="childDependentBirthCertIssueDate"></span></b>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:120px;font-weight:100;">Signed By</td>
                                                 <td style="padding-left:5px;width:280px;">
-                                                    <b><span id="agedDependentbirthCertSignedBy"></span></b>
+                                                    <b><span id="achildDependentBirthCertSignedBy"></span></b>
                                                 </td>
                                             </tr>
                                         </tbody>
                                     </table>
-                                </div>
                             </div>
                         </div>
                     </div>
