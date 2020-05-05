@@ -225,6 +225,7 @@ var hideAndShowThingsPTR = function () {
 };
 
 var hideAndShowTEXThings = function () {
+    
     $("#gridView").hide();
     $("#ptrDetailsGrid").hide();
     $("#tccDetailsGrid").hide();
