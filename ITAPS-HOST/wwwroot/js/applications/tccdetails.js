@@ -154,15 +154,15 @@ var loadAgedDependantReliefModal = function(resp) {
 };
 
 var loadChildWardDependantReliefModal = function(resp) {
-    $("#agedDependentFName").text(testNullOrEmpty(resp[0].firstName));
-    $("#agedDependentMName").text(testNullOrEmpty(resp[0].middleName));
-    $("#agedDependentLName").text(testNullOrEmpty(resp[0].lastName));
-    $("#agedDependentDOB").text(testNullOrEmpty(resp[0].agedDateOfBirth));
-    $("#agedDependentGender").text(testNullOrEmpty(resp[0].gender));
-    $("#agedDependentMStatus").text(testNullOrEmpty(resp[0].maritalStatus));
-    $("#agedDependentbirthCertIssueBy").text(testNullOrEmpty(resp[0].birthCertIssueBy));
-    $("#agedDependentbirthCertIssueDate").text(testNullOrEmpty(resp[0].certIssuingDate));
-    $("#agedDependentbirthCertSignedBy").text(testNullOrEmpty(resp[0].birthCertSignedBy));
+    $("#agedDependentFName").text(testNullOrEmpty(resp.firstName));
+    $("#agedDependentMName").text(testNullOrEmpty(resp.middleName));
+    $("#agedDependentLName").text(testNullOrEmpty(resp.lastName));
+    $("#agedDependentDOB").text(testNullOrEmpty(resp.agedDateOfBirth));
+    $("#agedDependentGender").text(testNullOrEmpty(resp.gender));
+    $("#agedDependentMStatus").text(testNullOrEmpty(resp.maritalStatus));
+    $("#agedDependentbirthCertIssueBy").text(testNullOrEmpty(resp.birthCertIssueBy));
+    $("#agedDependentbirthCertIssueDate").text(testNullOrEmpty(resp.certIssuingDate));
+    $("#agedDependentbirthCertSignedBy").text(testNullOrEmpty(resp.birthCertSignedBy));
 
     $("#childDependentDetails").modal("show");
 };
@@ -207,7 +207,8 @@ var loadAgedDependentReliefDetail = function (resp) {
 };
 
 var previewChildDependent = function (rowInfo) {
-    var dependants = JSON.parse(sessionStorage.getItem("listOfChildWardDependents"));
+    var appDetail = JSON.parse(sessionStorage.getItem("listOfChildWardDependents"));
+    var dependants = appDetail[0].childDetails;
     for(var i = 0; i < dependants.length; i++) {
         if (dependants[i].dependentId === rowInfo.id) {
             return loadChildWardDependantReliefModal(dependants[i]);
@@ -216,7 +217,8 @@ var previewChildDependent = function (rowInfo) {
 }
 
 var previewDependent = function (rowInfo) {
-    var dependants = JSON.parse(sessionStorage.getItem("listOfAgedDependents"));
+    var appDetail = JSON.parse(sessionStorage.getItem("listOfAgedDependents"));
+    var dependants = appDetail[0].agedDepandantsDetails;
     for(var i = 0; i < dependants.length; i++) {
         if (dependants[i].dependentId === rowInfo.id) {
             return loadAgedDependantReliefModal(dependants[i]);
