@@ -91,7 +91,7 @@ var loadDetailsPtr = function (resp) {
 
     if (activeApplicationType.trim() === "Disability Relief") {
         loadDisabilityReliefDetail(resp);
-        $("#messagesAndAttachments").hide();
+        //$("#messagesAndAttachments").hide();
         $("#ptrMarriageReliefDetailsGrid").hide();
         $("#ptrAgedDepedentReliefDetailsGrid").hide();
         $("#ptrOldAgeReliefDetailsGrid").hide();
@@ -101,7 +101,7 @@ var loadDetailsPtr = function (resp) {
         $("#ptrDisabilityReliefDetailsGrid").show();
     } else if (activeApplicationType.trim() === "Marriage/Responsibility Relief") {
         loadMarriageReliefDetail(resp);
-        $("#messagesAndAttachments").hide();
+        //$("#messagesAndAttachments").hide();
         $("#ptrDisabilityReliefDetailsGrid").hide();
         $("#ptrAgedDepedentReliefDetailsGrid").hide();
         $("#ptrOldAgeReliefDetailsGrid").hide();
@@ -111,7 +111,7 @@ var loadDetailsPtr = function (resp) {
         $("#ptrMarriageReliefDetailsGrid").show();
     } else if (activeApplicationType.trim() === "Aged Dependants Relief") {
         loadAgedDependentReliefDetail(resp);
-        $("#messagesAndAttachments").hide();
+        //$("#messagesAndAttachments").hide();
         $("#ptrDisabilityReliefDetailsGrid").hide();
         $("#ptrMarriageReliefDetailsGrid").hide();
         $("#ptrOldAgeReliefDetailsGrid").hide();
@@ -121,7 +121,7 @@ var loadDetailsPtr = function (resp) {
         $("#ptrAgedDepedentReliefDetailsGrid").show();
     } else if (activeApplicationType.trim() === "Old Age Relief") {
         loadOldAgeReliefDetail(resp);
-        $("#messagesAndAttachments").hide();
+        //$("#messagesAndAttachments").hide();
         $("#ptrDisabilityReliefDetailsGrid").hide();
         $("#ptrMarriageReliefDetailsGrid").hide();
         $("#ptrAgedDepedentReliefDetailsGrid").hide();
@@ -131,7 +131,7 @@ var loadDetailsPtr = function (resp) {
         $("#ptrOldAgeReliefDetailsGrid").show();
     } else if (activeApplicationType.trim() === "Child/Ward Education Relief") {
         loadChildWardDependentRelief(resp);
-        $("#messagesAndAttachments").hide();
+        //$("#messagesAndAttachments").hide();
         $("#ptrDisabilityReliefDetailsGrid").hide();
         $("#ptrMarriageReliefDetailsGrid").hide();
         $("#ptrAgedDepedentReliefDetailsGrid").hide();
@@ -475,3 +475,6 @@ var decideNextTccStage = function (statusId) {
     }
 };
 
+$("#appMessages").click(function () {
+    $("#messagesAndAttachments").modal("show");
+});

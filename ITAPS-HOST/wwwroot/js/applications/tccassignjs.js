@@ -229,7 +229,7 @@ var hideAndShowTEXThings = function () {
     $("#gridView").hide();
     $("#ptrDetailsGrid").hide();
     $("#tccDetailsGrid").hide();
-    $("#messagesAndAttachments").hide();
+    //$("#messagesAndAttachments").hide();
     $("#ptrDisabilityReliefDetailsGrid").hide();
     $("#ptrMarriageReliefDetailsGrid").hide();
     $("#ptrAgedDepedentReliefDetailsGrid").hide();
@@ -246,7 +246,7 @@ var hideAndShowThings = function () {
     $("#gridView").hide();
     $("#texDetailsGrid").hide();
     $("#ptrDetailsGrid").hide();
-    $("#messagesAndAttachments").hide();
+    //$("#messagesAndAttachments").hide();
     $("#ptrDisabilityReliefDetailsGrid").hide();
     $("#ptrMarriageReliefDetailsGrid").hide();
     $("#ptrAgedDepedentReliefDetailsGrid").hide();
