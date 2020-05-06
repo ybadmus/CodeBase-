@@ -1,61 +1,77 @@
 ﻿<input id="currentStatus" style="display: none" />
 
-<div class="col-md-12" id="messagesAndAttachments">
-    <div class="bordered-group" style="height: 400px">
-        <p class="card-title"><b>Messages & Atachment</b></p>
-        <div id="tabsContainer" class="tab" style="width: 100% !important; display: block;">
-            <button class="tablinks active" onclick="openDivForTab(event, 'applicantColumn')"> APPLICANT</button>
-            <button class="tablinks" onclick="openDivForTab(event, 'internalMessagesColumn')"> INTERNAL</button>
-            <button class="tablinks" onclick="openDivForTab(event, 'attachmentColumn')"> FILES</button>
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h6 class="modal-title" id="modal-income-title">ID: <span class="modalId"></span></h6>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" style="color: white">&times;</span>
+            </button>
         </div>
-        <div>
-            <div id="applicantColumn" class="tabcontent">
-                <div class="taxpayerMessageScroll" id="taxpayerMessageScroll" style="height: 250px; overflow-y: scroll; border-bottom: 1px solid silver; border-left: 1px solid silver;">
-                    <div id="chatUI">
+        <div class="modal-body">
+            <div class="form-horizontal">
+                <div class="row">
+                    <div class="col-md-12" id="messagesAndAttachments">
+                        <div class="bordered-group" style="height: 400px">
+                            <p class="card-title"><b>Messages & Atachment</b></p>
+                            <div id="tabsContainer" class="tab" style="width: 100% !important; display: block;">
+                                <button class="tablinks active" onclick="openDivForTab(event, 'applicantColumn')"> APPLICANT</button>
+                                <button class="tablinks" onclick="openDivForTab(event, 'internalMessagesColumn')"> INTERNAL</button>
+                                <button class="tablinks" onclick="openDivForTab(event, 'attachmentColumn')"> FILES</button>
+                            </div>
+                            <div>
+                                <div id="applicantColumn" class="tabcontent">
+                                    <div class="taxpayerMessageScroll" id="taxpayerMessageScroll" style="height: 250px; overflow-y: scroll; border-bottom: 1px solid silver; border-left: 1px solid silver;">
+                                        <div id="chatUI">
 
-                    </div>
-                </div>
+                                        </div>
+                                    </div>
 
-                <div style="position: relative">
-                    <form class="col-sm-10" style="padding-left: 0px; float:left;">
-                        <label for="commentToTaxpayer" class="control-label" style="font-weight: 600; padding: 2px;">Message To <span id="applicantFName" style="color: #364c66 !important;"></span></label>
-                        <textarea type="text" style="resize:none;height: 50px;" autocomplete="off" class="form-control form-cascade-control input-sm" id="commentToTaxpayer" placeholder="Type message to applicant here"></textarea>
-                    </form>
-                    <button id="sendMesageTaxpayer" style=" float:left; position: absolute; top: 40px" class="col-sm-2 btn btn-success"><i class="fa fa-paper-plane" aria-hidden="true"></i> Send</button>
-                </div>
-            </div>
+                                    <div style="position: relative">
+                                        <form class="col-sm-10" style="padding-left: 0px; float:left;">
+                                            <label for="commentToTaxpayer" class="control-label" style="font-weight: 600; padding: 2px;">Message To <span id="applicantFName" style="color: #364c66 !important;"></span></label>
+                                            <textarea type="text" style="resize:none;height: 50px;" autocomplete="off" class="form-control form-cascade-control input-sm" id="commentToTaxpayer" placeholder="Type message to applicant here"></textarea>
+                                        </form>
+                                        <button id="sendMesageTaxpayer" style=" float:left; position: absolute; top: 40px" class="col-sm-2 btn btn-success"><i class="fa fa-paper-plane" aria-hidden="true"></i> Send</button>
+                                    </div>
+                                </div>
 
-            <div id="internalMessagesColumn" class="tabcontent" style="display: none;">
-                <div class="internalMessageScroll" id="internalMessageScroll" style="height: 250px; overflow-y: scroll; border-bottom: 1px solid silver; border-left: 1px solid silver;">
-                    <div id="internalMessageUI">
+                                <div id="internalMessagesColumn" class="tabcontent" style="display: none;">
+                                    <div class="internalMessageScroll" id="internalMessageScroll" style="height: 250px; overflow-y: scroll; border-bottom: 1px solid silver; border-left: 1px solid silver;">
+                                        <div id="internalMessageUI">
 
-                    </div>
-                </div>
+                                        </div>
+                                    </div>
 
-                <div style="position: relative">
-                    <form class="col-sm-10" style="padding-left: 0px; float:left;">
-                        <label for="commentToStaff" class="control-label" style="font-weight: 600; padding: 2px;">Internal Message</label>
-                        <textarea type="text" autocomplete="off" class="form-control form-cascade-control input-sm" id="commentToStaff" style="resize:none;height: 50px;" placeholder="Type Internal messages here"></textarea>
-                    </form>
-                    <button id="sendInternal" style="float:left; position: absolute; top: 40px" class="col-sm-2 btn btn-success"><i class="fa fa-paper-plane" aria-hidden="true"></i> Send</button>
-                </div>
-            </div>
+                                    <div style="position: relative">
+                                        <form class="col-sm-10" style="padding-left: 0px; float:left;">
+                                            <label for="commentToStaff" class="control-label" style="font-weight: 600; padding: 2px;">Internal Message</label>
+                                            <textarea type="text" autocomplete="off" class="form-control form-cascade-control input-sm" id="commentToStaff" style="resize:none;height: 50px;" placeholder="Type Internal messages here"></textarea>
+                                        </form>
+                                        <button id="sendInternal" style="float:left; position: absolute; top: 40px" class="col-sm-2 btn btn-success"><i class="fa fa-paper-plane" aria-hidden="true"></i> Send</button>
+                                    </div>
+                                </div>
 
-            <div id="attachmentColumn" class="tabcontent" style="display: none;">
-                <div style="margin-top: 5px;">
-                    <div class="row">
-                        <div class="container">
-                            <table class="table table-striped">
-                                <colgroup><col style="width: 5%;"><col style="width: 65%;"><col style="width: 30%;"></colgroup>
-                                <thead>
-                                    <tr class="" style=" background-color: #364c66 !important;">
-                                        <td scope="col" style="color: white;">#</td>
-                                        <td scope="col" style="color: white;">File Name</td>
-                                        <td scope="col" style="color: white;">Date</td>
-                                    </tr>
-                                </thead>
-                                <tbody id="DocumentTableId"></tbody>
-                            </table>
+                                <div id="attachmentColumn" class="tabcontent" style="display: none;">
+                                    <div style="margin-top: 5px;">
+                                        <div class="row">
+                                            <div class="container">
+                                                <table class="table table-striped">
+                                                    <colgroup><col style="width: 5%;"><col style="width: 65%;"><col style="width: 30%;"></colgroup>
+                                                    <thead>
+                                                        <tr class="" style=" background-color: #364c66 !important;">
+                                                            <td scope="col" style="color: white;">#</td>
+                                                            <td scope="col" style="color: white;">File Name</td>
+                                                            <td scope="col" style="color: white;">Date</td>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="DocumentTableId"></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
