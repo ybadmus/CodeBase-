@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewData["Title"] = "Reports";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+
+    <div class="col-md-6" id="ptrAgedDepedentReliefDetailsGrid" style="display: none">
+        <div class="bordered-group" id="" style="height: 400px">
+            <p class="card-title"><b>Personal Income Tax Reports</b></p>
+            <form>
+                <div class="form-group row" style="margin-bottom: 1rem;">
+                    <div class="col-md-12 formDiv">
+                        <label for="appStatus" class="col-form-label">
+                            <b>Type Of Report</b>
+                        </label>
+                        <select type="text" id="appStatus" class="form-control" required>
+                            <option style="display: block" selected="selected">Select Status</option>
+                            <option style="display: none" id="acknowledgeStatus" value="0">Acknowledge</option>
+                            <option style="display: none" id="processApplication" value="1">Process Application</option>
+                            <option style="display: none" id="addTaxPosition" value="2">Add Tax Position</option>
+                            <option style="display: none" id="declineStatus" value="3">Decline</option>
+                            <option style="display: none" id="suspendStatus" value="4">Request Info</option>
+                            <option style="display: none" id="sendForApproval" value="5">Recommend for Approval</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
