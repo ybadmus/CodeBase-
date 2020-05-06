@@ -9,6 +9,7 @@ var ReportDownloadView = `${serverUrl}applications/certificate`;
 var loadPtrCodesUrl = `${serverUrl}api/CodesApi/`;
 var activeTaxOffice = "";
 var appType = "TCC";
+var activeApplicationType = "";
 
 $("#tccListOfTaxOffices").on('change', function () {
     var elem = document.getElementById("tccListOfTaxOffices");
@@ -153,7 +154,7 @@ $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
 
     if (!activeTaxOffice)
         return toastr.error("Please select a tax office");
-        
+
     var grid = $("#Grid").getKendoGrid();
     var item = grid.dataItem($(e.target).closest("tr"));
 
@@ -164,6 +165,7 @@ $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
     $(".applicationType").text(item.applicationType);
 
     appType = item.applicationType;
+    activeApplicationType = item.applicationType;
 
     if (item.applicationType.toUpperCase().trim() === "TCC".toUpperCase())
         prepareDetailsViewTCC();
