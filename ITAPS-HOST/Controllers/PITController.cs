@@ -29,6 +29,13 @@ namespace ITAPS_HOST.Controllers
             ViewBag.ServerUrl = _config.AppServerUrl;
             return View();
         }
+        
+         public IActionResult Reports()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
 
         public IActionResult Estimate()
         {

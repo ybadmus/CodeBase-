@@ -12,10 +12,38 @@
             <form>
                 <div class="form-group row" style="margin-bottom: 1rem;">
                     <div class="col-md-12 formDiv">
-                        <label for="appStatus" class="col-form-label">
+                        <label for="typesOfReport" class="col-form-label">
                             <b>Type Of Report</b>
                         </label>
-                        <select type="text" id="appStatus" class="form-control" required>
+                        <select type="text" id="typesOfReport" class="form-control" required>
+                            <option style="display: block" selected="selected">Select Status</option>
+                            <option style="display: none" id="acknowledgeStatus" value="0">Acknowledge</option>
+                            <option style="display: none" id="processApplication" value="1">Process Application</option>
+                            <option style="display: none" id="addTaxPosition" value="2">Add Tax Position</option>
+                            <option style="display: none" id="declineStatus" value="3">Decline</option>
+                            <option style="display: none" id="suspendStatus" value="4">Request Info</option>
+                            <option style="display: none" id="sendForApproval" value="5">Recommend for Approval</option>
+                        </select>
+                    </div>
+                    <div class="col-md-12 formDiv">
+                        <label for="taxOffice" class="col-form-label">
+                            <b>Tax Office</b>
+                        </label>
+                        <select type="text" id="taxOffice" class="form-control" required>
+                            <option style="display: block" selected="selected">Select Status</option>
+                            <option style="display: none" id="acknowledgeStatus" value="0">Acknowledge</option>
+                            <option style="display: none" id="processApplication" value="1">Process Application</option>
+                            <option style="display: none" id="addTaxPosition" value="2">Add Tax Position</option>
+                            <option style="display: none" id="declineStatus" value="3">Decline</option>
+                            <option style="display: none" id="suspendStatus" value="4">Request Info</option>
+                            <option style="display: none" id="sendForApproval" value="5">Recommend for Approval</option>
+                        </select>
+                    </div>
+                    <div class="col-md-12 formDiv">
+                        <label for="assyear" class="col-form-label">
+                            <b>Assessment Year</b>
+                        </label>
+                        <select type="text" id="assyear" class="form-control" required>
                             <option style="display: block" selected="selected">Select Status</option>
                             <option style="display: none" id="acknowledgeStatus" value="0">Acknowledge</option>
                             <option style="display: none" id="processApplication" value="1">Process Application</option>
