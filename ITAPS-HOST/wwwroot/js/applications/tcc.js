@@ -151,22 +151,33 @@ $("#searchItem").on('keypress', function (e) {
 
 $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
 
+    if (!activeTaxOffice)
+        return toastr.error("Please select a tax office");
+        
     var grid = $("#Grid").getKendoGrid();
     var item = grid.dataItem($(e.target).closest("tr"));
 
     $("#appId").val(item.applicationId);
     $("#appTypeId").val(item.applicationTypeId);
     $("#taxpayerName").text(item.applicantName);
+    $(".modalId").text(testNullOrEmpty(item.applicationNo));
+    $(".applicationType").text(item.applicationType);
 
     appType = item.applicationType;
 
-    if (item.applicationType === "TCC")
+    if (item.applicationType.toUpperCase().trim() === "TCC".toUpperCase())
         prepareDetailsViewTCC();
-    if (item.applicationType === "WHT Exemption")
+    if (item.applicationType.toUpperCase().trim() === "WHT Exemption".toUpperCase())
         prepareDetailsViewTEX();
-    if (item.applicationType === "Disability Relief" || item.applicationType === "Aged Dependants Relief") {
-        var PtrCodes = loadReliefTypes();
+    if (item.applicationType.toUpperCase().trim() === "Disability Relief".toUpperCase()
+        || item.applicationType.toUpperCase().trim() === "Aged Dependants Relief".toUpperCase()
+        || item.applicationType.toUpperCase().trim() === "Old Age Relief".toUpperCase()
+        || item.applicationType.toUpperCase().trim() === "Pension Relief".toUpperCase()
+        || item.applicationType.toUpperCase().trim() === "Marriage/Responsibility Relief".toUpperCase()
+        || item.applicationType.toUpperCase().trim() === "Child/Ward Education Relief".toUpperCase()) {
+        prepareDetailsViewPTR();
         $("#applicantNamePTR").text(item.applicantName);
+        $("#applicantFName").text(item.applicantName);
         $("#applicantTINPTR").text(item.applicantTIN);
     }
 });
@@ -195,36 +206,52 @@ var prepareDetailsViewTEX = function () {
     getTccDocumentsById();
 };
 
-var prepareDetailsViewPTR = function (pCode) {
+var prepareDetailsViewPTR = function () {
     hideAndShowThingsPTR();
     loadMessages();
-    loadDetailsViewPtr(pCode);
+    loadDetailsViewPtr();
     getTccDocumentsById();
 };
 
 var hideAndShowThingsPTR = function () {
     $("#gridView").hide();
-    $("#detailsView").show();
     $("#ptrDetailsGrid").show();
     $("#tccDetailsGrid").hide();
     $("#texDetailsGrid").hide();
+
+    $("#detailsView").show();
 };
 
 
 var hideAndShowTEXThings = function () {
     $("#gridView").hide();
-    $("#detailsView").show();
     $("#ptrDetailsGrid").hide();
     $("#tccDetailsGrid").hide();
+    $("#ptrDisabilityReliefDetailsGrid").hide();
+    $("#ptrMarriageReliefDetailsGrid").hide();
+    $("#ptrAgedDepedentReliefDetailsGrid").hide();
+    $("#ptrOldAgeReliefDetailsGrid").hide();
+    $("#ptrChildWardDepedentReliefDetailsGrid").hide();
+    $("#tccRequestEntityDetailsGrid").hide();
+
+    $("#texWHTDetailsGrid").show();
+    $("#detailsView").show();
     $("#texDetailsGrid").show();
 };
-
 var hideAndShowThings = function () {
     $("#gridView").hide();
-    $("#detailsView").show();
-    $("#ptrDetailsGrid").hide();
-    $("#tccDetailsGrid").show();
     $("#texDetailsGrid").hide();
+    $("#ptrDetailsGrid").hide();
+    $("#ptrDisabilityReliefDetailsGrid").hide();
+    $("#ptrMarriageReliefDetailsGrid").hide();
+    $("#ptrAgedDepedentReliefDetailsGrid").hide();
+    $("#ptrOldAgeReliefDetailsGrid").hide();
+    $("#ptrChildWardDepedentReliefDetailsGrid").hide();
+    $("#texWHTDetailsGrid").hide();
+
+    $("#tccRequestEntityDetailsGrid").show();
+    $("#detailsView").show();
+    $("#tccDetailsGrid").show();
 };
 
 $("#backToGrid").click(function () {

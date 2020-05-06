@@ -7,7 +7,6 @@ var GetTccCommentsByIdUrl = `${serverUrl}api/TCC/GetAllTccApplicationComments?tc
 var GetTccByIdUrl = `${serverUrl}api/TCC/GetTccApplicationById?tccId=`;
 var GetTCCDocuments = `${serverUrl}api/TCC/GetTCCApplicationDocumentByApplicationId`;
 var loadPtrCodesUrl = `${serverUrl}api/CodesApi/`;
-var appType = "TCC";
 var activeTaxOffice = "";
 var activeOfficer = "";
 var activeOfficerName = "";
