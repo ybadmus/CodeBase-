@@ -87,11 +87,11 @@ var loadDetailsPtr = function (resp) {
     $("#maritalStatusPTR").text(testNullOrEmpty(resp[0].maritalStatus));
     $("#mothersMaidenNamePTR").text(testNullOrEmpty(resp[0].mothersMaidenName));
     $("#phoneNoPTR").text(testNullOrEmpty(resp[0].phoneNo));
-    $("#startDatePTR").text(testNullOrEmpty(resp[0].startDate));
+    $("#startDatePTR").text(testNullOrEmpty(resp[0].startDate))
+    $("#currentStatus").text(resp[0].statusId);
 
     if (activeApplicationType.trim() === "Disability Relief") {
         loadDisabilityReliefDetail(resp);
-        //$("#messagesAndAttachments").hide();
         $("#ptrMarriageReliefDetailsGrid").hide();
         $("#ptrAgedDepedentReliefDetailsGrid").hide();
         $("#ptrOldAgeReliefDetailsGrid").hide();
@@ -101,7 +101,6 @@ var loadDetailsPtr = function (resp) {
         $("#ptrDisabilityReliefDetailsGrid").show();
     } else if (activeApplicationType.trim() === "Marriage/Responsibility Relief") {
         loadMarriageReliefDetail(resp);
-        //$("#messagesAndAttachments").hide();
         $("#ptrDisabilityReliefDetailsGrid").hide();
         $("#ptrAgedDepedentReliefDetailsGrid").hide();
         $("#ptrOldAgeReliefDetailsGrid").hide();
@@ -111,7 +110,6 @@ var loadDetailsPtr = function (resp) {
         $("#ptrMarriageReliefDetailsGrid").show();
     } else if (activeApplicationType.trim() === "Aged Dependants Relief") {
         loadAgedDependentReliefDetail(resp);
-        //$("#messagesAndAttachments").hide();
         $("#ptrDisabilityReliefDetailsGrid").hide();
         $("#ptrMarriageReliefDetailsGrid").hide();
         $("#ptrOldAgeReliefDetailsGrid").hide();
@@ -121,7 +119,6 @@ var loadDetailsPtr = function (resp) {
         $("#ptrAgedDepedentReliefDetailsGrid").show();
     } else if (activeApplicationType.trim() === "Old Age Relief") {
         loadOldAgeReliefDetail(resp);
-        //$("#messagesAndAttachments").hide();
         $("#ptrDisabilityReliefDetailsGrid").hide();
         $("#ptrMarriageReliefDetailsGrid").hide();
         $("#ptrAgedDepedentReliefDetailsGrid").hide();
@@ -131,7 +128,6 @@ var loadDetailsPtr = function (resp) {
         $("#ptrOldAgeReliefDetailsGrid").show();
     } else if (activeApplicationType.trim() === "Child/Ward Education Relief") {
         loadChildWardDependentRelief(resp);
-        //$("#messagesAndAttachments").hide();
         $("#ptrDisabilityReliefDetailsGrid").hide();
         $("#ptrMarriageReliefDetailsGrid").hide();
         $("#ptrAgedDepedentReliefDetailsGrid").hide();

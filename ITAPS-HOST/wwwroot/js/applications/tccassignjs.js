@@ -128,6 +128,7 @@ var prepareModal = function (item) {
         || item.applicationType.toUpperCase().trim() === "Child/Ward Education Relief".toUpperCase()) {
         prepareDetailsViewPTR();
         $("#applicantNamePTR").text(item.applicantName);
+        $("#applicantFName").text(item.applicantName);
         $("#applicantTINPTR").text(item.applicantTIN);
     }
 };
@@ -225,11 +226,9 @@ var hideAndShowThingsPTR = function () {
 };
 
 var hideAndShowTEXThings = function () {
-
     $("#gridView").hide();
     $("#ptrDetailsGrid").hide();
     $("#tccDetailsGrid").hide();
-    //$("#messagesAndAttachments").hide();
     $("#ptrDisabilityReliefDetailsGrid").hide();
     $("#ptrMarriageReliefDetailsGrid").hide();
     $("#ptrAgedDepedentReliefDetailsGrid").hide();
@@ -246,7 +245,6 @@ var hideAndShowThings = function () {
     $("#gridView").hide();
     $("#texDetailsGrid").hide();
     $("#ptrDetailsGrid").hide();
-    //$("#messagesAndAttachments").hide();
     $("#ptrDisabilityReliefDetailsGrid").hide();
     $("#ptrMarriageReliefDetailsGrid").hide();
     $("#ptrAgedDepedentReliefDetailsGrid").hide();
