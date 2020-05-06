@@ -4,59 +4,53 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="card">
+@section css {
+    <link href="~/css/applications/tcc.css" rel="stylesheet" />
+}
 
-    <div class="col-md-6" id="ptrAgedDepedentReliefDetailsGrid" style="display: none">
-        <div class="bordered-group" id="" style="height: 400px">
-            <p class="card-title"><b>Personal Income Tax Reports</b></p>
-            <form>
-                <div class="form-group row" style="margin-bottom: 1rem;">
-                    <div class="col-md-12 formDiv">
-                        <label for="typesOfReport" class="col-form-label">
-                            <b>Type Of Report</b>
-                        </label>
-                        <select type="text" id="typesOfReport" class="form-control" required>
-                            <option style="display: block" selected="selected">Select Status</option>
-                            <option style="display: none" id="acknowledgeStatus" value="0">Acknowledge</option>
-                            <option style="display: none" id="processApplication" value="1">Process Application</option>
-                            <option style="display: none" id="addTaxPosition" value="2">Add Tax Position</option>
-                            <option style="display: none" id="declineStatus" value="3">Decline</option>
-                            <option style="display: none" id="suspendStatus" value="4">Request Info</option>
-                            <option style="display: none" id="sendForApproval" value="5">Recommend for Approval</option>
-                        </select>
-                    </div>
-                    <div class="col-md-12 formDiv">
-                        <label for="taxOffice" class="col-form-label">
-                            <b>Tax Office</b>
-                        </label>
-                        <select type="text" id="taxOffice" class="form-control" required>
-                            <option style="display: block" selected="selected">Select Status</option>
-                            <option style="display: none" id="acknowledgeStatus" value="0">Acknowledge</option>
-                            <option style="display: none" id="processApplication" value="1">Process Application</option>
-                            <option style="display: none" id="addTaxPosition" value="2">Add Tax Position</option>
-                            <option style="display: none" id="declineStatus" value="3">Decline</option>
-                            <option style="display: none" id="suspendStatus" value="4">Request Info</option>
-                            <option style="display: none" id="sendForApproval" value="5">Recommend for Approval</option>
-                        </select>
-                    </div>
-                    <div class="col-md-12 formDiv">
-                        <label for="assyear" class="col-form-label">
-                            <b>Assessment Year</b>
-                        </label>
-                        <select type="text" id="assyear" class="form-control" required>
-                            <option style="display: block" selected="selected">Select Status</option>
-                            <option style="display: none" id="acknowledgeStatus" value="0">Acknowledge</option>
-                            <option style="display: none" id="processApplication" value="1">Process Application</option>
-                            <option style="display: none" id="addTaxPosition" value="2">Add Tax Position</option>
-                            <option style="display: none" id="declineStatus" value="3">Decline</option>
-                            <option style="display: none" id="suspendStatus" value="4">Request Info</option>
-                            <option style="display: none" id="sendForApproval" value="5">Recommend for Approval</option>
-                        </select>
-                    </div>
+<input id="serverUrl" value="@ViewBag.ServerUrl" hidden />
+
+<div class="card">
+    <div class="card-body">
+        <div class="row align-items-end" style="margin: 1px;">
+            <div class="col-md-6" id="">
+                <div class="bordered-group" id="" style="height: 400px">
+                    <p class="card-title"><b>Personal Income Tax Reports</b></p>
+                    <form>
+                        <div class="form-group row" style="margin-bottom: 1rem;">
+                            <div class="col-md-12 formDiv" style="margin: 0px 0px 15px 0px;">
+                                <label for="typesOfReport" class="col-form-label">
+                                    <b>Type Of Report</b>
+                                </label>
+                                <select type="text" id="typesOfReport" class="form-control" required>
+                                    <option style="display: block" selected="selected">Select Report Type</option>
+                                   
+                                </select>
+                            </div>
+                            <div class="col-md-12 formDiv" style="margin: 0px 0px 15px 0px;">
+                                <label for="taxOffice" class="col-form-label">
+                                    <b>Tax Office</b>
+                                </label>
+                                <select type="text" id="taxOffice" class="form-control" required>
+                                    <option style="display: block" selected="selected">Select Tax Office</option>
+
+                                </select>
+                            </div>
+                            <div class="col-md-12 formDiv" style="margin: 0px 0px 15px 0px;">
+                                <label for="assyear" class="col-form-label">
+                                    <b>Assessment Year</b>
+                                </label>
+                                <select type="text" id="assyear" class="form-control" required>
+                                    <option style="display: block" selected="selected">Select Assessment Year</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                    <button class="btn btn-success" style="float: right;">View Report</button>
                 </div>
-            </form>
+            </div>
+
         </div>
     </div>
-
 </div>
-
