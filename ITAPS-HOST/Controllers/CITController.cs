@@ -53,7 +53,7 @@ namespace ITAPS_HOST.Controllers
             return View();
         }
 
-        public IActionResult CITTaxWithStandingReport()
+        public IActionResult CITTaxOutStandingReport()
         {
             UserDetails();
             ViewBag.ServerUrl = _config.AppServerUrl;
