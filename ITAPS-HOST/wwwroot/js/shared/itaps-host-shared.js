@@ -214,7 +214,6 @@ var loadTaxOffices = function (listOfTaxOffices) {
 
 $('.yearsDropdown').ready(function () {
     var beginYear = (new Date()).getFullYear();
-    output += '<option style="display: block" selected="selected">Choose Assessment Year</option>';
     for (var i = beginYear; i >= 1990; i--) {
         $('.yearsDropdown').append($('<option/>', {
             value: i,
