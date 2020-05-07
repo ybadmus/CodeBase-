@@ -30,7 +30,35 @@ namespace ITAPS_HOST.Controllers
             return View();
         }
         
-         public IActionResult Reports()
+        public IActionResult ReportsDialog()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+
+        public IActionResult PITReturnsReport()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+
+        public IActionResult PITTaxWithStandingReport()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+
+        public IActionResult PITTaxOverPaymentReport()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+
+        public IActionResult PITZeroTaxOutstandingReport()
         {
             UserDetails();
             ViewBag.ServerUrl = _config.AppServerUrl;

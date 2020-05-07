@@ -23,8 +23,11 @@
                                     <b>Type Of Report</b>
                                 </label>
                                 <select type="text" id="typesOfReport" class="form-control" required>
-                                    <option style="display: block" selected="selected">Select Report Type</option>
-                                   
+                                    <option style="display: block" selected="selected">Select Type</option>
+                                    <option style="display: none" id="reportsPITReturns" value="0">PIT Returns</option>
+                                    <option style="display: none" id="reportPITTaxWithStanding" value="1">Tax WithStandings</option>
+                                    <option style="display: none" id="reportPITTaxOverpayment" value="2">Tax OverPayment</option>
+                                    <option style="display: none" id="reportPITZeroTaxOutstanding" value="3">Zero Tax Outstanding</option>
                                 </select>
                             </div>
                             <div class="col-md-12 formDiv" style="margin: 0px 0px 15px 0px;">
@@ -32,7 +35,6 @@
                                     <b>Tax Office</b>
                                 </label>
                                 <select type="text" id="taxOffice" class="form-control" required>
-                                    <option style="display: block" selected="selected">Select Tax Office</option>
 
                                 </select>
                             </div>
@@ -40,9 +42,8 @@
                                 <label for="assyear" class="col-form-label">
                                     <b>Assessment Year</b>
                                 </label>
-                                <select type="text" id="assyear" class="form-control" required>
-                                    <option style="display: block" selected="selected">Select Assessment Year</option>
-
+                                <select type="text" id="assessmentYear" class="form-control yearsDropdown" required>
+                                    
                                 </select>
                             </div>
                         </div>
@@ -54,3 +55,14 @@
         </div>
     </div>
 </div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $("#pgHeader").text("PIT Reports");
+        });
+
+      
+    </script>
+}
+
