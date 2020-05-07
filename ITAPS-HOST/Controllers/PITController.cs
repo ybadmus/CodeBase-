@@ -42,7 +42,7 @@ namespace ITAPS_HOST.Controllers
             UserDetails();
             ViewBag.ServerUrl = _config.AppServerUrl;
             ViewBag.ReportServer = _reportConfig.ReportServer;
-            ViewBag.ReportPath = "/ITaPS_Reports/PITReturnsReport";
+            ViewBag.ReportPath = "/ITaPS_Reports/PitReturnsReport";
             return View();
         }
 
@@ -51,7 +51,7 @@ namespace ITAPS_HOST.Controllers
             UserDetails();
             ViewBag.ServerUrl = _config.AppServerUrl;
             ViewBag.ReportServer = _reportConfig.ReportServer;
-            ViewBag.ReportPath = "/ITaPS_Reports/PITTaxWithStandingReport";
+            ViewBag.ReportPath = "/ITaPS_Reports/PitTaxWithstandingReport";
             return View();
         }
 
@@ -60,7 +60,7 @@ namespace ITAPS_HOST.Controllers
             UserDetails();
             ViewBag.ServerUrl = _config.AppServerUrl;
             ViewBag.ReportServer = _reportConfig.ReportServer;
-            ViewBag.ReportPath = "/ITaPS_Reports/PITTaxOverPaymentReport";
+            ViewBag.ReportPath = "/ITaPS_Reports/PitWithTaxOverpaymentReport";
             return View();
         }
 
@@ -69,7 +69,7 @@ namespace ITAPS_HOST.Controllers
             UserDetails();
             ViewBag.ServerUrl = _config.AppServerUrl;
             ViewBag.ReportServer = _reportConfig.ReportServer;
-            ViewBag.ReportPath = "/ITaPS_Reports/PITZeroTaxOutstandingReport";
+            ViewBag.ReportPath = "/ITaPS_Reports/PitWithZeroTaxOutstandingReport";
             return View();
         }
 
