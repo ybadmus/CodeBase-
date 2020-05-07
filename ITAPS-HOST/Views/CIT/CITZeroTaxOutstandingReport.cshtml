@@ -1,0 +1,50 @@
+@{
+    ViewData["Title"] = "TCC Certificate";
+}
+
+<input id="reportPath" value="@ViewBag.ReportPath" hidden />
+
+<style>
+    #reportviewer1_viewerContainer {
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+
+    #reportviewer1_licensing_msgContainer {
+        display: none;
+    }
+
+    #reportviewer1_viewBlockContainer {
+        display: block !important;
+    }
+
+    #reportviewer1 {
+        height: 77vh !important;
+    }
+</style>
+
+<div class="reportContainer">
+        <bold-report-viewer id="reportviewer1" report-service-url="../Reports" report-path="@ViewBag.ReportPath" toolbar-settings="ViewBag.toolbarSettings" tool-bar-item-click="onToolBarItemClick" report-server-url="@ViewBag.ReportServer" processing-mode="Remote" ajax-before-load="ajaxBeforeLoad" />
+</div>
+
+<script>
+    $("#pgHeader").text("CIT Zero Tax Outstanding");
+
+    var serverUrl = $("#serverUrl").val();
+
+    $(".pb-3").contents().filter(function () {
+        return this.nodeType != 1;
+    }).replaceWith("");
+
+    var parameters = [];
+    parameters.push({ name: sessionStorage.getItem("rptTaxOfficeLabel"), labels: [sessionStorage.getItem("rptTaxOffice")], values: [sessionStorage.getItem("rptTaxOffice")], nullable: "true" });
+    parameters.push({ name: sessionStorage.getItem("rptAssessYearLabel"), labels: [sessionStorage.getItem("rptYear")], values: [sessionStorage.getItem("rptYear")], nullable: "true" });
+
+    function ajaxBeforeLoad(event) {
+        event.model.parameters = parameters;
+    };
+</script>
+
+<bold-script-manager></bold-script-manager>
+
+

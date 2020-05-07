@@ -39,6 +39,42 @@ namespace ITAPS_HOST.Controllers
             return View();
         }
 
+        public IActionResult ReportsDialog()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+
+        public IActionResult CITReturnsReport()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+
+        public IActionResult CITTaxWithStandingReport()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+
+        public IActionResult CITTaxOverPaymentReport()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+
+        public IActionResult CITZeroTaxOutstandingReport()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+
+
         private void UserDetails()
         {
             foreach (var claim in User.Claims)
