@@ -24,36 +24,12 @@
 </style>
 
 <div class="reportContainer">
-        <bold-report-viewer id="reportviewer1" report-service-url="../Reports" report-path="@ViewBag.ReportPath" toolbar-settings="ViewBag.toolbarSettings" tool-bar-item-click="onToolBarItemClick" report-server-url="@ViewBag.ReportServer" processing-mode="Remote" ajax-before-load="ajaxBeforeLoad" />
+        <bold-report-viewer id="reportviewer1" report-service-url="../Reports" report-path="@ViewBag.ReportPath" report-server-url="@ViewBag.ReportServer" processing-mode="Remote" ajax-before-load="ajaxBeforeLoad" />
 </div>
 
 <script>
     $("#pgHeader").text("PIT Returns With Tax Outstanding");
  
-    $(function () {
-        var reportPath = $("#reportPath").val();
-        $("#reportviewer1").data("boldReportViewer", {
-            reportServiceUrl: "../Reports",
-            reportPath: reportPath,
-            toolbarSettings: {
-                showToolbar: true,
-                items: ej.ReportViewer.ToolbarItems.All & ~ej.ReportViewer.ToolbarItems.Print,
-                customItems: [{
-                    groupIndex: 1,
-                    index: 1,
-                    type: 'Default',
-                    cssClass: "e-icon e-mail e-reportviewer-icon",
-                    id: 'E-Mail',
-                    tooltip: {
-                        header: 'E-Mail',
-                        content: 'Send rendered report as mail attachment'
-                    }
-                }]
-            },
-            toolBarItemClick: 'ontoolBarItemClick'
-        });
-    });
-
     var serverUrl = $("#serverUrl").val();
 
     $(".pb-3").contents().filter(function () {
@@ -61,44 +37,12 @@
     }).replaceWith("");
 
     var parameters = [];
-
-    var getParameters = function () {
-        var parameters = window.location.search.substr(1);
-        var listParams = [];
-        if (parameters != "") {
-            var splitValues = parameters.split("&");
-            for (var i = 0; i < splitValues.length; i++) {
-                var tempValue = splitValues[i].split("=");
-                listParams.push({ name: tempValue[0], value: decodeURIComponent(tempValue[1]) });
-            }
-        }
-
-        return listParams;
-    };
-
-    parameters.push({ name: sessionStorage.getItem("tccLabel"), labels: [sessionStorage.getItem("tccReportId")], values: [sessionStorage.getItem("tccReportId")], nullable: "true" });
+    parameters.push({ name: sessionStorage.getItem("rptTaxOfficeLabel"), labels: [sessionStorage.getItem("rptTaxOffice")], values: [sessionStorage.getItem("rptTaxOffice")], nullable: "true" });
+    parameters.push({ name: sessionStorage.getItem("rptAssessYearLabel"), labels: [sessionStorage.getItem("rptYear")], values: [sessionStorage.getItem("rptYear")], nullable: "true" });
 
     function ajaxBeforeLoad(event) {
         event.model.parameters = parameters;
     };
-
-    function onToolBarItemClick(args) {
-        if (args.value == "E-Mail") {
-            var proxy = $('#reportviewer1').data('boldReportViewer');
-            var reportName = "TCC Certificate";
-            var requrl = "..Reports/SendEmail";
-            var _json = proxy.exportReport("PDF");
-
-            $.ajax({
-                type: "POST",
-                contentType: "application/json; charset=utf-8",
-                url: requrl,
-                data: JSON.stringify(_json),
-                dataType: "json",
-                crossDomain: true
-            })
-        }
-    }
 </script>
 
 <bold-script-manager></bold-script-manager>
