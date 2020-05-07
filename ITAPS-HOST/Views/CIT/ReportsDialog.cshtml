@@ -15,7 +15,7 @@
         <div class="row align-items-end" style="margin: 1px;">
             <div class="col-md-6" id="">
                 <div class="bordered-group" id="" style="height: 400px">
-                    <p class="card-title"><b>Personal Income Tax Reports</b></p>
+                    <p class="card-title"><b>Company Income Tax Reports</b></p>
                     <form>
                         <div class="form-group row" style="margin-bottom: 1rem;">
                             <div class="col-md-12 formDiv" style="margin: 0px 0px 15px 0px;">
@@ -24,10 +24,10 @@
                                 </label>
                                 <select type="text" id="typesOfReport" class="form-control" required>
                                     <option style="display: block" selected="selected">Select Type</option>
-                                    <option style="display: none" id="reportsPITReturns" value="0">PIT Returns</option>
-                                    <option style="display: none" id="reportPITTaxWithStanding" value="1">Tax WithStandings</option>
-                                    <option style="display: none" id="reportPITTaxOverpayment" value="2">Tax OverPayment</option>
-                                    <option style="display: none" id="reportPITZeroTaxOutstanding" value="3">Zero Tax Outstanding</option>
+                                    <option style="display: none" id="" value="1">All CIT Returns</option>
+                                    <option style="display: none" id="" value="2">CIT Returns with Tax Outstanding</option>
+                                    <option style="display: none" id="" value="3">CIT Returns with Tax Over payment Outstanding balance</option>
+                                    <option style="display: none" id="" value="4">CIT Return with Zero Tax Outstanding balance</option>
                                 </select>
                             </div>
                             <div class="col-md-12 formDiv" style="margin: 0px 0px 15px 0px;">
@@ -59,10 +59,11 @@
 @section scripts {
     <script>
         $(document).ready(function () {
-            $("#pgHeader").text("PIT Reports");
+            $("#pgHeader").text("CIT Reports");
         });
 
-      
+        var reporttype = "CIT";
     </script>
+    <script src="~/js/shared/reports.js"></script>
 }
 

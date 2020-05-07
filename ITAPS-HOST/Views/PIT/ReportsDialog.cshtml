@@ -24,22 +24,22 @@
                                 </label>
                                 <select type="text" id="typesOfReport" class="form-control" required>
                                     <option style="display: block" selected="selected">Select Type</option>
-                                    <option style="display: none" id="reportsPITReturns" value="0">Submitted PIT Returns</option>
-                                    <option style="display: none" id="reportPITTaxWithStanding" value="1">PIT Returns With Tax Outstanding</option>
-                                    <option style="display: none" id="reportPITTaxOverpayment" value="2">PIT Returns with Tax Over payment Outstanding Balance</option>
-                                    <option style="display: none" id="reportPITZeroTaxOutstanding" value="3">PIT Returns with Zero Tax Outstanding balance</option>
+                                    <option style="display: none" id="reportsPITReturns" value="1">All PIT Returns</option>
+                                    <option style="display: none" id="reportPITTaxWithStanding" value="2">PIT Returns with Tax Outstanding</option>
+                                    <option style="display: none" id="reportPITTaxOverpayment" value="3">PIT Returns with Tax Over payment Outstanding balance</option>
+                                    <option style="display: none" id="reportPITZeroTaxOutstanding" value="4">PIT Return with Zero Tax Outstanding balance</option>
                                 </select>
                             </div>
                             <div class="col-md-12 formDiv" style="margin: 0px 0px 15px 0px;">
-                                <label for="taxOffice" class="col-form-label">
+                                <label for="listOfTaxOffices" class="col-form-label">
                                     <b>Tax Office</b>
                                 </label>
-                                <select type="text" id="taxOffice" class="form-control" required>
+                                <select type="text" id="listOfTaxOffices" class="form-control" required>
 
                                 </select>
                             </div>
                             <div class="col-md-12 formDiv" style="margin: 0px 0px 15px 0px;">
-                                <label for="assyear" class="col-form-label">
+                                <label for="assessmentYear" class="col-form-label">
                                     <b>Assessment Year</b>
                                 </label>
                                 <select type="text" id="assessmentYear" class="form-control yearsDropdown" required>
@@ -48,7 +48,7 @@
                             </div>
                         </div>
                     </form>
-                    <button class="btn btn-success" style="float: right;">View Report</button>
+                    <button class="btn btn-success" style="float: right;" id="viewRTP">View Report</button>
                 </div>
             </div>
 
@@ -62,16 +62,8 @@
             $("#pgHeader").text("PIT Reports");
         });
 
-        $("#previewApplication").click(function () {
-            let appId = $("#appId").val();
-
-            sessionStorage.setItem("rptTaxOffice", appId);
-            sessionStorage.setItem("rptYear", appId);
-            sessionStorage.setItem("rptTaxOfficeLabel", "uniTaxOfficeId");
-            sessionStorage.setItem("rptAssessYearLabel", "bgAssessmentYear");
-
-            window.location.href = `${ReportDownloadView}`;
-        });
+          var reporttype = "PIT";
     </script>
+    <script src="~/js/shared/reports.js"></script>
 }
 
