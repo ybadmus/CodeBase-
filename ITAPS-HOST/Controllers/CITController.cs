@@ -50,12 +50,16 @@ namespace ITAPS_HOST.Controllers
         {
             UserDetails();
             ViewBag.ServerUrl = _config.AppServerUrl;
+            ViewBag.ReportServer = _reportConfig.ReportServer;
+            ViewBag.ReportPath = "/ITaPS_Reports/CitReturnsReport";
             return View();
         }
 
-        public IActionResult CITTaxWithStandingReport()
+        public IActionResult CitTaxOutStandingReport()
         {
             UserDetails();
+            ViewBag.ReportServer = _reportConfig.ReportServer;
+            ViewBag.ReportPath = "/ITaPS_Reports/CitTaxOutstandingReport";
             ViewBag.ServerUrl = _config.AppServerUrl;
             return View();
         }
@@ -63,6 +67,8 @@ namespace ITAPS_HOST.Controllers
         public IActionResult CITTaxOverPaymentReport()
         {
             UserDetails();
+            ViewBag.ReportServer = _reportConfig.ReportServer;
+            ViewBag.ReportPath = "/ITaPS_Reports/CitTaxOverPaymentOutstandingReport";
             ViewBag.ServerUrl = _config.AppServerUrl;
             return View();
         }
@@ -70,10 +76,11 @@ namespace ITAPS_HOST.Controllers
         public IActionResult CITZeroTaxOutstandingReport()
         {
             UserDetails();
+            ViewBag.ReportServer = _reportConfig.ReportServer;
+            ViewBag.ReportPath = "/ITaPS_Reports/CitZeroTaxOutstandingReport";
             ViewBag.ServerUrl = _config.AppServerUrl;
             return View();
         }
-
 
         private void UserDetails()
         {
