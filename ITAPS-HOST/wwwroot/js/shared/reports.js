@@ -55,13 +55,13 @@ $("#listOfTaxOffices").on('change', function () {
 });
 
 $("#assessmentYear").on('change', function () {
-    var elem = document.getElementById("#assessmentYear");
+    var elem = document.getElementById("assessmentYear");
     activeYear = elem.options[elem.selectedIndex].value;
     activateViewreportbutton();
 });
 
 $("#typesOfReport").on('change', function () {
-    var elem = document.getElementById("#typesOfReport");
+    var elem = document.getElementById("typesOfReport");
     activeReport = elem.options[elem.selectedIndex].value;
     activateViewreportbutton();
 });
