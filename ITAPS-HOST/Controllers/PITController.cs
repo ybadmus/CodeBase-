@@ -46,7 +46,7 @@ namespace ITAPS_HOST.Controllers
             return View();
         }
 
-        public IActionResult PITTaxWithStandingReport()
+        public IActionResult PITTaxOutStandingReport()
         {
             UserDetails();
             ViewBag.ServerUrl = _config.AppServerUrl;
