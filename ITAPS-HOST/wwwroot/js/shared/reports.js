@@ -3,14 +3,14 @@ var activeTaxOffice = "";
 var activeYear = "";
 var activeReport = 0;
 
-$("#previewApplication").click(function () {
+$("#viewRTP").click(function () {
     sessionStorage.setItem("rptTaxOffice", activeTaxOffice);
     sessionStorage.setItem("rptYear", activeYear);
     sessionStorage.setItem("rptTaxOfficeLabel", "uniTaxOfficeId");
     sessionStorage.setItem("rptAssessYearLabel", "bgAssessmentYear");
 
     if(reporttype === "PIT") {
-        switch(activeReport) {
+        switch(parseInt(activeReport)) {
             case 1:
                 window.location.href = `${reportPreView}PITReturnsReport`;
                 break;
