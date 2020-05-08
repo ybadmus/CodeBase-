@@ -27,7 +27,7 @@ $("#viewRTP").click(function () {
               return toastr.info("Invalid Report type selected!")
           }
     } else if(reporttype === "CIT") {
-        switch(activeReport) {
+        switch(parseInt(activeReport)) {
             case 1:
                 window.location.href = `${reportPreView}CITReturnsReport`;
                 break;
@@ -44,8 +44,6 @@ $("#viewRTP").click(function () {
               return toastr.info("Invalid Report type selected!")
           }
     }
-
-   
 });
 
 $("#listOfTaxOffices").on('change', function () {
