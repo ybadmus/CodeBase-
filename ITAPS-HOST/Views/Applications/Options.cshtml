@@ -57,7 +57,7 @@
         $(document).ready(function () {
             $("#pgHeader").text("Applications");
 
-            if ($("#UserFullName").text().toLowerCase() === "ybadmus") {
+            if ($("#UserFullName").text().toLowerCase() === "ybadmus" || $("#UserFullName").text().toLowerCase() === "manager") {
                 $("#approveTCC").show();
                 $("#processTCC").hide();
                 $("#assignTCC").hide();
@@ -67,7 +67,7 @@
                 $("#processTCC").show();
                 $("#assignTCC").hide();
                 $("#allTCC").show();
-            } else if ($("#UserFullName").text().toLowerCase() === "aansah") {
+            } else if ($("#UserFullName").text().toLowerCase() === "aansah" || $("#UserFullName").text().toLowerCase() === "supervisor") {
                 $("#approveTCC").hide();
                 $("#processTCC").hide();
                 $("#assignTCC").show();

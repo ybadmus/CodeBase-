@@ -67,6 +67,9 @@ namespace ITAPS_HOST.Controllers
                 {
                     ViewBag.UserId = claim.Value;
                 }
+                if (claim.Type == "usergroup") {
+                    ViewBag.UserGroup = claim.Value;
+                }
             }
         }
     }
