@@ -37,6 +37,15 @@ namespace ITAPS_HOST.Controllers
             return View();
         }
 
+        public IActionResult PITAnnualreport()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            ViewBag.ReportServer = _reportConfig.ReportServer;
+            ViewBag.ReportPath = "/ITaPS_Reports/PITANNUAL";
+            return View();
+        }
+
         public IActionResult PITReturnsReport()
         {
             UserDetails();
