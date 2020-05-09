@@ -1,6 +1,7 @@
 ﻿var serverUrl = $("#serverUrl").val();
 var searchPITByTaxOffice = `${serverUrl}api/Transaction/SearchTransactionAsync`;
 var pitDetailsUrl = `${serverUrl}api/Transaction/TransactionDetails`;
+var reportPreView = `${serverUrl}PIT/`;
 var activeTaxOffice = "";
 var activeYear = "";
 
@@ -136,12 +137,15 @@ $("#btnSearch").click(function () {
 });
 
 $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
-
     var grid = $("#Grid").getKendoGrid();
     var item = grid.dataItem($(e.target).closest("tr"));
 
     $(".entityName").text(item.entityName);
     $(".tin").text(item.tin);
+
+    sessionStorage.setItem("rptPitAnnualUniPkIdLable", "uniPkId");
+    sessionStorage.setItem("rptPitAnnualUniPkId", item.id);
+
     loadDetails(item.id);
 });
 
@@ -167,5 +171,9 @@ $("#backToGrid").click(function () {
 
     if (getParameterByName("type") === "annualreturn" || getParameterByName("type") === "provisional")
         initializeKendoGrid([], 1);
+});
+
+$("#previewPITReturnsReport").click(function () {
+    window.location.href = `${reportPreView}PITAnnualReport`;
 });
 
