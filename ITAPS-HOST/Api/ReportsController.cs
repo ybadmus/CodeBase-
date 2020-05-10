@@ -76,8 +76,8 @@ namespace ITAPS_HOST.Api
                 MailMessage mail = new MailMessage();
                 SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
                 mail.IsBodyHtml = true;
-                mail.From = new MailAddress("xx@gmail.com");
-                mail.To.Add("xx@gmail.com");
+                mail.From = new MailAddress("yusif.badmus@gmail.com");
+                mail.To.Add("yusif.badmus@gmail.com");
                 mail.Subject = "Report Name : " + reportName;
                 stream.Position = 0;
 
