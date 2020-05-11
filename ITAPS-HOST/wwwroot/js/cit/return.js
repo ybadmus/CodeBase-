@@ -39,6 +39,20 @@ var loadDetails = function (trId) {
     apiCaller(url, "POST", objSend, loadForm)
 };
 
+var searchPIT = function () {
+    objToSend.assessmentYear = activeYear === "" ? new Date().getFullYear() : activeYear;
+    objToSend.taxOfficeId = activeTaxOffice;
+    objToSend.transactionType = "Return";
+    objToSend.tin = $("#tinHolder").val();
+    objToSend.startDate = $("#startDate").val();
+    objToSend.endDate = $("#endDate").val();
+
+    let url = `${searchPITByTaxOffice}`;
+
+    $("#Grid").data("kendoGrid").dataSource.data([]);
+    apiCaller(url, "POST", objToSend, initializeKendoGrid);
+};
+
 var loadForm = function (response) {
 
     if (response && response.length !== 0) {

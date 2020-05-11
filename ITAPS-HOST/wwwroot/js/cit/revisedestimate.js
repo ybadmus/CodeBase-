@@ -1,14 +1,14 @@
-﻿var HeaderName = "CIT Estimates";
+﻿var HeaderName = "CIT Revised Estimates";
 var hideAndShowThings = function () {
     $("#gridView").hide();
-    $("#estimateDetail").show();
+    $("#revisedEstimateDetail").show();
     $("#returnDetail").hide();
 };
 
 var bootstrapNotification = function () {
     $("#pgHeader").text(HeaderName);
     $("#gridView").hide();
-    $("#estimateDetail").hide();
+    $("#revisedEstimateDetail").hide();
     $("#returnDetail").show();
 };
 
@@ -18,7 +18,7 @@ var loadDetails = function (trId) {
     let objSend = {
         "transactionId": trId,
         "taxType": "CIT",
-        "transactionType": "Estimate"
+        "transactionType": "RevisedEstimate"
     };
 
     apiCaller(url, "POST", objSend, loadForm)
@@ -50,13 +50,13 @@ var loadForm = function (response) {
 $("#backToGrid2").click(function () {
 
     $("#gridView").show();
-    $("#estimateDetail").hide();
+    $("#revisedEstimateDetail").hide();
 });
 
 var searchPIT = function () {
     objToSend.assessmentYear = activeYear === "" ? new Date().getFullYear() : activeYear;
     objToSend.taxOfficeId = activeTaxOffice;
-    objToSend.transactionType = "Estimate";
+    objToSend.transactionType = "RevisedEstimate";
     objToSend.tin = $("#tinHolder").val();
     objToSend.startDate = $("#startDate").val();
     objToSend.endDate = $("#endDate").val();

@@ -110,20 +110,6 @@ var validateSearchEntry = function () {
         return true;
 };
 
-var searchPIT = function () {
-    objToSend.assessmentYear = activeYear === "" ? new Date().getFullYear() : activeYear;
-    objToSend.taxOfficeId = activeTaxOffice;
-    objToSend.transactionType = HeaderName === "CIT Returns" ? "Return" : "Estimate"
-    objToSend.tin = $("#tinHolder").val();
-    objToSend.startDate = $("#startDate").val();
-    objToSend.endDate = $("#endDate").val();
-
-    let url = `${searchPITByTaxOffice}`;
-
-    $("#Grid").data("kendoGrid").dataSource.data([]);
-    apiCaller(url, "POST", objToSend, initializeKendoGrid);
-};
-
 var bootstrapNotification = function () {
     $("#pgHeader").text(HeaderName);
     $("#gridView").hide();

@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewData["Title"] = "RevisedEstimates";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section css {
+    <link href="~/css/applications/tcc.css" rel="stylesheet" />
+}
+
+<input id="serverUrl" value="@ViewBag.ServerUrl" hidden />
+<input id="taxpayerId" value="@ViewBag.TaxpayerId" hidden />
+
+<div class="card">
+
+    <partial name="_PITGrid" />
+    <partial name="_RevisedEstimates" />
+
+</div>
+
+@section scripts {
+    <script src="~/js/cit/cit.js"></script>
+    <script src="~/js/cit/revisedestimate.js"></script>
+}
+
+
