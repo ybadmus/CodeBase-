@@ -2,7 +2,6 @@
 
 var hideAndShowThings = function () {
     $("#gridView").hide();
-    $("#estimatesDetailsView").hide();
     $("#returnDetail").show();
 
     $("#returnDetailsGrid1").show();
@@ -64,13 +63,12 @@ var loadForm = function (response) {
 
         loadCtr1(resp.ctr1[0]);
         loadCtr2(resp.ctr2[0]);
-        //loadTc(resp);
-        //LoadTr(resp);
+        loadCtr3(resp.ctr3[0]);
+        loadDirectors(resp.ctr4[0]);
 
         hideAndShowThings();
     } else
         toastr.error("An error occured");
-
 };
 
 var loadCtr1 = function (resp) {
@@ -117,40 +115,53 @@ var loadCtr2 = function (resp) {
     $("#netCompanyProfitOrLoss").text(parseFloat(resp.netCompanyProfitOrLoss).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 };
 
-var loadTc = function (resp) {
-    $("#tcDepreciation1").text(parseFloat(resp.tcDepreciation1).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#tcNonAllowableDeductions").text(parseFloat(resp.tcNonAllowableDeductions).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#tcNonTaxableincome").text(parseFloat(resp.tcNonTaxableincome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#tcCapitalAllowance1").text(parseFloat(resp.tcCapitalAllowance1).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#tcTotalDeductions").text(parseFloat(resp.tcTotalDeductions).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#tcNetAdjustedBusinessProfit").text(parseFloat(resp.tcNetAdjustedBusinessProfit).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#tcNetBusinessProfit").text(parseFloat(resp.tcNetBusinessProfit).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+var loadCtr3 = function (resp) {
+    $("#netCompanyProfitOrLoss").text(parseFloat(resp.netCompanyProfitOrLoss).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#nonallowableDeductions").text(parseFloat(resp.nonallowableDeductions).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#adjustedNetProfitLoss").text(parseFloat(resp.adjustedNetProfitLoss).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    
+    $("#nonTaxableIncome").text(parseFloat(resp.nonTaxableIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#adjustedIncome").text(parseFloat(resp.adjustedIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#capitalAllowance").text(parseFloat(resp.capitalAllowance).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#carryForwardLosses").text(parseFloat(resp.carryForwardLosses).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#otherAllowableDeduction").text(parseFloat(resp.otherAllowableDeduction).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    
+    $("#totalAllowableDeduction").text(parseFloat(resp.totalAllowableDeduction).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#totalChargeableIncome").text(parseFloat(resp.totalChargeableIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#chargeableIncomeTaxDiffRate").text(parseFloat(resp.chargeableIncomeTaxDiffRate).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#chargeableIncomeTaxNormalRate").text(parseFloat(resp.chargeableIncomeTaxNormalRate).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#taxCode").text(parseFloat(resp.taxCode).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    
+    $("#taxRate").text(parseFloat(resp.taxRate).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#taxLiability").text(parseFloat(resp.taxLiability).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#taxRebateCode").text(parseFloat(resp.taxRebateCode).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#rateofTaxRebate").text(parseFloat(resp.rateofTaxRebate).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#amountTaxRebate").text(parseFloat(resp.amountTaxRebate).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#taxPayable").text(parseFloat(resp.taxPayable).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 
-    $("#tcNetEmploymentIncome").text(parseFloat(resp.tcNetEmploymentIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#tcNetInvestmentIncome").text(parseFloat(resp.tcNetInvestmentIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#tcIncomeTaxDiffRates").text(parseFloat(resp.tcIncomeTaxDiffRates).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#tcTaxPayable").text(parseFloat(resp.tcTaxPayable).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#tcTaxCharged").text(parseFloat(resp.tcTaxCharged).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#tcChargeableIncome").text(parseFloat(resp.tcChargeableIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#tcCapitalAllowance").text(parseFloat(resp.tcCapitalAllowance).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#citaxedDiffRateA").text(parseFloat(resp.citaxedDiffRateA).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#taxCodeA").text(parseFloat(resp.taxCodeA).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#taxRateA").text(parseFloat(resp.taxRateA).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#taxPayableA").text(parseFloat(resp.taxPayableA).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#citaxedDiffRateB").text(parseFloat(resp.citaxedDiffRateB).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 
-    $("#tcTaxCredits").text(parseFloat(resp.tcTaxCredits).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#tcPaymentOnAccount").text(parseFloat(resp.tcPaymentOnAccount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#tcPriorPeriodCredits").text(parseFloat(resp.tcPriorPeriodCredits).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#tcTotalPayment").text(parseFloat(resp.tcTotalPayment).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-};
+    $("#taxCodeB").text(parseFloat(resp.taxCodeB).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#taxRateB").text(parseFloat(resp.taxRateB).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#taxPayableB").text(parseFloat(resp.taxPayableB).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#citaxedDiffRateC").text(parseFloat(resp.citaxedDiffRateC).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#taxCodeC").text(parseFloat(resp.taxCodeC).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 
-var LoadTr = function (resp) {
-    $("#tcRelLifeAssurance").text(parseFloat(resp.tcRelLifeAssurance).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#tcRelSocialSecurity").text(parseFloat(resp.tcRelSocialSecurity).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#tcRelMarriageResponsibility").text(parseFloat(resp.tcRelMarriageResponsibility).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#relChildrenEduc").text(parseFloat(resp.relChildrenEduc).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#tcRelOldAgeEmployees").text(parseFloat(resp.tcRelOldAgeEmployees).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#tcRelAgedDependants").text(parseFloat(resp.tcRelAgedDependants).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#tcRelDisability").text(parseFloat(resp.tcRelDisability).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#tcRelCostOfTraining").text(parseFloat(resp.tcRelCostOfTraining).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#tcRelVolPensionContribution").text(parseFloat(resp.tcRelVolPensionContribution).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#tcRelOtherAllowableDeductions").text(parseFloat(resp.tcRelOtherAllowableDeductions).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#taxRateC").text(parseFloat(resp.taxRateC).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#taxPayableC").text(parseFloat(resp.taxPayableC).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#totalTaxPayableOnCidiffRate").text(parseFloat(resp.totalTaxPayableOnCidiffRate).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#totalTaxPayable").text(parseFloat(resp.totalTaxPayable).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#withholdingTaxCredits").text(parseFloat(resp.withholdingTaxCredits).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+
+    $("#taxesPaidDirectly").text(parseFloat(resp.taxesPaidDirectly).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#priorPeriodCredits").text(parseFloat(resp.priorPeriodCredits).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#totalDirectPayCredits").text(parseFloat(resp.totalDirectPayCredits).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#incomeTaxOutstandingOverpayment").text(parseFloat(resp.incomeTaxOutstandingOverpayment).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#statutoryLevies").text(parseFloat(resp.statutoryLevies).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 };
 
 var moreDetails = function (stage) {
@@ -207,19 +218,19 @@ var previousDetail = function (stage) {
     }
 }
 
-var loadAgedDependentReliefDetail = function (resp) {
+var loadDirectors = function (resp) {
     let output = "";
-    var dependants = resp[0].agedDepandantsDetails.sort(function (a, b) {
+    var directors = resp[0].agedDepandantsDetails.sort(function (a, b) {
         return (a.firstName - b.firstName);
     });
 
-    for (var i = 0; i < dependants.length; i++) {
-        output = output + '<tr><td align="">' + dependants[i].firstName + " " + dependants[i].middleName + " " + dependants[i].lastName + '</td>'
-            + '<td align="" style="color: black">' + dependants[i].agedDateOfBirth + '</td>'
-            + '<td align="center" style="color: black">' + dependants[i].gender + '</td>'
-            + '<td align="center" style="color: black">' + dependants[i].maritalStatus + '</td>'
-            + '<td><button style="padding: 4px 8px;" onclick="previewDependent(this)" id="' + dependants[i].dependentId +
-            '" title="View item" class="btn btn-success btn-sm btnReturnDetail"><span class="fa fa-file fa-lg"></span></button></td>';
+    for (var i = 0; i < directors.length; i++) {
+        output = output + '<tr><td align="">' + directors[i].directorsName+ '</td>'
+            + '<td align="" style="color: black">' + directors[i].directorsTin + '</td>'
+            + '<td align="center" style="color: black">' + directors[i].resStatus + '</td>'
+            + '<td align="center" style="color: black">' + directors[i].directorsSalary + '</td>'
+            + '<td><button style="padding: 4px 8px;" onclick="previewDirector(this)" id="' + directors[i].directorId +
+            '" title="View item" class="btn btn-success btn-sm"><span class="fa fa-file fa-lg"></span></button></td>';
     }
 
     output = output;
@@ -227,12 +238,16 @@ var loadAgedDependentReliefDetail = function (resp) {
     sessionStorage.setItem("listOfDirectors", JSON.stringify(resp));
 };
 
-var previewChildDependent = function (rowInfo) {
+var previewDirector = function (rowInfo) {
     var appDetail = JSON.parse(sessionStorage.getItem("listOfDirectors"));
     var dependants = appDetail[0].childDetails;
     for(var i = 0; i < dependants.length; i++) {
         if (dependants[i].dependantId === rowInfo.id) {
-            return loadChildWardDependantReliefModal(dependants[i]);
+            return loadDirectorDetailsModal(dependants[i]);
         }
     }
 }
+
+var loadDirectorDetailsModal = function () {
+
+};

@@ -143,8 +143,6 @@ $("#backToGrid").click(function () {
 
     $("#gridView").show();
     $("#returnDetail").hide();
-    $(".entityName").text("");
-    $(".tin").text("");
 
     if (getParameterByName("type") === "annualreturn" || getParameterByName("type") === "provisional")
         initializeKendoGrid([], 1);

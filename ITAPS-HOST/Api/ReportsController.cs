@@ -59,19 +59,11 @@ namespace ITAPS_HOST.Api
 
         }
 
-<<<<<<< HEAD
-        
-        public object SendEmail(Dictionary<string, object> jsonResult)
-        {
-            string _token = jsonResult["reportViewerToken"].ToString();
-            var stream = ReportHelper.GetReport(_token, jsonResult["exportType"].ToString());
-=======
         public object SendEmail(Dictionary<string, object> jsonResult)
         {
             string _token = jsonResult["reportViewerToken"].ToString();
             var stream = ReportHelper.GetReport(_token, "PDF", _reportController, _cache);
             //var stream = ReportHelper.GetReport(_token, jsonResult["exportType"].ToString());
->>>>>>> abcd7248f285e2fb140526a77bbb760c9f29772e
             stream.Position = 0;
 
             if (!ComposeEmail(stream, jsonResult["reportName"].ToString()))
