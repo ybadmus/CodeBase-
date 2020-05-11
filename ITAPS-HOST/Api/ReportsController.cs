@@ -17,14 +17,16 @@ namespace ITAPS_HOST.Api
     public class ReportsController : Controller, IReportController
     {
         private readonly IReportConstants _config;
+        private readonly IReportController _reportController;
         private IHostingEnvironment _hostingEnvironment;
         private IMemoryCache _cache;
 
-        public ReportsController(IMemoryCache memoryCache, IHostingEnvironment hostingEnvironment, IReportConstants config)
+        public ReportsController(IMemoryCache memoryCache, IHostingEnvironment hostingEnvironment, IReportConstants config, IReportController reportController)
         {
             _cache = memoryCache;
             _config = config;
             _hostingEnvironment = hostingEnvironment;
+            _reportController = reportController;
         }
 
         [HttpPost]
@@ -57,11 +59,14 @@ namespace ITAPS_HOST.Api
 
         }
 
-        public object SendEmail(Stream stream)
+        public object SendEmail(Dictionary<string, object> jsonResult)
         {
+            string _token = jsonResult["reportViewerToken"].ToString();
+            var stream = ReportHelper.GetReport(_token, "PDF", _reportController, _cache);
+            //var stream = ReportHelper.GetReport(_token, jsonResult["exportType"].ToString());
             stream.Position = 0;
 
-            if (!ComposeEmail(stream, "TCC Report"))
+            if (!ComposeEmail(stream, jsonResult["reportName"].ToString()))
             {
                 return "Mail not sent !!!";
             }
