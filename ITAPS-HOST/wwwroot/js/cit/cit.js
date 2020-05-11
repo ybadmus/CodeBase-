@@ -1,6 +1,6 @@
 ﻿var serverUrl = $("#serverUrl").val();
 var searchPITByTaxOffice = `${serverUrl}api/Transaction/SearchTransactionAsync`;
-var citDetailsUrl = `${serverUrl}api/Transaction/CITDetailsById/`;
+var citDetailsUrl = `${serverUrl}api/Transaction/CITDetailsById?trId=`;
 var activeTaxOffice = "";
 var activeYear = "";
 

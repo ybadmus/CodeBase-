@@ -10,6 +10,7 @@ var hideAndShowThings = function () {
     $("#returnDetailsGrid3").hide();
     $("#returnDetailsGrid4").hide();
     $("#returnDetailsGrid5").hide();
+    $("#returnDetailsGrid6").hide();
 
     $("#previousDetail1").hide();
     $("#previousDetail2").hide();
@@ -30,7 +31,7 @@ var bootstrapNotification = function () {
 var loadDetails = function (trId) {
     let url = `${citDetailsUrl}${trId}`;
 
-    apiCaller(url, "GET", objSend, loadForm)
+    apiCaller(url, "GET", "", loadForm)
 };
 
 var searchPIT = function () {
@@ -52,26 +53,19 @@ var loadForm = function (response) {
     if (response && response.length !== 0) {
         let resp = response[0];
 
-        $("#assessmentYearViewReturn").text(resp.assessmentYear);
-        $("#assessmentYearViewReturnPV").text(resp.assessmentYear);
+        $("#taxpayerName").text(resp.taxpayerName);
+        $("#taxpayerTin").text(resp.taxpayerTin);
+        $("#assessmentYear").text(resp.assessmentYear);
+        $("#fromPeriod").text(resp.fromPeriod);
+        $("#toPeriod").text(resp.toPeriod);
+        $("#createDate").text(resp.createDate);
+        $("#nil").text(resp.nil);
+        $("#tripsDocumentNo").text(resp.tripsDocumentNo);
 
-        $("#startDateViewReturn").text(resp.startDate);
-        var fromToPeriod = `From: ${resp.startDate} - To: ${resp.endDate}`;
-        $("#startDateViewReturnPV").text(fromToPeriod);
-
-        $("#endDateViewReturn").text(resp.endDate);
-        $("#endDateViewReturnPV").text(resp.endDate);
-
-        $("#nationalityReturn").text(resp.nationality);
-        $("#nationalityReturnPV").text(resp.nationality);
-
-        $("#accMethodReturn").text(resp.accountingMethod);
-        $("#accMethodReturnPV").text(resp.accountingMethod);
-
-        loadBs(resp);
-        loadIn(resp);
-        loadTc(resp);
-        LoadTr(resp);
+        loadCtr1(resp.ctr1[0]);
+        loadCtr2(resp.ctr2[0]);
+        //loadTc(resp);
+        //LoadTr(resp);
 
         hideAndShowThings();
     } else
@@ -79,176 +73,48 @@ var loadForm = function (response) {
 
 };
 
-var loadBs = function (resp) {
-    $("#bsBalanceSheetDate").text(resp.bsBalanceSheetDate);
-    $("#bsBalanceSheetDatePV").text(resp.bsBalanceSheetDate);
-
-    $("#bsStocks").text(parseFloat(resp.bsStocks).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#bsStocksPV").text(parseFloat(resp.bsStocks).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#bsBillsPayable").text(parseFloat(resp.bsBillsPayable).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#bsBillsPayablePV").text(parseFloat(resp.bsBillsPayable).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#bsReceivables").text(parseFloat(resp.receivables).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#bsReceivablesPV").text(parseFloat(resp.receivables).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#bsLoans").text(parseFloat(resp.bsLoans).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#bsLoansPV").text(parseFloat(resp.bsLoans).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#bsCashBalance").text(parseFloat(resp.bsCashBalance).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#bsCashBalancePV").text(parseFloat(resp.bsCashBalance).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#bsAccruals").text(parseFloat(resp.bsAccruals).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#bsAccrualsPV").text(parseFloat(resp.bsAccruals).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#bsPrepayment").text(parseFloat(resp.bsPrepayment).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#bsPrepaymentPV").text(parseFloat(resp.bsPrepayment).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#bsOtherPayables").text(parseFloat(resp.bsOtherPayables).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#bsOtherPayablesPV").text(parseFloat(resp.bsOtherPayables).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
+var loadCtr1 = function (resp) {
+    $("#cashAssestsReturnCurr").text(parseFloat(resp.cashAssestsReturnCurr).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#cashAssetsOtherCurr").text(parseFloat(resp.cashAssetsOtherCurr).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
     $("#bsOtherCurrentAssets").text(parseFloat(resp.bsOtherCurrentAssets).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#bsOtherCurrentAssetsPV").text(parseFloat(resp.bsOtherCurrentAssets).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
+    $("#bsStocks").text(parseFloat(resp.bsStocks).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#accountReceivables").text(parseFloat(resp.accountReceivables).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
     $("#totalCurrentAssets").text(parseFloat(resp.totalCurrentAssets).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#totalCurrentAssetsPV").text(parseFloat(resp.totalCurrentAssets).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#totalCurrentPayables").text(parseFloat(resp.totalCurrentPayables).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#totalCurrentPayablesPV").text(parseFloat(resp.totalCurrentPayables).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#bsLand").text(parseFloat(resp.bsLand).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#bsLandPV").text(parseFloat(resp.bsLand).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#bsBuilding").text(parseFloat(resp.bsBuilding).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#bsBuildingPV").text(parseFloat(resp.bsBuilding).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#bsCapitalBF").text(parseFloat(resp.bsCapitalBF).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#bsCapitalBFPV").text(parseFloat(resp.bsCapitalBF).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#bsEquipment").text(parseFloat(resp.bsEquipment).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#bsEquipmentPV").text(parseFloat(resp.bsEquipment).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#bsNetProfit").text(parseFloat(resp.bsNetProfit).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#bsNetProfitPV").text(parseFloat(resp.bsNetProfit).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#bsMotorVehicle").text(parseFloat(resp.bsMotorVehicle).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#bsMotorVehiclePV").text(parseFloat(resp.bsMotorVehicle).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#bsDrawings").text(parseFloat(resp.bsDrawings).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#bsDrawingsPV").text(parseFloat(resp.bsDrawings).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#bsOtherAssets").text(parseFloat(resp.bsOtherAssets).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#bsOtherAssetsPV").text(parseFloat(resp.bsOtherAssets).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#bsCapitalAdditions").text(parseFloat(resp.bsCapitalAdditions).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#bsCapitalAdditionsPV").text(parseFloat(resp.bsCapitalAdditions).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#bsTotalNonCurrentAssets").text(parseFloat(resp.bsTotalNonCurrentAssets).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#bsTotalNonCurrentAssetsPV").text(parseFloat(resp.bsTotalNonCurrentAssets).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#bsNetCapital").text(parseFloat(resp.bsNetCapital).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#bsNetCapitalPV").text(parseFloat(resp.bsNetCapital).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
+    $("#fixedCurrent").text(parseFloat(resp.fixedCurrent).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#otherAssets").text(parseFloat(resp.otherAssets).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
     $("#totalAssets").text(parseFloat(resp.totalAssets).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#totalAssetsPV").text(parseFloat(resp.totalAssets).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#totalCapitalPayables").text(parseFloat(resp.totalCapitalPayables).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#totalCapitalPayablesPV").text(parseFloat(resp.totalCapitalPayables).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#tradePayablesReturnCurr").text(parseFloat(resp.tradePayablesReturnCurr).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#tradePayablesOtherCurr").text(parseFloat(resp.tradePayablesOtherCurr).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#totalTradePayables").text(parseFloat(resp.totalTradePayables).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#otherPayablesReturnCurr").text(parseFloat(resp.otherPayablesReturnCurr).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#otherPayablesOtherCurr").text(parseFloat(resp.otherPayablesOtherCurr).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#totalOtherPayables").text(parseFloat(resp.totalOtherPayables).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#totalPayables").text(parseFloat(resp.totalPayables).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#shareholdersFund").text(parseFloat(resp.shareholdersFund).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#totalPayablesAndFund").text(parseFloat(resp.totalPayablesAndFund).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 };
 
-var loadIn = function (resp) {
-    $("#inGrossBusinessIncome").text(parseFloat(resp.inGrossBusinessIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#inGrossBusinessIncomePV").text(parseFloat(resp.inGrossBusinessIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#insOperatingCost").text(parseFloat(resp.insOperatingCost).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#inOperatingCostPV").text(parseFloat(resp.insOperatingCost).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#insGeneralAndAdminExpense").text(parseFloat(resp.insGeneralAndAdminExpense).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#insGeneralAdminExpensesPV").text(parseFloat(resp.insGeneralAndAdminExpense).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#inOtherExpenses").text(parseFloat(resp.inOtherExpenses).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#inOtherExpensesPV").text(parseFloat(resp.inOtherExpenses).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#insDepreciation").text(parseFloat(resp.insDepreciation).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#inDepreciationPV").text(parseFloat(resp.insDepreciation).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#insOtherPayables").text(parseFloat(resp.insOtherPayables).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#insOtherPayablesPV").text(parseFloat(resp.insOtherPayables).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#insLabourCost").text(parseFloat(resp.insLabourCost).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#insLabourCostPV").text(parseFloat(resp.insLabourCost).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#insInterestExpenses").text(parseFloat(resp.insInterestExpenses).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#insInterestExpensesPV").text(parseFloat(resp.insInterestExpenses).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#inTotalBusinessExpenses").text(parseFloat(resp.inTotalBusinessExpenses).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#inTotalBusinessExpensesPV").text(parseFloat(resp.inTotalBusinessExpenses).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#inNetBusinessProfitLoss").text(parseFloat(resp.inNetBusinessProfitLoss).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#inNetBusinessProfitLossPV").text(parseFloat(resp.inNetBusinessProfitLoss).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#insBasicSalary").text(parseFloat(resp.insBasicSalary).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#insBasicSalaryPV").text(parseFloat(resp.insBasicSalary).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#insCashAllowance").text(parseFloat(resp.insCashAllowance).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#insCashAllowancePV").text(parseFloat(resp.insCashAllowance).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#insOtherCashBenefit").text(parseFloat(resp.insOtherCashBenefit).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#insOtherCashBenefitPV").text(parseFloat(resp.insOtherCashBenefit).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#insExcessBonus").text(parseFloat(resp.insExcessBonus).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#insExcessBonusPV").text(parseFloat(resp.insExcessBonus).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#insRentElement").text(parseFloat(resp.insRentElement).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#insRentElementPV").text(parseFloat(resp.insRentElement).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#insCarElement").text(parseFloat(resp.insCarElement).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#insCarElementPV").text(parseFloat(resp.insCarElement).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#insOtherElements").text(parseFloat(resp.insOtherElements).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#insOtherElementsPV").text(parseFloat(resp.insOtherElements).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#inTotalBenefitsInKind").text(parseFloat(resp.inTotalBenefitsInKind).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#inTotalBenefitsInKindPV").text(parseFloat(resp.inTotalBenefitsInKind).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#inNetEmploymentIncome").text(parseFloat(resp.inNetEmploymentIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#inNetEmploymentIncomePV").text(parseFloat(resp.inNetEmploymentIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#insDirectorsFee").text(parseFloat(resp.insDirectorsFee).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#insDirectorsFeePV").text(parseFloat(resp.insDirectorsFee).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#insCommission").text(parseFloat(resp.insCommission).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#insCommissionPV").text(parseFloat(resp.insCommission).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#insRoyalty").text(parseFloat(resp.insRoyalty).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#insRoyaltyPV").text(parseFloat(resp.insRoyalty).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#insCharges").text(parseFloat(resp.insCharges).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#insChargesPV").text(parseFloat(resp.insCharges).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#insAnnuity").text(parseFloat(resp.insAnnuity).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#insAnnuityPV").text(parseFloat(resp.insAnnuity).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#insTaxableRentIncome").text(parseFloat(resp.insTaxableRentIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#insTaxableRentIncomePV").text(parseFloat(resp.insTaxableRentIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#insDiscounts").text(parseFloat(resp.insDiscounts).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#insDiscountsPV").text(parseFloat(resp.insDiscounts).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#insPremium").text(parseFloat(resp.insPremium).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#insPremiumPV").text(parseFloat(resp.insPremium).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#insInterest").text(parseFloat(resp.insInterest).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#insInterestPV").text(parseFloat(resp.insInterest).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#insOthers").text(parseFloat(resp.insOthers).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#insOthersPV").text(parseFloat(resp.insOthers).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#inNetInvestmentIncome").text(parseFloat(resp.inNetInvestmentIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#inNetInvestmentIncomePV").text(parseFloat(resp.inNetInvestmentIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#inTotalIncome").text(parseFloat(resp.inTotalIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#inTotalIncomePV").text(parseFloat(resp.inTotalIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+var loadCtr2 = function (resp) {
+    $("#localIncome").text(parseFloat(resp.localIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#exportIncome").text(parseFloat(resp.exportIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#totalBusIncome").text(parseFloat(resp.totalBusIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#investmentIncome").text(parseFloat(resp.investmentIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#otherIncome").text(parseFloat(resp.otherIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#totalCompanyIncome").text(parseFloat(resp.totalCompanyIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#opExpenReturnCurr").text(parseFloat(resp.opExpenReturnCurr).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#opExpensesForeignCurr").text(parseFloat(resp.opExpensesForeignCurr).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#totalOperatingCost").text(parseFloat(resp.totalOperatingCost).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#directorsRenum").text(parseFloat(resp.directorsRenum).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#labourCosts").text(parseFloat(resp.labourCosts).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#interestExpensesReturnCurr").text(parseFloat(resp.interestExpensesReturnCurr).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#interestExpForeignCurr").text(parseFloat(resp.interestExpForeignCurr).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#totalInteretsExpenses").text(parseFloat(resp.totalInteretsExpenses).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#totalGeneralAdminExpenses").text(parseFloat(resp.totalGeneralAdminExpenses).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#depreciation").text(parseFloat(resp.depreciation).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#foreignExchangeLosses").text(parseFloat(resp.foreignExchangeLosses).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#totalPayablesAndFund").text(parseFloat(resp.totalPayablesAndFund).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#totalExpenses").text(parseFloat(resp.totalExpenses).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#netCompanyProfitOrLoss").text(parseFloat(resp.netCompanyProfitOrLoss).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 };
 
 var loadTc = function (resp) {

@@ -42,9 +42,9 @@ namespace ITAPS_HOST.Api
         }
 
         [HttpGet("CITDetailsById", Name = "CITDetailsById")]
-        public async Task<ResponseItem<object>> CITDetailsById(Guid transactionId)
+        public async Task<ResponseItem<object>> CITDetailsById(Guid trId)
         {
-            return await _transactionService.GetCITDetailsById(transactionId);
+            return await _transactionService.GetCITDetailsById(trId);
         }
     }
 }
