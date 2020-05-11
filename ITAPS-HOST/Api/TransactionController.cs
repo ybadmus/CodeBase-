@@ -40,5 +40,11 @@ namespace ITAPS_HOST.Api
         {
             return await _transactionService.TaxCalculatorAsync(amount, startdate, enddate, _cancellationTokenSource.Token);
         }
+
+        [HttpGet("CITDetailsById", Name = "CITDetailsById")]
+        public async Task<ResponseItem<object>> CITDetailsById(Guid transactionId)
+        {
+            return await _transactionService.GetCITDetailsById(transactionId);
+        }
     }
 }
