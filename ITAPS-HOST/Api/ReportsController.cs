@@ -57,11 +57,14 @@ namespace ITAPS_HOST.Api
 
         }
 
-        public object SendEmail(Stream stream)
+        
+        public object SendEmail(Dictionary<string, object> jsonResult)
         {
+            string _token = jsonResult["reportViewerToken"].ToString();
+            var stream = ReportHelper.GetReport(_token, jsonResult["exportType"].ToString());
             stream.Position = 0;
 
-            if (!ComposeEmail(stream, "TCC Report"))
+            if (!ComposeEmail(stream, jsonResult["reportName"].ToString()))
             {
                 return "Mail not sent !!!";
             }
