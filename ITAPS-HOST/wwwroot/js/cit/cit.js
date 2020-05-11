@@ -1,6 +1,6 @@
 ﻿var serverUrl = $("#serverUrl").val();
 var searchPITByTaxOffice = `${serverUrl}api/Transaction/SearchTransactionAsync`;
-var pitDetailsUrl = `${serverUrl}api/Transaction/TransactionDetails`;
+var citDetailsUrl = `${serverUrl}api/Transaction/CITDetailsById/`;
 var activeTaxOffice = "";
 var activeYear = "";
 
@@ -60,7 +60,6 @@ var bootstrapPage = function () {
     $("#pgHeader").text(HeaderName);
     $("#gridView").show();
     $("#returnDetail").hide();
-    $("#estimateDetail").hide();
     $("#endDate").flatpickr({});
     $("#startDate").flatpickr({});
 
@@ -113,7 +112,6 @@ var validateSearchEntry = function () {
 var bootstrapNotification = function () {
     $("#pgHeader").text(HeaderName);
     $("#gridView").hide();
-    $("#estimateDetail").hide();
     $("#returnDetail").show();
 };
 
@@ -126,8 +124,6 @@ $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
     var grid = $("#Grid").getKendoGrid();
     var item = grid.dataItem($(e.target).closest("tr"));
 
-    $(".entityName").text(item.entityName);
-    $(".tin").text(item.tin);
     loadDetails(item.id);
 });
 
@@ -147,7 +143,6 @@ $("#backToGrid").click(function () {
 
     $("#gridView").show();
     $("#returnDetail").hide();
-    $("#estimateDetail").hide();
     $(".entityName").text("");
     $(".tin").text("");
 

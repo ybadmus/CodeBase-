@@ -28,15 +28,9 @@ var bootstrapNotification = function () {
 };
 
 var loadDetails = function (trId) {
-    let url = `${pitDetailsUrl}`;
+    let url = `${citDetailsUrl}${trId}`;
 
-    let objSend = {
-        "transactionId": trId,
-        "taxType": "CIT",
-        "transactionType": "Return"
-    };
-
-    apiCaller(url, "POST", objSend, loadForm)
+    apiCaller(url, "GET", objSend, loadForm)
 };
 
 var searchPIT = function () {
@@ -344,5 +338,35 @@ var previousDetail = function (stage) {
         $("#moreDetail2").show();
         $("#previousDetail1").show();
         $("#previousDetail2").hide();
+    }
+}
+
+var loadAgedDependentReliefDetail = function (resp) {
+    let output = "";
+    var dependants = resp[0].agedDepandantsDetails.sort(function (a, b) {
+        return (a.firstName - b.firstName);
+    });
+
+    for (var i = 0; i < dependants.length; i++) {
+        output = output + '<tr><td align="">' + dependants[i].firstName + " " + dependants[i].middleName + " " + dependants[i].lastName + '</td>'
+            + '<td align="" style="color: black">' + dependants[i].agedDateOfBirth + '</td>'
+            + '<td align="center" style="color: black">' + dependants[i].gender + '</td>'
+            + '<td align="center" style="color: black">' + dependants[i].maritalStatus + '</td>'
+            + '<td><button style="padding: 4px 8px;" onclick="previewDependent(this)" id="' + dependants[i].dependentId +
+            '" title="View item" class="btn btn-success btn-sm btnReturnDetail"><span class="fa fa-file fa-lg"></span></button></td>';
+    }
+
+    output = output;
+    $("#listOfDirectors").html(output);
+    sessionStorage.setItem("listOfDirectors", JSON.stringify(resp));
+};
+
+var previewChildDependent = function (rowInfo) {
+    var appDetail = JSON.parse(sessionStorage.getItem("listOfDirectors"));
+    var dependants = appDetail[0].childDetails;
+    for(var i = 0; i < dependants.length; i++) {
+        if (dependants[i].dependantId === rowInfo.id) {
+            return loadChildWardDependantReliefModal(dependants[i]);
+        }
     }
 }

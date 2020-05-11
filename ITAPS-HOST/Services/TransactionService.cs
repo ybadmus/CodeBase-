@@ -69,5 +69,12 @@ namespace ITAPS_HOST.Services
             var apiEndpoint = $"Transactions/TaxCalculatorAsync/{amount}/{startdate}/{enddate}";
             return await _adminRequestClient.GetRequestAsync(apiEndpoint);
         }
+
+         public async Task<ResponseItem<object>> GetCITDetailsById(Guid transactionId)
+        {
+
+            var apiEndpoint = $"CompanyIncomeTax/GetCompanyIncomeTaxDetailsById/{transactionId}";
+            return await _adminRequestClient.GetRequestAsync(apiEndpoint);
+        }
     }
 }
