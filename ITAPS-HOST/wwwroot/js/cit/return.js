@@ -220,16 +220,13 @@ var previousDetail = function (stage) {
 
 var loadDirectors = function (resp) {
     let output = "";
-    var directors = resp[0].agedDepandantsDetails.sort(function (a, b) {
-        return (a.firstName - b.firstName);
-    });
 
-    for (var i = 0; i < directors.length; i++) {
-        output = output + '<tr><td align="">' + directors[i].directorsName+ '</td>'
-            + '<td align="" style="color: black">' + directors[i].directorsTin + '</td>'
-            + '<td align="center" style="color: black">' + directors[i].resStatus + '</td>'
-            + '<td align="center" style="color: black">' + directors[i].directorsSalary + '</td>'
-            + '<td><button style="padding: 4px 8px;" onclick="previewDirector(this)" id="' + directors[i].directorId +
+    for (var i = 0; i < resp.length; i++) {
+        output = output + '<tr><td align="">' + resp[i].directorsName+ '</td>'
+            + '<td align="" style="color: black">' + resp[i].directorsTin + '</td>'
+            + '<td align="center" style="color: black">' + resp[i].resStatus + '</td>'
+            + '<td align="center" style="color: black">' + resp[i].directorsSalary + '</td>'
+            + '<td><button style="padding: 4px 8px;" onclick="previewDirector(this)" id="' + resp[i].directorId +
             '" title="View item" class="btn btn-success btn-sm"><span class="fa fa-file fa-lg"></span></button></td>';
     }
 
