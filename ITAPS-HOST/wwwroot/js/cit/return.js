@@ -220,7 +220,7 @@ var previousDetail = function (stage) {
 
 var loadDirectors = function (resp) {
     let output = "";
-    var directors = resp[0].agedDepandantsDetails.sort(function (a, b) {
+    var directors = resp.agedDepandantsDetails.sort(function (a, b) {
         return (a.firstName - b.firstName);
     });
 
