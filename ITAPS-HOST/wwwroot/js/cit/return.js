@@ -171,6 +171,7 @@ var moreDetails = function (stage) {
         $("#returnDetailsGrid3").show();
         $("#returnDetailsGrid4").show();
         $("#returnDetailsGrid5").hide();
+        $("#returnDetailsGrid6").hide();
 
         $("#moreDetail1").hide();
         $("#moreDetail2").show();
@@ -183,6 +184,7 @@ var moreDetails = function (stage) {
         $("#returnDetailsGrid3").hide();
         $("#returnDetailsGrid4").hide();
         $("#returnDetailsGrid5").show();
+        $("#returnDetailsGrid6").show();
 
         $("#moreDetail1").hide();
         $("#moreDetail2").hide();
@@ -198,6 +200,7 @@ var previousDetail = function (stage) {
         $("#returnDetailsGrid3").hide();
         $("#returnDetailsGrid4").hide();
         $("#returnDetailsGrid5").hide();
+        $("#returnDetailsGrid6").hide();
 
         $("#moreDetail1").show();
         $("#moreDetail2").hide();
@@ -210,6 +213,7 @@ var previousDetail = function (stage) {
         $("#returnDetailsGrid3").show();
         $("#returnDetailsGrid4").show();
         $("#returnDetailsGrid5").hide();
+        $("#returnDetailsGrid6").hide();
 
         $("#moreDetail1").hide();
         $("#moreDetail2").show();
