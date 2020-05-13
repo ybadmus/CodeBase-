@@ -55,7 +55,7 @@ var buildTree = function (menus) {
 
         for (var i = 0; i < listOfSubMenu.length; i++) {
             for (var j = 0; j < listOfNestedSubMenu.length; j++) {
-                if (listOfSubMenu[i].pkID === listOfNestedSubMenu[j].iParent) {
+                if (listOfSubMenu[i].pkId === listOfNestedSubMenu[j].iParent) {
                     listOfSubMenu[i].children.push(listOfNestedSubMenu[j]);
                 }
             }
@@ -63,7 +63,7 @@ var buildTree = function (menus) {
 
         for (var i = 0; i < listOfMenus.length; i++) {
             for (var j = 0; j < listOfSubMenu.length; j++) {
-                if (listOfMenus[i].pkID === listOfSubMenu[j].iParent) {
+                if (listOfMenus[i].pkId === listOfSubMenu[j].iParent) {
                     listOfMenus[i].children.push(listOfSubMenu[j]);
                 }
             }
