@@ -64,7 +64,7 @@ var loadForm = function (response) {
         loadCtr1(resp.ctr1[0]);
         loadCtr2(resp.ctr2[0]);
         loadCtr3(resp.ctr3[0]);
-        loadDirectors(resp.ctr4[0]);
+        loadDirectors(resp.ctr4);
 
         hideAndShowThings();
     } else
@@ -171,6 +171,7 @@ var moreDetails = function (stage) {
         $("#returnDetailsGrid3").show();
         $("#returnDetailsGrid4").show();
         $("#returnDetailsGrid5").hide();
+        $("#returnDetailsGrid6").hide();
 
         $("#moreDetail1").hide();
         $("#moreDetail2").show();
@@ -183,6 +184,7 @@ var moreDetails = function (stage) {
         $("#returnDetailsGrid3").hide();
         $("#returnDetailsGrid4").hide();
         $("#returnDetailsGrid5").show();
+        $("#returnDetailsGrid6").show();
 
         $("#moreDetail1").hide();
         $("#moreDetail2").hide();
@@ -198,6 +200,7 @@ var previousDetail = function (stage) {
         $("#returnDetailsGrid3").hide();
         $("#returnDetailsGrid4").hide();
         $("#returnDetailsGrid5").hide();
+        $("#returnDetailsGrid6").hide();
 
         $("#moreDetail1").show();
         $("#moreDetail2").hide();
@@ -210,6 +213,7 @@ var previousDetail = function (stage) {
         $("#returnDetailsGrid3").show();
         $("#returnDetailsGrid4").show();
         $("#returnDetailsGrid5").hide();
+        $("#returnDetailsGrid6").hide();
 
         $("#moreDetail1").hide();
         $("#moreDetail2").show();
@@ -224,7 +228,6 @@ var loadDirectors = function (resp) {
     for (var i = 0; i < resp.length; i++) {
         output = output + '<tr><td align="">' + resp[i].directorsName+ '</td>'
             + '<td align="" style="color: black">' + resp[i].directorsTin + '</td>'
-            + '<td align="center" style="color: black">' + resp[i].resStatus + '</td>'
             + '<td align="center" style="color: black">' + resp[i].directorsSalary + '</td>'
             + '<td><button style="padding: 4px 8px;" onclick="previewDirector(this)" id="' + resp[i].directorId +
             '" title="View item" class="btn btn-success btn-sm"><span class="fa fa-file fa-lg"></span></button></td>';
