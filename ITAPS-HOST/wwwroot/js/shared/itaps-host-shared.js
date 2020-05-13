@@ -2,6 +2,7 @@
 var userid = $("#userId").val();
 var urlTaxOffice = `${serverUrl}api/Users/GetAllUserTaxOfficesByUserID`;
 var urlAssignedMenu = `${serverUrl}api/Users/GetAllMenusByUserId`;
+var urlLoadUserDetails = `${serverUrl}api/Users/GetUserDetailsById`;
 
 $(document).ready(function () {
     loadTaxOfficeName();
@@ -210,6 +211,10 @@ var loadTaxOffices = function (listOfTaxOffices) {
 
     output = output;
     $("#listOfTaxOffices").html(output);
+};
+
+var loadUserDetials = function (callbackProcess) {
+    apiCaller(urlLoadUserDetails, "GET", "", callbackProcess)
 };
 
 $('.yearsDropdown').ready(function () {

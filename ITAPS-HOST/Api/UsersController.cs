@@ -57,5 +57,12 @@ namespace ITAPS_HOST.Api
             return await _userService.GetOffTaxOfficerId(taxofficeId);
         }
 
+
+         [HttpGet("GetUserDetailsById", Name = "GetUserDetailsById")]
+        public async Task<ResponseItem<object>> GetUserDetailsById(Guid userId)
+        {
+            return await _userService.GetUserDetailsId(userId);
+        }
+
     }
 }

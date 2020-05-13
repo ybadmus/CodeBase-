@@ -17,7 +17,7 @@
         </a>
     </div>
 
-    <div class="col-md-3 col-sm-6" id="assignTCC">
+    <div class="col-md-3 col-sm-6" id="assignTCC" style="display: none;">
         <a href="~/applications/assign" class="dash-anchor">
             <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center" title="Click to apply for Tax Clearance Certificate (TCC)">
                 <img src="~/icons/iconx-add.png" class="img-responsive" width="80" />
@@ -28,7 +28,7 @@
         </a>
     </div>
 
-    <div class="col-md-3 col-sm-6" id="processTCC">
+    <div class="col-md-3 col-sm-6" id="processTCC" style="display: none;"> 
         <a href="~/applications/tcc" class="dash-anchor">
             <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center" title="Click to apply for Personal Tax Relief (PTR)">
                 <img src="~/icons/icon-revise.png" class="img-responsive" width="80" />
@@ -39,7 +39,7 @@
         </a>
     </div>
 
-    <div class="col-md-3 col-sm-6" id="approveTCC">
+    <div class="col-md-3 col-sm-6" id="approveTCC" style="display: none;">
         <a href="~/approval/tccapproval" class="dash-anchor">
             <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center" title="Click to apply for Personal Tax Relief (PTR)">
                 <img src="~/images/icons/verified2.gif" class="img-responsive" width="80" />
@@ -54,26 +54,7 @@
 
 @section scripts {
     <script>
-        $(document).ready(function () {
-            $("#pgHeader").text("Applications");
-
-            if ($("#UserFullName").text().toLowerCase() === "ybadmus" || $("#UserFullName").text().toLowerCase() === "manager") {
-                $("#approveTCC").show();
-                $("#processTCC").hide();
-                $("#assignTCC").hide();
-                $("#allTCC").show();
-            } else if ($("#UserFullName").text().toLowerCase() === "officer") {
-                $("#approveTCC").hide();
-                $("#processTCC").show();
-                $("#assignTCC").hide();
-                $("#allTCC").show();
-            } else if ($("#UserFullName").text().toLowerCase() === "aansah" || $("#UserFullName").text().toLowerCase() === "supervisor") {
-                $("#approveTCC").hide();
-                $("#processTCC").hide();
-                $("#assignTCC").show();
-                $("#allTCC").show();
-            }
-        });
+         $("#pgHeader").text("Applications");
     </script>
 }
 
