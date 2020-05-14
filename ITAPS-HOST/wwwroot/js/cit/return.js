@@ -233,9 +233,10 @@ var previousDetail = function (stage) {
 
         $("#moreDetail1").show();
         $("#moreDetail2").hide();
+        $("#moreDetail3").hide();
         $("#previousDetail1").hide();
         $("#previousDetail2").hide();
-
+        $("#previousDetail3").hide();
     } else if (stage === 2) {
         $("#returnDetailsGrid1").hide();
         $("#returnDetailsGrid2").hide();
@@ -248,8 +249,10 @@ var previousDetail = function (stage) {
 
         $("#moreDetail1").hide();
         $("#moreDetail2").show();
+        $("#moreDetail3").hide();
         $("#previousDetail1").show();
         $("#previousDetail2").hide();
+        $("#previousDetail3").hide();
     } else if (stage === 3) {
         $("#returnDetailsGrid1").hide();
         $("#returnDetailsGrid2").hide();
@@ -262,8 +265,10 @@ var previousDetail = function (stage) {
 
         $("#moreDetail1").hide();
         $("#moreDetail2").show();
+        $("#moreDetail3").hide();
         $("#previousDetail1").show();
         $("#previousDetail2").hide();
+        $("#previousDetail3").hide();
     }
 
 }
