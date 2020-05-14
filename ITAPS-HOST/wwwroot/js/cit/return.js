@@ -228,6 +228,8 @@ var previousDetail = function (stage) {
         $("#returnDetailsGrid4").hide();
         $("#returnDetailsGrid5").hide();
         $("#returnDetailsGrid6").hide();
+        $("#returnDetailsGrid7").hide();
+        $("#returnDetailsGrid8").hide();
 
         $("#moreDetail1").show();
         $("#moreDetail2").hide();
@@ -241,12 +243,29 @@ var previousDetail = function (stage) {
         $("#returnDetailsGrid4").show();
         $("#returnDetailsGrid5").hide();
         $("#returnDetailsGrid6").hide();
+        $("#returnDetailsGrid7").hide();
+        $("#returnDetailsGrid8").hide();
+
+        $("#moreDetail1").hide();
+        $("#moreDetail2").show();
+        $("#previousDetail1").show();
+        $("#previousDetail2").hide();
+    } else if (stage === 3) {
+        $("#returnDetailsGrid1").hide();
+        $("#returnDetailsGrid2").hide();
+        $("#returnDetailsGrid3").hide();
+        $("#returnDetailsGrid4").hide();
+        $("#returnDetailsGrid5").show();
+        $("#returnDetailsGrid6").show();
+        $("#returnDetailsGrid7").hide();
+        $("#returnDetailsGrid8").hide();
 
         $("#moreDetail1").hide();
         $("#moreDetail2").show();
         $("#previousDetail1").show();
         $("#previousDetail2").hide();
     }
+
 }
 
 var loadDirectors = function (resp) {
