@@ -62,6 +62,7 @@ var bootstrapPage = function () {
     $("#pgHeader").text(HeaderName);
     $("#gridView").show();
     $("#returnDetail").hide();
+    $("#estimateDetail").hide();
     $("#endDate").flatpickr({});
     $("#startDate").flatpickr({});
 
