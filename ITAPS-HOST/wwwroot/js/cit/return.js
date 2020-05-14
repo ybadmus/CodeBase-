@@ -10,12 +10,15 @@ var hideAndShowThings = function () {
     $("#returnDetailsGrid4").hide();
     $("#returnDetailsGrid5").hide();
     $("#returnDetailsGrid6").hide();
+    $("#returnDetailsGrid7").hide();
+    $("#returnDetailsGrid8").hide();
 
     $("#previousDetail1").hide();
     $("#previousDetail2").hide();
+    $("#previousDetail3").hide();
     $("#moreDetail1").show();
     $("#moreDetail2").hide();
-
+    $("#moreDetail3").hide();
 };
 
 var bootstrapNotification = function () {
@@ -172,11 +175,15 @@ var moreDetails = function (stage) {
         $("#returnDetailsGrid4").show();
         $("#returnDetailsGrid5").hide();
         $("#returnDetailsGrid6").hide();
+        $("#returnDetailsGrid7").hide();
+        $("#returnDetailsGrid8").hide();
 
         $("#moreDetail1").hide();
         $("#moreDetail2").show();
+        $("#moreDetail3").hide();
         $("#previousDetail1").show();
         $("#previousDetail2").hide();
+        $("#previousDetail3").hide();
 
     } else if (stage === 2) {
         $("#returnDetailsGrid1").hide();
@@ -185,11 +192,31 @@ var moreDetails = function (stage) {
         $("#returnDetailsGrid4").hide();
         $("#returnDetailsGrid5").show();
         $("#returnDetailsGrid6").show();
+        $("#returnDetailsGrid7").hide();
+        $("#returnDetailsGrid8").hide();
 
         $("#moreDetail1").hide();
         $("#moreDetail2").hide();
+        $("#moreDetail3").show();
         $("#previousDetail1").hide();
         $("#previousDetail2").show();
+        $("#previousDetail3").hide();
+    } else if (stage === 3) {
+        $("#returnDetailsGrid1").hide();
+        $("#returnDetailsGrid2").hide();
+        $("#returnDetailsGrid3").hide();
+        $("#returnDetailsGrid4").hide();
+        $("#returnDetailsGrid5").hide();
+        $("#returnDetailsGrid6").hide();
+        $("#returnDetailsGrid7").show();
+        $("#returnDetailsGrid8").show();
+
+        $("#moreDetail1").hide();
+        $("#moreDetail2").hide();
+        $("#moreDetail3").hide();
+        $("#previousDetail1").hide();
+        $("#previousDetail2").hide();
+        $("#previousDetail3").show();
     }
 };
 
