@@ -70,10 +70,23 @@ namespace ITAPS_HOST.Services
             return await _adminRequestClient.GetRequestAsync(apiEndpoint);
         }
 
-         public async Task<ResponseItem<object>> GetCITDetailsById(Guid transactionId)
+        public async Task<ResponseItem<object>> GetCITDetailsById(Guid transactionId)
         {
 
             var apiEndpoint = $"CompanyIncomeTax/GetCompanyIncomeTaxDetailsById/{transactionId}";
+            return await _adminRequestClient.GetRequestAsync(apiEndpoint);
+        }
+
+        public async Task<ResponseItem<object>> GETCITEstimatesDetailsById(Guid transactionId)
+        {
+
+            var apiEndpoint = $"CompanyIncomeTax/GetEstimateCompanyIncomeTaxDetailsById/{transactionId}";
+            return await _adminRequestClient.GetRequestAsync(apiEndpoint);
+        }
+
+        public async Task<ResponseItem<object>> GETCITRevisedEstimatesDetailsById(Guid transactionId)
+        {
+            var apiEndpoint = $"CompanyIncomeTax/GetRevisedEstimateCompanyIncomeTaxDetailsById/{transactionId}";
             return await _adminRequestClient.GetRequestAsync(apiEndpoint);
         }
     }

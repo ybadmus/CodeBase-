@@ -12,6 +12,15 @@
                                     <table class="table table-bordered">
                                         <tbody>
                                             <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Date Submitted</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="dateSubmitted"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="padding-left:5px;width:120px;font-weight:100;text-align: center; font-weight: bold; background: #f7f8f9;"></td>
+                                            </tr>
+                                            <tr>
                                                 <td style="padding-left:5px;width:120px;font-weight:100;">Entity Name</td>
                                                 <td style="padding-left:5px;width:280px;">
                                                     <b><span class="entityName"></span></b>
@@ -41,12 +50,6 @@
                                                     <b><span id="endDateView"></span></b>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td style="padding-left:5px;width:120px;font-weight:100;">Nationality</td>
-                                                <td style="padding-left:5px;width:280px;">
-                                                    <b><span id="nationality"></span></b>
-                                                </td>
-                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -60,45 +63,63 @@
                                     <table class="table table-bordered">
                                         <tbody>
                                             <tr>
-                                                <td style="padding-left:5px;width:120px;font-weight:100;">Business Income</td>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Annual Chargeable Income</td>
                                                 <td style="padding-left:5px;width:280px;text-align: right;">
-                                                    <b><span id="businessIncome"></span></b>
+                                                    <b><span id="revAnnualChargeableIncome"></span></b>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="padding-left:5px;width:120px;font-weight:100;">Employment Income</td>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Annual Income Tax Payable</td>
                                                 <td style="padding-left:5px;width:280px;text-align: right;">
-                                                    <b><span id="employmentIncome"></span></b>
+                                                    <b><span id="revAnnualIncomeTaxPayable"></span></b>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="padding-left:5px;width:120px;font-weight:100;">Investment & Other</td>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Income Tax Paid</td>
                                                 <td style="padding-left:5px;width:280px;text-align: right;">
-                                                    <b><span id="investmentOtherIncome"></span></b>
+                                                    <b><span id="incomeTaxPaid"></span></b>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="padding-left:5px;width:120px;font-weight:100;">Total Income</td>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Income Tax Balance Due</td>
                                                 <td style="padding-left:5px;width:280px;text-align: right;">
-                                                    <b><span id="totalIncome"></span></b>
+                                                    <b><span id="incomeTaxBalDue"></span></b>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="padding-left:5px;width:120px;font-weight:100;">Annual Chargeable</td>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Income Tax To Pay</td>
                                                 <td style="padding-left:5px;width:280px;text-align: right;">
-                                                    <b><span id="annualChargeableIncome"></span></b>
+                                                    <b><span id="incomeTaxToPay"></span></b>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="padding-left:5px;width:120px;font-weight:100;">Annual Total</td>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Quarter Outstanding</td>
                                                 <td style="padding-left:5px;width:280px;text-align: right;">
-                                                    <b><span id="annualTotalIncomeTaxPayable"></span></b>
+                                                    <b><span id="quartersOutstanding"></span></b>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="padding-left:5px;width:120px;font-weight:100;">Quarterly Income</td>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Annual Levy Payable</td>
                                                 <td style="padding-left:5px;width:280px;text-align: right;">
-                                                    <b><span id="quarterlyIncomeTaxPayable"></span></b>
+                                                    <b><span id="revAnnualLevyPayable"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Levy Amount Paid</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="levyAmtPaid"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Levy Balance Due</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="levyBalDue"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Levy Amount To Pay</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="levyAmtToPay"></span></b>
                                                 </td>
                                             </tr>
                                         </tbody>

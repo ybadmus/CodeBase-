@@ -1,6 +1,8 @@
 ﻿var serverUrl = $("#serverUrl").val();
 var searchPITByTaxOffice = `${serverUrl}api/Transaction/SearchTransactionAsync`;
 var citDetailsUrl = `${serverUrl}api/Transaction/CITDetailsById?trId=`;
+var citEstimatesDetailsUrl = `${serverUrl}api/Transaction/CITEstimatesDetailsById?trId=`;
+var citRevEstimatesDetailsUrl = `${serverUrl}api/Transaction/CITRevEstimatesDetailsById?trId=`;
 var activeTaxOffice = "";
 var activeYear = "";
 
@@ -139,12 +141,5 @@ $("#assessmentYear").on('change', function () {
     activeYear = elem.options[elem.selectedIndex].value;
 });
 
-$("#backToGrid").click(function () {
 
-    $("#gridView").show();
-    $("#returnDetail").hide();
-
-    if (getParameterByName("type") === "annualreturn" || getParameterByName("type") === "provisional")
-        initializeKendoGrid([], 1);
-});
 

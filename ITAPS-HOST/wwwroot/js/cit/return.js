@@ -302,3 +302,12 @@ var previewDirector = function (rowInfo) {
 var loadDirectorDetailsModal = function () {
 
 };
+
+$("#backToGrid").click(function () {
+
+    $("#gridView").show();
+    $("#returnDetail").hide();
+
+    if (getParameterByName("type") === "annualreturn" || getParameterByName("type") === "provisional")
+        initializeKendoGrid([], 1);
+});

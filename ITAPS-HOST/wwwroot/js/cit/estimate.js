@@ -2,7 +2,6 @@
 var hideAndShowThings = function () {
     $("#gridView").hide();
     $("#estimateDetail").show();
-    $("#returnDetail").hide();
 };
 
 var bootstrapNotification = function () {
@@ -13,15 +12,9 @@ var bootstrapNotification = function () {
 };
 
 var loadDetails = function (trId) {
-    let url = `${pitDetailsUrl}`;
+    let url = `${citEstimatesDetailsUrl}${trId}`;
 
-    let objSend = {
-        "transactionId": trId,
-        "taxType": "CIT",
-        "transactionType": "Estimate"
-    };
-
-    apiCaller(url, "POST", objSend, loadForm)
+    apiCaller(url, "GET", "", loadForm)
 };
 
 var loadForm = function (response) {
@@ -29,17 +22,24 @@ var loadForm = function (response) {
     if (response) {
         let resp = response[0];
 
+        $("#dateSubmitted").text(resp.submittedDate);
+        $("#entityName").text(resp.taxpayerName);
+        $("#tin").text(resp.taxpayerTIN);
         $("#assessmentYearView").text(resp.assessmentYear);
-        $("#startDateView").text(resp.startDate);
-        $("#endDateView").text(resp.endDate);
-        $("#nationality").text(resp.nationality);
-        $("#businessIncome").text(parseFloat(resp.businessIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-        $("#employmentIncome").text(parseFloat(resp.employmentIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-        $("#investmentOtherIncome").text(parseFloat(resp.investmentOtherIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-        $("#totalIncome").text(parseFloat(resp.totalIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-        $("#annualChargeableIncome").text(parseFloat(resp.annualChargeableIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-        $("#annualTotalIncomeTaxPayable").text(parseFloat(resp.annualTotalIncomeTaxPayable).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-        $("#quarterlyIncomeTaxPayable").text(parseFloat(resp.quarterlyIncomeTaxPayable).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $("#startDateView").text(resp.fromPeriod);
+        $("#endDateView").text(parseFloat(resp.toPeriod);
+        
+        $("#revAnnualChargeableIncome").text(parseFloat(resp.revAnnualChargeableIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $("#revAnnualIncomeTaxPayable").text(parseFloat(resp.revAnnualIncomeTaxPayable).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $("#incomeTaxPaid").text(parseFloat(resp.incomeTaxPaid).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $("#incomeTaxBalDue").text(parseFloat(resp.incomeTaxBalDue).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $("#incomeTaxToPay").text(parseFloat(resp.incomeTaxToPay).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+
+        $("#quartersOutstanding").text(parseFloat(resp.quartersOutstanding).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $("#revAnnualLevyPayable").text(parseFloat(resp.revAnnualLevyPayable).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $("#levyAmtPaid").text(parseFloat(resp.levyAmtPaid).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $("#levyBalDue").text(parseFloat(resp.levyBalDue).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $("#levyAmtToPay").text(parseFloat(resp.levyAmtToPay).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 
         hideAndShowThings();
     }
@@ -47,7 +47,7 @@ var loadForm = function (response) {
         toastr.error("An error occured");
 };
 
-$("#backToGrid2").click(function () {
+$("#backToGrid").click(function () {
 
     $("#gridView").show();
     $("#estimateDetail").hide();
