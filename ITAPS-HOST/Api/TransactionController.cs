@@ -46,5 +46,17 @@ namespace ITAPS_HOST.Api
         {
             return await _transactionService.GetCITDetailsById(trId);
         }
+
+        [HttpGet("CITEstimatesDetailsById", Name = "CITEstimatesDetailsById")]
+        public async Task<ResponseItem<object>> CITEstimatesDetailsById(Guid trId)
+        {
+            return await _transactionService.GETCITEstimatesDetailsById(trId);
+        }
+
+        [HttpGet("CITRevEstimatesDetailsById", Name = "CITRevEstimatesDetailsById")]
+        public async Task<ResponseItem<object>> CITRevEstimatesDetailsById(Guid trId)
+        {
+            return await _transactionService.GETCITRevisedEstimatesDetailsById(trId);
+        }
     }
 }
