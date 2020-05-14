@@ -12,6 +12,6 @@ namespace ITAPS_HOST.IServices
 
         Task<ResponseItem<object>> GetOffTaxOfficerId(Guid taxofficeid);
 
-        Task<ResponseItem<object>> GetUserDetailsId(Guid userId)
+        Task<ResponseItem<object>> GetUserDetailsId(Guid userId);
     }
 }

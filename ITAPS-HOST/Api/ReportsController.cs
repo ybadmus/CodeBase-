@@ -17,16 +17,14 @@ namespace ITAPS_HOST.Api
     public class ReportsController : Controller, IReportController
     {
         private readonly IReportConstants _config;
-        private readonly IReportController _reportController;
         private IHostingEnvironment _hostingEnvironment;
         private IMemoryCache _cache;
 
-        public ReportsController(IMemoryCache memoryCache, IHostingEnvironment hostingEnvironment, IReportConstants config, IReportController reportController)
+        public ReportsController(IMemoryCache memoryCache, IHostingEnvironment hostingEnvironment, IReportConstants config)
         {
             _cache = memoryCache;
             _config = config;
             _hostingEnvironment = hostingEnvironment;
-            _reportController = reportController;
         }
 
         [HttpPost]
@@ -56,55 +54,6 @@ namespace ITAPS_HOST.Api
 
         public void OnReportLoaded(ReportViewerOptions reportOption)
         {
-
-        }
-
-        public object SendEmail(Dictionary<string, object> jsonResult)
-        {
-            string _token = jsonResult["reportViewerToken"].ToString();
-            var stream = ReportHelper.GetReport(_token, "PDF", _reportController, _cache);
-            //var stream = ReportHelper.GetReport(_token, jsonResult["exportType"].ToString());
-            stream.Position = 0;
-
-            if (!ComposeEmail(stream, jsonResult["reportName"].ToString()))
-            {
-                return "Mail not sent !!!";
-            }
-
-            return "Mail Sent !!!";
-        }
-
-        public bool ComposeEmail(Stream stream, string reportName)
-        {
-            try
-            {
-                MailMessage mail = new MailMessage();
-                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-                mail.IsBodyHtml = true;
-                mail.From = new MailAddress("yusif.badmus@gmail.com");
-                mail.To.Add("yusif.badmus@gmail.com");
-                mail.Subject = "Report Name : " + reportName;
-                stream.Position = 0;
-
-                if (stream != null)
-                {
-                    ContentType ct = new ContentType();
-                    ct.Name = reportName + DateTime.Now.ToString() + ".pdf";
-                    System.Net.Mail.Attachment attachment = new System.Net.Mail.Attachment(stream, ct);
-                    mail.Attachments.Add(attachment);
-                }
-
-                SmtpServer.Port = 587;
-                SmtpServer.Credentials = new System.Net.NetworkCredential("xx@gmail.com", "xx");
-                SmtpServer.EnableSsl = true;
-                SmtpServer.Send(mail);
-
-                return true;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
 
         }
 

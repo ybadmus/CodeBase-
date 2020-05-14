@@ -3,6 +3,7 @@
 }
 
 <input id="reportPath" value="@ViewBag.ReportPath" hidden />
+<input id="serverUrl" value="@ViewBag.ServerUrl" hidden />
 
 <style>
     #reportviewer1_viewerContainer {
@@ -24,35 +25,11 @@
 </style>
 
 <div class="reportContainer">
-        <bold-report-viewer id="reportviewer1" report-service-url="../Reports" report-path="@ViewBag.ReportPath" report-server-url="@ViewBag.ReportServer" toolbar-settings="ViewBag.toolbarSettings" tool-bar-item-click="onToolBarItemClick" processing-mode="Remote" ajax-before-load="ajaxBeforeLoad" />
+        <bold-report-viewer id="reportviewer1" report-service-url="../Reports" report-path="@ViewBag.ReportPath" report-server-url="@ViewBag.ReportServer" processing-mode="Remote" ajax-before-load="ajaxBeforeLoad" />
 </div>
 
 <script>
     $("#pgHeader").text("TCC Certificate");
-
-    $(function () {
-        var reportPath = $("#reportPath").val();
-        $("#reportviewer1").data("boldReportViewer", {
-            reportServiceUrl: "../Reports",
-            reportPath: reportPath,
-            toolbarSettings: {
-                showToolbar: true,
-                items: ej.ReportViewer.ToolbarItems.All & ~ej.ReportViewer.ToolbarItems.Print,
-                customItems: [{
-                    groupIndex: 1,
-                    index: 1,
-                    type: 'Default',
-                    cssClass: "e-icon e-mail e-reportviewer-icon",
-                    id: 'E-Mail',
-                    tooltip: {
-                        header: 'E-Mail',
-                        content: 'Send rendered report as mail attachment'
-                    }
-                }]
-            },
-            toolBarItemClick: 'ontoolBarItemClick'
-        });
-    });
 
     var serverUrl = $("#serverUrl").val();
 
@@ -82,23 +59,6 @@
         event.model.parameters = parameters;
     };
 
-    function onToolBarItemClick(args) {
-        if (args.value == "E-Mail") {
-            var proxy = $('#reportviewer1').data('boldReportViewer');
-            var reportName = "TCC Certificate";
-            var requrl = "..Reports/SendEmail";
-            var _json = proxy.exportReport("PDF");
-
-            $.ajax({
-                type: "POST",
-                contentType: "application/json; charset=utf-8",
-                url: requrl,
-                data: JSON.stringify(_json),
-                dataType: "json",
-                crossDomain: true
-            })
-        }
-    }
 </script>
 
 <bold-script-manager></bold-script-manager>

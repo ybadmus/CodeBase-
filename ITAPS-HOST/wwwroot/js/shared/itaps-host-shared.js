@@ -214,7 +214,8 @@ var loadTaxOffices = function (listOfTaxOffices) {
 };
 
 var loadUserDetials = function (callbackProcess) {
-    apiCaller(urlLoadUserDetails, "GET", "", callbackProcess)
+    var url = urlLoadUserDetails + "?userId=" + $("#userId").val();
+    apiCaller(url, "GET", "", callbackProcess)
 };
 
 $('.yearsDropdown').ready(function () {
