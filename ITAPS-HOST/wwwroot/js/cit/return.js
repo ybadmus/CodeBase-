@@ -57,7 +57,7 @@ var loadForm = function (response) {
 
         $("#taxpayerName").text(resp.taxpayerName);
         $("#taxpayerTin").text(resp.taxpayerTin);
-        $("#assessmentYear").text(resp.assessmentYear);
+        $("#assessmentYear2").text(resp.assessmentYear);
         $("#fromPeriod").text(resp.fromPeriod);
         $("#toPeriod").text(resp.toPeriod);
         $("#createDate").text(resp.createDate);
