@@ -266,8 +266,8 @@ var previousDetail = function (stage) {
         $("#moreDetail1").hide();
         $("#moreDetail2").show();
         $("#moreDetail3").hide();
-        $("#previousDetail1").show();
-        $("#previousDetail2").hide();
+        $("#previousDetail1").hide();
+        $("#previousDetail2").show();
         $("#previousDetail3").hide();
     }
 
