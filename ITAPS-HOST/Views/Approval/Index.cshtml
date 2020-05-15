@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<input id="serverUrl" value="@ViewBag.ServerUrl" hidden />
+<div class="row card-group-row">
+    <div class="col-md-3 col-sm-6">
+        <a href="~/approval/tccapproval" class="dash-anchor">
+            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center" title="Click to apply for Tax Clearance Certificate (TCC)">
+                <img src="~/icons/iconx-tcc.png" class="img-responsive" width="80" />
+                <div class="flex mb-4 mt-4 dash-body">
+                    <h5 class="text-stats text-muted">Tax Clearance Certificate</h5>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+        <a href="~/approval/texapproval" class="dash-anchor">
+            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center" title="Click to apply for Personal Tax Relief (PTR)">
+                <img src="~/icons/iconx-ptr.png" class="img-responsive" width="80" />
+                <div class="flex mb-4 mt-4 dash-body">
+                    <h5 class="text-stats text-muted">Withholding Tax Exemption</h5>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+        <a href="~/approval/ptrapproval" class="dash-anchor">
+            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center" title="Click to apply for Personal Tax Relief (PTR)">
+                <img src="~/icons/iconx-hand.png" class="img-responsive" width="80" />
+                <div class="flex mb-4 mt-4 dash-body">
+                    <h5 class="text-stats text-muted">Personal Tax Relief</h5>
+                </div>
+            </div>
+        </a>
+    </div>
+
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $("#pgHeader").text("Applications Approval");
+        });
+    </script>
+}
+
+
+
