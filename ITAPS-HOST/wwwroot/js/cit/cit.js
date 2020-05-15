@@ -63,6 +63,7 @@ var bootstrapPage = function () {
     $("#gridView").show();
     $("#returnDetail").hide();
     $("#estimateDetail").hide();
+    $("#revisedEstimateDetail").hide();
     $("#endDate").flatpickr({});
     $("#startDate").flatpickr({});
 

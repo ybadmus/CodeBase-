@@ -8,7 +8,6 @@ var bootstrapNotification = function () {
     $("#pgHeader").text(HeaderName);
     $("#gridView").hide();
     $("#estimateDetail").hide();
-    $("#returnDetail").show();
 };
 
 var loadDetails = function (trId) {
