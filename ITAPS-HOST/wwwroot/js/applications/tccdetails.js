@@ -81,7 +81,7 @@ var loadAgedDependantReliefModal = function(resp) {
     $("#agedDependentbirthCertIssueBy").text(testNullOrEmpty(resp.birthCertIssueBy));
     $("#agedDependentbirthCertIssueDate").text(testNullOrEmpty(resp.certIssuingDate));
     $("#agedDependentbirthCertSignedBy").text(testNullOrEmpty(resp.birthCertSignedBy));
-    $("#agedDependentBirthCertDocument").attr("href", resp[0].birthCertDocument);
+    $("#agedDependentBirthCertDocument").attr("href", resp.birthCertDocument);
 
     $("#dependentDetails").modal("show");
 };
@@ -92,7 +92,7 @@ var loadChildWardDependantReliefModal = function(resp) {
     $("#childDependentDateOfAdmission").text(testNullOrEmpty(resp.dateOfAdmission));
     $("#childDependentDOB").text(testNullOrEmpty(resp.childDateOfBirth));
     $("#childDependentadmissionReferenceNo").text(testNullOrEmpty(resp.admissionReferenceNo));
-    $("#childDependentBirthCertDocument").attr("href", resp[0].birthCertDocument);
+    $("#childDependentBirthCertDocument").attr("href", resp.birthCertDocument);
     $("#childDependentBirthCertIssueNo").text(testNullOrEmpty(resp.birthCertIssueNo));
     $("#childDependentBirthCertIssueDate").text(testNullOrEmpty(resp.birthCertIssueDate));
     $("#childDependentBirthCertIssueBy").text(testNullOrEmpty(resp.birthCertIssueBy));
