@@ -70,6 +70,7 @@ var loadOldAgeReliefDetail = function(resp) {
     $("#oldAgeDocIssueNo").text(testNullOrEmpty(resp[0].birthCertIssueNo));
     $("#oldAgeDocSignedBy").text(testNullOrEmpty(resp[0].birthCertSignedBy));
     $("#oldAgeDocIssueDate").text(testNullOrEmpty(resp[0].birthCertIssuingDate));
+    $("#oldAgeReliefBirthDoc").attr("href", resp[0].birthCertDocument);
 };
 
 var loadAgedDependantReliefModal = function(resp) {
@@ -80,6 +81,7 @@ var loadAgedDependantReliefModal = function(resp) {
     $("#agedDependentbirthCertIssueBy").text(testNullOrEmpty(resp.birthCertIssueBy));
     $("#agedDependentbirthCertIssueDate").text(testNullOrEmpty(resp.certIssuingDate));
     $("#agedDependentbirthCertSignedBy").text(testNullOrEmpty(resp.birthCertSignedBy));
+    $("#agedDependentBirthCertDocument").attr("href", resp[0].birthCertDocument);
 
     $("#dependentDetails").modal("show");
 };
@@ -90,7 +92,7 @@ var loadChildWardDependantReliefModal = function(resp) {
     $("#childDependentDateOfAdmission").text(testNullOrEmpty(resp.dateOfAdmission));
     $("#childDependentDOB").text(testNullOrEmpty(resp.childDateOfBirth));
     $("#childDependentadmissionReferenceNo").text(testNullOrEmpty(resp.admissionReferenceNo));
-    $("#childDependentBirthCertDocument").text(testNullOrEmpty(resp.birthCertDocument));
+    $("#childDependentBirthCertDocument").attr("href", resp[0].birthCertDocument);
     $("#childDependentBirthCertIssueNo").text(testNullOrEmpty(resp.birthCertIssueNo));
     $("#childDependentBirthCertIssueDate").text(testNullOrEmpty(resp.birthCertIssueDate));
     $("#childDependentBirthCertIssueBy").text(testNullOrEmpty(resp.birthCertIssueBy));
@@ -159,7 +161,6 @@ var previewDependent = function (rowInfo) {
 };
 
 var loadMarriageReliefDetail = function (resp) {
-
     $("#marriageDetailsCertDoc").attr("href", resp[0].certDocument)
     $("#certIssuingDateMar").text(testNullOrEmpty(resp[0].certIssuingDate));
     $("#spouseEmailMar").text(testNullOrEmpty(resp[0].spouseEmail));
@@ -177,7 +178,7 @@ var loadMarriageReliefDetail = function (resp) {
 var loadDisabilityReliefDetail = function (resp) {
     $("#typeOfDisability").text(testNullOrEmpty(resp[0].typeOfDisability));
     $("#disabilityDisclosureDate").text(testNullOrEmpty(resp[0].disabilityDisclosureDate));
-    $("#disabilityDoc").text();
+    $("#disabilityDoc").attr("href", resp[0].disabilityDoc)
     $("#disabilityDocIssueBy").text(testNullOrEmpty(resp[0].disabilityDocIssueBy));
     $("#disabilityDocIssueNo").text(testNullOrEmpty(resp[0].disabilityDocIssueNo));
     $("#disabilityDocSignedBy").text(testNullOrEmpty(resp[0].disabilityDocSignedBy));
