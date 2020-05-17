@@ -9,7 +9,6 @@ var tccUpdateUrl = `${serverUrl}api/TCC/UpdateTCCApplication?id=`;
 var loadPtrCodesUrl = `${serverUrl}api/CodesApi/`;
 var PtrCodes = [];
 
-
 $("#ptrListOfTaxOffices").on('change', function () {
     var elem = document.getElementById("ptrListOfTaxOffices");
     activeTaxOffice = elem.options[elem.selectedIndex].value;
@@ -212,7 +211,7 @@ var loadPtrDetails = function (resp) {
 
 
     $("#appIdHeader").text(testNullOrEmpty(resp.applicationNo));
-    $("#appNoDetails").text(response.applicationNo);
+    $("#appNoDetails").text(resp.applicationNo);
     $("#appStatusHeader").text(testNullOrEmpty(resp.status));
     $("#dateSubmittedPTR").text(testNullOrEmpty(resp.submittedDate));
     $("#assessmentYearPTR").text(testNullOrEmpty(resp.assessmentYear));
