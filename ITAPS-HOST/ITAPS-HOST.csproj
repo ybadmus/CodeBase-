@@ -11,6 +11,11 @@
     <StartupObject />
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
 
   <ItemGroup>
     <PackageReference Include="BoldReports.AspNet.Core" Version="2.2.28" />

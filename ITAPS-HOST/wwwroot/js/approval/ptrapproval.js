@@ -160,19 +160,15 @@ $("#reviseApp").click(function (e) {
 $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
     var grid = $("#Grid").getKendoGrid();
     var item = grid.dataItem($(e.target).closest("tr"));
-    activeApplicationType = item.applicationType;
-    // $("#appId").val(item.applicationId);
-    // $("#modalId").text(item.applicationNo);
-    // $("#appNo").text(item.applicationNo);
-    // $("#currentStatus").text(item.statusId);
-    // $("#applicantNamePTR").text(item.applicantName);
-    // $("#applicantTINPTR").text(item.applicantTIN);
-
+    $("#applicantTINPTR").text(item.applicantTIN);
+    $("#applicantNamePTR").text(item.applicantName);
+    $("#modalId").text(item.applicationNo);
     var ptrCode = ""
 
     for (var i = 0; i < PtrCodes.length; i++) {
         if (PtrCodes[i].description.toUpperCase().trim() === item.applicationType.toUpperCase().trim()) {
             ptrCode = PtrCodes[i].code.trim();
+            activeApplicationType = item.applicationType;
             break;
         }
     };
@@ -189,48 +185,27 @@ var prepareDetailsView = function (appId, pCode) {
 };
 
 var loadPtrDetails = function (resp) {
-    // $("#appIdHeader").text(resp.applicationNo);
-    // $("#appNoDetails").text(response.applicationNo);
-    // $("#appStatusHeader").text(resp.status);
-
-    // $("#dateSubmittedPTR").text(resp.submittedDate);
-    // $("#lastUpdatedPTR").text(resp.statusDate);
-    // $("#assessmentYearPTR").text(resp.assessmentYear);
-    // $("#dateOfBirthPTR").text(resp.dateOfBirth);
-    // $("#employerAddressPTR").text(resp.employerAddress);
-    // $("#employerEmailPTR").text(resp.employerEmail);
-    // $("#employerNamePTR").text(resp.employerName);
-    // $("#employerPhonePTR").text(resp.employerPhone);
-    // $("#employerTINPTR").text(resp.employerTIN);
-    // $("#endDatePTR").text(resp.endDate);
-    // $("#genderPTR").text(resp.gender === "M" ? "Male" : resp.gender === "F" ? "Female" : resp.gender);
-    // $("#maritalStatusPTR").text(resp.maritalStatus);
-    // $("#mothersMaidenNamePTR").text(resp.mothersMaidenName);
-    // $("#phoneNoPTR").text(resp.phoneNo);
-    // $("#startDatePTR").text(resp.startDate);
-    // $("#appNoTex2").text(resp.applicationNo);
-
-
-    $("#appIdHeader").text(testNullOrEmpty(resp.applicationNo));
-    $("#appNoDetails").text(resp.applicationNo);
-    $("#appStatusHeader").text(testNullOrEmpty(resp.status));
-    $("#dateSubmittedPTR").text(testNullOrEmpty(resp.submittedDate));
-    $("#assessmentYearPTR").text(testNullOrEmpty(resp.assessmentYear));
-    $("#dateOfBirthPTR").text(testNullOrEmpty(resp.dateOfBirth));
-    $("#applicantNamePTR").text(resp.applicantName);
-    $("#applicantTINPTR").text(resp.applicantTIN);
-    $("#employerAddressPTR").text(testNullOrEmpty(resp.employerAddress));
-    $("#employerEmailPTR").text(testNullOrEmpty(resp.employerEmail));
-    $("#employerNamePTR").text(testNullOrEmpty(resp.employerName));
-    $("#employerPhonePTR").text(testNullOrEmpty(resp.employerPhone));
-    $("#employerTINPTR").text(testNullOrEmpty(resp.employerTIN));
-    $("#endDatePTR").text(testNullOrEmpty(resp.endDate));
-    $("#genderPTR").text(resp.gender === "M" ? "Male" : resp.gender === "F" ? "Female" : resp.gender);
-    $("#maritalStatusPTR").text(testNullOrEmpty(resp.maritalStatus));
-    $("#mothersMaidenNamePTR").text(testNullOrEmpty(resp.mothersMaidenName));
-    $("#phoneNoPTR").text(testNullOrEmpty(resp.phoneNo));
-    $("#startDatePTR").text(testNullOrEmpty(resp.startDate))
-    $("#currentStatus").text(resp.statusId);
+    $("#appIdHeader").text(testNullOrEmpty(resp[0].applicationNo));
+    $("#appNoDetails").text(resp[0].applicationNo);
+    $("#appStatusHeader").text(testNullOrEmpty(resp[0].status));
+    $("#dateSubmittedPTR").text(testNullOrEmpty(resp[0].submittedDate));
+    $("#assessmentYearPTR").text(testNullOrEmpty(resp[0].assessmentYear));
+    $("#dateOfBirthPTR").text(testNullOrEmpty(resp[0].dateOfBirth));
+    $("#applicantNamePTR").text(resp[0].applicantName);
+    $("#applicantTINPTR").text(resp[0].applicantTIN);
+    $("#employerAddressPTR").text(testNullOrEmpty(resp[0].employerAddress));
+    $("#employerEmailPTR").text(testNullOrEmpty(resp[0].employerEmail));
+    $("#employerNamePTR").text(testNullOrEmpty(resp[0].employerName));
+    $("#employerPhonePTR").text(testNullOrEmpty(resp[0].employerPhone));
+    $("#employerTINPTR").text(testNullOrEmpty(resp[0].employerTIN));
+    $("#endDatePTR").text(testNullOrEmpty(resp[0].endDate));
+    $("#genderPTR").text(resp[0].gender === "M" ? "Male" : resp[0].gender === "F" ? "Female" : resp[0].gender);
+    $("#maritalStatusPTR").text(testNullOrEmpty(resp[0].maritalStatus));
+    $("#mothersMaidenNamePTR").text(testNullOrEmpty(resp[0].mothersMaidenName));
+    $("#phoneNoPTR").text(testNullOrEmpty(resp[0].phoneNo));
+    $("#startDatePTR").text(testNullOrEmpty(resp[0].startDate))
+    $("#currentStatus").text(resp[0].statusId);
+    $("#applicationType").text(activeApplicationType);
 
     if (activeApplicationType.trim() === "Disability Relief") {
         loadDisabilityReliefDetail(resp);
