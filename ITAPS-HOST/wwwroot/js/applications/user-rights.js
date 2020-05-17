@@ -19,4 +19,6 @@ var switchTilesByUserRight = function (response) {
         $("#assignTCC").show();
         $("#allTCC").show();
     }
+
+    $("#loggedInUserFUllNameTile").text(response[0].firstName + " " + response[0].lastName);
 };

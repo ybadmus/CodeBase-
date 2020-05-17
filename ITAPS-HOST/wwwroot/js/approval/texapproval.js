@@ -177,6 +177,7 @@ var loadAppDetails = function (resp) {
     $("#applicantName").text(response.applicantName);
     $("#applicantTin").text(response.applicantTIN);
     $("#typeOfWht").text(response.typeOfWithHolding);
+    $("#typeOfApp").text("WHT Tax Exemption");
     $("#residentialStatus").text(response.residentialStatus);
     $("#remarks").text(response.remarks);
     $("#reason").text(response.reasons);

@@ -290,17 +290,25 @@ var loadDirectors = function (resp) {
 };
 
 var previewDirector = function (rowInfo) {
-    var appDetail = JSON.parse(sessionStorage.getItem("listOfDirectors"));
-    var dependants = appDetail[0].childDetails;
-    for(var i = 0; i < dependants.length; i++) {
-        if (dependants[i].dependantId === rowInfo.id) {
-            return loadDirectorDetailsModal(dependants[i]);
+    var directors = JSON.parse(sessionStorage.getItem("listOfDirectors"));
+    for (var i = 0; i < directors.length; i++) {
+        if (directors[i].directorId === rowInfo.id) {
+            return loadDirectorDetailsModal(directors[i]);
         }
     }
 }
 
-var loadDirectorDetailsModal = function () {
+var loadDirectorDetailsModal = function (resp) {
+    $(".directorFullNameModalDetails").text(resp.directorsName);
+    $(".directorTINModalDetails").text(resp.directorsTin);
+    $(".residentialStatusModalDetails").text(resp.resStatus);
+    $(".salaryDirectorModalDetails").text(resp.directorsSalary);
+    $(".interestDirectorModalDetails").text(resp.interst);
+    $(".otherAllowanceDirectorModalDetails").text(resp.otherAllowances);
+    $(".loansDirectorModalDetails").text(resp.loans);
+    $(".totalDirectorModalDetails").text(resp.total);
 
+    $("#directorDetailModal").modal("show");
 };
 
 $("#backToGrid").click(function () {
