@@ -25,9 +25,9 @@ var initializeKendoGrid = function (data) {
         columns: [
             { field: "statusDate", title: "Date", width: '90px' },
             { field: "applicationNo", title: "Application No.", width: '100px' },
-            { field: "applicantName", title: "Applicant", width: '20%' },
+            { field: "applicantName", title: "Applicant", width: '25%' },
             { field: "applicantTIN", title: "TIN", width: '15%' },
-            { field: "applicationType", title: "Type", width: '15%' },
+            { field: "applicationType", title: "Type", width: '25%' },
             {
                 command: [{
                     name: "view",
