@@ -161,12 +161,12 @@ $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
     var grid = $("#Grid").getKendoGrid();
     var item = grid.dataItem($(e.target).closest("tr"));
 
-    $("#appId").val(item.applicationId);
-    $("#modalId").text(item.applicationNo);
-    $("#appNo").text(item.applicationNo);
-    $("#currentStatus").text(item.statusId);
-    $("#applicantNamePTR").text(item.applicantName);
-    $("#applicantTINPTR").text(item.applicantTIN);
+    // $("#appId").val(item.applicationId);
+    // $("#modalId").text(item.applicationNo);
+    // $("#appNo").text(item.applicationNo);
+    // $("#currentStatus").text(item.statusId);
+    // $("#applicantNamePTR").text(item.applicantName);
+    // $("#applicantTINPTR").text(item.applicantTIN);
 
     var ptrCode = ""
 
@@ -189,26 +189,95 @@ var prepareDetailsView = function (appId, pCode) {
 };
 
 var loadPtrDetails = function (resp) {
-    $("#appIdHeader").text(resp.applicationNo);
-    $("#appStatusHeader").text(resp.status);
+    // $("#appIdHeader").text(resp.applicationNo);
+    // $("#appNoDetails").text(response.applicationNo);
+    // $("#appStatusHeader").text(resp.status);
 
-    $("#dateSubmittedPTR").text(resp.submittedDate);
-    $("#lastUpdatedPTR").text(resp.statusDate);
-    $("#assessmentYearPTR").text(resp.assessmentYear);
-    $("#dateOfBirthPTR").text(resp.dateOfBirth);
-    $("#employerAddressPTR").text(resp.employerAddress);
-    $("#employerEmailPTR").text(resp.employerEmail);
-    $("#employerNamePTR").text(resp.employerName);
-    $("#employerPhonePTR").text(resp.employerPhone);
-    $("#employerTINPTR").text(resp.employerTIN);
-    $("#endDatePTR").text(resp.endDate);
-    $("#genderPTR").text(resp.gender === "M" ? "Male" : resp.gender === "F" ? "Female" : resp.gender);
-    $("#maritalStatusPTR").text(resp.maritalStatus);
-    $("#mothersMaidenNamePTR").text(resp.mothersMaidenName);
-    $("#phoneNoPTR").text(resp.phoneNo);
-    $("#startDatePTR").text(resp.startDate);
-    $("#appNoTex2").text(resp.applicationNo);
+    // $("#dateSubmittedPTR").text(resp.submittedDate);
+    // $("#lastUpdatedPTR").text(resp.statusDate);
+    // $("#assessmentYearPTR").text(resp.assessmentYear);
+    // $("#dateOfBirthPTR").text(resp.dateOfBirth);
+    // $("#employerAddressPTR").text(resp.employerAddress);
+    // $("#employerEmailPTR").text(resp.employerEmail);
+    // $("#employerNamePTR").text(resp.employerName);
+    // $("#employerPhonePTR").text(resp.employerPhone);
+    // $("#employerTINPTR").text(resp.employerTIN);
+    // $("#endDatePTR").text(resp.endDate);
+    // $("#genderPTR").text(resp.gender === "M" ? "Male" : resp.gender === "F" ? "Female" : resp.gender);
+    // $("#maritalStatusPTR").text(resp.maritalStatus);
+    // $("#mothersMaidenNamePTR").text(resp.mothersMaidenName);
+    // $("#phoneNoPTR").text(resp.phoneNo);
+    // $("#startDatePTR").text(resp.startDate);
+    // $("#appNoTex2").text(resp.applicationNo);
 
+
+    $("#appIdHeader").text(testNullOrEmpty(resp[0].applicationNo));
+    $("#appNoDetails").text(response.applicationNo);
+    $("#appStatusHeader").text(testNullOrEmpty(resp[0].status));
+    $("#dateSubmittedPTR").text(testNullOrEmpty(resp[0].submittedDate));
+    $("#assessmentYearPTR").text(testNullOrEmpty(resp[0].assessmentYear));
+    $("#dateOfBirthPTR").text(testNullOrEmpty(resp[0].dateOfBirth));
+    $("#applicantNamePTR").text(resp[0].applicantName);
+    $("#applicantTINPTR").text(resp[0].applicantTIN);
+    $("#employerAddressPTR").text(testNullOrEmpty(resp[0].employerAddress));
+    $("#employerEmailPTR").text(testNullOrEmpty(resp[0].employerEmail));
+    $("#employerNamePTR").text(testNullOrEmpty(resp[0].employerName));
+    $("#employerPhonePTR").text(testNullOrEmpty(resp[0].employerPhone));
+    $("#employerTINPTR").text(testNullOrEmpty(resp[0].employerTIN));
+    $("#endDatePTR").text(testNullOrEmpty(resp[0].endDate));
+    $("#genderPTR").text(resp[0].gender === "M" ? "Male" : resp[0].gender === "F" ? "Female" : resp[0].gender);
+    $("#maritalStatusPTR").text(testNullOrEmpty(resp[0].maritalStatus));
+    $("#mothersMaidenNamePTR").text(testNullOrEmpty(resp[0].mothersMaidenName));
+    $("#phoneNoPTR").text(testNullOrEmpty(resp[0].phoneNo));
+    $("#startDatePTR").text(testNullOrEmpty(resp[0].startDate))
+    $("#currentStatus").text(resp[0].statusId);
+
+    if (activeApplicationType.trim() === "Disability Relief") {
+        loadDisabilityReliefDetail(resp);
+        $("#ptrMarriageReliefDetailsGrid").hide();
+        $("#ptrAgedDepedentReliefDetailsGrid").hide();
+        $("#ptrOldAgeReliefDetailsGrid").hide();
+        $("#ptrChildWardDepedentReliefDetailsGrid").hide();
+        $("#texWHTDetailsGrid").hide();
+        $("#tccRequestEntityDetailsGrid").hide();
+        $("#ptrDisabilityReliefDetailsGrid").show();
+    } else if (activeApplicationType.trim() === "Marriage/Responsibility Relief") {
+        loadMarriageReliefDetail(resp);
+        $("#ptrDisabilityReliefDetailsGrid").hide();
+        $("#ptrAgedDepedentReliefDetailsGrid").hide();
+        $("#ptrOldAgeReliefDetailsGrid").hide();
+        $("#ptrChildWardDepedentReliefDetailsGrid").hide();
+        $("#texWHTDetailsGrid").hide();
+        $("#tccRequestEntityDetailsGrid").hide();
+        $("#ptrMarriageReliefDetailsGrid").show();
+    } else if (activeApplicationType.trim() === "Aged Dependants Relief") {
+        loadAgedDependentReliefDetail(resp);
+        $("#ptrDisabilityReliefDetailsGrid").hide();
+        $("#ptrMarriageReliefDetailsGrid").hide();
+        $("#ptrOldAgeReliefDetailsGrid").hide();
+        $("#ptrChildWardDepedentReliefDetailsGrid").hide();
+        $("#texWHTDetailsGrid").hide();
+        $("#tccRequestEntityDetailsGrid").hide();
+        $("#ptrAgedDepedentReliefDetailsGrid").show();
+    } else if (activeApplicationType.trim() === "Old Age Relief") {
+        loadOldAgeReliefDetail(resp);
+        $("#ptrDisabilityReliefDetailsGrid").hide();
+        $("#ptrMarriageReliefDetailsGrid").hide();
+        $("#ptrAgedDepedentReliefDetailsGrid").hide();
+        $("#ptrChildWardDepedentReliefDetailsGrid").hide();
+        $("#texWHTDetailsGrid").hide();
+        $("#tccRequestEntityDetailsGrid").hide();
+        $("#ptrOldAgeReliefDetailsGrid").show();
+    } else if (activeApplicationType.trim() === "Child/Ward Education Relief") {
+        loadChildWardDependentRelief(resp);
+        $("#ptrDisabilityReliefDetailsGrid").hide();
+        $("#ptrMarriageReliefDetailsGrid").hide();
+        $("#ptrAgedDepedentReliefDetailsGrid").hide();
+        $("#ptrOldAgeReliefDetailsGrid").hide();
+        $("#texWHTDetailsGrid").hide();
+        $("#tccRequestEntityDetailsGrid").hide();
+        $("#ptrChildWardDepedentReliefDetailsGrid").show();
+    }
 };
 
 var loadReliefTypes = function () {
