@@ -1,9 +1,11 @@
-﻿@{
-    ViewData["Title"] = "TCC Certificate";
+﻿
+@{
+    ViewData["Title"] = "Index";
 }
 
 <input id="reportPath" value="@ViewBag.ReportPath" hidden />
 <input id="serverUrl" value="@ViewBag.ServerUrl" hidden />
+<input id="reportServerSite" value="@ViewBag.ReportServerSite" hidden />
 
 <style>
     #reportviewer1_viewerContainer {
@@ -24,40 +26,22 @@
     }
 </style>
 
-<div class="reportContainer">
-        <bold-report-viewer id="reportviewer1" report-service-url="../Reports" report-path="@ViewBag.ReportPath" report-server-url="@ViewBag.ReportServer" processing-mode="Remote" toolbar-settings="ViewBag.toolbarSettings" tool-bar-item-click="onToolBarItemClick" ajax-before-load="ajaxBeforeLoad" />
-</div>
+<bold-report-viewer id="reportviewer1" report-service-url="@ViewBag.ReportServer" report-path="@ViewBag.ReportPath" service-authorization-token="@ViewBag.ServiceAuthorizationToken" toolbar-settings="ViewBag.toolbarSettings" tool-bar-item-click="onToolBarItemClick" ajax-before-load="onAjaxRequest"></bold-report-viewer>
 
-<script>
-    $("#pgHeader").text("TCC Certificate");
+<script type="text/javascript">
+    $("#pgHeader").text("Tax Clearance Certificate");
 
     var serverUrl = $("#serverUrl").val();
 
-    $(".pb-3").contents().filter(function () {
-        return this.nodeType != 1;
-    }).replaceWith("");
-
     var parameters = [];
-
-    var getParameters = function () {
-        var parameters = window.location.search.substr(1);
-        var listParams = [];
-        if (parameters != "") {
-            var splitValues = parameters.split("&");
-            for (var i = 0; i < splitValues.length; i++) {
-                var tempValue = splitValues[i].split("=");
-                listParams.push({ name: tempValue[0], value: decodeURIComponent(tempValue[1]) });
-            }
-        }
-
-        return listParams;
-    };
-
     parameters.push({ name: sessionStorage.getItem("tccLabel"), labels: [sessionStorage.getItem("tccReportId")], values: [sessionStorage.getItem("tccReportId")], nullable: "true" });
 
-    function ajaxBeforeLoad(event) {
-        event.model.parameters = parameters;
-    };
+    function onAjaxRequest(args) {
+        var siteUrl = $("#reportServerSite").val();
+        console.log(siteUrl);
+        args.model.parameters = parameters;
+        args.headers.push({ Key: 'serverurl', Value: siteUrl });
+    }
 
     function onToolBarItemClick(args) {
         if (args.value == "E-Mail") {
@@ -65,7 +49,7 @@
             var Report = proxy.model.reportPath;
             var lastsIndex = Report.lastIndexOf("/");
             var reportName = Report.substring(lastsIndex + 1);
-            var requrl = proxy.model.reportServiceUrl + '/SendEmail';
+            var requrl = serverUrl + 'Reports/SendEmail';
             var _json = {
                 exportType: "PDF", reportViewerToken: proxy._reportViewerToken, ReportName: reportName
             };
@@ -80,10 +64,6 @@
         }
     };
 
-
-
 </script>
 
 <bold-script-manager></bold-script-manager>
-
-

@@ -128,6 +128,10 @@ $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
     var grid = $("#Grid").getKendoGrid();
     var item = grid.dataItem($(e.target).closest("tr"));
 
+    sessionStorage.setItem("uniCITTransactionLabel", "uniTransactionId");
+    sessionStorage.setItem("uniCITTransactionId", item.id);
+
+
     loadDetails(item.id);
 });
 

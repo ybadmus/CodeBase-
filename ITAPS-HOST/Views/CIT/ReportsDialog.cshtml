@@ -10,20 +10,19 @@
 
 <input id="serverUrl" value="@ViewBag.ServerUrl" hidden />
 
-<div class="card">
+<div class="card" style="min-height: 600px; height: 60vh;">
     <div class="card-body">
         <div class="row align-items-end" style="margin: 1px;">
-            <div class="col-md-6" style="margin:0px auto;">
-                <div class="bordered-group" id="" style="height: 400px">
-                    <p class="card-title"><b>Company Income Tax Reports</b></p>
-                    <form>
-                        <div class="form-group row" style="margin-bottom: 1rem;">
-                            <div class="col-md-12 formDiv" style="        margin: 0px 0px 15px 0px;
-">
-                                <label for="typesOfReport" class="col-form-label">
+            <div class="col-md-6 col-sm-12 " style="margin:0px auto;">
+                <div style="height: 500px; border: 1px solid silver; position: relative;">
+                    <div style="font-size: 27px;padding: 10px 0px;text-align: center;background: #112b4a;color: floralwhite;"><b>CIT Reports</b></div>
+                    <form style="padding: 25px 0px 0px 0px;">
+                        <div class="form-group">
+                            <div class="col-md-12" style="margin-bottom: 20px;">
+                                <label for="typesOfReport" class="col-form-label" style="font-size: 18px">
                                     <b>Type Of Report</b>
                                 </label>
-                                <select type="text" id="typesOfReport" class="form-control" required>
+                                <select type="text" id="typesOfReport" class="form-control" style="height: 35px !important;font-size: 18px;" required>
                                     <option selected="selected">Select Type</option>
                                     <option value="1">All CIT Returns</option>
                                     <option value="2">CIT Returns with Tax Outstanding</option>
@@ -31,36 +30,41 @@
                                     <option value="4">CIT Return with Zero Tax Outstanding balance</option>
                                 </select>
                             </div>
-                            <div class="col-md-12 formDiv" style="margin: 0px 0px 15px 0px;">
-                                <label for="listOfTaxOffices" class="col-form-label">
+                            <div class="col-md-12" style="margin-bottom: 20px;">
+                                <label for="listOfTaxOffices" class="col-form-label" style="font-size: 18px">
                                     <b>Tax Office</b>
                                 </label>
-                                <select type="text" id="listOfTaxOffices" class="form-control" required>
-
+                                <select type="text" id="listOfTaxOffices" class="form-control" style="height: 35px !important;font-size: 18px;" required>
                                 </select>
                             </div>
-                            <div class="col-md-12 formDiv" style="margin: 0px 0px 15px 0px;">
-                                <label for="assessmentYear" class="col-form-label">
+                            <div class="col-md-12" style="margin-bottom: 20px;">
+                                <label for="assessmentYear" class="col-form-label" style="font-size: 18px">
                                     <b>Assessment Year</b>
                                 </label>
-                                <select type="text" id="assessmentYear" class="form-control yearsDropdown" required>
-                                    <option selected="selected">Choose Assessment Year</option>
+                                <select type="text" id="assessmentYear" class="form-control yearsDropdown" style="height: 35px !important;font-size: 18px;" required>
+                                    <option selected="selected">Choose Year</option>
                                 </select>
                             </div>
                         </div>
                     </form>
-                    <button class="btn btn-success" id="viewRTP" style="float: right;" disabled>View Report</button>
+                    <div class="col-md-12" style="position: absolute; bottom: 30px;">
+                        <button class="btn btn-success" id="viewRTP" style="float: right;" disabled><span class='fa fa-file fa-lg'></span> View Report</button>
+                    </div>
                 </div>
             </div>
 
         </div>
     </div>
+    <div class="card-footer">
+
+    </div>
 </div>
+
 
 @section scripts {
     <script>
         $(document).ready(function () {
-            $("#pgHeader").text("CIT Reports");
+            $("#pgHeader").text("Company Income Tax Reports");
         });
 
         var reporttype = "CIT";

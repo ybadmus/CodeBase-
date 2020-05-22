@@ -1,5 +1,6 @@
-﻿@{
-    ViewData["Title"] = "TCC Certificate";
+﻿
+@{
+    ViewData["Title"] = "CIT Return Final Report";
 }
 
 <input id="reportPath" value="@ViewBag.ReportPath" hidden />
@@ -25,11 +26,11 @@
 </style>
 
 <div class="reportContainer">
-        <bold-report-viewer id="reportviewer1" report-service-url="../Reports" report-path="@ViewBag.ReportPath" report-server-url="@ViewBag.ReportServer" processing-mode="Remote" toolbar-settings="ViewBag.toolbarSettings" tool-bar-item-click="onToolBarItemClick" ajax-before-load="ajaxBeforeLoad" />
+    <bold-report-viewer id="reportviewer1" report-service-url="../Reports" report-path="@ViewBag.ReportPath" report-server-url="@ViewBag.ReportServer" toolbar-settings="ViewBag.toolbarSettings" tool-bar-item-click="onToolBarItemClick" processing-mode="Remote" ajax-before-load="ajaxBeforeLoad" />
 </div>
 
 <script>
-    $("#pgHeader").text("TCC Certificate");
+    $("#pgHeader").text("CIT Final Returns");
 
     var serverUrl = $("#serverUrl").val();
 
@@ -38,22 +39,7 @@
     }).replaceWith("");
 
     var parameters = [];
-
-    var getParameters = function () {
-        var parameters = window.location.search.substr(1);
-        var listParams = [];
-        if (parameters != "") {
-            var splitValues = parameters.split("&");
-            for (var i = 0; i < splitValues.length; i++) {
-                var tempValue = splitValues[i].split("=");
-                listParams.push({ name: tempValue[0], value: decodeURIComponent(tempValue[1]) });
-            }
-        }
-
-        return listParams;
-    };
-
-    parameters.push({ name: sessionStorage.getItem("tccLabel"), labels: [sessionStorage.getItem("tccReportId")], values: [sessionStorage.getItem("tccReportId")], nullable: "true" });
+    parameters.push({ name: sessionStorage.getItem("uniCITTransactionLabel"), labels: [sessionStorage.getItem("uniCITTransactionId")], values: [sessionStorage.getItem("uniCITTransactionId")], nullable: "true" });
 
     function ajaxBeforeLoad(event) {
         event.model.parameters = parameters;
@@ -65,7 +51,7 @@
             var Report = proxy.model.reportPath;
             var lastsIndex = Report.lastIndexOf("/");
             var reportName = Report.substring(lastsIndex + 1);
-            var requrl = proxy.model.reportServiceUrl + '/SendEmail';
+            var requrl = serverUrl + 'Reports/SendEmail';
             var _json = {
                 exportType: "PDF", reportViewerToken: proxy._reportViewerToken, ReportName: reportName
             };
@@ -79,11 +65,10 @@
             })
         }
     };
-
-
-
 </script>
 
 <bold-script-manager></bold-script-manager>
+
+
 
 

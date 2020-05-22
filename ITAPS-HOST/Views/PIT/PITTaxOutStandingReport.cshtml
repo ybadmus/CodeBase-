@@ -3,6 +3,7 @@
 }
 
 <input id="reportPath" value="@ViewBag.ReportPath" hidden />
+<input id="serverUrl" value="@ViewBag.ServerUrl" hidden />
 
 <style>
     #reportviewer1_viewerContainer {
@@ -24,12 +25,12 @@
 </style>
 
 <div class="reportContainer">
-        <bold-report-viewer id="reportviewer1" report-service-url="../Reports" report-path="@ViewBag.ReportPath" report-server-url="@ViewBag.ReportServer" processing-mode="Remote" ajax-before-load="ajaxBeforeLoad" />
+    <bold-report-viewer id="reportviewer1" report-service-url="../Reports" report-path="@ViewBag.ReportPath" report-server-url="@ViewBag.ReportServer" processing-mode="Remote" ajax-before-load="ajaxBeforeLoad" />
 </div>
 
 <script>
     $("#pgHeader").text("PIT Returns With Tax Outstanding");
- 
+
     var serverUrl = $("#serverUrl").val();
 
     $(".pb-3").contents().filter(function () {

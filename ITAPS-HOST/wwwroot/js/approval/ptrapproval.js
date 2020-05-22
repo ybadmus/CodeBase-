@@ -160,9 +160,12 @@ $("#reviseApp").click(function (e) {
 $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
     var grid = $("#Grid").getKendoGrid();
     var item = grid.dataItem($(e.target).closest("tr"));
+    $("#appId").val(item.applicationId);
+
     $("#applicantTINPTR").text(item.applicantTIN);
     $("#applicantNamePTR").text(item.applicantName);
     $("#modalId").text(item.applicationNo);
+
     var ptrCode = ""
 
     for (var i = 0; i < PtrCodes.length; i++) {
