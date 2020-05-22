@@ -5,7 +5,7 @@ var GetTccCommentsByIdUrl = `${serverUrl}api/TCC/GetAllTccApplicationComments?tc
 var GetTccByIdUrl = `${serverUrl}api/TCC/GetTccApplicationById?tccId=`;
 var GetTCCDocuments = `${serverUrl}api/TCC/GetTCCApplicationDocumentByApplicationId`;
 let tccUpdateUrl = `${serverUrl}api/TCC/UpdateTCCApplication?id=`;
-var ReportDownloadView = `${serverUrl}applications/certificate`;
+var ReportDownloadView = `${serverUrl}reportviewer/index`;
 var loadPtrCodesUrl = `${serverUrl}api/CodesApi/`;
 var activeTaxOffice = "";
 var appType = "TCC";

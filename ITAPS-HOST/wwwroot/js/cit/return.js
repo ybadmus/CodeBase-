@@ -319,3 +319,8 @@ $("#backToGrid").click(function () {
     if (getParameterByName("type") === "annualreturn" || getParameterByName("type") === "provisional")
         initializeKendoGrid([], 1);
 });
+
+$("#previewCITReturnsReport").click(function () {
+    var reportPreView = `${serverUrl}CIT/`;
+    window.location.href = `${reportPreView}CITReturnFinalReport`;
+});

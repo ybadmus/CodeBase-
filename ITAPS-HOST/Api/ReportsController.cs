@@ -57,5 +57,59 @@ namespace ITAPS_HOST.Api
 
         }
 
+        public object SendEmail([FromBody] Dictionary<string, object> jsonResult)
+        {
+            string _token = jsonResult["reportViewerToken"].ToString();
+            var stream = ReportHelper.GetReport(_token, jsonResult["exportType"].ToString(), this, this._cache);
+            stream.Position = 0;
+
+            if (!ComposeEmail(stream, jsonResult["ReportName"].ToString()))
+            {
+                return "Mail not sent !!!";
+            }
+
+            return "Mail Sent !!!";
+        }
+
+        public bool ComposeEmail(Stream stream, string reportName)
+        {
+            try
+            {
+                MailMessage mail = new MailMessage();
+                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+                mail.IsBodyHtml = true;
+                mail.From = new MailAddress("yusif.badmus@gmail.com");
+                //mail.To.Add("eric.boateng@persol.net");
+                mail.To.Add("yusuf.badmus@persol.net");
+                mail.To.Add("augustine.larbi-ampofo@persol.net");
+                mail.To.Add("enoch.enchill@persol.net");
+                mail.To.Add("paul.kodjo@persol.net");
+                //mail.To.Add("somad.yessoufou@persol.net");
+                mail.Subject = "Report Name : " + reportName;
+                stream.Position = 0;
+
+                if (stream != null)
+                {
+                    ContentType ct = new ContentType();
+                    ct.Name = reportName + DateTime.Now.ToString() + ".pdf";
+                    System.Net.Mail.Attachment attachment = new System.Net.Mail.Attachment(stream, ct);
+                    mail.Attachments.Add(attachment);
+                }
+
+                SmtpServer.Port = 587;
+                //SmtpServer.Credentials = new System.Net.NetworkCredential("xx@gmail.com", "xx");
+                SmtpServer.Credentials = new System.Net.NetworkCredential("yusif.badmus@gmail.com", "Spoilthere2010");
+                SmtpServer.EnableSsl = true;
+                SmtpServer.Send(mail);
+
+                return true;
+            }
+
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
     }
 }

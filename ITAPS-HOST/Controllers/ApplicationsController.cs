@@ -172,7 +172,7 @@ namespace ITAPS_HOST.Controllers
             ViewBag.toolbarSettings = toolbarSettings;
             ViewBag.ServerUrl = _config.AppServerUrl;
             ViewBag.ReportServer = _reportConfig.ReportServer;
-            ViewBag.ReportPath = _reportConfig.ReportPath;
+            ViewBag.ReportPath = _reportConfig.TCCReport;
             UserDetails();
 
             return View();
