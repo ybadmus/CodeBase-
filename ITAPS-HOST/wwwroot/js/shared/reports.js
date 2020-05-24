@@ -12,7 +12,8 @@ $("#viewRTP").click(function () {
     if(reporttype === "PIT") {
         switch(parseInt(activeReport)) {
             case 1:
-                window.location.href = `${reportPreView}PITReturnsReport`;
+                var url = `${reportPreView}PITReturnsReport`;
+                window.location.replace(url);
                 break;
             case 2:
                 window.location.href = `${reportPreView}PITTaxOutStandingReport`;
