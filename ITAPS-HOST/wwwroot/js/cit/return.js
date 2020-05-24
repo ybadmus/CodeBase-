@@ -266,8 +266,8 @@ var previousDetail = function (stage) {
         $("#moreDetail1").hide();
         $("#moreDetail2").show();
         $("#moreDetail3").hide();
-        $("#previousDetail1").show();
-        $("#previousDetail2").hide();
+        $("#previousDetail1").hide();
+        $("#previousDetail2").show();
         $("#previousDetail3").hide();
     }
 
@@ -290,17 +290,25 @@ var loadDirectors = function (resp) {
 };
 
 var previewDirector = function (rowInfo) {
-    var appDetail = JSON.parse(sessionStorage.getItem("listOfDirectors"));
-    var dependants = appDetail[0].childDetails;
-    for(var i = 0; i < dependants.length; i++) {
-        if (dependants[i].dependantId === rowInfo.id) {
-            return loadDirectorDetailsModal(dependants[i]);
+    var directors = JSON.parse(sessionStorage.getItem("listOfDirectors"));
+    for (var i = 0; i < directors.length; i++) {
+        if (directors[i].directorId === rowInfo.id) {
+            return loadDirectorDetailsModal(directors[i]);
         }
     }
 }
 
-var loadDirectorDetailsModal = function () {
+var loadDirectorDetailsModal = function (resp) {
+    $(".directorFullNameModalDetails").text(resp.directorsName);
+    $(".directorTINModalDetails").text(resp.directorsTin);
+    $(".residentialStatusModalDetails").text(resp.resStatus);
+    $(".salaryDirectorModalDetails").text(resp.directorsSalary);
+    $(".interestDirectorModalDetails").text(resp.interst);
+    $(".otherAllowanceDirectorModalDetails").text(resp.otherAllowances);
+    $(".loansDirectorModalDetails").text(resp.loans);
+    $(".totalDirectorModalDetails").text(resp.total);
 
+    $("#directorDetailModal").modal("show");
 };
 
 $("#backToGrid").click(function () {
@@ -310,4 +318,9 @@ $("#backToGrid").click(function () {
 
     if (getParameterByName("type") === "annualreturn" || getParameterByName("type") === "provisional")
         initializeKendoGrid([], 1);
+});
+
+$("#previewCITReturnsReport").click(function () {
+    var reportPreView = `${serverUrl}CIT/`;
+    window.location.href = `${reportPreView}CITReturnFinalReport`;
 });

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BoldReports.Models.ReportViewer;
 using ITAPS_HOST.Data;
 using Microsoft.AspNetCore.Mvc;
 
@@ -53,12 +54,37 @@ namespace ITAPS_HOST.Controllers
             return View();
         }
 
+        public IActionResult CITReturnFinalReport()
+        {
+            UserDetails();
+            ToolbarSettings toolbarSettings = new ToolbarSettings();
+            toolbarSettings.CustomItems = new List<CustomItem>();
+
+            var customItem = new CustomItem()
+            {
+                GroupIndex = 1,
+                Index = 1,
+                CssClass = "e-icon e-mail e-reportviewer-icon",
+                Type = BoldReports.ReportViewerEnums.ToolBarItemType.Default,
+                Id = "E-Mail",
+                Tooltip = new ToolTip() { Header = "E-Mail", Content = "Send rendered report as mail attachment" }
+            };
+
+            toolbarSettings.CustomItems.Add(customItem);
+
+            ViewBag.toolbarSettings = toolbarSettings;
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            ViewBag.ReportServer = _reportConfig.ReportServer;
+            ViewBag.ReportPath = _reportConfig.CITReturnFinalReport;
+            return View();
+        }
+
         public IActionResult CITReturnsReport()
         {
             UserDetails();
             ViewBag.ServerUrl = _config.AppServerUrl;
             ViewBag.ReportServer = _reportConfig.ReportServer;
-            ViewBag.ReportPath = "/ITaPS_Reports/CitReturnsReport";
+            ViewBag.ReportPath = _reportConfig.CITReturnsReport;
             return View();
         }
 
@@ -66,7 +92,7 @@ namespace ITAPS_HOST.Controllers
         {
             UserDetails();
             ViewBag.ReportServer = _reportConfig.ReportServer;
-            ViewBag.ReportPath = "/ITaPS_Reports/CitTaxOutstandingReport";
+            ViewBag.ReportPath = _reportConfig.CITTaxOutstandingReport; 
             ViewBag.ServerUrl = _config.AppServerUrl;
             return View();
         }
@@ -75,7 +101,7 @@ namespace ITAPS_HOST.Controllers
         {
             UserDetails();
             ViewBag.ReportServer = _reportConfig.ReportServer;
-            ViewBag.ReportPath = "/ITaPS_Reports/CitTaxOverPaymentOutstandingReport";
+            ViewBag.ReportPath = _reportConfig.CITTaxOverPaymentOutstandingReport;
             ViewBag.ServerUrl = _config.AppServerUrl;
             return View();
         }
@@ -84,7 +110,7 @@ namespace ITAPS_HOST.Controllers
         {
             UserDetails();
             ViewBag.ReportServer = _reportConfig.ReportServer;
-            ViewBag.ReportPath = "/ITaPS_Reports/CitZeroTaxOutstandingReport";
+            ViewBag.ReportPath = _reportConfig.CITZeroTaxOutstandingReport;
             ViewBag.ServerUrl = _config.AppServerUrl;
             return View();
         }

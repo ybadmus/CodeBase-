@@ -8,7 +8,6 @@ var bootstrapNotification = function () {
     $("#pgHeader").text(HeaderName);
     $("#gridView").hide();
     $("#estimateDetail").hide();
-    $("#returnDetail").show();
 };
 
 var loadDetails = function (trId) {
@@ -23,19 +22,18 @@ var loadForm = function (response) {
         let resp = response[0];
 
         $("#dateSubmitted").text(resp.submittedDate);
-        $("#entityName").text(resp.taxpayerName);
-        $("#tin").text(resp.taxpayerTIN);
+        $("#taxPayerName").text(resp.taxpayerName);
+        $("#taxPayerTin").text(resp.taxpayerTIN);
         $("#assessmentYearView").text(resp.assessmentYear);
         $("#startDateView").text(resp.fromPeriod);
-        $("#endDateView").text(parseFloat(resp.toPeriod));
-        
+        $("#endDateView").text(resp.toPeriod);
+
         $("#estimatedAnnualChargeableIncome").text(parseFloat(resp.estimatedAnnualChargeableIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
         $("#estimatedAnnualLevyPayable").text(parseFloat(resp.estimatedAnnualLevyPayable).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
         $("#estimatedIncomeTaxPaid").text(parseFloat(resp.estimatedIncomeTaxPaid).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
         $("#estimatedQuarterlyIncomeTaxPayable").text(parseFloat(resp.estimatedQuarterlyIncomeTaxPayable).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
         $("#estimatedQuarterlyLevyPayable").text(parseFloat(resp.estimatedQuarterlyLevyPayable).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
         $("#taxRate").text(parseFloat(resp.taxRate).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-       
         hideAndShowThings();
     }
     else

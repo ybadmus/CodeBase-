@@ -1,1 +1,137 @@
-﻿
+﻿<div id="revisedEstimateDetail" style="display: none">
+    <div class="card-body">
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="tccDetails" role="tabpanel" aria-labelledby="nav-profile-tab">
+                <div class="form-horizontal">
+                    <div class="form-row">
+
+                        <div class="col-md-6" id="estimateDetailsGrid6">
+                            <div class="bordered-group" id="" style="height: 420px">
+                                <p class="card-title"><b>Entity Details</b></p>
+                                <div class="table-responsive border-bottom">
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Date Submitted</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="dateSubmitted"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="padding-left:5px;width:120px;font-weight:100;text-align: center; font-weight: bold; background: #f7f8f9;"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Entity Name</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="taxPayerName"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">TIN</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="taxPayerTin"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Assessment Year</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="assessmentYearView"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Start Date</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="startDateView"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">End Date</td>
+                                                <td style="padding-left:5px;width:280px;">
+                                                    <b><span id="endDateView"></span></b>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                         <div class="col-md-6" id="estimateDetailsGrid7">
+                            <div class="bordered-group" id="" style="height: 420px">
+                                <p class="card-title"><b>Income Details</b></p>
+                                <div class="table-responsive border-bottom">
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Annual Chargeable Income</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="estimatedAnnualChargeableIncome"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Annual Income Tax Payable</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="revAnnualIncomeTaxPayable"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Income Tax Paid</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="incomeTaxPaid"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Income Tax Balance Due</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="incomeTaxBalDue"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Income Tax To Pay</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="incomeTaxToPay"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Quarter Outstanding</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="quartersOutstanding"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Annual Levy Payable</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="revAnnualLevyPayable"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Levy Amount Paid</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="levyAmtPaid"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Levy Balance Due</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="levyBalDue"></span></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:120px;font-weight:100;">Levy Amount To Pay</td>
+                                                <td style="padding-left:5px;width:280px;text-align: right;">
+                                                    <b><span id="levyAmtToPay"></span></b>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <button id="backToGrid" class="btn btn-outline-primary"> Back</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

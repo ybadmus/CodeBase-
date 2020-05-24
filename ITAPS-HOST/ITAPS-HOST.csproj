@@ -11,10 +11,15 @@
     <StartupObject />
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
 
   <ItemGroup>
-    <PackageReference Include="BoldReports.AspNet.Core" Version="2.2.28" />
-    <PackageReference Include="BoldReports.Net.Core" Version="2.2.23" />
+    <PackageReference Include="BoldReports.AspNet.Core" Version="2.2.32" />
+    <PackageReference Include="BoldReports.Net.Core" Version="2.2.34" />
     <PackageReference Include="IdentityModel" Version="4.1.1" />
     <PackageReference Include="Marvin.StreamExtensions" Version="1.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />

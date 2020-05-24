@@ -3,6 +3,7 @@
 }
 
 <input id="reportPath" value="@ViewBag.ReportPath" hidden />
+<input id="serverUrl" value="@ViewBag.ServerUrl" hidden />
 
 <style>
     #reportviewer1_viewerContainer {
@@ -24,7 +25,7 @@
 </style>
 
 <div class="reportContainer">
-        <bold-report-viewer id="reportviewer1" report-service-url="../Reports" report-path="@ViewBag.ReportPath" report-server-url="@ViewBag.ReportServer" processing-mode="Remote" ajax-before-load="ajaxBeforeLoad" />
+    <bold-report-viewer id="reportviewer1" report-service-url="../Reports" report-path="@ViewBag.ReportPath" report-server-url="@ViewBag.ReportServer" toolbar-settings="ViewBag.toolbarSettings" tool-bar-item-click="onToolBarItemClick" processing-mode="Remote" ajax-before-load="ajaxBeforeLoad" />
 </div>
 
 <script>
@@ -39,8 +40,29 @@
     var parameters = [];
     parameters.push({ name: sessionStorage.getItem("rptPitAnnualUniPkIdLable"), labels: [sessionStorage.getItem("rptPitAnnualUniPkId")], values: [sessionStorage.getItem("rptPitAnnualUniPkId")], nullable: "true" });
 
-    function ajaxBeforeLoad(event) {
-        event.model.parameters = parameters;
+    function onAjaxRequest(args) {
+        args.model.parameters = parameters;
+    };
+
+    function onToolBarItemClick(args) {
+        if (args.value == "E-Mail") {
+            var proxy = $('#reportviewer1').data('boldReportViewer');
+            var Report = proxy.model.reportPath;
+            var lastsIndex = Report.lastIndexOf("/");
+            var reportName = Report.substring(lastsIndex + 1);
+            var requrl = serverUrl + 'Reports/SendEmail';
+            var _json = {
+                exportType: "PDF", reportViewerToken: proxy._reportViewerToken, ReportName: reportName
+            };
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: requrl,
+                data: JSON.stringify(_json),
+                dataType: "json",
+                crossDomain: true
+            })
+        }
     };
 </script>
 

@@ -8,7 +8,7 @@ var selectedStatus;
 var tccUpdateUrl = `${serverUrl}api/TCC/UpdateTCCApplication?id=`;
 var loadPtrCodesUrl = `${serverUrl}api/CodesApi/`;
 var PtrCodes = [];
-
+var activeApplicationType = "";
 
 $("#ptrListOfTaxOffices").on('change', function () {
     var elem = document.getElementById("ptrListOfTaxOffices");
@@ -25,9 +25,9 @@ var initializeKendoGrid = function (data) {
         columns: [
             { field: "statusDate", title: "Date", width: '90px' },
             { field: "applicationNo", title: "Application No.", width: '100px' },
-            { field: "applicantName", title: "Applicant", width: '20%' },
+            { field: "applicantName", title: "Applicant", width: '25%' },
             { field: "applicantTIN", title: "TIN", width: '15%' },
-            { field: "applicationType", title: "Type", width: '15%' },
+            { field: "applicationType", title: "Type", width: '25%' },
             {
                 command: [{
                     name: "view",
@@ -160,19 +160,18 @@ $("#reviseApp").click(function (e) {
 $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
     var grid = $("#Grid").getKendoGrid();
     var item = grid.dataItem($(e.target).closest("tr"));
-
     $("#appId").val(item.applicationId);
-    $("#modalId").text(item.applicationNo);
-    $("#appNo").text(item.applicationNo);
-    $("#currentStatus").text(item.statusId);
-    $("#applicantNamePTR").text(item.applicantName);
+
     $("#applicantTINPTR").text(item.applicantTIN);
+    $("#applicantNamePTR").text(item.applicantName);
+    $("#modalId").text(item.applicationNo);
 
     var ptrCode = ""
 
     for (var i = 0; i < PtrCodes.length; i++) {
         if (PtrCodes[i].description.toUpperCase().trim() === item.applicationType.toUpperCase().trim()) {
             ptrCode = PtrCodes[i].code.trim();
+            activeApplicationType = item.applicationType;
             break;
         }
     };
@@ -189,26 +188,74 @@ var prepareDetailsView = function (appId, pCode) {
 };
 
 var loadPtrDetails = function (resp) {
-    $("#appIdHeader").text(resp.applicationNo);
-    $("#appStatusHeader").text(resp.status);
+    $("#appIdHeader").text(testNullOrEmpty(resp[0].applicationNo));
+    $("#appNoDetails").text(resp[0].applicationNo);
+    $("#appStatusHeader").text(testNullOrEmpty(resp[0].status));
+    $("#dateSubmittedPTR").text(testNullOrEmpty(resp[0].submittedDate));
+    $("#assessmentYearPTR").text(testNullOrEmpty(resp[0].assessmentYear));
+    $("#dateOfBirthPTR").text(testNullOrEmpty(resp[0].dateOfBirth));
+    $("#applicantNamePTR").text(resp[0].applicantName);
+    $("#applicantTINPTR").text(resp[0].applicantTIN);
+    $("#employerAddressPTR").text(testNullOrEmpty(resp[0].employerAddress));
+    $("#employerEmailPTR").text(testNullOrEmpty(resp[0].employerEmail));
+    $("#employerNamePTR").text(testNullOrEmpty(resp[0].employerName));
+    $("#employerPhonePTR").text(testNullOrEmpty(resp[0].employerPhone));
+    $("#employerTINPTR").text(testNullOrEmpty(resp[0].employerTIN));
+    $("#endDatePTR").text(testNullOrEmpty(resp[0].endDate));
+    $("#genderPTR").text(resp[0].gender === "M" ? "Male" : resp[0].gender === "F" ? "Female" : resp[0].gender);
+    $("#maritalStatusPTR").text(testNullOrEmpty(resp[0].maritalStatus));
+    $("#mothersMaidenNamePTR").text(testNullOrEmpty(resp[0].mothersMaidenName));
+    $("#phoneNoPTR").text(testNullOrEmpty(resp[0].phoneNo));
+    $("#startDatePTR").text(testNullOrEmpty(resp[0].startDate))
+    $("#currentStatus").text(resp[0].statusId);
+    $("#applicationType").text(activeApplicationType);
 
-    $("#dateSubmittedPTR").text(resp.submittedDate);
-    $("#lastUpdatedPTR").text(resp.statusDate);
-    $("#assessmentYearPTR").text(resp.assessmentYear);
-    $("#dateOfBirthPTR").text(resp.dateOfBirth);
-    $("#employerAddressPTR").text(resp.employerAddress);
-    $("#employerEmailPTR").text(resp.employerEmail);
-    $("#employerNamePTR").text(resp.employerName);
-    $("#employerPhonePTR").text(resp.employerPhone);
-    $("#employerTINPTR").text(resp.employerTIN);
-    $("#endDatePTR").text(resp.endDate);
-    $("#genderPTR").text(resp.gender === "M" ? "Male" : resp.gender === "F" ? "Female" : resp.gender);
-    $("#maritalStatusPTR").text(resp.maritalStatus);
-    $("#mothersMaidenNamePTR").text(resp.mothersMaidenName);
-    $("#phoneNoPTR").text(resp.phoneNo);
-    $("#startDatePTR").text(resp.startDate);
-    $("#appNoTex2").text(resp.applicationNo);
-
+    if (activeApplicationType.trim() === "Disability Relief") {
+        loadDisabilityReliefDetail(resp);
+        $("#ptrMarriageReliefDetailsGrid").hide();
+        $("#ptrAgedDepedentReliefDetailsGrid").hide();
+        $("#ptrOldAgeReliefDetailsGrid").hide();
+        $("#ptrChildWardDepedentReliefDetailsGrid").hide();
+        $("#texWHTDetailsGrid").hide();
+        $("#tccRequestEntityDetailsGrid").hide();
+        $("#ptrDisabilityReliefDetailsGrid").show();
+    } else if (activeApplicationType.trim() === "Marriage/Responsibility Relief") {
+        loadMarriageReliefDetail(resp);
+        $("#ptrDisabilityReliefDetailsGrid").hide();
+        $("#ptrAgedDepedentReliefDetailsGrid").hide();
+        $("#ptrOldAgeReliefDetailsGrid").hide();
+        $("#ptrChildWardDepedentReliefDetailsGrid").hide();
+        $("#texWHTDetailsGrid").hide();
+        $("#tccRequestEntityDetailsGrid").hide();
+        $("#ptrMarriageReliefDetailsGrid").show();
+    } else if (activeApplicationType.trim() === "Aged Dependants Relief") {
+        loadAgedDependentReliefDetail(resp);
+        $("#ptrDisabilityReliefDetailsGrid").hide();
+        $("#ptrMarriageReliefDetailsGrid").hide();
+        $("#ptrOldAgeReliefDetailsGrid").hide();
+        $("#ptrChildWardDepedentReliefDetailsGrid").hide();
+        $("#texWHTDetailsGrid").hide();
+        $("#tccRequestEntityDetailsGrid").hide();
+        $("#ptrAgedDepedentReliefDetailsGrid").show();
+    } else if (activeApplicationType.trim() === "Old Age Relief") {
+        loadOldAgeReliefDetail(resp);
+        $("#ptrDisabilityReliefDetailsGrid").hide();
+        $("#ptrMarriageReliefDetailsGrid").hide();
+        $("#ptrAgedDepedentReliefDetailsGrid").hide();
+        $("#ptrChildWardDepedentReliefDetailsGrid").hide();
+        $("#texWHTDetailsGrid").hide();
+        $("#tccRequestEntityDetailsGrid").hide();
+        $("#ptrOldAgeReliefDetailsGrid").show();
+    } else if (activeApplicationType.trim() === "Child/Ward Education Relief") {
+        loadChildWardDependentRelief(resp);
+        $("#ptrDisabilityReliefDetailsGrid").hide();
+        $("#ptrMarriageReliefDetailsGrid").hide();
+        $("#ptrAgedDepedentReliefDetailsGrid").hide();
+        $("#ptrOldAgeReliefDetailsGrid").hide();
+        $("#texWHTDetailsGrid").hide();
+        $("#tccRequestEntityDetailsGrid").hide();
+        $("#ptrChildWardDepedentReliefDetailsGrid").show();
+    }
 };
 
 var loadReliefTypes = function () {
@@ -288,4 +335,124 @@ var backToGrid = function () {
     setTimeout(function () {
         window.location.href = `${serverUrl}approval/ptrapproval`;
     }, 3000);
+};
+
+var loadOldAgeReliefDetail = function(resp) {
+    $("#oldAgeDocIssueBy").text(testNullOrEmpty(resp[0].birthCertIssueBy));
+    $("#oldAgeDocIssueNo").text(testNullOrEmpty(resp[0].birthCertIssueNo));
+    $("#oldAgeDocSignedBy").text(testNullOrEmpty(resp[0].birthCertSignedBy));
+    $("#oldAgeDocIssueDate").text(testNullOrEmpty(resp[0].birthCertIssuingDate));
+    $("#oldAgeReliefBirthDoc").attr("href", resp[0].birthCertDocument);
+};
+
+var loadAgedDependantReliefModal = function(resp) {
+    $("#agedDependentFullName").text(testNullOrEmpty(resp.firstName + " " + resp.middleName + " " + resp.lastName));
+    $("#agedDependentDOB").text(testNullOrEmpty(resp.agedDateOfBirth));
+    $("#agedDependentGender").text(testNullOrEmpty(resp.gender === "M" ? "Male" : "Female"));
+    $("#agedDependentMStatus").text(testNullOrEmpty(resp.maritalStatus));
+    $("#agedDependentbirthCertIssueBy").text(testNullOrEmpty(resp.birthCertIssueBy));
+    $("#agedDependentbirthCertIssueDate").text(testNullOrEmpty(resp.certIssuingDate));
+    $("#agedDependentbirthCertSignedBy").text(testNullOrEmpty(resp.birthCertSignedBy));
+    $("#agedDependentBirthCertDocument").attr("href", resp.birthCertDocument);
+
+    $("#dependentDetails").modal("show");
+};
+
+var loadChildWardDependantReliefModal = function(resp) {
+    $("#childDependentFullName").text(testNullOrEmpty(resp.firstName + " " + resp.middleName + " " + resp.lastName));
+    $("#childDependentSchoolName").text(testNullOrEmpty(resp.schoolName));
+    $("#childDependentDateOfAdmission").text(testNullOrEmpty(resp.dateOfAdmission));
+    $("#childDependentDOB").text(testNullOrEmpty(resp.childDateOfBirth));
+    $("#childDependentadmissionReferenceNo").text(testNullOrEmpty(resp.admissionReferenceNo));
+    $("#childDependentBirthCertDocument").attr("href", resp.birthCertDocument);
+    $("#childDependentBirthCertIssueNo").text(testNullOrEmpty(resp.birthCertIssueNo));
+    $("#childDependentBirthCertIssueDate").text(testNullOrEmpty(resp.birthCertIssueDate));
+    $("#childDependentBirthCertIssueBy").text(testNullOrEmpty(resp.birthCertIssueBy));
+    $("#achildDependentBirthCertSignedBy").text(testNullOrEmpty(resp.birthCertSignedBy));
+
+    $("#childDependentDetails").modal("show");
+};
+
+var loadChildWardDependentRelief = function (resp) {
+    let output = "";
+    var dependants = resp[0].childDetails.sort(function (a, b) {
+        return (a.firstName - b.firstName);
+    });
+
+    for (var i = 0; i < dependants.length; i++) {
+        output = output + '<tr><td align="">' + dependants[i].firstName + " " + dependants[i].middleName + " " + dependants[i].lastName + '</td>'
+            + '<td align="" style="color: black">' + dependants[i].childDateOfBirth + '</td>'
+            + '<td align="center" style="color: black">' + dependants[i].schoolName + '</td>'
+            + '<td><button style="padding: 4px 8px;" onclick="previewChildDependent(this)" id="' + dependants[i].dependantId +
+            '" title="View item" class="btn btn-success btn-sm btnReturnDetail"><span class="fa fa-file fa-lg"></span></button></td>';
+    }
+
+    output = output;
+    $("#listOfChildWardDependents").html(output);
+    sessionStorage.setItem("listOfChildWardDependents", JSON.stringify(resp));
+};
+
+var loadAgedDependentReliefDetail = function (resp) {
+    let output = "";
+    var dependants = resp[0].agedDepandantsDetails.sort(function (a, b) {
+        return (a.firstName - b.firstName);
+    });
+
+    for (var i = 0; i < dependants.length; i++) {
+        output = output + '<tr><td align="">' + dependants[i].firstName + " " + dependants[i].middleName + " " + dependants[i].lastName + '</td>'
+            + '<td align="" style="color: black">' + dependants[i].agedDateOfBirth + '</td>'
+            + '<td align="center" style="color: black">' + dependants[i].gender + '</td>'
+            + '<td align="center" style="color: black">' + dependants[i].maritalStatus + '</td>'
+            + '<td><button style="padding: 4px 8px;" onclick="previewDependent(this)" id="' + dependants[i].dependentId +
+            '" title="View item" class="btn btn-success btn-sm btnReturnDetail"><span class="fa fa-file fa-lg"></span></button></td>';
+    }
+
+    output = output;
+    $("#listOfAgedDependents").html(output);
+    sessionStorage.setItem("listOfAgedDependents", JSON.stringify(resp));
+};
+
+var previewChildDependent = function (rowInfo) {
+    var appDetail = JSON.parse(sessionStorage.getItem("listOfChildWardDependents"));
+    var dependants = appDetail[0].childDetails;
+    for(var i = 0; i < dependants.length; i++) {
+        if (dependants[i].dependantId === rowInfo.id) {
+            return loadChildWardDependantReliefModal(dependants[i]);
+        }
+    }
+}
+
+var previewDependent = function (rowInfo) {
+    var appDetail = JSON.parse(sessionStorage.getItem("listOfAgedDependents"));
+    var dependants = appDetail[0].agedDepandantsDetails;
+    for(var i = 0; i < dependants.length; i++) {
+        if (dependants[i].dependentId === rowInfo.id) {
+            return loadAgedDependantReliefModal(dependants[i]);
+        }
+    }
+};
+
+
+var loadMarriageReliefDetail = function (resp) {
+    $("#marriageDetailsCertDoc").attr("href", resp[0].certDocument)
+    $("#certIssuingDateMar").text(testNullOrEmpty(resp[0].certIssuingDate));
+    $("#spouseEmailMar").text(testNullOrEmpty(resp[0].spouseEmail));
+    $("#spouseTIN").text(testNullOrEmpty(resp[0].spouseTIN));
+    $("#spousePhone").text(testNullOrEmpty(resp[0].spousePhone));
+    $("#spouseDateOfBirth").text(testNullOrEmpty(resp[0].spouseDateOfBirth));
+    $("#spouseGender").text(testNullOrEmpty(resp[0].spouseGender === "F" ? "Female" : "Male"));
+    $("#registrationDate").text(testNullOrEmpty(resp[0].registrationDate));
+    $("#certIssuedBy").text(testNullOrEmpty(resp[0].certIssuedBy));
+    $("#certIssueNo").text(testNullOrEmpty(resp[0].certIssueNo));
+    $("#certSignedBy").text(testNullOrEmpty(resp[0].certSignedBy));
+    $("#nameOfGender").text(testNullOrEmpty(resp[0].spouseFirstName + " " + resp[0].spouseMiddleName + " " + resp[0].spouseLastName));
+};
+
+var loadDisabilityReliefDetail = function (resp) {
+    $("#typeOfDisability").text(testNullOrEmpty(resp[0].typeOfDisability));
+    $("#disabilityDisclosureDate").text(testNullOrEmpty(resp[0].disabilityDisclosureDate));
+    $("#disabilityDoc").attr("href", resp[0].disabilityDoc)
+    $("#disabilityDocIssueBy").text(testNullOrEmpty(resp[0].disabilityDocIssueBy));
+    $("#disabilityDocIssueNo").text(testNullOrEmpty(resp[0].disabilityDocIssueNo));
+    $("#disabilityDocSignedBy").text(testNullOrEmpty(resp[0].disabilityDocSignedBy));
 };

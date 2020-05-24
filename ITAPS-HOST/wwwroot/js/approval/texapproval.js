@@ -22,7 +22,7 @@ var initializeKendoGrid = function (data) {
         columns: [
             { field: "statusDate", title: "Date", width: '90px' },
             { field: "applicationNo", title: "Application No.", width: '100px' },
-            { field: "applicantName", title: "Applicant", width: '20%' },
+            { field: "applicantName", title: "Applicant", width: '30%' },
             { field: "applicantTIN", title: "Applicant TIN", width: '15%' },
             {
                 command: [{
@@ -177,6 +177,7 @@ var loadAppDetails = function (resp) {
     $("#applicantName").text(response.applicantName);
     $("#applicantTin").text(response.applicantTIN);
     $("#typeOfWht").text(response.typeOfWithHolding);
+    $("#typeOfApp").text("WHT Tax Exemption");
     $("#residentialStatus").text(response.residentialStatus);
     $("#remarks").text(response.remarks);
     $("#reason").text(response.reasons);

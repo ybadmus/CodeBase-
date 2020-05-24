@@ -5,7 +5,7 @@ var GetTccCommentsByIdUrl = `${serverUrl}api/TCC/GetAllTccApplicationComments?tc
 var GetTccByIdUrl = `${serverUrl}api/TCC/GetTccApplicationById?tccId=`;
 var GetTCCDocuments = `${serverUrl}api/TCC/GetTCCApplicationDocumentByApplicationId`;
 let tccUpdateUrl = `${serverUrl}api/TCC/UpdateTCCApplication?id=`;
-var ReportDownloadView = `${serverUrl}applications/certificate`;
+var ReportDownloadView = `${serverUrl}reportviewer/index`;
 var loadPtrCodesUrl = `${serverUrl}api/CodesApi/`;
 var activeTaxOffice = "";
 var appType = "TCC";
@@ -23,11 +23,11 @@ var initializeKendoGrid = function (data, stage) {
         };
 
         $("#Grid").kendoGrid({
-            dataSource: { data: data, pageSize: 8 },
+            dataSource: {
+                data: data
+            },
             sortable: true,
-            selectable: true,
-            dataBound: onDataBound,
-            pageable: { refresh: false, pageSizes: true, buttonCount: 5 },
+            pageable: { refresh: true, pageSizes: true, pageSize: 8, buttonCount: 5 },
             columns: [
                 { field: "assignedDate", title: "Date", width: '90px', format: "{0:MM-dd-yyyy}" },
                 { field: "applicantName", title: "Applicant", width: '17%' },
@@ -266,10 +266,15 @@ var backToView = function () {
 };
 
 $("#previewApplication").click(function () {
-    let appId = $("#appId").val();
 
-    sessionStorage.setItem("tccReportId", appId);
-    sessionStorage.setItem("tccLabel", "uniApplicationId");
+    if (activeApplicationType === "TCC") {
+        let appId = $("#appId").val();
+        sessionStorage.setItem("tccReportId", appId);
+        sessionStorage.setItem("tccLabel", "uniApplicationId");
 
-    window.location.href = `${ReportDownloadView}`;
+        window.location.href = `${ReportDownloadView}`;
+    } else {
+        return toastr.info("Preview Not Available");
+    }
+    
 });
