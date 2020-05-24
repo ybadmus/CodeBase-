@@ -3,17 +3,17 @@ $(document).ready(function () {
 });
 
 var switchTilesByUserRight = function (response) {
-    if(response[0].szGroupName.toLowerCase() === "officer") {
+    if (response[0].szLevel.toLowerCase() === "officer") {
         $("#approveTCC").hide();
         $("#processTCC").show();
         $("#assignTCC").hide();
         $("#allTCC").show();
-    } else if (response[0].szGroupName.toLowerCase() === "manager") {
+    } else if (response[0].szLevel.toLowerCase() === "manager") {
         $("#approveTCC").show();
         $("#processTCC").hide();
         $("#assignTCC").hide();
         $("#allTCC").show();
-    } else if (response[0].szGroupName.toLowerCase() === "supervisor") {
+    } else if (response[0].szLevel.toLowerCase() === "supervisor") {
         $("#approveTCC").hide();
         $("#processTCC").hide();
         $("#assignTCC").show();
