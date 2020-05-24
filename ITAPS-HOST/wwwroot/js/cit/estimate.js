@@ -27,20 +27,15 @@ var loadForm = function (response) {
         $("#tin").text(resp.taxpayerTIN);
         $("#assessmentYearView").text(resp.assessmentYear);
         $("#startDateView").text(resp.fromPeriod);
-        $("#endDateView").text(parseFloat(resp.toPeriod);
+        $("#endDateView").text(parseFloat(resp.toPeriod));
         
-        $("#revAnnualChargeableIncome").text(parseFloat(resp.revAnnualChargeableIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-        $("#revAnnualIncomeTaxPayable").text(parseFloat(resp.revAnnualIncomeTaxPayable).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-        $("#incomeTaxPaid").text(parseFloat(resp.incomeTaxPaid).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-        $("#incomeTaxBalDue").text(parseFloat(resp.incomeTaxBalDue).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-        $("#incomeTaxToPay").text(parseFloat(resp.incomeTaxToPay).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-        $("#quartersOutstanding").text(parseFloat(resp.quartersOutstanding).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-        $("#revAnnualLevyPayable").text(parseFloat(resp.revAnnualLevyPayable).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-        $("#levyAmtPaid").text(parseFloat(resp.levyAmtPaid).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-        $("#levyBalDue").text(parseFloat(resp.levyBalDue).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-        $("#levyAmtToPay").text(parseFloat(resp.levyAmtToPay).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
+        $("#estimatedAnnualChargeableIncome").text(parseFloat(resp.estimatedAnnualChargeableIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $("#estimatedAnnualLevyPayable").text(parseFloat(resp.estimatedAnnualLevyPayable).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $("#estimatedIncomeTaxPaid").text(parseFloat(resp.estimatedIncomeTaxPaid).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $("#estimatedQuarterlyIncomeTaxPayable").text(parseFloat(resp.estimatedQuarterlyIncomeTaxPayable).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $("#estimatedQuarterlyLevyPayable").text(parseFloat(resp.estimatedQuarterlyLevyPayable).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $("#taxRate").text(parseFloat(resp.taxRate).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+       
         hideAndShowThings();
     }
     else

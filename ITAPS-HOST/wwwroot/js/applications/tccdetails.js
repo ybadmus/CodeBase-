@@ -386,6 +386,7 @@ var decideNextTccStage = function (statusId) {
             $("#addTaxPosition").hide();
             $("#declineStatus").hide();
             $("#suspendStatus").hide();
+            $("#sendForApproval").hide();
 
             let loc = window.location.href;
             if (loc.substring(loc.lastIndexOf('/') + 1) === "assign") {
@@ -430,6 +431,7 @@ var decideNextTccStage = function (statusId) {
             $("#processApplication").hide();
             $("#declineStatus").hide();
             $("#suspendStatus").hide();
+            $("#sendForApproval").hide();
 
             $("#previewApplication").show();
             $("#reviseApplication").hide();
@@ -441,6 +443,7 @@ var decideNextTccStage = function (statusId) {
             $("#suspendStatus").hide();
             $("#processApplication").hide();
             $("#acknowledgeStatus").hide();
+            $("#sendForApproval").hide();
             $("#previewApplication").hide();
             $("#reviseApplication").hide();
             $("#reviseApplication").attr("disabled", false);
@@ -449,10 +452,11 @@ var decideNextTccStage = function (statusId) {
             $("#acknowledgeStatus").hide();
             $("#addTaxPosition").hide();
             $("#declineStatus").show();
-            $("#processApplication").show();
-            $("#acknowledgeStatus").hide();
             $("#previewApplication").hide();
+            $("#sendForApproval").hide();
             $("#reviseApplication").show();
+            $("#declineStatus").show();
+            $("#processApplication").show();
             $("#reviseApplication").attr("disabled", false);
             break;
         case 5:
@@ -462,6 +466,7 @@ var decideNextTccStage = function (statusId) {
             $("#downloadTcc").hide();
             $("#acknowledgeStatus").hide();
             $("#previewApplication").hide();
+            $("#sendForApproval").hide();
             $("#reviseApplication").show();
             $("#reviseApplication").attr("disabled", true);
             break;
