@@ -3,9 +3,11 @@ var userid = $("#userId").val();
 var urlTaxOffice = `${serverUrl}api/Users/GetAllUserTaxOfficesByUserID`;
 var urlAssignedMenu = `${serverUrl}api/Users/GetAllMenusByUserId`;
 var urlLoadUserDetails = `${serverUrl}api/Users/GetUserDetailsById`;
+var logoutTimer;
 
 $(document).ready(function () {
     loadTaxOfficeName();
+    InitializeTimer();
     loadMenus();
 });
 
@@ -242,3 +244,69 @@ var testNullOrEmpty = function (value) {
     } else
         return value;
 };
+
+var InitializeTimer = function () {
+    var interval = 60 * 10,
+        display = document.querySelector('#ScreenTimeOutView');
+    startTimer(interval, display); 
+}
+
+var ContinueToStay = function () {
+    window.location.reload();
+    clearInterval(logoutTimer);
+    InitializeTimer();
+
+    $('#ScreenTimeOutModal').modal('hide');
+}
+
+var startTimer = function (duration, display) {
+    logoutTimer = 0;
+    var start = Date.now(),
+        diff,
+        minutes,
+        seconds;
+    function timer() {
+        // get the number of seconds that have elapsed since 
+        // startTimer() was called
+        diff = duration - (((Date.now() - start) / 1000) | 0);
+
+        // does the same job as parseInt truncates the float
+        minutes = (diff / 60) | 0;
+        seconds = (diff % 60) | 0;
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        //console.log({ duration, diff, minutes, seconds });
+
+        display.textContent = minutes + ":" + seconds;
+
+        if (diff <= 0) {
+            // add one second so that the count down starts at the full duration
+            // example 05:00 not 04:59
+            start = Date.now() + 1000;
+        }
+
+        // Show TimeOut Model;
+        if (diff === 31) {
+            $('#ScreenTimeOutModal').modal('show');
+        }
+
+        // Logout
+        if (diff === 1) {
+            var serverUrl = $("#serverUrl").val();
+            localStorage.clear();
+            window.location = `${serverUrl}/Home/Logout`;
+        }
+    };
+    // we don't want to wait a full second before the timer starts
+    timer();
+    logoutTimer = setInterval(timer, 1000);
+}
+
+//LOGGING OUT ACTION
+$("#logOut, #mdlLogout, #logMeOut").click(function () {
+
+    localStorage.clear();
+    console.log("Logout", "Clicked");
+});

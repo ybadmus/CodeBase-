@@ -152,7 +152,7 @@ var LoadModalGrid = function (listOfWht) {
         var thId = i + 1;
         output = output + '<tr><td scope="row">' + thId + '</td><td>' + listOfWht[i].entity + '</td><td style="text-align: right">' + parseFloat(listOfWht[i].contractAmount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') +
             '</td><td style="text-align: right">' + parseFloat(listOfWht[i].grossAmountOfPayment).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + '</td><td style="text-align: right">' + parseFloat(listOfWht[i].taxWithHeld).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + '</td><td>' + listOfWht[i].invoiceNo + '</td><td>' + listOfWht[i].transType +
-            '</td><td><button style="padding: 4px 8px;" onclick="detWHTDetailsByInvNo(this)" id="' + listOfWht[i].invoiceNo +
+            '</td><td><button style="padding: 4px 8px;" onclick="detWHTDetailsByInvNo(this)" id="' + listOfWht[i].id +
             '" title="View item" class="btn btn-success btn-sm btnReturnDetail"><span class="fa fa-file fa-lg"></span></button></td></tr>';
     };
 
@@ -169,7 +169,7 @@ var GetGWTTByGwrt = function (period, tin) {
 };
 
 var getWHTDetails = function (invoiceNumber) {
-    var url = `${ServerUrl}api/wht/GetGWTTByInvoiceNumber?invoiceNumber=${invoiceNumber}`;
+    var url = `${ServerUrl}api/wht/GetGWTTByInvoiceNumber?whtId=${invoiceNumber}`;
 
     ApiCaller(url, "GET", "", LoadModalDetails);
 };

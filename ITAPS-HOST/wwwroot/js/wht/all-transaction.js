@@ -225,7 +225,7 @@ var disablePeriodFields = function () {
 };
 
 var getWHTDetails = function (invoiceNumber) {
-    var url = `${ServerUrl}api/wht/GetGWTTByInvoiceNumber?invoiceNumber=${invoiceNumber}`;
+    var url = `${ServerUrl}api/wht/GetGWTTByInvoiceNumber?whtId=${invoiceNumber}`;
 
     ApiCaller(url, "GET", "", LoadModalDetails);
 };
@@ -260,7 +260,7 @@ $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
     var grid = $("#Grid").getKendoGrid();
     var item = grid.dataItem($(e.target).closest("tr"));
 
-    getWHTDetails(item.invoiceNumber);
+    getWHTDetails(item.id);
 });
 
 var hideShowDetails = function () {
