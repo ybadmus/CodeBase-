@@ -41,6 +41,8 @@
     var parameters = [];
     parameters.push({ name: sessionStorage.getItem("uniCITTransactionLabel"), labels: [sessionStorage.getItem("uniCITTransactionId")], values: [sessionStorage.getItem("uniCITTransactionId")], nullable: "true" });
 
+    console.log(parameters);
+
     function ajaxBeforeLoad(event) {
         event.model.parameters = parameters;
     };

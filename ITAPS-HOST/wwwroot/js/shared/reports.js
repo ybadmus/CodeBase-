@@ -4,6 +4,8 @@ var activeYear = "";
 var activeReport = 0;
 
 $("#viewRTP").click(function () {
+    var url = "";
+
     sessionStorage.setItem("rptTaxOffice", activeTaxOffice);
     sessionStorage.setItem("rptYear", activeYear);
     sessionStorage.setItem("rptTaxOfficeLabel", "uniTaxOfficeId");
@@ -12,16 +14,20 @@ $("#viewRTP").click(function () {
     if(reporttype === "PIT") {
         switch(parseInt(activeReport)) {
             case 1:
-                window.location.href = `${reportPreView}PITReturnsReport`;
+                url = `${reportPreView}PITReturnsReport`;
+                window.location.replace(url);
                 break;
             case 2:
-                window.location.href = `${reportPreView}PITTaxOutStandingReport`;
+                url  = `${reportPreView}PITTaxOutStandingReport`;
+                window.location.replace(url);
                 break;
             case 3:
-                window.location.href = `${reportPreView}PITTaxOverPaymentReport`;
+                url  = `${reportPreView}PITTaxOverPaymentReport`;
+                window.location.replace(url);
                 break;
             case 4:
-                window.location.href = `${reportPreView}PITZeroTaxOutstandingReport`;
+                url  = `${reportPreView}PITZeroTaxOutstandingReport`;
+                window.location.replace(url);
                 break;
             default:
               return toastr.info("Invalid Report type selected!")
@@ -29,16 +35,20 @@ $("#viewRTP").click(function () {
     } else if(reporttype === "CIT") {
         switch(parseInt(activeReport)) {
             case 1:
-                window.location.href = `${reportPreView}CITReturnsReport`;
+                url = `${reportPreView}CITReturnsReport`;
+                window.location.replace(url);
                 break;
             case 2:
-                window.location.href = `${reportPreView}CitTaxOutStandingReport`;
+                url = `${reportPreView}CitTaxOutStandingReport`;
+                window.location.replace(url);
                 break;
             case 3:
-                window.location.href = `${reportPreView}CITTaxOverPaymentReport`;
+                url = `${reportPreView}CITTaxOverPaymentReport`;
+                window.location.replace(url);
                 break;
             case 4:
-                window.location.href = `${reportPreView}CITZeroTaxOutstandingReport`;
+                url = `${reportPreView}CITZeroTaxOutstandingReport`;
+                window.location.replace(url);
                 break;
             default:
               return toastr.info("Invalid Report type selected!")

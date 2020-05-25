@@ -42,12 +42,6 @@ $(document).ready(() => {
 
 });
 
-//LOGGING OUT ACTION
-$("#logOut, #mdlLogout, #logMeOut").click(function () {
-    
-    localStorage.clear();
-    console.log("Logout", "Clicked");
-});
 
 /********** ACCORDION SECTION **********/
 $(function() {
@@ -272,57 +266,11 @@ function titleCase(str) {
     return splitStr.join(' ');
 }
 
-// Automatic Logout Timer
-var logoutTimer;
-var startTimer  = function (duration, display) {
-    logoutTimer = 0;
-    var start = Date.now(),
-        diff,
-        minutes,
-        seconds;
-    function timer() {
-        // get the number of seconds that have elapsed since 
-        // startTimer() was called
-        diff = duration - (((Date.now() - start) / 1000) | 0);
-
-        // does the same job as parseInt truncates the float
-        minutes = (diff / 60) | 0;
-        seconds = (diff % 60) | 0;
-
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
-
-        //console.log({ duration, diff, minutes, seconds });
-
-        display.textContent = minutes + ":" + seconds;
-
-        if (diff <= 0) {
-            // add one second so that the count down starts at the full duration
-            // example 05:00 not 04:59
-            start = Date.now() + 1000;
-        }
-
-        // Show TimeOut Model;
-        if (diff === 31) {
-            $('#ScreenTimeOutModal').modal('show');
-        }
-
-        // Logout
-        if (diff === 1) {
-            var serverUrl = $("#serverUrl").val();
-            localStorage.clear();
-            window.location = `${serverUrl}/Home/Logout`;
-        }
-    };
-    // we don't want to wait a full second before the timer starts
-    timer();
-    logoutTimer = setInterval(timer, 1000);
-}
 
 
 // OnLoad events listener
 window.onload = function () {
-    //InitializeTimer();
+    InitializeTimer();
 };
 
 // Selected web page events listener
@@ -332,31 +280,10 @@ webEvents.forEach(function (eventName) {
         // Modal is not shown
         if (!($("#ScreenTimeOutModal").data('bs.modal') || {})._isShown) {
             clearInterval(logoutTimer);
-            //InitializeTimer();
+            InitializeTimer();
         }
     }, true);
 });
-
-// Initialize the timer
-var InitializeTimer = function () {
-    var fiveMinutes = 60 * 5, // 60 * 5 => 5mins
-        display = document.querySelector('#ScreenTimeOutView');
-     startTimer(fiveMinutes, display); // Comment|Uncomment this line to Disable|Enable timer.
-}
-
-// I want to continue staying on page.
-var ContinueToStay = function () {
-    // Reload current page.
-    //window.location.reload();
-    clearInterval(logoutTimer);
-    InitializeTimer();
-
-    var serverUrl = $("#serverUrl").val();
-    var url = `${serverUrl}api/TCC/RenewToken`;
-    apiCaller(url, "GET");
-
-    $('#ScreenTimeOutModal').modal('hide');
-}
 
 function RoundTo(num) {
     return +(Math.round(num + "e+2") + "e-2");

@@ -3,7 +3,7 @@ $(document).ready(function () {
 });
 
 var switchTilesByUserRight = function (response) {
-    if(response[0].szGroupName.toLowerCase() === "officer") {
+    if (response[0].szGroupName.toLowerCase() === "officer") {
         $("#approveTCC").hide();
         $("#processTCC").show();
         $("#assignTCC").hide();

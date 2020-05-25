@@ -18,7 +18,7 @@ namespace ITAPS_HOST.IServices
         Task<ResponseItem<object>> GetGWVTByGwvrAsync(Guid periodId, string tin);
         Task<ResponseItemForCreationDto<object>> PostGWTR(GwtrForCreationDto data);
         Task<ResponseItemForCreationDto<object>> PostWTR1(TaxRateForCreationDto data);
-        Task<ResponseItem<object>> GetGWTTByInvoiceNumberAsync(string invoiceNumber);
+        Task<ResponseItem<object>> GetGWTTByInvoiceNumberAsync(Guid invoiceNumber);
         Task<ResponseItem<object>> GetGWVTByInvoiceNumberAsync(string invoiceNumber);
     }
 }

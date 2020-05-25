@@ -65,3 +65,11 @@
 #Grid .k-grid-content {
     height: 450px !important;
 }
+
+.formField {
+    margin: 15px 0px;
+}
+
+    .formField select {
+        height: 34px !important;
+    }

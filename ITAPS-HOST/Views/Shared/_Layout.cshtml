@@ -27,13 +27,13 @@
     <link href="~/css/Itaps-custom.css" rel="stylesheet" />
     <!-- Kendo -->
     <link href="~/kendo/css/kendo.default.min.css" rel="stylesheet" />
-        <link href="~/kendo/css/kendo.bootstrap.min.css" rel="stylesheet" />
-        <link href="~/kendo/css/kendo.default.mobile.min.css" rel="stylesheet" />
-        <link href="~/kendo/css/kendo.common.min.css" rel="stylesheet" />
+    <link href="~/kendo/css/kendo.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/kendo/css/kendo.default.mobile.min.css" rel="stylesheet" />
+    <link href="~/kendo/css/kendo.common.min.css" rel="stylesheet" />
     @*<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2019.1.220/styles/kendo.common.min.css">
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2019.1.220/styles/kendo.rtl.min.css">
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2019.1.220/styles/kendo.default.min.css">
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2019.1.220/styles/kendo.mobile.all.min.css">*@
+        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2019.1.220/styles/kendo.rtl.min.css">
+        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2019.1.220/styles/kendo.default.min.css">
+        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2019.1.220/styles/kendo.mobile.all.min.css">*@
     <!--Toastr and Loader-->
     <link href="~/css/showLoading.css" rel="stylesheet" />
     <link href="~/css/toastr.min.css" rel="stylesheet" />
@@ -234,19 +234,11 @@
     <script src="~/kendo/js/kendo.web.min.js"></script>
     <script src="~/kendo/js/knockout-3.1.0.js"></script>
     <script src="~/kendo/js/knockout-kendo.min.js"></script>
-    @*<script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
-        <script src="https://kendo.cdn.telerik.com/2019.1.220/js/angular.min.js"></script>
-        <script src="https://kendo.cdn.telerik.com/2019.1.220/js/jszip.min.js"></script>
-        <script src="https://kendo.cdn.telerik.com/2019.1.220/js/kendo.all.min.js"></script>*@
-    <!--Loader-->
     <script src="~/js/jquery.showLoading.min.js"></script>
     <!--Toastr-->
     <script src="~/js/toastr.min.js"></script>
     <script src="~/js/shared/itaps-host-shared.js"></script>
-    @*<script src="~/js/shared/itaps-helper.js"></script>
-        <script src="~/js/notifications/signalr.js"></script>
-        <script src="~/js/notifications/connections.js"></script>
-        <script src="~/js/notifications/notifications.js"></script>*@
+    @*<script src="~/js/shared/itaps-helper.js"></script>*@
 
     <div id="ScreenTimeOutModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ScreenTimeOutModal" aria-hidden="true" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog" role="document">
@@ -261,6 +253,63 @@
                 <div class="modal-footer">
                     <a class="btn btn-light" role="button" onclick="ContinueToStay()">Stay</a>
                     <a id="logMeOut" asp-controller="Home" asp-action="Logout" class="btn btn-success text-white">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="addEmailRecipientModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ScreenTimeOutModal" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-standard-title">Add Email Address</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" style="color: white">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="height: 400px;">
+                    <p><b>Recipient's Email</b></p>
+                    <form class="form-inline">
+                        <input type="email" class="form-control mb-2 mr-sm-2" id="recipientEmail" style="width: 80%; height: 30px !important;" placeholder="Add recipient's email">
+                        <button type="submit" class="btn btn-primary mb-2" disabled><i class='fa fa-plus-circle'></i> Add</button>
+                    </form>
+                    <br />
+                    <p class="card-title"><b>Recipients</b></p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td style=" width: 5%;">5.</td>
+                                    <td style=" width: 85%;">yusif.badmus@gmail.com</td>
+                                    <td style=" width: 10%"><button class="btn btn-default"><i class="fa fa-times" aria-hidden="true" style="color: red;"></i></button></td>
+                                </tr>
+                                <tr>
+                                    <td style=" width: 5%;">5.</td>
+                                    <td style=" width: 85%;">yusif.badmus@gmail.com</td>
+                                    <td style=" width: 10%"><button class="btn btn-default"><i class="fa fa-times" aria-hidden="true" style="color: red;"></i></button></td>
+                                </tr>
+                                <tr>
+                                    <td style=" width: 5%;">5.</td>
+                                    <td style=" width: 85%;">yusif.badmus@gmail.com</td>
+                                    <td style=" width: 10%"><button class="btn btn-default"><i class="fa fa-times" aria-hidden="true" style="color: red;"></i></button></td>
+                                </tr>
+                                <tr>
+                                    <td style=" width: 5%;">5.</td>
+                                    <td style=" width: 85%;">yusif.badmus@gmail.com</td>
+                                    <td style=" width: 10%"><button class="btn btn-default"><i class="fa fa-times" aria-hidden="true" style="color: red;"></i></button></td>
+                                </tr>
+                                <tr>
+                                    <td style=" width: 5%;">5.</td>
+                                    <td style=" width: 85%;">yusif.badmus@gmail.com</td>
+                                    <td style=" width: 10%"><button class="btn btn-default"><i class="fa fa-times" aria-hidden="true" style="color: red;"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer" style="display: block;">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="button" id="sendEmail" class="btn btn-success" style="float: right" disabled>Send Email</button>
                 </div>
             </div>
         </div>

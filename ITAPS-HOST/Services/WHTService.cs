@@ -180,9 +180,9 @@ namespace ITAPS_HOST.Services
             return await _adminRequestClient.PostRequestAsync(serializedGwtrForCreationDto, apiEndpoint);
         }
 
-        public async Task<ResponseItem<object>> GetGWTTByInvoiceNumberAsync(string invoiceNumber)
+        public async Task<ResponseItem<object>> GetGWTTByInvoiceNumberAsync(Guid whtId)
         {
-            string apiEndpoint = $"WithholdingTax/GetGWTTByInvoiceNumber/{invoiceNumber}";
+            string apiEndpoint = $"WithholdingTax/GetGWTTById/{whtId}";
             return await _adminRequestClient.GetRequestAsync(apiEndpoint);
         }
 

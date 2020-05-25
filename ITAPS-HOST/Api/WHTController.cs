@@ -82,11 +82,11 @@ namespace ITAPS_HOST.Api
             return await _whtService.GetGWVTByGwvrAsync(periodId, tin);
         }
 
-        [HttpGet("GetGWTTByInvoiceNumber", Name = "GetGWTTByInvoiceNumber")] //
-        public async Task<ResponseItem<object>> GetGWTTByInvoiceNumber(string invoiceNumber)
+        [HttpGet("GetGWTTByInvoiceNumber", Name = "GetGWTTByInvoiceNumber")] 
+        public async Task<ResponseItem<object>> GetGWTTByInvoiceNumber(Guid whtId)
         {
 
-            return await _whtService.GetGWTTByInvoiceNumberAsync(invoiceNumber);
+            return await _whtService.GetGWTTByInvoiceNumberAsync(whtId);
         }
 
         [HttpGet("GetGWVTByInvoiceNumber", Name = "GetGWVTByInvoiceNumber")]

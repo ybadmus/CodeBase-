@@ -1,12 +1,112 @@
 ﻿<input id="appId" value="@ViewBag.UserId " hidden />
 
 <div id="taxPosition">
+    <partial name="_AppHeader" />
     <div class="card-body">
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="taxPosition" role="tabpanel" aria-labelledby="nav-profile-tab">
                 <div class="form-horizontal">
                     <div class="form-row">
-                        <div class="col-md-12">
+
+                        <div class="col-md-12 bordered-group" style="display: flex;" id="tccDetails">
+                            <div class="col-md-6">
+                                <div class="bordered-group" id="" style="height: 400px">
+                                    <p class="card-title"><b>Application Details</b></p>
+                                    <div class="table-responsive border-bottom" style="height: 380px; margin: 10px 0px">
+                                        <table class="table table-bordered">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="padding-left:5px;width:120px;font-weight:100;">Date Submitted</td>
+                                                    <td style="padding-left:5px;width:280px;">
+                                                        <b><span id="dateSubmitted"></span></b>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left:5px;width:120px;font-weight:100;">Type</td>
+                                                    <td style="padding-left:5px;width:280px;">
+                                                        <b><span class="applicationType"></span></b>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" style="padding-left:5px;width:120px;font-weight:100; font-weight: bold; background: #f7f8f9;">Applicant Details</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left:5px;width:120px;font-weight:100;">Applicant Name</td>
+                                                    <td style="padding-left:5px;width:280px;">
+                                                        <b><span id="applicantName"></span></b>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left:5px;width:120px;font-weight:100;">TIN</td>
+                                                    <td style="padding-left:5px;width:280px;">
+                                                        <b><span id="applicantTIN"></span></b>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left:5px;width:120px;font-weight:100;">Phone</td>
+                                                    <td style="padding-left:5px;width:280px;">
+                                                        <b><span id="applicantPhone"></span></b>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left:5px;width:120px;font-weight:100;">Email</td>
+                                                    <td style="padding-left:5px;width:280px;">
+                                                        <b><span id="applicantEmail"></span></b>
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="bordered-group" id="" style="height: 400px">
+                                    <div class="table-responsive" style="height: 380px; margin: 10px 0px">
+                                        <table class="table table-bordered">
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="2" style="padding-left:5px;width:120px;font-weight:100; font-weight: bold; background: #f7f8f9;">Requesting Entity Details</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left:5px;width:120px;font-weight:100;">Name</td>
+                                                    <td style="padding-left:5px;width:280px;">
+                                                        <b><span id="requestEntityName"></span></b>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left:5px;width:120px;font-weight:100;">TIN</td>
+                                                    <td style="padding-left:5px;width:280px;">
+                                                        <b><span id="requestingEntityTin"></span></b>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left:5px;width:120px;font-weight:100;">Phone</td>
+                                                    <td style="padding-left:5px;width:280px;">
+                                                        <b><span id="requestingEntityPhone"></span></b>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left:5px;width:120px;font-weight:100;">Email</td>
+                                                    <td style="padding-left:5px;width:280px;">
+                                                        <b><span id="requestingEntityEmail"></span></b>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left:5px;width:120px;font-weight:100;">Purpose</td>
+                                                    <td style="padding-left:5px;width:280px;">
+                                                        <b><span id="purposeOfApplication"></span></b>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12" style="display: none" id="taxPositionView">
                             <div class="bordered-group" id="">
                                 <p class="card-title"><b>Tax Position Information - <span id="appNo"></span></b></p>
                                 <div class="table-responsive border-bottom">
@@ -57,10 +157,17 @@
                                 </div>
 
                             </div>
+
+                        </div>
+
+                        <div class="col-md-12">
                             <button id="backToGrid" class="btn btn-outline-primary"> Back</button>
-                            <button id="reviseApp" style="float: right; margin-left: 2px;" class="btn btn-success">  Revise Application</button>
+                            <button id="previousDetailBtn" class="btn btn-outline-success" style="display: none"> Previous Details</button>
+                            <button id="taxPositionMoreDetails" style="margin-left: 2px;" class="btn btn-success">  More Details</button>
                             <button id="tccMessages" style="float: right" class="btn btn-primary"><i class="fa fa-comments" aria-hidden="true"></i>  Messages</button>
                         </div>
+
+
                     </div>
                 </div>
             </div>
