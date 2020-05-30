@@ -15,19 +15,19 @@ $("#viewRTP").click(function () {
         switch(parseInt(activeReport)) {
             case 1:
                 url = `${reportPreView}PITReturnsReport`;
-                window.location.replace(url);
+                window.location.href = url;
                 break;
             case 2:
-                url  = `${reportPreView}PITTaxOutStandingReport`;
-                window.location.replace(url);
+                url = `${reportPreView}PITTaxOutStandingReport`;
+                window.location.href = url;
                 break;
             case 3:
                 url  = `${reportPreView}PITTaxOverPaymentReport`;
-                window.location.replace(url);
+                window.location.href = url;
                 break;
             case 4:
                 url  = `${reportPreView}PITZeroTaxOutstandingReport`;
-                window.location.replace(url);
+                window.location.href = url;
                 break;
             default:
               return toastr.info("Invalid Report type selected!")
@@ -36,19 +36,19 @@ $("#viewRTP").click(function () {
         switch(parseInt(activeReport)) {
             case 1:
                 url = `${reportPreView}CITReturnsReport`;
-                window.location.replace(url);
+                window.location.href(url);
                 break;
             case 2:
                 url = `${reportPreView}CitTaxOutStandingReport`;
-                window.location.replace(url);
+                window.location.href = url;
                 break;
             case 3:
                 url = `${reportPreView}CITTaxOverPaymentReport`;
-                window.location.replace(url);
+                window.location.href = url;
                 break;
             case 4:
                 url = `${reportPreView}CITZeroTaxOutstandingReport`;
-                window.location.replace(url);
+                window.location.href = url;
                 break;
             default:
               return toastr.info("Invalid Report type selected!")

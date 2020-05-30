@@ -1,10 +1,12 @@
 ﻿using BoldReports.Web;
 using BoldReports.Web.ReportViewer;
 using ITAPS_HOST.Data;
+using ITAPS_HOST.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,6 +15,12 @@ using System.Net.Mime;
 
 namespace ITAPS_HOST.Api
 {
+    public class RecipientsObj
+    {
+        public string Id { get; set; }
+        public string EmailAddress { get; set; }
+    }
+
     [Authorize]
     public class ReportsController : Controller, IReportController
     {
@@ -61,17 +69,26 @@ namespace ITAPS_HOST.Api
         {
             string _token = jsonResult["reportViewerToken"].ToString();
             var stream = ReportHelper.GetReport(_token, jsonResult["exportType"].ToString(), this, this._cache);
+            IList<RecipientsObj> listOfRecipients = JsonConvert.DeserializeObject<List<RecipientsObj>>(jsonResult["Recipients"].ToString());
+
             stream.Position = 0;
 
-            if (!ComposeEmail(stream, jsonResult["ReportName"].ToString()))
+            if (!ComposeEmail(stream, jsonResult["ReportName"].ToString(), listOfRecipients))
             {
-                return "Mail not sent !!!";
+                return new ResponseItem<object>
+                {
+                    Status = "Failure",
+                    Caption = "Emails Not Sent"
+                };
             }
 
-            return "Mail Sent !!!";
+            return new ResponseItem<object>
+            {
+                Status = "Succesfull",
+                Caption = "Email Sent"            };
         }
 
-        public bool ComposeEmail(Stream stream, string reportName)
+        public bool ComposeEmail(Stream stream, string reportName, IList<RecipientsObj> recipients)
         {
             try
             {
@@ -79,12 +96,10 @@ namespace ITAPS_HOST.Api
                 SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
                 mail.IsBodyHtml = true;
                 mail.From = new MailAddress("yusif.badmus@gmail.com");
-                //mail.To.Add("eric.boateng@persol.net");
-                mail.To.Add("yusuf.badmus@persol.net");
-                mail.To.Add("augustine.larbi-ampofo@persol.net");
-                mail.To.Add("enoch.enchill@persol.net");
-                mail.To.Add("paul.kodjo@persol.net");
-                //mail.To.Add("somad.yessoufou@persol.net");
+                foreach(RecipientsObj recipient in recipients)
+                {
+                    mail.To.Add(recipient.EmailAddress);
+                }
                 mail.Subject = "Report Name : " + reportName;
                 stream.Position = 0;
 
@@ -97,7 +112,6 @@ namespace ITAPS_HOST.Api
                 }
 
                 SmtpServer.Port = 587;
-                //SmtpServer.Credentials = new System.Net.NetworkCredential("xx@gmail.com", "xx");
                 SmtpServer.Credentials = new System.Net.NetworkCredential("yusif.badmus@gmail.com", "Spoilthere2010");
                 SmtpServer.EnableSsl = true;
                 SmtpServer.Send(mail);

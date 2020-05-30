@@ -238,6 +238,7 @@
     <!--Toastr-->
     <script src="~/js/toastr.min.js"></script>
     <script src="~/js/shared/itaps-host-shared.js"></script>
+
     @*<script src="~/js/shared/itaps-helper.js"></script>*@
 
     <div id="ScreenTimeOutModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ScreenTimeOutModal" aria-hidden="true" data-keyboard="false" data-backdrop="static">
@@ -258,7 +259,7 @@
         </div>
     </div>
 
-    <div id="addEmailRecipientModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ScreenTimeOutModal" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div id="addEmailRecipientModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -270,27 +271,26 @@
                 <div class="modal-body" style="height: 400px;">
                     <p><b>Recipient's Email</b></p>
                     <form class="form-inline">
-                        <input type="email" class="form-control mb-2 mr-sm-2" id="recipientEmail" style="width: 80%; height: 30px !important;" placeholder="Add recipient's email">
-                        <button type="submit" class="btn btn-primary mb-2" disabled><i class='fa fa-plus-circle'></i> Add</button>
+                        <input type="email" class="form-control mb-2 mr-sm-2" id="recipientEmailInput" style="width: 80%; height: 30px !important;" placeholder="Add recipient's email">
+                        <button type="button" S class="btn btn-primary mb-2" id="addEmailOfReport" disabled><i class='fa fa-plus-circle'></i> Add</button>
                     </form>
                     <br />
                     <p class="card-title"><b>Recipients</b></p>
                     <div class="table-responsive">
                         <table class="table table-bordered">
-                            <tbody>
-
+                            <tbody id="loadRecipientsGrid">
                             </tbody>
                         </table>
                     </div>
                 </div>
                 <div class="modal-footer" style="display: block;">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    <button type="button" id="sendEmail" class="btn btn-success" style="float: right" disabled>Send Email</button>
+                    <button type="button" id="sendRepotEmailModalBtn" class="btn btn-success" style="float: right" disabled>Send Email</button>
                 </div>
             </div>
         </div>
     </div>
-
+    <script src="~/js/applications/sendReportAsMail.js"></script>
     @RenderSection("modals", required: false)
     @RenderSection("scripts", required: false)
 

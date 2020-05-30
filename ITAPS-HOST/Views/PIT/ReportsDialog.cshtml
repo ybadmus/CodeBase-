@@ -10,60 +10,13 @@
 
 <input id="serverUrl" value="@ViewBag.ServerUrl" hidden />
 
-@*<div class="card" style="min-height: 600px; height: 60vh;">
-    <div class="card-body">
-        <div class="row align-items-end" style="margin: 1px;">
-            <div class="col-md-6 col-sm-12" style="margin:0px auto;">
-                <div style="height: 500px; border: 1px solid silver; position: relative;">
-                    <div style="font-size: 27px;padding: 10px 0px;text-align: center;background: #112b4a;color: floralwhite;"><b>PIT Reports</b></div>
-                    <form style="padding: 25px 0px 0px 0px;">
-                        <div class="form-group">
-                            <div class="col-md-12" style="margin-bottom: 20px;">
-                                <label for="typesOfReport" class="col-form-label" style="font-size: 18px">
-                                    <b>Type Of Report</b>
-                                </label>
-                                <select type="text" id="typesOfReport" class="form-control"  style="height: 35px !important;font-size: 18px;" required>
-                                    <option selected="selected">Select Type</option>
-                                    <option value="1">All PIT Returns</option>
-                                    <option value="2">PIT Returns with Tax Outstanding</option>
-                                    <option value="3">PIT Returns with Tax Over payment Outstanding balance</option>
-                                    <option value="4">PIT Return with Zero Tax Outstanding balance</option>
-                                </select>
-                            </div>
-                            <div class="col-md-12" style="margin-bottom: 20px;">
-                                <label for="listOfTaxOffices" class="col-form-label" style="font-size: 18px">
-                                    <b>Tax Office</b>
-                                </label>
-                                <select type="text" id="listOfTaxOffices" class="form-control" style="height: 35px !important;font-size: 18px;" required>
-                                </select>
-                            </div>
-                            <div class="col-md-12" style="margin-bottom: 20px;">
-                                <label for="assessmentYear" class="col-form-label" style="font-size: 18px">
-                                    <b>Assessment Year</b>
-                                </label>
-                                <select type="text" id="assessmentYear" class="form-control yearsDropdown" style="height: 35px !important;font-size: 18px;" required>
-                                    <option selected="selected">Choose Year</option>
-                                </select>
-                            </div>
-                        </div>
-                    </form>
-                    <div class="col-md-12" style="position: absolute; bottom: 30px;">
-                        <button class="btn btn-success" id="viewRTP" style="float: right;" disabled><span class='fa fa-file fa-lg'></span> View Report</button>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>*@
-
 <div class="row">
     <div class="col-md-6" style="margin:30px auto 0px auto;">
         <div style="height: 500px; border: 2px solid silver; position: relative; background: white;">
             <form>
                 <div style="padding: 20px 0px;text-align: center">
                     <h3>PIT Reports</h3>
-                    <i>Please select the appropriate fields and click the Preview Report button to view your report</i>
+                    <span>Please select the appropriate fields and click the Preview Report button to view your report</span>
                 </div>
 
                 <div class="form-group" style="margin-top: 20px;">

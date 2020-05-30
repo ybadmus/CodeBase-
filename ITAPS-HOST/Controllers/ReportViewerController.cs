@@ -37,7 +37,7 @@ namespace ITAPS_HOST.Controllers
 
             toolbarSettings.CustomItems.Add(customItem);
 
-            ViewBag.toolbarSettings = toolbarSettings;
+            //ViewBag.toolbarSettings = toolbarSettings;
             ViewBag.ServerUrl = _config.AppServerUrl;
             ViewBag.ReportServer = _reportConfig.BoldReportingService;
             ViewBag.ReportServerSite = _reportConfig.BoldReportingSite;

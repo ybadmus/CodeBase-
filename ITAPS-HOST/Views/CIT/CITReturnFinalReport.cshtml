@@ -17,7 +17,7 @@
     }
 
     #reportviewer1_viewBlockContainer {
-        display: block !important;
+        display: none !important;
     }
 
     #reportviewer1 {
@@ -49,23 +49,34 @@
 
     function onToolBarItemClick(args) {
         if (args.value == "E-Mail") {
-            var proxy = $('#reportviewer1').data('boldReportViewer');
-            var Report = proxy.model.reportPath;
-            var lastsIndex = Report.lastIndexOf("/");
-            var reportName = Report.substring(lastsIndex + 1);
-            var requrl = serverUrl + 'Reports/SendEmail';
-            var _json = {
-                exportType: "PDF", reportViewerToken: proxy._reportViewerToken, ReportName: reportName
-            };
-            $.ajax({
-                type: "POST",
-                contentType: "application/json; charset=utf-8",
-                url: requrl,
-                data: JSON.stringify(_json),
-                dataType: "json",
-                crossDomain: true
-            })
+            $("#addEmailRecipientModal").modal("show");
         }
+    };
+
+    var sendEmailToRecipients = function () {
+        var proxy = $('#reportviewer1').data('boldReportViewer');
+        var Report = proxy.model.reportPath;
+        var lastsIndex = Report.lastIndexOf("/");
+        var reportName = Report.substring(lastsIndex + 1);
+        var requrl = serverUrl + 'Reports/SendEmail';
+        var _json = {
+            exportType: "PDF", reportViewerToken: proxy._reportViewerToken, ReportName: reportName, Recipients: reportEmailRecipients
+        };
+
+        $.ajax({
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            url: requrl,
+            data: JSON.stringify(_json),
+            dataType: "json",
+            crossDomain: true,
+            success: function (resp) {
+                callBackReportEmail(resp);
+            },
+            error: function (resp) {
+                toastr.error("An error occurred");
+            }
+        })
     };
 </script>
 

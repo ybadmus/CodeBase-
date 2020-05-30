@@ -34,7 +34,6 @@ var loadForm = function (response) {
         $("#estimatedQuarterlyIncomeTaxPayable").text(parseFloat(resp.estimatedQuarterlyIncomeTaxPayable).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
         $("#estimatedQuarterlyLevyPayable").text(parseFloat(resp.estimatedQuarterlyLevyPayable).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
         $("#taxRate").text(parseFloat(resp.taxRate).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
         hideAndShowThings();
     }
     else
