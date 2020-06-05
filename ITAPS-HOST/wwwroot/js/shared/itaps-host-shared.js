@@ -296,7 +296,7 @@ var startTimer = function (duration, display) {
         if (diff === 1) {
             var serverUrl = $("#serverUrl").val();
             localStorage.clear();
-            window.location = `${serverUrl}/Home/Logout`;
+            window.location = `${serverUrl}Home/Logout`;
         }
     };
     // we don't want to wait a full second before the timer starts
@@ -306,7 +306,7 @@ var startTimer = function (duration, display) {
 
 //LOGGING OUT ACTION
 $("#logOut, #mdlLogout, #logMeOut").click(function () {
-
     localStorage.clear();
-    console.log("Logout", "Clicked");
+    sessionStorage.clear();
 });
+
