@@ -3,6 +3,9 @@ $(document).ready(function () {
 });
 
 var switchTilesByUserRight = function (response) {
+
+    $("#loggedInUserFUllNameTile").text(response[0].firstName + " " + response[0].lastName);
+
     if (response[0].szLevel.toLowerCase() === "officer") {
         $("#approveTCC").hide();
         $("#processTCC").show();
@@ -20,5 +23,4 @@ var switchTilesByUserRight = function (response) {
         $("#allTCC").show();
     }
 
-    $("#loggedInUserFUllNameTile").text(response[0].firstName + " " + response[0].lastName);
 };

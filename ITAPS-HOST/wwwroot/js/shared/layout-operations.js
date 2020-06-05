@@ -56,16 +56,13 @@ $(".modal").draggable({
     })
 })()
 
-$(document).ready(function () {
+$("#LogOut, #mdlLogout, #LogMeOut").click(function () {
+    localStorage.clear();
+    sessionStorage.clear();
+});
 
-    $("#LogOut, #mdlLogout, #LogMeOut").click(function () {
-        localStorage.clear();
-        sessionStorage.clear();
-    });
-
-    //do these before any modal pops up
-    $("#modal-declare").on('show.bs.modal', function () {
-        $(this).find('input[type="checkbox"]').prop('checked', false);
-        $(this).find(".transButtons").prop("disabled", true);
-    });
+//do these before any modal pops up
+$("#modal-declare").on('show.bs.modal', function () {
+    $(this).find('input[type="checkbox"]').prop('checked', false);
+    $(this).find(".transButtons").prop("disabled", true);
 });
