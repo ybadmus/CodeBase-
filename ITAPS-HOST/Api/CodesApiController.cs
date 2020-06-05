@@ -25,6 +25,7 @@ namespace ITAPS_HOST.Api
         }
 
         [HttpPost("{code}")]
+        [ValidateInputFilter]
         public async Task<ResponseItemForCreationDto<object>> PostCodeTableAsync(string code, [FromBody]SetupForCreationDto data)
         {
             return await _codeSetupService.PostCodesTableAsync(code, data);

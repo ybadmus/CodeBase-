@@ -2,6 +2,7 @@
 $(".modal").draggable({
     handle: ".modal-header"
 });
+
 (function () {
     'use strict';
     // Self Initialize DOM Factory Components
@@ -50,16 +51,11 @@ $(".modal").draggable({
         $('.preloader').fadeOut()
         domFactory.handler.upgradeAll()
     })
-    
+
     $('[data-toggle="tab"]').on('hide.bs.tab', function (e) {
         $(e.target).removeClass('active')
     })
 })()
-
-$("#LogOut, #mdlLogout, #LogMeOut").click(function () {
-    localStorage.clear();
-    sessionStorage.clear();
-});
 
 //do these before any modal pops up
 $("#modal-declare").on('show.bs.modal', function () {
