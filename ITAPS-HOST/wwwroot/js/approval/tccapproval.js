@@ -2,7 +2,7 @@
 var serverUrl = $("#serverUrl").val();
 var searchTccByTaxOffice = `${serverUrl}api/TCC/GetAllTccApplicationPendingApprovalByTaxOfficeId`;
 var loadTaxPositionsUrl = `${serverUrl}api/TCC/GetTCCApplicationTaxPositionByApplicationId?applicationId=`;
-var loadTCCDetailsUrl = `${serverUrl}api/TCC/?applicationId=`;
+var loadTCCDetailsUrl = `${serverUrl}api/TCC/GetTccApplicationById?tccId=`;
 var GetTccCommentsByIdUrl = `${serverUrl}api/TCC/GetAllTccApplicationComments?tccId=`;
 var activeTaxOffice = "";
 var selectedStatus;
@@ -82,6 +82,10 @@ var calculateYear = function () {
 var hideAndShow = function () {
     $("#taxPosition").show();
     $("#tccGridView").hide();
+    $("#tccDetails").show();
+    $("#taxPositionView").hide();
+    $("#previousDetailBtn").hide();
+    $("#taxPositionMoreDetails").show();
 };
 
 var bootstrapPage = function () {
@@ -144,7 +148,9 @@ var validateSearchEntry = function () {
 
 var prepareDetailsView = function (appId) {
     let urlTaxPosition = `${loadTaxPositionsUrl}` + appId;
-    let urlTCCDetails = `${loadTCCDetailsUrl}` + appId;
+    let appTypeId = "870301ea-f62e-4788-9905-7c94a26813d3";
+
+    let urlTCCDetails = `${loadTCCDetailsUrl}` + appId + `&appTypeId=${appTypeId}`;
 
     calculateYear();
     loadMessages(appId);
@@ -191,10 +197,12 @@ var calculateThreeMonths = function () {
     return [year, month, day].join('/');
 };
 
-var loadTccDetails = function () {
+var loadTccDetails = function (resp) {
     $("#dateSubmitted").text(testNullOrEmpty(resp[0].submittedDate));
     $("#applicantName").text(testNullOrEmpty(resp[0].applicantName));
     $("#applicantFName").text(testNullOrEmpty(resp[0].applicantName));
+    $(".applicationType").text("TCC");
+    $(".applicationTaxOffice").text(testNullOrEmpty(resp[0].taxOffice));
     $("#applicantTIN").text(testNullOrEmpty(resp[0].applicantTIN));
     $("#applicantPhone").text(testNullOrEmpty(resp[0].applicantPhoneNo));
     $("#applicantEmail").text(testNullOrEmpty(resp[0].applicantEmailAddress));
@@ -203,6 +211,7 @@ var loadTccDetails = function () {
     $("#requestingEntityPhone").text(testNullOrEmpty(resp[0].requestingOfficePhone));
     $("#requestingEntityEmail").text(testNullOrEmpty(resp[0].requestingOfficeEmail));
     $("#purposeOfApplication").text(testNullOrEmpty(resp[0].purpose));
+    $("#remarkOfApplication").text(testNullOrEmpty(resp[0].remarks));
 
     $("#appIdHeader").text(testNullOrEmpty(resp[0].applicationNo));
     $("#appStatusHeader").text(testNullOrEmpty(resp[0].status));
@@ -210,9 +219,6 @@ var loadTccDetails = function () {
     $("#statusNameModal").text(testNullOrEmpty(resp[0].status));
     $("#currentStatus").text(resp[0].statusId);
     $("#taxpayerId").text(testNullOrEmpty(resp[0].taxpayerId));
-
-    $("#tccDetails").show();
-    $("#taxPositionView").hide();
 };
 
 $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
@@ -225,6 +231,7 @@ $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
     $("#modalId").text(item.applicationNo);
     $("#appNo").text(item.applicationNo);
     $("#appNoDetails").text(item.applicationNo);
+
     prepareDetailsView(item.applicationId);
 });
 

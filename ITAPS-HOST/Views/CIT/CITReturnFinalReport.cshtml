@@ -6,7 +6,18 @@
 <input id="reportPath" value="@ViewBag.ReportPath" hidden />
 <input id="serverUrl" value="@ViewBag.ServerUrl" hidden />
 
-<style>
+<style type="text/css" class="cssStyles">
+    div.icons li {
+        display: inline-block;
+        vertical-align: middle;
+        padding: 20px;
+        list-style: none;
+    }
+
+    .e-custom-search:before {
+        content: "\e82e"
+    }
+
     #reportviewer1_viewerContainer {
         overflow-x: hidden;
         overflow-y: scroll;
@@ -41,8 +52,6 @@
     var parameters = [];
     parameters.push({ name: sessionStorage.getItem("uniCITTransactionLabel"), labels: [sessionStorage.getItem("uniCITTransactionId")], values: [sessionStorage.getItem("uniCITTransactionId")], nullable: "true" });
 
-    console.log(parameters);
-
     function ajaxBeforeLoad(event) {
         event.model.parameters = parameters;
     };
@@ -50,34 +59,9 @@
     function onToolBarItemClick(args) {
         if (args.value == "E-Mail") {
             $("#addEmailRecipientModal").modal("show");
-        }
+        } 
     };
 
-    var sendEmailToRecipients = function () {
-        var proxy = $('#reportviewer1').data('boldReportViewer');
-        var Report = proxy.model.reportPath;
-        var lastsIndex = Report.lastIndexOf("/");
-        var reportName = Report.substring(lastsIndex + 1);
-        var requrl = serverUrl + 'Reports/SendEmail';
-        var _json = {
-            exportType: "PDF", reportViewerToken: proxy._reportViewerToken, ReportName: reportName, Recipients: reportEmailRecipients
-        };
-
-        $.ajax({
-            type: "POST",
-            contentType: "application/json; charset=utf-8",
-            url: requrl,
-            data: JSON.stringify(_json),
-            dataType: "json",
-            crossDomain: true,
-            success: function (resp) {
-                callBackReportEmail(resp);
-            },
-            error: function (resp) {
-                toastr.error("An error occurred");
-            }
-        })
-    };
 </script>
 
 <bold-script-manager></bold-script-manager>

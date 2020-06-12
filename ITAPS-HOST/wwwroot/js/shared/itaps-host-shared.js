@@ -84,8 +84,13 @@ var loadUserMenus = function (menu) {
         homeLink = "/home";
     else if (window.location.hostname === "psl-app-vm3")
         homeLink = "/itaps-host/home";
-    else if (window.location.hostname === "tax.gra-itaps.com")
-        homeLink = "/itaps-host-test/home";
+    else if (window.location.hostname === "tax.gra-itaps.com") {
+        if (window.location.href.split('/').indexOf('itaps-host-test') > 0)
+            homeLink = "/itaps-host-test/home";
+        else if (window.location.href.split('/').indexOf('itaps-host') > 0)
+            homeLink = "/itaps-host/home";
+        else return toastr.error("Invalid domain name, please consult your Admin!");
+    }
     else
         homeLink = "/itaps-host/home";
 
@@ -206,13 +211,14 @@ var loadTaxOffices = function (listOfTaxOffices) {
 
     listOfTaxOffices.sort((a, b) => (a.taxOfficeName > b.taxOfficeName) - (a.taxOfficeName < b.taxOfficeName));
 
-    output += '<option selected>Choose office</option>';
+    output += '<option value="" selected>Choose office</option>';
     for (var i = 0; i < listOfTaxOffices.length; i++) {
         output = output + '<option value="' + listOfTaxOffices[i].taxOfficeId + '" >' + listOfTaxOffices[i].taxOfficeName + '</option>';
     }
 
     output = output;
     $("#listOfTaxOffices").html(output);
+    $(".listOfTaxOffices").html(output);
 };
 
 var loadUserDetials = function (callbackProcess) {

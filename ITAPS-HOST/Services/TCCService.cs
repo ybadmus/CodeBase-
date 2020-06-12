@@ -117,7 +117,7 @@ namespace ITAPS_HOST.Services
             return await _adminRequestClient.GetRequestAsync(apiEndpoint);
         }
 
-        public async Task<ResponseItem<object>> GetAllTccApplicationByTaxOfficeId(Guid id, string queryString)
+        public async Task<ResponseItem<object>> GetAllTccApplicationByTaxOfficeId(string queryString)
         {
             //var apiEndpoint = $"Application/GetAllTccApplicationByTaxOfficeId/{id}?QueryString={queryString}";
             var apiEndpoint = $"Application/GetAllAssignedApplicationsByPersonnelId";

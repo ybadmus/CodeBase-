@@ -198,6 +198,8 @@ var loadDetails = function (resp) {
     $("#requestingEntityPhone").text(testNullOrEmpty(resp[0].requestingOfficePhone));
     $("#requestingEntityEmail").text(testNullOrEmpty(resp[0].requestingOfficeEmail));
     $("#purposeOfApplication").text(testNullOrEmpty(resp[0].purpose));
+    $("#remarkOfApplication").text(testNullOrEmpty(resp[0].remarks));
+    $(".applicationTaxOffice").text(testNullOrEmpty(resp[0].taxOffice));
 
     $("#appIdHeader").text(testNullOrEmpty(resp[0].applicationNo));
     $("#appStatusHeader").text(testNullOrEmpty(resp[0].status));
@@ -220,6 +222,7 @@ var loadDetailsTex = function (resp) {
     $("#whtType").text(testNullOrEmpty(resp[0].typeOfWithHolding));
     $("#whtReason").text(testNullOrEmpty(resp[0].reasons));
     $("#whtRemarks").text(testNullOrEmpty(resp[0].remarks));
+    $(".applicationTaxOffice").text(testNullOrEmpty(resp[0].taxOffice));
 
     $("#appIdHeader").text(testNullOrEmpty(resp[0].applicationNo)); 
     $("#appStatusHeader").text(testNullOrEmpty(resp[0].status));

@@ -79,9 +79,9 @@ namespace ITAPS_HOST.Api
         }
 
         [HttpGet("GetAllTccApplicationByTaxOfficeId", Name = "GetAllTccApplicationByTaxOfficeId")]
-        public async Task<ResponseItem<object>> GetAllTccApplicationByTaxOfficeId(Guid officeId, string queryString)
+        public async Task<ResponseItem<object>> GetAllTccApplicationByTaxOfficeId(string queryString)
         {
-            return await _tccApplicationService.GetAllTccApplicationByTaxOfficeId(officeId, queryString);
+            return await _tccApplicationService.GetAllTccApplicationByTaxOfficeId(queryString);
         }
 
         [HttpGet("GetAllTccApplicationPendingApprovalByTaxOfficeId", Name = "GetAllTccApplicationPendingApprovalByTaxOfficeId")]

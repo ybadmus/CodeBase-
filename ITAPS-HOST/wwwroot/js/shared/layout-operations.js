@@ -55,7 +55,7 @@ $(".modal").draggable({
     $('[data-toggle="tab"]').on('hide.bs.tab', function (e) {
         $(e.target).removeClass('active')
     })
-})()
+})();
 
 //do these before any modal pops up
 $("#modal-declare").on('show.bs.modal', function () {

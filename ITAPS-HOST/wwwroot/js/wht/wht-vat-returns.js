@@ -122,7 +122,7 @@ var LoadModalGrid = function (listOfWht) {
         var thId = i + 1;
         output = output + '<tr style="color: black; font-size: 14px"><td scope="row">' + thId + '</td><td>' + listOfWht[i].entity + '</td><td style="text-align: right">' + parseFloat(listOfWht[i].contractAmount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') +
             '</td><td style="text-align: right">' + parseFloat(listOfWht[i].vatableAmount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + '</td><td style="text-align: right">' + parseFloat(listOfWht[i].vatWithHeld).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + '</td><td>' + listOfWht[i].invoiceNo + '</td><td>' + listOfWht[i].date +
-            '</td><td><button style="padding: 4px 8px;" onclick="detWHTDetailsByInvNo(this)" id="' + listOfWht[i].invoiceNo +
+            '</td><td><button style="padding: 4px 8px;" onclick="detWHTDetailsByInvNo(this)" id="' + listOfWht[i].invoiceNo +c
             '" title="View item" class="btn btn-success btn-sm btnReturnDetail"><span class="fa fa-file fa-lg"></span></button></td></tr>';
     };
 

@@ -16,7 +16,7 @@ namespace ITAPS_HOST.IServices
         Task<ResponseItemForCreationDto<object>> PostTaxPositionSummary(Guid taxerpayerId, Guid appId, IEnumerable<TaxPositionSummary> data);
         Task<ResponseItem<object>> GetTCCCertificateNo();
         Task<ResponseItem<object>> GetTCCApplicationDocumentByApplicationId(Guid id);
-        Task<ResponseItem<object>> GetAllTccApplicationByTaxOfficeId(Guid id, string queryString);
+        Task<ResponseItem<object>> GetAllTccApplicationByTaxOfficeId(string queryString);
         Task<ResponseItem<object>> GetTCCApplicationTaxPositionByApplicationId(Guid applicationId);
         Task<ResponseItem<object>> GetAllTccApplicationPendingApprovalByTaxOfficeId(Guid id, string queryString);
         Task<ResponseItem<object>> GetAppByOfficeTypeAndStatus(Guid id, int status, string searchitem);

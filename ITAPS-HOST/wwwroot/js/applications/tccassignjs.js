@@ -263,7 +263,6 @@ $("#backToGrid").click(function () {
 var backToViewAssign = function () {
     $("#gridView").show();
     $("#detailsView").hide();
-    $("#assignApplication").hide();
 };
 
 var prepareDetailsViewTCC = function () {

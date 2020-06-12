@@ -51,6 +51,8 @@
     };
 
     var sendEmailToRecipients = function () {
+        $('html').showLoading();
+
         var proxy = $('#reportviewer1').data('boldReportViewer');
         var Report = proxy.model.reportPath;
         var lastsIndex = Report.lastIndexOf("/");
@@ -69,9 +71,12 @@
             crossDomain: true,
             success: function (resp) {
                 callBackReportEmail(resp);
+                $('html').hideLoading();
             },
             error: function (resp) {
+                $('html').hideLoading();
                 toastr.error("An error occurred");
+                reportEmailRecipients = [];
             }
         })
     };

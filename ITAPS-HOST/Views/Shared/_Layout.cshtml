@@ -290,7 +290,48 @@
             </div>
         </div>
     </div>
-    <script src="~/js/applications/sendReportAsMail.js"></script>
+
+    <div id="newReportParameters" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-standard-title">Update Parameters</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" style="color: white">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body bordered-group" style="height: 190px;">
+                    <form >
+                        <div class="col-md-12 formField">
+                            <label for="listOfTaxOffices" class="col-form-label">
+                                <b>Tax Office</b>
+                            </label>
+                            <select type="text" id="taxOffUpdateParamModal" class="form-control listOfTaxOffices" required>
+                            </select>
+                        </div>
+                        <br />
+                        <div class="col-md-12 formField">
+                            <label for="assessmentYear" class="col-form-label">
+                                <b>Assessment Year</b>
+                            </label>
+                            <select type="text" id="assYearUpdateParamModal" class="form-control yearsDropdown" required>
+                                <option selected="selected" value="">Choose Year</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer" style="display: block;">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="button" id="reoadReportViewerButton" class="btn btn-success" style="float: right" disabled>
+                        <i class="fa fa-file" aria-hidden="true"></i>
+                         Reload
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/js/shared/report-features.js"></script>
     @RenderSection("modals", required: false)
     @RenderSection("scripts", required: false)
 

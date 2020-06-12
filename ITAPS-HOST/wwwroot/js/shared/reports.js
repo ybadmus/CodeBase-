@@ -36,7 +36,7 @@ $("#viewRTP").click(function () {
         switch(parseInt(activeReport)) {
             case 1:
                 url = `${reportPreView}CITReturnsReport`;
-                window.location.href(url);
+                window.location.href = url;
                 break;
             case 2:
                 url = `${reportPreView}CitTaxOutStandingReport`;

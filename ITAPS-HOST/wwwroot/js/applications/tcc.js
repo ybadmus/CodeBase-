@@ -8,14 +8,8 @@ let tccUpdateUrl = `${serverUrl}api/TCC/UpdateTCCApplication?id=`;
 var ReportDownloadView = `${serverUrl}reportviewer/index`;
 //var ReportDownloadView = `${serverUrl}applications/certificate`;
 var loadPtrCodesUrl = `${serverUrl}api/CodesApi/`;
-var activeTaxOffice = "";
 var appType = "TCC";
 var activeApplicationType = "";
-
-$("#tccListOfTaxOffices").on('change', function () {
-    var elem = document.getElementById("tccListOfTaxOffices");
-    activeTaxOffice = elem.options[elem.selectedIndex].value;
-})
 
 var initializeKendoGrid = function (data, stage) {
     if (data) {
@@ -116,7 +110,7 @@ var loadTccGrid = function (data) {
 
 var validateSearchEntry = function () {
     let searchItem = $("#searchItem").val().trim();
-    if (!searchItem.match(/\S/) || activeTaxOffice === "")
+    if (!searchItem.match(/\S/))
         return false;
     else
         return true;
@@ -133,7 +127,7 @@ var searchTcc = function () {
         }
 
         $("#Grid").data("kendoGrid").dataSource.data([]);
-        let url = `${searchTccByTaxOffice}?officeId=` + activeTaxOffice + "&queryString=" + searchItem;
+        let url = `${searchTccByTaxOffice}?queryString=` + searchItem.trim();
         apiCaller(url, "GET", "", initializeKendoGrid);
     } else {
 
@@ -152,9 +146,6 @@ $("#searchItem").on('keypress', function (e) {
 });
 
 $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
-
-    if (!activeTaxOffice)
-        return toastr.error("Please select a tax office");
 
     var grid = $("#Grid").getKendoGrid();
     var item = grid.dataItem($(e.target).closest("tr"));
