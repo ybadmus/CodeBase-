@@ -42,22 +42,7 @@ namespace ITAPS_HOST.Controllers
         public IActionResult PITAnnualreport()
         {
             UserDetails();
-            ToolbarSettings toolbarSettings = new ToolbarSettings();
-            toolbarSettings.CustomItems = new List<CustomItem>();
-
-            var customItem = new CustomItem()
-            {
-                GroupIndex = 1,
-                Index = 1,
-                CssClass = "e-icon e-mail e-reportviewer-icon",
-                Type = BoldReports.ReportViewerEnums.ToolBarItemType.Default,
-                Id = "E-Mail",
-                Tooltip = new ToolTip() { Header = "E-Mail", Content = "Send rendered report as mail attachment" }
-            };
-
-            toolbarSettings.CustomItems.Add(customItem);
-
-            ViewBag.toolbarSettings = toolbarSettings;
+            ReportEmailOnly();
             ViewBag.ServerUrl = _config.AppServerUrl;
             ViewBag.ReportServer = _reportConfig.ReportServer;
             ViewBag.ReportPath = _reportConfig.PITAnnualReport;
@@ -67,6 +52,7 @@ namespace ITAPS_HOST.Controllers
         public IActionResult PITReturnsReport()
         {
             UserDetails();
+            ReportEmailAndRefresh();
             ViewBag.ServerUrl = _config.AppServerUrl;
             ViewBag.ReportServer = _reportConfig.ReportServer;
             ViewBag.ReportPath = _reportConfig.PITReturnsReport;
@@ -76,6 +62,7 @@ namespace ITAPS_HOST.Controllers
         public IActionResult PITTaxOutStandingReport()
         {
             UserDetails();
+            ReportEmailAndRefresh();
             ViewBag.ServerUrl = _config.AppServerUrl;
             ViewBag.ReportServer = _reportConfig.ReportServer;
             ViewBag.ReportPath = _reportConfig.PITTaxWithstandingReport;
@@ -85,6 +72,7 @@ namespace ITAPS_HOST.Controllers
         public IActionResult PITTaxOverPaymentReport()
         {
             UserDetails();
+            ReportEmailAndRefresh();
             ViewBag.ServerUrl = _config.AppServerUrl;
             ViewBag.ReportServer = _reportConfig.ReportServer;
             ViewBag.ReportPath = _reportConfig.PITWithTaxOverpaymentReport;
@@ -94,6 +82,7 @@ namespace ITAPS_HOST.Controllers
         public IActionResult PITZeroTaxOutstandingReport()
         {
             UserDetails();
+            ReportEmailAndRefresh();
             ViewBag.ServerUrl = _config.AppServerUrl;
             ViewBag.ReportServer = _reportConfig.ReportServer;
             ViewBag.ReportPath = _reportConfig.PITWithZeroTaxOutstandingReport;
@@ -131,6 +120,57 @@ namespace ITAPS_HOST.Controllers
                     ViewBag.UserGroup = claim.Value;
                 }
             }
+        }
+
+        public void ReportEmailAndRefresh()
+        {
+            ToolbarSettings toolbarSettings = new ToolbarSettings();
+            toolbarSettings.CustomItems = new List<CustomItem>();
+
+            var customItem = new CustomItem()
+            {
+                GroupIndex = 1,
+                Index = 1,
+                CssClass = "e-icon e-mail e-reportviewer-icon",
+                Type = BoldReports.ReportViewerEnums.ToolBarItemType.Default,
+                Id = "E-Mail",
+                Tooltip = new ToolTip() { Header = "E-Mail", Content = "Send rendered report as mail attachment" }
+            };
+
+            var customItem2 = new CustomItem()
+            {
+                GroupIndex = 3,
+                Index = 1,
+                CssClass = "e-icon e-document e-reportviewer-icon",
+                Type = BoldReports.ReportViewerEnums.ToolBarItemType.Default,
+                Id = "Update-Parameter",
+                Tooltip = new ToolTip() { Header = "Update Parameters", Content = "Update the parameters of the report" }
+            };
+
+            toolbarSettings.CustomItems.Add(customItem);
+            toolbarSettings.CustomItems.Add(customItem2);
+
+            ViewBag.toolbarSettings = toolbarSettings;
+        }
+
+        public void ReportEmailOnly()
+        {
+            ToolbarSettings toolbarSettings = new ToolbarSettings();
+            toolbarSettings.CustomItems = new List<CustomItem>();
+
+            var customItem = new CustomItem()
+            {
+                GroupIndex = 1,
+                Index = 1,
+                CssClass = "e-icon e-mail e-reportviewer-icon",
+                Type = BoldReports.ReportViewerEnums.ToolBarItemType.Default,
+                Id = "E-Mail",
+                Tooltip = new ToolTip() { Header = "E-Mail", Content = "Send rendered report as mail attachment" }
+            };
+
+            toolbarSettings.CustomItems.Add(customItem);
+
+            ViewBag.toolbarSettings = toolbarSettings;
         }
 
     }

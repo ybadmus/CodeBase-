@@ -25,7 +25,7 @@
 </style>
 
 <div class="reportContainer">
-    <bold-report-viewer id="reportviewer1" report-service-url="../Reports" report-path="@ViewBag.ReportPath" report-server-url="@ViewBag.ReportServer" processing-mode="Remote" ajax-before-load="ajaxBeforeLoad" />
+    <bold-report-viewer id="reportviewer1" report-service-url="../Reports" report-path="@ViewBag.ReportPath" toolbar-settings="ViewBag.toolbarSettings" tool-bar-item-click="onToolBarItemClick" report-server-url="@ViewBag.ReportServer" processing-mode="Remote" ajax-before-load="ajaxBeforeLoad" />
 </div>
 
 <script>
@@ -43,6 +43,15 @@
 
     function ajaxBeforeLoad(event) {
         event.model.parameters = parameters;
+    };
+
+    function onToolBarItemClick(args) {
+        if (args.value == "E-Mail") {
+            $("#addEmailRecipientModal").modal("show");
+        } else if (args.value == "Update-Parameter") {
+            activeArgs = args;
+            $("#newReportParameters").modal("show");
+        }
     };
 </script>
 

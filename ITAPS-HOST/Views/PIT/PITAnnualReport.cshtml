@@ -49,37 +49,6 @@
             $("#addEmailRecipientModal").modal("show");
         }
     };
-
-    var sendEmailToRecipients = function () {
-        $('html').showLoading();
-
-        var proxy = $('#reportviewer1').data('boldReportViewer');
-        var Report = proxy.model.reportPath;
-        var lastsIndex = Report.lastIndexOf("/");
-        var reportName = Report.substring(lastsIndex + 1);
-        var requrl = serverUrl + 'Reports/SendEmail';
-        var _json = {
-            exportType: "PDF", reportViewerToken: proxy._reportViewerToken, ReportName: reportName, Recipients: reportEmailRecipients
-        };
-
-        $.ajax({
-            type: "POST",
-            contentType: "application/json; charset=utf-8",
-            url: requrl,
-            data: JSON.stringify(_json),
-            dataType: "json",
-            crossDomain: true,
-            success: function (resp) {
-                callBackReportEmail(resp);
-                $('html').hideLoading();
-            },
-            error: function (resp) {
-                $('html').hideLoading();
-                toastr.error("An error occurred");
-                reportEmailRecipients = [];
-            }
-        })
-    };
 </script>
 
 <bold-script-manager></bold-script-manager>
