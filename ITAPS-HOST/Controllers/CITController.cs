@@ -57,22 +57,7 @@ namespace ITAPS_HOST.Controllers
         public IActionResult CITReturnFinalReport()
         {
             UserDetails();
-            ToolbarSettings toolbarSettings = new ToolbarSettings();
-            toolbarSettings.CustomItems = new List<CustomItem>();
-
-            var customItem = new CustomItem()
-            {
-                GroupIndex = 1,
-                Index = 1,
-                CssClass = "e-icon e-mail e-reportviewer-icon",
-                Type = BoldReports.ReportViewerEnums.ToolBarItemType.Default,
-                Id = "E-Mail",
-                Tooltip = new ToolTip() { Header = "E-Mail", Content = "Send rendered report as mail attachment" }
-            };
-            
-            toolbarSettings.CustomItems.Add(customItem);
-
-            ViewBag.toolbarSettings = toolbarSettings;
+            ReportEmailOnly();
             ViewBag.ServerUrl = _config.AppServerUrl;
             ViewBag.ReportServer = _reportConfig.ReportServer;
             ViewBag.ReportPath = _reportConfig.CITReturnFinalReport;
@@ -82,33 +67,7 @@ namespace ITAPS_HOST.Controllers
         public IActionResult CITReturnsReport()
         {
             UserDetails();
-            ToolbarSettings toolbarSettings = new ToolbarSettings();
-            toolbarSettings.CustomItems = new List<CustomItem>();
-
-            var customItem = new CustomItem()
-            {
-                GroupIndex = 1,
-                Index = 1,
-                CssClass = "e-icon e-mail e-reportviewer-icon",
-                Type = BoldReports.ReportViewerEnums.ToolBarItemType.Default,
-                Id = "E-Mail",
-                Tooltip = new ToolTip() { Header = "E-Mail", Content = "Send rendered report as mail attachment" }
-            };
-
-            var customItem2 = new CustomItem()
-            {
-                GroupIndex = 3,
-                Index = 1,
-                CssClass = "e-icon e-document e-reportviewer-icon",
-                Type = BoldReports.ReportViewerEnums.ToolBarItemType.Default,
-                Id = "Update-Parameter",
-                Tooltip = new ToolTip() { Header = "Update Parameters", Content = "Update the parameters of the report" }
-            };
-
-            toolbarSettings.CustomItems.Add(customItem);
-            toolbarSettings.CustomItems.Add(customItem2);
-
-            ViewBag.toolbarSettings = toolbarSettings;
+            ReportEmailAndRefresh();
             ViewBag.ServerUrl = _config.AppServerUrl;
             ViewBag.ReportServer = _reportConfig.ReportServer;
             ViewBag.ReportPath = _reportConfig.CITReturnsReport;
@@ -118,6 +77,7 @@ namespace ITAPS_HOST.Controllers
         public IActionResult CitTaxOutStandingReport()
         {
             UserDetails();
+            ReportEmailAndRefresh();
             ViewBag.ReportServer = _reportConfig.ReportServer;
             ViewBag.ReportPath = _reportConfig.CITTaxOutstandingReport; 
             ViewBag.ServerUrl = _config.AppServerUrl;
@@ -127,6 +87,7 @@ namespace ITAPS_HOST.Controllers
         public IActionResult CITTaxOverPaymentReport()
         {
             UserDetails();
+            ReportEmailAndRefresh();
             ViewBag.ReportServer = _reportConfig.ReportServer;
             ViewBag.ReportPath = _reportConfig.CITTaxOverPaymentOutstandingReport;
             ViewBag.ServerUrl = _config.AppServerUrl;
@@ -136,6 +97,7 @@ namespace ITAPS_HOST.Controllers
         public IActionResult CITZeroTaxOutstandingReport()
         {
             UserDetails();
+            ReportEmailAndRefresh();
             ViewBag.ReportServer = _reportConfig.ReportServer;
             ViewBag.ReportPath = _reportConfig.CITZeroTaxOutstandingReport;
             ViewBag.ServerUrl = _config.AppServerUrl;
@@ -166,6 +128,57 @@ namespace ITAPS_HOST.Controllers
                     ViewBag.UserGroup = claim.Value;
                 }
             }
+        }
+
+        public void ReportEmailAndRefresh()
+        {
+            ToolbarSettings toolbarSettings = new ToolbarSettings();
+            toolbarSettings.CustomItems = new List<CustomItem>();
+
+            var customItem = new CustomItem()
+            {
+                GroupIndex = 1,
+                Index = 1,
+                CssClass = "e-icon e-mail e-reportviewer-icon",
+                Type = BoldReports.ReportViewerEnums.ToolBarItemType.Default,
+                Id = "E-Mail",
+                Tooltip = new ToolTip() { Header = "E-Mail", Content = "Send rendered report as mail attachment" }
+            };
+
+            var customItem2 = new CustomItem()
+            {
+                GroupIndex = 3,
+                Index = 1,
+                CssClass = "e-icon e-document e-reportviewer-icon",
+                Type = BoldReports.ReportViewerEnums.ToolBarItemType.Default,
+                Id = "Update-Parameter",
+                Tooltip = new ToolTip() { Header = "Update Parameters", Content = "Update the parameters of the report" }
+            };
+
+            toolbarSettings.CustomItems.Add(customItem);
+            toolbarSettings.CustomItems.Add(customItem2);
+
+            ViewBag.toolbarSettings = toolbarSettings;
+        }
+
+        public void ReportEmailOnly()
+        {
+            ToolbarSettings toolbarSettings = new ToolbarSettings();
+            toolbarSettings.CustomItems = new List<CustomItem>();
+
+            var customItem = new CustomItem()
+            {
+                GroupIndex = 1,
+                Index = 1,
+                CssClass = "e-icon e-mail e-reportviewer-icon",
+                Type = BoldReports.ReportViewerEnums.ToolBarItemType.Default,
+                Id = "E-Mail",
+                Tooltip = new ToolTip() { Header = "E-Mail", Content = "Send rendered report as mail attachment" }
+            };
+
+            toolbarSettings.CustomItems.Add(customItem);
+
+            ViewBag.toolbarSettings = toolbarSettings;
         }
     }
 }
