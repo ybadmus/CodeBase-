@@ -10,6 +10,8 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 using System.Net.Mail;
 using System.Net.Mime;
 
@@ -19,6 +21,27 @@ namespace ITAPS_HOST.Api
     {
         public string Id { get; set; }
         public string EmailAddress { get; set; }
+    }
+
+    public class TemplateData
+    {
+        public string ReportName { get; set; }
+    }
+
+    public static class Extensions
+    {
+        public static string ConvertToBase64(this Stream stream)
+        {
+            byte[] bytes;
+            using (var memoryStream = new MemoryStream())
+            {
+                stream.CopyTo(memoryStream);
+                bytes = memoryStream.ToArray();
+            }
+
+            string base64 = Convert.ToBase64String(bytes);
+            return base64;
+        }
     }
 
     [Authorize]
@@ -85,22 +108,26 @@ namespace ITAPS_HOST.Api
             return new ResponseItem<object>
             {
                 Status = "Succesfull",
-                Caption = "Email Sent"            };
+                Caption = "Email Sent"
+            };
         }
 
         public bool ComposeEmail(Stream stream, string reportName, IList<RecipientsObj> recipients)
         {
+            if (stream == null)
+                return false;
+
             try
             {
                 MailMessage mail = new MailMessage();
-                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+                SmtpClient SmtpServer = new SmtpClient("smtp.sendgrid.net");
                 mail.IsBodyHtml = true;
-                mail.From = new MailAddress("yusif.badmus@gmail.com");
-                foreach(RecipientsObj recipient in recipients)
+                mail.From = new MailAddress("persol.demo@gmail.com", "ITaPs Support");
+                foreach (RecipientsObj recipient in recipients)
                 {
                     mail.To.Add(recipient.EmailAddress);
                 }
-                mail.Subject = "Report Name : " + reportName;
+                mail.Subject = reportName;
                 stream.Position = 0;
 
                 if (stream != null)
@@ -112,7 +139,7 @@ namespace ITAPS_HOST.Api
                 }
 
                 SmtpServer.Port = 587;
-                SmtpServer.Credentials = new System.Net.NetworkCredential("yusif.badmus@gmail.com", "Spoilthere2010");
+                SmtpServer.Credentials = new System.Net.NetworkCredential("apikey", "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");
                 SmtpServer.EnableSsl = true;
                 SmtpServer.Send(mail);
 
