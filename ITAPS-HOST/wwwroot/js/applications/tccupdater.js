@@ -169,7 +169,7 @@ var updateMessageDirectly = function () {
 };
 
 var updateKendoGridLocally = function (updateDetails) {
-    var displayedData = $("#Grid").data().kendoGrid.dataSource.data();
+    var displayedData = gridGlobal.dataSource;
 
     for (var i = 0; i < displayedData.length; i++) {
         if (updateDetails.appId == displayedData[i].applicationId) {

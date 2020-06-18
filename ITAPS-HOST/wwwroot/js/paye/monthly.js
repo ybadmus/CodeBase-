@@ -104,6 +104,7 @@ var loadOffices = function () {
 
 var getActivePeriods = function () {
     var url = `${serverUrl}api/monoapi/GetAllActivePeriods`;
+
     apiCaller(url, "GET", "", loadActivePeriods);
 };
 

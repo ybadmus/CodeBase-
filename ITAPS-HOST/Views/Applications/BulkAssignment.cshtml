@@ -1,6 +1,8 @@
-﻿@{
-    ViewData["Title"] = "TCC";
+﻿
+@{
+    ViewData["Title"] = "TCCAssign";
 }
+
 
 @section css {
     <link href="~/css/applications/tcc.css" rel="stylesheet" />
@@ -18,21 +20,18 @@
     <script src="http://cdn.syncfusion.com/ej2/dist/ej2.min.js" type="text/javascript"></script>
 }
 
-<!--Defined this on page level because of control-->
 <input id="serverUrl" value="@ViewBag.ServerUrl" hidden />
-<input id="taxpayerId" value="@ViewBag.TaxpayerId" hidden />
 
 <div class="card">
     <div id="gridView">
         <div class="card-header">
             <div class="row">
-                <div class="col-sm-1" id="">
-                    @*<select type="text" id="tccListOfTaxOffices" class="form-control" required></select>*@
-                    <label style="color: white; font-weight: bold;">Filter By: </label>
+                <div class="col-sm-3" id="">
+                    <select type="text" id="listOfTaxOffices" class="form-control" required></select>
                 </div>
                 <div class="col-sm-3">
                     <div class="input-group">
-                        <input type="text" class="form-control" id="searchItem" autocomplete="off" placeholder="*, Applicant or TIN">
+                        <input type="text" class="form-control" id="searchItem" autocomplete="off" placeholder="Search">
                         <div class="input-group-append">
                             <button type="button" id="btnSearch" class="btn btn-success btn-sm"><i class='fa fa-search'></i></button>
                         </div>
@@ -42,25 +41,21 @@
         </div>
         <div class="card-body">
             <div class="row align-items-end" style="margin: 1px;">
+                <div style="width: 100%;height:40px;">
+                    <button id="assApplication" class="btn btn-info" style="display: none;">Assign Application</button>
+                </div>
                 <div class="GridDiv">
                     <div id="Grid"></div>
                 </div>
             </div>
         </div>
     </div>
-
-    <partial name="_AppDetails" />
-
 </div>
 
-
-@section modals {
-    <partial name="_AppUpdate" />
-    <partial name="_AppMessages" />
+@section modals{
+    <partial name="_AssignUpdate" />
 }
 
 @section scripts {
-    <script src="~/js/applications/tcc.js"></script>
-    <script src="~/js/applications/tccdetails.js"></script>
-    <script src="~/js/applications/tccupdater.js"></script>
+    <script src="~/js/applications/bulkassign.js"></script>
 }

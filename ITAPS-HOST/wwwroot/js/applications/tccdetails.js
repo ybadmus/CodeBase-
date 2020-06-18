@@ -222,6 +222,7 @@ var loadDetailsTex = function (resp) {
     $("#whtType").text(testNullOrEmpty(resp[0].typeOfWithHolding));
     $("#whtReason").text(testNullOrEmpty(resp[0].reasons));
     $("#whtRemarks").text(testNullOrEmpty(resp[0].remarks));
+    $("#applicantPhoneTex").text(testNullOrEmpty(resp[0].phoneNo));
     $(".applicationTaxOffice").text(testNullOrEmpty(resp[0].taxOffice));
 
     $("#appIdHeader").text(testNullOrEmpty(resp[0].applicationNo)); 

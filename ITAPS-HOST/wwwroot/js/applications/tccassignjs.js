@@ -201,8 +201,10 @@ $("#yesBtn").click(function () {
     assignApplication();
 });
 
-$("#assignApplication").click(function () {
-    $("#apType").text(activeApplicationType);
+$("#assignApplication").click(function () { 
+    var output = '[ <b><span>' + $("#appIdHeader").text() + '</span></b> - <span>' + $(".applicationType:first").text() + '</span> ]';
+
+    $("#listOfAssignedApplications").html(output);
     $("#selectedOfficer").text(activeOfficerName);
     $("#yesOrNo").modal("show");
 });
@@ -306,6 +308,8 @@ var lengthOfNotes = function () {
 };
 
 var assignApplication = function () {
+    $("#selectedOfficer").text(activeOfficerName);
+
     var objData = [{
         "applicationId": $("#appId").val(),
         "notes": $("#assignNotes").val(),
@@ -317,13 +321,12 @@ var assignApplication = function () {
 };
 
 var callBackFunc = function () {
-    var appNo = $("#modalId").text();
     var tccId = $("#appId").val();
     var url = tccUpdateUrl + tccId;
 
     var ObjectToSend = {
         "status": 0,
-        "taxpayerComment": `Your ${activeApplicationType} application - ${appNo} has been assigned to a GRA official for processing.`,
+        "taxpayerComment": `Your application has been assigned to a GRA official for processing.`,
         "internalComment": $("#assignNotes").val(),
         "applicationId": $("#appId").val()
     };

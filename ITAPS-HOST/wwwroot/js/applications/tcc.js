@@ -6,44 +6,43 @@ var GetTccByIdUrl = `${serverUrl}api/TCC/GetTccApplicationById?tccId=`;
 var GetTCCDocuments = `${serverUrl}api/TCC/GetTCCApplicationDocumentByApplicationId`;
 let tccUpdateUrl = `${serverUrl}api/TCC/UpdateTCCApplication?id=`;
 var ReportDownloadView = `${serverUrl}reportviewer/index`;
-//var ReportDownloadView = `${serverUrl}applications/certificate`;
 var loadPtrCodesUrl = `${serverUrl}api/CodesApi/`;
 var appType = "TCC";
 var activeApplicationType = "";
+var gridGlobal = "";
 
 var initializeKendoGrid = function (data, stage) {
+    document.getElementById("Grid").innerHTML = "";
+
     if (data) {
         if (data.length == 0 && stage !== 1) {
             return toastr.info("No Data");
         };
 
-        $("#Grid").kendoGrid({
-            dataSource: {
-                data: data
-            },
-            sortable: true,
-            pageable: { refresh: true, pageSizes: true, pageSize: 8, buttonCount: 5 },
+        var grid = new ej.grids.Grid({
+            dataSource: data,
+            selectionSettings: { type: 'Multiple' },
             columns: [
-                { field: "assignedDate", title: "Date", width: '90px', format: "{0:MM-dd-yyyy}" },
-                { field: "applicantName", title: "Applicant", width: '17%' },
-                { field: "applicantTIN", title: "TIN", width: '15%' },
-                { field: "applicationType", title: "Application Type", width: '20%' },
-                { field: "status", title: "Status", width: '20%' },
-                {
-                    command: [{
-                        name: "view",
-                        template: "<button title='View item' class='btn btn-success btn-sm' style='margin-right: 2px'><span class='fa fa-file fa-lg'></span></button>"
-                    }],
-                    title: "Actions",
-                    width: "90px"
-                }
-            ]
+                { field: 'assignedDate', headerText: 'Date', width: 60, format: 'yMd' },
+                { field: 'applicationNo', headerText: 'Application No.', width: 80 },
+                { field: 'applicantTIN', headerText: 'TIN', width: 60 },
+                { field: 'applicantName', headerText: 'Applicant', width: 140 },
+                { field: 'applicationType', headerText: 'Application Type', width: 100 },
+                { type: 'button', width: 30 },
+            ],
+            height: 350,
+            pageSettings: { pageSize: 10 },
+            allowGrouping: false,
+            allowPaging: true,
+            allowSorting: false,
+            allowFiltering: true,
+            filterSettings: { type: 'Menu' },
+            rowSelected: rowSelected,
         });
+
+        grid.appendTo('#Grid');
+        gridGlobal = grid;
     }
-};
-
-let onDataBound = function () {
-
 };
 
 $(document).ready(function () {
@@ -104,10 +103,6 @@ var apiCaller = function (url, type, data, callback) {
     });
 };
 
-var loadTccGrid = function (data) {
-
-};
-
 var validateSearchEntry = function () {
     let searchItem = $("#searchItem").val().trim();
     if (!searchItem.match(/\S/))
@@ -126,7 +121,6 @@ var searchTcc = function () {
             }
         }
 
-        $("#Grid").data("kendoGrid").dataSource.data([]);
         let url = `${searchTccByTaxOffice}?queryString=` + searchItem.trim();
         apiCaller(url, "GET", "", initializeKendoGrid);
     } else {
@@ -145,11 +139,12 @@ $("#searchItem").on('keypress', function (e) {
     }
 });
 
-$("body").on('click', '#Grid .k-grid-content .btn', function (e) {
+function rowSelected(args) {
+    var selectedrecords = gridGlobal.getSelectedRecords();
+    onGridSelected(selectedrecords[0]);
+};
 
-    var grid = $("#Grid").getKendoGrid();
-    var item = grid.dataItem($(e.target).closest("tr"));
-
+var onGridSelected = function (item) {
     $("#appId").val(item.applicationId);
     $("#appTypeId").val(item.applicationTypeId);
     $("#taxpayerName").text(item.applicantName);
@@ -174,7 +169,7 @@ $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
         $("#applicantFName").text(item.applicantName);
         $("#applicantTINPTR").text(item.applicantTIN);
     }
-});
+};
 
 var loadReliefTypes = function () {
     var url = `${loadPtrCodesUrl}APT`;

@@ -10,16 +10,19 @@ var switchTilesByUserRight = function (response) {
         $("#approveTCC").hide();
         $("#processTCC").show();
         $("#assignTCC").hide();
+        $("#assignBulk").hide();
         $("#allTCC").show();
     } else if (response[0].szLevel.toLowerCase() === "manager") {
         $("#approveTCC").show();
         $("#processTCC").hide();
         $("#assignTCC").hide();
+        $("#assignBulk").hide();
         $("#allTCC").show();
     } else if (response[0].szLevel.toLowerCase() === "supervisor") {
         $("#approveTCC").hide();
         $("#processTCC").hide();
         $("#assignTCC").show();
+        $("#assignBulk").show();
         $("#allTCC").show();
     }
 
