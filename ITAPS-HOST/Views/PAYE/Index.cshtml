@@ -10,7 +10,18 @@
             <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center" title="Click to enter your annual estimates">
                 <img src="~/icons/iconx-edits.png" class="img-responsive" width="80" />
                 <div class="flex mb-4 mt-4 dash-body">
-                    <h5 class="text-stats text-muted">Monthly PAYE</h5>
+                    <h5 class="text-stats text-muted">Monthly PAYE Deduction Returns</h5>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+        <a href="~/paye/annual" class="dash-anchor">
+            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center" title="Click to enter your annual estimates">
+                <img src="~/icons/iconx-edits.png" class="img-responsive" width="80" />
+                <div class="flex mb-4 mt-4 dash-body">
+                    <h5 class="text-stats text-muted">Annual PAYE Deduction Returns</h5>
                 </div>
             </div>
         </a>
@@ -20,7 +31,7 @@
 @section scripts {
     <script>
         $(document).ready(function () {
-            $("#pgHeader").text("Pay As You Earn");
+            $("#pgHeader").text("Pay As You Earn (PAYE)");
         });
     </script>
 }

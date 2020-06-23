@@ -16,23 +16,38 @@ namespace ITAPS_HOST.Services
             _adminRequestClient = adminRequestClient;
         }
 
-        public async Task<ResponseItem<object>> GetPayeCompanyDetailsByTaxOficeId(Guid taxCollectId, Guid periodId, string queryString)
+        public async Task<ResponseItem<object>> GetPayeCompanyDetailsByTaxOficeId(Guid taxOfficeId, Guid periodId, string queryString)
         {
-            var apiEndpoint = $"GPaye/GetPayeCompanyDetailsByTaxOficeId/{taxCollectId}/{periodId}?filter={queryString}";
+            var apiEndpoint = $"GPaye/GetPayeCompanyDetailsByTaxOficeId/{taxOfficeId}/{periodId}?filter={queryString}"; //all monthly
+
+            return await _adminRequestClient.GetRequestAsync(apiEndpoint);
+        }
+
+        public async Task<ResponseItem<object>> GetAllAnnualPaye(Guid taxOfficeId, string year)
+        {
+            var apiEndpoint = $"GPaye/GetPayeByTaxPayerIdAndPyrAndPmoYearly/{taxOfficeId}/{year}"; //?filter={queryString}"; 
+
+            return await _adminRequestClient.GetRequestAsync(apiEndpoint);
+        }
+
+        public async Task<ResponseItem<object>> GetAnnualPayeDetails(Guid payeId)
+        {
+            var apiEndpoint = $"GPaye/GetPayeYearlyTransByTaxPayerId/{payeId}";
 
             return await _adminRequestClient.GetRequestAsync(apiEndpoint);
         }
 
         public async Task<ResponseItem<object>> GetAllPayeEmpDeByEmpIdAndPayeId(Guid employeeId, Guid payeId)
         {
-            var apiEndpoint = $"GPaye/GetAllPayeEmpDeByEmpIdAndPayeId/{employeeId}/{payeId}";
+            var apiEndpoint = $"GPaye/GetAllPayeEmpDeByEmpIdAndPayeId/{employeeId}/{payeId}"; //employee details 
 
             return await _adminRequestClient.GetRequestAsync(apiEndpoint);
         }
 
         public async Task<ResponseItemForSingleObject<object>> GetAllPayeTransacByPayeId(Guid payeId)
         {
-            var apiEndpoint = $"GPaye/GetAllPayeTransacByPayeId/{payeId}";
+            //var apiEndpoint = $"GPaye/GetAllPayeTransacByPayeId/{payeId}";
+            var apiEndpoint = $"GPaye/GetPayeTransByTaxPayerId/{payeId}";
 
             return await _adminRequestClient.GetRequestAsyncSingleObject(apiEndpoint); 
         }

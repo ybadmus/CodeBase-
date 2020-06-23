@@ -5,6 +5,18 @@
 
 @section css {
     <link href="~/css/applications/tcc.css" rel="stylesheet" />
+    <link href="//cdn.syncfusion.com/ej2/ej2-base/styles/material.css" rel="stylesheet">
+    <link href="//cdn.syncfusion.com/ej2/ej2-grids/styles/material.css" rel="stylesheet">
+    <link href="//cdn.syncfusion.com/ej2/ej2-buttons/styles/material.css" rel="stylesheet">
+    <link href="//cdn.syncfusion.com/ej2/ej2-popups/styles/material.css" rel="stylesheet">
+    <link href="//cdn.syncfusion.com/ej2/ej2-navigations/styles/material.css" rel="stylesheet">
+    <link href="//cdn.syncfusion.com/ej2/ej2-dropdowns/styles/material.css" rel="stylesheet">
+    <link href="//cdn.syncfusion.com/ej2/ej2-lists/styles/material.css" rel="stylesheet">
+    <link href="//cdn.syncfusion.com/ej2/ej2-inputs/styles/material.css" rel="stylesheet">
+    <link href="//cdn.syncfusion.com/ej2/ej2-calendars/styles/material.css" rel="stylesheet">
+    <link href="//cdn.syncfusion.com/ej2/ej2-splitbuttons/styles/material.css" rel="stylesheet">
+    <!-- Essential JS 2 all script -->
+    <script src="http://cdn.syncfusion.com/ej2/dist/ej2.min.js" type="text/javascript"></script>
 }
 
 <!--Defined this on page level because of control-->
@@ -12,11 +24,14 @@
 <input id="taxpayerId" value="@ViewBag.TaxpayerId" hidden />
 
 <div class="card">
-    <div id="tccGridView">
+    <div id="payeGridView">
         <div class="card-header">
             <div class="row">
                 <div class="col-sm-3" id="">
                     <select type="text" id="listOfTaxOffices" class="form-control" required></select>
+                </div>
+                <div class="col-sm-2" id="">
+                    <select type="text" id="payeYears" class="form-control yearsDropdown" required></select>
                 </div>
                 <div class="col-sm-3">
                     <div class="input-group">
@@ -40,11 +55,6 @@
     <partial name="_AnnualDetails" />
 
 </div>
-
-
-@section modals{
-    <partial name="_AnnualModal" />
-}
 
 @section scripts {
     <script src="~/js/paye/annual.js"></script>

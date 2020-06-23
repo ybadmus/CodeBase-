@@ -1,4 +1,6 @@
-﻿var HeaderName = "My Tasks";
+﻿ej.grids.Grid.Inject(ej.grids.Page, ej.grids.Sort, ej.grids.Filter, ej.grids.Group);
+
+var HeaderName = "My Tasks";
 var serverUrl = $("#serverUrl").val();
 var searchTccByTaxOffice = `${serverUrl}api/TCC/GetAllTccApplicationByTaxOfficeId`;
 var GetTccCommentsByIdUrl = `${serverUrl}api/TCC/GetAllTccApplicationComments?tccId=`;
@@ -24,15 +26,15 @@ var initializeKendoGrid = function (data, stage) {
             selectionSettings: { type: 'Multiple' },
             columns: [
                 { field: 'assignedDate', headerText: 'Date', width: 60, format: 'yMd' },
-                { field: 'applicationNo', headerText: 'Application No.', width: 80 },
+                { field: 'applicantName', headerText: 'Applicant', width: 120 },
                 { field: 'applicantTIN', headerText: 'TIN', width: 60 },
-                { field: 'applicantName', headerText: 'Applicant', width: 140 },
-                { field: 'applicationType', headerText: 'Application Type', width: 100 },
+                { field: 'applicationType', headerText: 'Application Type', width: 90 },
+                { field: 'status', headerText: 'Status', width: 100 },
                 { type: 'button', width: 30 },
             ],
             height: 350,
             pageSettings: { pageSize: 10 },
-            allowGrouping: false,
+            allowGrouping: true,
             allowPaging: true,
             allowSorting: false,
             allowFiltering: true,

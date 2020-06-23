@@ -24,6 +24,18 @@ namespace ITAPS_HOST.Api
             return await _payeService.GetPayeCompanyDetailsByTaxOficeId(officeId, periodId, queryString);
         }
 
+        [HttpGet("GetAllAnnualPaye", Name = "GetAllAnnualPaye")]
+        public async Task<ResponseItem<object>> GetAllAnnualPaye(Guid officeId, string year)
+        {
+            return await _payeService.GetAllAnnualPaye(officeId, year);
+        }
+
+        [HttpGet("GetAnnualPayeDetails", Name = "GetAnnualPayeDetails")]
+        public async Task<ResponseItem<object>> GetAnnualPayeDetails(Guid payeId)
+        {
+            return await _payeService.GetAnnualPayeDetails(payeId);
+        }
+
         [HttpGet("GetPayeDetails", Name = "GetPayeDetails")]
         public async Task<ResponseItemForSingleObject<object>> GetPayeDetails(Guid payeId)
         {

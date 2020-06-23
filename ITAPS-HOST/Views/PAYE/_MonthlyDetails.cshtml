@@ -5,21 +5,83 @@
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="taxPosition" role="tabpanel" aria-labelledby="nav-profile-tab">
 
-                <div class="form-horizontal">
+                <div class="form-horizontal" id="payeDetailsView">
                     <div class="form-row">
-                        <div class="col-sm-5">
-                            <div class="bordered-group" id="" style="height: 350px">
-                                <p class="card-title"><b>PAYE Detail - <span id="ratesCode"></span> </b></p>
-                                <div class="table-responsive border-bottom" style="overflow-y: scroll;height: 280px;">
-                                    <table class="table table-bordered" id="detailsViewTR">
+                        <div class="col-sm-6" id="detailsViewTR">
+                            <div class="bordered-group" style="height: 400px">
+                                <p class="card-title"><b>Company Details</b></p>
+                                <div class="table-responsive" style="height: 350px; margin: 10px 0px">
+                                    <table class="table table-bordered">
                                         <tbody>
                                             <tr>
-                                                <td style="padding-left:5px;width:150px;font-weight:100;">TIN</td>
-                                                <td title="Date Format: YYYY/MM/DD" style="padding-left:5px;width:250px;font-weight:bold;" id="payerTIN"></td>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Date Submitted</td>
+                                                <td title="Date Format: YYYY/MM/DD" style="padding-left:5px;width:250px;font-weight:bold;" id="dateSubmitted"></td>
                                             </tr>
                                             <tr>
-                                                <td style="padding-left:5px;width:150px;font-weight:100;">Period</td> <!--Concat Month and Year-->
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Tax Office</td>
+                                                <td title="Date Format: YYYY/MM/DD" style="padding-left:5px;width:250px;font-weight:bold;" id="taxOfficeName"></td>
+                                            </tr>
+                                            @*<tr>
+                                                    <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;background: #f7f8f9;">Company Details</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left:5px;width:150px;font-weight:100;">Company Name</td>
+                                                    <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="companyName"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left:5px;width:150px;font-weight:100;">TIN</td>
+                                                    <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="companyTIN"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left:5px;width:150px;font-weight:100;">Address</td>
+                                                    <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="companyAddress"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left:5px;width:150px;font-weight:100;">Applicant Phone</td>
+                                                    <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="companyPhone"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left:5px;width:150px;font-weight:100;">Email</td>
+                                                    <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="companyEmail"></td>
+                                                </tr>*@
+                                            <tr>
+                                                <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;background: #f7f8f9;">Applicant Details</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Taxpayer Name</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="taxpayerName"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">TIN</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="taxpayerTIN"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Applicant Phone</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="taxpayerPhone"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Email</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="taxpayerEmail"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="bordered-group" style="height: 400px">
+                                <p class="card-title"><b>Transaction Details</b></p>
+                                <div class="table-responsive" style="height: 350px; margin: 10px 0px">
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Year</td>
                                                 <td title="Date Format: YYYY/MM/DD" style="padding-left:5px;width:250px;font-weight:bold;" id="periodYear"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Month</td>
+                                                <td title="Date Format: YYYY/MM/DD" style="padding-left:5px;width:250px;font-weight:bold;" id="periodMonth"></td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;background: #f7f8f9;">Number Of Staffs</td>
@@ -33,6 +95,10 @@
                                                 <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="otherNo"></td>
                                             </tr>
                                             <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Total Staffs</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="totalNoOfStaff"></td>
+                                            </tr>
+                                            <tr>
                                                 <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;background: #f7f8f9;">Cash Emolument</td>
                                             </tr>
                                             <tr>
@@ -44,6 +110,10 @@
                                                 <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="otherPay"></td>
                                             </tr>
                                             <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Total Salaries</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="totalCashEmolument"></td>
+                                            </tr>
+                                            <tr>
                                                 <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;background: #f7f8f9;">Tax Deductions</td>
                                             </tr>
                                             <tr>
@@ -53,6 +123,10 @@
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Other</td>
                                                 <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="otherTax"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Total Deductions</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="totalTaxDeduction"></td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;background: #f7f8f9;">Staff Movement</td>
@@ -75,28 +149,19 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-7">
-                            <div class="bordered-group" id="" style="height: 350px">
-                                <p class="card-title"><b>Employee Details</b></p>
-                                <div class="table-responsive border-bottom" style="height: 300px;">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr class="table-info">
-                                                <th scope="col" style="color: black;">Employee Name</th>
-                                                <th scope="col" style="color: black;">TIN</th>
-                                                <th scope="col" style="color: black;">Position</th>
-                                                <th scope="col" style="color: black;">Tax Deducted</th>
-                                                <th scope="col" style="color: black;">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="employeeGrid"></tbody>
-                                    </table>
-                                </div>
-                            </div>
-
-                        </div>
                     </div>
                     <button id="backToGrid" class="btn btn-outline-primary"> Back</button>
+                    <button id="moreDetailsView" class="btn btn-primary"> More Details</button>
+                </div>
+
+                <div class="form-horizontal" id="employeeListView">
+                    <div class="form-row">
+                        <div class="col-sm-12">
+                            <h6 class="card-title">List Of Employees</h6>
+                            <div id="employeesGrid"></div>
+                        </div>
+                    </div>
+                    <button id="backToDetailsView" class="btn btn-outline-primary"> Back</button>
                 </div>
 
             </div>
@@ -108,13 +173,12 @@
 <div id="employeeDetails">
     <div class="card-body">
         <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="taxPosition" role="tabpanel" aria-labelledby="nav-profile-tab">
-
+            <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="nav-profile-tab">
                 <div class="form-horizontal">
                     <div class="form-row">
                         <div class="col-sm-6">
                             <div class="bordered-group" id="" style="height: 350px">
-                                <p class="card-title"><b>EMPLOYEE DETAIL<span id="ratesCode"></span> </b></p>
+                                <p class="card-title"><b>Employee Details<span id="ratesCode"></span> </b></p>
                                 <div class="table-responsive border-bottom" style="height: 300px;">
                                     <table class="table table-bordered" id="employeeViewTR">
                                         <tbody>
@@ -155,7 +219,7 @@
 
                         <div class="col-sm-6">
                             <div class="bordered-group" id="" style="height: 350px">
-                                <p class="card-title"><b>EMPLOYEE DETAIL<span id="ratesCode"></span> </b></p>
+                                <p class="card-title"><b>Income Details<span id="ratesCode"></span> </b></p>
                                 <div class="table-responsive border-bottom" style="height: 300px;">
                                     <table class="table table-bordered" id="detailsViewTR">
                                         <tbody>
