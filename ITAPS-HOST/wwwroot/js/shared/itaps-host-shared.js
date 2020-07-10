@@ -228,6 +228,7 @@ var loadUserDetials = function (callbackProcess) {
 
 $('.yearsDropdown').ready(function () {
     var beginYear = (new Date()).getFullYear();
+    $('.yearsDropdown').append('<option value="0">Select Year</option>');
     for (var i = beginYear; i >= 1990; i--) {
         $('.yearsDropdown').append($('<option/>', {
             value: i,

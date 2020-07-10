@@ -1,4 +1,6 @@
-﻿namespace ITAPS_HOST.Models.Codes
+﻿using System;
+
+namespace ITAPS_HOST.Models.Codes
 {
     public class SetupDto
     {
@@ -20,6 +22,18 @@
         public string Type { get; set; }
         public string Notes { get; set; }
         public char cStatus { get; set; }
+    }
+
+    public class ReliefCreationDto
+    {
+        public Guid ReliefId { get; set; }
+        public string ReliefType { get; set; }
+        public string Status { get; set; }
+        public string RateMultiplier { get; set; }
+        public string Notes { get; set; }
+        public string StartDate { get; set; }
+        public string EndDate { get; set; }
+        public double ReliefValue { get; set; }
     }
 
     public class WhtPeriodsDto

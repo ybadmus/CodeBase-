@@ -6,17 +6,35 @@ var searchPayeByTaxOffice = `${serverUrl}api/PayeApi/GetAllCompanyPaye`; //searc
 var payeDetailsUrl = `${serverUrl}api/PayeApi/GetPayeDetails`; //payeid
 var employeeDetails = `${serverUrl}api/PayeApi/GetEmployeeDetails`; //employee details
 var activeTaxOffice = "";
+var activeTaxOfficeName = "";
 var gridGlobal = "";
 var activePeriod = "";
 var activeEmployeeList = [];
+var activeCompany = "";
+var activeYear = "";
 
 $(document).ready(function () {
     bootstrapPage();
 });
 
+$("#yearsDropdown").on('change', function () {
+    var elem = document.getElementById("yearsDropdown");
+    activeYear = elem.options[elem.selectedIndex].value;
+    if (activeYear == 0) {
+
+        $("#listOfPeriods").prop("disabled", true);
+    }
+    else {
+
+        
+        getActivePeriods(activeYear);
+    }
+});
+
 $("#tccListOfTaxOffices").on('change', function () {
     var elem = document.getElementById("tccListOfTaxOffices");
     activeTaxOffice = elem.options[elem.selectedIndex].value;
+    activeTaxOfficeName = elem.options[elem.selectedIndex].text;
 });
 
 $("#listOfPeriods").on('change', function () {
@@ -69,7 +87,6 @@ var bootstrapPage = function () {
     initializeKendoGrid();
     setTitles();
     loadOffices();
-    getActivePeriods();
     hideAndShow();
 };
 
@@ -88,7 +105,7 @@ var loadTaxOffices = function (listOfTaxOffices) {
 
     listOfTaxOffices.sort((a, b) => (a.taxOfficeName > b.taxOfficeName) - (a.taxOfficeName < b.taxOfficeName));
 
-    output += '<option selected>Choose Office</option>';
+    output += '<option value="0" selected>Choose Office</option>';
     for (var i = 0; i < listOfTaxOffices.length; i++) {
         output = output + '<option value="' + listOfTaxOffices[i].taxOfficeId + '" >' + listOfTaxOffices[i].taxOfficeName + '</option>';
     }
@@ -104,8 +121,8 @@ var loadOffices = function () {
     apiCaller(officesUrl, "GET", "", loadTaxOffices);
 };
 
-var getActivePeriods = function () {
-    var url = `${serverUrl}api/monoapi/GetAllActivePeriods`;
+var getActivePeriods = function (year) {
+    var url = `${serverUrl}api/monoapi/GetAllActivePeriods?year=${year}`;
 
     apiCaller(url, "GET", "", loadActivePeriods);
 };
@@ -118,10 +135,15 @@ var loadActivePeriods = function (listOfPeriods) {
         for (var i = 0; i < listOfPeriods.length; i++) {
             output = output + '<option value="' + listOfPeriods[i].id + '" >' + listOfPeriods[i].period + '</option>';
         }
-    };
+    } else {
+        toastr.warning("No periods for this year!");
+        $("#listOfPeriods").html('<option value="0" selected>Choose Period</option>');
+        $("#listOfPeriods").prop("disabled", true);
+    }
 
     output = output;
     $("#listOfPeriods").html(output);
+    $("#listOfPeriods").prop("disabled", false);
 };
 
 var validateSearchEntry = function () {
@@ -141,7 +163,7 @@ var searchPaye = function () {
                     replaceAt(searchItem, i, '%2F');
             }
         }
-
+        $("#Grid").data("kendoGrid").dataSource.data([]);
         let url = `${searchPayeByTaxOffice}?officeId=` + activeTaxOffice + `&periodId=` + activePeriod + `&queryString=` + searchItem;
         apiCaller(url, "GET", "", initializeKendoGrid);
     } else {
@@ -170,6 +192,7 @@ $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
     var item = grid.dataItem($(e.target).closest("tr"));
     var detailsUrl = `${payeDetailsUrl}?payeId=` + item.id;
     $("#applicationId").val(item.id);
+    activeCompany = item.companyName;
 
     apiCaller(detailsUrl, "GET", "", loadDetailsView);
 });
@@ -196,16 +219,26 @@ var loadDetailsView = function (resp) {
     $("#payeDetailsView").show();
     $("#employeeListView").hide();
 
-    $("#dateSubmitted").text(resp[0].dateSubmitted);
-    $("#taxOfficeName").text(resp[0].taxOfficeName);
+    if (!resp[0].companyName) {
+        $("#taxpayerName").text(activeCompany);
+    } else {
+        $("#taxpayerName").text(resp[0].companyName);
+    };
 
-    $("#companyName").text(resp[0].companyName);
+    $("#dateSubmitted").text(resp[0].createdAt);
+
+    if (!resp[0].taxOfficeName) {
+        $("#taxOfficeName").text(activeTaxOfficeName);
+    } else {
+        $("#taxOfficeName").text(resp[0].taxOfficeName);
+    };
+
     $("#companyTIN").text(resp[0].companyTIN);
     $("#companyAddress").text(resp[0].companyAddress);
     $("#companyPhone").text(resp[0].companyPhone);
     $("#companyEmail").text(resp[0].companyEmail);
 
-    $("#taxpayerName").text(resp[0].taxpayerName);
+    //$("#companyName").text(resp[0].taxpayerName);
     $("#taxpayerTIN").text(resp[0].taxpayerTIN);
     $("#taxpayerPhone").text(resp[0].taxpayerPhone);
     $("#taxpayerEmail").text(resp[0].taxpayerEmail);
@@ -233,7 +266,7 @@ var loadDetailsView = function (resp) {
 var loadEmployeeTable = function (data) {
 
     document.getElementById("employeesGrid").innerHTML = "";
-    
+
     var grid = new ej.grids.Grid({
         dataSource: data,
         enableHover: true,
@@ -324,3 +357,4 @@ var employeeView = function (resp) {
     $("#employeeDetails").show();
     $("#monDetails").hide();
 };
+

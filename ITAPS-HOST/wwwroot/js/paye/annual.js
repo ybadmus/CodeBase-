@@ -59,7 +59,7 @@ var initializeKendoGrid = function (data) {
         pageable: { refresh: false, pageSizes: true, buttonCount: 5 },
         columns: [
             {
-                field: "updatedAt", title: "Date", width: '90px', format: "{0:MM-dd-yyyy}", template: function (data) {
+                field: "updatedAt", title: "Date", width: '110px', format: "{0:MM-dd-yyyy}", template: function (data) {
                     return convertDateToFormat(data.updatedAt);
                 }
             },

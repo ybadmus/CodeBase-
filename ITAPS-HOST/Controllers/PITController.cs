@@ -31,7 +31,7 @@ namespace ITAPS_HOST.Controllers
             ViewBag.ServerUrl = _config.AppServerUrl;
             return View();
         }
-        
+
         public IActionResult ReportsDialog()
         {
             UserDetails();
@@ -116,7 +116,8 @@ namespace ITAPS_HOST.Controllers
                 {
                     ViewBag.UserId = claim.Value;
                 }
-                if (claim.Type == "usergroup") {
+                if (claim.Type == "usergroup")
+                {
                     ViewBag.UserGroup = claim.Value;
                 }
             }

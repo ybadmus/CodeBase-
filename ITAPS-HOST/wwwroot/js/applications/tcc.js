@@ -122,7 +122,6 @@ var searchTcc = function () {
                     replaceAt(searchItem, i, '%2F');
             }
         }
-
         let url = `${searchTccByTaxOffice}?queryString=` + searchItem.trim();
         apiCaller(url, "GET", "", initializeKendoGrid);
     } else {

@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace ITAPS_HOST.Services
 {
-    public class CodeService: ICodeService
+    public class CodeService : ICodeService
     {
         private readonly IAdminRequestClient _adminRequestClient;
         public CodeService(IAdminRequestClient adminRequestClient)
@@ -25,6 +25,25 @@ namespace ITAPS_HOST.Services
         {
             string apiEndpoint = $"GenericCodes/GetAllGCOTByTypeAsync/{code}";
             return await _adminRequestClient.GetRequestAsync(apiEndpoint);
+        }
+
+        public async Task<ResponseItemForCreationDto<object>> SvRelief(ReliefCreationDto data)
+        {
+            string apiEndpoint = $"TaxReliefSetup/PostTaxReliefSetup";
+
+            var codeSetupForCreation = new ReliefCreationDto
+            {
+                ReliefId = data.ReliefId,
+                ReliefType = data.ReliefType,
+                Status = data.Status,
+                RateMultiplier = data.RateMultiplier,
+                Notes = data.Notes,
+                StartDate = data.StartDate,
+                EndDate = data.EndDate,
+                ReliefValue = data.ReliefValue,
+            };
+
+            return await _adminRequestClient.PostRequestAsync(codeSetupForCreation, apiEndpoint);
         }
 
         public async Task<ResponseItemForCreationDto<object>> PostCodesTableAsync(string code, SetupForCreationDto data)
@@ -45,6 +64,12 @@ namespace ITAPS_HOST.Services
         public async Task<ResponseItem<object>> SearchCodesTableAsync(string type, string term)
         {
             string apiEndpoint = $"GenericCodes/SearchCodesAsync?type={type}&term={term}";
+            return await _adminRequestClient.GetRequestAsync(apiEndpoint);
+        }
+
+        public async Task<ResponseItem<object>> GetReliefsByDate(string type, string year)
+        {
+            string apiEndpoint = $"TaxReliefSetup/GetAllTaxReliefsSetupsByDate/{year}/{type}";
             return await _adminRequestClient.GetRequestAsync(apiEndpoint);
         }
 

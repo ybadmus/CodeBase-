@@ -12,6 +12,10 @@ namespace ITAPS_HOST.IServices
 
         Task<ResponseItem<object>> SearchCodesTableAsync(string type, string term);
 
+        Task<ResponseItem<object>> GetReliefsByDate(string type, string year);
+
         Task<ResponseItem<object>> GetAllActivePeriods();
+
+        Task<ResponseItemForCreationDto<object>> SvRelief(ReliefCreationDto data);
     }
 }

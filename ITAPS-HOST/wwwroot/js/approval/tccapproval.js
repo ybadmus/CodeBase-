@@ -22,7 +22,7 @@ var initializeKendoGrid = function (data) {
         pageable: { refresh: false, pageSizes: true, buttonCount: 5 },
         columns: [
             { field: "statusDate", title: "Date", width: '90px' },
-            { field: "applicationNo", title: "Application No.", width: '100px' },
+            { field: "applicationNo", title: "Application No.", width: '15%' },
             { field: "applicantName", title: "Applicant", width: '20%' },
             { field: "purpose", title: "Purpose", width: '20%' },
             { field: "requestingEntity", title: "Requesting Entity", width: '20%' },

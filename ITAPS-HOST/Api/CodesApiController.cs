@@ -31,10 +31,23 @@ namespace ITAPS_HOST.Api
             return await _codeSetupService.PostCodesTableAsync(code, data);
         }
 
+        [HttpPost]
+        [ValidateInputFilter]
+        public async Task<ResponseItemForCreationDto<object>> SaveReliefType([FromBody]ReliefCreationDto data)
+        {
+            return await _codeSetupService.SvRelief(data);
+        }
+
         [HttpPut("{code}")]
-        public async Task<ResponseItemForCreationDto<object>> PutCodeTableAsync(string code, [FromBody]SetupForCreationDto data)
+        public async Task<ResponseItemForCreationDto<object>> PutCodeTableAsync(string code, [FromBody] SetupForCreationDto data)
         {
             return await _codeSetupService.PostCodesTableAsync(code, data);
+        }
+
+        [HttpGet("GetAllTaxReliefsSetupsByDate/")]
+        public async Task<ResponseItem<object>> GetAllTaxReliefsSetupsByDate(string type, string year)
+        {
+            return await _codeSetupService.GetReliefsByDate(type, year);
         }
 
         [HttpGet("SearchCodesTableAsync/")]
