@@ -116,7 +116,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="modal-title" id="modal-income-title">Add Tax Relief</h6>
+                <h6 class="modal-title" id="modalincometitle">Add Tax Relief</h6>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true" style="color: white">&times;</span>
                 </button>
@@ -140,7 +140,7 @@
                                         </label>
                                         <select type="text" id="typeOfReliefs" class="form-control" required="">
                                             <option value="0">Select Type</option>
-                                            <option value="F">Fixed Value</option>
+                                            <option value="V">Fixed Value</option>
                                             <option value="R">Rate</option>
                                         </select>
                                     </div>
@@ -162,7 +162,7 @@
                                         <label for="UpdateCode" class="col-form-label">
                                             Relief Amount
                                         </label>
-                                        <input type="number" class="form-control" id="reliefValue" placeholder="Amount">
+                                        <input type="text" class="form-control" id="reliefValue" placeholder="Amount">
                                     </div>
                                     <div class="col-md-6 ">
                                         <label for="reliefStatus" class="col-form-label">
@@ -178,15 +178,17 @@
                                 <div class="form-group row">
                                     <div class="col-md-6 ">
                                         <label for="startDateReliefModal" class="col-form-label">
-                                            Start Date
+                                            From (01/01/<span id="selectedStartYear"></span>)
                                         </label>
-                                        <input type="text" class="form-control" id="startDateReliefModal" placeholder="Start Date">
+                                        <select type="text" id="startDateReliefModal" class="form-control yearsDropdown" required="">
+                                        </select>
                                     </div>
                                     <div class="col-md-6 ">
                                         <label for="endDateReliefModal" class="col-form-label">
-                                            End Date
+                                            To (31/12/<span id="selectedEndYear"></span>)
                                         </label>
-                                        <input type="text" class="form-control" id="endDateReliefModal" placeholder="End Date">
+                                        <select type="text" id="endDateReliefModal" class="form-control" required="" disabled>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -206,6 +208,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 <button type="button" id="btnSaveRelief" class="btn btn-success" disabled>Save</button>
+                <button type="button" id="btnEditField" class="btn btn-outline-success" style="display: none;">Edit</button>
             </div>
         </div>
     </div>

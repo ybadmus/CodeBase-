@@ -1,5 +1,6 @@
 ﻿using ITAPS_HOST.Models;
 using ITAPS_HOST.Models.Codes;
+using System;
 using System.Threading.Tasks;
 
 namespace ITAPS_HOST.IServices
@@ -14,8 +15,12 @@ namespace ITAPS_HOST.IServices
 
         Task<ResponseItem<object>> GetReliefsByDate(string type, string year);
 
+        Task<ResponseItem<object>> GetReliefDetails(Guid id);
+
         Task<ResponseItem<object>> GetAllActivePeriods();
 
         Task<ResponseItemForCreationDto<object>> SvRelief(ReliefCreationDto data);
+
+        Task<ResponseItem<object>> UpRelief(ReliefCreationDto data, Guid id);
     }
 }

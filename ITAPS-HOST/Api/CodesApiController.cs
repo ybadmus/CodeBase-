@@ -3,6 +3,7 @@ using ITAPS_HOST.Models;
 using ITAPS_HOST.Models.Codes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace ITAPS_HOST.Api
@@ -31,11 +32,18 @@ namespace ITAPS_HOST.Api
             return await _codeSetupService.PostCodesTableAsync(code, data);
         }
 
-        [HttpPost]
+        [HttpPost("SaveReliefType/")]
         [ValidateInputFilter]
         public async Task<ResponseItemForCreationDto<object>> SaveReliefType([FromBody]ReliefCreationDto data)
         {
             return await _codeSetupService.SvRelief(data);
+        }
+        
+        [HttpPost("UpdatesReliefType/")]
+        [ValidateInputFilter]
+        public async Task<ResponseItem<object>> UpdatesReliefType([FromBody]ReliefCreationDto data, Guid id)
+        {
+            return await _codeSetupService.UpRelief(data, id);
         }
 
         [HttpPut("{code}")]
@@ -48,6 +56,12 @@ namespace ITAPS_HOST.Api
         public async Task<ResponseItem<object>> GetAllTaxReliefsSetupsByDate(string type, string year)
         {
             return await _codeSetupService.GetReliefsByDate(type, year);
+        }
+        
+        [HttpGet("GetReliefDetails/")]
+        public async Task<ResponseItem<object>> GetReliefDetails(Guid id)
+        {
+            return await _codeSetupService.GetReliefDetails(id);
         }
 
         [HttpGet("SearchCodesTableAsync/")]
