@@ -66,9 +66,7 @@ var initializeKendoGrid = function (data) {
             { field: "companyName", title: "Name", width: '17%' },
             { field: "companyTIN", title: "TIN", width: '20%' },
             {
-                field: "totalNoOfStaff", title: "Total Staffs", width: '15%', attributes: { style: "text-align:right;" }, template: function (data) {
-                    return parseFloat(data.totalNoOfStaff).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
-                }
+                field: "totalNoOfStaff", title: "Total Staffs", width: '15%', attributes: { style: "text-align:right;" }
             },
             {
                 field: "totalCashEmolument", title: "Total Cash Emolument", width: '15%', attributes: { style: "text-align:right;" }, template: function (data) {
@@ -135,7 +133,7 @@ var searchPaye = function () {
             }
         }
 
-        let url = `${searchPayeByTaxOffice}?officeId=` + activeTaxOffice + `&year=` + activeYear; // + `&queryString=` + searchItem;
+        let url = `${searchPayeByTaxOffice}?officeId=` + activeTaxOffice + `&year=` + activeYear + `&queryString=` + searchItem;
         apiCaller(url, "GET", "", initializeKendoGrid);
     } else {
 
@@ -160,50 +158,58 @@ $("#moreDetailsView").click(function () {
 });
 
 var loadDetailsView = function (resp) {
-    var totalCashEmolument = resp[0].managementPay + resp[0].otherPay;
-    var totalTaxDeduction = resp[0].managementTax + resp[0].otherTax;
-    activeEmployeeList = resp[0].payeChild;
 
-    $("#payeGridView").hide();
-    $("#employeeDetails").hide();
-    $("#monDetails").show();
-    $("#payeDetailsView").show();
-    $("#employeeListView").hide();
+    if (resp && resp.length > 0) {
 
-    $("#taxOfficeName").text(resp[0].taxOfficeName);
-    $("#periodYear").text(activeYear);
-    $("#taxOfficeName").text(activeTaxOfficeName);
-    $("#dateSubmitted").text(convertDateToFormat(activeDateSubmitted));
+        var totalCashEmolument = resp[0].managementPay + resp[0].otherPay;
+        var totalTaxDeduction = resp[0].managementTax + resp[0].otherTax;
+        activeEmployeeList = resp[0].payeChild;
 
-    $("#companyName").text(resp[0].companyName);
-    $("#companyTIN").text(resp[0].companyTIN);
-    $("#companyAddress").text(resp[0].companyAddress);
-    $("#companyPhone").text(resp[0].companyPhone);
-    $("#companyEmail").text(resp[0].companyEmail);
+        $("#payeGridView").hide();
+        $("#employeeDetails").hide();
+        $("#monDetails").show();
+        $("#payeDetailsView").show();
+        $("#employeeListView").hide();
 
-    $("#taxpayerName").text(resp[0].taxpayerName);
-    $("#taxpayerTIN").text(resp[0].taxpayerTIN);
-    $("#taxpayerPhone").text(resp[0].taxpayerPhone);
-    $("#taxpayerEmail").text(resp[0].taxpayerEmail);
+        $("#taxOfficeName").text(resp[0].taxOfficeName);
+        $("#periodYear").text(activeYear);
+        $("#taxOfficeName").text(activeTaxOfficeName);
+        $("#dateSubmitted").text(convertDateToFormat(activeDateSubmitted));
 
-    $("#periodYear").text(resp[0].periodYear);
-    $("#periodMonth").text(resp[0].periodMonth);
+        $("#companyName").text(resp[0].companyName);
+        $("#companyTIN").text(resp[0].companyTIN);
+        $("#companyAddress").text(resp[0].companyAddress);
+        $("#companyPhone").text(resp[0].companyPhone);
+        $("#companyEmail").text(resp[0].companyEmail);
 
-    $("#managementNo").text(resp[0].managementNo);
-    $("#otherNo").text(resp[0].otherNo);
-    $("#totalNoOfStaff").text(resp[0].managementNo + resp[0].otherNo);
+        $("#taxpayerName").text(resp[0].taxpayerName);
+        $("#taxpayerTIN").text(resp[0].taxpayerTIN);
+        $("#taxpayerPhone").text(resp[0].taxpayerPhone);
+        $("#taxpayerEmail").text(resp[0].taxpayerEmail);
 
-    $("#managementPay").text(parseFloat(resp[0].managementPay).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#otherPay").text(parseFloat(resp[0].otherPay).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#totalCashEmolument").text(parseFloat(totalCashEmolument).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $("#periodYear").text(resp[0].periodYear);
+        $("#periodMonth").text(resp[0].periodMonth);
 
-    $("#managementTax").text(parseFloat(resp[0].managementTax).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#otherTax").text(parseFloat(resp[0].otherTax).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#totalTaxDeduction").text(parseFloat(totalTaxDeduction).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $("#managementNo").text(resp[0].managementNo);
+        $("#otherNo").text(resp[0].otherNo);
+        $("#totalNoOfStaff").text(resp[0].managementNo + resp[0].otherNo);
 
-    $("#startingStaff").text(resp[0].startingStaff);
-    $("#engagedStaff").text(resp[0].engagedStaff);
-    $("#disengagedStaff").text(resp[0].disengagedStaff);
+        $("#managementPay").text(parseFloat(resp[0].managementPay).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $("#otherPay").text(parseFloat(resp[0].otherPay).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $("#totalCashEmolument").text(parseFloat(totalCashEmolument).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+
+        $("#managementTax").text(parseFloat(resp[0].managementTax).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $("#otherTax").text(parseFloat(resp[0].otherTax).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $("#totalTaxDeduction").text(parseFloat(totalTaxDeduction).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+
+        $("#startingStaff").text(resp[0].startingStaff);
+        $("#engagedStaff").text(resp[0].engagedStaff);
+        $("#disengagedStaff").text(resp[0].disengagedStaff);
+    } else {
+
+        $('html').hideLoading();
+        toastr.info("An error occured when loading the details");
+    }
 };
 
 var loadEmployeeTable = function (data) {

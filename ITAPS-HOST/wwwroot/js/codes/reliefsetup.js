@@ -18,12 +18,6 @@ $(document).ready(function () {
     $("#startDate").flatpickr({});
 });
 
-$("#typeOfReliefs").on('change', function () {
-    var e = document.getElementById("listOfReliefs");
-    reliefType = e.options[e.selectedIndex].value;
-    hideOrShowRateMultiplier();
-});
-
 $("#listOfReliefs").on('change', function () {
     var e = document.getElementById("listOfReliefs");
     activeRelief = e.options[e.selectedIndex].value;
@@ -37,7 +31,7 @@ $("#yearsDropdown").on('change', function () {
 var hideOrShowRateMultiplier = function () {
     if ($("#typeOfReliefs").val() == "R")
         $("#rateMultiplierDiv").show();
-    else if ($("#typeOfReliefs").val() == "F")
+    else if ($("#typeOfReliefs").val() == "V")
         $("#rateMultiplierDiv").hide();
 };
 
@@ -95,8 +89,8 @@ var initializeGrid = function (data) {
         enableHover: true,
         columns: [
             { field: 'reliefApplicationType', headerText: 'Name', width: 250 },
-            { field: 'reliefType', headerText: 'Relief Type', width: 350 },
-            { field: 'amountOfRelief', headerText: 'Amount', width: 150, textAlign: 'Right' },
+            { field: 'reliefType', headerText: 'Relief Type', width: 300 },
+            { field: 'amountOfRelief', headerText: 'Amount / Rate', width: 200, type: 'number', textAlign: 'Right' },
             { field: 'status', headerText: 'Status', width: 120 },
             { field: 'startDate', headerText: 'Start Date', width: 140, format: 'yMd' },
             { field: 'endDate', headerText: 'End Date', width: 140, format: 'yMd' }
@@ -123,13 +117,14 @@ function rowSelected(args) {
 var onGridSelected = function (item) {
     setModalDefault();
     loadReliefDetails(item.setupId);
+
     activeSetupId = item.setupId;
 };
 
 var loadReliefDetails = function (id) {
 
     var url = MainGetUrl + "GetReliefDetails?id=" + id;
-    apiCaller(url, "GET", "", loadUpdateModal)
+    apiCaller(url, "GET", "", loadUpdateModal);
 };
 
 var loadUpdateModal = function (data) {
@@ -138,16 +133,20 @@ var loadUpdateModal = function (data) {
     $("#btnEditField").show();
     $("#btnSaveRelief").hide();
 
-    $("#listOfReliefsModal").val(data.reliefApplicationTypeId);
+    $("#listOfReliefsModal").val(data.reliefApplicationTypeId ? data.reliefApplicationTypeId : "0");
     $("#typeOfReliefs").val(data.reliefType.includes("Fixed Value") ? "V" : data.reliefType.includes("Rate") ? "R" : "0");
-    $("#multiplierCode").val(data.rateMultiplierCode);
-    $("#reliefValue").val(data.amountOfRelief);
-    $("#reliefStatus").val(data.status);
-    $("#startDateReliefModal").val(data.startDate.split('-')[0]);
-    $("#endDateReliefModal").val(data.endDate.split('-')[0]);
-    $("#selectedStartYear").text(data.startDate.split('-')[0]);
-    $("#selectedEndYear").text(data.endDate.split('-')[0]);
-    $("#addReliefNotes").val(data.notes);
+    if (data.reliefType.includes("Fixed Value")) {
+
+        $("#rateMultiplierDiv").hide();
+    };
+    $("#multiplierCode").val(data.rateMultiplierCode.toUpperCase() == "N/A" ? "0" : data.rateMultiplierCode ? data.rateMultiplierCode : "0");
+    $("#reliefValue").val(data.amountOfRelief ? data.amountOfRelief : "n/a");
+    $("#reliefStatus").val(data.status ? data.status : "0");
+    $("#startDateReliefModal").val(data.startDate ? data.startDate.split('-')[0]: "0");
+    $("#endDateReliefModal").val(data.endDate ? data.endDate.split('-')[0] : "0");
+    $("#selectedStartYear").text(data.startDate ? data.startDate.split('-')[0] : "n/a");
+    $("#selectedEndYear").text(data.endDate ? data.endDate.split('-')[0] : "n/a");
+    $("#addReliefNotes").val(data.notes ? data.notes : "");
 
     disableEnableFieldModal(true);
     $("#addPersonalReliefType").modal("show");
@@ -182,6 +181,7 @@ $("#addPersonalReliefType").on('hidden.bs.modal', function () {
 
 $("#btnEditField").click(function () {
     disableEnableFieldModal(false);
+    //$("#endDateReliefModal").prop("disabled", true);
     $("#btnEditField").hide();
     $("#btnSaveRelief").show();
     validateModalUpdate();
@@ -205,15 +205,17 @@ $("#btnSearch").click(function () {
 });
 
 var manipulateDataForDisplay = function (resp) {
-    if (resp == null) {
+
+    if (!resp || resp == null) {
         initializeGrid([]);
         return toastr.info("No Data");
     }
 
     for (var i = 0; i < resp.length; i++) {
-        resp[i].status = resp[i].status == "I" ? "Inactive" : resp[i].status == "A" ? "Active" : "N/A";
-        resp[i].startDate = convertDateToFormat(resp[i].startDate);
-        resp[i].endDate = convertDateToFormat(resp[i].endDate);
+        resp[i].status = resp[i].status == "I" ? "Inactive" : resp[i].status == "A" ? "Active" : "";
+        resp[i].startDate = resp[i].startDate ? convertDateToFormat(resp[i].startDate) : "";
+        resp[i].endDate = resp[i].endDate ? convertDateToFormat(resp[i].endDate) : "";
+        resp[i].amountOfRelief = resp[i].amountOfRelief ? resp[i].amountOfRelief.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : 0;
     }
 
     return initializeGrid(resp);
@@ -236,7 +238,11 @@ $("#listOfReliefsModal").on('change', function () {
 });
 
 $("#typeOfReliefs").on('change', function () {
+
     var e = document.getElementById("typeOfReliefs");
+    reliefType = e.options[e.selectedIndex].value;
+    hideOrShowRateMultiplier();
+
     if (e.options[e.selectedIndex].value == "F")
         itemToSave.reliefMultiplierCode = "N/A";
     else if (e.options[e.selectedIndex].value == "R" && itemToSave.reliefMultiplierCode == "N/A") {
@@ -281,9 +287,11 @@ var validateEntry = function () {
 
 var validateModalUpdate = function () {
 
-    if ($("#reliefStatus").val() && $("#typeOfReliefs").val() && $("#multiplierCode").val() && $("#listOfReliefsModal").val()) {
+    var multiplyCode = $("#typeOfReliefs").val() === "V" ? "n/a" : $("#multiplierCode").val();
 
-        if ($("#reliefStatus").val() != "0" && $("#typeOfReliefs").val() != "0" && $("#multiplierCode").val() != "0"
+    if ($("#reliefStatus").val() && $("#typeOfReliefs").val() && multiplyCode && $("#listOfReliefsModal").val()) {
+
+        if ($("#reliefStatus").val() != "0" && $("#typeOfReliefs").val() != "0" && multiplyCode != "0"
             && $("#listOfReliefsModal").val() != "0") {
 
             if (lookForEmpytyField())
@@ -293,6 +301,8 @@ var validateModalUpdate = function () {
         } else {
             $("#btnSaveRelief").prop("disabled", true);
         }
+    } else {
+        $("#btnSaveRelief").prop("disabled", true);
     }
 
 };
@@ -319,7 +329,7 @@ $("#startDateReliefModal").on("change", function () {
 var populateEndYear = function (data) {
 
     var output = "";
-    var count = parseInt(data) + 5;
+    var count = parseInt(data) + 20;
     output += '<option value="0" selected>Select Year</option>';
     for (var i = data; i < count; i++) {
         output = output + '<option value="' + i + '" >' + i + '</option>';
@@ -391,6 +401,7 @@ var setModalDefault = function () {
     $("#reliefStatus").val($("#reliefStatus option:first").val());
     $("#multiplierCode").val($("#multiplierCode option:first").val());
     $("#typeOfReliefs").val($("#typeOfReliefs option:first").val());
+    $("#rateMultiplierDiv").show();
     $("#listOfReliefsModal").val($("#listOfReliefsModal option:first").val());
     $("#startDateReliefModal").val($("#startDateReliefModal option:first").val());
     $("#endDateReliefModal").val($("#endDateReliefModal option:first").val());
@@ -430,7 +441,7 @@ $("#btnSaveRelief").click(function () {
             "reliefId": $("#listOfReliefsModal").val(),
             "reliefType": $("#typeOfReliefs").val(),
             "status": $("#reliefStatus").val(),
-            "rateMultiplier": $("#multiplierCode").val(),
+            "rateMultiplier": $("#typeOfReliefs").val() === "V" ? "n/a" : $("#multiplierCode").val(),
             "notes": $("#addReliefNotes").val(),
             "startDate": $("#startDateReliefModal").val() + "-01-01",
             "endDate": $("#endDateReliefModal").val() + "-12-31",

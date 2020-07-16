@@ -23,9 +23,9 @@ namespace ITAPS_HOST.Services
             return await _adminRequestClient.GetRequestAsync(apiEndpoint);
         }
 
-        public async Task<ResponseItem<object>> GetAllAnnualPaye(Guid taxOfficeId, string year)
+        public async Task<ResponseItem<object>> GetAllAnnualPaye(Guid taxOfficeId, string year, string queryString)
         {
-            var apiEndpoint = $"GPaye/GetPayeByTaxPayerIdAndPyrAndPmoYearly/{taxOfficeId}/{year}"; //?filter={queryString}"; 
+            var apiEndpoint = $"GPaye/GetPayeByTaxPayerIdAndPyrAndPmoYearly/{taxOfficeId}/{year}/{queryString}"; 
 
             return await _adminRequestClient.GetRequestAsync(apiEndpoint);
         }

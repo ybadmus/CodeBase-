@@ -26,7 +26,7 @@ $("#yearsDropdown").on('change', function () {
     }
     else {
 
-        
+        $("#listOfPeriods").prop("disabled", false);
         getActivePeriods(activeYear);
     }
 });
@@ -143,7 +143,6 @@ var loadActivePeriods = function (listOfPeriods) {
 
     output = output;
     $("#listOfPeriods").html(output);
-    $("#listOfPeriods").prop("disabled", false);
 };
 
 var validateSearchEntry = function () {
@@ -208,59 +207,76 @@ $("#backToDetailsView").click(function () {
     $("#employeeListView").hide();
 });
 
+var convertDateToFormat = function (input) {
+    input = input.toString().split("T")[0];
+    var datePart = input.match(/\d+/g),
+        year = datePart[0],
+        month = datePart[1], day = datePart[2];
+
+    return day + '/' + month + '/' + year;
+};
+
 var loadDetailsView = function (resp) {
-    var totalCashEmolument = resp[0].managementPay + resp[0].otherPay;
-    var totalTaxDeduction = resp[0].managementTax + resp[0].otherTax;
-    activeEmployeeList = resp[0].payeChild;
 
-    $("#payeGridView").hide();
-    $("#employeeDetails").hide();
-    $("#monDetails").show();
-    $("#payeDetailsView").show();
-    $("#employeeListView").hide();
+    if (resp && resp.length > 0) {
+        var totalCashEmolument = resp[0].managementPay + resp[0].otherPay;
+        var totalTaxDeduction = resp[0].managementTax + resp[0].otherTax;
+        activeEmployeeList = resp[0].payeChild;
 
-    if (!resp[0].companyName) {
-        $("#taxpayerName").text(activeCompany);
+        $("#payeGridView").hide();
+        $("#employeeDetails").hide();
+        $("#monDetails").show();
+        $("#payeDetailsView").show();
+        $("#employeeListView").hide();
+
+        if (!resp[0].companyName) {
+            $("#taxpayerName").text(activeCompany);
+        } else {
+            $("#taxpayerName").text(resp[0].companyName);
+        };
+
+        $("#dateSubmitted").text(convertDateToFormat(resp[0].createdAt));
+
+        if (!resp[0].taxOfficeName) {
+            $("#taxOfficeName").text(activeTaxOfficeName);
+        } else {
+            $("#taxOfficeName").text(resp[0].taxOfficeName);
+        };
+
+        $("#companyTIN").text(resp[0].companyTIN);
+        $("#companyAddress").text(resp[0].companyAddress);
+        $("#companyPhone").text(resp[0].companyPhone);
+        $("#companyEmail").text(resp[0].companyEmail);
+
+        //$("#companyName").text(resp[0].taxpayerName);
+        $("#taxpayerTIN").text(resp[0].taxpayerTIN);
+        $("#taxpayerPhone").text(resp[0].taxpayerPhone);
+        $("#taxpayerEmail").text(resp[0].taxpayerEmail);
+
+        $("#periodYear").text(resp[0].periodYear);
+        $("#periodMonth").text(resp[0].periodMonth);
+
+        $("#managementNo").text(resp[0].managementNo);
+        $("#otherNo").text(resp[0].otherNo);
+        $("#totalNoOfStaff").text(resp[0].managementNo + resp[0].otherNo);
+
+        $("#managementPay").text(parseFloat(resp[0].managementPay).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $("#otherPay").text(parseFloat(resp[0].otherPay).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $("#totalCashEmolument").text(parseFloat(totalCashEmolument).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+
+        $("#managementTax").text(parseFloat(resp[0].managementTax).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $("#otherTax").text(parseFloat(resp[0].otherTax).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $("#totalTaxDeduction").text(parseFloat(totalTaxDeduction).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+
+        $("#startingStaff").text(resp[0].startingStaff);
+        $("#engagedStaff").text(resp[0].engagedStaff);
+        $("#disengagedStaff").text(resp[0].disengagedStaff);
     } else {
-        $("#taxpayerName").text(resp[0].companyName);
-    };
 
-    $("#dateSubmitted").text(resp[0].createdAt);
-
-    if (!resp[0].taxOfficeName) {
-        $("#taxOfficeName").text(activeTaxOfficeName);
-    } else {
-        $("#taxOfficeName").text(resp[0].taxOfficeName);
-    };
-
-    $("#companyTIN").text(resp[0].companyTIN);
-    $("#companyAddress").text(resp[0].companyAddress);
-    $("#companyPhone").text(resp[0].companyPhone);
-    $("#companyEmail").text(resp[0].companyEmail);
-
-    //$("#companyName").text(resp[0].taxpayerName);
-    $("#taxpayerTIN").text(resp[0].taxpayerTIN);
-    $("#taxpayerPhone").text(resp[0].taxpayerPhone);
-    $("#taxpayerEmail").text(resp[0].taxpayerEmail);
-
-    $("#periodYear").text(resp[0].periodYear);
-    $("#periodMonth").text(resp[0].periodMonth);
-
-    $("#managementNo").text(resp[0].managementNo);
-    $("#otherNo").text(resp[0].otherNo);
-    $("#totalNoOfStaff").text(resp[0].managementNo + resp[0].otherNo);
-
-    $("#managementPay").text(parseFloat(resp[0].managementPay).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#otherPay").text(parseFloat(resp[0].otherPay).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#totalCashEmolument").text(parseFloat(totalCashEmolument).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#managementTax").text(parseFloat(resp[0].managementTax).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#otherTax").text(parseFloat(resp[0].otherTax).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#totalTaxDeduction").text(parseFloat(totalTaxDeduction).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
-    $("#startingStaff").text(resp[0].startingStaff);
-    $("#engagedStaff").text(resp[0].engagedStaff);
-    $("#disengagedStaff").text(resp[0].disengagedStaff);
+        $('html').hideLoading();
+        toastr.info("An error occured when loading the details");
+    }
+    
 };
 
 var loadEmployeeTable = function (data) {
