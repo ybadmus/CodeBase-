@@ -19,40 +19,28 @@
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Tax Office</td>
-                                                <td title="Date Format: YYYY/MM/DD" style="padding-left:5px;width:250px;font-weight:bold;" id="taxOfficeName"></td>
-                                            </tr>
-                                            @*<tr>
-                                                    <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;background: #f7f8f9;">Company Details</td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="padding-left:5px;width:150px;font-weight:100;">Company Name</td>
-                                                    <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="companyName"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="padding-left:5px;width:150px;font-weight:100;">TIN</td>
-                                                    <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="companyTIN"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="padding-left:5px;width:150px;font-weight:100;">Address</td>
-                                                    <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="companyAddress"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="padding-left:5px;width:150px;font-weight:100;">Applicant Phone</td>
-                                                    <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="companyPhone"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="padding-left:5px;width:150px;font-weight:100;">Email</td>
-                                                    <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="companyEmail"></td>
-                                                </tr>*@
-                                            <tr>
-                                                <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;background: #f7f8f9;">Applicant Details</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="taxOfficeName"></td>
                                             </tr>
                                             <tr>
-                                                <td style="padding-left:5px;width:150px;font-weight:100;">Taxpayer Name</td>
+                                                <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;background: #f7f8f9;">Payment Status</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Total Tax Charged</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="totalTaxCharged2"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Total Tax Paid</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="totaltTaxPaid2"></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;background: #f7f8f9;">Company Details</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Company Name</td>
                                                 <td style="padding-left:5px;width:250px;font-weight:bold;" id="taxpayerName"></td>
                                             </tr>
                                             <tr>
-                                                <td style="padding-left:5px;width:150px;font-weight:100;">TIN</td>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Company TIN</td>
                                                 <td style="padding-left:5px;width:250px;font-weight:bold;" id="taxpayerTIN"></td>
                                             </tr>
                                             <tr>
@@ -62,6 +50,21 @@
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Email</td>
                                                 <td style="padding-left:5px;width:250px;font-weight:bold;" id="taxpayerEmail"></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;background: #f7f8f9;">Staff Movement</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Starting Staff</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="startingStaff"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Engaged Staff</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="engagedStaff"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Disengaged Staff</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="disengagedStaff"></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -106,15 +109,15 @@
                                                 <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="managementPay"></td>
                                             </tr>
                                             <tr>
-                                                <td style="padding-left:5px;width:150px;font-weight:100;">Other</td>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Others</td>
                                                 <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="otherPay"></td>
                                             </tr>
                                             <tr>
-                                                <td style="padding-left:5px;width:150px;font-weight:100;">Total Salaries</td>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Total Cash Emolument</td>
                                                 <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="totalCashEmolument"></td>
                                             </tr>
                                             <tr>
-                                                <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;background: #f7f8f9;">Tax Deductions</td>
+                                                <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;background: #f7f8f9;">Tax Charged</td>
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Management</td>
@@ -125,23 +128,8 @@
                                                 <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="otherTax"></td>
                                             </tr>
                                             <tr>
-                                                <td style="padding-left:5px;width:150px;font-weight:100;">Total Deductions</td>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Total Tax Charged</td>
                                                 <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="totalTaxDeduction"></td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;background: #f7f8f9;">Staff Movement</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding-left:5px;width:150px;font-weight:100;">Starting Staff</td>
-                                                <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="startingStaff"></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding-left:5px;width:150px;font-weight:100;">Engaged Staff</td>
-                                                <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="engagedStaff"></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding-left:5px;width:150px;font-weight:100;">Disengaged Staff</td>
-                                                <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="disengagedStaff"></td>
                                             </tr>
                                         </tbody>
                                     </table>

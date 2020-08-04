@@ -15,8 +15,8 @@ var switchTilesByUserRight = function (response) {
     } else if (response[0].szLevel.toLowerCase() === "manager") {
         $("#approveTCC").show();
         $("#processTCC").hide();
-        $("#assignTCC").hide();
-        $("#assignBulk").hide();
+        $("#assignTCC").show();
+        $("#assignBulk").show();
         $("#allTCC").show();
     } else if (response[0].szLevel.toLowerCase() === "supervisor") {
         $("#approveTCC").hide();

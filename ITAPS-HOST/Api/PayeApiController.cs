@@ -19,9 +19,9 @@ namespace ITAPS_HOST.Api
         }
 
         [HttpGet("GetAllCompanyPaye", Name = "GetAllCompanyPaye")]
-        public async Task<ResponseItem<object>> GetAllCompanyPaye(Guid officeId, Guid periodId, string queryString)
+        public async Task<ResponseItem<object>> GetAllCompanyPaye(Guid officeId, Guid periodId, string searchItem)
         {
-            return await _payeService.GetPayeCompanyDetailsByTaxOficeId(officeId, periodId, queryString);
+            return await _payeService.GetPayeCompanyDetailsByTaxOficeId(officeId, periodId, searchItem);
         }
 
         [HttpGet("GetAllAnnualPaye", Name = "GetAllAnnualPaye")]

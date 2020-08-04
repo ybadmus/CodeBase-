@@ -42,41 +42,47 @@ $("#listOfPeriods").on('change', function () {
     activePeriod = elem.options[elem.selectedIndex].value;
 });
 
-var initializeKendoGrid = function (data) {
+var initializeKendoGrid = function (data, stage) {
 
-    $("#Grid").kendoGrid({
-        dataSource: { data: data, pageSize: 8 },
-        sortable: true,
-        selectable: true,
-        dataBound: onDataBound,
-        pageable: { refresh: false, pageSizes: true, buttonCount: 5 },
-        columns: [
-            { field: "updatedAt", title: "Date", width: '110px', template: '#= kendo.toString(kendo.parseDate(updatedAt), "dd/MM/yyyy")#' },
-            { field: "companyName", title: "Name", width: '25%' },
-            { field: "companyTIN", title: "TIN", width: '110px' },
-            {
-                field: "totalNoOfStaff", title: "Total Staffs", width: '15%', attributes: { style: "text-align:right;" }
-            },
-            {
-                field: "totalCashEmolument", title: "Total Cash Emolument", width: '15%', attributes: { style: "text-align:right;" }, template: function (data) {
-                    return parseFloat(data.totalCashEmolument).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
+    if (data) {
+        if (data.length == 0 && stage !== 1) {
+            return toastr.info("No Data");
+        };
+
+        $("#Grid").kendoGrid({
+            dataSource: { data: data, pageSize: 8 },
+            sortable: true,
+            selectable: true,
+            dataBound: onDataBound,
+            pageable: { refresh: false, pageSizes: true, buttonCount: 5 },
+            columns: [
+                { field: "submittedDate", title: "Date Submitted", width: '15%', template: '#= kendo.toString(kendo.parseDate(submittedDate), "dd/MM/yyyy")#' },
+                { field: "employerName", title: "Employer Name", width: '30%' },
+                { field: "employerTin", title: "Employer TIN", width: '15%' },
+                {
+                    field: "totalTaxCharged", title: "Total Tax Charged", width: '20%', attributes: { style: "text-align:right;" }, template: function (data) {
+                        return parseFloat(data.totalTaxCharged).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
+                    }
+                },
+                {
+                    field: "totalAmountPaid", title: "Tax Amount Paid", width: '20%', attributes: { style: "text-align:right;" }, template: function (data) {
+                        return parseFloat(data.totalAmountPaid).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
+                    }
+                },
+                {
+                    command: [{
+                        name: "view",
+                        template: "<button title='View item' class='btn btn-success btn-sm' style='margin-right: 2px'><span class='fa fa-file fa-lg'></span></button>"
+                    }],
+                    title: "Actions",
+                    width: "90px"
                 }
-            },
-            {
-                field: "taxDeducted", title: "Tax Deducted", width: '15%', attributes: { style: "text-align:right;" }, template: function (data) {
-                    return parseFloat(data.taxDeducted).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
-                }
-            },
-            {
-                command: [{
-                    name: "view",
-                    template: "<button title='View item' class='btn btn-success btn-sm' style='margin-right: 2px'><span class='fa fa-file fa-lg'></span></button>"
-                }],
-                title: "Actions",
-                width: "90px"
-            }
-        ]
-    });
+            ]
+        });
+    } else {
+
+        toastr.info("No Data");
+    }
 };
 
 var onDataBound = function () {
@@ -84,7 +90,7 @@ var onDataBound = function () {
 };
 
 var bootstrapPage = function () {
-    initializeKendoGrid();
+    initializeKendoGrid([], 1);
     setTitles();
     loadOffices();
     hideAndShow();
@@ -163,7 +169,7 @@ var searchPaye = function () {
             }
         }
         $("#Grid").data("kendoGrid").dataSource.data([]);
-        let url = `${searchPayeByTaxOffice}?officeId=` + activeTaxOffice + `&periodId=` + activePeriod + `&queryString=` + searchItem;
+        let url = `${searchPayeByTaxOffice}?officeId=` + activeTaxOffice + `&periodId=` + activePeriod + `&searchItem=` + searchItem;
         apiCaller(url, "GET", "", initializeKendoGrid);
     } else {
 
@@ -191,7 +197,6 @@ $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
     var item = grid.dataItem($(e.target).closest("tr"));
     var detailsUrl = `${payeDetailsUrl}?payeId=` + item.id;
     $("#applicationId").val(item.id);
-    activeCompany = item.companyName;
 
     apiCaller(detailsUrl, "GET", "", loadDetailsView);
 });
@@ -219,9 +224,7 @@ var convertDateToFormat = function (input) {
 var loadDetailsView = function (resp) {
 
     if (resp && resp.length > 0) {
-        var totalCashEmolument = resp[0].managementPay + resp[0].otherPay;
-        var totalTaxDeduction = resp[0].managementTax + resp[0].otherTax;
-        activeEmployeeList = resp[0].payeChild;
+        //activeEmployeeList = resp[0].payeChild;
 
         $("#payeGridView").hide();
         $("#employeeDetails").hide();
@@ -229,46 +232,38 @@ var loadDetailsView = function (resp) {
         $("#payeDetailsView").show();
         $("#employeeListView").hide();
 
-        if (!resp[0].companyName) {
-            $("#taxpayerName").text(activeCompany);
-        } else {
-            $("#taxpayerName").text(resp[0].companyName);
-        };
+        $("#taxpayerName").text(resp[0].employerName);
+        $("#dateSubmitted").text(convertDateToFormat(resp[0].submittedDate));
+        $("#companyTIN").text(resp[0].employerTin);
 
-        $("#dateSubmitted").text(convertDateToFormat(resp[0].createdAt));
-
-        if (!resp[0].taxOfficeName) {
-            $("#taxOfficeName").text(activeTaxOfficeName);
-        } else {
-            $("#taxOfficeName").text(resp[0].taxOfficeName);
-        };
-
-        $("#companyTIN").text(resp[0].companyTIN);
-        $("#companyAddress").text(resp[0].companyAddress);
-        $("#companyPhone").text(resp[0].companyPhone);
-        $("#companyEmail").text(resp[0].companyEmail);
-
+        //$("#companyAddress").text(resp[0].companyAddress);
+        //$("#companyPhone").text(resp[0].companyPhone);
+        //$("#companyEmail").text(resp[0].companyEmail);
         //$("#companyName").text(resp[0].taxpayerName);
-        $("#taxpayerTIN").text(resp[0].taxpayerTIN);
+        //$("#taxOfficeName").text(resp[0].taxOfficeName);
+
+        $("#taxpayerTIN").text(resp[0].employerTin);
         $("#taxpayerPhone").text(resp[0].taxpayerPhone);
         $("#taxpayerEmail").text(resp[0].taxpayerEmail);
 
-        $("#periodYear").text(resp[0].periodYear);
-        $("#periodMonth").text(resp[0].periodMonth);
+        $("#periodYear").text(resp[0].assessmentYear);
+        $("#periodMonth").text(resp[0].month);
 
-        $("#managementNo").text(resp[0].managementNo);
-        $("#otherNo").text(resp[0].otherNo);
-        $("#totalNoOfStaff").text(resp[0].managementNo + resp[0].otherNo);
+        $("#managementNo").text(resp[0].totalManagementStaff);
+        $("#otherNo").text(resp[0].totalOtherStaff);
+        $("#totalNoOfStaff").text(resp[0].totalNoStaff);
 
-        $("#managementPay").text(parseFloat(resp[0].managementPay).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-        $("#otherPay").text(parseFloat(resp[0].otherPay).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-        $("#totalCashEmolument").text(parseFloat(totalCashEmolument).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $("#managementPay").text(parseFloat(resp[0].totalManagementPay).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $("#otherPay").text(parseFloat(resp[0].totalOtherPay).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $("#totalCashEmolument").text(parseFloat(resp[0].totalCashEmolument).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 
-        $("#managementTax").text(parseFloat(resp[0].managementTax).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-        $("#otherTax").text(parseFloat(resp[0].otherTax).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-        $("#totalTaxDeduction").text(parseFloat(totalTaxDeduction).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $("#managementTax").text(parseFloat(resp[0].totalManagementTaxDeducted).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $("#otherTax").text(parseFloat(resp[0].totalOtherStaffTaxDeducted).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $("#totalTaxDeduction").text(parseFloat(resp[0].totalTaxCharged).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $("#totalTaxCharged2").text(parseFloat(resp[0].totalTaxCharged).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $("#totaltTaxPaid2").text(parseFloat(resp[0].totalAmountPaid).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 
-        $("#startingStaff").text(resp[0].startingStaff);
+        $("#startingStaff").text(resp[0].totalStaffStartOfMonth);
         $("#engagedStaff").text(resp[0].engagedStaff);
         $("#disengagedStaff").text(resp[0].disengagedStaff);
     } else {
@@ -276,7 +271,7 @@ var loadDetailsView = function (resp) {
         $('html').hideLoading();
         toastr.info("An error occured when loading the details");
     }
-    
+
 };
 
 var loadEmployeeTable = function (data) {

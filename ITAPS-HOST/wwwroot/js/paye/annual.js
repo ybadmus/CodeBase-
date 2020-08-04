@@ -10,7 +10,7 @@ var activeTaxOfficeName = "";
 var activeYear = "";
 
 $(document).ready(function () {
-    initializeKendoGrid();
+    initializeKendoGrid([], 1);
     setTitles();
     loadOffices();
     hideAndShow();
@@ -41,7 +41,7 @@ $("#backToGrid").click(function () {
     hideAndShow();
 });
 
-var convertDateToFormat = function(input) {
+var convertDateToFormat = function (input) {
     input = input.toString().split("T")[0];
     var datePart = input.match(/\d+/g),
         year = datePart[0],
@@ -50,44 +50,54 @@ var convertDateToFormat = function(input) {
     return day + '/' + month + '/' + year;
 };
 
-var initializeKendoGrid = function (data) {
+var initializeKendoGrid = function (data, stage) {
 
-    $("#Grid").kendoGrid({
-        dataSource: { data: data, pageSize: 8 },
-        sortable: true,
-        selectable: true,
-        pageable: { refresh: false, pageSizes: true, buttonCount: 5 },
-        columns: [
-            {
-                field: "updatedAt", title: "Date", width: '110px', format: "{0:MM-dd-yyyy}", template: function (data) {
-                    return convertDateToFormat(data.updatedAt);
+    if (data) {
+        if (data.length == 0 && stage !== 1) {
+            return toastr.info("No Data");
+        };
+
+
+        $("#Grid").kendoGrid({
+            dataSource: { data: data, pageSize: 8 },
+            sortable: true,
+            selectable: true,
+            pageable: { refresh: false, pageSizes: true, buttonCount: 5 },
+            columns: [
+                {
+                    field: "updatedAt", title: "Date", width: '110px', format: "{0:MM-dd-yyyy}", template: function (data) {
+                        return convertDateToFormat(data.updatedAt);
+                    }
+                },
+                { field: "companyName", title: "Name", width: '17%' },
+                { field: "companyTIN", title: "TIN", width: '20%' },
+                {
+                    field: "totalNoOfStaff", title: "Total Staffs", width: '15%', attributes: { style: "text-align:right;" }
+                },
+                {
+                    field: "totalCashEmolument", title: "Total Cash Emolument", width: '15%', attributes: { style: "text-align:right;" }, template: function (data) {
+                        return parseFloat(data.totalCashEmolument).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
+                    }
+                },
+                {
+                    field: "taxDeducted", title: "Tax Deducted", width: '15%', attributes: { style: "text-align:right;" }, template: function (data) {
+                        return parseFloat(data.taxDeducted).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
+                    }
+                },
+                {
+                    command: [{
+                        name: "view",
+                        template: "<button title='View item' class='btn btn-success btn-sm' style='margin-right: 2px'><span class='fa fa-file fa-lg'></span></button>"
+                    }],
+                    title: "Actions",
+                    width: "90px"
                 }
-            },
-            { field: "companyName", title: "Name", width: '17%' },
-            { field: "companyTIN", title: "TIN", width: '20%' },
-            {
-                field: "totalNoOfStaff", title: "Total Staffs", width: '15%', attributes: { style: "text-align:right;" }
-            },
-            {
-                field: "totalCashEmolument", title: "Total Cash Emolument", width: '15%', attributes: { style: "text-align:right;" }, template: function (data) {
-                    return parseFloat(data.totalCashEmolument).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
-                }
-            },
-            {
-                field: "taxDeducted", title: "Tax Deducted", width: '15%', attributes: { style: "text-align:right;" }, template: function (data) {
-                    return parseFloat(data.taxDeducted).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
-                }
-            },
-            {
-                command: [{
-                    name: "view",
-                    template: "<button title='View item' class='btn btn-success btn-sm' style='margin-right: 2px'><span class='fa fa-file fa-lg'></span></button>"
-                }],
-                title: "Actions",
-                width: "90px"
-            }
-        ]
-    });
+            ]
+        });
+    } else {
+
+        toastr.info("No Data");
+    }
 };
 
 var loadTaxOffices = function (listOfTaxOffices) {

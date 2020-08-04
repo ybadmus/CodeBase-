@@ -44,7 +44,10 @@ var initializeKendoGrid = function (data, stage) {
 
         grid.appendTo('#Grid');
         gridGlobal = grid;
-    }
+    } else {
+
+        toastr.info("No Data");
+    };
 };
 
 $(document).ready(function () {
@@ -115,6 +118,7 @@ var validateSearchEntry = function () {
 
 var searchTcc = function () {
     if (validateSearchEntry()) {
+
         let searchItem = $("#searchItem").val().trim();
         if (searchItem.includes('/')) {
             for (var i = 0; i < searchItem.length; i++) {

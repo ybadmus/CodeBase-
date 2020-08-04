@@ -70,6 +70,11 @@
             margin: 0;
             padding: 0;
         }
+
+        #Codes_menu {
+            overflow-y: scroll;
+            height: 250px !important;
+        }
     </style>
     @RenderSection("css", required: false)
 </head>
@@ -252,8 +257,8 @@
                     <h6 class="text-primary">You will be automatically logged out in <span id="ScreenTimeOutView"></span></h6>
                 </div>
                 <div class="modal-footer">
-                    <a class="btn btn-light" role="button" onclick="ContinueToStay()">Stay</a>
-                    <a id="logMeOut" asp-controller="Home" asp-action="Logout" class="btn btn-success text-white">Logout</a>
+                    <a class="btn btn-light" role="button" onclick="continueToStay()">Stay</a>
+                    <a id="logMeOut" asp-controller="Home" asp-action="logOut" class="btn btn-success text-white">Logout</a>
                 </div>
             </div>
         </div>

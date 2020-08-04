@@ -3,9 +3,14 @@ var userid = $("#userId").val();
 var urlTaxOffice = `${serverUrl}api/Users/GetAllUserTaxOfficesByUserID`;
 var urlAssignedMenu = `${serverUrl}api/Users/GetAllMenusByUserId`;
 var urlLoadUserDetails = `${serverUrl}api/Users/GetUserDetailsById`;
-var logoutTimer;
+var timerConstant = 60 * 5;
+var timeActivity;
+var thirtySecondsTimer;
+var globalTimeTracker;
+var globalTokenRenewer;
 
 $(document).ready(function () {
+    globalTokenRenewer = setInterval(function () { refreshTokenManually() }, 240000);
     loadTaxOfficeName();
     InitializeTimer();
     loadMenus();
@@ -109,7 +114,11 @@ var loadUserMenus = function (menu) {
             '<span class="ml-auto sidebar-menu-toggle-icon"></span></a>');
 
         if (menu[i].children && menu[i].children.length !== 0) {
-            output.push('<ul class="sidebar-submenu collapse" id="' + menu[i].link + '">');
+            if (menu[i].link.toLowerCase() == "codes_menu")
+                output.push('<ul class="sidebar-submenu collapse" id="' + menu[i].link + '">');
+            else
+                output.push('<ul class="sidebar-submenu collapse" id="' + menu[i].link + '">');
+
             let children = menu[i].children;
 
             for (var j = 0; j < children.length; j++) {
@@ -156,10 +165,6 @@ var loadUserMenus = function (menu) {
 
 };
 
-var loadUserTiles = function (tiles) {
-
-};
-
 var apiCaller = function (url, type, data, callback) {
     $('html').showLoading();
 
@@ -185,13 +190,15 @@ var apiCaller = function (url, type, data, callback) {
 };
 
 var userTaxOffice = function (resp) {
+
     if (!sessionStorage.getItem("assignedTaxOffices"));
-        sessionStorage.setItem("assignedTaxOffices", JSON.stringify(resp));
+    sessionStorage.setItem("assignedTaxOffices", JSON.stringify(resp));
     setTaxOfficeName(resp);
     loadTaxOffices(resp);
 };
 
 var setTaxOfficeName = function (resp) {
+
     if (resp) {
         if (resp.length > 1) {
             $("#adminTaxOffice").text("Head Office");
@@ -207,6 +214,7 @@ var setTaxOfficeName = function (resp) {
 };
 
 var loadTaxOffices = function (listOfTaxOffices) {
+
     var output = "";
 
     listOfTaxOffices.sort((a, b) => (a.taxOfficeName > b.taxOfficeName) - (a.taxOfficeName < b.taxOfficeName));
@@ -222,11 +230,13 @@ var loadTaxOffices = function (listOfTaxOffices) {
 };
 
 var loadUserDetials = function (callbackProcess) {
+
     var url = urlLoadUserDetails + "?userId=" + $("#userId").val();
     apiCaller(url, "GET", "", callbackProcess)
 };
 
 $('.yearsDropdown').ready(function () {
+
     var beginYear = (new Date()).getFullYear();
     $('.yearsDropdown').append('<option value="0">Select Year</option>');
     for (var i = beginYear; i >= 1990; i--) {
@@ -252,68 +262,94 @@ var testNullOrEmpty = function (value) {
         return value;
 };
 
-var InitializeTimer = function () {
-    var interval = 60 * 10,
+function noMovement() {
+
+    if (globalTimeTracker == 31) {
+
         display = document.querySelector('#ScreenTimeOutView');
-    startTimer(interval, display); 
+        display.textContent = "00" + " : " + (globalTimeTracker >= 10 ? globalTimeTracker : "0" + globalTimeTracker);
+        $('#ScreenTimeOutModal').modal('show');
+
+        clearInterval(timeActivity);
+
+        thirtySecondsTimer = setInterval(function () {
+
+            globalTimeTracker--;
+            display.textContent = "00" + " : " + (globalTimeTracker >= 10 ? globalTimeTracker : "0" + globalTimeTracker);
+            if (globalTimeTracker == 1) {
+
+                $('#ScreenTimeOutModal').modal('hide');
+                var serverUrl = $("#serverUrl").val();
+                localStorage.clear();
+                sessionStorage.clear();
+                window.location = `${serverUrl}Home/Logout`;
+            }
+
+        }, 1000);
+
+    } else {
+
+        globalTimeTracker--;
+    }
 }
 
-var ContinueToStay = function () {
-    window.location.reload();
-    clearInterval(logoutTimer);
-    InitializeTimer();
+function resetglobalTimeTracker() {
 
-    $('#ScreenTimeOutModal').modal('hide');
+    if (globalTimeTracker <= 31) {
+
+        return;
+    }
+
+    globalTimeTracker = timerConstant;
 }
 
-var startTimer = function (duration, display) {
-    logoutTimer = 0;
-    var start = Date.now(),
-        diff,
-        minutes,
-        seconds;
-    function timer() {
-        // get the number of seconds that have elapsed since 
-        // startTimer() was called
-        diff = duration - (((Date.now() - start) / 1000) | 0);
 
-        // does the same job as parseInt truncates the float
-        minutes = (diff / 60) | 0;
-        seconds = (diff % 60) | 0;
+var InitializeTimer = function () {
 
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
+    globalTimeTracker = timerConstant;
+    timeActivity = setInterval(function () { noMovement() }, 1000);
 
-        //console.log({ duration, diff, minutes, seconds });
+    $('html').mousemove(function (event) {
 
-        display.textContent = minutes + ":" + seconds;
+        resetglobalTimeTracker();
+    });
 
-        if (diff <= 0) {
-            // add one second so that the count down starts at the full duration
-            // example 05:00 not 04:59
-            start = Date.now() + 1000;
-        }
+    $('html').keypress(function (event) {
 
-        // Show TimeOut Model;
-        if (diff === 31) {
-            $('#ScreenTimeOutModal').modal('show');
-        }
+        resetglobalTimeTracker();
+    });
+};
 
-        // Logout
-        if (diff === 1) {
-            var serverUrl = $("#serverUrl").val();
-            localStorage.clear();
-            window.location = `${serverUrl}Home/Logout`;
-        }
-    };
-    // we don't want to wait a full second before the timer starts
-    timer();
-    logoutTimer = setInterval(timer, 1000);
-}
-
-//LOGGING OUT ACTION
 $("#logOut, #mdlLogout, #logMeOut").click(function () {
+
     localStorage.clear();
     sessionStorage.clear();
 });
 
+var continueToStay = function () {
+
+    clearInterval(thirtySecondsTimer);
+    InitializeTimer();
+    $('#ScreenTimeOutModal').modal('hide');
+    refreshTokenManually();
+};
+
+var refreshTokenManually = function () {
+
+    var url = `${serverUrl}api/CodesApi/REG`;
+    apiCaller(url, "GET", "", isUserAuthenticated)
+};
+
+var isUserAuthenticated = function (resp) {
+
+    $('html').hideLoading();
+
+    if (resp.length > 0) 
+
+        return;
+    else {
+
+        toastr.warning("Your session has timed out, you will be logged out automatically");
+        window.location = `${serverUrl}Home/Logout`;
+    }
+};

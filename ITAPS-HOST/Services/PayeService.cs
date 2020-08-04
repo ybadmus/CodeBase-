@@ -16,9 +16,9 @@ namespace ITAPS_HOST.Services
             _adminRequestClient = adminRequestClient;
         }
 
-        public async Task<ResponseItem<object>> GetPayeCompanyDetailsByTaxOficeId(Guid taxOfficeId, Guid periodId, string queryString)
+        public async Task<ResponseItem<object>> GetPayeCompanyDetailsByTaxOficeId(Guid taxOfficeId, Guid periodId, string searchItem)
         {
-            var apiEndpoint = $"GPaye/GetPayeCompanyDetailsByTaxOficeId/{taxOfficeId}/{periodId}?filter={queryString}"; //all monthly
+            var apiEndpoint = $"GPaye/GetPayeMonthlyByTaxOficeIdAndPeriod/{taxOfficeId}/{periodId}?filter={searchItem}";
 
             return await _adminRequestClient.GetRequestAsync(apiEndpoint);
         }
@@ -47,7 +47,7 @@ namespace ITAPS_HOST.Services
         public async Task<ResponseItemForSingleObject<object>> GetAllPayeTransacByPayeId(Guid payeId)
         {
             //var apiEndpoint = $"GPaye/GetAllPayeTransacByPayeId/{payeId}";
-            var apiEndpoint = $"GPaye/GetPayeTransByTaxPayerId/{payeId}";
+            var apiEndpoint = $"GPaye/GetPayeMonthlyDetailsById/{payeId}";
 
             return await _adminRequestClient.GetRequestAsyncSingleObject(apiEndpoint); 
         }
