@@ -43,9 +43,9 @@ namespace ITAPS_HOST.Api
         }
 
         [HttpGet("GetEmployeeDetails", Name = "GetEmployeeDetails")]
-        public async Task<ResponseItem<object>> GetEmployeeDetails(Guid payeId, Guid empId)
+        public async Task<ResponseItem<object>> GetEmployeeDetails(Guid payeId)
         {
-            return await _payeService.GetAllPayeEmpDeByEmpIdAndPayeId(empId, payeId);
+            return await _payeService.GetPayeMonthlyEmployeeDetailsById(payeId);
         }
     }
 }

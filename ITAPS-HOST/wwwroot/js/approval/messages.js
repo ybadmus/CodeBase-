@@ -121,35 +121,6 @@ var updateMessageDirectlyStaff = function () {
     };
 };
 
-var successfullyUpdated = function () {
-    if (selectedStatus == 2) {
-        toastr.success("Application has successfully been approved");
-
-        $("#approveModal").modal("hide");
-        $("#approveDecline").modal("hide");
-
-        backToGrid();
-    };
-
-    if (selectedStatus == 3) {
-        toastr.info("Application has been declined");
-
-        $("#approveModal").modal("hide");
-        $("#approveDecline").modal("hide");
-
-        backToGrid();
-    };
-
-    if (selectedStatus == 1) {
-        toastr.success("Application successfully return to applicant");
-
-        $("#approveModal").modal("hide");
-        $("#approveDecline").modal("hide");
-
-        backToGrid();
-    }
-};
-
 $("#tccMessages").click(function (e) {
     $("#tccMessagesView").modal("show");
 });
@@ -203,3 +174,32 @@ $("#approveDecline").on('hidden.bs.modal', function () {
     $("#internalMessage").val("");
     $("#taxpayerMessage").val("");
 });
+
+var successfullyUpdated = function () {
+    if (selectedStatus == 2) {
+        toastr.success("Application has successfully been approved");
+
+        $("#approveModal").modal("hide");
+        $("#approveDecline").modal("hide");
+
+        previewCertificate();
+    };
+
+    if (selectedStatus == 3) {
+        toastr.info("Application has been declined");
+
+        $("#approveModal").modal("hide");
+        $("#approveDecline").modal("hide");
+
+        backToGrid();
+    };
+
+    if (selectedStatus == 1) {
+        toastr.success("Application successfully return to applicant");
+
+        $("#approveModal").modal("hide");
+        $("#approveDecline").modal("hide");
+
+        backToGrid();
+    }
+};

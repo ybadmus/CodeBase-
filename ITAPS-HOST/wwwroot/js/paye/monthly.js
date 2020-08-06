@@ -2,14 +2,14 @@
 
 var HeaderName = "Monthly PAYE";
 var serverUrl = $("#serverUrl").val();
-var searchPayeByTaxOffice = `${serverUrl}api/PayeApi/GetAllCompanyPaye`; //search
-var payeDetailsUrl = `${serverUrl}api/PayeApi/GetPayeDetails`; //payeid
-var employeeDetails = `${serverUrl}api/PayeApi/GetEmployeeDetails`; //employee details
+var searchPayeByTaxOffice = `${serverUrl}api/PayeApi/GetAllCompanyPaye`;
+var payeDetailsUrl = `${serverUrl}api/PayeApi/GetPayeDetails`;
+var employeeDetails = `${serverUrl}api/PayeApi/GetEmployeeDetails`;
 var activeTaxOffice = "";
 var activeTaxOfficeName = "";
 var gridGlobal = "";
 var activePeriod = "";
-var activeEmployeeList = [];
+//var activeEmployeeList = [];
 var activeCompany = "";
 var activeYear = "";
 
@@ -202,9 +202,8 @@ $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
 });
 
 $("#moreDetailsView").click(function () {
-    loadEmployeeTable(activeEmployeeList);
-    $("#payeDetailsView").hide();
-    $("#employeeListView").show();
+    var url = `${employeeDetails}?payeId=` + $("#applicationId").val();
+    apiCaller(url, "GET", "", loadEmployeeTable)
 });
 
 $("#backToDetailsView").click(function () {
@@ -224,48 +223,36 @@ var convertDateToFormat = function (input) {
 var loadDetailsView = function (resp) {
 
     if (resp && resp.length > 0) {
-        //activeEmployeeList = resp[0].payeChild;
 
         $("#payeGridView").hide();
         $("#employeeDetails").hide();
         $("#monDetails").show();
         $("#payeDetailsView").show();
         $("#employeeListView").hide();
-
-        $("#taxpayerName").text(resp[0].employerName);
+        $("#companyName").text(resp[0].employerName);
         $("#dateSubmitted").text(convertDateToFormat(resp[0].submittedDate));
         $("#companyTIN").text(resp[0].employerTin);
-
-        //$("#companyAddress").text(resp[0].companyAddress);
-        //$("#companyPhone").text(resp[0].companyPhone);
-        //$("#companyEmail").text(resp[0].companyEmail);
-        //$("#companyName").text(resp[0].taxpayerName);
-        //$("#taxOfficeName").text(resp[0].taxOfficeName);
-
-        $("#taxpayerTIN").text(resp[0].employerTin);
-        $("#taxpayerPhone").text(resp[0].taxpayerPhone);
-        $("#taxpayerEmail").text(resp[0].taxpayerEmail);
-
+        $("#companyTIN2").text(resp[0].employerTin);
+        $("#taxOfficeName").text(resp[0].employerTaxOffice);
+        $("#companyPhone").text(resp[0].employerPhone);
+        $("#companyEmail").text(resp[0].employerEmail);
         $("#periodYear").text(resp[0].assessmentYear);
         $("#periodMonth").text(resp[0].month);
-
         $("#managementNo").text(resp[0].totalManagementStaff);
         $("#otherNo").text(resp[0].totalOtherStaff);
         $("#totalNoOfStaff").text(resp[0].totalNoStaff);
-
         $("#managementPay").text(parseFloat(resp[0].totalManagementPay).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
         $("#otherPay").text(parseFloat(resp[0].totalOtherPay).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
         $("#totalCashEmolument").text(parseFloat(resp[0].totalCashEmolument).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
         $("#managementTax").text(parseFloat(resp[0].totalManagementTaxDeducted).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
         $("#otherTax").text(parseFloat(resp[0].totalOtherStaffTaxDeducted).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
         $("#totalTaxDeduction").text(parseFloat(resp[0].totalTaxCharged).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
         $("#totalTaxCharged2").text(parseFloat(resp[0].totalTaxCharged).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
         $("#totaltTaxPaid2").text(parseFloat(resp[0].totalAmountPaid).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-
         $("#startingStaff").text(resp[0].totalStaffStartOfMonth);
         $("#engagedStaff").text(resp[0].engagedStaff);
         $("#disengagedStaff").text(resp[0].disengagedStaff);
+
     } else {
 
         $('html').hideLoading();
@@ -275,6 +262,32 @@ var loadDetailsView = function (resp) {
 };
 
 var loadEmployeeTable = function (data) {
+
+    for (var i = 0; i < data.length; i++) {
+
+        data[i].isSecondaryEmployement ? data[i].isSecondaryEmployement = "YES" : data[i].isSecondaryEmployement = "NO";
+        data[i].empResidential ? data[i].empResidential = "RESIDENT" : data[i].empResidential = "NON RESIDENT";
+        data[i].basicSalary = parseFloat(data[i].basicSalary).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        data[i].cashAllowances = parseFloat(data[i].cashAllowances).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        data[i].bonusIncome = parseFloat(data[i].bonusIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        data[i].overtimeIncome = parseFloat(data[i].overtimeIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        data[i].nonCashBenefit = parseFloat(data[i].nonCashBenefit).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        data[i].thirdTierPension = parseFloat(data[i].thirdTierPension).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        data[i].severancePayPaid = parseFloat(data[i].severancePayPaid).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        data[i].socialSecurity = parseFloat(data[i].socialSecurity).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        data[i].finalTaxOnBonus = parseFloat(data[i].finalTaxOnBonus).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        data[i].excessBonus = parseFloat(data[i].excessBonus).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        data[i].totalCashEmolument = parseFloat(data[i].totalCashEmolument).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        data[i].accommodationElement = parseFloat(data[i].accommodationElement).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        data[i].vehicleElement = parseFloat(data[i].vehicleElement).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        data[i].totalAssessableIncome = parseFloat(data[i].totalAssessableIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        data[i].deductibleReliefs = parseFloat(data[i].deductibleReliefs).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        data[i].totalReliefs = parseFloat(data[i].totalReliefs).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        data[i].chargeableIncome = parseFloat(data[i].chargeableIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        data[i].taxDeductible = parseFloat(data[i].taxDeductible).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        data[i].overtimeTax = parseFloat(data[i].overtimeTax).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        data[i].totalTaxPayableToGra = parseFloat(data[i].totalTaxPayableToGra).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+    }
 
     document.getElementById("employeesGrid").innerHTML = "";
 
@@ -286,30 +299,46 @@ var loadEmployeeTable = function (data) {
             { field: 'empName', headerText: 'Employee Name', width: 250 },
             { field: 'empTin', headerText: 'TIN', width: 150 },
             { field: 'empPosition', headerText: 'Position', width: 180 },
-            { field: 'empSerialNumber', headerText: 'Serial No', width: 150 },
-            { field: 'empResidential', headerText: 'Non-Resident', width: 150 },
-            { field: 'basicSalary', headerText: 'Basic Salary', textAlign: 'Right', width: 150 },
-            { field: 'cashAllowances', headerText: 'Cash Allowance', textAlign: 'Right', width: 180 },
-            { field: 'bonusIncome', headerText: 'Bonus Income', textAlign: 'Right', width: 150 },
-            { field: 'overtimeIncome', headerText: 'Overtime Income', textAlign: 'Right', width: 150 },
-            { field: 'nonCashBenefit', headerText: 'Non-Cash Benefit', textAlign: 'Right', width: 150 },
-            { field: 'overtimeIncome', headerText: 'Tier 3', textAlign: 'Right', width: 150 },
-            { field: 'severancePayPaid', headerText: 'Severance Pay Paid', textAlign: 'Right', width: 150 },
             { field: 'empPhone', headerText: 'Phone', width: 150 },
-            { field: 'empEmail', headerText: 'Email', width: 200 }
+            { field: 'empEmail', headerText: 'Email', width: 220 },
+            { field: 'empSerialNumber', headerText: 'Serial No', width: 150 },
+            { field: 'empResidential', headerText: 'Non-Resident', width: 170 },
+            { field: 'isSecondaryEmployement', headerText: 'Secondary Employment', width: 250 },
+            { field: 'basicSalary', headerText: 'Basic Salary', textAlign: 'Right', width: 200 },
+            { field: 'cashAllowances', headerText: 'Cash Allowance', textAlign: 'Right', width: 200 },
+            { field: 'bonusIncome', headerText: 'Bonus Income', textAlign: 'Right', width: 170 },
+            { field: 'overtimeIncome', headerText: 'Overtime Income', textAlign: 'Right', width: 190 },
+            { field: 'nonCashBenefit', headerText: 'Non-Cash Benefit', textAlign: 'Right', width: 200 },
+            { field: 'thirdTierPension', headerText: 'Tier 3', textAlign: 'Right', width: 150 },
+            { field: 'severancePayPaid', headerText: 'Severance Pay Paid', textAlign: 'Right', width: 220 },
+            { field: 'socialSecurity', headerText: 'Social Security', textAlign: 'Right', width: 220 },
+            { field: 'finalTaxOnBonus', headerText: 'Final Tax On Bonus', textAlign: 'Right', width: 220 },
+            { field: 'excessBonus', headerText: 'Excess Bonus', textAlign: 'Right', width: 220 },
+            { field: 'totalCashEmolument', headerText: 'Total Cash Emolument', textAlign: 'Right', width: 250 },
+            { field: 'accommodationElement', headerText: 'Accomodation Element', textAlign: 'Right', width: 250 },
+            { field: 'vehicleElement', headerText: 'Vehicle Element', textAlign: 'Right', width: 220 },
+            { field: 'totalAssessableIncome', headerText: 'Total Assessable Income', textAlign: 'Right', width: 250 },
+            { field: 'deductibleReliefs', headerText: 'Deductible Reliefs', textAlign: 'Right', width: 220 },
+            { field: 'totalReliefs', headerText: 'Total Relief', textAlign: 'Right', width: 220 },
+            { field: 'chargeableIncome', headerText: 'Chargeable Income', textAlign: 'Right', width: 220 },
+            { field: 'taxDeductible', headerText: 'Tax Deductible', textAlign: 'Right', width: 220 },
+            { field: 'overtimeTax', headerText: 'Overtime Tax', textAlign: 'Right', width: 220 },
+            { field: 'totalTaxPayableToGra', headerText: 'Total Tax Payable to GRA', textAlign: 'Right', width: 250 },
         ],
         height: 350,
-        pageSettings: { pageSize: 10 },
+        pageSettings: { pageSize: 12 },
         allowGrouping: false,
         allowPaging: true,
         allowSorting: false,
-        allowFiltering: true,
+        allowFiltering: false,
         filterSettings: { type: 'Menu' },
-        rowSelected: rowSelected,
     });
 
     grid.appendTo('#employeesGrid');
     gridGlobal = grid;
+
+    $("#payeDetailsView").hide();
+    $("#employeeListView").show();
 };
 
 function rowSelected(args) {
@@ -341,9 +370,9 @@ $("#employeeGrid").on("click", '.btnRow', function (e) {
     loadEmployeeView(e.currentTarget.id);
 });
 
-var loadEmployeeView = function (employeeId) {
+var loadEmployeeView = function () {
     var appId = $("#applicationId").val();
-    var employeeDetailsUrl = `${employeeDetails}?empId=` + employeeId + "&payeId=" + appId;
+    var employeeDetailsUrl = `${employeeDetails}?payeId=` + appId;
 
     apiCaller(employeeDetailsUrl, "GET", "", employeeView);
 };

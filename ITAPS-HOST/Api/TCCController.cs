@@ -34,7 +34,6 @@ namespace ITAPS_HOST.Api
             return await _tccApplicationService.GetTccApplicationById(tccId, appTypeId);
         }
 
-
         [HttpGet("GetAllTccApplicationComments", Name = "GetAllTccApplicationComments")]
         public async Task<ResponseItem<object>> GetAllTccApplicationComments(Guid tccId)
         {

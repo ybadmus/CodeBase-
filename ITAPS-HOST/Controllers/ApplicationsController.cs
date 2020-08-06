@@ -40,7 +40,14 @@ namespace ITAPS_HOST.Controllers
             ViewBag.ServerUrl = _config.AppServerUrl;
             return View();
         }
-        
+
+        public IActionResult Approved()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+
         public IActionResult BulkAssignment()
         {
             UserDetails();

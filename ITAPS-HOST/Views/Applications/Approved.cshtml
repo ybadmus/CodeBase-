@@ -1,7 +1,8 @@
 ﻿
 @{
-    ViewData["Title"] = "Monthly";
+    ViewData["Title"] = "Approved Applications";
 }
+
 
 @section css {
     <link href="~/css/applications/tcc.css" rel="stylesheet" />
@@ -17,30 +18,16 @@
     <link href="https://cdn.syncfusion.com/ej2/ej2-splitbuttons/styles/material.css" rel="stylesheet">
     <!-- Essential JS 2 all script -->
     <script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js" type="text/javascript"></script>
-    <style>
-        .e-headertext {
-            font-size: 14px;
-            color: black;
-        }
-    </style>
 }
 
-<!--Defined this on page level because of control-->
 <input id="serverUrl" value="@ViewBag.ServerUrl" hidden />
-<input id="taxpayerId" value="@ViewBag.TaxpayerId" hidden />
 
 <div class="card">
-    <div id="payeGridView">
+    <div id="gridView">
         <div class="card-header">
             <div class="row">
                 <div class="col-sm-3" id="">
-                    <select type="text" id="tccListOfTaxOffices" class="form-control" required></select>
-                </div>
-                <div class="col-sm-2">
-                    <select type="text" id="yearsDropdown" class="form-control yearsDropdown" required></select>
-                </div>
-                <div class="col-sm-3" id="">
-                    <select type="text" id="listOfPeriods" class="form-control" required disabled></select>
+                    <select type="text" id="listOfTaxOffices" class="form-control" required></select>
                 </div>
                 <div class="col-sm-3">
                     <div class="input-group">
@@ -61,10 +48,9 @@
         </div>
     </div>
 
-    <partial name="_MonthlyDetails" />
-
 </div>
 
 @section scripts {
-    <script src="~/js/paye/monthly.js"></script>
+    <script src="~/js/applications/approved.js"></script>
 }
+

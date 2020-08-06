@@ -31,7 +31,7 @@ var initializeKendoGrid = function (data, stage) {
                 { field: 'applicationType', headerText: 'Application Type', width: 90 },
                 { field: 'status', headerText: 'Status', width: 100 },
                 { type: 'button', width: 30 },
-            ],
+            ], 
             height: 350,
             pageSettings: { pageSize: 10 },
             allowGrouping: true,
@@ -216,7 +216,6 @@ var hideAndShowThingsPTR = function () {
     $("#detailsView").show();
 };
 
-
 var hideAndShowTEXThings = function () {
     $("#gridView").hide();
     $("#ptrDetailsGrid").hide();
@@ -266,7 +265,7 @@ $("#previewApplication").click(function () {
 
         window.location.href = `${ReportDownloadView}`;
     } else {
+
         return toastr.info("No Preview Available");
     }
-    
 });

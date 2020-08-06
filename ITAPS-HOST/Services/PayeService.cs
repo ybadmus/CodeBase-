@@ -37,16 +37,15 @@ namespace ITAPS_HOST.Services
             return await _adminRequestClient.GetRequestAsync(apiEndpoint);
         }
 
-        public async Task<ResponseItem<object>> GetAllPayeEmpDeByEmpIdAndPayeId(Guid employeeId, Guid payeId)
+        public async Task<ResponseItem<object>> GetPayeMonthlyEmployeeDetailsById(Guid payeId)
         {
-            var apiEndpoint = $"GPaye/GetAllPayeEmpDeByEmpIdAndPayeId/{employeeId}/{payeId}"; //employee details 
+            var apiEndpoint = $"GPaye/GetPayeMonthlyEmployeeDetailsById/{payeId}"; 
 
             return await _adminRequestClient.GetRequestAsync(apiEndpoint);
         }
 
         public async Task<ResponseItemForSingleObject<object>> GetAllPayeTransacByPayeId(Guid payeId)
         {
-            //var apiEndpoint = $"GPaye/GetAllPayeTransacByPayeId/{payeId}";
             var apiEndpoint = $"GPaye/GetPayeMonthlyDetailsById/{payeId}";
 
             return await _adminRequestClient.GetRequestAsyncSingleObject(apiEndpoint); 

@@ -4,6 +4,7 @@ var searchTccByTaxOffice = `${serverUrl}api/TCC/GetAllTccApplicationPendingAppro
 var loadTaxPositionsUrl = `${serverUrl}api/TCC/GetTCCApplicationTaxPositionByApplicationId?applicationId=`;
 var loadTCCDetailsUrl = `${serverUrl}api/TCC/GetTccApplicationById?tccId=`;
 var GetTccCommentsByIdUrl = `${serverUrl}api/TCC/GetAllTccApplicationComments?tccId=`;
+var ReportDownloadView = `${serverUrl}reportviewer/index`;
 var activeTaxOffice = "";
 var selectedStatus;
 var tccUpdateUrl = `${serverUrl}api/TCC/UpdateTCCApplication?id=`;
@@ -319,4 +320,18 @@ var backToGrid = function () {
     setTimeout(function () {
         window.location.href = `${serverUrl}approval/tccapproval`;
     }, 3000);
+};
+
+var previewCertificate = function () {
+    if ($(".applicationType").text() === "TCC") {
+
+        let appId = $("#appId").val();
+        sessionStorage.setItem("tccReportId", appId);
+        sessionStorage.setItem("tccLabel", "uniApplicationId");
+        window.location.href = `${ReportDownloadView}`;
+    } else {
+
+        return toastr.info("No Preview Available");
+    }
+
 };

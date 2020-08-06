@@ -37,19 +37,19 @@
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Company Name</td>
-                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="taxpayerName"></td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="companyName"></td>
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Company TIN</td>
-                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="taxpayerTIN"></td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="companyTIN"></td>
                                             </tr>
                                             <tr>
-                                                <td style="padding-left:5px;width:150px;font-weight:100;">Applicant Phone</td>
-                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="taxpayerPhone"></td>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Phone</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="companyPhone"></td>
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Email</td>
-                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="taxpayerEmail"></td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="companyEmail"></td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;background: #f7f8f9;">Staff Movement</td>
@@ -87,21 +87,6 @@
                                                 <td title="Date Format: YYYY/MM/DD" style="padding-left:5px;width:250px;font-weight:bold;" id="periodMonth"></td>
                                             </tr>
                                             <tr>
-                                                <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;background: #f7f8f9;">Number Of Staffs</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding-left:5px;width:150px;font-weight:100;">Management</td>
-                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="managementNo"></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding-left:5px;width:150px;font-weight:100;">Other</td>
-                                                <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="otherNo"></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding-left:5px;width:150px;font-weight:100;">Total Staffs</td>
-                                                <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="totalNoOfStaff"></td>
-                                            </tr>
-                                            <tr>
                                                 <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;background: #f7f8f9;">Cash Emolument</td>
                                             </tr>
                                             <tr>
@@ -131,6 +116,21 @@
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Total Tax Charged</td>
                                                 <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="totalTaxDeduction"></td>
                                             </tr>
+                                            <tr>
+                                                <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;background: #f7f8f9;">Number Of Staffs</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Management</td>
+                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="managementNo"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Other</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="otherNo"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Total Staffs</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="totalNoOfStaff"></td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -145,7 +145,7 @@
                 <div class="form-horizontal" id="employeeListView">
                     <div class="form-row">
                         <div class="col-sm-12">
-                            <h6 class="card-title">List Of Employees</h6>
+                            <h5>List Of Employees - <span id="companyTIN2"></span></h5> 
                             <div id="employeesGrid"></div>
                         </div>
                     </div>

@@ -191,8 +191,8 @@ var apiCaller = function (url, type, data, callback) {
 
 var userTaxOffice = function (resp) {
 
-    if (!sessionStorage.getItem("assignedTaxOffices"));
-    sessionStorage.setItem("assignedTaxOffices", JSON.stringify(resp));
+    if (!sessionStorage.getItem("assignedTaxOffices"))
+        sessionStorage.setItem("assignedTaxOffices", JSON.stringify(resp));
     setTaxOfficeName(resp);
     loadTaxOffices(resp);
 };
@@ -344,7 +344,7 @@ var isUserAuthenticated = function (resp) {
 
     $('html').hideLoading();
 
-    if (resp.length > 0) 
+    if (resp.length > 0)
 
         return;
     else {

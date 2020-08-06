@@ -19,6 +19,7 @@ namespace ITAPS_HOST.Controllers
             _config = config;
             _reportConfig = reportConfig;
         }
+
         public IActionResult Index()
         {
             ViewBag.ServiceAuthorizationToken = this.GenerateToken(_reportConfig.BoldReportServerUser, _reportConfig.BoldReportServerPassword);
