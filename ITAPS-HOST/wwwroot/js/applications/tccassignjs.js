@@ -37,7 +37,7 @@ var initializeKendoGrid = function (data, stage) {
             selectable: true,
             pageable: { refresh: false, pageSizes: true, buttonCount: 5 },
             columns: [
-                { field: "submittedDate", title: "Date", width: '90px', format: "{0:MM-dd-yyyy}" },
+                { field: "submittedDate", title: "Date Submitted", width: '90px', format: "{0:MM-dd-yyyy}" },
                 { field: "applicationNo", title: "Application No.", width: '12%' },
                 { field: "applicantName", title: "Applicant", width: '20%' },
                 { field: "applicantTIN", title: "TIN", width: '20%' },

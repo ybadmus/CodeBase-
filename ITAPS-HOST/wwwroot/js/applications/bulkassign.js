@@ -41,7 +41,7 @@ var initializeGrid = function (data) {
         selectionSettings: { enableToggle: true, checkboxOnly: true },
         columns: [
             { type: 'checkbox', width: 30 },
-            { field: 'submittedDate', headerText: 'Date', width: 60, format: 'yMd' },
+            { field: 'submittedDate', headerText: 'Date Submitted', width: 60, format: 'yMd' },
             { field: 'applicationNo', headerText: 'Application No.', width: 80 },
             { field: 'applicantTIN', headerText: 'TIN', width: 60 },
             { field: 'applicantName', headerText: 'Applicant', width: 140 },

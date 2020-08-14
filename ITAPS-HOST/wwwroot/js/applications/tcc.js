@@ -15,6 +15,8 @@ var gridGlobal = "";
 
 var initializeKendoGrid = function (data, stage) {
     document.getElementById("Grid").innerHTML = "";
+    if (data == null)
+        data = [];
 
     if (data) {
         if (data.length == 0 && stage !== 1) {
@@ -25,7 +27,7 @@ var initializeKendoGrid = function (data, stage) {
             dataSource: data,
             selectionSettings: { type: 'Multiple' },
             columns: [
-                { field: 'assignedDate', headerText: 'Date', width: 60, format: 'yMd' },
+                { field: 'assignedDate', headerText: 'Date Assigned', width: 80, format: 'yMd' },
                 { field: 'applicantName', headerText: 'Applicant', width: 120 },
                 { field: 'applicantTIN', headerText: 'TIN', width: 60 },
                 { field: 'applicationType', headerText: 'Application Type', width: 90 },
@@ -164,11 +166,11 @@ var onGridSelected = function (item) {
     if (item.applicationType.toUpperCase().trim() === "WHT Exemption".toUpperCase())
         prepareDetailsViewTEX();
     if (item.applicationType.toUpperCase().trim() === "Disability Relief".toUpperCase()
-        || item.applicationType.toUpperCase().trim() === "Aged Dependants Relief".toUpperCase()
+        || item.applicationType.toUpperCase().trim() === "Old Dependants Relief".toUpperCase()
         || item.applicationType.toUpperCase().trim() === "Old Age Relief".toUpperCase()
         || item.applicationType.toUpperCase().trim() === "Pension Relief".toUpperCase()
         || item.applicationType.toUpperCase().trim() === "Marriage/Responsibility Relief".toUpperCase()
-        || item.applicationType.toUpperCase().trim() === "Child/Ward Education Relief".toUpperCase()) {
+        || item.applicationType.toUpperCase().trim() === "Child Education Relief".toUpperCase()) {
         prepareDetailsViewPTR();
         $("#applicantNamePTR").text(item.applicantName);
         $("#applicantFName").text(item.applicantName);

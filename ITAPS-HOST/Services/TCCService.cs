@@ -63,15 +63,23 @@ namespace ITAPS_HOST.Services
         public async Task<ResponseItem<object>> UpdateTccApplication(Guid id, UpdateTccDto objectToSend)
         {
             var apiEndpoint = $"Application/UpdateTCCApplication?id={id}";
+            var objectForUpdateTccDto = new UpdateTccDto() { };
 
-            var objectForUpdateTccDto = new UpdateTccDto
+            if (objectToSend.Status == 2)
             {
-                Status = objectToSend.Status,
-                TaxpayerComment = objectToSend.TaxpayerComment,
-                InternalComment = objectToSend.InternalComment,
-                ExpiryDate = objectToSend.ExpiryDate
-            };
-
+                objectForUpdateTccDto.Status = objectToSend.Status;
+                objectForUpdateTccDto.TaxpayerComment = objectToSend.TaxpayerComment;
+                objectForUpdateTccDto.InternalComment = objectToSend.InternalComment;
+                objectForUpdateTccDto.ExpiryDate = objectToSend.ExpiryDate;
+            }
+            else
+            {
+                objectForUpdateTccDto.Status = objectToSend.Status;
+                objectForUpdateTccDto.TaxpayerComment = objectToSend.TaxpayerComment;
+                objectForUpdateTccDto.InternalComment = objectToSend.InternalComment;
+                objectForUpdateTccDto.ExpiryDate = DateTime.UtcNow.Date;
+            }
+ 
             return await _adminRequestClient.PutRequestAsync(objectForUpdateTccDto, apiEndpoint);
         }
 

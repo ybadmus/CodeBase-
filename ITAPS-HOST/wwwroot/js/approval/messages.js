@@ -203,3 +203,17 @@ var successfullyUpdated = function () {
         backToGrid();
     }
 };
+
+var previewCertificate = function () {
+    if ($(".applicationType").text() === "TCC") {
+
+        let appId = $("#appId").val();
+        sessionStorage.setItem("tccReportId", appId);
+        sessionStorage.setItem("tccLabel", "uniApplicationId");
+        window.location.href = `${ReportDownloadView}`;
+    } else {
+
+        return toastr.info("No Preview Available");
+    }
+
+};
