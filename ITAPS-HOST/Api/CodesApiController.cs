@@ -75,5 +75,18 @@ namespace ITAPS_HOST.Api
         {
             return await _codeSetupService.GetAllActivePeriods();
         }
+
+        [HttpGet("GetTaxpayerDetailsByTin", Name = "GetTaxpayerDetailsByTin")]
+        public async Task<ResponseItem<object>> GetTaxpayerDetailsByTin(string tin)
+        {
+            return await _codeSetupService.GetTaxpayerDetailsByTin(tin);
+        }
+
+        [HttpPut("UpdateTaxOffice", Name = "UpdateTaxOffice")]
+        public async Task<object> UpdateTaxOffice([FromBody] ChangeTaxOffice objData)
+        {
+
+            return await _codeSetupService.UpdateTaxOffice(objData);
+        }
     }
 }

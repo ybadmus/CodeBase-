@@ -14,8 +14,14 @@ $(document).ready(function () {
     InitializeKendoGrid([], 1);
     $("taxOfficesDiv").show();
     $("#tccTaxOffices").show();
-    $("#endDate").flatpickr({});
-    $("#startDate").flatpickr({});
+    $("#endDate").flatpickr({
+        enableTime: true,
+        dateFormat: "d-m-Y"
+    });
+    $("#startDate").flatpickr({
+        enableTime: true,
+        dateFormat: "d-m-Y"
+    });
 });
 
 var commaRemover = function (value) {

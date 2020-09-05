@@ -276,7 +276,7 @@ var loadDetailsTex = function (resp) {
         $("#texWHTDetailsGrid").hide();
         $("#tccRequestEntityDetailsGrid").hide();
         $("#ptrMarriageReliefDetailsGrid").show();
-    } else if (activeApplicationType.trim() === "Aged Dependants Relief") {
+    } else if (activeApplicationType.trim() === "Old Dependants Relief") {
         loadAgedDependentReliefDetail(resp);
         $("#ptrDisabilityReliefDetailsGrid").hide();
         $("#ptrMarriageReliefDetailsGrid").hide();
@@ -294,7 +294,7 @@ var loadDetailsTex = function (resp) {
         $("#texWHTDetailsGrid").hide();
         $("#tccRequestEntityDetailsGrid").hide();
         $("#ptrOldAgeReliefDetailsGrid").show();
-    } else if (activeApplicationType.trim() === "Child/Ward Education Relief") {
+    } else if (activeApplicationType.trim() === "Child Education Relief") {
         loadChildWardDependentRelief(resp);
         $("#ptrDisabilityReliefDetailsGrid").hide();
         $("#ptrMarriageReliefDetailsGrid").hide();

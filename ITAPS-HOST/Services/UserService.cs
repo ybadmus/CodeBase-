@@ -36,6 +36,12 @@ namespace ITAPS_HOST.Services
             var apiEndpoint = $"Users/GetUserDetailsById/" + userId;
             return await _adminRequestClient.GetRequestAsync(apiEndpoint);
         }
+
+        public async Task<ResponseItemForCreationDto<object>> ChangePassword(ChangePasswordDto data)
+        {
+            var apiEndpoint = $"Users/PostChangePassword";
+            return await _adminRequestClient.PostRequestAsync(data, apiEndpoint);
+        }
     }
 }
 

@@ -19,8 +19,12 @@ namespace ITAPS_HOST.IServices
 
         Task<ResponseItem<object>> GetAllActivePeriods();
 
+        Task<ResponseItem<object>> GetTaxpayerDetailsByTin(string tin);
+
         Task<ResponseItemForCreationDto<object>> SvRelief(ReliefCreationDto data);
 
         Task<ResponseItem<object>> UpRelief(ReliefCreationDto data, Guid id);
+
+        Task<object> UpdateTaxOffice(ChangeTaxOffice objData);
     }
 }

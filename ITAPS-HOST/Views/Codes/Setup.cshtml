@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewData["Title"] = "System Settings";
+}
+
+<input id="serverUrl" value="@ViewBag.ServerUrl" hidden />
+
+<div class="row card-group-row">
+
+    <div class="col-md-3 col-sm-6">
+        <a href="~/codes/changemypassword" class="dash-anchor">
+            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center" title="Click to apply for Personal Tax Relief (PTR)">
+                <img src="~/icons/user-admin.png" class="img-responsive" width="80" />
+                <div class="flex mb-4 mt-4 dash-body">
+                    <h5 class="text-stats text-muted">Change My Password</h5>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+        <a href="~/codes/updatetaxpayertaxoffice" class="dash-anchor">
+            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center" title="Click to apply for Personal Tax Relief (PTR)">
+                <img src="~/icons/icon-company.png" class="img-responsive" width="80" />
+                <div class="flex mb-4 mt-4 dash-body">
+                    <h5 class="text-stats text-muted">Change Taxpayer Tax Office</h5>
+                </div>
+            </div>
+        </a>
+    </div>
+
+</div>
+
+@section scripts {
+    <script>
+        $("#pgHeader").text("iTaPS Settings");
+    </script>
+}
+

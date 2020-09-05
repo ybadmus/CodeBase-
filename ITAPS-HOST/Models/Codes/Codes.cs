@@ -45,4 +45,10 @@ namespace ITAPS_HOST.Models.Codes
         public string CloseDate { get; set; }
         public string PaymentDate { get; set; }
     }
+
+    public class ChangeTaxOffice
+    {
+        public string Tin { get; set; }
+        public string NewTaxOfficeId { get; set; }
+    }
 }

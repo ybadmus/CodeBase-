@@ -1,0 +1,84 @@
+﻿<div id="changeTaxofficeModal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="modal-standard-title" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="modal-income-title">Change Tax Office</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: white">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form>
+                                <div class="form-group row" style="margin-bottom: 1rem;">
+                                    <div class="col-md-12 formDiv">
+                                        <label for="selectOffice" class="col-form-label">
+                                            <b>Action - Select New Tax Office</b>
+                                        </label>
+                                        <select type="text" id="selectOffice" class="form-control listOfTaxOffices" required>
+                                            <option style="display: block" id="" value="">Select Office</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row" style="margin-bottom: 2rem;">
+                                    <div class="col-md-12 formDiv">
+                                        <label for="selectNote" class="col-form-label">
+                                            <b>Notes</b> (Required)
+                                        </label>
+                                        <textarea class="form-control" rows="3" id="selectNote"></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" id="saveNewTaxOffice" class="btn btn-primary" disabled>Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="yesOrNo" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="modal-standard-title" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="modal-income-title">Are you sure?</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: white">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div><p>Are you sure you want to change the Tax Office of <span id="taxpayerNameModal" style="font-weight: bold"></span> from <span id="oldTaxOfficeName" style="font-weight: bold"></span> to <span id="newTaxOfficeName" style="font-weight: bold"></span></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                <button type="button" id="yesBtn" class="btn btn-primary">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="yesOrNoChangePassword" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="modal-standard-title" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="modal-income-title">Are you sure?</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: white">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div><p>Are you sure you want to change your password!</p></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                <button type="button" id="yesBtnChangePassword" class="btn btn-primary">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>

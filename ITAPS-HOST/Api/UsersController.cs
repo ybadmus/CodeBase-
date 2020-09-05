@@ -58,11 +58,26 @@ namespace ITAPS_HOST.Api
         }
 
 
-         [HttpGet("GetUserDetailsById", Name = "GetUserDetailsById")]
+        [HttpGet("GetUserDetailsById", Name = "GetUserDetailsById")]
         public async Task<ResponseItem<object>> GetUserDetailsById(Guid userId)
         {
             return await _userService.GetUserDetailsId(userId);
         }
 
+        [HttpPost("ChangePassword", Name = "ChangePassword")]
+        public async Task<ResponseItemForCreationDto<object>> ChangePassword([FromBody]ChangePasswordDto data)
+        {
+
+            var item = new ChangePasswordDto
+            {
+                StrEmail = data.StrEmail,
+                StrPhoneNo = data.StrPhoneNo,
+                StrOldPassword = data.StrOldPassword,
+                StrNewPassword = data.StrNewPassword,
+                StrConfirmPassword = data.StrConfirmPassword,
+            };
+
+            return await _userService.ChangePassword(item);
+        }
     }
 }

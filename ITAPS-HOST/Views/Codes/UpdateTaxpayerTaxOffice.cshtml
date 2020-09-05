@@ -1,0 +1,118 @@
+﻿
+@{
+    ViewData["Title"] = "Change Tax Office";
+}
+
+<input id="serverUrl" value="@ViewBag.ServerUrl" hidden />
+
+<div class="row ">
+
+    <div class="col-md-12">
+        <div style="width: 100%;height:40px;">
+            <button id="changeTaxOfficeButton" style="float: right;display: none" class="btn btn-info">Change Tax Office</button>
+        </div>
+    </div>
+
+    <div class="col-md-5">
+
+        <div class="bordered-group" id="" style="height: 320px;background: #FFF; padding: 15px;">
+            <form style="width: 80%; margin: 0 auto;">
+                <div style="text-align: center">
+                    <h5>Search for Taxpayer</h5>
+                </div>
+                <div class="form-group row" style="margin-bottom: 1rem;">
+                    <div class="col-md-12 formDiv" style="margin-bottom: 10px;">
+                        <label for="taxpayerTINch" class="col-form-label">
+                            <b style="font-size: 16px;">Taxpayer TIN</b>
+                        </label>
+                        <input type="text" class="form-control" maxlength="11" id="taxpayerTINCh" autocomplete="off" placeholder="Enter TIN" style="height: 30px !important;" onpaste="return false;">
+                    </div>
+                    <div class="col-md-12 formDiv" style="margin-bottom: 20px;">
+                        <label for="taxpayerNameCh" class="col-form-label">
+                            <b style="font-size: 16px;">Full Name</b>
+                        </label>
+                        <input type="text" class="form-control" id="taxpayerNameCh" autocomplete="off" placeholder="Full Name" style="height: 30px !important;">
+                    </div>
+                    <div class="col-md-12 formDiv">
+                        <button type="button" class="btn btn-success" style="float: right;" id="searchTaxpayer" disabled>
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                            Search
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-7">
+        <div class="bordered-group" id="" style="height: 420px;background: #FFF;">
+            <div style="text-align: center;padding:12px 0px;">
+                <h5>Taxpayer Details</h5>
+            </div>
+            <div class="table-responsive border-bottom">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <td style="padding-left:5px;width:120px;font-weight:100;">Taxpayer Name</td>
+                            <td style="padding-left:5px;width:280px;">
+                                <b><span id="taxpayerName"></span></b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left:5px;width:120px;font-weight:100;">TIN</td>
+                            <td style="padding-left:5px;width:280px;">
+                                <b><span id="tin"></span></b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left:5px;width:120px;font-weight:100;">Current Tax Office</td>
+                            <td style="padding-left:5px;width:280px;">
+                                <b><span id="taxOffice"></span></b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left:5px;width:120px;font-weight:100;">Phone</td>
+                            <td style="padding-left:5px;width:280px;">
+                                <b><span id="telephoneNo"></span></b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left:5px;width:120px;font-weight:100;">Email</td>
+                            <td style="padding-left:5px;width:280px;">
+                                <b><span id="email"></span></b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left:5px;width:120px;font-weight:100;">Account Created Date</td>
+                            <td style="padding-left:5px;width:280px;">
+                                <b><span id="accountCreationDate"></span></b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left:5px;width:120px;font-weight:100;">Nationality</td>
+                            <td style="padding-left:5px;width:280px;">
+                                <b><span id="nationality"></span></b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left:5px;width:120px;font-weight:100;">Currency</td>
+                            <td style="padding-left:5px;width:280px;">
+                                <b><span id="currency"></span></b>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $("#pgHeader").text("Change Tax Office");
+    </script>
+    <script src="~/js/codes/updatetaxoffice.js"></script>
+}
+
+@section modals {
+    <partial name="_ChangeTaxOfficeModals" />
+}

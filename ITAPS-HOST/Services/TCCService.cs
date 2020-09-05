@@ -147,12 +147,28 @@ namespace ITAPS_HOST.Services
             return await _adminRequestClient.GetRequestAsync(apiEndpoint);
         }
 
+        public async Task<ResponseItem<object>> GetAllAssignedApplicationsToReassign(Guid id, string searchitem)
+        {
+            var apiEndpoint = $"Application/GetAllAssignedApplicationsToReassign/{id}?Fields={searchitem}";
+
+            return await _adminRequestClient.GetRequestAsync(apiEndpoint);
+        }
+
         public async Task<ResponseItemForCreationDto<object>> PostAssignApplication(IEnumerable<AssignApplication> objData)
         {
             var apiEndpoint = $"Application/ApplicationAssignment";
 
             return await _adminRequestClient.PostRequestArrayAsync(objData, apiEndpoint);
         }
+
+        public async Task<ResponseItemForCreationDto<object>> ReassignApplication(IEnumerable<ReassignApplication> objData)
+        {
+            var apiEndpoint = $"Application/ReAssignApplication";
+
+            return await _adminRequestClient.PutRequestArrayAsync(objData, apiEndpoint);
+        }
+
+       
 
         public async Task<ResponseItem<object>> GetTCCApplicationTaxPositionByApplicationId(Guid applicationId)
         {

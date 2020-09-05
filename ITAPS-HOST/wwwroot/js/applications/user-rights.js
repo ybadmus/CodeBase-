@@ -11,11 +11,13 @@ var switchTilesByUserRight = function (response) {
         $("#processTCC").show();
         $("#assignTCC").hide();
         $("#assignBulk").hide();
+        $("#reassign").hide();
         $("#allTCC").show();
     } else if (response[0].szLevel.toLowerCase() === "manager") {
         $("#approveTCC").show();
         $("#processTCC").hide();
         $("#assignTCC").show();
+        $("#reassign").show();
         $("#assignBulk").show();
         $("#allTCC").show();
     } else if (response[0].szLevel.toLowerCase() === "supervisor") {
@@ -24,6 +26,7 @@ var switchTilesByUserRight = function (response) {
         $("#assignTCC").show();
         $("#assignBulk").show();
         $("#allTCC").show();
+        $("#reassign").hide();
     }
 
 };

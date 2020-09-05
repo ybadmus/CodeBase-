@@ -47,13 +47,13 @@ namespace ITAPS_HOST.Api
         }
 
         [HttpPut("UpdateTccApplication", Name = "UpdateTccApplication")]
-        public async Task<ResponseItem<object>> UpdateTccApplication(Guid id, [FromBody]UpdateTccDto data)
+        public async Task<ResponseItem<object>> UpdateTccApplication(Guid id, [FromBody] UpdateTccDto data)
         {
             return await _tccApplicationService.UpdateTccApplication(id, data);
         }
 
         [HttpPost("PostTaxPositionSummary", Name = "PostTaxPositionSummary")]
-        public async Task<ResponseItemForCreationDto<object>> PostTaxPositionSummary(Guid taxpayerId, Guid appId, [FromBody]ArrayObjectSummary data)
+        public async Task<ResponseItemForCreationDto<object>> PostTaxPositionSummary(Guid taxpayerId, Guid appId, [FromBody] ArrayObjectSummary data)
         {
 
             return await _tccApplicationService.PostTaxPositionSummary(taxpayerId, appId, data.Summary);
@@ -72,7 +72,7 @@ namespace ITAPS_HOST.Api
         }
 
         [HttpPut("UpdateTccApplicationWithCertificate", Name = "UpdateTccApplicationWithCertificate")]
-        public async Task<ResponseItem<object>> UpdateTccApplicationWithCertificate(Guid id, [FromBody]UpdateTccWithCertificate data)
+        public async Task<ResponseItem<object>> UpdateTccApplicationWithCertificate(Guid id, [FromBody] UpdateTccWithCertificate data)
         {
             return await _tccApplicationService.UpdateTccApplicationWithCertificate(id, data);
         }
@@ -95,6 +95,13 @@ namespace ITAPS_HOST.Api
             return await _tccApplicationService.GetAppByOfficeTypeAndStatus(officeId, status, searchitem);
         }
 
+        [HttpGet("GetAllAssignedApplicationsToReassign", Name = "GetAllAssignedApplicationsToReassign")]
+        public async Task<ResponseItem<object>> GetAllAssignedApplicationsToReassign(Guid officeId, string searchitem)
+        {
+
+            return await _tccApplicationService.GetAllAssignedApplicationsToReassign(officeId, searchitem);
+        }
+
         [HttpPost("PostAssignApplication", Name = "PostAssignApplication")]
         public async Task<ResponseItemForCreationDto<object>> PostAssignApplication(IEnumerable<AssignApplication> objData)
         {
@@ -114,6 +121,13 @@ namespace ITAPS_HOST.Api
             }
 
             return await _tccApplicationService.PostAssignApplication(objData);
+        }
+
+        [HttpPut("ReassignApplication", Name = "ReassignApplication")]
+        public async Task<ResponseItemForCreationDto<object>> ReassignApplication(IEnumerable<ReassignApplication> objData)
+        {
+            
+            return await _tccApplicationService.ReassignApplication(objData);
         }
 
         [HttpGet("GetTCCApplicationTaxPositionByApplicationId", Name = "GetTCCApplicationTaxPositionByApplicationId")]

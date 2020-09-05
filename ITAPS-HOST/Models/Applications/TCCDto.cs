@@ -33,4 +33,12 @@ namespace ITAPS_HOST.Models.Applications
         public string AssignerId { get; set; }
         public Guid PersonnelId { get; set; }
     }
+
+    public class ReassignApplication
+    {
+        public Guid ApplicationId { get; set; }
+        public string Notes { get; set; }
+        public Guid PersonnelId { get; set; }
+    }
+
 }

@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.852
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITAPS-HOST", "ITAPS-HOST\ITAPS-HOST.csproj", "{71B21167-BC2C-455C-AD91-7FE4476447C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITAPS-HOST", "ITAPS-HOST\ITAPS-HOST.csproj", "{71B21167-BC2C-455C-AD91-7FE4476447C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -70,6 +70,27 @@ namespace ITAPS_HOST.Controllers
             return View();
         }
 
+        public IActionResult Setup()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        } 
+        
+        public IActionResult Changemypassword()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+
+        public IActionResult UpdateTaxpayerTaxOffice()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+
         public IActionResult ReliefSetup()
         {
             UserDetails();

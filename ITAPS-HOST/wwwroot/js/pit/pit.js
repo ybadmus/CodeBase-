@@ -62,8 +62,14 @@ var bootstrapPage = function () {
     $("#gridView").show();
     $("#returnDetail").hide();
     $("#estimateDetail").hide();
-    $("#endDate").flatpickr({});
-    $("#startDate").flatpickr({});
+    $("#endDate").flatpickr({
+        enableTime: true,
+        dateFormat: "d-m-Y",
+    });
+    $("#startDate").flatpickr({
+        enableTime: true,
+        dateFormat: "d-m-Y",
+    });
 
     initializeKendoGrid([], 1);
 };

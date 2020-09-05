@@ -44,7 +44,16 @@ connection.on("pitsavenotification", (message) => {
     updateNotificationList(imgUrl, message);
 });
 
-connection.on("whtTransactionsavenotification", (message) => {
+connection.on("ReceiveNewApplicationNotification", (message) => {
+    console.log("ReceiveNewApplicationNotification", { message });
+    AppNotifications.push({
+        Title: "New Application",
+        Message: message
+    });
+    SetAppNotifications();
+});
+
+connection.on("ReceiveNewCITNotification", (message) => {
     console.log("whtTransactionsavenotification", { message });
     AppNotifications.push({
         Title: "WHT Transaction",
@@ -53,46 +62,37 @@ connection.on("whtTransactionsavenotification", (message) => {
     SetAppNotifications();
 });
 
-connection.on("whVatTransactionsavenotification", (message) => {
-    console.log("whVatTransactionsavenotification", { message });
+connection.on("ReceiveWithholdingTaxNotification", (message) => {
+    console.log("ReceiveWithholdingTaxNotification", { message });
     AppNotifications.push({
-        Title: "WHVAT Transaction",
+        Title: "WHT Returns Submission",
         Message: message
     });
     SetAppNotifications();
 });
 
-connection.on("whVatReturnsavenotification", (message) => {
-    console.log("whVatReturnsavenotification", { message });
+connection.on("ReceiveWVattNotification", (message) => {
+    console.log("ReceiveWVattNotification", { message });
     AppNotifications.push({
-        Title: "WHVAT Returns",
+        Title: "WHT VAT Submission",
         Message: message
     });
     SetAppNotifications();
 });
 
-connection.on("whtReturnsavenotification", (message) => {
-    console.log("whtReturnsavenotification", { message });
+connection.on("ReceiveNewPayeNotification", (message) => {
+    console.log("ReceiveNewPayeNotification", { message });
     AppNotifications.push({
-        Title: "WHT Returns",
+        Title: "PAYE Monthly Submission",
         Message: message
     });
     SetAppNotifications();
 });
 
-connection.on("whtAndVatNotify", (message) => {
-    console.log("whtAndVatNotify", { message });
+connection.on("ReceiveNewPayeAnnualNotification", (message) => {
+    console.log("ReceiveNewPayeAnnualNotification", { message });
     AppNotifications.push({
-        Title: "WHT Submission",
-        Message: message
-    });
-    SetAppNotifications();
-});
-
-connection.on("ReceivePayeMessage", (message) => {
-    console.log("ReceivePayeMessage", { message });
-    AppNotifications.push({
-        Title: "PAYE Submission",
+        Title: "PAYE Annual Submission",
         Message: message
     });
     SetAppNotifications();

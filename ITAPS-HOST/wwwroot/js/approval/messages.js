@@ -182,6 +182,7 @@ var successfullyUpdated = function () {
         $("#approveModal").modal("hide");
         $("#approveDecline").modal("hide");
 
+        removeEntryFromGrid($("#appId").val());
         previewCertificate();
     };
 
@@ -216,4 +217,15 @@ var previewCertificate = function () {
         return toastr.info("No Preview Available");
     }
 
+};
+
+var removeEntryFromGrid = function (id) {
+    var displayedData = $('#Grid').data("kendoGrid").dataSource.data().toJSON()
+
+    for (var i = 0; i < displayedData.length; i++) {
+        if (id == displayedData[i].applicationId) {
+            displayedData.splice(i, 1);
+            initializeKendoGrid(displayedData);
+        }
+    };
 };

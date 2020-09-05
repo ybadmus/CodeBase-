@@ -20,5 +20,14 @@ namespace ITAPS_HOST.Models
         public string Caption { get; set; }
         public TModel Body { get; set; }
     }
+    
+    public class ChangePasswordDto
+    {
+        public string StrEmail { get; set; }
+        public string StrPhoneNo { get; set; }
+        public string StrOldPassword { get; set; }
+        public string StrNewPassword { get; set; }
+        public string StrConfirmPassword { get; set; }
+    }
 
 }

@@ -22,8 +22,9 @@ var initializeKendoGrid = function (data) {
         columns: [
             { field: "statusDate", title: "Date", width: '90px' },
             { field: "applicationNo", title: "Application No.", width: '100px' },
-            { field: "applicantName", title: "Applicant", width: '30%' },
+            { field: "applicantName", title: "Applicant", width: '25%' },
             { field: "applicantTIN", title: "Applicant TIN", width: '15%' },
+            { field: "applicationType", title: "WHT Type", width: '30%' },
             {
                 command: [{
                     name: "view",
@@ -179,7 +180,7 @@ var loadAppDetails = function (resp) {
     $("#typeOfWht").text(response.typeOfWithHolding);
     $("#typeOfApp").text("WHT Tax Exemption");
     $("#residentialStatus").text(response.residentialStatus);
-    $("#remarks").text(response.remarks);
+    $("#remarks").text(response.remarks); 
     $("#reason").text(response.reasons);
     $("#appNo").text(response.applicationNo);
     $("#appNoMore").text(response.applicationNo);
@@ -187,6 +188,7 @@ var loadAppDetails = function (resp) {
     $("#applicationStatus").text(response.status);
     $("#modalId").text(response.applicationNo);
     $("#applicantEmail").text(response.email);
+    $("#applicantPhone").text(response.phoneNo);
 };
 
 var hideAndShow = function () {

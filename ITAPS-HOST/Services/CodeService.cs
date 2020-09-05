@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ITAPS_HOST.Services
 {
@@ -103,5 +104,20 @@ namespace ITAPS_HOST.Services
             string apiEndpoint = $"GenericCodes/GetAllActivePeriodsByYearAndType/{DateTime.Now.Year.ToString()}/WHPER";
             return await _adminRequestClient.GetRequestAsync(apiEndpoint);
         }
+
+        public async Task<ResponseItem<object>> GetTaxpayerDetailsByTin(string tin)
+        {
+            string apiEndpoint = $"Taxpayer/GetTaxpayerDetailsByTin/{tin}";
+            return await _adminRequestClient.GetRequestAsync(apiEndpoint);
+        }
+
+        public async Task<object> UpdateTaxOffice(ChangeTaxOffice objData)
+        {
+            var apiEndpoint = $"Taxpayer/UpdateTaxpayerTaxoffice";
+
+            return await _adminRequestClient.PutRequestAsync(objData, apiEndpoint);
+        }
+
+        
     }
 }

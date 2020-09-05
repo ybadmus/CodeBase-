@@ -27,7 +27,7 @@ var initializeKendoGrid = function (data) {
             { field: "applicationNo", title: "Application No.", width: '100px' },
             { field: "applicantName", title: "Applicant", width: '25%' },
             { field: "applicantTIN", title: "TIN", width: '15%' },
-            { field: "applicationType", title: "Type", width: '25%' },
+            { field: "applicationType", title: "Type", width: '30%' },
             {
                 command: [{
                     name: "view",
@@ -228,7 +228,7 @@ var loadPtrDetails = function (resp) {
         $("#texWHTDetailsGrid").hide();
         $("#tccRequestEntityDetailsGrid").hide();
         $("#ptrMarriageReliefDetailsGrid").show();
-    } else if (activeApplicationType.trim() === "Aged Dependants Relief") {
+    } else if (activeApplicationType.trim() === "Old Dependants Relief") {
         loadAgedDependentReliefDetail(resp);
         $("#ptrDisabilityReliefDetailsGrid").hide();
         $("#ptrMarriageReliefDetailsGrid").hide();
@@ -246,7 +246,7 @@ var loadPtrDetails = function (resp) {
         $("#texWHTDetailsGrid").hide();
         $("#tccRequestEntityDetailsGrid").hide();
         $("#ptrOldAgeReliefDetailsGrid").show();
-    } else if (activeApplicationType.trim() === "Child/Ward Education Relief") {
+    } else if (activeApplicationType.trim() === "Child Education Relief") {
         loadChildWardDependentRelief(resp);
         $("#ptrDisabilityReliefDetailsGrid").hide();
         $("#ptrMarriageReliefDetailsGrid").hide();
@@ -431,7 +431,6 @@ var previewDependent = function (rowInfo) {
         }
     }
 };
-
 
 var loadMarriageReliefDetail = function (resp) {
     $("#marriageDetailsCertDoc").attr("href", resp[0].certDocument)

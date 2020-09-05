@@ -233,6 +233,7 @@ var hideAndShowTEXThings = function () {
     $("#detailsView").show();
     $("#texDetailsGrid").show();
 };
+
 var hideAndShowThings = function () {
     $("#gridView").hide();
     $("#texDetailsGrid").hide();

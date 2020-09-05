@@ -12,8 +12,14 @@ $(document).ready(function () {
     showHideTrDetails();
     SetHeaderNameToHTML();
     InitializeKendoGrid([], 1);
-    $("#endDate").flatpickr({});
-    $("#startDate").flatpickr({});
+    $("#endDate").flatpickr({
+        enableTime: true,
+        dateFormat: "d-m-Y"
+    });
+    $("#startDate").flatpickr({
+        enableTime: true,
+        dateFormat: "d-m-Y"
+    });
 });
 
 var ApiCaller = function (url, type, data, callback) {
