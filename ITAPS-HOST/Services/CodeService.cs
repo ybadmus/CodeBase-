@@ -115,7 +115,7 @@ namespace ITAPS_HOST.Services
         {
             var apiEndpoint = $"Taxpayer/UpdateTaxpayerTaxoffice";
 
-            return await _adminRequestClient.PutRequestAsync(objData, apiEndpoint);
+            return await _adminRequestClient.PutRequestBooleanResponseAsync(objData, apiEndpoint);
         }
 
         

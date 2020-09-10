@@ -12,6 +12,7 @@ namespace ITAPS_HOST.IServices
         Task<ResponseItem<object>> DeleteRequestAsync(string endpoint);
         Task<ResponseItem<object>> PutRequestAsync(object objectForCreation, string apiEndpoint);
         Task<ResponseItemForCreationDto<object>> PutRequestArrayAsync(IEnumerable<object> objectForCreation, string apiEndpoint);
+        Task<ResponseItemBooleanResponse<object>> PutRequestBooleanResponseAsync(object objectForCreation, string apiEndpoint);
         Task<ResponseItem<object>> PutNoificationAsync(string apiEndpoint);
         Task<ResponseItemForCreationDto<object>> PostRequestArrayAsync(IEnumerable<object> objectForCreation, string apiEndpoint);
     }

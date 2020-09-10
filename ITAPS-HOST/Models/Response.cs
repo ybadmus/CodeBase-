@@ -8,6 +8,12 @@ namespace ITAPS_HOST.Models
         public string Caption { get; set; }
         public IEnumerable<TModel> Body { get; set; }
     }
+    public class ResponseItemBooleanResponse<TModel>
+    {
+        public string Status { get; set; }
+        public string Caption { get; set; }
+        public bool Body { get; set; }
+    }
     public class ResponseItemForCreationDto<TModel>
     {
         public string Status { get; set; }

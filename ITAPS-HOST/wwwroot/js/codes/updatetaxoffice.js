@@ -27,6 +27,9 @@ var getTaxpayerDetails = function (url) {
 };
 
 var loadTaxpayerDetails = function (resp) {
+
+    if (resp.length < 1)
+        return toastr.info("No records for this Tax Office.")
  
     $("#taxpayerName").text(resp[0].name);
     $("#taxpayerNameModal").text(resp[0].name);
@@ -77,8 +80,9 @@ $("#selectOffice").on('change', function () {
 
     var elem = document.getElementById("selectOffice");
     activeTaxOffice = elem.options[elem.selectedIndex].value;
+    var newTaxOfficeName = elem.options[elem.selectedIndex].text;
     objToSend.NewTaxOfficeId = activeTaxOffice;
-    $("#newTaxOfficeName").text(activeTaxOffice);
+    $("#newTaxOfficeName").text(newTaxOfficeName);
     if (activeTaxOffice)
         $("#saveNewTaxOffice").prop("disabled", false);
     else 

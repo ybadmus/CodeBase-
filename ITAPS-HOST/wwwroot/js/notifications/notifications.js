@@ -57,7 +57,7 @@ var loadNotificatonsAssignedToUser = function (offices) {
             }
         }
     } else {
-        let output =loadDropdownView(JSON.parse(sessionStorage.getItem("notifications")));
+        let output = loadDropdownView(JSON.parse(sessionStorage.getItem("notifications")));
         $("#loader_div").hide();
         $("#NotificationItems").prepend(output);
     }
