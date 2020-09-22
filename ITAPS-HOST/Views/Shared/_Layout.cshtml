@@ -206,6 +206,7 @@
     <!-- jQuery
     <script src="~/vendor/jquery.min.js"></script>
         -->
+    <script src="~/js/notifications/signalr.js"></script>
     <!-- Bootstrap -->
     <script src="~/vendor/popper.min.js"></script>
     <script src="~/vendor/bootstrap.min.js"></script>
@@ -246,6 +247,8 @@
     <script src="~/js/toastr.min.js"></script>
     <script src="~/js/shared/itaps-host-shared.js"></script>
     <script src="~/js/shared/layout-operations.js"></script>
+    <script src="~/js/notifications/connections.js"></script>
+    <script src="~/js/notifications/notifications.js"></script>
     @*<script src="~/js/shared/itaps-helper.js"></script>*@
 
     <div id="ScreenTimeOutModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ScreenTimeOutModal" aria-hidden="true" data-keyboard="false" data-backdrop="static">
@@ -308,7 +311,7 @@
                     </button>
                 </div>
                 <div class="modal-body bordered-group" style="height: 190px;">
-                    <form >
+                    <form>
                         <div class="col-md-12 formField">
                             <label for="listOfTaxOffices" class="col-form-label">
                                 <b>Tax Office</b>
@@ -331,7 +334,7 @@
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                     <button type="button" id="reoadReportViewerButton" class="btn btn-success" style="float: right" disabled>
                         <i class="fa fa-file" aria-hidden="true"></i>
-                         Reload
+                        Reload
                     </button>
                 </div>
             </div>

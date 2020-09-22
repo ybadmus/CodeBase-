@@ -63,11 +63,9 @@ var bootstrapPage = function () {
     $("#returnDetail").hide();
     $("#estimateDetail").hide();
     $("#endDate").flatpickr({
-        enableTime: true,
         dateFormat: "d-m-Y",
     });
     $("#startDate").flatpickr({
-        enableTime: true,
         dateFormat: "d-m-Y",
     });
 
@@ -122,13 +120,18 @@ var searchPIT = function () {
     objToSend.taxOfficeId = activeTaxOffice;
     objToSend.transactionType = HeaderName === "PIT Returns" ? "Return" : "Estimate"
     objToSend.tin = $("#tinHolder").val();
-    objToSend.startDate = $("#startDate").val();
-    objToSend.endDate = $("#endDate").val();
+    objToSend.startDate = convertDateYYYYMMDD($("#startDate").val());
+    objToSend.endDate = convertDateYYYYMMDD($("#endDate").val());
 
     let url = `${searchPITByTaxOffice}`;
 
     $("#Grid").data("kendoGrid").dataSource.data([]);
     apiCaller(url, "POST", objToSend, initializeKendoGrid);
+};
+
+var convertDateYYYYMMDD = function (date) {
+    var oldDateArray = date.split("-");
+    return oldDateArray[2] + "-" + oldDateArray[1] + "-" + oldDateArray[0];
 };
 
 var bootstrapNotification = function () {

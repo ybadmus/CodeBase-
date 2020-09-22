@@ -22,13 +22,13 @@ connection.start()
         return console.error(err.toString());
     });
 
-connection.on("ReceiveApplicationStatusMessage", (message) => {
+connection.on("ReceivePitReturnNotification", (message) => {
 
     var imgUrl = `${serverUrl}/icons/iconx-pit.png`;
     var title = "New PIT Notification Received";
     var body = message[0];
     body.submittedDate = new Date().toUTCString(); 
-
+    console.log("New PIT Notification Received", body);
     displayNotification(body, imgUrl, title);
     prependListNotifications(body);
     prependNotificationLocalStorage(body);
