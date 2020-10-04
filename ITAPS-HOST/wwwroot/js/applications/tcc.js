@@ -33,7 +33,7 @@ var initializeKendoGrid = function (data, stage) {
                 { field: 'applicationType', headerText: 'Application Type', width: 90 },
                 { field: 'status', headerText: 'Status', width: 100 },
                 { type: 'button', width: 30 },
-            ], 
+            ],
             height: 350,
             pageSettings: { pageSize: 10 },
             allowGrouping: true,
@@ -56,6 +56,7 @@ $(document).ready(function () {
     initializeKendoGrid([], 1);
     bootstrapPage();
     setTitles();
+    searchTcc();
 
     $("#gridView").show();
 });
@@ -119,21 +120,22 @@ var validateSearchEntry = function () {
 };
 
 var searchTcc = function () {
-    if (validateSearchEntry()) {
+    //if (validateSearchEntry()) {
 
-        let searchItem = $("#searchItem").val().trim();
-        if (searchItem.includes('/')) {
-            for (var i = 0; i < searchItem.length; i++) {
-                if (searchItem[i] === '/')
-                    replaceAt(searchItem, i, '%2F');
-            }
+    let searchItem = "*"; //$("#searchItem").val().trim();
+    if (searchItem.includes('/')) {
+        for (var i = 0; i < searchItem.length; i++) {
+            if (searchItem[i] === '/')
+                replaceAt(searchItem, i, '%2F');
         }
-        let url = `${searchTccByTaxOffice}?queryString=` + searchItem.trim();
-        apiCaller(url, "GET", "", initializeKendoGrid);
-    } else {
-
-        toastr.error("Tax office or search item field is empty");
     }
+    let url = `${searchTccByTaxOffice}?queryString=` + searchItem.trim();
+    apiCaller(url, "GET", "", initializeKendoGrid);
+
+    //} else {
+
+    //    toastr.error("Tax office or search item field is empty");
+    //}
 }
 
 $("#btnSearch").click(function (e) {
