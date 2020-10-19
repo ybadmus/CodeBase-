@@ -190,6 +190,11 @@ var calculateThreeMonths = function () {
         day = '' + d.getDate(),
         year = d.getFullYear();
 
+    if (month > 12) {
+        year = year + 1;
+        month = month % 12;
+    }
+
     if (month.length < 2)
         month = '0' + month;
     if (day.length < 2)

@@ -20,7 +20,8 @@ var initializeKendoGrid = function (data, stage) {
 
     if (data) {
         if (data.length == 0 && stage !== 1) {
-            return toastr.info("No Data");
+            toastr.info("No Data");
+            data = [];
         };
 
         var grid = new ej.grids.Grid({

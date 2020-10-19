@@ -88,7 +88,7 @@ var bootstrapPage = function () {
 $("#confirmationBox").on('click', function () {
     if ($(this).is(':checked')) {
         isCheckBoxSelected = true;
-        if (isCheckBoxSelectedAll && isCheckBoxSelectedGRA && isCheckBoxSelectedPaye)
+        if (isCheckBoxSelectedPaye)
             $("#saveTaxPositionSummary").removeAttr('disabled');
     } else {
         isCheckBoxSelected = false;
@@ -99,7 +99,7 @@ $("#confirmationBox").on('click', function () {
 $("#confirmationBoxPaye").on('click', function () {
     if ($(this).is(':checked')) {
         isCheckBoxSelectedPaye = true;
-        if (isCheckBoxSelectedAll && isCheckBoxSelectedGRA && isCheckBoxSelected)
+        if (isCheckBoxSelected)
             $("#saveTaxPositionSummary").removeAttr('disabled');
     } else {
         isCheckBoxSelectedPaye = false;
@@ -110,7 +110,7 @@ $("#confirmationBoxPaye").on('click', function () {
 $("#confirmationBoxAll").on('click', function () {
     if ($(this).is(':checked')) {
         isCheckBoxSelectedAll = true;
-        if (isCheckBoxSelected && isCheckBoxSelectedGRA && isCheckBoxSelectedPaye)
+        if (isCheckBoxSelected && isCheckBoxSelectedPaye)
             $("#saveTaxPositionSummary").removeAttr('disabled');
     } else {
         isCheckBoxSelectedAll = false;
@@ -121,7 +121,7 @@ $("#confirmationBoxAll").on('click', function () {
 $("#confirmationBoxGRA").on('click', function () {
     if ($(this).is(':checked')) {
         isCheckBoxSelectedGRA = true;
-        if (isCheckBoxSelectedAll && isCheckBoxSelected && isCheckBoxSelectedPaye)
+        if (isCheckBoxSelected && isCheckBoxSelectedPaye)
             $("#saveTaxPositionSummary").removeAttr('disabled');
     } else {
         isCheckBoxSelectedGRA = false;
@@ -284,6 +284,6 @@ var notify = function () {
     toastr.success('Application is pending approval');
 
     setTimeout(function () {
-        window.location.href = `${serverUrl}applications/tcc`; 
+        window.location.href = `${serverUrl}applications/mytask`;
     }, 3000);
 };
