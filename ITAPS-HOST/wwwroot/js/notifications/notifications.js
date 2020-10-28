@@ -157,8 +157,8 @@ var addToLocalStorageArray = function (name, value) {
 
 var bootstrapNotifications = function (resp) {
 
-    joinGroups(resp);
-    loadNotificatonsAssignedToUser(resp);
+    //joinGroups(resp);
+    //loadNotificatonsAssignedToUser(resp);
 };
 
 var displayNotification = function (body) {

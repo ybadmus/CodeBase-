@@ -214,6 +214,10 @@ var previewCertificate = function () {
         window.location.href = `${ReportDownloadView}`;
     } else {
 
+        $("#texDetails").hide();
+        $("#texGridView").show();
+        $("#ptrDetails").hide();
+        $("#ptrGridView").show();
         return toastr.info("No Preview Available");
     }
 
