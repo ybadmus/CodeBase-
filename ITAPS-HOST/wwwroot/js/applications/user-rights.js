@@ -5,6 +5,7 @@ $(document).ready(function () {
 var switchTilesByUserRight = function (response) {
 
     $("#loggedInUserFUllNameTile").text(response[0].firstName + " " + response[0].lastName);
+    $("#szGroupName").text(response[0].szLevel);
 
     if (response[0].szLevel.toLowerCase() === "officer") {
         $("#approveTCC").hide();
