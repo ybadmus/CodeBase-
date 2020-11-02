@@ -233,3 +233,50 @@ var removeEntryFromGrid = function (id) {
         }
     };
 };
+
+var getDocumentsById = function () {
+    let tccId = $("#appId").val();
+    let url = `${GetTCCDocuments}?id=` + tccId; 
+
+    apiCaller(url, "GET", "", appendDocumentsToTable)
+};
+
+var appendDocumentsToTable = function (listOfDocuments) {
+    listOfDocumentsGlobal = listOfDocuments
+
+    let output = "";
+
+    if (listOfDocumentsGlobal && listOfDocumentsGlobal.length !== 0) {
+        for (var i = 0; i < listOfDocuments.length; i++) {
+            var number = i + 1;
+            output = output + '<tr onclick="GetAssociatedBase64Stirng(' + i + ')" id="docId' + i + '" style="cursor: pointer;"><td style="color: black; text-align: center;">'
+                + number + '</td><td style="color: black;">' + listOfDocuments[i].documentDesc + '</td><td style="color: black;">' + listOfDocuments[i].createDate
+                + '</td></tr >';
+        }
+    } else {
+        output = output + '<br /><tr style="cursor: pointer;"><td colspan=4 style="color: black; text-align: center;">No Data</td></tr >';
+    }
+
+    output = output;
+    $("#DocumentTableId").html(output);
+};
+
+var GetAssociatedBase64Stirng = function (id) {
+    let stringT = listOfDocumentsGlobal[id].document;
+    let exd = stringT;
+
+    const win = window.open("", "_blank");
+    let html = '';
+
+    html += '<html>';
+    html += '<head><title>Document</title>'
+    html += '</head>';
+    html += '<body style="margin:0!important">';
+    html += '<embed width="100%" height="100%" src="' + exd + '" type="" />';
+    html += '</body>';
+    html += '</html>';
+
+    setTimeout(() => {
+        win.document.write(html);
+    }, 0);
+};

@@ -2,6 +2,7 @@
 var serverUrl = $("#serverUrl").val();
 var searchTexByTaxOffice = `${serverUrl}api/TEX/GetAllTaxExemptionPendingApprovalByTaxOfficeId`;
 var GetTccCommentsByIdUrl = `${serverUrl}api/TCC/GetAllTccApplicationComments?tccId=`;
+var GetTCCDocuments = `${serverUrl}api/TCC/GetTCCApplicationDocumentByApplicationId`;
 var GetAppDetailsById = `${serverUrl}api/TEX/GetWHTExApplicationById?whtId=`;
 var activeTaxOffice = "";
 var selectedStatus; 
@@ -167,6 +168,7 @@ var prepareDetailsView = function (appId) {
 
     hideAndShow();
     loadMessages(appId);
+    getDocumentsById();
     apiCaller(url, "GET", "", loadAppDetails);
 };
 

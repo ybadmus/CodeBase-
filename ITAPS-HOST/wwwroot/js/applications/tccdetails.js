@@ -350,7 +350,8 @@ var appendDocumentsToTable = function (listOfDocuments) {
     listOfDocumentsGlobal = listOfDocuments
 
     let output = "";
-    if (listOfDocumentsGlobal.length !== 0) {
+
+    if (listOfDocumentsGlobal && listOfDocumentsGlobal.length !== 0) {
         for (var i = 0; i < listOfDocuments.length; i++) {
             var number = i + 1;
             output = output + '<tr onclick="GetAssociatedBase64Stirng(' + i + ')" id="docId' + i + '" style="cursor: pointer;"><td style="color: black; text-align: center;">'

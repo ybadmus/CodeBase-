@@ -2,6 +2,7 @@
 var serverUrl = $("#serverUrl").val();
 var searchTexByTaxOffice = `${serverUrl}api/PTR/GetAllPTRPendingApprovalByTaxOfficeId`;
 var GetTccCommentsByIdUrl = `${serverUrl}api/TCC/GetAllTccApplicationComments?tccId=`;
+var GetTCCDocuments = `${serverUrl}api/TCC/GetTCCApplicationDocumentByApplicationId`;
 var GetAppDetailsById = `${serverUrl}api/PTR/GetReliefApplicationDetailsByIdAndType?uniApplicationId=`;
 var activeTaxOffice = "";
 var selectedStatus;
@@ -177,6 +178,7 @@ $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
     };
 
     prepareDetailsView(item.applicationId, ptrCode);
+    getDocumentsById();
     hideAndShow();
 });
 

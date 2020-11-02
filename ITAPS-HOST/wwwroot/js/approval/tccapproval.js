@@ -2,6 +2,7 @@
 var serverUrl = $("#serverUrl").val();
 var searchTccByTaxOffice = `${serverUrl}api/TCC/GetAllTccApplicationPendingApprovalByTaxOfficeId`;
 var loadTaxPositionsUrl = `${serverUrl}api/TCC/GetTCCApplicationTaxPositionByApplicationId?applicationId=`;
+var GetTCCDocuments = `${serverUrl}api/TCC/GetTCCApplicationDocumentByApplicationId`;
 var loadTCCDetailsUrl = `${serverUrl}api/TCC/GetTccApplicationById?tccId=`;
 var GetTccCommentsByIdUrl = `${serverUrl}api/TCC/GetAllTccApplicationComments?tccId=`;
 var ReportDownloadView = `${serverUrl}reportviewer/index`;
@@ -239,6 +240,7 @@ $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
     $("#appNoDetails").text(item.applicationNo);
 
     prepareDetailsView(item.applicationId);
+    getDocumentsById();
 });
 
 $("#btnSearch").click(function (e) {
