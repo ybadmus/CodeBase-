@@ -20,7 +20,7 @@ var LoadTaxSummaryTable = function (listOfSummary) {
     for (var i = 0; i < sortedArray.length; i++) {
         output = output + '<tr><td align="center" id="assessmentYear' + i + '">' + listOfSummary[i].assessmentYear + '</td>'
             + '<td align="center" style="color: black"><select type="text" id="statusColumn' + i + '" class="form-control">'
-            + '<option value="" selected="selected">Choose Status</option><option value="NID">Not In Dispute</option><option value="PROV">Provisional</option>' 
+            + '<option value="" selected="selected">Choose Status</option><option value="NID">Not In Dispute</option><option value="PROV">Provisional</option>'
             + '<option value="S/A">Self-Assessment</option><option value="FINAL">Finalized</option></select></td>'
             + '<td align="right" style="color: black" contenteditable="true"  id="chargeableIncomeColumn' + i + '" class="valueCell"></td>'
             + '<td align="right" style="color: black" id="taxChargedColumn' + i + '" class=""></td>'
@@ -61,8 +61,8 @@ $(document).ready(function () {
 
     var previousYear = new Date().getFullYear() - 1;
     var currentYear = new Date().getFullYear();
-    var currentMonth = new Date().getMonth() + 1;
-    var monthsArray = ["None", "Jan", "Feb", "March", "April", "May", "June", "July", "August", "September", "November", "December"];
+    var currentMonth = new Date().getMonth();
+    var monthsArray = ["Jan", "Feb", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     var MonthYear = monthsArray[currentMonth] + ", " + currentYear;
 
     $("#pgHeader").text(HeaderName);
@@ -88,30 +88,65 @@ var bootstrapPage = function () {
 $("#confirmationBox").on('click', function () {
     if ($(this).is(':checked')) {
         isCheckBoxSelected = true;
-        if (isCheckBoxSelectedPaye)
+        if (isCheckBoxSelected && isCheckBoxSelectedGRA && isCheckBoxSelectedAll && isCheckBoxSelectedPaye) {
             $("#saveTaxPositionSummary").removeAttr('disabled');
-    } else {
+        } else if (isCheckBoxSelected && isCheckBoxSelectedGRA && isCheckBoxSelectedAll && !isCheckBoxSelectedPaye) {
+            $("#saveTaxPositionSummary").removeAttr('disabled');
+        } else {
+            $("#saveTaxPositionSummary").attr("disabled", true);
+        }
+    }
+    else {
         isCheckBoxSelected = false;
-        $("#saveTaxPositionSummary").attr("disabled", true);
+        if (!isCheckBoxSelected && isCheckBoxSelectedGRA && isCheckBoxSelectedAll && !isCheckBoxSelectedPaye) {
+            $("#saveTaxPositionSummary").removeAttr('disabled');
+        } else if (!isCheckBoxSelected && isCheckBoxSelectedGRA && isCheckBoxSelectedAll && isCheckBoxSelectedPaye) {
+            $("#saveTaxPositionSummary").removeAttr('disabled');
+        } else {
+            $("#saveTaxPositionSummary").attr("disabled", true);
+        }
     }
 });
 
 $("#confirmationBoxPaye").on('click', function () {
     if ($(this).is(':checked')) {
         isCheckBoxSelectedPaye = true;
-        if (isCheckBoxSelected)
+        if (isCheckBoxSelectedPaye && isCheckBoxSelectedAll && isCheckBoxSelectedGRA && isCheckBoxSelected) {
             $("#saveTaxPositionSummary").removeAttr('disabled');
+        } else if (isCheckBoxSelectedPaye && isCheckBoxSelectedAll && isCheckBoxSelectedGRA && !isCheckBoxSelected) {
+            $("#saveTaxPositionSummary").removeAttr('disabled');
+        } else {
+            $("#saveTaxPositionSummary").attr("disabled", true);
+        }
     } else {
         isCheckBoxSelectedPaye = false;
-        $("#saveTaxPositionSummary").attr("disabled", true);
+        if (!isCheckBoxSelectedPaye && isCheckBoxSelectedAll && isCheckBoxSelectedGRA && isCheckBoxSelected) {
+            $("#saveTaxPositionSummary").removeAttr('disabled');
+        } else if (!isCheckBoxSelectedPaye && isCheckBoxSelectedAll && isCheckBoxSelectedGRA && !isCheckBoxSelected) {
+            $("#saveTaxPositionSummary").removeAttr('disabled');
+        } else {
+            $("#saveTaxPositionSummary").attr("disabled", true);
+        }
     }
 });
 
 $("#confirmationBoxAll").on('click', function () {
     if ($(this).is(':checked')) {
         isCheckBoxSelectedAll = true;
-        if (isCheckBoxSelected && isCheckBoxSelectedPaye)
+        if (isCheckBoxSelectedGRA && isCheckBoxSelectedAll && isCheckBoxSelectedPaye && isCheckBoxSelected) {
             $("#saveTaxPositionSummary").removeAttr('disabled');
+        }
+        else if (isCheckBoxSelectedGRA && isCheckBoxSelectedAll && !isCheckBoxSelectedPaye && !isCheckBoxSelected) {
+            $("#saveTaxPositionSummary").removeAttr('disabled');
+        }
+        else if (isCheckBoxSelectedGRA && isCheckBoxSelectedAll && isCheckBoxSelectedPaye && !isCheckBoxSelected) {
+            $("#saveTaxPositionSummary").removeAttr('disabled');
+        }
+        else if (isCheckBoxSelectedGRA && isCheckBoxSelectedAll && !isCheckBoxSelectedPaye && isCheckBoxSelected) {
+            $("#saveTaxPositionSummary").removeAttr('disabled');
+        } else {
+            $("#saveTaxPositionSummary").attr("disabled", true);
+        }
     } else {
         isCheckBoxSelectedAll = false;
         $("#saveTaxPositionSummary").attr("disabled", true);
@@ -121,8 +156,20 @@ $("#confirmationBoxAll").on('click', function () {
 $("#confirmationBoxGRA").on('click', function () {
     if ($(this).is(':checked')) {
         isCheckBoxSelectedGRA = true;
-        if (isCheckBoxSelected && isCheckBoxSelectedPaye)
+        if (isCheckBoxSelectedGRA && isCheckBoxSelectedAll && isCheckBoxSelectedPaye && isCheckBoxSelected) {
             $("#saveTaxPositionSummary").removeAttr('disabled');
+        }
+        else if (isCheckBoxSelectedGRA && isCheckBoxSelectedAll && !isCheckBoxSelectedPaye && !isCheckBoxSelected) {
+            $("#saveTaxPositionSummary").removeAttr('disabled');
+        }
+        else if (isCheckBoxSelectedGRA && isCheckBoxSelectedAll && isCheckBoxSelectedPaye && !isCheckBoxSelected) {
+            $("#saveTaxPositionSummary").removeAttr('disabled');
+        }
+        else if (isCheckBoxSelectedGRA && isCheckBoxSelectedAll && !isCheckBoxSelectedPaye && isCheckBoxSelected) {
+            $("#saveTaxPositionSummary").removeAttr('disabled');
+        } else {
+            $("#saveTaxPositionSummary").attr("disabled", true);
+        }
     } else {
         isCheckBoxSelectedGRA = false;
         $("#saveTaxPositionSummary").attr("disabled", true);

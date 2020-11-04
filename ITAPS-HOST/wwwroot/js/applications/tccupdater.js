@@ -84,6 +84,9 @@ $("#updateAppStatus").click(function (e) {
                 "appId": tccId
             };
 
+            if ($("#taxpayerMessage").val().length < 5)
+                return toastr.info("Message to the Taxpayer is required when Declining Application");
+
             apiCaller(updateUrl, "PUT", ObjectToSend, updateView);
         }
 
@@ -101,6 +104,9 @@ $("#updateAppStatus").click(function (e) {
                 "statusId": 4,
                 "appId": tccId
             };
+
+            if ($("#taxpayerMessage").val().length < 5)
+                return toastr.info("Message to the Taxpayer is required when Requesting for more Info ");
 
             apiCaller(updateUrl, "PUT", ObjectToSend, updateView);
         }

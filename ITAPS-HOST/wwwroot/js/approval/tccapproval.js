@@ -270,7 +270,7 @@ $("#approveDeclineReturnBtn").click(function () {
 
     if (selectedStatus == 2) {
 
-        approveTCC();
+        $("#approveModal").modal("show");
 
     } else {
 
@@ -283,6 +283,12 @@ $("#approveDeclineReturnBtn").click(function () {
             "internalComment": $("#internalMessage").val(),
             "applicationId": tccId
         };
+
+        if ($("#taxpayerMessage").val().length < 5 && selectedStatus == 3)
+            return toastr.info("Message to the Taxpayer is required when Declining Application");
+
+        if ($("#taxpayerMessage").val().length < 5 && selectedStatus == 1)
+            return toastr.info("Message to the Taxpayer is required when Returning Application");
 
         apiCaller(updateUrl, "PUT", ObjectToSend, successfullyUpdated);
     };
@@ -297,7 +303,7 @@ var approveTCC = function () {
         "taxpayerComment": $("#taxpayerMessage").val(),
         "internalComment": $("#internalMessage").val(),
         "applicationId": tccId,
-        "expiryDate": calculateThreeMonths()
+        "expiryDate": $("#expiryDateTcc").val()
     };
 
     apiCaller(updateUrl, "PUT", ObjectToSend, successfullyUpdated);
