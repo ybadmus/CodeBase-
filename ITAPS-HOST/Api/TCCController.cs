@@ -53,10 +53,11 @@ namespace ITAPS_HOST.Api
         }
 
         [HttpPost("PostTaxPositionSummary", Name = "PostTaxPositionSummary")]
-        public async Task<ResponseItemForCreationDto<object>> PostTaxPositionSummary(Guid taxpayerId, Guid appId, [FromBody] ArrayObjectSummary data)
+        //public async Task<ResponseItemForCreationDto<object>> PostTaxPositionSummary(Guid taxpayerId, Guid appId, [FromBody] ArrayObjectSummary data)
+        public async Task<ResponseItemForCreationDto<object>> PostTaxPositionSummary(Guid appId, [FromBody] ArrayObjectSummary data)
         {
 
-            return await _tccApplicationService.PostTaxPositionSummary(taxpayerId, appId, data.Summary);
+            return await _tccApplicationService.PostTaxPositionSummary(appId, data);
         }
 
         [HttpGet("GetTCCCertificateNo", Name = "GetTCCCertificateNo")]

@@ -13,7 +13,7 @@ namespace ITAPS_HOST.IServices
         Task<ResponseItem<object>> GetAllTccApplicationComments(Guid tccId);
         Task<ResponseItem<object>> UpdateTccApplication(Guid id, UpdateTccDto objectToSend);
         Task<ResponseItem<object>> SearchAllTCCApplication(string searchTerm);
-        Task<ResponseItemForCreationDto<object>> PostTaxPositionSummary(Guid taxerpayerId, Guid appId, IEnumerable<TaxPositionSummary> data);
+        Task<ResponseItemForCreationDto<object>> PostTaxPositionSummary(Guid appId, ArrayObjectSummary data);
         Task<ResponseItem<object>> GetTCCCertificateNo();
         Task<ResponseItem<object>> GetTCCApplicationDocumentByApplicationId(Guid id);
         Task<ResponseItem<object>> GetAllTccApplicationByTaxOfficeId(string queryString);

@@ -4,7 +4,8 @@ var isCheckBoxSelectedGRA = false;
 var isCheckBoxSelectedPaye = false;
 var isCheckBoxSelectedAll = false;
 var ServerUrl = $("#serverUrl").val();
-var postTaxPosition = `${ServerUrl}api/TCC/PostTaxPositionSummary?taxpayerId=`;
+//var postTaxPosition = `${ServerUrl}api/TCC/PostTaxPositionSummary?taxpayerId=`;
+var postTaxPosition = `${ServerUrl}api/TCC/PostTaxPositionSummary?appId=`;
 let tccUpdateUrl = `${ServerUrl}api/TCC/UpdateTCCApplication?id=`;
 var statusColumn0 = "";
 var statusColumn1 = "";
@@ -252,7 +253,6 @@ $("#saveTaxPositionSummary").click(function (e) {
     var summaryData = [];
 
     var row1 = {
-        "id": "",
         "status": statusColumn0,
         "assessmentYear": $("#assessmentYear0").text(),
         "chargeableIncome": $("#chargeableIncomeColumn0").text(),
@@ -264,7 +264,6 @@ $("#saveTaxPositionSummary").click(function (e) {
     summaryData.push(row1);
 
     var row2 = {
-        "id": "",
         "status": statusColumn1,
         "assessmentYear": $("#assessmentYear1").text(),
         "chargeableIncome": $("#chargeableIncomeColumn1").text(),
@@ -276,7 +275,6 @@ $("#saveTaxPositionSummary").click(function (e) {
     summaryData.push(row2);
 
     var row3 = {
-        "id": "",
         "status": statusColumn2,
         "assessmentYear": $("#assessmentYear2").text(),
         "chargeableIncome": $("#chargeableIncomeColumn2").text(),
@@ -288,10 +286,15 @@ $("#saveTaxPositionSummary").click(function (e) {
     summaryData.push(row3);
 
     var arrayObject = {
-        Summary: summaryData
+        Summary: summaryData,
+        PaidTaxLiabilities: isCheckBoxSelected,
+        PaidWithholdingTax: isCheckBoxSelectedPaye,
+        SubmittedTaxReturns: isCheckBoxSelectedAll,
+        RegisteredWithGRA: isCheckBoxSelectedGRA,
+        TaxpayerId: $("#taxpayerId").val()
     };
 
-    var url = `${postTaxPosition}` + $("#taxpayerId").val() + "&appId=" + $("#appId").val();
+    var url = `${postTaxPosition}` + $("#appId").val();
 
     apiCaller(url, 'POST', arrayObject, updateApplication);
 });

@@ -83,16 +83,16 @@ namespace ITAPS_HOST.Services
             return await _adminRequestClient.PutRequestAsync(objectForUpdateTccDto, apiEndpoint);
         }
 
-        public async Task<ResponseItemForCreationDto<object>> PostTaxPositionSummary(Guid taxerpayerId, Guid appId, IEnumerable<TaxPositionSummary> data)
+        public async Task<ResponseItemForCreationDto<object>> PostTaxPositionSummary(Guid appId, ArrayObjectSummary data)
         {
             //var apiEndpoint = $"Application/AddUpdateTaxPosition/{appId}";
             var apiEndpoint = $"Application/AddListTaxPositions/{appId}";
 
-            List<TaxPositionSummaryDto> arrayForCreation = new List<TaxPositionSummaryDto> { };
+            List<TaxPositionSummary> arrayForCreation = new List<TaxPositionSummary> { };
 
-            foreach (TaxPositionSummary summary in data)
+            foreach (TaxPositionSummary summary in data.Summary)
             {
-                TaxPositionSummaryDto item = new TaxPositionSummaryDto
+                TaxPositionSummary item = new TaxPositionSummary
                 {
                     Status = summary.Status,
                     AssessmentYear = Convert.ToInt64(summary.AssessmentYear),
@@ -103,10 +103,11 @@ namespace ITAPS_HOST.Services
                 };
 
                 arrayForCreation.Add(item);
-
             }
 
-            return await _adminRequestClient.PostRequestArrayAsync(arrayForCreation, apiEndpoint);
+            data.Summary = arrayForCreation;
+
+            return await _adminRequestClient.PostRequestAsync(data, apiEndpoint);
         }
 
         public async Task<ResponseItem<object>> GetTCCCertificateNo()
