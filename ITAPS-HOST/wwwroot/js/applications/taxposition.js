@@ -22,7 +22,7 @@ var LoadTaxSummaryTable = function (listOfSummary) {
         output = output + '<tr><td align="center" id="assessmentYear' + i + '">' + listOfSummary[i].assessmentYear + '</td>'
             + '<td align="center" style="color: black"><select type="text" id="statusColumn' + i + '" class="form-control">'
             + '<option value="" selected="selected">Choose Status</option><option value="NID">Not In Dispute</option><option value="PROV">Provisional</option>'
-            + '<option value="S/A">Self-Assessment</option><option value="FINAL">Finalized</option></select></td>'
+            + '<option value="S/A">Self-Assessment</option><option value="FINAL">Finalized</option><option value="NLT">Not Liable for Tax</option></select></td>'
             + '<td align="right" style="color: black" contenteditable="true"  id="chargeableIncomeColumn' + i + '" class="valueCell"></td>'
             + '<td align="right" style="color: black" id="taxChargedColumn' + i + '" class=""></td>'
             + '<td align="right" style="color: black" contenteditable="true" id="taxPaidColumn' + i + '" class="valueCell"></td>'
