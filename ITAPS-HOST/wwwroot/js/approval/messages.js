@@ -181,6 +181,7 @@ var successfullyUpdated = function () {
 
         $("#approveModal").modal("hide");
         $("#approveDecline").modal("hide");
+        $("#yesOrNo").modal("hide");
 
         removeEntryFromGrid($("#appId").val());
         previewCertificate();
@@ -191,6 +192,7 @@ var successfullyUpdated = function () {
 
         $("#approveModal").modal("hide");
         $("#approveDecline").modal("hide");
+        $("#yesOrNo").modal("hide");
 
         backToGrid();
     };
@@ -200,6 +202,7 @@ var successfullyUpdated = function () {
 
         $("#approveModal").modal("hide");
         $("#approveDecline").modal("hide");
+        $("#yesOrNo").modal("hide");
 
         backToGrid();
     }

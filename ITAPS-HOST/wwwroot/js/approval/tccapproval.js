@@ -310,7 +310,19 @@ var approveTCC = function () {
 };
 
 $("#continueApproval").click(function () {
+    $("#yesOrNo").modal("show");
+    $("#approveModal").modal("hide");
+    $("#approveDecline").modal("hide");
+});
+
+$("#yesBtn").click(function () {
     approveTCC();
+});
+
+$("#noYesBtn").click(function () {
+    $("#yesOrNo").modal("hide");
+    $("#approveModal").modal("show");
+    $("#approveDecline").modal("show");
 });
 
 $("#taxPositionMoreDetails").click(function () {

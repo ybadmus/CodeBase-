@@ -168,7 +168,6 @@ namespace ITAPS_HOST.Services
 
             return await _adminRequestClient.PutRequestArrayAsync(objData, apiEndpoint);
         }
-
        
 
         public async Task<ResponseItem<object>> GetTCCApplicationTaxPositionByApplicationId(Guid applicationId)
