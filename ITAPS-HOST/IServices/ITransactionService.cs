@@ -10,7 +10,7 @@ namespace ITAPS_HOST.IServices
     {
         Task<ResponseItem<object>> SearchTransactionAsync(SearchForTransactionDto searchObject, CancellationToken cancellationToken);
         Task<ResponseItem<object>> GetTransactionDetailsAsync(SearchForTransactionDetailDto searchObject, CancellationToken cancellationToken);
-        Task<ResponseItem<object>> TaxCalculatorAsync(Double amount, string startdate, string enddate, CancellationToken cancellationToken);
+        Task<ResponseItem<object>> TaxCalculatorAsync(Double amount, string startdate, string enddate, string tin);
         Task<ResponseItem<object>> GetCITDetailsById(Guid transactionId);
         Task<ResponseItem<object>> GETCITEstimatesDetailsById(Guid transactionId);
         Task<ResponseItem<object>> GETCITRevisedEstimatesDetailsById(Guid transactionId);

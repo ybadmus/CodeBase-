@@ -170,11 +170,12 @@ namespace ITAPS_HOST.Controllers
         }
         //PTR END
 
-        public IActionResult TaxPosition(string applicantName, Guid taxpayerId, Guid appId)
+        public IActionResult TaxPosition(string applicantName, Guid taxpayerId, Guid appId, string applicantTin)
         {
             UserDetails();
             ViewBag.ServerUrl = _config.AppServerUrl;
             ViewBag.ApplicantName = applicantName;
+            ViewBag.ApplicantTin = applicantTin;
             ViewBag.TaxpayerId = taxpayerId;
             ViewBag.AppId = appId;
             return View();

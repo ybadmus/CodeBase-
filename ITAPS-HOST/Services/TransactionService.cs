@@ -63,10 +63,10 @@ namespace ITAPS_HOST.Services
             return await _adminRequestClient.GetRequestAsync(apiEndpoint);
         }
 
-        public async Task<ResponseItem<object>> TaxCalculatorAsync(Double amount, string startdate, string enddate, CancellationToken cancellationToken)
+        public async Task<ResponseItem<object>> TaxCalculatorAsync(Double amount, string startdate, string enddate, string tin)
         {
 
-            var apiEndpoint = $"Transactions/TaxCalculatorAsync/{amount}/{startdate}/{enddate}";
+            var apiEndpoint = $"Transactions/TaxCalculatorAsync/{tin}/{amount}/{startdate}/{enddate}";
             return await _adminRequestClient.GetRequestAsync(apiEndpoint);
         }
 

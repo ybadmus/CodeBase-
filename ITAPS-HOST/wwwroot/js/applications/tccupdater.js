@@ -276,5 +276,6 @@ $("#taxPosition").click(function () {
 
     localStorage.setItem('taxpositionObj', JSON.stringify(ObjectToSend));
 
-    window.location.href = `${serverUrl}applications/taxposition?applicantName=` + $("#applicantName").text() + "&taxpayerId=" + $("#taxpayerId").text() + "&appId=" + $("#appId").val();
+    window.location.href = `${serverUrl}applications/taxposition?applicantName=` + $("#applicantName").text() + "&taxpayerId=" +
+        $("#taxpayerId").text() + "&appId=" + $("#appId").val() + "&applicantTin=" + $("#applicantTIN").text();
 });

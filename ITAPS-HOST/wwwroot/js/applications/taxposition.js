@@ -218,7 +218,7 @@ $("#TaxPositionSummaryGrid").on('focusout', '.valueCell', function (event) {
         let enddate = $("#assessmentYear0").text() + "-12-31";
         let amount = parseFloat(event.target.innerText.split(".")[0].replace(",", ""));
 
-        var url = `${ServerUrl}api/Transaction/TaxCalculatorAsync?amount=` + amount + `&startdate=` + startdate + `&enddate=` + enddate;
+        var url = `${ServerUrl}api/Transaction/TaxCalculatorAsync?amount=` + amount + `&startdate=` + startdate + `&enddate=` + enddate + `&tin=` + $("#taxpayerTin").val();
 
         if (amount > 0)
             apiCaller(url, "GET", "", updateTaxCharged);
@@ -229,7 +229,7 @@ $("#TaxPositionSummaryGrid").on('focusout', '.valueCell', function (event) {
         let enddate = $("#assessmentYear1").text() + "-12-31";
         let amount = parseFloat(event.target.innerText.split(".")[0].replace(",", ""));
 
-        var url = `${ServerUrl}api/Transaction/TaxCalculatorAsync?amount=` + amount + `&startdate=` + startdate + `&enddate=` + enddate;
+        var url = `${ServerUrl}api/Transaction/TaxCalculatorAsync?amount=` + amount + `&startdate=` + startdate + `&enddate=` + enddate + `&tin=` + $("#taxpayerTin").val();
 
         if (amount > 0)
             apiCaller(url, "GET", "", updateTaxCharged);
@@ -240,7 +240,7 @@ $("#TaxPositionSummaryGrid").on('focusout', '.valueCell', function (event) {
         let enddate = $("#assessmentYear2").text() + "-12-31";
         let amount = parseFloat(event.target.innerText.split(".")[0].replace(",", ""));
 
-        var url = `${ServerUrl}api/Transaction/TaxCalculatorAsync?amount=` + amount + `&startdate=` + startdate + `&enddate=` + enddate;
+        var url = `${ServerUrl}api/Transaction/TaxCalculatorAsync?amount=` + amount + `&startdate=` + startdate + `&enddate=` + enddate + `&tin=` + $("#taxpayerTin").val();
 
         if (amount > 0)
             apiCaller(url, "GET", "", updateTaxCharged);
