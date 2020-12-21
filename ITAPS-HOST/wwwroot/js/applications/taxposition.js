@@ -208,9 +208,9 @@ $("#TaxPositionSummaryGrid").on('focusout', '.valueCell', function (event) {
         $("#" + taxChargedColumn).text(parseFloat(res[0].nTaxAmount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
     };
 
-    $("#taxOutstandingColumn0").text(taxOustanding0 < 0 ? '(' + Math.abs(taxOustanding0).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + ')' : taxOustanding0.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#taxOutstandingColumn1").text(taxOustanding1 < 0 ? '(' + Math.abs(taxOustanding1).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + ')' : taxOustanding1.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#taxOutstandingColumn2").text(taxOustanding2 < 0 ? '(' + Math.abs(taxOustanding2).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + ')' : taxOustanding2.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#taxOutstandingColumn0").text(taxOustanding0 < 0 ? '(' + Math.abs(taxOustanding0).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + ')' : taxOustanding0 == 0 ? "" : taxOustanding0.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#taxOutstandingColumn1").text(taxOustanding1 < 0 ? '(' + Math.abs(taxOustanding1).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + ')' : taxOustanding0 == 0 ? "" : taxOustanding1.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#taxOutstandingColumn2").text(taxOustanding2 < 0 ? '(' + Math.abs(taxOustanding2).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + ')' : taxOustanding0 == 0 ? "" : taxOustanding2.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 
     if (event.currentTarget.id === "chargeableIncomeColumn0") {
 
@@ -244,6 +244,7 @@ $("#TaxPositionSummaryGrid").on('focusout', '.valueCell', function (event) {
 
         if (amount > 0)
             apiCaller(url, "GET", "", updateTaxCharged);
+       
     }
 });
 
@@ -302,17 +303,60 @@ $("#saveTaxPositionSummary").click(function (e) {
 $("#TaxPositionSummaryGrid").on('change', '#statusColumn0', function () {
     var elem = document.getElementById("statusColumn0");
     statusColumn0 = elem.options[elem.selectedIndex].value;
+    if (statusColumn0 === "NLT") {
+        notLiableTax(1);
+        $("#taxPaidColumn0").prop("contenteditable", false);
+        $("#chargeableIncomeColumn0").prop("contenteditable", false);
+    } else {
+        $("#taxPaidColumn0").prop("contenteditable", true);
+        $("#chargeableIncomeColumn0").prop("contenteditable", true);
+    }
 });
 
 $("#TaxPositionSummaryGrid").on('change', '#statusColumn1', function () {
     var elem = document.getElementById("statusColumn1");
     statusColumn1 = elem.options[elem.selectedIndex].value;
+    if (statusColumn1 === "NLT") {
+        notLiableTax(2);
+        $("#taxPaidColumn1").prop("contenteditable", false);
+        $("#chargeableIncomeColumn1").prop("contenteditable", false);
+    } else {
+        $("#taxPaidColumn1").prop("contenteditable", true);
+        $("#chargeableIncomeColumn1").prop("contenteditable", true);
+    }
 });
 
 $("#TaxPositionSummaryGrid").on('change', '#statusColumn2', function () {
     var elem = document.getElementById("statusColumn2");
     statusColumn2 = elem.options[elem.selectedIndex].value;
+    if (statusColumn2 === "NLT") {
+        notLiableTax(3);
+        $("#taxPaidColumn2").prop("contenteditable", false);
+        $("#chargeableIncomeColumn2").prop("contenteditable", false);
+    } else {
+        $("#taxPaidColumn2").prop("contenteditable", true);
+        $("#chargeableIncomeColumn2").prop("contenteditable", true);
+    }
 });
+
+var notLiableTax = function (index) {
+    if (index === 1) {
+        $("#chargeableIncomeColumn0").text(0.00);
+        $("#taxChargedColumn0").text(0.00);
+        $("#taxOutstandingColumn0").text(0.00);
+        $("#taxPaidColumn0").text(0.00);
+    } else if (index === 2) {
+        $("#chargeableIncomeColumn1").text(0.00);
+        $("#taxChargedColumn1").text(0.00);
+        $("#taxOutstandingColumn1").text(0.00);
+        $("#taxPaidColumn1").text(0.00);
+    } else if (index === 3) {
+        $("#chargeableIncomeColumn2").text(0.00);
+        $("#taxChargedColumn2").text(0.00);
+        $("#taxOutstandingColumn2").text(0.00);
+        $("#taxPaidColumn2").text(0.00);
+    }
+};
 
 var updateApplication = function () {
     toastr.success('Tax position successfully saved!');

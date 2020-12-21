@@ -12,12 +12,10 @@ namespace ITAPS_HOST.Services
     public class TransactionService: ITransactionService
     {
         private readonly IAdminRequestClient _adminRequestClient;
-        private readonly IMainRequestClient _mainRequestClient;
 
-        public TransactionService(IAdminRequestClient adminRequestClient, IMainRequestClient mainRequestClient)
+        public TransactionService(IAdminRequestClient adminRequestClient)
         {
             _adminRequestClient = adminRequestClient;
-            _mainRequestClient = mainRequestClient;
         }
 
         public async Task<ResponseItem<object>> SearchTransactionAsync(SearchForTransactionDto searchObject, CancellationToken cancellationToken)
@@ -69,8 +67,9 @@ namespace ITAPS_HOST.Services
         {
 
             //var apiEndpoint = $"Transactions/TaxCalculatorAsync/{tin}/{amount}/{startdate}/{enddate}";
-            var apiEndpoint = $"Transactions/PitTaxCalculatorAsync/{tin}/{amount}/{startdate}/{enddate}";
-            return await _mainRequestClient.GetRequestAsync(apiEndpoint);
+            //var apiEndpoint = $"Transactions/PitTaxCalculatorAsync/{tin}/{amount}/{startdate}/{enddate}";
+            var apiEndpoint = $"Transactions/GetTaxChargedByTin/{tin}/{amount}/{startdate}/{enddate}";
+            return await _adminRequestClient.GetRequestAsync(apiEndpoint);
         }
 
         public async Task<ResponseItem<object>> GetCITDetailsById(Guid transactionId)

@@ -419,7 +419,13 @@ var decideNextTccStage = function (statusId) {
                 $("#addTaxPosition").show();
                 $("#suspendStatus").show();
                 $("#declineStatus").hide();
-
+            } else if (appType.toUpperCase() === "WHT Exemption".toUpperCase()) {
+                $("#acknowledgeStatus").hide();
+                $("#processApplication").hide();
+                $("#addTaxPosition").show();
+                $("#sendForApproval").hide();
+                $("#suspendStatus").show();
+                $("#declineStatus").hide();
             } else {
                 $("#acknowledgeStatus").hide();
                 $("#processApplication").hide();

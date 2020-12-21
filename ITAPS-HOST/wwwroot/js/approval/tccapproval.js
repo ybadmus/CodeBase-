@@ -117,7 +117,12 @@ var apiCaller = function (url, type, data, callback) {
         },
         error: function (error) {
             $('html').hideLoading();
-            toastr.error('An error occured');
+
+            if (data.status == 2) {
+                return toastr.error("This application has already been approved, please reload the browser and choose another application.");
+            }
+
+            return toastr.error('An error occured, please reload the browser and try again.');
         }
     });
 };

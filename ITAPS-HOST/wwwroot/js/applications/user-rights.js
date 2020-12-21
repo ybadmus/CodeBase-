@@ -23,11 +23,11 @@ var switchTilesByUserRight = function (response) {
         $("#allTCC").show();
     } else if (response[0].szLevel.toLowerCase() === "supervisor") {
         $("#approveTCC").hide();
-        $("#processTCC").hide();
+        $("#processTCC").show();
         $("#assignTCC").show();
         $("#assignBulk").show();
         $("#allTCC").show();
-        $("#reassign").hide();
+        $("#reassign").show();
     }
 
 };
