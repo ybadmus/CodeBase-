@@ -19,8 +19,8 @@ var LoadTaxSummaryTable = function (listOfSummary) {
     });
 
     for (var i = 0; i < sortedArray.length; i++) {
-        output = output + '<tr><td align="center" id="assessmentYear' + i + '">' + listOfSummary[i].assessmentYear + '</td>'
-            + '<td align="center" style="color: black"><select type="text" id="statusColumn' + i + '" class="form-control">'
+        output = output + '<tr><td align="center" style="width: 110px;" id="assessmentYear' + i + '">' + listOfSummary[i].assessmentYear + '</td>'
+            + '<td align="center" style="color: black; width:190px;"><select type="text" id="statusColumn' + i + '" class="form-control">'
             + '<option value="" selected="selected">Choose Status</option><option value="NID">Not In Dispute</option><option value="PROV">Provisional</option>'
             + '<option value="S/A">Self-Assessment</option><option value="FINAL">Finalized</option><option value="NLT">Not Liable for Tax</option></select></td>'
             + '<td align="right" style="color: black" contenteditable="true"  id="chargeableIncomeColumn' + i + '" class="valueCell"></td>'
@@ -178,39 +178,140 @@ $("#confirmationBoxGRA").on('click', function () {
 });
 
 $("#TaxPositionSummaryGrid").on('focus', '.valueCell', function (event) {
+
     if (event.target.innerText === "" || event.target.innerText === "\n")
         $("#" + event.target.id).text("");
     else {
         var val = parseFloat(event.target.innerText.replace(/,/g, ''));
         $("#" + event.target.id).text(val);
     }
+
+    $("#" + event.target.id).text(parseFloat(event.target.innerText).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') == "NaN" ? "" : parseFloat(event.target.innerText).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+
+    if (event.currentTarget.id === "chargeableIncomeColumn0") {
+
+        if ($("#chargeableIncomeColumn0").text() === "") {  
+            $("#chargeableIncomeColumn0").text("");
+            $("#taxPaidColumn0").prop("contenteditable", false);
+
+            if (statusColumn0 === "" || statusColumn0 === "NLT") {
+
+
+                return toastr.info("Please select a valid status for the corresonding year.");
+            }
+        } 
+
+    }
+
+    if (event.currentTarget.id === "chargeableIncomeColumn") {
+
+        if ($("#chargeableIncomeColumn1").text() === "") {
+            $("#chargeableIncomeColumn1").text("");
+            $("#taxPaidColumn1").prop("contenteditable", false);
+
+            if (statusColumn1 === "" || statusColumn1 === "NLT")
+                return toastr.info("Please select a valid status for the corresonding year.");
+        }
+
+    }
+
+    if (event.currentTarget.id === "chargeableIncomeColumn") {
+
+        if ($("#chargeableIncomeColumn2").text() === "") {
+            $("#chargeableIncomeColumn2").text("");
+            $("#taxPaidColumn2").prop("contenteditable", false);
+
+            if (statusColumn2 === "" || statusColumn2 === "NLT")
+                return toastr.info("Please select a valid status for the corresonding year.");
+        }
+
+    }
+
+
+    if (event.currentTarget.id === "taxPaidColumn0") {
+
+        if ($("#chargeableIncomeColumn0").text() === "") {
+            $("#taxPaidColumn0").text("");
+            $("#taxChargedColumn0").text("");
+            $("#chargeableIncomeColumn0").text("");
+            $("#taxPaidColumn0").prop("contenteditable", false);
+
+            return toastr.info("Tax paid without corresponding Chargeable Income is not allowed");
+        } else {
+
+            $("#taxPaidColumn0").prop("contenteditable", true);
+        }
+
+    } else if (event.currentTarget.id === "taxPaidColumn1") {
+
+        if ($("#chargeableIncomeColumn1").text() === "") {
+            $("#taxPaidColumn1").text("");
+            $("#taxChargedColumn1").text("");
+            $("#chargeableIncomeColumn1").text("");
+            $("#taxPaidColumn1").prop("contenteditable", false);
+
+            return toastr.info("Tax paid without corresponding Chargeable Income is not allowed");
+        } else {
+
+            $("#taxPaidColumn1").prop("contenteditable", true);
+        }
+
+    } else if (event.currentTarget.id === "taxPaidColumn2") {
+
+        if ($("#chargeableIncomeColumn2").text() === "") {
+            $("#taxPaidColumn2").text("");
+            $("#taxChargedColumn2").text("");
+            $("#chargeableIncomeColumn2").text("");
+            $("#taxPaidColumn2").prop("contenteditable", false);
+
+            return toastr.info("Tax paid without corresponding Chargeable Income is not allowed");
+        } else {
+
+            $("#taxPaidColumn2").prop("contenteditable", true);
+        }
+
+    }
+
 });
 
 $("#TaxPositionSummaryGrid").on('focusout', '.valueCell', function (event) {
 
-    $("#" + event.target.id).text(parseFloat(event.target.innerText).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') === "NaN" ? "" : parseFloat(event.target.innerText).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#" + event.target.id).text(parseFloat(event.target.innerText).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') == "NaN" ? "" : parseFloat(event.target.innerText).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 
-    var taxOustanding0 = parseFloat($("#taxChargedColumn0").text() !== "" ? $("#taxChargedColumn0").text().replace(/,/g, '') : 0) - parseFloat($("#taxPaidColumn0").text() !== "" ? $("#taxPaidColumn0").text().replace(/,/g, '') : 0);
-    var taxOustanding1 = parseFloat($("#taxChargedColumn1").text() !== "" ? $("#taxChargedColumn1").text().replace(/,/g, '') : 0) - parseFloat($("#taxPaidColumn1").text() !== "" ? $("#taxPaidColumn1").text().replace(/,/g, '') : 0);
-    var taxOustanding2 = parseFloat($("#taxChargedColumn2").text() !== "" ? $("#taxChargedColumn2").text().replace(/,/g, '') : 0) - parseFloat($("#taxPaidColumn2").text() !== "" ? $("#taxPaidColumn2").text().replace(/,/g, '') : 0);
 
     var updateTaxCharged = function (res) {
         let taxChargedColumn = "";
 
         if (event.target.id === "chargeableIncomeColumn0") {
+
             taxChargedColumn = "taxChargedColumn0";
         } else if (event.target.id === "chargeableIncomeColumn1") {
+
             taxChargedColumn = "taxChargedColumn1";
         } else if (event.target.id === "chargeableIncomeColumn2") {
+
             taxChargedColumn = "taxChargedColumn2";
         }
 
         $("#" + taxChargedColumn).text(parseFloat(res[0].nTaxAmount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
     };
 
-    $("#taxOutstandingColumn0").text(taxOustanding0 < 0 ? '(' + Math.abs(taxOustanding0).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + ')' : taxOustanding0 == 0 ? "" : taxOustanding0.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#taxOutstandingColumn1").text(taxOustanding1 < 0 ? '(' + Math.abs(taxOustanding1).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + ')' : taxOustanding0 == 0 ? "" : taxOustanding1.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#taxOutstandingColumn2").text(taxOustanding2 < 0 ? '(' + Math.abs(taxOustanding2).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + ')' : taxOustanding0 == 0 ? "" : taxOustanding2.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    if (event.currentTarget.id === "taxPaidColumn0") {
+
+        var taxOustanding0 = parseFloat($("#taxChargedColumn0").text() !== "" ? $("#taxChargedColumn0").text().replace(/,/g, '') : 0) - parseFloat($("#taxPaidColumn0").text() !== "" ? $("#taxPaidColumn0").text().replace(/,/g, '') : 0);
+        $("#taxOutstandingColumn0").text(taxOustanding0 < 0 ? '(' + Math.abs(taxOustanding0).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + ')' : taxOustanding0.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+
+    } else if (event.currentTarget.id === "taxPaidColumn1") {
+
+        var taxOustanding1 = parseFloat($("#taxChargedColumn1").text() !== "" ? $("#taxChargedColumn1").text().replace(/,/g, '') : 0) - parseFloat($("#taxPaidColumn1").text() !== "" ? $("#taxPaidColumn1").text().replace(/,/g, '') : 0);
+        $("#taxOutstandingColumn1").text(taxOustanding1 < 0 ? '(' + Math.abs(taxOustanding1).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + ')' : taxOustanding1.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+
+    } else if (event.currentTarget.id === "taxPaidColumn2") {
+
+        var taxOustanding2 = parseFloat($("#taxChargedColumn2").text() !== "" ? $("#taxChargedColumn2").text().replace(/,/g, '') : 0) - parseFloat($("#taxPaidColumn2").text() !== "" ? $("#taxPaidColumn2").text().replace(/,/g, '') : 0);
+        $("#taxOutstandingColumn2").text(taxOustanding2 < 0 ? '(' + Math.abs(taxOustanding2).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + ')' : taxOustanding2.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+
+    }
 
     if (event.currentTarget.id === "chargeableIncomeColumn0") {
 
@@ -220,8 +321,20 @@ $("#TaxPositionSummaryGrid").on('focusout', '.valueCell', function (event) {
 
         var url = `${ServerUrl}api/Transaction/TaxCalculatorAsync?amount=` + amount + `&startdate=` + startdate + `&enddate=` + enddate + `&tin=` + $("#taxpayerTin").val();
 
-        if (amount > 0)
+        if (amount > 0 && statusColumn0 !== "" && statusColumn0 !== "NLT") {
             apiCaller(url, "GET", "", updateTaxCharged);
+        } else {
+            if (statusColumn0 === "") {
+
+                $("#chargeableIncomeColumn0").text("");
+                $("#chargeableIncomeColumn0").focus();
+                return toastr.info("Please select a valid status for the corresonding year.");
+
+            } else if (statusColumn0 === "NLT") {
+
+                return toastr.info("Taxpayer is NOT LIABLE FOR TAX for the selected year.");
+            }
+        }
 
     } else if (event.currentTarget.id === "chargeableIncomeColumn1") {
 
@@ -231,8 +344,20 @@ $("#TaxPositionSummaryGrid").on('focusout', '.valueCell', function (event) {
 
         var url = `${ServerUrl}api/Transaction/TaxCalculatorAsync?amount=` + amount + `&startdate=` + startdate + `&enddate=` + enddate + `&tin=` + $("#taxpayerTin").val();
 
-        if (amount > 0)
+        if (amount > 0 && statusColumn1 !== "" && statusColumn1 !== "NLT") {
             apiCaller(url, "GET", "", updateTaxCharged);
+        } else {
+            if (statusColumn1 === "") {
+
+                $("#chargeableIncomeColumn1").text("");
+                $("#chargeableIncomeColumn1").focus();
+                return toastr.info("Please select a valid status for the corresonding year.");
+
+            } else if (statusColumn1 === "NLT") {
+
+                return toastr.info("Taxpayer is NOT LIABLE FOR TAX for the selected year.");
+            }
+        }
 
     } else if (event.currentTarget.id === "chargeableIncomeColumn2") {
 
@@ -242,9 +367,21 @@ $("#TaxPositionSummaryGrid").on('focusout', '.valueCell', function (event) {
 
         var url = `${ServerUrl}api/Transaction/TaxCalculatorAsync?amount=` + amount + `&startdate=` + startdate + `&enddate=` + enddate + `&tin=` + $("#taxpayerTin").val();
 
-        if (amount > 0)
+        if (amount > 0 && statusColumn2 !== "" && statusColumn2 !== "NLT") {
             apiCaller(url, "GET", "", updateTaxCharged);
-       
+        } else {
+            if (statusColumn2 === "") {
+
+                $("#chargeableIncomeColumn2").text("");
+                $("#chargeableIncomeColumn2").focus();
+                return toastr.info("Please select a valid status for the corresonding year.");
+
+            } else if (statusColumn2 === "NLT") {
+
+                return toastr.info("Taxpayer is NOT LIABLE FOR TAX for the selected year.");
+            }
+        }
+
     }
 });
 
@@ -256,10 +393,10 @@ $("#saveTaxPositionSummary").click(function (e) {
     var row1 = {
         "status": statusColumn0,
         "assessmentYear": $("#assessmentYear0").text(),
-        "chargeableIncome": $("#chargeableIncomeColumn0").text(),
-        "taxCharged": $("#taxChargedColumn0").text(),
-        "taxOutstanding": $("#taxOutstandingColumn0").text().includes('(') ? $("#taxOutstandingColumn0").text().substring(1, $("#taxOutstandingColumn0").text().length - 1) : $("#taxOutstandingColumn0").text(),
-        "taxPaid": $("#taxPaidColumn0").text()
+        "chargeableIncome": $("#chargeableIncomeColumn0").text() === "NIL" ? 0 : $("#chargeableIncomeColumn0").text(),
+        "taxCharged": $("#taxChargedColumn0").text() === "NIL" ? 0 : $("#taxChargedColumn0").text(),
+        "taxOutstanding": $("#taxOutstandingColumn0").text().includes('(') ? $("#taxOutstandingColumn0").text().substring(1, $("#taxOutstandingColumn0").text().length - 1) : $("#taxOutstandingColumn0").text() === "NIL" ? 0 : $("#taxOutstandingColumn0").text(),
+        "taxPaid": $("#taxPaidColumn0").text() === "NIL" ? 0 : $("#taxPaidColumn0").text()
     }
 
     summaryData.push(row1);
@@ -267,10 +404,10 @@ $("#saveTaxPositionSummary").click(function (e) {
     var row2 = {
         "status": statusColumn1,
         "assessmentYear": $("#assessmentYear1").text(),
-        "chargeableIncome": $("#chargeableIncomeColumn1").text(),
-        "taxCharged": $("#taxChargedColumn1").text(),
-        "taxOutstanding": $("#taxOutstandingColumn1").text().includes('(') ? $("#taxOutstandingColumn1").text().substring(1, $("#taxOutstandingColumn1").text().length - 1) : $("#taxOutstandingColumn1").text(),
-        "taxPaid": $("#taxPaidColumn1").text()
+        "chargeableIncome": $("#chargeableIncomeColumn1").text() === "NIL" ? 0 : $("#chargeableIncomeColumn1").text(),
+        "taxCharged": $("#taxChargedColumn1").text() === "NIL" ? 0 : $("#taxChargedColumn1").text(),
+        "taxOutstanding": $("#taxOutstandingColumn1").text().includes('(') ? $("#taxOutstandingColumn1").text().substring(1, $("#taxOutstandingColumn1").text().length - 1) : $("#taxOutstandingColumn1").text() === "NIL" ? 0 : $("#taxOutstandingColumn1").text(),
+        "taxPaid": $("#taxPaidColumn1").text() === "NIL" ? 0 : $("#taxPaidColumn1").text()
     }
 
     summaryData.push(row2);
@@ -278,10 +415,10 @@ $("#saveTaxPositionSummary").click(function (e) {
     var row3 = {
         "status": statusColumn2,
         "assessmentYear": $("#assessmentYear2").text(),
-        "chargeableIncome": $("#chargeableIncomeColumn2").text(),
-        "taxCharged": $("#taxChargedColumn2").text(),
-        "taxOutstanding": $("#taxOutstandingColumn2").text().includes('(') ? $("#taxOutstandingColumn2").text().substring(1, $("#taxOutstandingColumn2").text().length - 1) : $("#taxOutstandingColumn2").text(),
-        "taxPaid": $("#taxPaidColumn2").text()
+        "chargeableIncome": $("#chargeableIncomeColumn2").text() === "NIL" ? 0 : $("#chargeableIncomeColumn2").text(),
+        "taxCharged": $("#taxChargedColumn2").text() === "NIL" ? 0 : $("#taxChargedColumn2").text(),
+        "taxOutstanding": $("#taxOutstandingColumn2").text().includes('(') ? $("#taxOutstandingColumn2").text().substring(1, $("#taxOutstandingColumn2").text().length - 1) : $("#taxOutstandingColumn2").text() === "NIL" ? 0 : $("#taxOutstandingColumn2").text(),
+        "taxPaid": $("#taxPaidColumn2").text() === "NIL" ? 0 : $("#taxPaidColumn2").text()
     }
 
     summaryData.push(row3);
@@ -304,10 +441,16 @@ $("#TaxPositionSummaryGrid").on('change', '#statusColumn0', function () {
     var elem = document.getElementById("statusColumn0");
     statusColumn0 = elem.options[elem.selectedIndex].value;
     if (statusColumn0 === "NLT") {
+
         notLiableTax(1);
         $("#taxPaidColumn0").prop("contenteditable", false);
         $("#chargeableIncomeColumn0").prop("contenteditable", false);
     } else {
+
+        $("#chargeableIncomeColumn0").text("");
+        $("#taxChargedColumn0").text("");
+        $("#taxOutstandingColumn0").text("");
+        $("#taxPaidColumn0").text("");
         $("#taxPaidColumn0").prop("contenteditable", true);
         $("#chargeableIncomeColumn0").prop("contenteditable", true);
     }
@@ -317,10 +460,16 @@ $("#TaxPositionSummaryGrid").on('change', '#statusColumn1', function () {
     var elem = document.getElementById("statusColumn1");
     statusColumn1 = elem.options[elem.selectedIndex].value;
     if (statusColumn1 === "NLT") {
+
         notLiableTax(2);
         $("#taxPaidColumn1").prop("contenteditable", false);
         $("#chargeableIncomeColumn1").prop("contenteditable", false);
     } else {
+
+        $("#chargeableIncomeColumn1").text("");
+        $("#taxChargedColumn1").text("");
+        $("#taxOutstandingColumn1").text("");
+        $("#taxPaidColumn1").text("");
         $("#taxPaidColumn1").prop("contenteditable", true);
         $("#chargeableIncomeColumn1").prop("contenteditable", true);
     }
@@ -330,10 +479,16 @@ $("#TaxPositionSummaryGrid").on('change', '#statusColumn2', function () {
     var elem = document.getElementById("statusColumn2");
     statusColumn2 = elem.options[elem.selectedIndex].value;
     if (statusColumn2 === "NLT") {
+
         notLiableTax(3);
         $("#taxPaidColumn2").prop("contenteditable", false);
         $("#chargeableIncomeColumn2").prop("contenteditable", false);
     } else {
+
+        $("#chargeableIncomeColumn2").text("");
+        $("#taxChargedColumn2").text("");
+        $("#taxOutstandingColumn2").text("");
+        $("#taxPaidColumn2").text("");
         $("#taxPaidColumn2").prop("contenteditable", true);
         $("#chargeableIncomeColumn2").prop("contenteditable", true);
     }
@@ -341,20 +496,20 @@ $("#TaxPositionSummaryGrid").on('change', '#statusColumn2', function () {
 
 var notLiableTax = function (index) {
     if (index === 1) {
-        $("#chargeableIncomeColumn0").text(0.00);
-        $("#taxChargedColumn0").text(0.00);
-        $("#taxOutstandingColumn0").text(0.00);
-        $("#taxPaidColumn0").text(0.00);
+        $("#chargeableIncomeColumn0").text("NIL");
+        $("#taxChargedColumn0").text("NIL");
+        $("#taxOutstandingColumn0").text("NIL");
+        $("#taxPaidColumn0").text("NIL");
     } else if (index === 2) {
-        $("#chargeableIncomeColumn1").text(0.00);
-        $("#taxChargedColumn1").text(0.00);
-        $("#taxOutstandingColumn1").text(0.00);
-        $("#taxPaidColumn1").text(0.00);
+        $("#chargeableIncomeColumn1").text("NIL");
+        $("#taxChargedColumn1").text("NIL");
+        $("#taxOutstandingColumn1").text("NIL");
+        $("#taxPaidColumn1").text("NIL");
     } else if (index === 3) {
-        $("#chargeableIncomeColumn2").text(0.00);
-        $("#taxChargedColumn2").text(0.00);
-        $("#taxOutstandingColumn2").text(0.00);
-        $("#taxPaidColumn2").text(0.00);
+        $("#chargeableIncomeColumn2").text("NIL");
+        $("#taxChargedColumn2").text("NIL");
+        $("#taxOutstandingColumn2").text("NIL");
+        $("#taxPaidColumn2").text("NIL");
     }
 };
 

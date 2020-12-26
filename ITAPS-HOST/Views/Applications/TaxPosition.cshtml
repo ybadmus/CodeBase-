@@ -39,14 +39,14 @@
                                     <div class="row" style="margin: 15px 0px 15px 0px; font-size: 16px;">
                                         <div class="checkbox col-sm-12">
                                             <label class="row ml-3 mb-3 checkgroup">
-                                                I confirm from the Information available that &nbsp;<b>@ViewBag.ApplicantName</b>&nbsp; has paid all Tax liabilites up to and including the&nbsp;<span id="previousYear"></span>&nbsp;year of assessment.
+                                                I confirm from the Information available that &nbsp;<b>@ViewBag.ApplicantName</b>&nbsp; has paid all Tax liabilites up to and including the&nbsp;<b><span id="previousYear"></span></b>&nbsp;year of assessment.
                                                 <input type="checkbox" id="confirmationBox" />
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="checkbox col-sm-12">
                                             <label class="row ml-3 mb-3 checkgroup">
-                                                Has paid P.A.Y.E and other Witholding Taxes up to and including&nbsp; <span id="currentMonthYear"></span>.
+                                                Has paid P.A.Y.E and other Witholding Taxes up to and including&nbsp; <b><span id="currentMonthYear"></span></b>.
                                                 <input type="checkbox" id="confirmationBoxPaye" />
                                                 <span class="checkmark"></span>
                                             </label>
@@ -78,7 +78,6 @@
         </div>
     </div>
 </div>
-
 
 @section scripts {
     <script src="~/js/applications/taxposition.js"></script>
