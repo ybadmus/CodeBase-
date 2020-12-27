@@ -29,13 +29,13 @@ var initializeKendoGrid = function (data, stage) {
         columns: [
             { field: "code", title: "Code", width: '90px', },
             { field: "sector", title: "Sector", width: '20%' },
-            { field: "businessLoc", title: "Location", width: '20%' },
+            { field: "businessLoc", title: "Location", width: '30%' },
             { field: "taxRate", title: "Tax Rate", width: '70px', attributes: { style: "text-align:right;" } },
             {
                 field: "status",
                 template: "#if(status=='A'){# #: 'Active' # #}else{# #: 'Inactive' # #}#",
                 title: "Status",
-                width: '10%'
+                width: '90px'
             },
             {
                 command: [{
@@ -43,7 +43,7 @@ var initializeKendoGrid = function (data, stage) {
                     template: "<button title='View item' class='btn btn-success btn-sm'><i class='fa fa-file fa-lg'></i></button>"
                 }],
                 title: "Actions",
-                width: "90px"
+                width: "50px"
             }
         ]
     });

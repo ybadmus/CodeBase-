@@ -3,6 +3,10 @@
     ViewData["Title"] = "TaxPosition";
 }
 
+@section css {
+    
+} 
+
 <input id="serverUrl" value="@ViewBag.ServerUrl" hidden />
 <input id="taxpayerId" value="@ViewBag.TaxpayerId" hidden />
 <input id="appId" value="@ViewBag.AppId" hidden />
@@ -13,13 +17,50 @@
 
         <div class="card-body">
             <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="taxPosition" role="tabpanel" aria-labelledby="nav-profile-tab">
+
+                <div class="tab-pane fade show active" id="taxPositionOptions" role="tabpanel" aria-labelledby="nav-profile-tab">
+
+                    <div class="form-horizontal">
+                        <div class="form-row">
+                            <div class="col-sm-12 col-md-4">
+                                <div class="bordered-group" style="height: 107px;">
+                                    <p class="card-title"><b>Applicant Type</b></p>
+
+                                    <form class="row" style="margin-bottom: 10px;">
+                                        <label class="col-sm-6 ml-3 mb-3 checkgroup" style="padding-right: 0px">
+                                            <b style="margin-left: 15px;">Individual</b>
+                                            <input type="radio" name="type" id="individualRadio" value="individual" onclick="changeType(this)" />
+                                            <span class="checkmark" style="border-radius: 50%"></span>
+                                        </label>
+
+                                        <label class="col-sm-6 ml-3 mb-3 checkgroup" style="padding-right: 0px">
+                                            <b style="margin-left: 15px;">Company</b>
+                                            <input type="radio" name="type" id="companyRadio" value="company" onclick="changeType(this)" />
+                                            <span class="checkmark" style="border-radius: 50%"></span>
+                                        </label>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-3" style="display: none" id="chooseTaxRateDiv">
+                                <div class="bordered-group" style="height: 107px;">
+                                    <p class="card-title"><b>Choose Tax Rate</b></p>
+                                    <select type="text" id="listOfCodes" class="form-control" required></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="tab-pane fade show active" id="taxPositionGrid" role="tabpanel" aria-labelledby="nav-profile-tab" style="display: none;">
 
                     <div class="form-horizontal">
                         <div class="form-row">
                             <div class="col-md-12">
                                 <div class="bordered-group" id="">
                                     <p class="card-title"><b>Add Tax Position</b></p>
+
                                     <div class="table-responsive border-bottom">
                                         <table class="table table-bordered" id="mainTable">
                                             <thead>
@@ -65,9 +106,7 @@
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
-
                                     </div>
-
                                 </div>
                             </div>
                         </div>

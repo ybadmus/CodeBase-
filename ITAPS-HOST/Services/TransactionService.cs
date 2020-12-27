@@ -68,6 +68,7 @@ namespace ITAPS_HOST.Services
 
             //var apiEndpoint = $"Transactions/TaxCalculatorAsync/{tin}/{amount}/{startdate}/{enddate}";
             //var apiEndpoint = $"Transactions/PitTaxCalculatorAsync/{tin}/{amount}/{startdate}/{enddate}";
+            //http://psl-app-vm3/ITaPSGRAAdminAPI/api/Transactions/GetTaxChargedByTin/P6787446546/123800/2020-1-12/2020-12-12?uniTaxCodeId=4bd3f39d-da4d-4058-9544-9a09a06d657c
             var apiEndpoint = $"Transactions/GetTaxChargedByTin/{tin}/{amount}/{startdate}/{enddate}";
             return await _adminRequestClient.GetRequestAsync(apiEndpoint);
         }
