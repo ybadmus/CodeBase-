@@ -79,7 +79,7 @@ var loadOfficers = function (listOfOfficers) {
 
     output += '<option selected>Choose officer</option>';
     for (var i = 0; i < listOfOfficers.length; i++) {
-        output = output + '<option name="' + listOfOfficers[i].name + '" value="' + listOfOfficers[i].userId + '" >' + listOfOfficers[i].name + '</option>';
+        output = output + '<option name="' + listOfOfficers[i].name + '" value="' + listOfOfficers[i].userId + '" >' + listOfOfficers[i].name + " (" + listOfOfficers[i].level + ') </option>';
     }
 
     output = output;

@@ -110,17 +110,22 @@ var apiCaller = function (url, type, data, callback) {
         },
         dataType: 'json',
         success: function (response) {
+
+            if (response.caption.toLowerCase() == "conflict") {
+
+                $('html').hideLoading();
+                return toastr.error("This application has already been approved, please reload the browser and choose another application.");
+            }
+
             if (callback) {
                 callback(response.body);
             };
+
             $('html').hideLoading();
         },
         error: function (error) {
-            $('html').hideLoading();
 
-            if (data.status == 2) {
-                return toastr.error("This application has already been approved, please reload the browser and choose another application.");
-            }
+            $('html').hideLoading();
 
             return toastr.error('An error occured, please reload the browser and try again.');
         }
@@ -165,7 +170,9 @@ var prepareDetailsView = function (appId) {
     apiCaller(urlTCCDetails, "GET", "", loadTccDetails);
 };
 
-var loadTaxPositionDetails = function (listOfSummary) {
+var loadTaxPositionDetails = function (listOfSummaryAPI) {
+
+    var listOfSummary = listOfSummaryAPI[0].taxPositions;
 
     let output = "";
 
@@ -188,6 +195,12 @@ var loadTaxPositionDetails = function (listOfSummary) {
     $("#TaxPositionSummaryGrid").html(output);
 
     hideAndShow();
+
+    $("#confirmationBox").prop("checked", listOfSummaryAPI[0].paidTaxLiabilities);
+    $("#confirmationBoxPaye").prop("checked", listOfSummaryAPI[0].paidWithholdingTax);
+    $("#confirmationBoxAll").prop("checked", listOfSummaryAPI[0].submittedTaxReturns);
+    $("#confirmationBoxGRA").prop("checked", listOfSummaryAPI[0].registeredWithGRA);
+
 };
 
 var calculateThreeMonths = function () {

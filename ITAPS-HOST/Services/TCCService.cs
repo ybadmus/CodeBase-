@@ -90,7 +90,7 @@ namespace ITAPS_HOST.Services
 
             List<TaxPositionSummary> arrayForCreation = new List<TaxPositionSummary> { };
 
-            foreach (TaxPositionSummary summary in data.Summary)
+            foreach (TaxPositionSummary summary in data.TaxPositions)
             {
                 TaxPositionSummary item = new TaxPositionSummary
                 {
@@ -105,7 +105,7 @@ namespace ITAPS_HOST.Services
                 arrayForCreation.Add(item);
             }
 
-            data.Summary = arrayForCreation;
+            data.TaxPositions = arrayForCreation;
 
             return await _adminRequestClient.PostRequestAsync(data, apiEndpoint);
         }
@@ -172,7 +172,7 @@ namespace ITAPS_HOST.Services
 
         public async Task<ResponseItem<object>> GetTCCApplicationTaxPositionByApplicationId(Guid applicationId)
         {
-            var apiEndpoint = $"Application/GetTCCApplicationTaxPositionByApplicationId/{applicationId}";
+            var apiEndpoint = $"Application/GetTaxpositionByApplicationId/{applicationId}";
 
             return await _adminRequestClient.GetRequestAsync(apiEndpoint);
         }

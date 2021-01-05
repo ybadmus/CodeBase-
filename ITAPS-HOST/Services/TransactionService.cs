@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ITAPS_HOST.Services
 {
-    public class TransactionService: ITransactionService
+    public class TransactionService : ITransactionService
     {
         private readonly IAdminRequestClient _adminRequestClient;
 
@@ -63,14 +63,26 @@ namespace ITAPS_HOST.Services
             return await _adminRequestClient.GetRequestAsync(apiEndpoint);
         }
 
-        public async Task<ResponseItem<object>> TaxCalculatorAsync(Double amount, string startdate, string enddate, string tin)
+        public async Task<ResponseItem<object>> TaxCalculatorAsync(Double amount, string startdate, string enddate, string tin, String taxCodeId)
         {
 
-            //var apiEndpoint = $"Transactions/TaxCalculatorAsync/{tin}/{amount}/{startdate}/{enddate}";
-            //var apiEndpoint = $"Transactions/PitTaxCalculatorAsync/{tin}/{amount}/{startdate}/{enddate}";
-            //http://psl-app-vm3/ITaPSGRAAdminAPI/api/Transactions/GetTaxChargedByTin/P6787446546/123800/2020-1-12/2020-12-12?uniTaxCodeId=4bd3f39d-da4d-4058-9544-9a09a06d657c
-            var apiEndpoint = $"Transactions/GetTaxChargedByTin/{tin}/{amount}/{startdate}/{enddate}";
-            return await _adminRequestClient.GetRequestAsync(apiEndpoint);
+            if (taxCodeId == String.Empty || taxCodeId == null)
+            {
+
+                var apiEndpoint = $"Transactions/GetTaxChargedByTin/{tin}/{amount}/{startdate}/{enddate}";
+
+                return await _adminRequestClient.GetRequestAsync(apiEndpoint);
+
+            }
+            else
+            {
+
+                var apiEndpoint = $"Transactions/GetTaxChargedByTin/{tin}/{amount}/{startdate}/{enddate}?uniTaxCodeId={taxCodeId}";
+
+                return await _adminRequestClient.GetRequestAsync(apiEndpoint);
+
+            }
+
         }
 
         public async Task<ResponseItem<object>> GetCITDetailsById(Guid transactionId)

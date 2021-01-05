@@ -33,7 +33,7 @@ namespace ITAPS_HOST.Models.Applications
     public class ArrayObjectSummary
     {
         public Guid TaxpayerId { get; set; }
-        public IList<TaxPositionSummary> Summary { get; set; }
+        public IList<TaxPositionSummary> TaxPositions { get; set; }
         public bool PaidTaxLiabilities { get; set; }
         public bool PaidWithholdingTax { get; set; }
         public bool SubmittedTaxReturns { get; set; }

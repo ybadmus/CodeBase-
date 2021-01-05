@@ -36,9 +36,9 @@ namespace ITAPS_HOST.Api
         }
 
         [HttpGet("TaxCalculatorAsync", Name = "TaxCalculatorAsync")]
-        public async Task<ResponseItem<object>> TaxCalculatorAsync(Double amount, string startdate, string enddate, string tin)
+        public async Task<ResponseItem<object>> TaxCalculatorAsync(Double amount, string startdate, string enddate, string tin, String taxCodeId)
         {
-            return await _transactionService.TaxCalculatorAsync(amount, startdate, enddate, tin);
+            return await _transactionService.TaxCalculatorAsync(amount, startdate, enddate, tin, taxCodeId);
         }
 
         [HttpGet("CITDetailsById", Name = "CITDetailsById")]

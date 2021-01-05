@@ -9,7 +9,8 @@ let tccUpdateUrl = `${ServerUrl}api/TCC/UpdateTCCApplication?id=`;
 var statusColumn0 = "";
 var statusColumn1 = "";
 var statusColumn2 = "";
-
+var taxCodeId = "";
+  
 var LoadTaxSummaryTable = function (listOfSummary) {
 
     let output = "";
@@ -81,6 +82,8 @@ var changeType = function (event) {
 
         $("#chooseTaxRateDiv").hide();
         $("#taxPositionGrid").show();
+
+        taxCodeId = "";
     }
 
 
@@ -98,13 +101,14 @@ $("#listOfCodes").on('change', function () {
     if (elem.options[elem.selectedIndex].value !== "") {
 
         $("#taxPositionGrid").show();
+
+        taxCodeId = elem.options[elem.selectedIndex].value;
     } else {
 
+        taxCodeId = "";
         $("#taxPositionGrid").hide();
     }
 
-    //activeOfficer = elem.options[elem.selectedIndex].value;
-    //activeOfficerName = elem.options[elem.selectedIndex].text;
 });
 
 var apiCaller = function (url, type, data, callback) {
@@ -323,9 +327,10 @@ $("#TaxPositionSummaryGrid").on('focusout', '.valueCell', function (event) {
 
         let startdate = $("#assessmentYear0").text() + "-1-1";
         let enddate = $("#assessmentYear0").text() + "-12-31";
-        let amount = parseFloat(event.target.value.split(".")[0].replace(",", ""));
+        let amount = parseFloat(event.target.value.split(".")[0].replaceAll(",", ""));
 
-        var url = `${ServerUrl}api/Transaction/TaxCalculatorAsync?amount=` + amount + `&startdate=` + startdate + `&enddate=` + enddate + `&tin=` + $("#taxpayerTin").val();
+
+        var url = `${ServerUrl}api/Transaction/TaxCalculatorAsync?amount=` + amount + `&startdate=` + startdate + `&enddate=` + enddate + `&tin=` + $("#taxpayerTin").val() + `&taxCodeId=` + taxCodeId;
 
         if (amount > 0) {
 
@@ -344,9 +349,9 @@ $("#TaxPositionSummaryGrid").on('focusout', '.valueCell', function (event) {
 
         let startdate = $("#assessmentYear1").text() + "-1-1";
         let enddate = $("#assessmentYear1").text() + "-12-31";
-        let amount = parseFloat(event.target.value.split(".")[0].replace(",", ""));
+        let amount = parseFloat(event.target.value.split(".")[0].replaceAll(",", ""));
 
-        var url = `${ServerUrl}api/Transaction/TaxCalculatorAsync?amount=` + amount + `&startdate=` + startdate + `&enddate=` + enddate + `&tin=` + $("#taxpayerTin").val();
+        var url = `${ServerUrl}api/Transaction/TaxCalculatorAsync?amount=` + amount + `&startdate=` + startdate + `&enddate=` + enddate + `&tin=` + $("#taxpayerTin").val() + `&taxCodeId=` + taxCodeId;
 
         if (amount > 0) {
 
@@ -365,9 +370,9 @@ $("#TaxPositionSummaryGrid").on('focusout', '.valueCell', function (event) {
 
         let startdate = $("#assessmentYear2").text() + "-1-1";
         let enddate = $("#assessmentYear2").text() + "-12-31";
-        let amount = parseFloat(event.target.value.split(".")[0].replace(",", ""));
+        let amount = parseFloat(event.target.value.split(".")[0].replaceAll(",", ""));
 
-        var url = `${ServerUrl}api/Transaction/TaxCalculatorAsync?amount=` + amount + `&startdate=` + startdate + `&enddate=` + enddate + `&tin=` + $("#taxpayerTin").val();
+        var url = `${ServerUrl}api/Transaction/TaxCalculatorAsync?amount=` + amount + `&startdate=` + startdate + `&enddate=` + enddate + `&tin=` + $("#taxpayerTin").val() + `&taxCodeId=` + taxCodeId;
 
         if (amount > 0) {
 
@@ -405,6 +410,9 @@ $("#TaxPositionSummaryGrid").on('focusout', '.valueCell', function (event) {
 $("#saveTaxPositionSummary").click(function (e) {
     e.preventDefault();
 
+    if ($("#taxPaidColumn0").val().trim() == "" || $("#taxPaidColumn1").val().trim() == "" || $("#taxPaidColumn2").val().trim() == "")
+        return toastr.info("Tax paid fields cannot be empty");
+
     var summaryData = [];
 
     var row1 = {
@@ -441,7 +449,7 @@ $("#saveTaxPositionSummary").click(function (e) {
     summaryData.push(row3);
 
     var arrayObject = {
-        Summary: summaryData,
+        TaxPositions: summaryData,
         PaidTaxLiabilities: isCheckBoxSelected,
         PaidWithholdingTax: isCheckBoxSelectedPaye,
         SubmittedTaxReturns: isCheckBoxSelectedAll,

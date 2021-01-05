@@ -27,7 +27,7 @@ namespace ITAPS_HOST.Services
 
         public async Task<ResponseItem<object>> GetOffTaxOfficerId(Guid taxofficeId)
         {
-            var apiEndpoint = $"Users/GetManagersAndOfficersByTaxOfficeId/" + taxofficeId + "/OFF";
+            var apiEndpoint = $"Users/GetManagersAndOfficersByTaxOfficeId/" + taxofficeId + "/OFFSUP";
             return await _adminRequestClient.GetRequestAsync(apiEndpoint);
         }
 
