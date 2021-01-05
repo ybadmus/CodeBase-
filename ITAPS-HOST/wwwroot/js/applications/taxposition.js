@@ -5,7 +5,8 @@ var isCheckBoxSelectedPaye = false;
 var isCheckBoxSelectedAll = false;
 var ServerUrl = $("#serverUrl").val();
 var postTaxPosition = `${ServerUrl}api/TCC/PostTaxPositionSummary?appId=`;
-let tccUpdateUrl = `${ServerUrl}api/TCC/UpdateTCCApplication?id=`;
+var tccUpdateUrl = `${ServerUrl}api/TCC/UpdateTCCApplication?id=`;
+var loadTaxPositionsUrl = `${serverUrl}api/TCC/GetTCCApplicationTaxPositionByApplicationId?applicationId=`;
 var statusColumn0 = "";
 var statusColumn1 = "";
 var statusColumn2 = "";
@@ -19,14 +20,22 @@ var LoadTaxSummaryTable = function (listOfSummary) {
     });
 
     for (var i = 0; i < sortedArray.length; i++) {
-        output = output + '<tr><td align="center" style="min-width:80px;" id="assessmentYear' + i + '">' + listOfSummary[i].assessmentYear + '</td>'
-            + '<td align="center" style="color: black; min-width:180px;"><select type="text" id="statusColumn' + i + '" class="form-control">'
-            + '<option value="" selected="selected">Choose Status</option><option value="NID">Not In Dispute</option><option value="PROV">Provisional</option>'
-            + '<option value="S/A">Self-Assessment</option><option value="FINAL">Finalized</option><option value="NLT">Not Liable for Tax</option></select></td>'
-            + '<td align="right" style="color: black; width: 20%; padding: 0px 3px;" class="valueCell"><input id="chargeableIncomeColumn' + i + '" style="width: 100%;border:none;border-radius: 5px;text-align: right;padding: 2px 5px;cursor: no-drop;" readonly="true" /></td>'
-            + '<td align="right" style="color: black; width: 18%;" id="taxChargedColumn' + i + '" class=""></td>'
-            + '<td align="right" style="color: black; width: 20%; padding: 0px 3px;" class="valueCell"><input id="taxPaidColumn' + i + '" style="width: 100%;border:none;border-radius: 5px;text-align: right;padding: 2px 5px;cursor: no-drop;" readonly="true" /></td>'
-            + '<td align="right" style="color: black; width: 18%;" id="taxOutstandingColumn' + i + '" class=""></td></tr>';
+        if (listOfSummary[i].status == "NLT") {
+
+            output = output + '<tr><td align="center" style="min-width:80px;" id="assessmentYear' + i + '">' + sortedArray[i].assessmentYear + '</td>'
+                + decideTaxpositonStatus(sortedArray[i].status, i) + '<td align="right" style="color: black; width: 20%; padding: 0px 3px;" class="valueCell"><input id="chargeableIncomeColumn' + i + '" style="width: 100%;border:none;border-radius: 5px;text-align: right;padding: 2px 5px;cursor: no-drop;" value="NIL" readonly="true" /></td>'
+                + '<td align="right" style="color: black; width: 18%;" id="taxChargedColumn' + i + '" class="">NIL</td>'
+                + '<td align="right" style="color: black; width: 20%; padding: 0px 3px;" class="valueCell"><input id="taxPaidColumn' + i + '" style="width: 100%;border:none;border-radius: 5px;text-align: right;padding: 2px 5px;cursor: no-drop;" value="NIL" readonly="true" /></td>'
+                + '<td align="right" style="color: black; width: 18%;" id="taxOutstandingColumn' + i + '" class="">NIL</td></tr>';
+
+        } else {
+
+            output = output + '<tr><td align="center" style="min-width:80px;" id="assessmentYear' + i + '">' + sortedArray[i].assessmentYear + '</td>'
+                + decideTaxpositonStatus(sortedArray[i].status, i) + '<td align="right" style="color: black; width: 20%; padding: 0px 3px;" class="valueCell"><input id="chargeableIncomeColumn' + i + '" style="width: 100%;border:none;border-radius: 5px;text-align: right;padding: 2px 5px;cursor: no-drop;" value="' + convertToMoney(sortedArray[i].chargeableIncome) + '" readonly="true" /></td>'
+                + '<td align="right" style="color: black; width: 18%;" id="taxChargedColumn' + i + '" class="">' + convertToMoney(sortedArray[i].taxCharged) + '</td>'
+                + '<td align="right" style="color: black; width: 20%; padding: 0px 3px;" class="valueCell"><input id="taxPaidColumn' + i + '" style="width: 100%;border:none;border-radius: 5px;text-align: right;padding: 2px 5px;cursor: no-drop;" value="' + convertToMoney(sortedArray[i].taxPaid) + '" readonly="true" /></td>'
+                + '<td align="right" style="color: black; width: 18%;" id="taxOutstandingColumn' + i + '" class="">' + convertToMoney(sortedArray[i].taxOutstanding) + '</td></tr>';
+        }
     }
 
     output = output;
@@ -38,6 +47,118 @@ var LoadTaxSummaryTable = function (listOfSummary) {
         cells[i].addEventListener("keyup", handler);
     }
 };
+
+var decideTaxpositonStatus = function (status, i) {
+
+    switch (status) {
+
+        case "":
+
+            if (i == 0) statusColumn0 = "";
+            if (i == 1) statusColumn1 = "";
+            if (i == 2) statusColumn2 = "";
+
+            return '<td align="center" style="color: black; min-width:180px;"><select type="text" id="statusColumn' + i + '" class="form-control">'
+                + '<option value="" selected="selected">Choose Status</option><option value="NID">Not In Dispute</option><option value="PRO">Provisional</option>'
+                + '<option value="S/A">Self-Assessment</option><option value="FIN">Finalized</option><option value="NLT">Not Liable for Tax</option></select></td>';
+
+       
+
+            break;
+
+        case "NID":
+
+            if (i == 0) statusColumn0 = "NID";
+            if (i == 1) statusColumn1 = "NID";
+            if (i == 2) statusColumn2 = "NID";
+
+            return '<td align="center" style="color: black; min-width:180px;"><select type="text" id="statusColumn' + i + '" class="form-control">'
+                + '<option value="">Choose Status</option><option value="NID" selected="selected">Not In Dispute</option><option value="PRO">Provisional</option>'
+                + '<option value="S/A">Self-Assessment</option><option value="FIN">Finalized</option><option value="NLT">Not Liable for Tax</option></select></td>';
+
+        
+            break;
+
+        case "PRO":
+
+            if (i == 0) statusColumn0 = "PRO";
+            if (i == 1) statusColumn1 = "PRO";
+            if (i == 2) statusColumn2 = "PRO";
+
+            return '<td align="center" style="color: black; min-width:180px;"><select type="text" id="statusColumn' + i + '" class="form-control">'
+                + '<option value="">Choose Status</option><option value="NID">Not In Dispute</option><option value="PRO" selected="selected">Provisional</option>'
+                + '<option value="S/A">Self-Assessment</option><option value="FIN">Finalized</option><option value="NLT">Not Liable for Tax</option></select></td>';
+
+
+            break;
+
+        case "S/A":
+
+            if (i == 0) statusColumn0 = "S/A";
+            if (i == 1) statusColumn1 = "S/A";
+            if (i == 2) statusColumn2 = "S/A";
+
+            return '<td align="center" style="color: black; min-width:180px;"><select type="text" id="statusColumn' + i + '" class="form-control">'
+                + '<option value="">Choose Status</option><option value="NID">Not In Dispute</option><option value="PRO">Provisional</option>'
+                + '<option value="S/A" selected="selected">Self-Assessment</option><option value="FIN">Finalized</option><option value="NLT">Not Liable for Tax</option></select></td>';
+
+            break;
+
+        case "FIN":
+
+            if (i == 0) statusColumn0 = "FIN";
+            if (i == 1) statusColumn1 = "FIN";
+            if (i == 2) statusColumn2 = "FIN";
+
+            return '<td align="center" style="color: black; min-width:180px;"><select type="text" id="statusColumn' + i + '" class="form-control">'
+                + '<option value="">Choose Status</option><option value="NID">Not In Dispute</option><option value="PRO">Provisional</option>'
+                + '<option value="S/A">Self-Assessment</option><option value="FIN" selected="selected">Finalized</option><option value="NLT">Not Liable for Tax</option></select></td>';
+
+            break;
+
+        case "NLT":
+
+            if (i == 0) statusColumn0 = "NLT";
+            if (i == 1) statusColumn1 = "NLT";
+            if (i == 2) statusColumn2 = "NLT";
+
+            return '<td align="center" style="color: black; min-width:180px;"><select type="text" id="statusColumn' + i + '" class="form-control">'
+                + '<option value="">Choose Status</option><option value="NID">Not In Dispute</option><option value="PRO">Provisional</option>'
+                + '<option value="S/A">Self-Assessment</option><option value="FIN">Finalized</option><option value="NLT" selected="selected">Not Liable for Tax</option></select></td>';
+
+            break;
+
+        default:
+
+            if (i == 0) statusColumn0 = "";
+            if (i == 1) statusColumn1 = "";
+            if (i == 2) statusColumn2 = "";
+
+            return '<td align="center" style="color: black; min-width:180px;"><select type="text" id="statusColumn' + i + '" class="form-control">'
+                + '<option value="" selected="selected">Choose Status</option><option value="NID">Not In Dispute</option><option value="PRO">Provisional</option>'
+                + '<option value="S/A">Self-Assessment</option><option value="FIN">Finalized</option><option value="NLT">Not Liable for Tax</option></select></td>';
+
+         
+
+    } 
+    
+};
+
+var convertToMoney = function (amount) {
+
+    if (amount) {
+
+        return parseFloat(amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+    }
+    else {
+        if (amount == 0)
+
+            return 0;
+        else 
+
+            return "";
+    }
+}
 
 var handler = function () {
 
@@ -94,7 +215,6 @@ var changeType = function (event) {
     }
 };
 
-
 $("#listOfCodes").on('change', function () {
     var elem = document.getElementById("listOfCodes");
 
@@ -143,13 +263,47 @@ $(document).ready(function () {
     var currentMonth = new Date().getMonth();
     var monthsArray = ["Jan", "Feb", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     var MonthYear = monthsArray[currentMonth] + ", " + currentYear;
+    let urlTaxPosition = `${loadTaxPositionsUrl}` + $("#appId").val();
 
     $("#pgHeader").text(HeaderName);
     $("#previousYear").text(previousYear);
     $("#currentMonthYear").text(MonthYear);
 
-    bootstrapPage();
+    apiCaller(urlTaxPosition, "GET", "", loadTaxPositionDetails);
+
 });
+
+var loadTaxPositionDetails = function (data) {
+
+    if (data.length == 0) {
+
+        bootstrapPage();
+    } else {
+
+        if (data.length > 0) {
+
+            isCheckBoxSelected = data[0].paidTaxLiabilities;
+            isCheckBoxSelectedGRA = data[0].registeredWithGRA;
+            isCheckBoxSelectedPaye = data[0].paidWithholdingTax;
+            isCheckBoxSelectedAll = data[0].submittedTaxReturns;
+
+            if (data[0].registeredWithGRA) $("#confirmationBoxGRA").click();
+            if (data[0].submittedTaxReturns) $("#confirmationBoxAll").click();
+            if (data[0].paidWithholdingTax) $("#confirmationBoxPaye").click();
+            if (data[0].paidTaxLiabilities) $("#confirmationBox").click();
+
+            bootstrapTaxPositionExist(data[0].taxPositions);
+        }
+    }
+
+    searchTaxRates();
+
+};
+
+var bootstrapTaxPositionExist = function (data) {
+
+    LoadTaxSummaryTable(data);
+};
 
 var bootstrapPage = function () {
     var d = new Date();
@@ -162,7 +316,6 @@ var bootstrapPage = function () {
     };
 
     LoadTaxSummaryTable(data);
-    searchTaxRates();
 };
 
 var searchTaxRates = function () {
@@ -183,7 +336,6 @@ var loadTaxRates = function (listOfRates) {
     output = output;
     $("#listOfCodes").html(output);
 };
-
 
 $("#confirmationBox").on('click', function () {
     if ($(this).is(':checked')) {

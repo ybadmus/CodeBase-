@@ -182,13 +182,23 @@ var loadTaxPositionDetails = function (listOfSummaryAPI) {
     for (var i = listOfSummary.length - 1; i >= 0; i--) {
         var negativeValues = listOfSummary[i].taxOutstanding < 0 ? "(" + Math.abs(listOfSummary[i].taxOutstanding).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + ")" : listOfSummary[i].taxOutstanding.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
 
-        output = output + '<tr><td align="center" id="assessmentYear' + i + '">'
-            + listOfSummary[i].assessmentYear + '</td><td align="center" style="color: black" class="">'
-            + listOfSummary[i].status + '</td><td align="right" style="color: black" class="valueCell">'
-            + listOfSummary[i].chargeableIncome.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + '</td><td align="right" style="color: black"  class="">'
-            + listOfSummary[i].taxCharged.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + '</td><td align="right" style="color: black" class="valueCell">'
-            + listOfSummary[i].taxPaid.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + '</td><td align="right" style="color: black" class="">'
-            + negativeValues + '</td></tr>';
+        if (listOfSummary[i].status == "NLT") {
+
+            output = output + '<tr><td align="center" id="assessmentYear' + i + '">'
+                + listOfSummary[i].assessmentYear + '</td><td align="center" style="color: black" class="">'
+                + listOfSummary[i].status + '</td><td align="right" style="color: black" class="valueCell">NIL</td><td align="right" style="color: black" class="">NIL</td><td align="right" style="color: black" class="valueCell">NIL</td><td align="right" style="color: black" class="">NIL</td></tr>';
+
+        } else {
+
+            output = output + '<tr><td align="center" id="assessmentYear' + i + '">'
+                + listOfSummary[i].assessmentYear + '</td><td align="center" style="color: black" class="">'
+                + listOfSummary[i].status + '</td><td align="right" style="color: black" class="valueCell">'
+                + listOfSummary[i].chargeableIncome.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + '</td><td align="right" style="color: black"  class="">'
+                + listOfSummary[i].taxCharged.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + '</td><td align="right" style="color: black" class="valueCell">'
+                + listOfSummary[i].taxPaid.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + '</td><td align="right" style="color: black" class="">'
+                + negativeValues + '</td></tr>';
+        }
+       
     }
 
     output = output;
@@ -203,7 +213,7 @@ var loadTaxPositionDetails = function (listOfSummaryAPI) {
 
 };
 
-var calculateThreeMonths = function () {
+var calculateThreeMonths = function () { 
     var d = new Date(),
         month = '' + (d.getMonth() + 4),
         day = '' + d.getDate(),
