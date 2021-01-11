@@ -4,6 +4,7 @@ var searchTexByTaxOffice = `${serverUrl}api/TEX/GetAllTaxExemptionPendingApprova
 var loadTaxPositionsUrl = `${serverUrl}api/TCC/GetTCCApplicationTaxPositionByApplicationId?applicationId=`;
 var GetTccCommentsByIdUrl = `${serverUrl}api/TCC/GetAllTccApplicationComments?tccId=`;
 var GetTCCDocuments = `${serverUrl}api/TCC/GetTCCApplicationDocumentByApplicationId`;
+var tccMessagesOnlyUrl = `${serverUrl}api/TCC/SendTCCApplicationMessage?id=`;
 var GetAppDetailsById = `${serverUrl}api/TEX/GetWHTExApplicationById?whtId=`;
 var activeTaxOffice = "";
 var selectedStatus; 
