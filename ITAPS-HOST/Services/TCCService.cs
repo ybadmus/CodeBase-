@@ -83,6 +83,17 @@ namespace ITAPS_HOST.Services
             return await _adminRequestClient.PutRequestAsync(objectForUpdateTccDto, apiEndpoint);
         }
 
+        public async Task<ResponseItem<object>> SendTCCApplicationMessage(Guid id, MessageOnlyDto objectToSend)
+        {
+            var apiEndpoint = $"Application/SendTCCApplicationMessage?id={id}";
+            var newMessages = new MessageOnlyDto() { };
+
+            newMessages.InternalComment = objectToSend.InternalComment;
+            newMessages.TaxpayerComment = objectToSend.TaxpayerComment;
+
+            return await _adminRequestClient.PutRequestAsync(newMessages, apiEndpoint);
+        }
+
         public async Task<ResponseItemForCreationDto<object>> PostTaxPositionSummary(Guid appId, ArrayObjectSummary data)
         {
             //var apiEndpoint = $"Application/AddUpdateTaxPosition/{appId}";

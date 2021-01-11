@@ -3,6 +3,7 @@ var serverUrl = $("#serverUrl").val();
 var searchTccByTaxOffice = `${serverUrl}api/TCC/GetAllTccApplicationPendingApprovalByTaxOfficeId`;
 var loadTaxPositionsUrl = `${serverUrl}api/TCC/GetTCCApplicationTaxPositionByApplicationId?applicationId=`;
 var GetTCCDocuments = `${serverUrl}api/TCC/GetTCCApplicationDocumentByApplicationId`;
+var tccMessagesOnlyUrl = `${serverUrl}api/TCC/SendTCCApplicationMessage?id=`;
 var loadTCCDetailsUrl = `${serverUrl}api/TCC/GetTccApplicationById?tccId=`;
 var GetTccCommentsByIdUrl = `${serverUrl}api/TCC/GetAllTccApplicationComments?tccId=`;
 var ReportDownloadView = `${serverUrl}reportviewer/index`;
@@ -336,6 +337,11 @@ var approveTCC = function () {
 
     apiCaller(updateUrl, "PUT", ObjectToSend, successfullyUpdated);
 };
+
+$("#expiryDateTcc").change(function () {
+    $("#continueApproval").removeAttr('disabled');
+    console.log("change button status");
+});
 
 $("#continueApproval").click(function () {
     $("#yesOrNo").modal("show");

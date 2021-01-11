@@ -1,6 +1,6 @@
 ﻿ej.grids.Grid.Inject(ej.grids.Page, ej.grids.Sort, ej.grids.Filter, ej.grids.Group);
 
-var HeaderName = "Re-assign Application";
+var HeaderName = "Re-assign Applications in Bulk";
 var serverUrl = $("#serverUrl").val();
 var searchNewApplications = `${serverUrl}api/TCC/GetAllAssignedApplicationsToReassign`;
 var assignTccApplication = `${serverUrl}api/TCC/ReAssignApplication`;
@@ -10,12 +10,7 @@ var activeTaxOffice = "";
 var activeOfficer = "";
 var activeOfficerName = "";
 var gridGlobal = "";
-var currentRecord = ""; 
-
-var GetTccCommentsByIdUrl = `${serverUrl}api/TCC/GetAllTccApplicationComments?tccId=`;
-var GetTccByIdUrl = `${serverUrl}api/TCC/GetTccApplicationById?tccId=`;
-var tccUpdateUrl = `${serverUrl}api/TCC/UpdateTCCApplication?id=`;
-var tccMessagesOnlyUrl = `${serverUrl}api/TCC/SendTCCApplicationMessage?id=`;
+var currentRecord = "";
 
 $("#listOfTaxOffices").on('change', function () {
     var elem = document.getElementById("listOfTaxOffices");
@@ -33,7 +28,7 @@ $(document).ready(function () {
     $("#pgHeader").text(HeaderName);
 });
 
-$("#reassApplication").click(function (e) {
+$("#assApplication").click(function (e) {
     $("#assign-update").modal("show");
     prepareAssignmentModal();
 });
@@ -43,8 +38,9 @@ var initializeGrid = function (data) {
 
     var grid = new ej.grids.Grid({
         dataSource: data,
-        selectionSettings: { enableToggle: true },
+        selectionSettings: { enableToggle: true, checkboxOnly: true },
         columns: [
+            { type: 'checkbox', width: 30 },
             { field: 'applicationNo', headerText: 'Application No.', width: 80 },
             { field: 'assignedTo', headerText: 'Assigned To', width: 100,},
             { field: 'applicantName', headerText: 'Applicant', width: 100 },
@@ -68,7 +64,8 @@ var initializeGrid = function (data) {
 
 function rowSelected(args) {
     var selectedrecords = gridGlobal.getSelectedRecords();
-    onGridSelected(selectedrecords[0]);
+    if (selectedrecords.length > 0)
+        $("#assApplication").show();
 }
 
 var prepareAssignmentModal = function () {
@@ -110,7 +107,7 @@ $("#Grid").click(function () {
     setTimeout(function () {
         var selectedrecords = gridGlobal.getSelectedRecords();
         if (selectedrecords.length <= 0)
-            $("#reassApplication").hide();
+            $("#assApplication").hide();
     }, 250)
 });
 
@@ -120,10 +117,6 @@ $("#assignNotes").keyup(function () {
 
 $("#assignOfficer").change(function () {
     fieldValidatorAssign();
-});
-
-$("#backToGrid").click(function () {
-    backToView();
 });
 
 var searchTcc = function () {
@@ -215,106 +208,7 @@ var callBackFunc = function () {
 
     $('#assign-update').modal('hide');
     $('#yesOrNo').modal('hide');
-    $("#reassApplication").hide();
-    backToView();
+    $("#assApplication").hide();
 
     toastr.success("Applications successfully assigned");
-};
-
-var backToView = function () {
-
-    $("#gridView").show();
-    $("#detailsView").hide();
-    $("#tccRequestEntityDetailsGrid").hide();
-    $("#tccDetailsGrid").hide();
-};
-
-var onGridSelected = function (item) {
-    $("#appId").val(item.applicationId);
-    $("#appTypeId").val(item.applicationTypeId);
-    $("#taxpayerName").text(item.applicantName);
-    $(".modalId").text(testNullOrEmpty(item.applicationNo));
-    $(".applicationType").text(item.applicationType);
-
-    appType = item.applicationType;
-    activeApplicationType = item.applicationType;
-
-    if (item.applicationType.toUpperCase().trim() === "TCC".toUpperCase())
-        prepareDetailsViewTCC();
-    if (item.applicationType.toUpperCase().trim() === "WHT Exemption".toUpperCase())
-        prepareDetailsViewTEX();
-    if (item.applicationType.toUpperCase().trim() === "Disability Relief".toUpperCase()
-        || item.applicationType.toUpperCase().trim() === "Old Dependants Relief".toUpperCase()
-        || item.applicationType.toUpperCase().trim() === "Old Age Relief".toUpperCase()
-        || item.applicationType.toUpperCase().trim() === "Pension Relief".toUpperCase()
-        || item.applicationType.toUpperCase().trim() === "Marriage/Responsibility Relief".toUpperCase()
-        || item.applicationType.toUpperCase().trim() === "Child Education Relief".toUpperCase()) {
-        prepareDetailsViewPTR();
-        $("#applicantNamePTR").text(item.applicantName);
-        $("#applicantFName").text(item.applicantName);
-        $("#applicantTINPTR").text(item.applicantTIN);
-    }
-
-};
-
-var prepareDetailsViewTCC = function () {
-    hideAndShowThings();
-    loadMessages();
-    loadDetailsView();
-    getTccDocumentsById();
-};
-
-var prepareDetailsViewTEX = function () {
-    hideAndShowTEXThings();
-    loadMessages();
-    loadDetailsViewTex();
-    getTccDocumentsById();
-};
-
-var prepareDetailsViewPTR = function () {
-    hideAndShowThingsPTR();
-    loadMessages();
-    loadDetailsViewPtr();
-    getTccDocumentsById();
-};
-
-var hideAndShowThingsPTR = function () {
-    $("#gridView").hide();
-    $("#ptrDetailsGrid").show();
-    $("#tccDetailsGrid").hide();
-    $("#texDetailsGrid").hide();
-
-    $("#detailsView").show();
-};
-
-var hideAndShowTEXThings = function () {
-    $("#gridView").hide();
-    $("#ptrDetailsGrid").hide();
-    $("#tccDetailsGrid").hide();
-    $("#ptrDisabilityReliefDetailsGrid").hide();
-    $("#ptrMarriageReliefDetailsGrid").hide();
-    $("#ptrAgedDepedentReliefDetailsGrid").hide();
-    $("#ptrOldAgeReliefDetailsGrid").hide();
-    $("#ptrChildWardDepedentReliefDetailsGrid").hide();
-    $("#tccRequestEntityDetailsGrid").hide();
-
-    $("#texWHTDetailsGrid").show();
-    $("#detailsView").show();
-    $("#texDetailsGrid").show();
-};
-
-var hideAndShowThings = function () {
-    $("#gridView").hide();
-    $("#texDetailsGrid").hide();
-    $("#ptrDetailsGrid").hide();
-    $("#ptrDisabilityReliefDetailsGrid").hide();
-    $("#ptrMarriageReliefDetailsGrid").hide();
-    $("#ptrAgedDepedentReliefDetailsGrid").hide();
-    $("#ptrOldAgeReliefDetailsGrid").hide();
-    $("#ptrChildWardDepedentReliefDetailsGrid").hide();
-    $("#texWHTDetailsGrid").hide();
-
-    $("#tccRequestEntityDetailsGrid").show();
-    $("#detailsView").show();
-    $("#tccDetailsGrid").show();
 };

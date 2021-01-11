@@ -10,6 +10,12 @@ namespace ITAPS_HOST.Models.Applications
         public DateTime ExpiryDate { get; set; }
     }
 
+    public class MessageOnlyDto
+    {
+        public string TaxpayerComment { get; set; }
+        public string InternalComment { get; set; }
+    }
+
     public class UpdateTccWithCertificateDto
     {
         public string TaxpayerComment { get; set; }

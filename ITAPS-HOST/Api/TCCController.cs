@@ -52,6 +52,12 @@ namespace ITAPS_HOST.Api
             return await _tccApplicationService.UpdateTccApplication(id, data);
         }
 
+        [HttpPut("SendTCCApplicationMessage", Name = "SendTCCApplicationMessage")]
+        public async Task<ResponseItem<object>> SendTCCApplicationMessage(Guid id, [FromBody] MessageOnlyDto data)
+        {
+            return await _tccApplicationService.SendTCCApplicationMessage(id, data);
+        }
+
         [HttpPost("PostTaxPositionSummary", Name = "PostTaxPositionSummary")]
         //public async Task<ResponseItemForCreationDto<object>> PostTaxPositionSummary(Guid taxpayerId, Guid appId, [FromBody] ArrayObjectSummary data)
         public async Task<ResponseItemForCreationDto<object>> PostTaxPositionSummary(Guid appId, [FromBody] ArrayObjectSummary data)

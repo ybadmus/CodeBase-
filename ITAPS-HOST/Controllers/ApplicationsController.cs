@@ -53,6 +53,13 @@ namespace ITAPS_HOST.Controllers
             UserDetails();
             ViewBag.ServerUrl = _config.AppServerUrl;
             return View();
+        } 
+        
+        public IActionResult Bulkreassign()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
         }
 
         public IActionResult Approved()

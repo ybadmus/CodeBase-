@@ -233,13 +233,11 @@ $("#tcc-status-update").on('hidden.bs.modal', function () {
 $("#sendMesageTaxpayer").click(function () {
     let tccId = $("#appId").val();
     let message = $("#commentToTaxpayer").val();
-    let updateUrl = tccUpdateUrl + tccId;
+    let updateUrl = tccMessagesOnlyUrl + tccId;
 
     let ObjectToSend = {
-        "status": parseInt($("#currentStatus").text()),
         "taxpayerComment": message,
         "internalComment": "",
-        "applicationId": tccId
     };
 
     if (message.replace(/\s+/, '').length == 0)
@@ -251,13 +249,11 @@ $("#sendMesageTaxpayer").click(function () {
 $("#sendInternal").click(function () {
     let tccId = $("#appId").val();
     let message = $("#commentToStaff").val();
-    let updateUrl = tccUpdateUrl + tccId;
+    let updateUrl = tccMessagesOnlyUrl + tccId;
 
     let ObjectToSend = {
-        "status": parseInt($("#currentStatus").text()),
         "taxpayerComment": "",
         "internalComment": message,
-        "applicationId": tccId
     };
 
     if (message.replace(/\s+/, '').length == 0)
@@ -276,6 +272,11 @@ $("#taxPosition").click(function () {
 
     localStorage.setItem('taxpositionObj', JSON.stringify(ObjectToSend));
 
-    window.location.href = `${serverUrl}applications/taxposition?applicantName=` + $("#applicantName").text() + "&taxpayerId=" +
-        $("#taxpayerId").text() + "&appId=" + $("#appId").val() + "&applicantTin=" + $("#applicantTIN").text();
+    if (activeApplicationType == "TCC")
+        window.location.href = `${serverUrl}applications/taxposition?applicantName=` + $("#applicantName").text() + "&taxpayerId=" +
+            $("#taxpayerId").text() + "&appId=" + $("#appId").val() + "&applicantTin=" + $("#applicantTIN").text();
+
+    if (activeApplicationType == "WHT Exemption")
+        window.location.href = `${serverUrl}applications/taxposition?applicantName=` + $("#applicantNameTex").text() + "&appId=" +
+            $("#appId").val() + "&applicantTin=" + $("#applicantTINTex").text();
 });

@@ -12,6 +12,7 @@ namespace ITAPS_HOST.IServices
         Task<ResponseItem<object>> GetTccApplicationById(Guid tccId, Guid appTypeId);
         Task<ResponseItem<object>> GetAllTccApplicationComments(Guid tccId);
         Task<ResponseItem<object>> UpdateTccApplication(Guid id, UpdateTccDto objectToSend);
+        Task<ResponseItem<object>> SendTCCApplicationMessage(Guid id, MessageOnlyDto objectToSend);
         Task<ResponseItem<object>> SearchAllTCCApplication(string searchTerm);
         Task<ResponseItemForCreationDto<object>> PostTaxPositionSummary(Guid appId, ArrayObjectSummary data);
         Task<ResponseItem<object>> GetTCCCertificateNo();

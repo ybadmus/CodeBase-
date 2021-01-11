@@ -6,7 +6,8 @@ var searchTccByTaxOffice = `${serverUrl}api/TCC/GetAllTccApplicationByTaxOfficeI
 var GetTccCommentsByIdUrl = `${serverUrl}api/TCC/GetAllTccApplicationComments?tccId=`;
 var GetTccByIdUrl = `${serverUrl}api/TCC/GetTccApplicationById?tccId=`;
 var GetTCCDocuments = `${serverUrl}api/TCC/GetTCCApplicationDocumentByApplicationId`;
-let tccUpdateUrl = `${serverUrl}api/TCC/UpdateTCCApplication?id=`;
+var tccUpdateUrl = `${serverUrl}api/TCC/UpdateTCCApplication?id=`;
+var tccMessagesOnlyUrl = `${serverUrl}api/TCC/SendTCCApplicationMessage?id=`;
 var ReportDownloadView = `${serverUrl}reportviewer/index`;
 var loadPtrCodesUrl = `${serverUrl}api/CodesApi/`;
 var appType = "TCC";

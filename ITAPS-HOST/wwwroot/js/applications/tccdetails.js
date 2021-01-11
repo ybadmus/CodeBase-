@@ -387,8 +387,11 @@ var GetAssociatedBase64Stirng = function (id) {
 };
 
 var decideNextTccStage = function (statusId) {
+    let loc = window.location.href;
+
     switch (statusId) {
         case 0:
+
             $("#acknowledgeStatus").hide();
             $("#processApplication").show();
             $("#addTaxPosition").hide();
@@ -396,48 +399,78 @@ var decideNextTccStage = function (statusId) {
             $("#suspendStatus").hide();
             $("#sendForApproval").hide();
 
-            let loc = window.location.href;
             if (loc.substring(loc.lastIndexOf('/') + 1) === "assign") {
 
                 $("#assApplication").show();
                 $("#reviseApplication").hide();
                 $("#previewApplication").hide();
+                $("#reassApplication").hide();
+
+            } else if (loc.substring(loc.lastIndexOf('/') + 1) === "reassign") {
+
+                $("#assApplication").hide();
+                $("#reviseApplication").hide();
+                $("#previewApplication").hide();
+                $("#reassApplication").show();
+
             } else {
 
                 $("#previewApplication").hide();
                 $("#assApplication").hide();
+                $("#reassApplication").hide();
                 $("#reviseApplication").show();
                 $("#reviseApplication").attr("disabled", false);
+
             }
 
             break;
         case 1:
+
             if (appType === "TCC") {
+
                 $("#acknowledgeStatus").hide();
                 $("#processApplication").hide();
                 $("#sendForApproval").hide();
                 $("#addTaxPosition").show();
                 $("#suspendStatus").show();
                 $("#declineStatus").hide();
+
             } else if (appType.toUpperCase() === "WHT Exemption".toUpperCase()) {
+
                 $("#acknowledgeStatus").hide();
                 $("#processApplication").hide();
-                $("#addTaxPosition").show();
                 $("#sendForApproval").hide();
+                $("#addTaxPosition").show();
                 $("#suspendStatus").show();
                 $("#declineStatus").hide();
+
             } else {
+
                 $("#acknowledgeStatus").hide();
                 $("#processApplication").hide();
                 $("#addTaxPosition").hide();
                 $("#sendForApproval").show();
                 $("#suspendStatus").show();
                 $("#declineStatus").hide();
+
             };
 
-            $("#previewApplication").hide();
-            $("#reviseApplication").show();
-            $("#reviseApplication").attr("disabled", false);
+            if (loc.substring(loc.lastIndexOf('/') + 1) === "reassign") {
+
+                $("#assApplication").hide();
+                $("#reviseApplication").hide();
+                $("#previewApplication").hide();
+                $("#reassApplication").show();
+
+            } else {
+
+                $("#assApplication").hide();
+                $("#reassApplication").hide();
+                $("#previewApplication").hide();
+                $("#reviseApplication").show();
+                $("#reviseApplication").attr("disabled", false);
+            }
+
             break;
         case 2:
             $("#acknowledgeStatus").hide();
@@ -447,9 +480,23 @@ var decideNextTccStage = function (statusId) {
             $("#suspendStatus").hide();
             $("#sendForApproval").hide();
 
-            $("#previewApplication").show();
-            $("#reviseApplication").hide();
-            $("#reviseApplication").attr("disabled", true);
+
+            if (loc.substring(loc.lastIndexOf('/') + 1) === "reassign") {
+
+                $("#assApplication").hide();
+                $("#reviseApplication").hide();
+                $("#previewApplication").hide();
+                $("#reassApplication").show();
+
+            } else {
+
+                $("#assApplication").hide();
+                $("#reassApplication").hide();
+                $("#previewApplication").show();
+                $("#reviseApplication").hide();
+                $("#reviseApplication").attr("disabled", true);
+            }
+           
             break;
         case 3:
             $("#addTaxPosition").hide();
@@ -458,20 +505,48 @@ var decideNextTccStage = function (statusId) {
             $("#processApplication").hide();
             $("#acknowledgeStatus").hide();
             $("#sendForApproval").hide();
-            $("#previewApplication").hide();
-            $("#reviseApplication").hide();
-            $("#reviseApplication").attr("disabled", false);
+
+            if (loc.substring(loc.lastIndexOf('/') + 1) === "reassign") {
+
+                $("#assApplication").hide();
+                $("#reviseApplication").hide();
+                $("#previewApplication").hide();
+                $("#reassApplication").show();
+
+            } else {
+
+                $("#assApplication").hide();
+                $("#reassApplication").hide();
+                $("#previewApplication").hide();
+                $("#reviseApplication").hide();
+                $("#reviseApplication").attr("disabled", false);
+            }
+
             break;
         case 4:
             $("#acknowledgeStatus").hide();
+            $("#processApplication").show();
             $("#addTaxPosition").hide();
             $("#declineStatus").show();
-            $("#previewApplication").hide();
             $("#sendForApproval").hide();
-            $("#reviseApplication").show();
             $("#declineStatus").show();
-            $("#processApplication").show();
-            $("#reviseApplication").attr("disabled", false);
+
+            if (loc.substring(loc.lastIndexOf('/') + 1) === "reassign") {
+
+                $("#assApplication").hide();
+                $("#reviseApplication").hide();
+                $("#previewApplication").hide();
+                $("#reassApplication").show();
+
+            } else {
+
+                $("#previewApplication").hide();
+                $("#assApplication").hide();
+                $("#reassApplication").hide();
+                $("#reviseApplication").show();
+                $("#reviseApplication").attr("disabled", false);
+            }
+          
             break;
         case 5:
             $("#processApplication").hide();
@@ -479,10 +554,24 @@ var decideNextTccStage = function (statusId) {
             $("#previewTcc").hide();
             $("#downloadTcc").hide();
             $("#acknowledgeStatus").hide();
-            $("#previewApplication").hide();
             $("#sendForApproval").hide();
-            $("#reviseApplication").show();
-            $("#reviseApplication").attr("disabled", true);
+
+            if (loc.substring(loc.lastIndexOf('/') + 1) === "reassign") {
+
+                $("#assApplication").hide();
+                $("#reviseApplication").hide();
+                $("#previewApplication").hide();
+                $("#reassApplication").show();
+
+            } else {
+
+                $("#assApplication").hide();
+                $("#reassApplication").hide();
+                $("#previewApplication").hide();
+                $("#reviseApplication").show();
+                $("#reviseApplication").attr("disabled", true);
+            }
+
             break;
         default:
             toastr.warning("Invalid Entry");

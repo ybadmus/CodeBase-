@@ -151,7 +151,7 @@ var convertToMoney = function (amount) {
         return parseFloat(amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
     }
     else {
-        if (amount == 0)
+        if (amount === 0)
 
             return 0;
         else 

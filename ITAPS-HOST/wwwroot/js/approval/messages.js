@@ -134,13 +134,11 @@ $("#appStatus").on('change', function () {
 $("#sendInternal").click(function () {
     let tccId = $("#appId").val();
     let message = $("#commentToStaff").val();
-    let updateUrl = tccUpdateUrl + tccId;
+    let updateUrl = tccMessagesOnlyUrl + tccId;
 
     let ObjectToSend = {
-        "status": 5,
         "taxpayerComment": "",
         "internalComment": message,
-        "applicationId": $("#appId").val()
     };
 
     if (message.replace(/\s+/, '').length == 0)
@@ -152,13 +150,11 @@ $("#sendInternal").click(function () {
 $("#sendMesageTaxpayer").click(function () {
     let tccId = $("#appId").val();
     let message = $("#commentToTaxpayer").val();
-    let updateUrl = tccUpdateUrl + tccId;
+    let updateUrl = tccMessagesOnlyUrl + tccId;
 
     let ObjectToSend = {
-        "status": 5,
         "taxpayerComment": message,
-        "internalComment": "",
-        "applicationId": $("#appId").val()
+        "internalComment": ""
     };
 
     if (message.replace(/\s+/, '').length == 0)
