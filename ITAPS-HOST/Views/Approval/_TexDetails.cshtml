@@ -1,115 +1,173 @@
 ﻿<input id="appId" value="@ViewBag.UserId " hidden />
 
-<div id="texDetails">
+<div id="taxPosition">
     <partial name="_AppHeader" />
 
     <div class="card-body">
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="taxPosition" role="tabpanel" aria-labelledby="nav-profile-tab">
-
                 <div class="form-horizontal">
                     <div class="form-row">
-                        <div class="col-sm-6">
-                            <div class="bordered-group" style="height: 350px">
-                                <div class="table-responsive border-bottom">
-                                    <table class="table table-bordered">
-                                        <tbody>
-                                            <tr>
-                                                <td colspan="2" style="padding-left:5px;width:140px;font-weight:100;background: #f7f8f9;"><b>Application Details</b></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding-left:5px;width:120px;font-weight:100;">Date Submitted</td>
-                                                <td style="padding-left:5px;width:280px;">
-                                                    <b><span id="dateSubmitted"></span></b>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding-left:5px;width:120px;font-weight:100;">Last Updated</td>
-                                                <td style="padding-left:5px;width:280px;">
-                                                    <b><span id="lastUpdated"></span></b>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding-left:5px;width:120px;font-weight:100;">Type</td>
-                                                <td style="padding-left:5px;width:280px;">
-                                                    <b><span id="typeOfApp"></span></b>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2" style="padding-left:5px;width:140px;font-weight:100;background: #f7f8f9;"><b>Applicant Details</b></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding-left:5px;width:120px;font-weight:100;">Applicant Name</td>
-                                                <td style="padding-left:5px;width:280px;">
-                                                    <b><span id="applicantName"></span></b>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding-left:5px;width:120px;font-weight:100;">TIN</td>
-                                                <td style="padding-left:5px;width:280px;">
-                                                    <b><span id="applicantTin"></span></b>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding-left:5px;width:120px;font-weight:100;">Phone</td>
-                                                <td style="padding-left:5px;width:280px;">
-                                                    <b><span id="applicantPhone"></span></b>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding-left:5px;width:120px;font-weight:100;">Email</td>
-                                                <td style="padding-left:5px;width:280px;">
-                                                    <b><span id="applicantEmail"></span></b>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+
+                        <div class="col-md-12 bordered-group" style="display: flex;" id="texDetails">
+                            <div class="col-sm-6">
+                                <div class="bordered-group" style="height: 350px">
+                                    <div class="table-responsive border-bottom">
+                                        <table class="table table-bordered">
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="2" style="padding-left:5px;width:140px;font-weight:100;background: #f7f8f9;"><b>Application Details</b></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left:5px;width:120px;font-weight:100;">Date Submitted</td>
+                                                    <td style="padding-left:5px;width:280px;">
+                                                        <b><span id="dateSubmitted"></span></b>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left:5px;width:120px;font-weight:100;">Last Updated</td>
+                                                    <td style="padding-left:5px;width:280px;">
+                                                        <b><span id="lastUpdated"></span></b>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left:5px;width:120px;font-weight:100;">Type</td>
+                                                    <td style="padding-left:5px;width:280px;">
+                                                        <b><span id="typeOfApp"></span></b>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" style="padding-left:5px;width:140px;font-weight:100;background: #f7f8f9;"><b>Applicant Details</b></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left:5px;width:120px;font-weight:100;">Applicant Name</td>
+                                                    <td style="padding-left:5px;width:280px;">
+                                                        <b><span id="applicantName"></span></b>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left:5px;width:120px;font-weight:100;">TIN</td>
+                                                    <td style="padding-left:5px;width:280px;">
+                                                        <b><span id="applicantTin"></span></b>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left:5px;width:120px;font-weight:100;">Phone</td>
+                                                    <td style="padding-left:5px;width:280px;">
+                                                        <b><span id="applicantPhone"></span></b>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left:5px;width:120px;font-weight:100;">Email</td>
+                                                    <td style="padding-left:5px;width:280px;">
+                                                        <b><span id="applicantEmail"></span></b>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="bordered-group" style="height: 350px">
+
+                                    <div class="table-responsive border-bottom">
+                                        <table class="table table-bordered">
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="2" style="padding-left:5px;width:140px;font-weight:100;background: #f7f8f9;"><b>WHT Details</b></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left:5px;width:120px;font-weight:100;">WHT Type</td>
+                                                    <td style="padding-left:5px;width:280px;">
+                                                        <b><span id="typeOfWht"></span></b>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left:5px;width:120px;font-weight:100;">Residential Status</td>
+                                                    <td style="padding-left:5px;width:280px;">
+                                                        <b><span id="residentialStatus"></span></b>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left:5px;width:120px;font-weight:100;">Reason</td>
+                                                    <td style="padding-left:5px;width:280px;">
+                                                        <b><span id="reason"></span></b>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left:5px;width:120px;font-weight:100;">Remarks</td>
+                                                    <td style="padding-left:5px;width:280px;">
+                                                        <b><span id="remarks"></span></b>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-sm-6">
-                            <div class="bordered-group" style="height: 350px">
-                               
+                        <div class="col-md-12" style="display: none" id="taxPositionView">
+                            <div class="bordered-group" id="">
+                                <p class="card-title"><b>Tax Position Information - <span id="appNo"></span></b></p>
                                 <div class="table-responsive border-bottom">
                                     <table class="table table-bordered">
-                                        <tbody>
-                                            <tr>
-                                                <td colspan="2" style="padding-left:5px;width:140px;font-weight:100;background: #f7f8f9;"><b>WHT Details</b></td>
+                                        <thead>
+                                            <tr class="table-info">
+                                                <th scope="col" style="color: black;">Year</th>
+                                                <th scope="col" style="color: black;">Status </th>
+                                                <th scope="col" style="color: black;">Chargeable Income</th>
+                                                <th scope="col" style="color: black;">Tax Charged</th>
+                                                <th scope="col" style="color: black;">Tax Paid</th>
+                                                <th scope="col" style="color: black;">Tax Outstanding</th>
                                             </tr>
-                                            <tr>
-                                                <td style="padding-left:5px;width:120px;font-weight:100;">WHT Type</td>
-                                                <td style="padding-left:5px;width:280px;">
-                                                    <b><span id="typeOfWht"></span></b>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding-left:5px;width:120px;font-weight:100;">Residential Status</td>
-                                                <td style="padding-left:5px;width:280px;">
-                                                    <b><span id="residentialStatus"></span></b>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding-left:5px;width:120px;font-weight:100;">Reason</td>
-                                                <td style="padding-left:5px;width:280px;">
-                                                    <b><span id="reason"></span></b>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding-left:5px;width:120px;font-weight:100;">Remarks</td>
-                                                <td style="padding-left:5px;width:280px;">
-                                                    <b><span id="remarks"></span></b>
-                                                </td>
-                                            </tr>
-                                        </tbody>
+                                        </thead>
+                                        <tbody id="TaxPositionSummaryGrid"></tbody>
                                     </table>
                                 </div>
-                            </div>
 
+                                <div class="row" style="margin: 15px 0px 15px 0px; font-size: 16px;">
+                                    <div class="checkbox col-sm-12">
+                                        <label class="row ml-3 mb-3 checkgroup">
+                                            I confirm from the Information available thate&nbsp;<span id="applicantNameApproval"></span>&nbsp;has paid all Tax liabilites up to and including the&nbsp;<span id="previousYear"></span>&nbsp;year of assessment.
+                                            <input type="checkbox" id="confirmationBox" disabled />
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                    <div class="checkbox col-sm-12">
+                                        <label class="row ml-3 mb-3 checkgroup">
+                                            Has paid P.A.Y.E and other Witholding Taxes up to and including&nbsp; <span id="currentMonthYear"></span>.
+                                            <input type="checkbox" id="confirmationBoxPaye" disabled />
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                    <div class="checkbox col-sm-12">
+                                        <label class="row ml-3 mb-3 checkgroup">
+                                            Has submitted all Tax returns up to date.
+                                            <input type="checkbox" id="confirmationBoxAll" disabled />
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                    <div class="checkbox col-sm-12">
+                                        <label class="row ml-3 mb-3 checkgroup">
+                                            Has registered with Ghana Revenue Authority.
+                                            <input type="checkbox" id="confirmationBoxGRA" disabled />
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <button id="backToGrid" class="btn btn-outline-primary"> Back</button>
+                            <button id="previousDetailBtn" class="btn btn-outline-success" style="display: none"> Previous Details</button>
+                            <button id="taxPositionMoreDetails" style="margin-left: 2px;display: none" class="btn btn-success">  More Details</button>
+                            <button id="tccMessages" style="float: right" class="btn btn-primary"><i class="fa fa-comments" aria-hidden="true"></i>  Messages & Attachments</button>
                         </div>
                     </div>
-                    <button id="backToGrid" class="btn btn-outline-primary"> Back</button>
-                    <button id="tccMessages" style="float: right" class="btn btn-primary"><i class="fa fa-comments" aria-hidden="true"></i>  Messages & Attachments</button>
                 </div>
 
             </div>

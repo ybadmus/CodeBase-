@@ -1,6 +1,7 @@
 ﻿var HeaderName = "WH Tax Exemption Approval";
 var serverUrl = $("#serverUrl").val();
 var searchTexByTaxOffice = `${serverUrl}api/TEX/GetAllTaxExemptionPendingApprovalByTaxOfficeId`;
+var loadTaxPositionsUrl = `${serverUrl}api/TCC/GetTCCApplicationTaxPositionByApplicationId?applicationId=`;
 var GetTccCommentsByIdUrl = `${serverUrl}api/TCC/GetAllTccApplicationComments?tccId=`;
 var GetTCCDocuments = `${serverUrl}api/TCC/GetTCCApplicationDocumentByApplicationId`;
 var GetAppDetailsById = `${serverUrl}api/TEX/GetWHTExApplicationById?whtId=`;
@@ -73,7 +74,7 @@ var loadTaxOffices = function (listOfTaxOffices) {
 
 var bootstrapPage = function () {
     $("#pgHeader").text(HeaderName);
-    $("#texDetails").hide();
+    $("#taxPosition").hide();
     $("#texGridView").show();
 
     $("#expiryDateTcc").flatpickr({
@@ -164,12 +165,14 @@ $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
 });
 
 var prepareDetailsView = function (appId) {
+    let urlTaxPosition = `${loadTaxPositionsUrl}` + appId;
     let url = `${GetAppDetailsById}` + appId;
 
     hideAndShow();
     loadMessages(appId);
     getDocumentsById();
     apiCaller(url, "GET", "", loadAppDetails);
+    apiCaller(urlTaxPosition, "GET", "", loadTaxPositionDetails);
 };
 
 var loadAppDetails = function (resp) {
@@ -193,9 +196,72 @@ var loadAppDetails = function (resp) {
     $("#applicantPhone").text(response.phoneNo);
 };
 
-var hideAndShow = function () {
+var loadTaxPositionDetails = function (listOfSummaryAPI) {
+
+    var listOfSummary = listOfSummaryAPI[0].taxPositions;
+
+    let output = "";
+
+    if (listOfSummary === null)
+        return;
+
+    for (var i = listOfSummary.length - 1; i >= 0; i--) {
+        var negativeValues = listOfSummary[i].taxOutstanding < 0 ? "(" + Math.abs(listOfSummary[i].taxOutstanding).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + ")" : listOfSummary[i].taxOutstanding.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+
+        if (listOfSummary[i].status == "NLT") {
+
+            output = output + '<tr><td align="center" id="assessmentYear' + i + '">'
+                + listOfSummary[i].assessmentYear + '</td><td align="center" style="color: black" class="">'
+                + listOfSummary[i].status + '</td><td align="right" style="color: black" class="valueCell">NIL</td><td align="right" style="color: black" class="">NIL</td><td align="right" style="color: black" class="valueCell">NIL</td><td align="right" style="color: black" class="">NIL</td></tr>';
+
+        } else {
+
+            output = output + '<tr><td align="center" id="assessmentYear' + i + '">'
+                + listOfSummary[i].assessmentYear + '</td><td align="center" style="color: black" class="">'
+                + listOfSummary[i].status + '</td><td align="right" style="color: black" class="valueCell">'
+                + listOfSummary[i].chargeableIncome.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + '</td><td align="right" style="color: black"  class="">'
+                + listOfSummary[i].taxCharged.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + '</td><td align="right" style="color: black" class="valueCell">'
+                + listOfSummary[i].taxPaid.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + '</td><td align="right" style="color: black" class="">'
+                + negativeValues + '</td></tr>';
+        }
+
+    }
+
+    output = output;
+    $("#TaxPositionSummaryGrid").html(output);
+
+    hideAndShow();
+
+    $("#confirmationBox").prop("checked", listOfSummaryAPI[0].paidTaxLiabilities);
+    $("#confirmationBoxPaye").prop("checked", listOfSummaryAPI[0].paidWithholdingTax);
+    $("#confirmationBoxAll").prop("checked", listOfSummaryAPI[0].submittedTaxReturns);
+    $("#confirmationBoxGRA").prop("checked", listOfSummaryAPI[0].registeredWithGRA);
+
+};
+
+$("#taxPositionMoreDetails").click(function () {
+    $("#texDetails").hide();
+    $("#taxPositionView").show();
+
+    $("#previousDetailBtn").show();
+    $("#taxPositionMoreDetails").hide();
+});
+
+$("#previousDetailBtn").click(function () {
+    $("#taxPositionView").hide();
     $("#texDetails").show();
+
+    $("#taxPositionMoreDetails").show();
+    $("#previousDetailBtn").hide();
+});
+
+var hideAndShow = function () {
+    $("#taxPosition").show();
     $("#texGridView").hide();
+    $("#texDetails").show();
+    $("#taxPositionView").hide();
+    $("#previousDetailBtn").hide();
+    $("#taxPositionMoreDetails").show();
 };
 
 var loadMessages = function (tccId) {
@@ -211,7 +277,7 @@ $("#backToGrid").click(function () {
 
 var backToView = function () {
 
-    $("#texDetails").hide();
+    $("#taxPosition").hide();
     $("#texGridView").show();
 };
 
