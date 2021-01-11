@@ -62,8 +62,6 @@ var decideTaxpositonStatus = function (status, i) {
                 + '<option value="" selected="selected">Choose Status</option><option value="NID">Not In Dispute</option><option value="PRO">Provisional</option>'
                 + '<option value="S/A">Self-Assessment</option><option value="FIN">Finalized</option><option value="NLT">Not Liable for Tax</option></select></td>';
 
-       
-
             break;
 
         case "NID":
@@ -275,7 +273,7 @@ $(document).ready(function () {
 
 var loadTaxPositionDetails = function (data) {
 
-    if (data.length == 0) {
+    if (data.length <= 1) {
 
         bootstrapPage();
     } else {

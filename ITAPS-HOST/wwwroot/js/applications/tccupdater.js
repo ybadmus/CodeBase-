@@ -277,6 +277,6 @@ $("#taxPosition").click(function () {
             $("#taxpayerId").text() + "&appId=" + $("#appId").val() + "&applicantTin=" + $("#applicantTIN").text();
 
     if (activeApplicationType == "WHT Exemption")
-        window.location.href = `${serverUrl}applications/taxposition?applicantName=` + $("#applicantNameTex").text() + "&appId=" +
-            $("#appId").val() + "&applicantTin=" + $("#applicantTINTex").text();
+        window.location.href = `${serverUrl}applications/taxposition?applicantName=` + $("#applicantNameTex").text() + "&taxpayerId=" +
+            $("#taxpayerId").text() + "&appId=" + $("#appId").val() + "&applicantTin=" + $("#applicantTINTex").text();
 });

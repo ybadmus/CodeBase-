@@ -230,7 +230,7 @@ var loadDetailsTex = function (resp) {
     $("#modalId").text(testNullOrEmpty(resp[0].applicationNo));
     $("#statusNameModal").text(testNullOrEmpty(resp[0].status));
     $("#currentStatus").text(resp[0].statusId);
-    $("#taxpayerId").text(testNullOrEmpty(resp[0].taxpayerId));
+    $("#taxpayerId").text(testNullOrEmpty(resp[0].applicantId));
  };
 
  var loadDetailsPtr = function (resp) {
