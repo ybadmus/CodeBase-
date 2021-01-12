@@ -273,12 +273,12 @@ $(document).ready(function () {
 
 var loadTaxPositionDetails = function (data) {
 
-    if (data.length <= 1) {
+    if (!data || data.length <= 1) {
 
         bootstrapPage();
     } else {
 
-        if (data.length > 0) {
+        if (data.length > 1) {
 
             isCheckBoxSelected = data[0].paidTaxLiabilities;
             isCheckBoxSelectedGRA = data[0].registeredWithGRA;
