@@ -2,7 +2,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="modal-title" id="modal-income-title">ID: <span id="appNoTex2"></span></h6>
+                <h6 class="modal-title" id="modal-income-title">ID: <span id="modalId"></span></h6>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true" style="color: white">&times;</span>
                 </button>
@@ -100,8 +100,9 @@
             </div>
             <div class="modal-body">
                 <div id="tabsContainer" class="tab" style="width: 100% !important; display: block;">
-                    <button class="tablinks active" style="width: 50% !important" onclick="openDivForTab(event, 'taxpayer')"> APPLICANT</button>
-                    <button class="tablinks" style="width: 50% !important" onclick="openDivForTab(event, 'internal')"> INTERNAL</button>
+                    <button class="tablinks active" onclick="openDivForTab(event, 'taxpayer')"> APPLICANT</button>
+                    <button class="tablinks" onclick="openDivForTab(event, 'internal')"> INTERNAL</button>
+                    <button class="tablinks" onclick="openDivForTab(event, 'attachmentColumn')" style="border-right: none;"> FILES</button>
                 </div>
 
                 <div id="taxpayer" class="form-horizontal tabcontent">
@@ -116,7 +117,7 @@
                             </div>
 
                             <form>
-                                <label for="commentToTaxpayer" class="control-label" style="font-weight: 600; padding: 2px;">Message To <span id="applicantFName" style="color: #364c66 !important;"></span></label>
+                                <label for="commentToTaxpayer" class="control-label" style="font-weight: 600; padding: 2px;">Message To Applicant</label>
                                 <textarea type="text" style="resize:none;height: 70px;" autocomplete="off" class="form-control form-cascade-control input-sm" id="commentToTaxpayer" placeholder="Type message to applicant here"></textarea>
                             </form>
                         </div>
@@ -138,6 +139,26 @@
                                 <label for="commentToStaff" class="control-label" style="font-weight: 600; padding: 2px;">Message To Staffs</label>
                                 <textarea type="text" style="resize:none;height: 70px;" autocomplete="off" class="form-control form-cascade-control input-sm" id="commentToStaff" placeholder="Type internal messages here"></textarea>
                             </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="attachmentColumn" class="form-horizontal tabcontent" style="display: none;">
+                    <div style="margin-top: 5px;">
+                        <div class="row">
+                            <div class="container" style="height: 420px;">
+                                <table class="table table-striped">
+                                    <colgroup><col style="width: 5%;"><col style="width: 65%;"><col style="width: 30%;"></colgroup>
+                                    <thead>
+                                        <tr class="" style=" background-color: #364c66 !important;">
+                                            <td scope="col" style="color: white;">#</td>
+                                            <td scope="col" style="color: white;">File Name</td>
+                                            <td scope="col" style="color: white;">Date</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="DocumentTableId"></tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
