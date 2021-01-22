@@ -1,5 +1,6 @@
-﻿@{
-    ViewData["Title"] = "TCC";
+﻿
+@{
+    ViewData["Title"] = "Applicant Applications";
 }
 
 @section css {
@@ -18,24 +19,25 @@
     <script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js" type="text/javascript"></script>
 }
 
-<!--Defined this on page level because of control-->
 <input id="serverUrl" value="@ViewBag.ServerUrl" hidden />
 <input id="taxpayerId" value="@ViewBag.TaxpayerId" hidden />
+
 
 <div class="card">
     <div id="gridView">
         <div class="card-header">
             <div class="row">
-                <div class="col-sm-1" id="">
-                    <label style="color: white; font-weight: bold;">Filter By: </label>
+                <div class="col-sm-12 col-md-3" id="">
+                    <input type="text" id="applicantTin" class="form-control" placeholder="Applicant Tin">
                 </div>
-                <div class="col-sm-3">
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="searchItem" autocomplete="off" placeholder="*, Applicant or TIN">
-                        <div class="input-group-append">
-                            <button type="button" id="btnSearch" class="btn btn-success btn-sm"><i class='fa fa-search'></i></button>
-                        </div>
-                    </div>
+                <div class="col-sm-12 col-md-2">
+                    <input id="startDate" type="text" class="form-control" placeholder="Start Date" />
+                </div>
+                <div class="col-sm-12 col-md-2">
+                    <input id="endDate" type="text" class="form-control" placeholder="End Date" />
+                </div>
+                <div class="col-sm-12 col-md-5">
+                    <button type="button" id="btnSearch" class="btn btn-success btn-sm"><i class='fa fa-search'></i> Search</button>
                 </div>
             </div>
         </div>
@@ -52,14 +54,12 @@
 
 </div>
 
-
 @section modals {
-    <partial name="_AppUpdate" />
     <partial name="_AppMessages" />
 }
 
 @section scripts {
-    <script src="~/js/applications/tcc.js"></script>
+    <script src="~/js/applications/applicantapplications.js"></script>
     <script src="~/js/applications/tccdetails.js"></script>
     <script src="~/js/applications/tccupdater.js"></script>
 }

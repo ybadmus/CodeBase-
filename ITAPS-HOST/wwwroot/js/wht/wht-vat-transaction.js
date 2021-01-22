@@ -13,11 +13,9 @@ $(document).ready(function () {
     SetHeaderNameToHTML();
     InitializeKendoGrid([], 1);
     $("#endDate").flatpickr({
-        enableTime: true,
         dateFormat: "d-m-Y"
     });
     $("#startDate").flatpickr({
-        enableTime: true,
         dateFormat: "d-m-Y"
     });
 });

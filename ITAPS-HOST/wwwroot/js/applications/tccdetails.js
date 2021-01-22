@@ -413,6 +413,13 @@ var decideNextTccStage = function (statusId) {
                 $("#previewApplication").hide();
                 $("#reassApplication").show();
 
+            } else if (loc.substring(loc.lastIndexOf('/') + 1) === "applicantapplications") {
+
+                $("#assApplication").hide();
+                $("#reviseApplication").hide();
+                $("#previewApplication").hide();
+                $("#reassApplication").hide();
+
             } else {
 
                 $("#previewApplication").hide();
@@ -462,6 +469,13 @@ var decideNextTccStage = function (statusId) {
                 $("#previewApplication").hide();
                 $("#reassApplication").show();
 
+            } else if (loc.substring(loc.lastIndexOf('/') + 1) === "applicantapplications") {
+
+                $("#assApplication").hide();
+                $("#reviseApplication").hide();
+                $("#previewApplication").hide();
+                $("#reassApplication").hide();
+
             } else {
 
                 $("#assApplication").hide();
@@ -488,6 +502,13 @@ var decideNextTccStage = function (statusId) {
                 $("#previewApplication").hide();
                 $("#reassApplication").show();
 
+            } else if (loc.substring(loc.lastIndexOf('/') + 1) === "applicantapplications") {
+
+                $("#assApplication").hide();
+                $("#reviseApplication").hide();
+                $("#previewApplication").hide();
+                $("#reassApplication").hide();
+
             } else {
 
                 $("#assApplication").hide();
@@ -512,6 +533,13 @@ var decideNextTccStage = function (statusId) {
                 $("#reviseApplication").hide();
                 $("#previewApplication").hide();
                 $("#reassApplication").show();
+
+            } else if (loc.substring(loc.lastIndexOf('/') + 1) === "applicantapplications") {
+
+                $("#assApplication").hide();
+                $("#reviseApplication").hide();
+                $("#previewApplication").hide();
+                $("#reassApplication").hide();
 
             } else {
 
@@ -538,6 +566,13 @@ var decideNextTccStage = function (statusId) {
                 $("#previewApplication").hide();
                 $("#reassApplication").show();
 
+            } else if (loc.substring(loc.lastIndexOf('/') + 1) === "applicantapplications") {
+
+                $("#assApplication").hide();
+                $("#reviseApplication").hide();
+                $("#previewApplication").hide();
+                $("#reassApplication").hide();
+
             } else {
 
                 $("#previewApplication").hide();
@@ -562,6 +597,13 @@ var decideNextTccStage = function (statusId) {
                 $("#reviseApplication").hide();
                 $("#previewApplication").hide();
                 $("#reassApplication").show();
+
+            } else if (loc.substring(loc.lastIndexOf('/') + 1) === "applicantapplications") {
+
+                $("#assApplication").hide();
+                $("#reviseApplication").hide();
+                $("#previewApplication").hide();
+                $("#reassApplication").hide();
 
             } else {
 

@@ -15,11 +15,9 @@ $(document).ready(function () {
     $("taxOfficesDiv").show();
     $("#tccTaxOffices").show();
     $("#endDate").flatpickr({
-        enableTime: true,
         dateFormat: "d-m-Y"
     });
     $("#startDate").flatpickr({
-        enableTime: true,
         dateFormat: "d-m-Y"
     });
 });

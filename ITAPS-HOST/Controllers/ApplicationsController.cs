@@ -162,6 +162,13 @@ namespace ITAPS_HOST.Controllers
             return View();
         }
 
+        public IActionResult ApplicantApplications()
+        {
+            UserDetails();
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            return View();
+        }
+
         public IActionResult PTRDashboard()
         {
             UserDetails();

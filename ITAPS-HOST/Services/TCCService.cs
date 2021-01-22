@@ -144,6 +144,13 @@ namespace ITAPS_HOST.Services
 
             return await _adminRequestClient.GetRequestAsync(apiEndpoint);
         }
+        
+        public async Task<ResponseItem<object>> GetAllApplicantApplications(string tin, string startDate, string endDate)
+        {
+            var apiEndpoint = $"Application/GetAllApplicationsByTin/{tin}/{startDate}/{endDate}";
+
+            return await _adminRequestClient.GetRequestAsync(apiEndpoint);
+        }
 
         public async Task<ResponseItem<object>> GetAllTccApplicationPendingApprovalByTaxOfficeId(Guid id, string queryString)
         {

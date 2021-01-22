@@ -12,11 +12,9 @@ $(document).ready(function () {
     InitializeKendoGrid([]);
     hideShowGrid();
     $("#endDate").flatpickr({
-        enableTime: true,
         dateFormat: "d-m-Y"
     });
     $("#startDate").flatpickr({
-        enableTime: true,
         dateFormat: "d-m-Y"
     });
 });
