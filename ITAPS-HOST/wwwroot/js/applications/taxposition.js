@@ -11,7 +11,7 @@ var statusColumn0 = "";
 var statusColumn1 = "";
 var statusColumn2 = "";
 var taxCodeId = "";
-  
+
 var LoadTaxSummaryTable = function (listOfSummary) {
 
     let output = "";
@@ -74,7 +74,7 @@ var decideTaxpositonStatus = function (status, i) {
                 + '<option value="">Choose Status</option><option value="NID" selected="selected">Not In Dispute</option><option value="PRO">Provisional</option>'
                 + '<option value="S/A">Self-Assessment</option><option value="FIN">Finalized</option><option value="NLT">Not Liable for Tax</option></select></td>';
 
-        
+
             break;
 
         case "PRO":
@@ -136,10 +136,8 @@ var decideTaxpositonStatus = function (status, i) {
                 + '<option value="" selected="selected">Choose Status</option><option value="NID">Not In Dispute</option><option value="PRO">Provisional</option>'
                 + '<option value="S/A">Self-Assessment</option><option value="FIN">Finalized</option><option value="NLT">Not Liable for Tax</option></select></td>';
 
-         
+    }
 
-    } 
-    
 };
 
 var convertToMoney = function (amount) {
@@ -152,7 +150,7 @@ var convertToMoney = function (amount) {
         if (amount === 0)
 
             return 0;
-        else 
+        else
 
             return "";
     }
@@ -273,29 +271,25 @@ $(document).ready(function () {
 
 var loadTaxPositionDetails = function (data) {
 
-    if (!data || data.length <= 1) {
+    if (!data || data.length < 1) {
 
         bootstrapPage();
     } else {
 
-        if (data.length > 1) {
+        isCheckBoxSelected = data[0].paidTaxLiabilities;
+        isCheckBoxSelectedGRA = data[0].registeredWithGRA;
+        isCheckBoxSelectedPaye = data[0].paidWithholdingTax;
+        isCheckBoxSelectedAll = data[0].submittedTaxReturns;
 
-            isCheckBoxSelected = data[0].paidTaxLiabilities;
-            isCheckBoxSelectedGRA = data[0].registeredWithGRA;
-            isCheckBoxSelectedPaye = data[0].paidWithholdingTax;
-            isCheckBoxSelectedAll = data[0].submittedTaxReturns;
+        if (data[0].registeredWithGRA) $("#confirmationBoxGRA").click();
+        if (data[0].submittedTaxReturns) $("#confirmationBoxAll").click();
+        if (data[0].paidWithholdingTax) $("#confirmationBoxPaye").click();
+        if (data[0].paidTaxLiabilities) $("#confirmationBox").click();
 
-            if (data[0].registeredWithGRA) $("#confirmationBoxGRA").click();
-            if (data[0].submittedTaxReturns) $("#confirmationBoxAll").click();
-            if (data[0].paidWithholdingTax) $("#confirmationBoxPaye").click();
-            if (data[0].paidTaxLiabilities) $("#confirmationBox").click();
-
-            bootstrapTaxPositionExist(data[0].taxPositions);
-        }
+        bootstrapTaxPositionExist(data[0].taxPositions);
     }
 
     searchTaxRates();
-
 };
 
 var bootstrapTaxPositionExist = function (data) {
