@@ -168,7 +168,7 @@ var handler = function () {
 
         if ($("#chargeableIncomeColumn0").val() == 0.00 || $("#chargeableIncomeColumn0").val() == "" || $("#chargeableIncomeColumn0").val() == 0) {
             $("#taxPaidColumn0").val("");
-            return toastr.info("Tax paid without corresponding Chargeable income is not allowed!");
+            return toastr.info("Tax paid without corresponding chargeable income is not allowed!");
         }
 
     }
@@ -177,7 +177,7 @@ var handler = function () {
 
         if ($("#chargeableIncomeColumn1").val() == 0.00 || $("#chargeableIncomeColumn1").val() == "" || $("#chargeableIncomeColumn1").val() == 0) {
             $("#taxPaidColumn1").val("");
-            return toastr.info("Tax paid without corresponding Chargeable income is not allowed!");
+            return toastr.info("Tax paid without corresponding chargeable income is not allowed!");
         }
 
     }
@@ -186,7 +186,7 @@ var handler = function () {
 
         if ($("#chargeableIncomeColumn2").val() == 0.00 || $("#chargeableIncomeColumn2").val() == "" || $("#chargeableIncomeColumn2").val() == 0) {
             $("#taxPaidColumn2").val("");
-            return toastr.info("Tax paid without corresponding Chargeable income is not allowed!");
+            return toastr.info("Tax paid without corresponding chargeable income is not allowed!");
         }
 
     }

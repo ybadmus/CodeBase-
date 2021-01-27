@@ -65,11 +65,16 @@ var bootstrapPage = function () {
     $("#pgHeader").text(HeaderName);
 
     $("#endDate").flatpickr({
-        dateFormat: "Y-m-d"
+        dateFormat: "d-m-Y"
     });
     $("#startDate").flatpickr({
-        dateFormat: "Y-m-d"
+        dateFormat: "d-m-Y"
     });
+};
+
+var convertDate = function (date) {
+    var oldDateArray = date.split("-");
+    return oldDateArray[2] + "-" + oldDateArray[1] + "-" + oldDateArray[0];
 };
 
 $("#applicantTin").on('keypress', function (e) {
@@ -82,8 +87,8 @@ var searchTcc = function () {
     if (validateSearchEntry()) {
 
         let tin = $("#applicantTin").val().trim();
-        let startDate = $("#startDate").val().trim();
-        let endDate = $("#endDate").val().trim();
+        let startDate = convertDate($("#startDate").val().trim());
+        let endDate = convertDate($("#endDate").val().trim());
 
         if (tin.includes('/')) {
             for (var i = 0; i < tin.length; i++) {
@@ -102,8 +107,8 @@ var searchTcc = function () {
 
 var validateSearchEntry = function () {
     let tin = $("#applicantTin").val().trim();
-    let startDate = $("#startDate").val().trim();
-    let endDate = $("#endDate").val().trim();
+    let startDate = convertDate($("#startDate").val().trim());
+    let endDate = convertDate($("#endDate").val().trim());
 
     if (!tin.match(/\S/) || !startDate.match(/\S/) || !endDate.match(/\S/))
         return false;

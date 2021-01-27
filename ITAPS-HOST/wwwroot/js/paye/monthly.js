@@ -266,7 +266,7 @@ var loadEmployeeTable = function (data) {
     for (var i = 0; i < data.length; i++) {
 
         data[i].isSecondaryEmployement ? data[i].isSecondaryEmployement = "YES" : data[i].isSecondaryEmployement = "NO";
-        data[i].empResidential ? data[i].empResidential = "RESIDENT" : data[i].empResidential = "NON RESIDENT";
+        data[i].isResident ? data[i].isResident = "RESIDENT" : data[i].isResident = "NON RESIDENT";
         data[i].basicSalary = parseFloat(data[i].basicSalary).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
         data[i].cashAllowances = parseFloat(data[i].cashAllowances).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
         data[i].bonusIncome = parseFloat(data[i].bonusIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
@@ -290,42 +290,39 @@ var loadEmployeeTable = function (data) {
     }
 
     document.getElementById("employeesGrid").innerHTML = "";
-
+     
     var grid = new ej.grids.Grid({
         dataSource: data,
         enableHover: true,
         frozenColumns: 2,
         columns: [
-            { field: 'empName', headerText: 'Employee Name', width: 250 },
+            { field: 'empName', headerText: 'Employee Name', width: 230 },
             { field: 'empTin', headerText: 'TIN', width: 150 },
-            { field: 'empPosition', headerText: 'Position', width: 180 },
-            { field: 'empPhone', headerText: 'Phone', width: 150 },
-            { field: 'empEmail', headerText: 'Email', width: 220 },
-            { field: 'empSerialNumber', headerText: 'Serial No', width: 150 },
-            { field: 'empResidential', headerText: 'Non-Resident', width: 170 },
-            { field: 'isSecondaryEmployement', headerText: 'Secondary Employment', width: 250 },
-            { field: 'basicSalary', headerText: 'Basic Salary', textAlign: 'Right', width: 200 },
-            { field: 'cashAllowances', headerText: 'Cash Allowance', textAlign: 'Right', width: 200 },
+            { field: 'empPosition', headerText: 'Position', width: 150 },
+            { field: 'isResident', headerText: 'Resident', textAlign: 'Center', width: 150 },
+            //{ field: 'isSecondaryEmployement', headerText: 'Secondary Employment', textAlign: 'Center', width: 180 },
+            { field: 'basicSalary', headerText: 'Basic Salary', textAlign: 'Right', width: 170 },
+            { field: 'cashAllowances', headerText: 'Cash Allowance', textAlign: 'Right', width: 170 },
             { field: 'bonusIncome', headerText: 'Bonus Income', textAlign: 'Right', width: 170 },
-            { field: 'overtimeIncome', headerText: 'Overtime Income', textAlign: 'Right', width: 190 },
-            { field: 'nonCashBenefit', headerText: 'Non-Cash Benefit', textAlign: 'Right', width: 200 },
-            { field: 'thirdTierPension', headerText: 'Tier 3', textAlign: 'Right', width: 150 },
-            { field: 'severancePayPaid', headerText: 'Severance Pay Paid', textAlign: 'Right', width: 220 },
-            { field: 'socialSecurity', headerText: 'Social Security', textAlign: 'Right', width: 220 },
-            { field: 'finalTaxOnBonus', headerText: 'Final Tax On Bonus', textAlign: 'Right', width: 220 },
-            { field: 'excessBonus', headerText: 'Excess Bonus', textAlign: 'Right', width: 220 },
-            { field: 'totalCashEmolument', headerText: 'Total Cash Emolument', textAlign: 'Right', width: 250 },
-            { field: 'accommodationElement', headerText: 'Accomodation Element', textAlign: 'Right', width: 250 },
-            { field: 'vehicleElement', headerText: 'Vehicle Element', textAlign: 'Right', width: 220 },
-            { field: 'totalAssessableIncome', headerText: 'Total Assessable Income', textAlign: 'Right', width: 250 },
-            { field: 'deductibleReliefs', headerText: 'Deductible Reliefs', textAlign: 'Right', width: 220 },
-            { field: 'totalReliefs', headerText: 'Total Relief', textAlign: 'Right', width: 220 },
-            { field: 'chargeableIncome', headerText: 'Chargeable Income', textAlign: 'Right', width: 220 },
-            { field: 'taxDeductible', headerText: 'Tax Deductible', textAlign: 'Right', width: 220 },
-            { field: 'overtimeTax', headerText: 'Overtime Tax', textAlign: 'Right', width: 220 },
-            { field: 'totalTaxPayableToGra', headerText: 'Total Tax Payable to GRA', textAlign: 'Right', width: 250 },
+            { field: 'overtimeIncome', headerText: 'Overtime Income', textAlign: 'Right', width: 170 },
+            { field: 'nonCashBenefit', headerText: 'Non-Cash Benefit', textAlign: 'Right', width: 170 },
+            { field: 'thirdTierPension', headerText: 'Tier 3', textAlign: 'Right', width: 170 },
+            { field: 'severancePayPaid', headerText: 'Severance Pay Paid', textAlign: 'Right', width: 170 },
+            { field: 'socialSecurity', headerText: 'Social Security', textAlign: 'Right', width: 170 },
+            { field: 'finalTaxOnBonus', headerText: 'Final Tax On Bonus', textAlign: 'Right', width: 170 },
+            { field: 'excessBonus', headerText: 'Excess Bonus', textAlign: 'Right', width: 170 },
+            { field: 'totalCashEmolument', headerText: 'Total Cash Emolument', textAlign: 'Right', width: 170 },
+            { field: 'accommodationElement', headerText: 'Accomodation Element', textAlign: 'Right', width: 170 },
+            { field: 'vehicleElement', headerText: 'Vehicle Element', textAlign: 'Right', width: 170 },
+            { field: 'totalAssessableIncome', headerText: 'Total Assessable Income', textAlign: 'Right', width: 170 },
+            { field: 'deductibleReliefs', headerText: 'Deductible Reliefs', textAlign: 'Right', width: 170 },
+            { field: 'totalReliefs', headerText: 'Total Relief', textAlign: 'Right', width: 170 },
+            { field: 'chargeableIncome', headerText: 'Chargeable Income', textAlign: 'Right', width: 170 },
+            { field: 'taxDeductible', headerText: 'Tax Deductible', textAlign: 'Right', width: 170 },
+            { field: 'overtimeTax', headerText: 'Overtime Tax', textAlign: 'Right', width: 170 },
+            { field: 'totalTaxPayableToGra', headerText: 'Total Tax Payable to GRA', textAlign: 'Right', width: 170 },
         ],
-        height: 350,
+        height: 450,
         pageSettings: { pageSize: 12 },
         allowGrouping: false,
         allowPaging: true,

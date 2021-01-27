@@ -155,9 +155,9 @@
                                 <div class="form-group row" style="margin-bottom: 1rem;">
                                     <div class="col-md-8  formDiv">
                                         <label for="internalMessage" class="col-form-label">
-                                            <b>Expires On - YYYY/MM/DD</b> (Required)
+                                            Expires On <span style="color: red !important">*</span>
                                         </label>
-                                        <input id="expiryDateTcc" type="text" class="form-control" placeholder="Please select epiry date" data-toggle="flatpickr">
+                                        <input id="expiryDateTcc" type="text" class="form-control" placeholder="Please select expiry date" data-toggle="flatpickr">
                                     </div>
                                 </div>
                             </form>
@@ -183,8 +183,10 @@
                 </button>
             </div>
             <div class="modal-body">
-                <br />
-                <div><p>Are you sure you want to <b>APPROVE</b> this Application?</p></div>
+                <div><p>Are you sure you want to <b>Approve</b> this application for a <b>Tax Clearance Certificate</b> for the purpose of "<b><span id="approvalPurpose"></span></b>"</p></div>
+                <div><p>Applicant Name: <b><span id="approvalApplicantName"></span></b></p></div>
+                <div><p>Requesting Entity: <b><span id="approvalRequestingEntity"></span></b></p></div>
+                <div><p>Expiry Date: <b><span id="approvalExpiryDate"></span></b></p> </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" id="noYesBtn">No</button>
@@ -193,3 +195,5 @@
         </div>
     </div>
 </div>
+
+for <span id="approvalApplicant"></span>

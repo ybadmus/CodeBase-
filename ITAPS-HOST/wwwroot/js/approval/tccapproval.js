@@ -52,7 +52,8 @@ $(document).ready(function () {
 
     $("#expiryDateTcc").flatpickr({
         maxDate: calculateThreeMonths(),
-        minDate: 'today'
+        minDate: 'today',
+        dateFormat: "d-m-Y"
     });
 });
 
@@ -332,21 +333,30 @@ var approveTCC = function () {
         "taxpayerComment": $("#taxpayerMessage").val(),
         "internalComment": $("#internalMessage").val(),
         "applicationId": tccId,
-        "expiryDate": $("#expiryDateTcc").val()
+        "expiryDate": convertDate($("#expiryDateTcc").val())
     };
 
     apiCaller(updateUrl, "PUT", ObjectToSend, successfullyUpdated);
 };
 
+var convertDate = function (date) {
+    var oldDateArray = date.split("-");
+    return oldDateArray[2] + "-" + oldDateArray[1] + "-" + oldDateArray[0];
+};
+
 $("#expiryDateTcc").change(function () {
     $("#continueApproval").removeAttr('disabled');
-    console.log("change button status");
 });
 
 $("#continueApproval").click(function () {
     $("#yesOrNo").modal("show");
     $("#approveModal").modal("hide");
     $("#approveDecline").modal("hide");
+
+    $("#approvalPurpose").text($("#purposeOfApplication").text());
+    $("#approvalApplicantName").text($("#applicantName").text());
+    $("#approvalRequestingEntity").text($("#requestEntityName").text());
+    $("#approvalExpiryDate").text($("#expiryDateTcc").val());
 });
 
 $("#yesBtn").click(function () {
