@@ -9,6 +9,7 @@
         public string DatasourceUser { get; set; }
         public string DatasourcePassword { get; set; }
         public string TCCReport { get; set; }
+        public string TEXReport { get; set; }
         public string ReportServer { get; set; }
         public string BoldBiKey { get; set; }
         public string PITAnnualReport { get; set; }
@@ -36,6 +37,7 @@
         string DatasourceUser { get; set; }
         string DatasourcePassword { get; set; }
         string TCCReport { get; set; }
+        string TEXReport { get; set; }
         string ReportServer { get; set; }
         string BoldBiKey { get; set; }
         string PITAnnualReport { get; set; }

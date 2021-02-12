@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewData["Title"] = "TEXCert";
+}
+
+<input id="reportPath" value="@ViewBag.ReportPath" hidden />
+<input id="serverUrl" value="@ViewBag.ServerUrl" hidden />
+<input id="reportServerSite" value="@ViewBag.ReportServerSite" hidden />
+
+<style>
+    #reportviewer1_viewerContainer {
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+
+    #reportviewer1_licensing_msgContainer {
+        display: none;
+    }
+
+    #reportviewer1_viewBlockContainer {
+        display: none !important;
+    }
+
+    #reportviewer1 {
+        height: 77vh !important;
+    }
+</style>
+
+<bold-report-viewer id="reportviewer1" report-service-url="@ViewBag.ReportServer" report-path="@ViewBag.ReportPath" service-authorization-token="@ViewBag.ServiceAuthorizationToken" toolbar-settings="ViewBag.toolbarSettings"
+                    tool-bar-item-click="onToolBarItemClick" ajax-before-load="onAjaxRequest" export-progress-changed="onExportProgressChanged"></bold-report-viewer>
+
+<script type="text/javascript">
+    $("#pgHeader").text("Withholding Tax Exemption");
+
+    var serverUrl = $("#serverUrl").val();
+
+    var parameters = [];
+    parameters.push({ name: sessionStorage.getItem("texLabel"), labels: [sessionStorage.getItem("texReportId")], values: [sessionStorage.getItem("texReportId")], nullable: "true" });
+
+    function onAjaxRequest(args) {
+        var siteUrl = $("#reportServerSite").val();
+        console.log(siteUrl);
+        args.model.parameters = parameters;
+        args.headers.push({ Key: 'serverurl', Value: siteUrl });
+    }
+
+    function onToolBarItemClick(args) {
+        if (args.value == "E-Mail") {
+            var proxy = $('#reportviewer1').data('boldReportViewer');
+            var Report = proxy.model.reportPath;
+            var lastsIndex = Report.lastIndexOf("/");
+            var reportName = Report.substring(lastsIndex + 1);
+            var requrl = serverUrl + 'Reports/SendEmail';
+            var _json = {
+                exportType: "PDF", reportViewerToken: proxy._reportViewerToken, ReportName: reportName
+            };
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: requrl,
+                data: JSON.stringify(_json),
+                dataType: "json",
+                crossDomain: true
+            })
+        }
+    };
+
+    function onExportProgressChanged(args) {
+        if (args.stage === "beginExport") {
+            console.log(args.stage);
+            args.format =
+                $('#reportviewer1').ejWaitingPopup({ showOnInit: true, cssClass: "customStyle", text: "Preparing exporting document.. Please wait..." });
+        }
+        else if (args.stage === "exportStarted") {
+            console.log(args.stage);
+            var popupObj1 = $('#reportviewer1').data('ejWaitingPopup');
+            popupObj1.hide();
+        }
+        else if (args.stage === "preparation") {
+            console.log(args.stage);
+            console.log(args.format);
+            console.log(args.preparationStage);
+            if (args.format === "PDF" && args.preparationStage === "documentPreparation") {
+                console.log(args.totalPages);
+                console.log(args.currentPage);
+                if (args.totalPages > 1 && args.currentPage > 1) {
+                    var progressPercentage = Math.floor((args.currentPage / args.totalPages) * 100);
+                    if (progressPercentage > 0) {
+                        var popupObj2 = $('#reportviewer1').data('ejWaitingPopup');
+                        popupObj2.setModel({ text: "Preparing exporting document.." + progressPercentage + " % completed.. Please wait..." });
+                    }
+                }
+            }
+        }
+
+        args.handled = true;
+    }
+
+</script>
+
+<bold-script-manager></bold-script-manager>

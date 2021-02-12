@@ -47,6 +47,33 @@ namespace ITAPS_HOST.Controllers
             return View();
         }
 
+        public IActionResult TEXCert()
+        {
+            ViewBag.ServiceAuthorizationToken = this.GenerateToken(_reportConfig.BoldReportServerUser, _reportConfig.BoldReportServerPassword);
+            ToolbarSettings toolbarSettings = new ToolbarSettings();
+            toolbarSettings.CustomItems = new List<CustomItem>();
+
+            var customItem = new CustomItem()
+            {
+                GroupIndex = 1,
+                Index = 1,
+                CssClass = "e-icon e-mail e-reportviewer-icon",
+                Type = BoldReports.ReportViewerEnums.ToolBarItemType.Default,
+                Id = "E-Mail",
+                Tooltip = new ToolTip() { Header = "E-Mail", Content = "Send rendered report as mail attachment" }
+            };
+
+            toolbarSettings.CustomItems.Add(customItem);
+
+            //ViewBag.toolbarSettings = toolbarSettings;
+            ViewBag.ServerUrl = _config.AppServerUrl;
+            ViewBag.ReportServer = _reportConfig.BoldReportingService;
+            ViewBag.ReportServerSite = _reportConfig.BoldReportingSite;
+            ViewBag.ReportPath = _reportConfig.TEXReport;
+            UserDetails();
+            return View();
+        }
+
         public IActionResult Error()
         {
             return View();

@@ -151,7 +151,7 @@ var searchTex = function () {
 
         apiCaller(url, "GET", "", initializeKendoGrid);
 
-    } else {
+    } else {``
 
         toastr.error("Tax office or search item field is empty");
     }
