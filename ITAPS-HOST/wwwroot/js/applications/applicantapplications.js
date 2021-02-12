@@ -1,6 +1,6 @@
 ﻿ej.grids.Grid.Inject(ej.grids.Page, ej.grids.Sort, ej.grids.Filter, ej.grids.Group);
 
-var HeaderName = "Applicant Applications";
+var HeaderName = "All Applicant Applications";
 var serverUrl = $("#serverUrl").val();
 var searchTccByTaxOffice = `${serverUrl}api/TCC/GetAllApplicantApplications`;
 var GetTccCommentsByIdUrl = `${serverUrl}api/TCC/GetAllTccApplicationComments?tccId=`;

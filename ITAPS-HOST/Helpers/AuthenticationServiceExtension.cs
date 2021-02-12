@@ -40,10 +40,8 @@ namespace ITAPS_HOST.Helpers
                 options.ClientSecret = clientSecret;
                 options.ClientId = clientId;
                 options.CallbackPath = "/signin-oidc";
-                //options.SignedOutCallbackPath = "";
                 options.ResponseType = "code id_token";
                 options.UseTokenLifetime = true;
-                //options.CorrelationCookie = 
                 options.Scope.Clear();
                 options.Scope.Add("openid");
                 options.Scope.Add("profile");

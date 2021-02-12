@@ -615,6 +615,11 @@ var decideNextTccStage = function (statusId) {
             }
 
             break;
+
+        case 6:
+
+
+            break;
         default:
             toastr.warning("Invalid Entry");
             break;

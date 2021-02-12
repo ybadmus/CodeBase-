@@ -43,7 +43,28 @@ var initializeKendoGrid = function (data) {
 
 $(document).ready(function () {
     bootstrapPage();
+    loadUserDetials(userActions);
 });
+
+var userActions = function (response) {
+    if (response[0].szLevel.toLowerCase() === "manager") {
+        $("#approveTccManager").show();
+        $("#approveTccDComm").hide();
+        $("#approveTcc").hide();
+    }
+
+    if (response[0].szLevel.toLowerCase() === "commissioner") {
+        $("#approveTccManager").hide();
+        $("#approveTccDComm").hide();
+        $("#approveTcc").show();
+    }
+
+    if (response[0].szLevel.toLowerCase() === "deputy commissioner") {
+        $("#approveTccManager").hide();
+        $("#approveTccDComm").show();
+        $("#approveTcc").hide();
+    }
+};
 
 var calculateTwelveMonths = function () {
     var d = new Date(),
@@ -127,6 +148,7 @@ var searchTex = function () {
         }
 
         let url = `${searchTexByTaxOffice}?officeId=` + activeTaxOffice + "&queryString=" + searchItem;
+
         apiCaller(url, "GET", "", initializeKendoGrid);
 
     } else {
