@@ -233,6 +233,14 @@ var previewCertificate = function () {
         sessionStorage.setItem("tccReportId", appId);
         sessionStorage.setItem("tccLabel", "uniApplicationId");
         window.location.href = `${ReportDownloadView}`;
+
+    } else if ($("#typeOfApp").text().toUpperCase() == "WHT Tax Exemption".toUpperCase()) {
+
+        let appId = $("#appId").val();
+        sessionStorage.setItem("texReportId", appId);
+        sessionStorage.setItem("texLabel", "uniApplicationId");
+        window.location.href = `${ReportDownloadView}`;
+
     } else {
 
         $("#texDetails").hide();

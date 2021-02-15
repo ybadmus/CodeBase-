@@ -9,6 +9,7 @@ var tccMessagesOnlyUrl = `${serverUrl}api/TCC/SendTCCApplicationMessage?id=`;
 var GetAppDetailsById = `${serverUrl}api/TEX/GetWHTExApplicationById?whtId=`;
 var activeTaxOffice = "";
 var activeUserGroup = "";
+var ReportDownloadViewTEX = `${serverUrl}reportviewer/texcert`;
 var selectedStatus; 
 var tccUpdateUrl = `${serverUrl}api/TCC/UpdateTCCApplication?id=`;
 
