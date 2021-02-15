@@ -29,6 +29,13 @@ namespace ITAPS_HOST.Services
             var apiEndpoint = $"Application/GetAllTaxExemptionPendingApprovalByTaxOfficeId/{taxOfficeId}?filter={filter}";
 
             return await _adminRequestClient.GetRequestAsync(apiEndpoint);
+        } 
+        
+        public async Task<ResponseItem<object>> GetAllExemptionApplicationForCommissioner(Guid taxOfficeId, string status, string filter)
+        {
+            var apiEndpoint = $"Application/GetAllExemptionApplicationForCommissioner/{taxOfficeId}/{status}/{filter}";
+
+            return await _adminRequestClient.GetRequestAsync(apiEndpoint);
         }
 
         public async Task<ResponseItem<object>> GetWHTExApplicationById(Guid whtId)

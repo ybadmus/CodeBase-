@@ -30,6 +30,12 @@ namespace ITAPS_HOST.Api
             return await _iTExService.GetAllTaxExemptionPendingApprovalByTaxOfficeId(officeId, queryString);
         }
 
+        [HttpGet("GetAllExemptionApplicationForCommissioner", Name = "GetAllExemptionApplicationForCommissioner")]
+        public async Task<ResponseItem<object>> GetAllExemptionApplicationForCommissioner(Guid officeId, string status, string queryString)
+        {
+            return await _iTExService.GetAllExemptionApplicationForCommissioner(officeId, status, queryString);
+        }
+
         [HttpGet("GetWHTExApplicationById", Name = "GetWHTExApplicationById")]
         public async Task<ResponseItem<object>> GetWHTExApplicationById(Guid whtId)
         {

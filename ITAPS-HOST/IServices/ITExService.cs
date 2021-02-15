@@ -10,6 +10,7 @@ namespace ITAPS_HOST.IServices
     {
         Task<ResponseItem<object>> GetAllTExApplicationByTaxOfficeId(Guid id, string queryString);
         Task<ResponseItem<object>> GetAllTaxExemptionPendingApprovalByTaxOfficeId(Guid taxOfficeId, string filter);
+        Task<ResponseItem<object>> GetAllExemptionApplicationForCommissioner(Guid taxOfficeId, string status, string filter);
         Task<ResponseItem<object>> GetWHTExApplicationById(Guid whtId);
     }
 }

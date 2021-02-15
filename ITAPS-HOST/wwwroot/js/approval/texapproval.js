@@ -1,12 +1,14 @@
 ﻿var HeaderName = "WH Tax Exemption Approval";
 var serverUrl = $("#serverUrl").val();
 var searchTexByTaxOffice = `${serverUrl}api/TEX/GetAllTaxExemptionPendingApprovalByTaxOfficeId`;
+var searchTexCommissioner = `${serverUrl}api/TEX/GetAllExemptionApplicationForCommissioner`;
 var loadTaxPositionsUrl = `${serverUrl}api/TCC/GetTCCApplicationTaxPositionByApplicationId?applicationId=`;
 var GetTccCommentsByIdUrl = `${serverUrl}api/TCC/GetAllTccApplicationComments?tccId=`;
 var GetTCCDocuments = `${serverUrl}api/TCC/GetTCCApplicationDocumentByApplicationId`;
 var tccMessagesOnlyUrl = `${serverUrl}api/TCC/SendTCCApplicationMessage?id=`;
 var GetAppDetailsById = `${serverUrl}api/TEX/GetWHTExApplicationById?whtId=`;
 var activeTaxOffice = "";
+var activeUserGroup = "";
 var selectedStatus; 
 var tccUpdateUrl = `${serverUrl}api/TCC/UpdateTCCApplication?id=`;
 
@@ -51,18 +53,21 @@ var userActions = function (response) {
         $("#approveTccManager").show();
         $("#approveTccDComm").hide();
         $("#approveTcc").hide();
+        activeUserGroup = "manager";
     }
 
-    if (response[0].szLevel.toLowerCase() === "commissioner") {
+    if (response[0].szLevel.toLowerCase() === "commisioner") {
         $("#approveTccManager").hide();
         $("#approveTccDComm").hide();
         $("#approveTcc").show();
+        activeUserGroup = "commissioner";
     }
 
-    if (response[0].szLevel.toLowerCase() === "deputy commissioner") {
+    if (response[0].szLevel.toLowerCase() === "deputy commisioner") {
         $("#approveTccManager").hide();
         $("#approveTccDComm").show();
         $("#approveTcc").hide();
+        activeUserGroup = "deputy commissioner";
     }
 };
 
@@ -147,11 +152,18 @@ var searchTex = function () {
             }
         }
 
-        let url = `${searchTexByTaxOffice}?officeId=` + activeTaxOffice + "&queryString=" + searchItem;
+        let url = "";
+
+        if (activeUserGroup.toLowerCase() == "manager")
+            url = `${searchTexByTaxOffice}?officeId=` + activeTaxOffice + "&queryString=" + searchItem;
+        else if (activeUserGroup.toLowerCase() == "commissioner")
+            url = `${searchTexCommissioner}?officeId=` + activeTaxOffice + "&status=" + 7 + "&queryString=" + searchItem;
+        else if (activeUserGroup.toLowerCase() == "deputy commissioner")
+            url = `${searchTexCommissioner}?officeId=` + activeTaxOffice + "&status=" + 6 + "&queryString=" + searchItem;
 
         apiCaller(url, "GET", "", initializeKendoGrid);
 
-    } else {``
+    } else {
 
         toastr.error("Tax office or search item field is empty");
     }

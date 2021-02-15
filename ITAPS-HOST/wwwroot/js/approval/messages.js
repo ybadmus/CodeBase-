@@ -172,6 +172,7 @@ $("#approveDecline").on('hidden.bs.modal', function () {
 });
 
 var successfullyUpdated = function () {
+
     if (selectedStatus == 2) {
         toastr.success("Application has successfully been approved");
 
@@ -202,6 +203,27 @@ var successfullyUpdated = function () {
 
         backToGrid();
     }
+
+    if (selectedStatus == 6) {
+        toastr.success("Application has been moved to Deputy Commissioner's office for approval");
+
+        $("#approveModal").modal("hide");
+        $("#approveDecline").modal("hide");
+        $("#yesOrNo").modal("hide");
+
+        backToGrid();
+    }
+
+    if (selectedStatus == 7) {
+        toastr.success("Application has been moved to Commissioner's office for approval");
+
+        $("#approveModal").modal("hide");
+        $("#approveDecline").modal("hide");
+        $("#yesOrNo").modal("hide");
+
+        backToGrid();
+    }
+
 };
 
 var previewCertificate = function () {
