@@ -24,7 +24,7 @@
         }
 
         .e-headercell {
-            background: #112b4a !important;
+            background: #364C7D !important;
         }
 
         .e-headertext {
@@ -32,13 +32,21 @@
         }
 
         .e-pager .e-currentitem.e-active {
-            background: #112b4a!important;
+            background: #364C7D !important;
             border-radius: 50%;
             color: #fff;
         }
 
         .e-grid .e-frozenheader > .e-table, .e-grid .e-frozencontent > .e-table, .e-grid .e-frozencontent .e-virtualtable > .e-table, .e-grid .e-frozenheader .e-virtualtable > .e-table {
             border-right-color: #112b4a !important;
+        }
+
+        .e-icon-filter {
+            color: white!important;
+        }
+
+        .e-row {
+            cursor: pointer;
         }
     </style>
 }
@@ -51,22 +59,20 @@
     <div id="payeGridView">
         <div class="card-header">
             <div class="row">
-                <div class="col-sm-3" id="">
+                <div class="col-sm-3">
                     <select type="text" id="tccListOfTaxOffices" class="form-control" required></select>
                 </div>
                 <div class="col-sm-2">
                     <select type="text" id="yearsDropdown" class="form-control yearsDropdown" required></select>
                 </div>
-                <div class="col-sm-3" id="">
+                <div class="col-sm-2">
                     <select type="text" id="listOfPeriods" class="form-control" required disabled></select>
                 </div>
                 <div class="col-sm-3">
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="searchItem" autocomplete="off" placeholder="Search">
-                        <div class="input-group-append">
-                            <button type="button" id="btnSearch" class="btn btn-success btn-sm"><i class='fa fa-search'></i></button>
-                        </div>
-                    </div>
+                    <input type="text" class="form-control" id="searchItem" autocomplete="off" placeholder="Keyword use * for all">
+                </div>
+                <div class="col-sm-2">
+                    <button type="button" id="btnSearch" class="btn btn-success btn-sm" style="position: absolute;bottom: 0;"><i class='fa fa-search'></i> Search</button>
                 </div>
             </div>
         </div>

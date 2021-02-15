@@ -34,7 +34,7 @@ namespace ITAPS_HOST.Helpers
             })
             .AddAutomaticTokenManagement()
             .AddOpenIdConnect("oidc", options =>
-            {
+            { 
                 options.Authority = authority;
                 options.RequireHttpsMetadata = requireHttpsMetadata;
                 options.ClientSecret = clientSecret;

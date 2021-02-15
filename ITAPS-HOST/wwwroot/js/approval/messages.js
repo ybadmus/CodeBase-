@@ -181,6 +181,7 @@ var successfullyUpdated = function () {
 
         removeEntryFromGrid($("#appId").val());
         previewCertificate();
+        backToGrid();
     };
 
     if (selectedStatus == 3) {
@@ -211,15 +212,7 @@ var previewCertificate = function () {
         sessionStorage.setItem("tccReportId", appId);
         sessionStorage.setItem("tccLabel", "uniApplicationId");
         window.location.href = `${ReportDownloadView}`;
-    } else {
-
-        $("#texDetails").hide();
-        $("#texGridView").show();
-        $("#ptrDetails").hide();
-        $("#ptrGridView").show();
-        return toastr.info("No Preview Available");
     }
-
 };
 
 var removeEntryFromGrid = function (id) {

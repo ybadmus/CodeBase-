@@ -22,15 +22,12 @@
                                                 <td style="padding-left:5px;width:250px;font-weight:bold;" id="taxOfficeName"></td>
                                             </tr>
                                             <tr>
-                                                <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;background: #f7f8f9;">Payment Status</td>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Period Year</td>
+                                                <td title="Date Format: YYYY/MM/DD" style="padding-left:5px;width:250px;font-weight:bold;" id="periodYear"></td>
                                             </tr>
                                             <tr>
-                                                <td style="padding-left:5px;width:150px;font-weight:100;">Total Tax Charged</td>
-                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="totalTaxCharged2"></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding-left:5px;width:150px;font-weight:100;">Total Tax Paid</td>
-                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="totaltTaxPaid2"></td>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Period Month</td>
+                                                <td title="Date Format: YYYY/MM/DD" style="padding-left:5px;width:250px;font-weight:bold;" id="periodMonth"></td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;background: #f7f8f9;">Company Details</td>
@@ -52,19 +49,34 @@
                                                 <td style="padding-left:5px;width:250px;font-weight:bold;" id="companyEmail"></td>
                                             </tr>
                                             <tr>
+                                                <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;background: #f7f8f9;">Number Of Staffs</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Management</td>
+                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;" id="managementNo"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Other</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="otherNo"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Total Staffs</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="totalNoOfStaff"></td>
+                                            </tr>
+                                            <tr>
                                                 <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;background: #f7f8f9;">Staff Movement</td>
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Starting Staff</td>
-                                                <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="startingStaff"></td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="startingStaff"></td>
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Engaged Staff</td>
-                                                <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="engagedStaff"></td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="engagedStaff"></td>
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Disengaged Staff</td>
-                                                <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="disengagedStaff"></td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="disengagedStaff"></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -79,27 +91,15 @@
                                     <table class="table table-bordered">
                                         <tbody>
                                             <tr>
-                                                <td style="padding-left:5px;width:150px;font-weight:100;">Year</td>
-                                                <td title="Date Format: YYYY/MM/DD" style="padding-left:5px;width:250px;font-weight:bold;" id="periodYear"></td>
+                                                <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;background: #f7f8f9;">Payment Status</td>
                                             </tr>
                                             <tr>
-                                                <td style="padding-left:5px;width:150px;font-weight:100;">Month</td>
-                                                <td title="Date Format: YYYY/MM/DD" style="padding-left:5px;width:250px;font-weight:bold;" id="periodMonth"></td>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Total Tax Charged</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="totalTaxCharged2">1,518.92</td>
                                             </tr>
                                             <tr>
-                                                <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;background: #f7f8f9;">Cash Emolument</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding-left:5px;width:150px;font-weight:100;">Management</td>
-                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="managementPay"></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding-left:5px;width:150px;font-weight:100;">Others</td>
-                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="otherPay"></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding-left:5px;width:150px;font-weight:100;">Total Cash Emolument</td>
-                                                <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="totalCashEmolument"></td>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Total Tax Paid</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="totaltTaxPaid2">0.00</td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;background: #f7f8f9;">Tax Charged</td>
@@ -117,19 +117,19 @@
                                                 <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="totalTaxDeduction"></td>
                                             </tr>
                                             <tr>
-                                                <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;background: #f7f8f9;">Number Of Staffs</td>
+                                                <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;background: #f7f8f9;">Cash Emolument</td>
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Management</td>
-                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="managementNo"></td>
+                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="managementPay"></td>
                                             </tr>
                                             <tr>
-                                                <td style="padding-left:5px;width:150px;font-weight:100;">Other</td>
-                                                <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="otherNo"></td>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Others</td>
+                                                <td title="True or False" style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="otherPay"></td>
                                             </tr>
                                             <tr>
-                                                <td style="padding-left:5px;width:150px;font-weight:100;">Total Staffs</td>
-                                                <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="totalNoOfStaff"></td>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Total Cash Emolument</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="totalCashEmolument"></td>
                                             </tr>
                                         </tbody>
                                     </table>

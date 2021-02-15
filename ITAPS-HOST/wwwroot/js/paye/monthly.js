@@ -8,6 +8,7 @@ var employeeDetails = `${serverUrl}api/PayeApi/GetEmployeeDetails`;
 var activeTaxOffice = "";
 var activeTaxOfficeName = "";
 var gridGlobal = "";
+var gridGlobal2 = "";
 var activePeriod = "";
 //var activeEmployeeList = [];
 var activeCompany = "";
@@ -43,50 +44,50 @@ $("#listOfPeriods").on('change', function () {
 });
 
 var initializeKendoGrid = function (data, stage) {
+    document.getElementById("Grid").innerHTML = "";
+    if (data == null)
+        data = [];
 
     if (data) {
         if (data.length == 0 && stage !== 1) {
-            return toastr.info("No Data");
+            toastr.info("No Data");
+            data = [];
         };
 
-        $("#Grid").kendoGrid({
-            dataSource: { data: data, pageSize: 8 },
-            sortable: true,
-            selectable: true,
-            dataBound: onDataBound,
-            pageable: { refresh: false, pageSizes: true, buttonCount: 5 },
+        for (var i = 0; i < data.length; i++) {
+
+            data[i].submittedDate = convertDateToFormat(data[i].submittedDate);
+            data[i].totalTaxCharged = parseFloat(data[i].totalTaxCharged).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+            data[i].totalAmountPaid = parseFloat(data[i].totalAmountPaid).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        }
+
+        var grid = new ej.grids.Grid({
+            dataSource: data,
+            selectionSettings: { type: 'Multiple' },
             columns: [
-                { field: "submittedDate", title: "Date Submitted", width: '15%', template: '#= kendo.toString(kendo.parseDate(submittedDate), "dd/MM/yyyy")#' },
-                { field: "employerName", title: "Employer Name", width: '30%' },
-                { field: "employerTin", title: "Employer TIN", width: '15%' },
-                {
-                    field: "totalTaxCharged", title: "Total Tax Charged", width: '20%', attributes: { style: "text-align:right;" }, template: function (data) {
-                        return parseFloat(data.totalTaxCharged).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
-                    }
-                },
-                {
-                    field: "totalAmountPaid", title: "Tax Amount Paid", width: '20%', attributes: { style: "text-align:right;" }, template: function (data) {
-                        return parseFloat(data.totalAmountPaid).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
-                    }
-                },
-                {
-                    command: [{
-                        name: "view",
-                        template: "<button title='View item' class='btn btn-success btn-sm' style='margin-right: 2px'><span class='fa fa-file fa-lg'></span></button>"
-                    }],
-                    title: "Actions",
-                    width: "90px"
-                }
-            ]
+                { field: 'submittedDate', headerText: 'Date Submitted', width: 80, format: 'yMd' },
+                { field: 'employerName', headerText: 'Employer Name', width: 120 },
+                { field: 'employerTin', headerText: 'Employer TIN', width: 80 },
+                { field: 'totalTaxCharged', headerText: 'Total Tax Charged', width: 100 },
+                { field: 'totalAmountPaid', headerText: 'Tax Amount Paid', width: 100 },
+                { type: 'button', width: 30 },
+            ],
+            height: 420,
+            pageSettings: { pageSize: 10 },
+            allowGrouping: true,
+            allowPaging: true,
+            allowSorting: false,
+            allowFiltering: true,
+            filterSettings: { type: 'Menu' },
+            rowSelected: rowSelected2,
         });
+
+        grid.appendTo('#Grid');
+        gridGlobal2 = grid;
     } else {
 
         toastr.info("No Data");
-    }
-};
-
-var onDataBound = function () {
-
+    };
 };
 
 var bootstrapPage = function () {
@@ -168,7 +169,6 @@ var searchPaye = function () {
                     replaceAt(searchItem, i, '%2F');
             }
         }
-        $("#Grid").data("kendoGrid").dataSource.data([]);
         let url = `${searchPayeByTaxOffice}?officeId=` + activeTaxOffice + `&periodId=` + activePeriod + `&searchItem=` + searchItem;
         apiCaller(url, "GET", "", initializeKendoGrid);
     } else {
@@ -191,15 +191,26 @@ $("#backToGrid").click(function () {
     hideAndShow();
 });
 
-$("body").on('click', '#Grid .k-grid-content .btn', function (e) {
+function rowSelected2(args) {
+    var selectedrecords = gridGlobal2.getSelectedRecords();
+    onDetailsGridSelected(selectedrecords[0]);
+};
 
-    var grid = $("#Grid").getKendoGrid();
-    var item = grid.dataItem($(e.target).closest("tr"));
+var onDetailsGridSelected = function (item) {
     var detailsUrl = `${payeDetailsUrl}?payeId=` + item.id;
     $("#applicationId").val(item.id);
 
     apiCaller(detailsUrl, "GET", "", loadDetailsView);
-});
+};
+
+function rowSelected(args) {
+    var selectedrecords = gridGlobal.getSelectedRecords();
+    onGridSelected(selectedrecords[0]);
+};
+
+var onGridSelected = function (item) {
+    loadEmployeeView(item.id);
+};
 
 $("#moreDetailsView").click(function () {
     var url = `${employeeDetails}?payeId=` + $("#applicationId").val();
@@ -230,7 +241,7 @@ var loadDetailsView = function (resp) {
         $("#payeDetailsView").show();
         $("#employeeListView").hide();
         $("#companyName").text(resp[0].employerName);
-        $("#dateSubmitted").text(convertDateToFormat(resp[0].submittedDate));
+        $("#dateSubmitted").text(resp[0].submittedDate);
         $("#companyTIN").text(resp[0].employerTin);
         $("#companyTIN2").text(resp[0].employerTin);
         $("#taxOfficeName").text(resp[0].employerTaxOffice);
@@ -238,9 +249,9 @@ var loadDetailsView = function (resp) {
         $("#companyEmail").text(resp[0].employerEmail);
         $("#periodYear").text(resp[0].assessmentYear);
         $("#periodMonth").text(resp[0].month);
-        $("#managementNo").text(resp[0].totalManagementStaff);
-        $("#otherNo").text(resp[0].totalOtherStaff);
-        $("#totalNoOfStaff").text(resp[0].totalNoStaff);
+        $("#managementNo").text(numberWithCommas(resp[0].totalManagementStaff));
+        $("#otherNo").text(numberWithCommas(resp[0].totalOtherStaff));
+        $("#totalNoOfStaff").text(numberWithCommas(resp[0].totalNoStaff));
         $("#managementPay").text(parseFloat(resp[0].totalManagementPay).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
         $("#otherPay").text(parseFloat(resp[0].totalOtherPay).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
         $("#totalCashEmolument").text(parseFloat(resp[0].totalCashEmolument).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
@@ -249,9 +260,9 @@ var loadDetailsView = function (resp) {
         $("#totalTaxDeduction").text(parseFloat(resp[0].totalTaxCharged).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
         $("#totalTaxCharged2").text(parseFloat(resp[0].totalTaxCharged).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
         $("#totaltTaxPaid2").text(parseFloat(resp[0].totalAmountPaid).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-        $("#startingStaff").text(resp[0].totalStaffStartOfMonth);
-        $("#engagedStaff").text(resp[0].engagedStaff);
-        $("#disengagedStaff").text(resp[0].disengagedStaff);
+        $("#startingStaff").text(numberWithCommas(resp[0].totalStaffStartOfMonth));
+        $("#engagedStaff").text(numberWithCommas(resp[0].engagedStaff));
+        $("#disengagedStaff").text(numberWithCommas(resp[0].disengagedStaff));
 
     } else {
 
@@ -338,15 +349,6 @@ var loadEmployeeTable = function (data) {
     $("#employeeListView").show();
 };
 
-function rowSelected(args) {
-    var selectedrecords = gridGlobal.getSelectedRecords();
-    onGridSelected(selectedrecords[0]);
-};
-
-var onGridSelected = function (item) {
-    loadEmployeeView(item.id);
-};
-
 var getDetailsEmployee = function (employeeId) {
     $("#payeGridView").hide();
     $("#employeeDetails").show();
@@ -395,3 +397,6 @@ var employeeView = function (resp) {
     $("#monDetails").hide();
 };
 
+var numberWithCommas = function (x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
