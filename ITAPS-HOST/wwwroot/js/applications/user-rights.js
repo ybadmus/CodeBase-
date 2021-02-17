@@ -15,7 +15,7 @@ var switchTilesByUserRight = function (response) {
         $("#reassign").hide();
         $("#bulkreassign").hide();
         $("#allTCC").show();
-    } else if (response[0].szLevel.toLowerCase() === "manager" || response[0].szLevel.toLowerCase() === "commisioner" || response[0].szLevel.toLowerCase() === "deputy commisioner") {
+    } else if (response[0].szLevel.toLowerCase() === "manager" || response[0].szLevel.toLowerCase() === "commisioner" || response[0].szLevel.toLowerCase() === "deputy commisioner" || response[0].szLevel.toLowerCase() === "commissioner" || response[0].szLevel.toLowerCase() === "deputy commissioner") {
         $("#approveTCC").show();
         $("#processTCC").hide();
         $("#assignTCC").show();

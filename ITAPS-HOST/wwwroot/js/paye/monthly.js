@@ -323,7 +323,7 @@ var loadEmployeeTable = function (data) {
             { field: 'totalTaxPayableToGra', headerText: 'Total Tax Payable to GRA', textAlign: 'Right', width: 170 },
         ],
         height: 450,
-        pageSettings: { pageSize: 12 },
+        pageSettings: { pageSize: 100 },
         allowGrouping: false,
         allowPaging: true,
         allowSorting: false,

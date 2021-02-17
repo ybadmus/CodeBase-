@@ -57,14 +57,14 @@ var userActions = function (response) {
         activeUserGroup = "manager";
     }
 
-    if (response[0].szLevel.toLowerCase() === "commisioner") {
+    if (response[0].szLevel.toLowerCase() === "commisioner" || response[0].szLevel.toLowerCase() === "commissioner") {
         $("#approveTccManager").hide();
         $("#approveTccDComm").hide();
         $("#approveTcc").show();
         activeUserGroup = "commissioner";
     }
 
-    if (response[0].szLevel.toLowerCase() === "deputy commisioner") {
+    if (response[0].szLevel.toLowerCase() === "deputy commisioner" || response[0].szLevel.toLowerCase() === "deputy commissioner") {
         $("#approveTccManager").hide();
         $("#approveTccDComm").show();
         $("#approveTcc").hide();
