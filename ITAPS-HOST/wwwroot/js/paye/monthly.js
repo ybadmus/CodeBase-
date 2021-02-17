@@ -325,7 +325,7 @@ var loadEmployeeTable = function (data) {
         height: 450,
         pageSettings: { pageSize: 100 },
         allowGrouping: false,
-        allowPaging: true,
+        allowPaging: false,
         allowSorting: false,
         allowFiltering: false,
         filterSettings: { type: 'Menu' },

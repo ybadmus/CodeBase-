@@ -22,25 +22,22 @@
                                                 <td style="padding-left:5px;width:250px;font-weight:bold;" id="taxOfficeName"></td>
                                             </tr>
                                             <tr>
-                                                <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;background: #f7f8f9;">Payment Status</td>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Assessment Year</td>
+                                                <td title="Date Format: YYYY/MM/DD" style="padding-left:5px;width:250px;font-weight:bold;" id="periodYear"></td>
                                             </tr>
                                             <tr>
-                                                <td style="padding-left:5px;width:150px;font-weight:100;">Total Tax Charged</td>
-                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="totalTaxCharged2"></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding-left:5px;width:150px;font-weight:100;">Total Tax Paid</td>
-                                                <td style="padding-left:5px;width:250px;font-weight:bold;" id="totaltTaxPaid2"></td>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Month</td>
+                                                <td title="Date Format: YYYY/MM/DD" style="padding-left:5px;width:250px;font-weight:bold;" id="periodMonth"></td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;background: #f7f8f9;">Company Details</td>
                                             </tr>
                                             <tr>
-                                                <td style="padding-left:5px;width:150px;font-weight:100;">Company Name</td>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Name</td>
                                                 <td style="padding-left:5px;width:250px;font-weight:bold;" id="companyName"></td>
                                             </tr>
                                             <tr>
-                                                <td style="padding-left:5px;width:150px;font-weight:100;">Company TIN</td>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">TIN</td>
                                                 <td style="padding-left:5px;width:250px;font-weight:bold;" id="companyTIN"></td>
                                             </tr>
                                             <tr>
@@ -50,21 +47,6 @@
                                             <tr>
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Email</td>
                                                 <td style="padding-left:5px;width:250px;font-weight:bold;" id="companyEmail"></td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;background: #f7f8f9;">Staff Movement</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding-left:5px;width:150px;font-weight:100;">Starting Staff</td>
-                                                <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="startingStaff"></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding-left:5px;width:150px;font-weight:100;">Engaged Staff</td>
-                                                <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="engagedStaff"></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding-left:5px;width:150px;font-weight:100;">Disengaged Staff</td>
-                                                <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="disengagedStaff"></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -79,12 +61,15 @@
                                     <table class="table table-bordered">
                                         <tbody>
                                             <tr>
-                                                <td style="padding-left:5px;width:150px;font-weight:100;">Year</td>
-                                                <td title="Date Format: YYYY/MM/DD" style="padding-left:5px;width:250px;font-weight:bold;" id="periodYear"></td>
+                                                <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;background: #f7f8f9;">Payment Status</td>
                                             </tr>
                                             <tr>
-                                                <td style="padding-left:5px;width:150px;font-weight:100;">Month</td>
-                                                <td title="Date Format: YYYY/MM/DD" style="padding-left:5px;width:250px;font-weight:bold;" id="periodMonth"></td>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Total Tax Charged</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="totalTaxCharged2"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Total Tax Paid</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="totaltTaxPaid2"></td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;background: #f7f8f9;">Cash Emolument</td>
@@ -131,6 +116,21 @@
                                                 <td style="padding-left:5px;width:150px;font-weight:100;">Total Staffs</td>
                                                 <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="totalNoOfStaff"></td>
                                             </tr>
+                                            <tr>
+                                                <td colspan="2" style="padding-left:5px;width:150px;font-weight:bold;background: #f7f8f9;">Staff Movement</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Starting Staff</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="startingStaff"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Engaged Staff</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="engagedStaff"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:5px;width:150px;font-weight:100;">Disengaged Staff</td>
+                                                <td style="padding-left:5px;width:250px;font-weight:bold;text-align: right;" id="disengagedStaff"></td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -148,7 +148,28 @@
                             <div id="employeesGrid"></div>
                         </div>
                     </div>
-                    <button id="backToDetailsView" class="btn btn-outline-primary"> Back</button>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <button id="backToDetailsView" class="btn btn-outline-primary"> Back</button>
+                        </div>
+                        <div class="col-md-6" style="text-align: center;">
+                            <button id="" class="btn btn-outline-dark">
+                                <i class="fa fa-step-backward" aria-hidden="true"></i>
+                            </button>
+                            <button id="" class="btn btn-outline-dark">
+                                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                            </button>
+                            <button id="" class="btn btn-outline-dark">
+                                <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                            </button>
+                            <button id="" class="btn btn-outline-dark">
+                                <i class="fa fa-step-forward" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <div class="col-md-3">
+                            <p style="float: right">1 of 3 pages (7603 items)</p>
+                        </div>
+                    </div>
                 </div>
 
             </div>
