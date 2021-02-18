@@ -117,7 +117,7 @@ var initializeKendoGrid = function (data, stage) {
                 { field: 'totalAmountPaid', headerText: 'Tax Amount Paid', width: 100 },
             ],
             height: 350,
-            pageSettings: { pageSize: 10 },
+            pageSettings: { pageSize: 50 },
             allowGrouping: true,
             allowPaging: true,
             allowSorting: false,
