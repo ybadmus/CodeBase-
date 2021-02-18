@@ -42,10 +42,16 @@ namespace ITAPS_HOST.Api
             return await _payeService.GetAllPayeTransacByPayeId(payeId);
         }
 
+        //[HttpGet("GetEmployeeDetails", Name = "GetEmployeeDetails")]
+        //public async Task<ResponseItem<object>> GetEmployeeDetails(Guid payeId)
+        //{
+        //    return await _payeService.GetPayeMonthlyEmployeeDetailsById(payeId);
+        //}
+
         [HttpGet("GetEmployeeDetails", Name = "GetEmployeeDetails")]
-        public async Task<ResponseItem<object>> GetEmployeeDetails(Guid payeId)
+        public async Task<ResponseItemForSingleObject<object>> GetEmployeeDetails(Guid payeId, int pageNumber = 1, int pageSize = 500)
         {
-            return await _payeService.GetPayeMonthlyEmployeeDetailsById(payeId);
+            return await _payeService.GetPayeMonthlyEmployeeDetailsById(payeId, pageNumber, pageSize);
         }
     }
 }

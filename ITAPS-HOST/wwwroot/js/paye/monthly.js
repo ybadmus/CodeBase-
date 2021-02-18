@@ -8,10 +8,14 @@ var employeeDetails = `${serverUrl}api/PayeApi/GetEmployeeDetails`;
 var activeTaxOffice = "";
 var activeTaxOfficeName = "";
 var gridGlobal = "";
+var gridGlobal2 = "";
 var activePeriod = "";
 //var activeEmployeeList = [];
 var activeCompany = "";
 var activeYear = "";
+var currentPageNumber = 0;
+var totalPageNumber = 0;
+var pageSizeEmployees = 500;
 
 $(document).ready(function () {
     bootstrapPage();
@@ -42,51 +46,105 @@ $("#listOfPeriods").on('change', function () {
     activePeriod = elem.options[elem.selectedIndex].value;
 });
 
+//var initializeKendoGrid = function (data, stage) {
+
+//    if (data) {
+//        if (data.length == 0 && stage !== 1) {
+//            return toastr.info("No Data");
+//        };
+
+//        $("#Grid").kendoGrid({
+//            dataSource: { data: data, pageSize: 8 },
+//            sortable: true,
+//            selectable: true,
+//            dataBound: onDataBound,
+//            pageable: { refresh: false, pageSizes: true, buttonCount: 5 },
+//            columns: [
+//                { field: "submittedDate", title: "Date Submitted", width: '15%', template: '#= kendo.toString(kendo.parseDate(submittedDate), "dd/MM/yyyy")#' },
+//                { field: "employerName", title: "Employer Name", width: '30%' },
+//                { field: "employerTin", title: "Employer TIN", width: '15%' },
+//                {
+//                    field: "totalTaxCharged", title: "Total Tax Charged", width: '20%', attributes: { style: "text-align:right;" }, template: function (data) {
+//                        return parseFloat(data.totalTaxCharged).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
+//                    }
+//                },
+//                {
+//                    field: "totalAmountPaid", title: "Tax Amount Paid", width: '20%', attributes: { style: "text-align:right;" }, template: function (data) {
+//                        return parseFloat(data.totalAmountPaid).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
+//                    }
+//                },
+//                {
+//                    command: [{
+//                        name: "view",
+//                        template: "<button title='View item' class='btn btn-success btn-sm' style='margin-right: 2px'><span class='fa fa-file fa-lg'></span></button>"
+//                    }],
+//                    title: "Actions",
+//                    width: "90px"
+//                }
+//            ]
+//        });
+//    } else {
+
+//        toastr.info("No Data");
+//    }
+//};
+
 var initializeKendoGrid = function (data, stage) {
+    document.getElementById("Grid").innerHTML = "";
+    if (data == null)
+        data = [];
 
     if (data) {
         if (data.length == 0 && stage !== 1) {
-            return toastr.info("No Data");
+            toastr.info("No Data");
+            data = [];
         };
 
-        $("#Grid").kendoGrid({
-            dataSource: { data: data, pageSize: 8 },
-            sortable: true,
-            selectable: true,
-            dataBound: onDataBound,
-            pageable: { refresh: false, pageSizes: true, buttonCount: 5 },
+        for (var i = 0; i < data.length; i++) {
+            data[i].submittedDate = convertDateToFormatDetails(data[i].submittedDate);
+            data[i].totalTaxCharged = parseFloat(data[i].totalTaxCharged).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+            data[i].totalAmountPaid = parseFloat(data[i].totalAmountPaid).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        }
+
+        var grid = new ej.grids.Grid({
+            dataSource: data,
+            selectionSettings: { type: 'Multiple' },
             columns: [
-                { field: "submittedDate", title: "Date Submitted", width: '15%', template: '#= kendo.toString(kendo.parseDate(submittedDate), "dd/MM/yyyy")#' },
-                { field: "employerName", title: "Employer Name", width: '30%' },
-                { field: "employerTin", title: "Employer TIN", width: '15%' },
-                {
-                    field: "totalTaxCharged", title: "Total Tax Charged", width: '20%', attributes: { style: "text-align:right;" }, template: function (data) {
-                        return parseFloat(data.totalTaxCharged).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
-                    }
-                },
-                {
-                    field: "totalAmountPaid", title: "Tax Amount Paid", width: '20%', attributes: { style: "text-align:right;" }, template: function (data) {
-                        return parseFloat(data.totalAmountPaid).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
-                    }
-                },
-                {
-                    command: [{
-                        name: "view",
-                        template: "<button title='View item' class='btn btn-success btn-sm' style='margin-right: 2px'><span class='fa fa-file fa-lg'></span></button>"
-                    }],
-                    title: "Actions",
-                    width: "90px"
-                }
-            ]
+                { field: "submittedDate", headerText: "Date Submitted", width: 80 },
+                { field: "employerName", headerText: "Employer Name", width: 120 },
+                { field: "employerTin", headerText: "Employer TIN", width: 80 },
+                { field: 'totalTaxCharged', headerText: 'Total Tax Charged', width: 100 },
+                { field: 'totalAmountPaid', headerText: 'Tax Amount Paid', width: 100 },
+            ],
+            height: 350,
+            pageSettings: { pageSize: 10 },
+            allowGrouping: true,
+            allowPaging: true,
+            allowSorting: false,
+            allowFiltering: true,
+            filterSettings: { type: 'Menu' },
+            rowSelected: rowSelected2,
         });
+
+        grid.appendTo('#Grid');
+        gridGlobal2 = grid;
     } else {
 
         toastr.info("No Data");
-    }
+    };
 };
 
-var onDataBound = function () {
+var convertDateToFormatDetails = function(input) {
+    if (input == null || input == undefined)
+        return
 
+    var time = input.toString().split("T")[1];
+    input = input.toString().split("T")[0];
+    var datePart = input.match(/\d+/g),
+        year = datePart[0],
+        month = datePart[1], day = datePart[2];
+
+    return day + '/' + month + '/' + year + " ";
 };
 
 var bootstrapPage = function () {
@@ -168,7 +226,9 @@ var searchPaye = function () {
                     replaceAt(searchItem, i, '%2F');
             }
         }
-        $("#Grid").data("kendoGrid").dataSource.data([]);
+
+        //$("#Grid").data("kendoGrid").dataSource.data([]);
+
         let url = `${searchPayeByTaxOffice}?officeId=` + activeTaxOffice + `&periodId=` + activePeriod + `&searchItem=` + searchItem;
         apiCaller(url, "GET", "", initializeKendoGrid);
     } else {
@@ -191,18 +251,50 @@ $("#backToGrid").click(function () {
     hideAndShow();
 });
 
-$("body").on('click', '#Grid .k-grid-content .btn', function (e) {
+//$("body").on('click', '#Grid .k-grid-content .btn', function (e) {
 
-    var grid = $("#Grid").getKendoGrid();
-    var item = grid.dataItem($(e.target).closest("tr"));
+//    var grid = $("#Grid").getKendoGrid();
+//    var item = grid.dataItem($(e.target).closest("tr"));
+//    var detailsUrl = `${payeDetailsUrl}?payeId=` + item.id;
+//    $("#applicationId").val(item.id);
+
+//    apiCaller(detailsUrl, "GET", "", loadDetailsView);
+//});
+
+function rowSelected2(args) {
+    var selectedrecords = gridGlobal2.getSelectedRecords();
+    onGridSelected2(selectedrecords[0]);
+};
+
+var onGridSelected2 = function (item) {
     var detailsUrl = `${payeDetailsUrl}?payeId=` + item.id;
     $("#applicationId").val(item.id);
 
     apiCaller(detailsUrl, "GET", "", loadDetailsView);
-});
+};
 
 $("#moreDetailsView").click(function () {
-    var url = `${employeeDetails}?payeId=` + $("#applicationId").val();
+    var url = `${employeeDetails}?payeId=` + $("#applicationId").val(); //pagination here 
+    apiCaller(url, "GET", "", loadEmployeeTable)
+});
+
+$("#firstPageOftheDocument").click(function () {
+    var url = `${employeeDetails}?payeId=` + $("#applicationId").val() + `&PageNumber=${1}&PageSize=${pageSizeEmployees}`;
+    apiCaller(url, "GET", "", loadEmployeeTable)
+});
+
+$("#previousPageOfDocument").click(function () {
+    var url = `${employeeDetails}?payeId=` + $("#applicationId").val() + `&PageNumber=${currentPageNumber > 1 ? currentPageNumber - 1 : 1}&PageSize=${pageSizeEmployees}`;
+    apiCaller(url, "GET", "", loadEmployeeTable)
+});
+
+$("#nextPageOfDocument").click(function () {
+    var url = `${employeeDetails}?payeId=` + $("#applicationId").val() + `&PageNumber=${currentPageNumber >= totalPageNumber ? totalPageNumber : currentPageNumber + 1}&PageSize=${pageSizeEmployees}`; //pagination here 
+    apiCaller(url, "GET", "", loadEmployeeTable)
+});
+
+$("#lastPageOftheDocument").click(function () {
+    var url = `${employeeDetails}?payeId=` + $("#applicationId").val() + `&PageNumber=${totalPageNumber}&PageSize=${pageSizeEmployees}`;
     apiCaller(url, "GET", "", loadEmployeeTable)
 });
 
@@ -230,7 +322,7 @@ var loadDetailsView = function (resp) {
         $("#payeDetailsView").show();
         $("#employeeListView").hide();
         $("#companyName").text(resp[0].employerName);
-        $("#dateSubmitted").text(convertDateToFormat(resp[0].submittedDate));
+        $("#dateSubmitted").text(resp[0].submittedDate);
         $("#companyTIN").text(resp[0].employerTin);
         $("#companyTIN2").text(resp[0].employerTin);
         $("#taxOfficeName").text(resp[0].employerTaxOffice);
@@ -261,7 +353,93 @@ var loadDetailsView = function (resp) {
 
 };
 
+//var loadEmployeeTable = function (data) {
+
+//    for (var i = 0; i < data.length; i++) {
+
+//        data[i].isSecondaryEmployement ? data[i].isSecondaryEmployement = "YES" : data[i].isSecondaryEmployement = "NO";
+//        data[i].isResident ? data[i].isResident = "RESIDENT" : data[i].isResident = "NON RESIDENT";
+//        data[i].basicSalary = parseFloat(data[i].basicSalary).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+//        data[i].cashAllowances = parseFloat(data[i].cashAllowances).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+//        data[i].bonusIncome = parseFloat(data[i].bonusIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+//        data[i].overtimeIncome = parseFloat(data[i].overtimeIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+//        data[i].nonCashBenefit = parseFloat(data[i].nonCashBenefit).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+//        data[i].thirdTierPension = parseFloat(data[i].thirdTierPension).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+//        data[i].severancePayPaid = parseFloat(data[i].severancePayPaid).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+//        data[i].socialSecurity = parseFloat(data[i].socialSecurity).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+//        data[i].finalTaxOnBonus = parseFloat(data[i].finalTaxOnBonus).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+//        data[i].excessBonus = parseFloat(data[i].excessBonus).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+//        data[i].totalCashEmolument = parseFloat(data[i].totalCashEmolument).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+//        data[i].accommodationElement = parseFloat(data[i].accommodationElement).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+//        data[i].vehicleElement = parseFloat(data[i].vehicleElement).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+//        data[i].totalAssessableIncome = parseFloat(data[i].totalAssessableIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+//        data[i].deductibleReliefs = parseFloat(data[i].deductibleReliefs).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+//        data[i].totalReliefs = parseFloat(data[i].totalReliefs).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+//        data[i].chargeableIncome = parseFloat(data[i].chargeableIncome).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+//        data[i].taxDeductible = parseFloat(data[i].taxDeductible).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+//        data[i].overtimeTax = parseFloat(data[i].overtimeTax).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+//        data[i].totalTaxPayableToGra = parseFloat(data[i].totalTaxPayableToGra).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+//    }
+
+//    document.getElementById("employeesGrid").innerHTML = "";
+
+//    var grid = new ej.grids.Grid({
+//        dataSource: data,
+//        enableHover: true,
+//        frozenColumns: 2,
+//        columns: [
+//            { field: 'empName', headerText: 'Employee Name', width: 230 },
+//            { field: 'empTin', headerText: 'TIN', width: 150 },
+//            { field: 'empPosition', headerText: 'Position', width: 150 },
+//            { field: 'isResident', headerText: 'Resident', textAlign: 'Center', width: 150 },
+//            { field: 'isSecondaryEmployement', headerText: 'Secondary Employment', textAlign: 'Center', width: 190 },
+//            { field: 'basicSalary', headerText: 'Basic Salary', textAlign: 'Right', width: 170 },
+//            { field: 'cashAllowances', headerText: 'Cash Allowance', textAlign: 'Right', width: 170 },
+//            { field: 'bonusIncome', headerText: 'Bonus Income', textAlign: 'Right', width: 170 },
+//            { field: 'overtimeIncome', headerText: 'Overtime Income', textAlign: 'Right', width: 170 },
+//            { field: 'nonCashBenefit', headerText: 'Non-Cash Benefit', textAlign: 'Right', width: 170 },
+//            { field: 'thirdTierPension', headerText: 'Tier 3', textAlign: 'Right', width: 170 },
+//            { field: 'severancePayPaid', headerText: 'Severance Pay Paid', textAlign: 'Right', width: 170 },
+//            { field: 'socialSecurity', headerText: 'Social Security', textAlign: 'Right', width: 170 },
+//            { field: 'finalTaxOnBonus', headerText: 'Final Tax On Bonus', textAlign: 'Right', width: 170 },
+//            { field: 'excessBonus', headerText: 'Excess Bonus', textAlign: 'Right', width: 170 },
+//            { field: 'totalCashEmolument', headerText: 'Total Cash Emolument', textAlign: 'Right', width: 190 },
+//            { field: 'accommodationElement', headerText: 'Accomodation Element', textAlign: 'Right', width: 190 },
+//            { field: 'vehicleElement', headerText: 'Vehicle Element', textAlign: 'Right', width: 170 },
+//            { field: 'totalAssessableIncome', headerText: 'Total Assessable Income', textAlign: 'Right', width: 200 },
+//            { field: 'deductibleReliefs', headerText: 'Deductible Reliefs', textAlign: 'Right', width: 170 },
+//            { field: 'totalReliefs', headerText: 'Total Relief', textAlign: 'Right', width: 170 },
+//            { field: 'chargeableIncome', headerText: 'Chargeable Income', textAlign: 'Right', width: 170 },
+//            { field: 'taxDeductible', headerText: 'Tax Deductible', textAlign: 'Right', width: 170 },
+//            { field: 'overtimeTax', headerText: 'Overtime Tax', textAlign: 'Right', width: 170 },
+//            { field: 'totalTaxPayableToGra', headerText: 'Total Tax Payable to GRA', textAlign: 'Right', width: 200 },
+//        ],
+//        height: 450,
+//        pageSettings: { pageSize: 100 },
+//        allowGrouping: false,
+//        allowPaging: false,
+//        allowSorting: false,
+//        allowFiltering: false,
+//        filterSettings: { type: 'Menu' },
+//    });
+
+//    grid.appendTo('#employeesGrid');
+//    gridGlobal = grid;
+
+//    $("#payeDetailsView").hide();
+//    $("#employeeListView").show();
+//};
+
 var loadEmployeeTable = function (data) {
+
+    $("#pageNumberPagination").text(data.paging.pageNumber);
+    $("#totalPagesPagination").text(data.paging.totalPages);
+    $("#totalItemsPagination").text(data.paging.totalItems);
+
+    currentPageNumber = data.paging.pageNumber;
+    totalPageNumber = data.paging.totalPages
+
+    var data = data.items;
 
     for (var i = 0; i < data.length; i++) {
 
@@ -290,7 +468,7 @@ var loadEmployeeTable = function (data) {
     }
 
     document.getElementById("employeesGrid").innerHTML = "";
-     
+
     var grid = new ej.grids.Grid({
         dataSource: data,
         enableHover: true,
@@ -300,7 +478,7 @@ var loadEmployeeTable = function (data) {
             { field: 'empTin', headerText: 'TIN', width: 150 },
             { field: 'empPosition', headerText: 'Position', width: 150 },
             { field: 'isResident', headerText: 'Resident', textAlign: 'Center', width: 150 },
-            //{ field: 'isSecondaryEmployement', headerText: 'Secondary Employment', textAlign: 'Center', width: 180 },
+            { field: 'isSecondaryEmployement', headerText: 'Secondary Employment', textAlign: 'Center', width: 190 },
             { field: 'basicSalary', headerText: 'Basic Salary', textAlign: 'Right', width: 170 },
             { field: 'cashAllowances', headerText: 'Cash Allowance', textAlign: 'Right', width: 170 },
             { field: 'bonusIncome', headerText: 'Bonus Income', textAlign: 'Right', width: 170 },
@@ -311,21 +489,21 @@ var loadEmployeeTable = function (data) {
             { field: 'socialSecurity', headerText: 'Social Security', textAlign: 'Right', width: 170 },
             { field: 'finalTaxOnBonus', headerText: 'Final Tax On Bonus', textAlign: 'Right', width: 170 },
             { field: 'excessBonus', headerText: 'Excess Bonus', textAlign: 'Right', width: 170 },
-            { field: 'totalCashEmolument', headerText: 'Total Cash Emolument', textAlign: 'Right', width: 170 },
-            { field: 'accommodationElement', headerText: 'Accomodation Element', textAlign: 'Right', width: 170 },
+            { field: 'totalCashEmolument', headerText: 'Total Cash Emolument', textAlign: 'Right', width: 190 },
+            { field: 'accommodationElement', headerText: 'Accomodation Element', textAlign: 'Right', width: 190 },
             { field: 'vehicleElement', headerText: 'Vehicle Element', textAlign: 'Right', width: 170 },
-            { field: 'totalAssessableIncome', headerText: 'Total Assessable Income', textAlign: 'Right', width: 170 },
+            { field: 'totalAssessableIncome', headerText: 'Total Assessable Income', textAlign: 'Right', width: 200 },
             { field: 'deductibleReliefs', headerText: 'Deductible Reliefs', textAlign: 'Right', width: 170 },
             { field: 'totalReliefs', headerText: 'Total Relief', textAlign: 'Right', width: 170 },
             { field: 'chargeableIncome', headerText: 'Chargeable Income', textAlign: 'Right', width: 170 },
             { field: 'taxDeductible', headerText: 'Tax Deductible', textAlign: 'Right', width: 170 },
             { field: 'overtimeTax', headerText: 'Overtime Tax', textAlign: 'Right', width: 170 },
-            { field: 'totalTaxPayableToGra', headerText: 'Total Tax Payable to GRA', textAlign: 'Right', width: 170 },
+            { field: 'totalTaxPayableToGra', headerText: 'Total Tax Payable to GRA', textAlign: 'Right', width: 200 },
         ],
-        height: 450,
+        height: 480,
         pageSettings: { pageSize: 100 },
         allowGrouping: false,
-        allowPaging: false,
+        allowPaging: true,
         allowSorting: false,
         allowFiltering: false,
         filterSettings: { type: 'Menu' },

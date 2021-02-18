@@ -157,9 +157,9 @@ var searchTex = function () {
 
         if (activeUserGroup.toLowerCase() == "manager")
             url = `${searchTexByTaxOffice}?officeId=` + activeTaxOffice + "&queryString=" + searchItem;
-        else if (activeUserGroup.toLowerCase() == "commissioner")
+        else if (activeUserGroup.toLowerCase() == "commissioner" || activeUserGroup.toLowerCase() == "commisioner")
             url = `${searchTexCommissioner}?officeId=` + activeTaxOffice + "&status=" + 7 + "&queryString=" + searchItem;
-        else if (activeUserGroup.toLowerCase() == "deputy commissioner")
+        else if (activeUserGroup.toLowerCase() == "deputy commissioner" || activeUserGroup.toLowerCase() == "deputy commisioner")
             url = `${searchTexCommissioner}?officeId=` + activeTaxOffice + "&status=" + 6 + "&queryString=" + searchItem;
 
         apiCaller(url, "GET", "", initializeKendoGrid);

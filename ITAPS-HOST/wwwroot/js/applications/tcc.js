@@ -29,7 +29,7 @@ var initializeKendoGrid = function (data, stage) {
             dataSource: data,
             selectionSettings: { type: 'Multiple' },
             columns: [
-                { field: 'assignedDate', headerText: 'Date Assigned', width: 80, format: 'yMd' },
+                { field: 'assignedDate', headerText: 'Date Assigned', width: 80 },
                 { field: 'applicantName', headerText: 'Applicant', width: 120 },
                 { field: 'applicantTIN', headerText: 'TIN', width: 60 },
                 { field: 'applicationType', headerText: 'Application Type', width: 90 },
