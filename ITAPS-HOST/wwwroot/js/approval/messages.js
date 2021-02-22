@@ -239,7 +239,7 @@ var previewCertificate = function () {
         let appId = $("#appId").val();
         sessionStorage.setItem("texReportId", appId);
         sessionStorage.setItem("texLabel", "uniApplicationId");
-        window.location.href = `${ReportDownloadView}`;
+        window.location.href = `${ReportDownloadViewTEX}`;
 
     } else {
 
