@@ -14,7 +14,7 @@ var activePeriod = "";
 var activeCompany = "";
 var activeYear = "";
 var currentPageNumber = 0;
-var totalPageNumber = 0;
+var totalPageNumber = 0; 
 var pageSizeEmployees = 500;
 
 $(document).ready(function () {
