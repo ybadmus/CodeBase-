@@ -5,6 +5,7 @@ var serverUrl = $("#serverUrl").val();
 var activeTaxOffice = "";
 var searchAprApps = `${serverUrl}api/TCC/GetAppByOfficeTypeAndStatus`;
 var ReportDownloadView = `${serverUrl}reportviewer/index`;
+var ReportDownloadViewTEX = `${serverUrl}reportviewer/texcert`;
 
 $(document).ready(function () {
 
@@ -73,16 +74,22 @@ function rowSelected(args) {
 
 var onGridSelected = function (item) {
 
-    if (item.applicationType === "TCC") {
+    if (item.applicationType.toUpperCase() === "TCC") {
 
         sessionStorage.setItem("tccReportId", item.applicationId);
         sessionStorage.setItem("tccLabel", "uniApplicationId");
         window.location.href = `${ReportDownloadView}`;
+    } else if (item.applicationType.toUpperCase() === "WHT Exemption".toUpperCase()) {
+
+        sessionStorage.setItem("texReportId", item.applicationId);
+        sessionStorage.setItem("texLabel", "uniApplicationId");
+        window.location.href = `${ReportDownloadViewTEX}`;
+
     } else {
 
         return toastr.info("No Preview Available");
     }
-  
+
 };
 
 $("#listOfTaxOffices").on('change', function () {
