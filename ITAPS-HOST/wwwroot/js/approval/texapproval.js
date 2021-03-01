@@ -152,7 +152,8 @@ var bootstrapPage = function () {
 
     $("#expiryDateTcc").flatpickr({
         maxDate: calculateTwelveMonths(),
-        minDate: 'today'
+        minDate: 'today',
+        dateFormat: "d-m-Y"
     });
 
     initializeKendoGrid([], 1);
@@ -285,12 +286,12 @@ var loadAppDetails = function (resp) {
 
 var loadTaxPositionDetails = function (listOfSummaryAPI) {
 
+    if (listOfSummaryAPI[0].taxPositions == null)
+        return;
+
     var listOfSummary = listOfSummaryAPI[0].taxPositions;
 
     let output = "";
-
-    if (listOfSummary === null)
-        return;
 
     for (var i = listOfSummary.length - 1; i >= 0; i--) {
         var negativeValues = listOfSummary[i].taxOutstanding < 0 ? "(" + Math.abs(listOfSummary[i].taxOutstanding).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + ")" : listOfSummary[i].taxOutstanding.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
@@ -372,7 +373,7 @@ $("#approveDeclineReturnBtn").click(function () {
 
     if (selectedStatus == 2) {
 
-        approveTEX();
+        $("#approveModal").modal("show");
 
     } else {
 
@@ -391,7 +392,14 @@ $("#approveDeclineReturnBtn").click(function () {
 });
 
 $("#continueApproval").click(function () {
-    approveTEX();
+    $("#yesOrNo").modal("show");
+    $("#approveModal").modal("hide");
+    $("#approveDecline").modal("hide");
+
+    $("#approvalPurpose").text($("#reason").text());
+    $("#approvalApplicantName").text($("#applicantName").text());
+    $("#approvalRequestingEntity").text($("#typeOfWht").text());
+    $("#approvalExpiryDate").text($("#expiryDateTcc").val());
 });
 
 var approveTEX = function () {
@@ -414,3 +422,13 @@ var backToGrid = function () {
         window.location.href = `${serverUrl}approval/texapproval`;
     }, 3000);
 };
+
+$("#yesBtn").click(function () {
+    approveTEX();
+});
+
+$("#noYesBtn").click(function () {
+    $("#yesOrNo").modal("hide");
+    $("#approveModal").modal("show");
+    $("#approveDecline").modal("show");
+});
