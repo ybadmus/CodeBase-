@@ -253,7 +253,10 @@ var previewCertificate = function () {
 };
 
 var removeEntryFromGrid = function (id) {
-    var displayedData = $('#Grid').data("kendoGrid").dataSource.data().toJSON()
+    var displayedData = gridGlobal.dataSource;
+    //var displayedData = $('#Grid').data("kendoGrid").dataSource.data().toJSON()
+
+    //gridGlobal.dataSource;
 
     for (var i = 0; i < displayedData.length; i++) {
         if (id == displayedData[i].applicationId) {
