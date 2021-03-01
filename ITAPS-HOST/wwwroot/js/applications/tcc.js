@@ -36,7 +36,7 @@ var initializeKendoGrid = function (data, stage) {
                 { field: 'status', headerText: 'Status', width: 100 },
                 { type: 'button', width: 30 },
             ],
-            height: 350,
+            height: 400,
             pageSettings: { pageSize: 10 },
             allowGrouping: true,
             allowPaging: true,
