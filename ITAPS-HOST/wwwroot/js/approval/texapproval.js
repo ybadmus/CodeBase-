@@ -10,7 +10,7 @@ var GetAppDetailsById = `${serverUrl}api/TEX/GetWHTExApplicationById?whtId=`;
 var activeTaxOffice = "";
 var activeUserGroup = "";
 var ReportDownloadViewTEX = `${serverUrl}reportviewer/texcert`;
-var selectedStatus; 
+var selectedStatus;
 var gridGlobal;
 var tccUpdateUrl = `${serverUrl}api/TCC/UpdateTCCApplication?id=`;
 
@@ -18,32 +18,6 @@ $("#texListOfTaxOffices").on('change', function () {
     var elem = document.getElementById("texListOfTaxOffices");
     activeTaxOffice = elem.options[elem.selectedIndex].value;
 });
-
-//var initializeKendoGrid = function (data) {
-
-//    $("#Grid").kendoGrid({
-//        dataSource: { data: data, pageSize: 8 },
-//        sortable: true,
-//        selectable: true,
-//        pageable: { refresh: false, pageSizes: true, buttonCount: 5 },
-//        columns: [
-//            { field: "statusDate", title: "Date", width: '90px' },
-//            { field: "applicationNo", title: "Application No.", width: '100px' },
-//            { field: "applicantName", title: "Applicant", width: '25%' },
-//            { field: "applicantTIN", title: "Applicant TIN", width: '15%' },
-//            { field: "applicationType", title: "WHT Type", width: '30%' },
-//            {
-//                command: [{
-//                    name: "view",
-//                    template: "<button title='View item' class='btn btn-success btn-sm' style=''><span class='fa fa-file fa-lg'></span></button>"
-//                }],
-//                title: "Actions",
-//                width: "70px"
-//            }
-//        ]
-//    });
-
-//};
 
 var initializeKendoGrid = function (data, stage) {
     document.getElementById("Grid").innerHTML = "";
@@ -238,14 +212,6 @@ $("#reviseApp").click(function (e) {
     $("#approveDecline").modal("show");
 });
 
-//$("body").on('click', '#Grid .k-grid-content .btn', function (e) {
-//    var grid = $("#Grid").getKendoGrid();
-//    var item = grid.dataItem($(e.target).closest("tr"));
-
-//    $("#appId").val(item.applicationId);
-//    prepareDetailsView(item.applicationId);
-//});
-
 var onGridSelected = function (item) {
 
     $("#appId").val(item.applicationId);
@@ -273,7 +239,7 @@ var loadAppDetails = function (resp) {
     $("#typeOfWht").text(response.typeOfWithHolding);
     $("#typeOfApp").text("WHT Tax Exemption");
     $("#residentialStatus").text(response.residentialStatus);
-    $("#remarks").text(response.remarks); 
+    $("#remarks").text(response.remarks);
     $("#reason").text(response.reasons);
     $("#appNo").text(response.applicationNo);
     $("#appNoMore").text(response.applicationNo);
@@ -286,44 +252,49 @@ var loadAppDetails = function (resp) {
 
 var loadTaxPositionDetails = function (listOfSummaryAPI) {
 
-    if (listOfSummaryAPI[0].taxPositions == null)
-        return;
+    if (listOfSummaryAPI != null) {
 
-    var listOfSummary = listOfSummaryAPI[0].taxPositions;
+        var listOfSummary = listOfSummaryAPI[0].taxPositions;
 
-    let output = "";
+        let output = "";
 
-    for (var i = listOfSummary.length - 1; i >= 0; i--) {
-        var negativeValues = listOfSummary[i].taxOutstanding < 0 ? "(" + Math.abs(listOfSummary[i].taxOutstanding).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + ")" : listOfSummary[i].taxOutstanding.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        for (var i = listOfSummary.length - 1; i >= 0; i--) {
+            var negativeValues = listOfSummary[i].taxOutstanding < 0 ? "(" + Math.abs(listOfSummary[i].taxOutstanding).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + ")" : listOfSummary[i].taxOutstanding.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
 
-        if (listOfSummary[i].status == "NLT") {
+            if (listOfSummary[i].status == "NLT") {
 
-            output = output + '<tr><td align="center" id="assessmentYear' + i + '">'
-                + listOfSummary[i].assessmentYear + '</td><td align="center" style="color: black" class="">'
-                + listOfSummary[i].status + '</td><td align="right" style="color: black" class="valueCell">NIL</td><td align="right" style="color: black" class="">NIL</td><td align="right" style="color: black" class="valueCell">NIL</td><td align="right" style="color: black" class="">NIL</td></tr>';
+                output = output + '<tr><td align="center" id="assessmentYear' + i + '">'
+                    + listOfSummary[i].assessmentYear + '</td><td align="center" style="color: black" class="">'
+                    + listOfSummary[i].status + '</td><td align="right" style="color: black" class="valueCell">NIL</td><td align="right" style="color: black" class="">NIL</td><td align="right" style="color: black" class="valueCell">NIL</td><td align="right" style="color: black" class="">NIL</td></tr>';
 
-        } else {
+            } else {
 
-            output = output + '<tr><td align="center" id="assessmentYear' + i + '">'
-                + listOfSummary[i].assessmentYear + '</td><td align="center" style="color: black" class="">'
-                + listOfSummary[i].status + '</td><td align="right" style="color: black" class="valueCell">'
-                + listOfSummary[i].chargeableIncome.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + '</td><td align="right" style="color: black"  class="">'
-                + listOfSummary[i].taxCharged.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + '</td><td align="right" style="color: black" class="valueCell">'
-                + listOfSummary[i].taxPaid.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + '</td><td align="right" style="color: black" class="">'
-                + negativeValues + '</td></tr>';
+                output = output + '<tr><td align="center" id="assessmentYear' + i + '">'
+                    + listOfSummary[i].assessmentYear + '</td><td align="center" style="color: black" class="">'
+                    + listOfSummary[i].status + '</td><td align="right" style="color: black" class="valueCell">'
+                    + listOfSummary[i].chargeableIncome.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + '</td><td align="right" style="color: black"  class="">'
+                    + listOfSummary[i].taxCharged.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + '</td><td align="right" style="color: black" class="valueCell">'
+                    + listOfSummary[i].taxPaid.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + '</td><td align="right" style="color: black" class="">'
+                    + negativeValues + '</td></tr>';
+            }
+
         }
 
+        output = output;
+        $("#TaxPositionSummaryGrid").html(output);
+
+        hideAndShow();
+
+        $("#confirmationBox").prop("checked", listOfSummaryAPI[0].paidTaxLiabilities);
+        $("#confirmationBoxPaye").prop("checked", listOfSummaryAPI[0].paidWithholdingTax);
+        $("#confirmationBoxAll").prop("checked", listOfSummaryAPI[0].submittedTaxReturns);
+        $("#confirmationBoxGRA").prop("checked", listOfSummaryAPI[0].registeredWithGRA);
+
+    } else {
+
+        toastr.info("Tax position for this application could not be loaded, Please check if the tax position were added by officer")
+        return;
     }
-
-    output = output;
-    $("#TaxPositionSummaryGrid").html(output);
-
-    hideAndShow();
-
-    $("#confirmationBox").prop("checked", listOfSummaryAPI[0].paidTaxLiabilities);
-    $("#confirmationBoxPaye").prop("checked", listOfSummaryAPI[0].paidWithholdingTax);
-    $("#confirmationBoxAll").prop("checked", listOfSummaryAPI[0].submittedTaxReturns);
-    $("#confirmationBoxGRA").prop("checked", listOfSummaryAPI[0].registeredWithGRA);
 
 };
 

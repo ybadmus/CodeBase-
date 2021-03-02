@@ -30,7 +30,7 @@ var loadDetailsView = function () {
 
     if (appTypeId === "")
         appTypeId = "870301ea-f62e-4788-9905-7c94a26813d3";
-        
+
     let url = `${GetTccByIdUrl}` + appId + `&appTypeId=${appTypeId}`;
 
     apiCaller(url, "GET", "", loadDetails)
@@ -65,7 +65,7 @@ var getTccDocumentsById = function () {
     apiCaller(url, "GET", "", appendDocumentsToTable)
 };
 
-var loadOldAgeReliefDetail = function(resp) {
+var loadOldAgeReliefDetail = function (resp) {
     $("#oldAgeDocIssueBy").text(testNullOrEmpty(resp[0].birthCertIssueBy));
     $("#oldAgeDocIssueNo").text(testNullOrEmpty(resp[0].birthCertIssueNo));
     $("#oldAgeDocSignedBy").text(testNullOrEmpty(resp[0].birthCertSignedBy));
@@ -73,7 +73,7 @@ var loadOldAgeReliefDetail = function(resp) {
     $("#oldAgeReliefBirthDoc").attr("href", resp[0].birthCertDocument);
 };
 
-var loadAgedDependantReliefModal = function(resp) {
+var loadAgedDependantReliefModal = function (resp) {
     $("#agedDependentFullName").text(testNullOrEmpty(resp.firstName + " " + resp.middleName + " " + resp.lastName));
     $("#agedDependentDOB").text(testNullOrEmpty(resp.agedDateOfBirth));
     $("#agedDependentGender").text(testNullOrEmpty(resp.gender === "M" ? "Male" : "Female"));
@@ -86,7 +86,7 @@ var loadAgedDependantReliefModal = function(resp) {
     $("#dependentDetails").modal("show");
 };
 
-var loadChildWardDependantReliefModal = function(resp) {
+var loadChildWardDependantReliefModal = function (resp) {
     $("#childDependentFullName").text(testNullOrEmpty(resp.firstName + " " + resp.middleName + " " + resp.lastName));
     $("#childDependentSchoolName").text(testNullOrEmpty(resp.schoolName));
     $("#childDependentDateOfAdmission").text(testNullOrEmpty(resp.dateOfAdmission));
@@ -143,7 +143,7 @@ var loadAgedDependentReliefDetail = function (resp) {
 var previewChildDependent = function (rowInfo) {
     var appDetail = JSON.parse(sessionStorage.getItem("listOfChildWardDependents"));
     var dependants = appDetail[0].childDetails;
-    for(var i = 0; i < dependants.length; i++) {
+    for (var i = 0; i < dependants.length; i++) {
         if (dependants[i].dependantId === rowInfo.id) {
             return loadChildWardDependantReliefModal(dependants[i]);
         }
@@ -153,7 +153,7 @@ var previewChildDependent = function (rowInfo) {
 var previewDependent = function (rowInfo) {
     var appDetail = JSON.parse(sessionStorage.getItem("listOfAgedDependents"));
     var dependants = appDetail[0].agedDepandantsDetails;
-    for(var i = 0; i < dependants.length; i++) {
+    for (var i = 0; i < dependants.length; i++) {
         if (dependants[i].dependentId === rowInfo.id) {
             return loadAgedDependantReliefModal(dependants[i]);
         }
@@ -225,15 +225,15 @@ var loadDetailsTex = function (resp) {
     $("#applicantPhoneTex").text(testNullOrEmpty(resp[0].phoneNo));
     $(".applicationTaxOffice").text(testNullOrEmpty(resp[0].taxOffice));
 
-    $("#appIdHeader").text(testNullOrEmpty(resp[0].applicationNo)); 
+    $("#appIdHeader").text(testNullOrEmpty(resp[0].applicationNo));
     $("#appStatusHeader").text(testNullOrEmpty(resp[0].status));
     $("#modalId").text(testNullOrEmpty(resp[0].applicationNo));
     $("#statusNameModal").text(testNullOrEmpty(resp[0].status));
     $("#currentStatus").text(resp[0].statusId);
     $("#taxpayerId").text(testNullOrEmpty(resp[0].applicantId));
- };
+};
 
- var loadDetailsPtr = function (resp) {
+var loadDetailsPtr = function (resp) {
     decideNextTccStage(resp[0].statusId);
 
     $("#appIdHeader").text(testNullOrEmpty(resp[0].applicationNo));
@@ -517,7 +517,7 @@ var decideNextTccStage = function (statusId) {
                 $("#reviseApplication").hide();
                 $("#reviseApplication").attr("disabled", true);
             }
-           
+
             break;
         case 3:
             $("#addTaxPosition").hide();
@@ -581,7 +581,7 @@ var decideNextTccStage = function (statusId) {
                 $("#reviseApplication").show();
                 $("#reviseApplication").attr("disabled", false);
             }
-          
+
             break;
         case 5:
             $("#processApplication").hide();
@@ -617,7 +617,69 @@ var decideNextTccStage = function (statusId) {
             break;
 
         case 6:
+            $("#processApplication").hide();
+            $("#dismissModal").hide();
+            $("#previewTcc").hide();
+            $("#downloadTcc").hide();
+            $("#acknowledgeStatus").hide();
+            $("#sendForApproval").hide();
+            $("#appStatusHeader").text("PENDING APPROVAL");
 
+            if (loc.substring(loc.lastIndexOf('/') + 1) === "reassign") {
+
+                $("#assApplication").hide();
+                $("#reviseApplication").hide();
+                $("#previewApplication").hide();
+                $("#reassApplication").show();
+
+            } else if (loc.substring(loc.lastIndexOf('/') + 1) === "applicantapplications") {
+
+                $("#assApplication").hide();
+                $("#reviseApplication").hide();
+                $("#previewApplication").hide();
+                $("#reassApplication").hide();
+
+            } else {
+
+                $("#assApplication").hide();
+                $("#reassApplication").hide();
+                $("#previewApplication").hide();
+                $("#reviseApplication").show();
+                $("#reviseApplication").attr("disabled", true);
+            }
+
+            break;
+        case 7:
+            $("#processApplication").hide();
+            $("#dismissModal").hide();
+            $("#previewTcc").hide();
+            $("#downloadTcc").hide();
+            $("#acknowledgeStatus").hide();
+            $("#sendForApproval").hide();
+            $("#appStatusHeader").text("PENDING APPROVAL");
+
+            if (loc.substring(loc.lastIndexOf('/') + 1) === "reassign") {
+
+                $("#assApplication").hide();
+                $("#reviseApplication").hide();
+                $("#previewApplication").hide();
+                $("#reassApplication").show();
+
+            } else if (loc.substring(loc.lastIndexOf('/') + 1) === "applicantapplications") {
+
+                $("#assApplication").hide();
+                $("#reviseApplication").hide();
+                $("#previewApplication").hide();
+                $("#reassApplication").hide();
+
+            } else {
+
+                $("#assApplication").hide();
+                $("#reassApplication").hide();
+                $("#previewApplication").hide();
+                $("#reviseApplication").show();
+                $("#reviseApplication").attr("disabled", true);
+            }
 
             break;
         default:
