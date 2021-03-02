@@ -11,7 +11,7 @@
     <StartupObject />
     <UserSecretsId>08f4a303-ae87-40ba-910e-a4a8e0910d9c</UserSecretsId>
   </PropertyGroup>
-
+ 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
