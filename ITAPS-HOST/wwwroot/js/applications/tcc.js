@@ -82,7 +82,7 @@ var loadTaxOffices = function (listOfTaxOffices) {
 };
 
 var bootstrapPage = function () {
-    var userid = $("#userId").val(); //save in layout file
+    var userid = $("#userId").val();
     var tccUrl = `${serverUrl}api/Users/GetAllUserTaxOfficesByUserID?userId=` + userid;
 
     apiCaller(tccUrl, "GET", "", loadTaxOffices);
@@ -122,9 +122,8 @@ var validateSearchEntry = function () {
 };
 
 var searchTcc = function () {
-    //if (validateSearchEntry()) {
 
-    let searchItem = "*"; //$("#searchItem").val().trim();
+    let searchItem = "*";
     if (searchItem.includes('/')) {
         for (var i = 0; i < searchItem.length; i++) {
             if (searchItem[i] === '/')
@@ -134,10 +133,6 @@ var searchTcc = function () {
     let url = `${searchTccByTaxOffice}?queryString=` + searchItem.trim();
     apiCaller(url, "GET", "", initializeKendoGrid);
 
-    //} else {
-
-    //    toastr.error("Tax office or search item field is empty");
-    //}
 }
 
 $("#btnSearch").click(function (e) {
