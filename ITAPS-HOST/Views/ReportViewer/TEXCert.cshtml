@@ -1,5 +1,4 @@
-﻿texReportId
-@{
+﻿@{
     ViewData["Title"] = "TEXCert";
 }
 
@@ -33,6 +32,10 @@
     $("#pgHeader").text("Withholding Tax Exemption");
 
     var serverUrl = $("#serverUrl").val();
+
+    $(".pb-3").contents().filter(function () {
+        return this.nodeType != 1;
+    }).replaceWith("");
 
     var parameters = [];
     parameters.push({ name: sessionStorage.getItem("texLabel"), labels: [sessionStorage.getItem("texReportId")], values: [sessionStorage.getItem("texReportId")], nullable: "true" });

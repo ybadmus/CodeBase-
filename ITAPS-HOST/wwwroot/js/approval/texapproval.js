@@ -11,6 +11,7 @@ var activeTaxOffice = "";
 var activeUserGroup = "";
 var ReportDownloadViewTEX = `${serverUrl}reportviewer/texcert`;
 var selectedStatus; 
+var gridGlobal;
 var tccUpdateUrl = `${serverUrl}api/TCC/UpdateTCCApplication?id=`;
 
 $("#texListOfTaxOffices").on('change', function () {
@@ -18,30 +19,74 @@ $("#texListOfTaxOffices").on('change', function () {
     activeTaxOffice = elem.options[elem.selectedIndex].value;
 });
 
-var initializeKendoGrid = function (data) {
+//var initializeKendoGrid = function (data) {
 
-    $("#Grid").kendoGrid({
-        dataSource: { data: data, pageSize: 8 },
-        sortable: true,
-        selectable: true,
-        pageable: { refresh: false, pageSizes: true, buttonCount: 5 },
-        columns: [
-            { field: "statusDate", title: "Date", width: '90px' },
-            { field: "applicationNo", title: "Application No.", width: '100px' },
-            { field: "applicantName", title: "Applicant", width: '25%' },
-            { field: "applicantTIN", title: "Applicant TIN", width: '15%' },
-            { field: "applicationType", title: "WHT Type", width: '30%' },
-            {
-                command: [{
-                    name: "view",
-                    template: "<button title='View item' class='btn btn-success btn-sm' style=''><span class='fa fa-file fa-lg'></span></button>"
-                }],
-                title: "Actions",
-                width: "70px"
-            }
-        ]
-    });
+//    $("#Grid").kendoGrid({
+//        dataSource: { data: data, pageSize: 8 },
+//        sortable: true,
+//        selectable: true,
+//        pageable: { refresh: false, pageSizes: true, buttonCount: 5 },
+//        columns: [
+//            { field: "statusDate", title: "Date", width: '90px' },
+//            { field: "applicationNo", title: "Application No.", width: '100px' },
+//            { field: "applicantName", title: "Applicant", width: '25%' },
+//            { field: "applicantTIN", title: "Applicant TIN", width: '15%' },
+//            { field: "applicationType", title: "WHT Type", width: '30%' },
+//            {
+//                command: [{
+//                    name: "view",
+//                    template: "<button title='View item' class='btn btn-success btn-sm' style=''><span class='fa fa-file fa-lg'></span></button>"
+//                }],
+//                title: "Actions",
+//                width: "70px"
+//            }
+//        ]
+//    });
 
+//};
+
+var initializeKendoGrid = function (data, stage) {
+    document.getElementById("Grid").innerHTML = "";
+    if (data == null)
+        data = [];
+
+    if (data) {
+        if (data.length == 0 && stage !== 1) {
+            toastr.info("No Data");
+            data = [];
+        };
+
+        var grid = new ej.grids.Grid({
+            dataSource: data,
+            selectionSettings: { type: 'Multiple' },
+            columns: [
+                { field: 'statusDate', headerText: 'Last Updated', width: 80 },
+                { field: 'applicationNo', headerText: 'Application No.', width: 80 },
+                { field: 'applicantName', headerText: 'Applicant Name', width: 130 },
+                { field: 'applicantTIN', headerText: 'Applicant TIN', width: 80 },
+                { field: 'applicationType', headerText: 'WHT Type', width: 130 }
+            ],
+            height: 400,
+            pageSettings: { pageSize: 10 },
+            allowGrouping: true,
+            allowPaging: true,
+            allowSorting: false,
+            allowFiltering: true,
+            filterSettings: { type: 'Menu' },
+            rowSelected: rowSelected,
+        });
+
+        grid.appendTo('#Grid');
+        gridGlobal = grid;
+    } else {
+
+        toastr.info("No Data");
+    };
+};
+
+function rowSelected(args) {
+    var selectedrecords = gridGlobal.getSelectedRecords();
+    onGridSelected(selectedrecords[0]);
 };
 
 $(document).ready(function () {
@@ -107,10 +152,11 @@ var bootstrapPage = function () {
 
     $("#expiryDateTcc").flatpickr({
         maxDate: calculateTwelveMonths(),
-        minDate: 'today'
+        minDate: 'today',
+        dateFormat: "d-m-Y"
     });
 
-    initializeKendoGrid();
+    initializeKendoGrid([], 1);
 
     var userid = $("#userId").val();
     var tccUrl = `${serverUrl}api/Users/GetAllUserTaxOfficesByUserID?userId=` + userid;
@@ -192,13 +238,19 @@ $("#reviseApp").click(function (e) {
     $("#approveDecline").modal("show");
 });
 
-$("body").on('click', '#Grid .k-grid-content .btn', function (e) {
-    var grid = $("#Grid").getKendoGrid();
-    var item = grid.dataItem($(e.target).closest("tr"));
+//$("body").on('click', '#Grid .k-grid-content .btn', function (e) {
+//    var grid = $("#Grid").getKendoGrid();
+//    var item = grid.dataItem($(e.target).closest("tr"));
+
+//    $("#appId").val(item.applicationId);
+//    prepareDetailsView(item.applicationId);
+//});
+
+var onGridSelected = function (item) {
 
     $("#appId").val(item.applicationId);
     prepareDetailsView(item.applicationId);
-});
+}
 
 var prepareDetailsView = function (appId) {
     let urlTaxPosition = `${loadTaxPositionsUrl}` + appId;
@@ -234,12 +286,12 @@ var loadAppDetails = function (resp) {
 
 var loadTaxPositionDetails = function (listOfSummaryAPI) {
 
+    if (listOfSummaryAPI[0].taxPositions == null)
+        return;
+
     var listOfSummary = listOfSummaryAPI[0].taxPositions;
 
     let output = "";
-
-    if (listOfSummary === null)
-        return;
 
     for (var i = listOfSummary.length - 1; i >= 0; i--) {
         var negativeValues = listOfSummary[i].taxOutstanding < 0 ? "(" + Math.abs(listOfSummary[i].taxOutstanding).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + ")" : listOfSummary[i].taxOutstanding.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
@@ -321,7 +373,7 @@ $("#approveDeclineReturnBtn").click(function () {
 
     if (selectedStatus == 2) {
 
-        approveTEX();
+        $("#approveModal").modal("show");
 
     } else {
 
@@ -340,7 +392,14 @@ $("#approveDeclineReturnBtn").click(function () {
 });
 
 $("#continueApproval").click(function () {
-    approveTEX();
+    $("#yesOrNo").modal("show");
+    $("#approveModal").modal("hide");
+    $("#approveDecline").modal("hide");
+
+    $("#approvalPurpose").text($("#reason").text());
+    $("#approvalApplicantName").text($("#applicantName").text());
+    $("#approvalRequestingEntity").text($("#typeOfWht").text());
+    $("#approvalExpiryDate").text($("#expiryDateTcc").val());
 });
 
 var approveTEX = function () {
@@ -363,3 +422,13 @@ var backToGrid = function () {
         window.location.href = `${serverUrl}approval/texapproval`;
     }, 3000);
 };
+
+$("#yesBtn").click(function () {
+    approveTEX();
+});
+
+$("#noYesBtn").click(function () {
+    $("#yesOrNo").modal("hide");
+    $("#approveModal").modal("show");
+    $("#approveDecline").modal("show");
+});

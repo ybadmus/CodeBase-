@@ -10,41 +10,86 @@ var ReportDownloadView = `${serverUrl}reportviewer/index`;
 var activeTaxOffice = "";
 var selectedStatus;
 var tccUpdateUrl = `${serverUrl}api/TCC/UpdateTCCApplication?id=`;
+var gridGlobal;
 
 $("#tccListOfTaxOffices").on('change', function () {
     var elem = document.getElementById("tccListOfTaxOffices");
     activeTaxOffice = elem.options[elem.selectedIndex].value;
 });
 
-var initializeKendoGrid = function (data) {
+//var initializeKendoGrid = function (data) {
 
-    $("#Grid").kendoGrid({
-        dataSource: { data: data, pageSize: 8 },
-        sortable: true,
-        selectable: true,
-        pageable: { refresh: false, pageSizes: true, buttonCount: 5 },
-        columns: [
-            { field: "statusDate", title: "Date", width: '90px' },
-            { field: "applicationNo", title: "Application No.", width: '15%' },
-            { field: "applicantName", title: "Applicant", width: '20%' },
-            { field: "purpose", title: "Purpose", width: '20%' },
-            { field: "requestingEntity", title: "Requesting Entity", width: '20%' },
-            {
-                command: [{
-                    name: "view",
-                    template: "<button title='View item' class='btn btn-success btn-sm' style=''><span class='fa fa-file fa-lg'></span></button>"
-                }],
-                title: "Actions",
-                width: "70px"
-            }
-        ]
-    });
+//    $("#Grid").kendoGrid({
+//        dataSource: { data: data, pageSize: 8 },
+//        sortable: true,
+//        selectable: true,
+//        pageable: { refresh: false, pageSizes: true, buttonCount: 5 },
+//        columns: [
+//            { field: "statusDate", title: "Date", width: '90px' },
+//            { field: "applicationNo", title: "Application No.", width: '15%' },
+//            { field: "applicantName", title: "Applicant", width: '20%' },
+//            { field: "purpose", title: "Purpose", width: '20%' },
+//            { field: "requestingEntity", title: "Requesting Entity", width: '20%' },
+//            {
+//                command: [{
+//                    name: "view",
+//                    template: "<button title='View item' class='btn btn-success btn-sm' style=''><span class='fa fa-file fa-lg'></span></button>"
+//                }],
+//                title: "Actions",
+//                width: "70px"
+//            }
+//        ]
+//    });
 
+//};
+
+var initializeKendoGrid = function (data, stage) {
+    document.getElementById("Grid").innerHTML = "";
+    if (data == null)
+        data = [];
+
+    if (data) {
+        if (data.length == 0 && stage !== 1) {
+            toastr.info("No Data");
+            data = [];
+        };
+
+        var grid = new ej.grids.Grid({
+            dataSource: data,
+            selectionSettings: { type: 'Multiple' },
+            columns: [
+                { field: 'statusDate', headerText: 'Last Updated', width: 80 },
+                { field: 'applicationNo', headerText: 'Application No.', width: 80 },
+                { field: 'applicantName', headerText: 'Applicant Name', width: 120 },
+                { field: 'purpose', headerText: 'Purpose', width: 100 },
+                { field: 'requestingEntity', headerText: 'Requesting Entity', width: 120 }
+            ],
+            height: 400,
+            pageSettings: { pageSize: 10 },
+            allowGrouping: true,
+            allowPaging: true,
+            allowSorting: false,
+            allowFiltering: true,
+            filterSettings: { type: 'Menu' },
+            rowSelected: rowSelected,
+        });
+
+        grid.appendTo('#Grid');
+        gridGlobal = grid;
+    } else {
+
+        toastr.info("No Data");
+    };
+};
+
+function rowSelected(args) {
+    var selectedrecords = gridGlobal.getSelectedRecords();
+    onGridSelected(selectedrecords[0]);
 };
 
 $(document).ready(function () {
     $("#pgHeader").text(HeaderName);
-    initializeKendoGrid();
+    initializeKendoGrid([], 1);
     bootstrapPage();
 
     $("#taxPosition").hide();
@@ -258,10 +303,8 @@ var loadTccDetails = function (resp) {
     $("#taxpayerId").text(testNullOrEmpty(resp[0].taxpayerId));
 };
 
-$("body").on('click', '#Grid .k-grid-content .btn', function (e) {
+var onGridSelected = function (item) {
 
-    var grid = $("#Grid").getKendoGrid();
-    var item = grid.dataItem($(e.target).closest("tr"));
 
     $("#appId").val(item.applicationId);
     $("#applicantNameApproval").text(item.applicantName);
@@ -271,7 +314,22 @@ $("body").on('click', '#Grid .k-grid-content .btn', function (e) {
 
     prepareDetailsView(item.applicationId);
     getDocumentsById();
-});
+};
+
+//$("body").on('click', '#Grid .k-grid-content .btn', function (e) {
+
+//    var grid = $("#Grid").getKendoGrid();
+//    var item = grid.dataItem($(e.target).closest("tr"));
+
+//    $("#appId").val(item.applicationId);
+//    $("#applicantNameApproval").text(item.applicantName);
+//    $("#modalId").text(item.applicationNo);
+//    $("#appNo").text(item.applicationNo);
+//    $("#appNoDetails").text(item.applicationNo);
+
+//    prepareDetailsView(item.applicationId);
+//    getDocumentsById();
+//});
 
 $("#btnSearch").click(function (e) {
     searchTcc();

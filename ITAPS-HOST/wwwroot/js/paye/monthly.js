@@ -330,9 +330,9 @@ var loadDetailsView = function (resp) {
         $("#companyEmail").text(resp[0].employerEmail);
         $("#periodYear").text(resp[0].assessmentYear);
         $("#periodMonth").text(resp[0].month);
-        $("#managementNo").text(resp[0].totalManagementStaff);
-        $("#otherNo").text(resp[0].totalOtherStaff);
-        $("#totalNoOfStaff").text(resp[0].totalNoStaff);
+        $("#managementNo").text(resp[0].totalManagementStaff.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').split('.')[0]);
+        $("#otherNo").text(resp[0].totalOtherStaff.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').split('.')[0]); 
+        $("#totalNoOfStaff").text(resp[0].totalNoStaff.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').split('.')[0]); 
         $("#managementPay").text(parseFloat(resp[0].totalManagementPay).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
         $("#otherPay").text(parseFloat(resp[0].totalOtherPay).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
         $("#totalCashEmolument").text(parseFloat(resp[0].totalCashEmolument).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
@@ -341,9 +341,9 @@ var loadDetailsView = function (resp) {
         $("#totalTaxDeduction").text(parseFloat(resp[0].totalTaxCharged).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
         $("#totalTaxCharged2").text(parseFloat(resp[0].totalTaxCharged).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
         $("#totaltTaxPaid2").text(parseFloat(resp[0].totalAmountPaid).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-        $("#startingStaff").text(resp[0].totalStaffStartOfMonth);
-        $("#engagedStaff").text(resp[0].engagedStaff);
-        $("#disengagedStaff").text(resp[0].disengagedStaff);
+        $("#startingStaff").text(resp[0].totalStaffStartOfMonth.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').split('.')[0]); 
+        $("#engagedStaff").text(resp[0].engagedStaff.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').split('.')[0]); 
+        $("#disengagedStaff").text(resp[0].disengagedStaff.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').split('.')[0]); 
 
     } else {
 
@@ -501,7 +501,7 @@ var loadEmployeeTable = function (data) {
             { field: 'totalTaxPayableToGra', headerText: 'Total Tax Payable to GRA', textAlign: 'Right', width: 200 },
         ],
         height: 480,
-        pageSettings: { pageSize: 100 },
+        pageSettings: { pageSize: 50 },
         allowGrouping: false,
         allowPaging: true,
         allowSorting: false,
