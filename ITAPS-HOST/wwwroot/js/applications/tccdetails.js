@@ -623,7 +623,7 @@ var decideNextTccStage = function (statusId) {
             $("#downloadTcc").hide();
             $("#acknowledgeStatus").hide();
             $("#sendForApproval").hide();
-            $("#appStatusHeader").text("PENDING APPROVAL");
+            $("#appStatusHeader").text("PENDING APPROVAL(DEPT. COMMISSIONER)");
 
             if (loc.substring(loc.lastIndexOf('/') + 1) === "reassign") {
 
@@ -656,7 +656,7 @@ var decideNextTccStage = function (statusId) {
             $("#downloadTcc").hide();
             $("#acknowledgeStatus").hide();
             $("#sendForApproval").hide();
-            $("#appStatusHeader").text("PENDING APPROVAL");
+            $("#appStatusHeader").text("PENDING APPROVAL(COMMISSIONER)");
 
             if (loc.substring(loc.lastIndexOf('/') + 1) === "reassign") {
 
