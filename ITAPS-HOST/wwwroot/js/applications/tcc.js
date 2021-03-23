@@ -108,7 +108,7 @@ var apiCaller = function (url, type, data, callback) {
         },
         error: function () {
             $('html').hideLoading();
-            toastr.error("Error connecting to server, Please try again!');
+            toastr.error("Error connecting to server, Please try again!");
         }
     });
 };

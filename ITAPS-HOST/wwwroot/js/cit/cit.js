@@ -64,8 +64,13 @@ var bootstrapPage = function () {
     $("#returnDetail").hide();
     $("#estimateDetail").hide();
     $("#revisedEstimateDetail").hide();
-    $("#endDate").flatpickr({});
-    $("#startDate").flatpickr({});
+
+    $("#endDate").flatpickr({
+        dateFormat: "d-m-Y",
+    });
+    $("#startDate").flatpickr({
+        dateFormat: "d-m-Y",
+    });
 
     initializeKendoGrid([], 1);
 };
